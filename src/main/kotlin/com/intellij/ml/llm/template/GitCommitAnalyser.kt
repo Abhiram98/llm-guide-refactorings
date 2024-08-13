@@ -31,7 +31,7 @@ class GitCommitAnalyser(val repositoryPath:String) {
         .build()
     val COMMIT_LIMIT = 500
     val THRESHOLD = 20
-    val METHOD_THRESHOLD_SIZE = 20
+    val METHOD_THRESHOLD_SIZE = 30
     val interestingCommits = mutableMapOf<RevCommit, MutableList<InterestingCommmit>>()
 
 
@@ -44,7 +44,11 @@ class GitCommitAnalyser(val repositoryPath:String) {
                 break
             println("LogCommit: $commit")
             count++
-            analyseTwoCommits(repository, commit.getParent(0), commit)
+            try {
+                analyseTwoCommits(repository, commit.getParent(0), commit)
+            } catch (e: ArrayIndexOutOfBoundsException){
+                break
+            }
         }
         println(interestingCommits)
         println(count)
@@ -106,7 +110,7 @@ class GitCommitAnalyser(val repositoryPath:String) {
                 for (edit in bigEdits){
                     if (edit.beginB >= methodRange.begin.line &&
                         edit.endB <= methodRange.end.line){ // edited a method.
-                        if ((edit.endB - edit.beginB)/methodRange.lineCount >= 0.5) {
+                        if ((edit.endB - edit.beginB).toDouble()/methodRange.lineCount >= 0.3) {
                             // edited more than half of a method.
                             addInfo(revCommit,
                                 InterestingCommmit(method.nameAsString, hunk.newPath,
@@ -119,7 +123,7 @@ class GitCommitAnalyser(val repositoryPath:String) {
                         methodRange.end.line <= edit.endB){ // method inside a larger edit
                         addInfo(revCommit,
                             InterestingCommmit(method.nameAsString, hunk.newPath,
-                                edit.beginB, edit.endB, 
+                                edit.beginB, edit.endB,
                                 methodRange.begin.line, methodRange.end.line))
                         interesting = true
                     }
