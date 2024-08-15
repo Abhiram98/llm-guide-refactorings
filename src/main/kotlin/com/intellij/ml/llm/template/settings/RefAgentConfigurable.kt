@@ -34,7 +34,9 @@ class RefAgentConfigurable : BoundConfigurable(LLMBundle.message("settings.confi
                         "openai-gpt-4",
                         "openai-gpt-3.5-turbo",
                         "openai-gpt-4-o-mini",
-                        "ollama")).bindItem(
+                        "ollama",
+                        "claude-sonnet"
+                    )).bindItem(
                     settings::getAiModel, settings::setAiModel
                 )
             }
