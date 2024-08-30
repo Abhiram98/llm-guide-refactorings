@@ -1,5 +1,7 @@
 package com.intellij.ml.llm.template.utils
 
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiMethod
 import kotlinx.serialization.Serializable
@@ -13,11 +15,18 @@ import okhttp3.RequestBody
 import java.io.IOException
 
 class CodeBertScore {
-    @Serializable
-    private data class CodeBertRequest(val text1: String, val text2: String)
 
-    @Serializable
-    private data class CodeBertResponse(val score: Double)
+    private data class CodeBertRequest(
+        @SerializedName("text1")
+        val text1: String,
+        @SerializedName("text2")
+        val text2: String
+    )
+
+    private data class CodeBertResponse(
+        @SerializedName("score")
+        val score: Double
+    )
 
     companion object {
         fun computeCodeBertScore(psiMethod: PsiMethod, psiClass: PsiClass): Double {
@@ -27,16 +36,16 @@ class CodeBertScore {
             return computeCodeBertScore(methodBody, classBody)
         }
 
-        private fun computeCodeBertScore(text1: String, text2: String): Double {
+        fun computeCodeBertScore(text1: String, text2: String): Double {
             val client = OkHttpClient()
 
             val requestData = CodeBertRequest(text1, text2)
-            val jsonBody = Json.encodeToString(requestData)
+            val jsonBody = Gson().toJson(requestData)
 
             val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), jsonBody)
 
             val request = Request.Builder()
-                .url("https://7fce-141-142-254-149.ngrok-free.app/compute_codebertscore")
+                .url("https://240a-141-142-254-149.ngrok-free.app/compute_codebertscore")
                 .post(requestBody)
                 .build()
 
@@ -45,7 +54,7 @@ class CodeBertScore {
                     if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
                     val responseBody = response.body?.string()
-                    val codeBertResponse = Json.decodeFromString<CodeBertResponse>(responseBody ?: "")
+                    val codeBertResponse = Gson().fromJson(responseBody, CodeBertResponse::class.java)
                     return codeBertResponse.score
                 }
             } catch (e: Exception) {
