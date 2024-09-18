@@ -1,8 +1,8 @@
-# Move-Method Assistant
+# Refactoring Assistant
 
 <!-- Plugin description -->
-Researching collaboration between LLMs and IDEs to suggest the move of misplaces method to the right class. 
-This tool leverages the power of LLMs to provide suggestions about what method can be moved, but leverages
+Researching collaboration between LLMs and IDEs to suggest various refactoring actions that could be applied to your code. 
+This tool leverages the power of LLMs to provide suggestions about what to change, but leverages
 the reliability of IntelliJ IDE to carry out correctly the code transformations.
 <!-- Plugin description end -->
 
@@ -22,19 +22,22 @@ the reliability of IntelliJ IDE to carry out correctly the code transformations.
 - Go to Settings | Tools | Large Language Models and enter your API key in the "API Key" field. Select the appropriate LLM in the dropdown list.
   ![api_key.gif](readme-images/gifs/api_key.gif)
 
-## Triggering Move Method Assistant
+## Triggering Refactoring Assistant
 
-- Find a Java class you’d like to improve its modularity, and move methods that are misplaced.
--  Right-click on the class name -> Select "Show Context Actions" -> Select "Move-Method Refactoring Assistant"
-   ![trigger_plugin.gif](readme-images/gifs/trigger_plugin.gif)
+- Find a Java class you’d like to improve.
+- Right-click on the class name -> Select "Show Context Actions" -> Select "Refactoring Assistant"
+
+[//]: # (   ![trigger_plugin.gif]&#40;readme-images/gifs/v2.gif&#41;)
 - If you liked any of the suggestions, select that particular suggestion and execute it by pushing the Refactor button! You can execute as many (or none) of the shown suggestions.
 - Hit the ESC button when you’re done, to close the popup window with suggested refactorings.
 
 
-#### Optional: View the logs of the assistant
+[//]: # (#### Optional: View the logs of the assistant)
 
--  Click on View | Tool Windows | Refactoring Assistant Logs
-   ![trigger_plugin.gif](readme-images/gifs/open_logs.gif)
+[//]: # ()
+[//]: # (-  Click on View | Tool Windows | Refactoring Assistant Logs)
+
+[//]: # (   ![trigger_plugin.gif]&#40;readme-images/gifs/open_logs.gif&#41;)
 
 
 ## Telemetry data
