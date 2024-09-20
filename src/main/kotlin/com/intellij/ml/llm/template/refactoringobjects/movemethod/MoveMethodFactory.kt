@@ -11,24 +11,21 @@ import com.intellij.ml.llm.template.prompts.MoveMethodRefactoringPrompt
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.MyRefactoringFactory
 import com.intellij.ml.llm.template.telemetry.EFTelemetryDataManager
+import com.intellij.ml.llm.template.utils.CodeBertScore
 import com.intellij.ml.llm.template.utils.JsonUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
-import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.util.Ref
 import com.intellij.psi.*
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.refactoring.move.MoveInstanceMembersUtil
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProcessor
 import com.intellij.refactoring.openapi.impl.JavaRefactoringFactoryImpl
 import com.intellij.refactoring.suggested.startOffset
-import com.intellij.usageView.UsageInfo
 import dev.langchain4j.model.chat.ChatLanguageModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.kotlin.idea.editor.fixers.endLine
 import org.jetbrains.kotlin.idea.editor.fixers.startLine
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
@@ -108,8 +105,9 @@ class MoveMethodFactory {
                     validMovePivots
                         .filter { runReadAction{ methodToMove.containingClass?.qualifiedName != it.psiClass.qualifiedName } }
                         .map { pivot ->
-                            val similarity = runReadAction{ PsiUtils.computeCosineSimilarity(methodToMove, pivot.psiClass) }
-                            pivot to similarity
+//                            val similarity = runReadAction{ PsiUtils.computeCosineSimilarity(methodToMove, pivot.psiClass) }
+                            val cbSimilarity = runReadAction{ CodeBertScore.computeCodeBertScore(methodToMove, pivot.psiClass) }
+                            pivot to cbSimilarity
                         }
 
             }
@@ -321,15 +319,15 @@ class MoveMethodFactory {
                 && runReadAction {
                     MoveMembersPreConditions.checkPreconditions(project, arrayOf(methodToMove), null, null)
                 }){
-                return runReadAction {
-                    (PsiUtils.fetchClassesInProject(
-                        methodToMove.containingClass!!,
-                        project
-                    ))
-                        .map { MovePivot(it, null) }
-                }
-//                val potentialTargets = (PsiUtils.fetchClassesInPackage(methodToMove.containingClass!!, project) + PsiUtils.fetchImportsInFile(file, project))
-//                return potentialTargets.subList(0, min(potentialTargets.size, 30)).map { MovePivot(it,null) }
+//                return runReadAction {
+//                    (PsiUtils.fetchClassesInProject(
+//                        methodToMove.containingClass!!,
+//                        project
+//                    ))
+//                        .map { MovePivot(it, null) }
+//                }
+                val potentialTargets = runReadAction { (PsiUtils.fetchClassesInPackage(methodToMove.containingClass!!, project) + PsiUtils.fetchImportsInFile(file, project))}
+                return potentialTargets.subList(0, min(potentialTargets.size, 30)).map { MovePivot(it,null) }
             }else{
                 val handler = MoveInstanceMethodHandlerForPlugin()
                 return runReadAction {

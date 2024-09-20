@@ -2,9 +2,12 @@ package com.intellij.ml.llm.template.utils
 
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiMethod
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.descriptors.element
+import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
@@ -13,39 +16,92 @@ import okhttp3.RequestBody
 import java.io.IOException
 
 class CodeBertScore {
-    @Serializable
-    private data class CodeBertRequest(val text1: String, val text2: String)
+    data class CodeBertRequest(val text1: String, val text2: String)
 
-    @Serializable
-    private data class CodeBertResponse(val score: Double)
+    data class CodeBertResponse(val score: Double)
+
+    @OptIn(ExperimentalSerializationApi::class)
+    object CodeBertRequestSerializer : KSerializer<CodeBertRequest> {
+        override val descriptor: SerialDescriptor = buildClassSerialDescriptor("CodeBertRequest") {
+            element<String>("text1")
+            element<String>("text2")
+        }
+
+        override fun serialize(encoder: Encoder, value: CodeBertRequest) {
+            encoder.encodeStructure(descriptor) {
+                encodeStringElement(descriptor, 0, value.text1)
+                encodeStringElement(descriptor, 1, value.text2)
+            }
+        }
+
+        override fun deserialize(decoder: Decoder): CodeBertRequest {
+            var text1 = ""
+            var text2 = ""
+            decoder.decodeStructure(descriptor) {
+                while (true) {
+                    when (val index = decodeElementIndex(descriptor)) {
+                        0 -> text1 = decodeStringElement(descriptor, 0)
+                        1 -> text2 = decodeStringElement(descriptor, 1)
+                        CompositeDecoder.DECODE_DONE -> break
+                        else -> error("Unexpected index: $index")
+                    }
+                }
+            }
+            return CodeBertRequest(text1, text2)
+        }
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    object CodeBertResponseSerializer : KSerializer<CodeBertResponse> {
+        override val descriptor: SerialDescriptor = buildClassSerialDescriptor("CodeBertResponse") {
+            element<Double>("score")
+        }
+
+        override fun serialize(encoder: Encoder, value: CodeBertResponse) {
+            encoder.encodeStructure(descriptor) {
+                encodeDoubleElement(descriptor, 0, value.score)
+            }
+        }
+
+        override fun deserialize(decoder: Decoder): CodeBertResponse {
+            var score = 0.0
+            decoder.decodeStructure(descriptor) {
+                while (true) {
+                    when (val index = decodeElementIndex(descriptor)) {
+                        0 -> score = decodeDoubleElement(descriptor, 0)
+                        CompositeDecoder.DECODE_DONE -> break
+                        else -> error("Unexpected index: $index")
+                    }
+                }
+            }
+            return CodeBertResponse(score)
+        }
+    }
 
     companion object {
+        private val json = Json { ignoreUnknownKeys = true }
+
         fun computeCodeBertScore(psiMethod: PsiMethod, psiClass: PsiClass): Double {
             val methodBody = psiMethod.text
             val classBody = psiClass.text
-
             return computeCodeBertScore(methodBody, classBody)
         }
 
-        private fun computeCodeBertScore(text1: String, text2: String): Double {
+        fun computeCodeBertScore(text1: String, text2: String): Double {
             val client = OkHttpClient()
-
             val requestData = CodeBertRequest(text1, text2)
-            val jsonBody = Json.encodeToString(requestData)
-
+            val jsonBody = json.encodeToString(CodeBertRequestSerializer, requestData)
             val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), jsonBody)
-
             val request = Request.Builder()
-                .url("https://7fce-141-142-254-149.ngrok-free.app/compute_codebertscore")
+                .url("https://568e-141-142-254-120.ngrok-free.app/compute_codebertscore")
                 .post(requestBody)
                 .build()
 
             try {
                 client.newCall(request).execute().use { response ->
                     if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
                     val responseBody = response.body?.string()
-                    val codeBertResponse = Json.decodeFromString<CodeBertResponse>(responseBody ?: "")
+                    val codeBertResponse = json.decodeFromString(CodeBertResponseSerializer, responseBody ?: "")
                     return codeBertResponse.score
                 }
             } catch (e: Exception) {
