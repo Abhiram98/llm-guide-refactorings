@@ -14,17 +14,20 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
             SystemMessage.from(SuggestRefactoringPrompt.systemMessageText),
             UserMessage.from("""
             Please provide suggestions to improve the following Java method/class. 
-            Your task is to identify methods that do not belong to the class and suggest an appropriate class to move them.
-            Only provide suggestions that are: Move Method.
-                
-                
+            **Task**: Identify methods that violate good software design practices, such as the Single Responsibility Principle or low coupling. Specifically, find methods that do not logically belong to their current class and suggest an appropriate class to move them to. 
+            Provide only suggestions that involve moving methods (i.e., "Move Method" refactoring).
+            
+            **Instructions**:
+            
             Ensure that your recommendations are specific to this method/class and are actionable immediately. 
             Your response should be formatted as a JSON list of objects. Each object should comprise of the following fields. 
             The first field, named "method_name", should be the name of the method that needs to move.
             The second field, names "method_signature", should be the signature of the method that needs to move.
             The third field, "target_class" is the class it should move to.
             The fourth field "rationale", is the reason why it should be moved.
-                
+            
+            **Example**:
+            
             class Order {
                 private Customer customer;
                 private double amount;

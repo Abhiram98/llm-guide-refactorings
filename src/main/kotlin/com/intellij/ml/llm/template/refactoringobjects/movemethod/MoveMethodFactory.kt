@@ -11,7 +11,6 @@ import com.intellij.ml.llm.template.prompts.MoveMethodRefactoringPrompt
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.MyRefactoringFactory
 import com.intellij.ml.llm.template.telemetry.EFTelemetryDataManager
-import com.intellij.ml.llm.template.utils.CodeBertScore
 import com.intellij.ml.llm.template.utils.JsonUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.openapi.application.runReadAction
@@ -105,9 +104,9 @@ class MoveMethodFactory {
                     validMovePivots
                         .filter { runReadAction{ methodToMove.containingClass?.qualifiedName != it.psiClass.qualifiedName } }
                         .map { pivot ->
-//                            val similarity = runReadAction{ PsiUtils.computeCosineSimilarity(methodToMove, pivot.psiClass) }
-                            val cbSimilarity = runReadAction{ CodeBertScore.computeCodeBertScore(methodToMove, pivot.psiClass) }
-                            pivot to cbSimilarity
+                            val similarity = runReadAction{ PsiUtils.computeCosineSimilarity(methodToMove, pivot.psiClass) }
+//                            val cbSimilarity = runReadAction{ CodeBertScore.computeCodeBertScore(methodToMove, pivot.psiClass) }
+                            pivot to similarity
                         }
 
             }
@@ -122,7 +121,7 @@ class MoveMethodFactory {
                 ?.addPotentialTargetClassesOrdered(
                     methodToMove.name,
                     runReadAction{ targetPivotsWithSimilarity.map { it.first.psiClass.name to it.second } },
-                    "cosine",
+                    "CB",
                     similarityComputationTime)
 
             val pivotsSortedByLLM =
@@ -327,7 +326,7 @@ class MoveMethodFactory {
 //                        .map { MovePivot(it, null) }
 //                }
                 val potentialTargets = runReadAction { (PsiUtils.fetchClassesInPackage(methodToMove.containingClass!!, project) + PsiUtils.fetchImportsInFile(file, project))}
-                return potentialTargets.subList(0, min(potentialTargets.size, 30)).map { MovePivot(it,null) }
+                return potentialTargets.subList(0, min(potentialTargets.size, 50)).map { MovePivot(it,null) }
             }else{
                 val handler = MoveInstanceMethodHandlerForPlugin()
                 return runReadAction {
