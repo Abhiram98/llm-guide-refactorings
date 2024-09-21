@@ -2,6 +2,8 @@ import git
 import os
 import json
 from collections import defaultdict
+from mm_analyser.env import PROJECTS_BASE_PATH
+from mm_analyser import data_folder, resources_folder
 
 project_name = "springboot"
 project_basepath_map = {
@@ -22,8 +24,8 @@ project_basepath_map = {
     }
 
 
-project_basepath = "/Users/abhiram/Documents/TBE/evaluation_projects"
-refminer_filtered_file = f"../../../../../data/refminer_data/filter_fp/{project_name}_res.json"
+project_basepath = str(PROJECTS_BASE_PATH)
+refminer_filtered_file = f"{data_folder}/refminer_data/filter_fp/{project_name}_res.json"
 repo = git.Repo(os.path.join(project_basepath, project_basepath_map.get(project_name)))
 
 with open(refminer_filtered_file) as f:
@@ -43,7 +45,7 @@ for ref in refdata:
     })
     duplication_counter.add((parent_commit, file_path))
 
-with open("/Users/abhiram/Documents/TBE/RefactoringAgentProject/llm-guide-refactorings/data/classes_and_commits.json", "w") as f:
+with open(f"{resources_folder}/plugin_input_files/classes_and_commits.json", "w") as f:
     json.dump(write_data, f, indent=4)
 
 

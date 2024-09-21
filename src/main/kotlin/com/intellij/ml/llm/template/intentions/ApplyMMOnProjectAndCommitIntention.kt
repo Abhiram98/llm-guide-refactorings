@@ -18,9 +18,9 @@ import java.io.File
 
 class ApplyMMOnProjectAndCommitIntention: ApplyMoveMethodOnProjectIntention() {
     override fun runPluginOnSpecificFiles(project: Project) {
-        val fileText = File(
-            "/Users/abhiram/Documents/TBE/RefactoringAgentProject/llm-guide-refactorings/data/classes_and_commits.json"
-        ).readText()
+
+        val fileText = ApplyMMOnProjectAndCommitIntention::class.java
+            .getResource("/plugin_input_files/classes_and_commits.json")?.readText()?:return
         val fileAndCommits = JsonParser.parseString(fileText).asJsonArray
         val repo = FileRepositoryBuilder()
             .setGitDir(File("${project.basePath}/.git"))

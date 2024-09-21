@@ -209,28 +209,27 @@ class MoveMethodFactory {
             methodToMove: PsiMethod,
             it: MovePivot
         ): Boolean {
-            return true
-//            return runReadAction {
-//                val processor = MoveInstanceMethodProcessorAutoValidator(
-//                    project, methodToMove, it.psiElement as PsiVariable, "public",
-//                    runReadAction {
-//                        getParamNamesIfNeeded(
-//                            MoveInstanceMembersUtil.getThisClassesToMembers(methodToMove),
-//                            it.psiElement as? PsiField
-//                        )
-//                    }
-//                )
-//                // Reflection. This is a hacky way to call intellij API.
-//                val method = processor.javaClass.getDeclaredMethod("findUsages")
-//                method.setAccessible(true)
-//                val usages = method.invoke(processor)
-//                val refUsages = Ref<Array<UsageInfo>>(usages as Array<UsageInfo>)
-//
-//                val preprocessUsagesMethod =
-//                    processor.javaClass.getDeclaredMethod("preprocessUsages", refUsages::class.java)
-//                preprocessUsagesMethod.setAccessible(true)
-//                return@runReadAction preprocessUsagesMethod.invoke(processor, refUsages) as Boolean
-//            }
+            return runReadAction {
+                val processor = MoveInstanceMethodProcessorAutoValidator(
+                    project, methodToMove, it.psiElement as PsiVariable, "public",
+                    runReadAction {
+                        getParamNamesIfNeeded(
+                            MoveInstanceMembersUtil.getThisClassesToMembers(methodToMove),
+                            it.psiElement as? PsiField
+                        )
+                    }
+                )
+                // Reflection. This is a hacky way to call intellij API.
+                val method = processor.javaClass.getDeclaredMethod("findUsages")
+                method.setAccessible(true)
+                val usages = method.invoke(processor)
+                val refUsages = Ref<Array<UsageInfo>>(usages as Array<UsageInfo>)
+
+                val preprocessUsagesMethod =
+                    processor.javaClass.getDeclaredMethod("preprocessUsages", refUsages::class.java)
+                preprocessUsagesMethod.setAccessible(true)
+                return@runReadAction preprocessUsagesMethod.invoke(processor, refUsages) as Boolean
+            }
         }
 
         private fun logPotentialPivots(

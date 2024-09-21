@@ -1,6 +1,40 @@
 [
     {
         "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "3e91ac73c4fd1bcebe2c608675324d6cf2df5c5a",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/3e91ac73c4fd1bcebe2c608675324d6cf2df5c5a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private getAdminUserApi() : AdminUserApi from class cn.iocoder.yudao.module.crm.util.CrmQueryWrapperUtils to public getAdminUserApi() : AdminUserApi from class cn.iocoder.yudao.module.crm.util.CrmQueryWrapperUtils.SingletonManager",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/util/CrmQueryWrapperUtils.java",
+                    "startLine": 96,
+                    "endLine": 98,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private getAdminUserApi() : AdminUserApi"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/util/CrmQueryWrapperUtils.java",
+                    "startLine": 115,
+                    "endLine": 117,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public getAdminUserApi() : AdminUserApi"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
         "sha1": "69503689912abe6e565fd71895bc0245bd72fc2c",
         "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/69503689912abe6e565fd71895bc0245bd72fc2c",
         "move_method_refactoring": {

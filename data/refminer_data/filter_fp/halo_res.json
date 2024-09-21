@@ -32,5 +32,39 @@
             ],
             "isStatic": true
         }
+    },
+    {
+        "repository": "https://github.com/halo-dev/halo.git",
+        "sha1": "f61f846a7f571f46e15930e4a0ce952a9c58932b",
+        "url": "https://github.com/halo-dev/halo/commit/f61f846a7f571f46e15930e4a0ce952a9c58932b",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public buildParameters(builder Builder) : void from class run.halo.app.core.extension.attachment.endpoint.AttachmentEndpoint.ISearchRequest to public buildParameters(builder Builder) : void from class run.halo.app.core.extension.attachment.endpoint.AttachmentEndpoint.SearchRequest",
+            "leftSideLocations": [
+                {
+                    "filePath": "application/src/main/java/run/halo/app/core/extension/attachment/endpoint/AttachmentEndpoint.java",
+                    "startLine": 188,
+                    "endLine": 220,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public buildParameters(builder Builder) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "application/src/main/java/run/halo/app/core/extension/attachment/endpoint/AttachmentEndpoint.java",
+                    "startLine": 205,
+                    "endLine": 237,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public buildParameters(builder Builder) : void"
+                }
+            ],
+            "isStatic": true
+        }
     }
 ]

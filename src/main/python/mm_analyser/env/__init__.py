@@ -8,6 +8,7 @@ config = configparser.ConfigParser()
 config.read(file)
 
 PROJECTS_BASE_PATH = config['projects']['PROJECTS_BASE_PATH']
+TELEMETRY_FILE_PATH = config['telemetry']['TELEMETRY_FILE_PATH']
 
 PROJECT_ALIAS_MAP = {
         'vue_pro_res.json': 'ruoyi-vue-pro',
