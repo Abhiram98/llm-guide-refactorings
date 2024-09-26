@@ -4,8 +4,15 @@ import json
 from collections import defaultdict
 from mm_analyser.env import PROJECTS_BASE_PATH
 from mm_analyser import data_folder, resources_folder
+import argparse
 
-project_name = "springboot"
+# Add argument parsing
+parser = argparse.ArgumentParser(description='Process project name.')
+parser.add_argument('--project_name', type=str, required=True, help='Name of the project')
+args = parser.parse_args()
+
+project_name = args.project_name
+
 project_basepath_map = {
         'vue_pro': 'ruoyi-vue-pro',
         'flink': 'flink',

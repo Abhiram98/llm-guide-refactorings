@@ -4,14 +4,32 @@ import MoveMethodValidator
 from collections import defaultdict
 import pandas as pd
 from mm_analyser import data_folder
+import argparse
+import datetime
+import sys
 
+# Add argument parsing
+parser = argparse.ArgumentParser()
+parser.add_argument('--input_directory', required=True, help='Directory for input files')
+parser.add_argument('--output_file_path', required=True, help='Path for output CSV file')
+parser.add_argument('--log_path', required=True, help='Path to the log file')
+args = parser.parse_args()
+
+# Redirect stdout to the log file
+sys.stdout = open(args.log_path, 'w')
+
+# Add datetime stamp as an indicator
+current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+print(f"#############################################################")
+print(f"############### Log started at {current_time} ###############")
+print(f"#############################################################")
+print()
 
 def myindex(list, ele):
     try:
         return list.index(ele)
     except ValueError:
         return -1
-
 
 def calculate_vanilla_llm_recalls(telemetry, method_name, target_class, evaluation_data):
     # Calculating recall for iteration-3
@@ -48,12 +66,20 @@ plugin_outfiles = [
 combined_output = []
 df = pd.read_csv(f'{data_folder}/refminer_data/static_moves.csv')
 for file_name in plugin_outfiles:
-    with open(f'{data_folder}/refminer_data/mm-assist/{file_name}') as f:
-        data = json.load(f)
-    combined_output += data
+    try:
+        with open(f'{data_folder}/refminer_data/{args.input_directory}/{file_name}') as f:
+            data = json.load(f)
+        combined_output += data
+        print(f"Successfully processed {file_name}")
+    except FileNotFoundError:
+        print(f"File not found: {file_name}. Skipping...")
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON in file: {file_name}. Skipping...")
+
 combined_output = [i for i in combined_output if 'telemetry' in i
                    and len(i['telemetry'].keys())
                    and i['move_method_refactoring']['isStatic'] == True]
+print(f"Total items after loading all files: {len(combined_output)}")
 
 oracle_group_by_file = defaultdict(list)
 for evaluation_data in combined_output:
@@ -79,10 +105,10 @@ for evaluation_data in combined_output:
 
     calculate_vanilla_llm_recalls(telemetry, method_name, target_class, evaluation_data)
 
-    # if 'llmMethodPriority' not in telemetry:
-    #     evaluation_data['recall_method_and_class_position'] = -1
-    #     evaluation_data['recall_method_position'] = -1
-    #     continue
+    if 'llmMethodPriority' not in telemetry:
+        evaluation_data['recall_method_and_class_position'] = -1
+        evaluation_data['recall_method_position'] = -1
+        continue
 
     vanilla_llm_suggestions = [i for i in telemetry['iterationData']]
     if len(vanilla_llm_suggestions) == 0:
@@ -107,13 +133,15 @@ for evaluation_data in combined_output:
         evaluation_data['recall_method_class_position'] = -1
         continue
 
-    suggested_target_classes = telemetry['targetClassMap'][method_name]['target_classes_sorted_by_llm']
+    suggested_target_classes = telemetry['targetClassMap'].get(method_name, {}).get('target_classes_sorted_by_llm', [])
     evaluation_data['recall_method_class_position'] = \
         myindex(suggested_target_classes, target_class)
+
 
 # combined_output = [i for i in combined_output if 'recall_method_position' in i]
 
 df_mm_assist = pd.DataFrame(combined_output)
+# print(df_mm_assist.head())
 df_mm_assist['description'] = df_mm_assist['move_method_refactoring'].apply(lambda x: x['description'])
 df_mm_assist['description-url'] = df_mm_assist['description'] + df_mm_assist['url']
 df['description-url'] = df['description'] + df['url']
@@ -127,7 +155,7 @@ selected_columns = ['url_x', 'description_x', 'same_package', 'source_class_inne
                     'recall_method_class_position']
 df_selected = df_merged[selected_columns]
 df_selected = df_selected.rename(columns={"vanilla_recall_method_class_position": "vanilla_recall_class_position", "recall_method_class_position": "recall_class_position"})
-df_selected.to_csv(f"{data_folder}/refminer_data/static_methods_2.csv", index=False)
+df_selected.to_csv(f"{data_folder}/refminer_data/{args.output_file_path}", index=False)
 recall_method_and_class_1 = len(
     [i for i in combined_output if i['recall_method_position'] == 0 and i['recall_method_class_position'] == 0]) / len(
     combined_output)
@@ -237,3 +265,9 @@ print(f"recall class @1 = {vanilla_recall_class_1}")
 print(f"recall class @2 = {vanilla_recall_class_2}")
 print(f"recall class @3 = {vanilla_recall_class_3}")
 print(f"recall class @inf = {vanilla_recall_class_inf}")
+
+# Close the log file
+sys.stdout.close()
+
+# Restore stdout
+sys.stdout = sys.__stdout__

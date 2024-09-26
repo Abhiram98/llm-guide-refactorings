@@ -4,6 +4,7 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiMethod
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.descriptors.element
@@ -93,21 +94,37 @@ class CodeBertScore {
             val jsonBody = json.encodeToString(CodeBertRequestSerializer, requestData)
             val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), jsonBody)
             val request = Request.Builder()
-                .url("https://568e-141-142-254-120.ngrok-free.app/compute_codebertscore")
+                .url("https://e7c06e50dd0292b1830d8320d4d2b6f7.serveo.net/compute_codebertscore")
                 .post(requestBody)
                 .build()
 
             try {
                 client.newCall(request).execute().use { response ->
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                    if (!response.isSuccessful) {
+                        // HTTP error
+                        println("HTTP error: ${response.code}")
+                        return -2.0
+                    }
                     val responseBody = response.body?.string()
-                    val codeBertResponse = json.decodeFromString(CodeBertResponseSerializer, responseBody ?: "")
+                    if (responseBody == null) {
+                        // Null response body
+                        println("Null response body")
+                        return -3.0
+                    }
+                    val codeBertResponse = json.decodeFromString(CodeBertResponseSerializer, responseBody)
                     return codeBertResponse.score
                 }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                return -4.0 // Network error
+            } catch (e: SerializationException) {
+                e.printStackTrace()
+                return -5.0 // JSON parsing error
             } catch (e: Exception) {
                 e.printStackTrace()
-                return -1.0 // Return a default value or handle the error as needed
+                return -6.0 // Other errors
             }
         }
+
     }
 }
