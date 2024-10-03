@@ -30,17 +30,22 @@ with open(refminer_filtered_file) as f:
 with open(f"{TELEMETRY_FILE_PATH_BASE}/ref_telemetry_data_{args.project_name}.jsonl") as f:
     telemetry = [json.loads(i) for i in f.read().split('\n') if i!=''][-len(mm_assist_runs):]
 
-# print("Sample telemetry data:", telemetry[:1])
+# print(f"Length of refdata: {len(refdata)}")
+# print(f"Length of mm_assist_runs: {len(mm_assist_runs)}")
+# print(f"Length of telemetry: {len(telemetry)}")
 
 for ref in refdata:
-    matches = [1 if i['new_commit_hash']==ref['sha1'] and i['file_path']==ref['move_method_refactoring']['leftSideLocations'][0]['filePath'] else 0 for i in mm_assist_runs ]
+    matches = [1 if i['new_commit_hash']==ref['sha1'] and i['file_path']==ref['move_method_refactoring']['leftSideLocations'][0]['filePath'] else 0 for i in mm_assist_runs]
     
     try:
         index = matches.index(1)
-    except:
-        break
-    ref["telemetry"] = telemetry[index]
-    # print("Sample of ref data:", refdata[:5])
+        if index < len(telemetry):
+            ref["telemetry"] = telemetry[index]
+        else:
+            print(f"Warning: Telemetry index {index} out of range. Skipping this entry.")
+    except ValueError:
+        print(f"Warning: No matching entry found for commit {ref['sha1']}. Skipping this entry.")
+        continue
 
 for ref in refdata:
     if 'telemetry' in ref:

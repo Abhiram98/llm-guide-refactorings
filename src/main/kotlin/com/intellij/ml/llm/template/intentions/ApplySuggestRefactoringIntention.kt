@@ -30,7 +30,6 @@ import dev.langchain4j.model.chat.ChatLanguageModel
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.util.concurrent.TimeUnit
 
-
 @Suppress("UnstableApiUsage")
 abstract class ApplySuggestRefactoringIntention(
     open var llmChatModel: ChatLanguageModel = RefAgentSettingsManager.getInstance().createAndGetAiModel()!!,
@@ -45,7 +44,7 @@ abstract class ApplySuggestRefactoringIntention(
     var apiResponseCache = mutableMapOf<String, MutableMap<String, LLMBaseResponse>>()
     val MAX_REFACTORINGS = 10
     var finishedBackgroundTask: Boolean? = null
-    protected val llmContextLimit = 7000
+    protected val llmContextLimit = 128000
 
     open var prompter: MethodPromptBase = SuggestRefactoringPrompt();
 
@@ -107,12 +106,17 @@ abstract class ApplySuggestRefactoringIntention(
         }
     }
 
+    private fun isInputSizeWithinLimit(text: String): Boolean {
+        logger.warn("Input size is ${text.length / 4} characters.")
+        val inputTextSize = text.length / 4
+        return inputTextSize <= llmContextLimit
+    }
+
     //    abstract fun invokeLlm(text: String, project: Project, editor: Editor, file: PsiFile)
 fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor, file: PsiFile) {
         logger.info("Invoking LLM with text: $text")
-        val promptIterator = createPromptIterator(text)
-//        val messageList = prompter.getPrompt(text)
-
+        val promptIterator = createPromptIterator(project, text)
+//        val promptText = prompter.getPrompt(text)
         val task = object : Task.Backgroundable(
             project, LLMBundle.message("intentions.request.extract.function.background.process.title")
         ) {
@@ -131,34 +135,28 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
     }
 
     private fun createPromptIterator(
+        project: Project,
         text: String,
     ): Iterator<MutableList<ChatMessage>> {
         val promptIterator: Iterator<MutableList<ChatMessage>>
-        if (text.split("\\s+".toRegex()).size > llmContextLimit) {
-            promptIterator = object : Iterator<MutableList<ChatMessage>> {
-                private var currentIndex = 0
 
-                override fun hasNext(): Boolean {
-                    return true
-                }
-
-                override fun next(): MutableList<ChatMessage> {
-                    if (currentIndex >= text.length) {
-                        // Reset the index to loop from the beginning
-                        currentIndex = 0
-                    }
-                    val endIndex = (currentIndex + llmContextLimit).coerceAtMost(text.length)
-                    val chunk = text.substring(currentIndex, endIndex)
-                    currentIndex = endIndex
-                    return prompter.getPrompt(chunk)
-                }
+        if (!isInputSizeWithinLimit(text)) {
+            // Notify the user that the input exceeds the context limit
+            invokeLater{
+                showEFNotification(
+                    project,
+                    LLMBundle.message("notification.extract.function.with.llm.exceeds.context.limit.message"),
+                    NotificationType.WARNING
+                )
             }
-        } else {
-            promptIterator = sequence {
-                while(true)
-                    yield(prompter.getPrompt(text))
-            }.iterator()
+            logger.warn("Input size exceeds the LLM context limit of $llmContextLimit characters.")
         }
+
+        promptIterator = sequence {
+            while (true)
+                yield(prompter.getPrompt(text))
+        }.iterator()
+
         return promptIterator
     }
 

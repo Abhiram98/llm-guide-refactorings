@@ -307,11 +307,143 @@ class PsiUtils {
             val javaFile = containingClass.containingFile as PsiJavaFile
             val psiPackage = JavaPsiFacade.getInstance(project)
                 .findPackage(javaFile.packageName)
+
             if (psiPackage != null) {
+                println("Number of classes in the package: ${psiPackage.classes.size}")
                 return runReadAction{ psiPackage.classes.toList() }
             }
+
+
             return emptyList()
         }
+
+//        fun fetchUtilityClassesInProject(containingClass: PsiClass, project: Project): List<PsiClass> {
+//            val utilityClasses: MutableList<PsiClass> = mutableListOf()
+//
+//            // Retrieve all classes in the project
+//            val allClasses = PsiUtils.fetchClassesInProject(containingClass, project)
+//
+//            for (psiClass in allClasses) {
+//                val className = psiClass.name?.toLowerCase() ?: ""
+//                val fileName = psiClass.containingFile?.name?.toLowerCase() ?: ""
+//
+//                // Check if either the class name or file name contains "util" or "utility"
+//                if (className.contains("util") || className.contains("utility") ||
+//                    fileName.contains("util") || fileName.contains("utility")) {
+//                    utilityClasses.add(psiClass)
+//                }
+//            }
+//
+//            println("Number of utility classes found: ${utilityClasses.size}")
+//            return utilityClasses
+//        }
+
+        fun fetchPrioritizedClasses(
+            containingClass: PsiClass,
+            project: Project
+        ): List<PsiClass> {
+            val classList = PsiUtils.fetchClassesInProject(containingClass, project)
+
+            // Define weights for each criterion
+            val STATIC_RATIO_WEIGHT = 1.0
+            val PACKAGE_PROXIMITY_WEIGHT = 1.0
+            val UTILITY_CLASS_WEIGHT = 2.0 // Higher weight to give more importance to utility classes
+
+            // Source package name for package proximity calculation
+            val sourcePackageName = (containingClass.containingFile as? PsiJavaFile)?.packageName ?: ""
+
+            // Create a list to store classes with their computed weights
+            val classWithWeights = mutableListOf<Pair<PsiClass, Double>>()
+
+            for (psiClass in classList) {
+                val className = psiClass.name?.toLowerCase() ?: ""
+                val fileName = psiClass.containingFile?.name?.toLowerCase() ?: ""
+
+                // Determine if the class is a utility class
+                val isUtilityClass = className.contains("util") || className.contains("utility") ||
+                        fileName.contains("util") || fileName.contains("utility")
+
+                // Skip classes without methods
+                val classMethods = psiClass.methods
+                if (classMethods.isEmpty()) continue
+
+                // Calculate the static to instance method ratio
+                val staticMethods = classMethods.count { PsiUtils.isMethodStatic(it) }
+                val staticRatio = staticMethods.toDouble() / classMethods.size
+
+                // Calculate package proximity
+                val targetPackageName = (psiClass.containingFile as? PsiJavaFile)?.packageName ?: ""
+                val packageProximity = calculatePackageProximity(sourcePackageName, targetPackageName)
+
+                // Assign a utility class bonus if applicable
+                val utilityBonus = if (isUtilityClass) UTILITY_CLASS_WEIGHT else 0.0
+
+                // Combine weights: Static ratio, package proximity, and utility class bonus
+                val combinedWeight = (STATIC_RATIO_WEIGHT * staticRatio) +
+                        (PACKAGE_PROXIMITY_WEIGHT * packageProximity) +
+                        utilityBonus
+
+                // Store the class and its combined weight
+                classWithWeights.add(Pair(psiClass, combinedWeight))
+            }
+
+            // Sort classes by their combined weight in descending order
+            return classWithWeights.sortedByDescending { it.second }.map { it.first }
+        }
+
+        private fun calculatePackageProximity(sourcePackage: String, targetPackage: String): Double {
+            if (sourcePackage == targetPackage) return 1.0
+
+            val sourceSegments = sourcePackage.split(".")
+            val targetSegments = targetPackage.split(".")
+            val commonSegments = sourceSegments.zip(targetSegments).count { it.first == it.second }
+
+            // Normalize by the number of segments in the source package to get a value between 0.0 and 1.0
+            return commonSegments.toDouble() / sourceSegments.size
+        }
+
+//        fun fetchPrioritizedClassesByStaticRatio(containingClass: PsiClass, project: Project): List<PsiClass> {
+//            val classList = PsiUtils.fetchClassesInProject(containingClass, project)
+//
+//            // Create a map to store classes and their weights based on the two criteria
+//            val classWithWeights = mutableListOf<Pair<PsiClass, Double>>()
+//
+//            val sourcePackageName = (containingClass.containingFile as? PsiJavaFile)?.packageName ?: ""
+//
+//            for (psiClass in classList) {
+//                val classMethods = psiClass.methods
+//                if (classMethods.isEmpty()) continue
+//
+//                // Calculate the static to instance method ratio
+//                val staticMethods = classMethods.count { PsiUtils.isMethodStatic(it) }
+////                val instanceMethods = classMethods.size - staticMethods
+//                val staticRatio = staticMethods.toDouble() / classMethods.size
+//
+//                // Calculate package proximity
+//                val targetPackageName = (psiClass.containingFile as? PsiJavaFile)?.packageName ?: ""
+//                val packageProximity = calculatePackageProximity(sourcePackageName, targetPackageName)
+//
+//                // Combine weights: Static ratio (higher is better) and package proximity (closer is better)
+//                val combinedWeight = staticRatio + packageProximity
+//
+//                // Store class and combined weight
+//                classWithWeights.add(Pair(psiClass, combinedWeight))
+//            }
+//
+//            // Sort classes by their weight (higher weight at the top)
+//            return classWithWeights.sortedByDescending { it.second }.map { it.first }
+//        }
+//
+//        // Helper function to calculate package proximity (e.g., string similarity between package names)
+//        private fun calculatePackageProximity(sourcePackage: String, targetPackage: String): Double {
+//            if (sourcePackage == targetPackage) return 1.0
+//
+//            val sourceSegments = sourcePackage.split(".")
+//            val targetSegments = targetPackage.split(".")
+//            val commonSegments = sourceSegments.zip(targetSegments).count { it.first == it.second }
+//
+//            return commonSegments.toDouble() / sourceSegments.size
+//        }
 
 
         internal class MyGlobalSearchScope(project: Project?) : GlobalSearchScope(project) {
@@ -334,9 +466,16 @@ class PsiUtils {
             val classList : MutableList<PsiClass> = mutableListOf()
             AllClassesSearch.search(MyGlobalSearchScope(project), project).allowParallelProcessing()
                 .forEach(
-
                     Processor<PsiClass> {
-                        psiClass: PsiClass-> classList.add(psiClass)
+                        psiClass: PsiClass->
+//                        psiClass: PsiClass-> classList.add(psiClass)
+                        if (psiClass.methods.isNotEmpty() &&
+                            !psiClass.isEnum &&
+                            !psiClass.isInterface &&
+                            !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
+                            !psiClass.isAnnotationType) {
+                            classList.add(psiClass)
+                        }
                         true
                     }
                 )

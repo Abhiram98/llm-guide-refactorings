@@ -11,7 +11,6 @@ import com.intellij.ml.llm.template.prompts.MoveMethodRefactoringPrompt
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.MyRefactoringFactory
 import com.intellij.ml.llm.template.telemetry.EFTelemetryDataManager
-import com.intellij.ml.llm.template.utils.CodeBertScore
 import com.intellij.ml.llm.template.utils.JsonUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.openapi.application.runReadAction
@@ -49,9 +48,10 @@ class MoveMethodFactory {
 
         const val TOPN_SUGGESTIONS4USER = 1
         const val TOPN_SUGGESTIONS4LLM = 5
+        const val llmContextLimit = 128000
         val llmResponseCache = mutableMapOf<String, LLMBaseResponse>()
         var myInvokeFinished: Boolean? = null
-        const val MAX_TARGET_CLASS4LLM = 5
+        const val MAX_TARGET_CLASS4LLM = 3
 
         fun test(){
 
@@ -98,17 +98,17 @@ class MoveMethodFactory {
             telemetryDataManager: EFTelemetryDataManager?
         ): List<AbstractRefactoring> {
 
-            val targetPivots = getPotentialMovePivots(project, editor, file, methodToMove)
-            val validMovePivots = getValidPivots(project, editor, file, methodToMove, targetPivots)
+            val validMovePivots = getPotentialMovePivots(project, editor, file, methodToMove)
+//            val validMovePivots = getValidPivots(project, editor, file, methodToMove, targetPivots)
             val targetPivotsWithSimilarity: List<Pair<MovePivot, Double>>
             val similarityComputationTime = measureTimeMillis {
                 targetPivotsWithSimilarity =
                     validMovePivots
                         .filter { runReadAction{ methodToMove.containingClass?.qualifiedName != it.psiClass.qualifiedName } }
                         .map { pivot ->
-//                            val similarity = runReadAction{ PsiUtils.computeCosineSimilarity(methodToMove, pivot.psiClass) }
-                            val cbSimilarity = runReadAction{ CodeBertScore.computeCodeBertScore(methodToMove, pivot.psiClass) }
-                            pivot to cbSimilarity
+                            val similarity = runReadAction{ PsiUtils.computeCosineSimilarity(methodToMove, pivot.psiClass) }
+//                            val cbSimilarity = runReadAction{ CodeBertScore.computeCodeBertScore(methodToMove, pivot.psiClass) }
+                            pivot to similarity
                         }
 
             }
@@ -258,18 +258,25 @@ class MoveMethodFactory {
         ) : List<MovePivot>?{
 
             val response: LLMBaseResponse?
-            val methoText = runReadAction{ methodToMove.text }
+            val methodText = runReadAction{ methodToMove.text }
+            val potentialClassBodies = runReadAction {
+                targetPivotsSorted.mapNotNull { pivot ->
+                    pivot.psiClass.text
+                }
+            }
+
             val llmResponseTime = measureTimeMillis {
-                response = llmResponseCache[methoText] ?: sendChatRequest(
+                response = llmResponseCache[methodText] ?: sendChatRequest(
                     project,
                     MoveMethodRefactoringPrompt().askForTargetClassPriorityPrompt(
-                        methoText,
+                        methodText,
+                        potentialClassBodies.joinToString("\n"),
                         targetPivotsSorted.distinctBy { it.psiClass.name }
                     ),
                     llmChatModel)
             }
             if (response!=null){
-                llmResponseCache[methoText]?: llmResponseCache.put(runReadAction{ methoText }, response)
+                llmResponseCache[methodText]?: llmResponseCache.put(runReadAction{ methodText }, response)
                 try {
                     val priorityOrder =
                         (JsonParser.parseString(JsonUtils.sanitizeJson(response.getSuggestions()[0].text)) as JsonArray)
@@ -326,8 +333,14 @@ class MoveMethodFactory {
 //                    ))
 //                        .map { MovePivot(it, null) }
 //                }
-                val potentialTargets = runReadAction { (PsiUtils.fetchClassesInPackage(methodToMove.containingClass!!, project) + PsiUtils.fetchImportsInFile(file, project))}
-                return potentialTargets.subList(0, min(potentialTargets.size, 50)).map { MovePivot(it,null) }
+
+                val potentialTargets = runReadAction {
+                    (PsiUtils.fetchImportsInFile(file, project) +
+                            PsiUtils.fetchPrioritizedClasses(methodToMove.containingClass!!, project))}
+                val dedupPotentialTargets = potentialTargets.distinctBy { it.name }
+                val potentialMovePivots = dedupPotentialTargets.map { MovePivot(it, null) }
+                val validMovePivots = getValidPivots(project, editor, file, methodToMove, potentialMovePivots)
+                return validMovePivots.subList(0, min(validMovePivots.size, 100)).map { MovePivot(it.psiClass, null) }
             }else{
                 val handler = MoveInstanceMethodHandlerForPlugin()
                 return runReadAction {

@@ -23,6 +23,7 @@ import com.intellij.ml.llm.template.utils.CodeTransformer
 import com.intellij.ml.llm.template.utils.EFCandidatesApplicationTelemetryObserver
 import com.intellij.ml.llm.template.utils.EFNotification
 import com.intellij.ml.llm.template.utils.JsonUtils
+import com.intellij.ml.llm.template.utils.PsiUtils.Companion.computeCosineSimilarity
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
@@ -292,10 +293,34 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         uniqueSuggestions: List<MoveMethodSuggestion>,
         project: Project
     ) : List<MoveMethodSuggestion>? {
+        val psiClass = runReadAction{ functionPsiElement as? PsiClass }
+        if (psiClass == null) {
+            log2fileAndViewer("Error: functionPsiElement is not a PsiClass", logger)
+            return emptyList()
+        }
+        val methodSimilarity = runReadAction {
+            uniqueSuggestions.map { suggestion ->
+                val method = psiClass.findMethodsByName(suggestion.methodName, false).firstOrNull()
+                if (method == null) {
+                    log2fileAndViewer("Method ${suggestion.methodName} not found in class", logger)
+                    return@map Pair(suggestion, -1.0)
+                }
+
+                val methodText = method.text
+                val classTextWithoutMethod = psiClass.methods
+                    .filter { it != method }
+                    .joinToString("\n") { it.text }
+
+                val similarity = computeCosineSimilarity(methodText, classTextWithoutMethod)
+                Pair(suggestion, similarity)
+            }.sortedBy { it.second }
+//                .map { it.first }
+        }
+
         val messages =
             (prompter as MoveMethodRefactoringPrompt).askForMethodPriorityPrompt(
                 condenseMethodCode(functionPsiElement, uniqueSuggestions),
-                uniqueSuggestions)
+                uniqueSuggestions, methodSimilarity)
         val response: LLMBaseResponse?
         val llmResponseTime = measureTimeMillis { response = llmResponseCache[messages.toString()]?:sendChatRequest(project, messages, llmChatModel)}
         if (response != null) {
