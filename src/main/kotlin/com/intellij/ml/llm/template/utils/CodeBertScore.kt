@@ -94,7 +94,7 @@ class CodeBertScore {
             val jsonBody = json.encodeToString(CodeBertRequestSerializer, requestData)
             val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), jsonBody)
             val request = Request.Builder()
-                .url("https://c3ffbf301f33bc4e9823374a29b45653.serveo.net/compute_codebertscore")
+                .url("https://75d447f5c710daed3ef132d70d88e83c.serveo.net/compute_codebertscore")
                 .post(requestBody)
                 .build()
 

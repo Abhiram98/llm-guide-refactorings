@@ -347,7 +347,7 @@ class PsiUtils {
             // Define weights for each criterion
             val STATIC_RATIO_WEIGHT = 1.0
             val PACKAGE_PROXIMITY_WEIGHT = 1.0
-            val UTILITY_CLASS_WEIGHT = 2.0 // Higher weight to give more importance to utility classes
+            val UTILITY_CLASS_WEIGHT = 1.5 // Higher weight to give more importance to utility classes
 
             // Source package name for package proximity calculation
             val sourcePackageName = (containingClass.containingFile as? PsiJavaFile)?.packageName ?: ""

@@ -51,7 +51,7 @@ class MoveMethodFactory {
         const val llmContextLimit = 128000
         val llmResponseCache = mutableMapOf<String, LLMBaseResponse>()
         var myInvokeFinished: Boolean? = null
-        const val MAX_TARGET_CLASS4LLM = 3
+        const val MAX_TARGET_CLASS4LLM = 5
 
         fun test(){
 
@@ -340,7 +340,7 @@ class MoveMethodFactory {
                 val dedupPotentialTargets = potentialTargets.distinctBy { it.name }
                 val potentialMovePivots = dedupPotentialTargets.map { MovePivot(it, null) }
                 val validMovePivots = getValidPivots(project, editor, file, methodToMove, potentialMovePivots)
-                return validMovePivots.subList(0, min(validMovePivots.size, 100)).map { MovePivot(it.psiClass, null) }
+                return validMovePivots.subList(0, min(validMovePivots.size, 200)).map { MovePivot(it.psiClass, null) }
             }else{
                 val handler = MoveInstanceMethodHandlerForPlugin()
                 return runReadAction {

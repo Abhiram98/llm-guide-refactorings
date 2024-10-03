@@ -9,13 +9,12 @@ import dev.langchain4j.data.message.SystemMessage
 import dev.langchain4j.data.message.UserMessage
 
 class MoveMethodRefactoringPrompt: MethodPromptBase() {
-    override fun getPrompt(methodCode: String): MutableList<ChatMessage> {
+    override fun getPrompt(classCode: String): MutableList<ChatMessage> {
         return mutableListOf(
             SystemMessage.from(SuggestRefactoringPrompt.systemMessageText),
             UserMessage.from("""
             Please provide suggestions to improve the following Java method/class. 
-            **Task**: Identify methods that violate good software design practices, such as the Single Responsibility Principle or low coupling. Specifically, find methods that do not logically belong to their current class and suggest an appropriate class to move them to. 
-            Provide only suggestions that involve moving methods (i.e., "Move Method" refactoring).
+            **Task**: Analyze the following Java class and give rationale for each of the methods to a different class.
             
             **Instructions**:
             
@@ -53,7 +52,7 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
                                 }
                             ]
                             """.trimIndent()),
-            UserMessage.from(methodCode)
+            UserMessage.from(classCode)
         )
     }
 //    fun askForMethodPriorityPrompt(classCode: String, moveMethodSuggetions: List<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion>, methodSimilarity: List<Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>): MutableList<ChatMessage> {
@@ -84,7 +83,7 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
         // Construct a list of methods with their similarity scores
         val methodsWithScores = methodSimilarity.map { (suggestion, score) ->
             mapOf(
-                "methodName" to suggestion.methodName,
+                "methodSignature" to suggestion.methodSignature,
                 "similarityScore" to score
             )
         }
@@ -101,7 +100,7 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
             ${classCode}
             ```
             
-            Below are the move-method suggestions along with their similarity scores:
+            Below are the move-method suggestions along with their similarity scores. If the score is low, it indicates that the method may not belong in the current class:
             ```json
             $methodsJson
             ```

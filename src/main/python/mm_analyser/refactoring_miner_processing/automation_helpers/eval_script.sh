@@ -13,7 +13,7 @@ CURRENT_DATE=$(date +'%d-%H:%M')
 MM_ASSIST_OUTFILE="mm-assist-${CURRENT_DATE}"
 
 INPUT_DIRECTORY=$MM_ASSIST_OUTFILE # used this name to make it readable for users
-OUTPUT_FILE_PATH="static_methods_12.csv"
+OUTPUT_FILE_PATH="static_methods_15.csv"
 LOG_FILE_PATH="./${MM_ASSIST_OUTFILE}.log"
 
 
