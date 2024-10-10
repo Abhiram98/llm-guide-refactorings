@@ -60,13 +60,14 @@ abstract class ApplySuggestRefactoringIntention(
     }
 
     override fun invoke(project: Project, editor: Editor?, file: PsiFile?) {
-        invokePlugin(project, editor, file)
+        invokePlugin(project, editor, file, null)
     }
 
     protected fun invokePlugin(
         project: Project,
         editor: Editor?,
-        file: PsiFile?
+        file: PsiFile?,
+        classPsi: PsiClass?
     ) {
         llmChatModel = RefAgentSettingsManager.getInstance().createAndGetAiModel()!!
 
@@ -75,7 +76,8 @@ abstract class ApplySuggestRefactoringIntention(
         //        val namedElement =
         //            PsiUtils.getParentFunctionOrNull(editor, file.language)
         //                ?: PsiUtils.getParentClassOrNull(editor, file.language)
-        val namedElement = (file as PsiJavaFileImpl).classes[0]
+        val namedElement = classPsi ?: (file as PsiJavaFileImpl).classes[0]
+//        val namedElement = (file as PsiJavaFileImpl).classes[0]
         if (namedElement != null) {
 
             telemetryDataManager.newSession()

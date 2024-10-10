@@ -47,11 +47,11 @@ for ref in refdata:
         print(f"Warning: No matching entry found for commit {ref['sha1']}. Skipping this entry.")
         continue
 
-for ref in refdata:
-    if 'telemetry' in ref:
-        assert ref['telemetry']['hostFunctionTelemetryData']['filePath'].endswith(
-            ref['move_method_refactoring']['leftSideLocations'][0]['filePath']
-        )
+# for ref in refdata:
+#     if 'telemetry' in ref:
+#         assert ref['telemetry']['hostFunctionTelemetryData']['filePath'].endswith(
+#             ref['move_method_refactoring']['leftSideLocations'][0]['filePath']
+#         )
 
 with open(mm_assist_outfile, "w") as f:
     json.dump(refdata, f, indent=4)

@@ -9,24 +9,22 @@ import dev.langchain4j.data.message.SystemMessage
 import dev.langchain4j.data.message.UserMessage
 
 class MoveMethodRefactoringPrompt: MethodPromptBase() {
-    override fun getPrompt(classCode: String): MutableList<ChatMessage> {
+    override fun getPrompt(methodCode: String): MutableList<ChatMessage> {
         return mutableListOf(
             SystemMessage.from(SuggestRefactoringPrompt.systemMessageText),
             UserMessage.from("""
             Please provide suggestions to improve the following Java method/class. 
-            **Task**: Analyze the following Java class and give rationale for each of the methods to a different class.
-            
-            **Instructions**:
-            
+            Your task is to identify methods that do not belong to the class and suggest an appropriate class to move them.
+            Only provide suggestions that are: Move Method.
+                
+                
             Ensure that your recommendations are specific to this method/class and are actionable immediately. 
             Your response should be formatted as a JSON list of objects. Each object should comprise of the following fields. 
             The first field, named "method_name", should be the name of the method that needs to move.
             The second field, names "method_signature", should be the signature of the method that needs to move.
             The third field, "target_class" is the class it should move to.
             The fourth field "rationale", is the reason why it should be moved.
-            
-            **Example**:
-            
+                
             class Order {
                 private Customer customer;
                 private double amount;
@@ -52,38 +50,59 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
                                 }
                             ]
                             """.trimIndent()),
-            UserMessage.from(classCode)
+            UserMessage.from(methodCode)
         )
     }
-//    fun askForMethodPriorityPrompt(classCode: String, moveMethodSuggetions: List<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion>, methodSimilarity: List<Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>): MutableList<ChatMessage> {
-//        return mutableListOf(
-//            SystemMessage.from("You are an expert Java developer who prioritises move-method refactoring suggestions based on your expertise."),
-//            UserMessage.from("""
-//                Here is a java class:
-//                ${classCode}
-//
-//
-//
-//                Please rank the following move-method suggestions:
-//                 ${
-//                     Gson().toJson(moveMethodSuggetions.map{it.methodName})
-//                 }
-//
-//                Respond in a JSON list, with the most important move-method suggestion at the beginning of the list.
-//                If you think it is not important to move some any of these methods, exclude them from the response list.
-//                     """.trimIndent()),
-//        )
-//    }
 
     fun askForMethodPriorityPrompt(
         classCode: String,
         moveMethodSuggestions: List<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion>,
         methodSimilarity: List<Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>
     ): MutableList<ChatMessage> {
+        return mutableListOf(
+            SystemMessage.from("You are an expert Java developer who specializes in move-method refactoring."),
+            UserMessage.from("""
+            Analyze this class and determine which methods should be moved. Follow these exact steps:
+
+            1. First, analyze each candidate method using this format:
+            - Method: [name]
+            - Purpose: [one-line description of what it does]
+            - Dependencies: [what data/methods it uses from current class vs other classes]
+            - Cohesion: [how related is it to class's main purpose]
+
+            2. Then, summarize:
+            - The main responsibility of this class
+            - Which methods align with this responsibility
+            - Which methods seem out of place
+
+            3. Finally, provide a JSON array of method names to move, ordered by priority (highest first). 
+
+            Class code:
+            ${classCode}
+
+            Candidate methods:
+            ${moveMethodSuggestions.joinToString("\n") {
+                "- ${it.methodName}: ${it.methodSignature}"
+            }}
+
+            Remember to complete ALL three sections before making your final recommendations. Only return the method names as JSON. Your response should be a JSON list of method names ordered from highest priority to lowest priority.
+            [
+                "method1",
+                "method2",
+                "method3"
+            ]
+        """.trimIndent())
+        )
+    }
+
+    fun askForMethodPriorityPromptWithSimilarity(
+        classCode: String,
+        methodSimilarity: List<Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>
+    ): MutableList<ChatMessage> {
         // Construct a list of methods with their similarity scores
         val methodsWithScores = methodSimilarity.map { (suggestion, score) ->
             mapOf(
-                "methodSignature" to suggestion.methodSignature,
+                "methodName" to suggestion.methodName,
                 "similarityScore" to score
             )
         }
@@ -100,7 +119,7 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
             ${classCode}
             ```
             
-            Below are the move-method suggestions along with their similarity scores. If the score is low, it indicates that the method may not belong in the current class:
+            Below are the move-method suggestions along with their similarity scores:
             ```json
             $methodsJson
             ```
@@ -112,6 +131,7 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
         """.trimIndent())
         )
     }
+
 
     fun askForTargetClassPriorityPrompt(methodCode: String,
                                         potentialClassBody: String?,

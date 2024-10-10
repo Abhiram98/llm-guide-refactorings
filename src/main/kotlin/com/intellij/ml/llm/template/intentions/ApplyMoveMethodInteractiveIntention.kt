@@ -1,5 +1,6 @@
 package com.intellij.ml.llm.template.intentions
 
+import ai.grazie.utils.isCapitalized
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonParser
@@ -29,9 +30,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.JBPopupListener
 import com.intellij.openapi.ui.popup.LightweightWindowEvent
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
+import com.intellij.psi.*
 import com.intellij.ui.awt.RelativePoint
 import dev.langchain4j.data.message.ChatMessage
 import java.awt.Point
@@ -39,7 +38,6 @@ import java.awt.Rectangle
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
-
 
 open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntention() {
     var MAX_ITERS = RefAgentSettingsManager.getInstance().getNumberOfIterations()
@@ -60,7 +58,10 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         @SerializedName("target_class")
         val targetClass: String,
         @SerializedName("rationale")
-        val rationale:String
+        val rationale:String,
+
+        @Transient
+        val psiMethod: PsiMethod?
     )
 
     override fun getFamilyName(): String {
@@ -116,34 +117,63 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                     print("Failed to parse ${processed}")
                     log2fileAndViewer("LLM response: ${processed}", logger)
                     e.printStackTrace()
-                    logMethods(listOf(MoveMethodSuggestion("failed to unparse","failed to unparse","failed to unparse", processed)), iter, llmRequestTime)
+                    logMethods(listOf(MoveMethodSuggestion("failed to unparse",
+                        "failed to unparse","failed to unparse",
+                        processed, null)), iter, llmRequestTime)
                     null
                 }
                 if (refactoringSuggestions!=null) {
                     llmResponseCache[cacheKey] ?: llmResponseCache.put(cacheKey, response) // cache response
+//                    val augSuggestions = refactoringSuggestions.map {
+//                        functionPsiElement
+////                        it.methodSignature
+////                        val psiMethod = PsiUtils.getMethodWithSignatureFromClass(functionPsiElement)
+////                        MoveMethodSuggestion(it.methodName, it.methodSignature, it.targetClass, it.rationale, psiMethod)
+//                    }
                     vanillaLLMSuggestions.addAll(refactoringSuggestions)
                     logMethods(refactoringSuggestions, iter, llmRequestTime)
                 }
             }
         }
-        val uniqueSuggestions = vanillaLLMSuggestions.distinctBy { it.methodName }
 
-        log2fileAndViewer("*** Combining responses from iterations ***", logger)
-        logMethods(uniqueSuggestions, -1, 0)
-        if (uniqueSuggestions.isEmpty()){
+        val uniqueSuggestions = vanillaLLMSuggestions.distinctBy { it.methodName }
+        var methods : List<PsiMethod> = emptyList()
+        val bruteForceSuggestions = runReadAction {
+            methods = PsiUtils.getAllMethodsInClass(functionPsiElement as PsiClass)
+            telemetryDataManager.addMethodCount(methods.size)
+            methods
+                .filter { !it.name.isCapitalized() } // filter constructors
+                .filter { !(it.name.startsWith("set") && it.parameterList.parameters.size==1)} // filter out getters and setters.
+//                .filter{ !it.isOverridableElement() }
+                .filter { !it.text.contains("@Override") }
+                .filter { !it.text.contains("@Test")}
+                .filter { !it.hasModifierProperty(PsiModifier.ABSTRACT) }
+                .filter { method ->
+                            method.body != null &&
+                                !method.body!!.statements.all { it is PsiComment }
+                }
+                .map { MoveMethodSuggestion(it.name, it.getSignature(PsiSubstitutor.EMPTY).toString(), "", "", it) }
+        }
+
+        val methodCompatibilitySuggestionsWithSore = getMethodCompatibility(bruteForceSuggestions, functionPsiElement as PsiClass, project)
+
+        if (methodCompatibilitySuggestionsWithSore == null) {
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
             telemetryDataManager.setRefactoringObjects(emptyList())
             // show message to user.
-            invokeLater { showEFNotification(
-                project,
-                LLMBundle.message("notification.extract.function.with.llm.no.suggestions.message"),
-                NotificationType.INFORMATION
-            ) }
+            invokeLater {
+                showEFNotification(
+                    project,
+                    LLMBundle.message("notification.extract.function.with.llm.no.suggestions.message"),
+                    NotificationType.INFORMATION
+                )
+            }
             sendTelemetryData()
         }
         else {
             log2fileAndViewer("Prioritising suggestions...", logger)
-            val priority = getSuggestionPriority(uniqueSuggestions, project)
+//            val priority = getSuggestionPriority(methodCompatibilitySuggestions, project)
+            val priority = methodCompatibilitySuggestionsWithSore
             if (priority!=null){
                 logPriority(priority)
                 if (priority.size==0) {
@@ -175,7 +205,19 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                 sendTelemetryData()
             }
         }
+    }
 
+    private fun countPrivateFieldAccesses(method: PsiMethod): Int {
+        var count = 0
+        method.body?.accept(object : JavaRecursiveElementVisitor() {
+            override fun visitReferenceExpression(expression: PsiReferenceExpression) {
+                val resolved = expression.resolve()
+                if (resolved is PsiField && resolved.hasModifierProperty(PsiModifier.PRIVATE)) {
+                    count++
+                }
+            }
+        })
+        return count
     }
 
     private fun createRefactoringObjectsAndShowSuggestions(moveMethodSuggestions: List<MoveMethodSuggestion>) {
@@ -218,6 +260,82 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
 
 
     }
+
+    private fun getMethodCompatibility(
+        uniqueSuggestions: List<MoveMethodSuggestion>,
+        psiClass: PsiClass,
+        project: Project
+    ): List<MoveMethodSuggestion>? {
+        val methodSimilarity = runReadAction {
+            uniqueSuggestions.map { suggestion ->
+                if (suggestion.psiMethod == null) {
+                    log2fileAndViewer("Method ${suggestion.methodName} not found in class", logger)
+                    return@map Pair(suggestion, -1.0)
+                }
+                val methodIndex = psiClass.text.indexOf(suggestion.psiMethod.text)
+                val classTextWithoutMethod = if (methodIndex==-1){
+                    psiClass.text
+                }else {
+                    psiClass.text.substring(
+                        0,
+                        methodIndex
+                    ) + psiClass.text.substring(methodIndex + suggestion.psiMethod.text.length, psiClass.text.length)
+                }
+                val methodText = suggestion.psiMethod.text
+//                val cbSimilarity = CodeBertScore.computeCodeBertScore(methodText, classTextWithoutMethod)
+                val similarity = PsiUtils.computeCosineSimilarity(methodText, classTextWithoutMethod)
+//                val voyageAiEmbeddingModelIT = VoyageAiEmbeddingModelIT()
+//                val similarity = voyageAiEmbeddingModelIT.computeVoyageAiCosineSimilarity(methodText, classTextWithoutMethod, VoyageAiEmbeddingModelName.VOYAGE_3_LITE)
+                Pair(suggestion, similarity)
+            }.sortedBy { it.second }
+            //                .map { it.first }
+
+        }
+
+        val top15Suggestions = methodSimilarity.subList(0, min(15, methodSimilarity.size))
+        val top15MM = top15Suggestions.map { it.first }
+        logMethods(top15MM, -2, 0)
+        val messages =
+            (prompter as MoveMethodRefactoringPrompt).askForMethodPriorityPrompt(
+                condenseMethodCode(functionPsiElement, uniqueSuggestions),
+                uniqueSuggestions, top15Suggestions)
+//        val messages = (prompter as MoveMethodRefactoringPrompt).askForMethodPriorityPromptWithSimilarity(
+//            condenseMethodCode(functionPsiElement, uniqueSuggestions),
+//            top15Suggestions)
+        val response: LLMBaseResponse?
+        val llmResponseTime = measureTimeMillis { response = llmResponseCache[messages.toString()]?:sendChatRequest(project, messages, llmChatModel)}
+        if (response != null) {
+            var methodPriority = mutableListOf<String>()
+            val methodPriority2 = try {
+                Gson().fromJson(
+                    JsonUtils.sanitizeJson(response.getSuggestions()[0].text),
+                    methodPriority::class.java
+                )
+            } catch (e: Exception) {
+                log2fileAndViewer("LLM Response: " + response.getSuggestions()[0].text, logger)
+                telemetryDataManager.addLLMPriorityResponse(response.getSuggestions()[0].text, llmResponseTime)
+                null
+            }
+            if (methodPriority2!=null) {
+                llmResponseCache.put(messages.toString(), response)
+                val sortedSuggestions = top15MM.sortedBy {
+                    val index = methodPriority2.indexOf(it.methodName)
+                    if (index == -1) {
+                        top15MM.size + 1
+                    } else {
+                        index
+                    }
+                }
+                telemetryDataManager.addLLMPriorityResponse(sortedSuggestions.map{it.methodName}, llmResponseTime)
+                return sortedSuggestions
+            }
+        }
+        return null
+
+//        return top15MM
+    }
+
+
     fun showRefactoringOptionsPopup(
         project: Project,
         editor: Editor,
@@ -289,11 +407,13 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         uniqueSuggestions: List<MoveMethodSuggestion>,
         project: Project
     ) : List<MoveMethodSuggestion>? {
-        val psiClass = runReadAction{ functionPsiElement as? PsiClass }
+        val psiClass = runReadAction{ functionPsiElement.context as? PsiClass }
+
         if (psiClass == null) {
             log2fileAndViewer("Error: functionPsiElement is not a PsiClass", logger)
             return emptyList()
         }
+
         val methodSimilarity = runReadAction {
             uniqueSuggestions.map { suggestion ->
                 val method = psiClass.findMethodsByName(suggestion.methodName, false).firstOrNull()
@@ -302,16 +422,29 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                     return@map Pair(suggestion, -1.0)
                 }
 
-                val methodText = method.body?.text?: ""
+                val methodText = method.text?: ""
                 val classTextWithoutMethod = psiClass.methods
                     .filter { it != method }
                     .joinToString("\n") { it.text }
 
-                val similarity = CodeBertScore.computeCodeBertScore(methodText, classTextWithoutMethod)
+                val similarity = PsiUtils.computeCosineSimilarity(methodText, classTextWithoutMethod)
                 Pair(suggestion, similarity)
             }.sortedBy { it.second }
 //                .map { it.first }
         }
+
+//        val methodSimilarity = runReadAction {
+//            psiClass.methods.map { method ->
+//                val methodText = method.body?.text ?: ""
+//                val classTextWithoutMethod = psiClass.methods
+//                    .filter { it != method }
+//                    .joinToString("\n") { it.text }
+//
+//                val similarity = PsiUtils.computeCosineSimilarity(methodText, classTextWithoutMethod)
+////                val similarity = CodeBertScore.computeCodeBertScore(methodText, classTextWithoutMethod)
+//                Pair(method, similarity)
+//            }.sortedBy { it.second }
+//        }
 
         val messages =
             (prompter as MoveMethodRefactoringPrompt).askForMethodPriorityPrompt(

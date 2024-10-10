@@ -51,7 +51,7 @@ class MoveMethodFactory {
         const val llmContextLimit = 128000
         val llmResponseCache = mutableMapOf<String, LLMBaseResponse>()
         var myInvokeFinished: Boolean? = null
-        const val MAX_TARGET_CLASS4LLM = 5
+        const val MAX_TARGET_CLASS4LLM = 10
 
         fun test(){
 
@@ -106,6 +106,8 @@ class MoveMethodFactory {
                     validMovePivots
                         .filter { runReadAction{ methodToMove.containingClass?.qualifiedName != it.psiClass.qualifiedName } }
                         .map { pivot ->
+//                            val voyageAiEmbeddingModelIT = VoyageAiEmbeddingModelIT()
+//                            val similarity = runReadAction{ voyageAiEmbeddingModelIT.computeVoyageAiCosineSimilarity(methodToMove, pivot.psiClass, VoyageAiEmbeddingModelName.VOYAGE_3_LITE)}
                             val similarity = runReadAction{ PsiUtils.computeCosineSimilarity(methodToMove, pivot.psiClass) }
 //                            val cbSimilarity = runReadAction{ CodeBertScore.computeCodeBertScore(methodToMove, pivot.psiClass) }
                             pivot to similarity
@@ -123,7 +125,7 @@ class MoveMethodFactory {
                 ?.addPotentialTargetClassesOrdered(
                     methodToMove.name,
                     runReadAction{ targetPivotsWithSimilarity.map { it.first.psiClass.name to it.second } },
-                    "CB",
+                    "tfidf",
                     similarityComputationTime)
 
             val pivotsSortedByLLM =
@@ -138,7 +140,7 @@ class MoveMethodFactory {
                     targetPivotsSorted
             if (pivotsSortedByLLM.isEmpty())
                 return emptyList()
-            logPotentialPivots(pivotsSortedByLLM.subList(0, min(3, pivotsSortedByLLM.size)), methodToMove)
+            logPotentialPivots(pivotsSortedByLLM.subList(0, min(15, pivotsSortedByLLM.size)), methodToMove)
 
             if (PsiUtils.isMethodStatic(methodToMove)){
                 return runReadAction {
@@ -340,7 +342,7 @@ class MoveMethodFactory {
                 val dedupPotentialTargets = potentialTargets.distinctBy { it.name }
                 val potentialMovePivots = dedupPotentialTargets.map { MovePivot(it, null) }
                 val validMovePivots = getValidPivots(project, editor, file, methodToMove, potentialMovePivots)
-                return validMovePivots.subList(0, min(validMovePivots.size, 200)).map { MovePivot(it.psiClass, null) }
+                return validMovePivots.subList(0, min(validMovePivots.size, 100)).map { MovePivot(it.psiClass, null) }
             }else{
                 val handler = MoveInstanceMethodHandlerForPlugin()
                 return runReadAction {

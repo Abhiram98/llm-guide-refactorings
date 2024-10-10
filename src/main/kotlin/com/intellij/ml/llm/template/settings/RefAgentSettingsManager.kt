@@ -3,10 +3,8 @@ package com.intellij.ml.llm.template.settings
 import com.intellij.ml.llm.template.models.grazie.GrazieGPT4
 import com.intellij.ml.llm.template.models.grazie.GrazieGPT4o
 import com.intellij.ml.llm.template.models.grazie.GrazieGPT4omini
-import com.intellij.ml.llm.template.models.grazie.GrazieModel
 import com.intellij.ml.llm.template.models.ollama.localOllamaMistral
 import com.intellij.ml.llm.template.models.openai.CredentialsHolder
-import com.intellij.ml.llm.template.models.openai.OpenAiGpt4
 import com.intellij.ml.llm.template.models.openai.getOpenAiModel
 import com.intellij.openapi.components.*
 import com.intellij.util.xmlb.annotations.OptionTag
@@ -157,7 +155,7 @@ class RefAgentSettings : BaseState() {
     var useOpenAi by property(true)
 
     @get:OptionTag("ai_model")
-    var aiModel = "grazie-gpt-4"
+    var aiModel = "openai-gpt-4o-mini"
 
     @get:OptionTag("use_local_llm")
     var useOllamaToCreateObj = false

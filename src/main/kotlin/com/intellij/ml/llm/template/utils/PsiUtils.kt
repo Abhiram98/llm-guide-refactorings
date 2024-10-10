@@ -337,6 +337,21 @@ class PsiUtils {
 //            println("Number of utility classes found: ${utilityClasses.size}")
 //            return utilityClasses
 //        }
+        fun getAllMethodsInClass(containingClass: PsiClass?): List<PsiMethod> {
+            if (containingClass==null)
+                return emptyList()
+
+            val visitedMethods = mutableSetOf<PsiMethod>()
+            class MethodFinder: JavaRecursiveElementVisitor() {
+                override fun visitMethod(method: PsiMethod) {
+                    super.visitMethod(method)
+                    visitedMethods.add(method)
+                }
+
+            }
+            containingClass.accept(MethodFinder())
+            return visitedMethods.toList()
+        }
 
         fun fetchPrioritizedClasses(
             containingClass: PsiClass,
@@ -345,9 +360,9 @@ class PsiUtils {
             val classList = PsiUtils.fetchClassesInProject(containingClass, project)
 
             // Define weights for each criterion
-            val STATIC_RATIO_WEIGHT = 1.0
-            val PACKAGE_PROXIMITY_WEIGHT = 1.0
-            val UTILITY_CLASS_WEIGHT = 1.5 // Higher weight to give more importance to utility classes
+            val STATIC_RATIO_WEIGHT = 0.0
+            val UTILITY_CLASS_WEIGHT = 1.0
+            val PACKAGE_PROXIMITY_WEIGHT = 3.0
 
             // Source package name for package proximity calculation
             val sourcePackageName = (containingClass.containingFile as? PsiJavaFile)?.packageName ?: ""
@@ -472,7 +487,7 @@ class PsiUtils {
                         if (psiClass.methods.isNotEmpty() &&
                             !psiClass.isEnum &&
                             !psiClass.isInterface &&
-                            !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
+//                            !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
                             !psiClass.isAnnotationType) {
                             classList.add(psiClass)
                         }

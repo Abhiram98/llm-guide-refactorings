@@ -18,6 +18,9 @@ data class RefTelemetryData(
     @SerializedName("id")
     var id: String,
 ) {
+    @SerializedName("methodCount")
+    var methodCount: Int = 0
+
     @SerializedName("hostFunctionTelemetryData")
     lateinit var hostFunctionTelemetryData: HostFunctionTelemetryData
 
@@ -337,7 +340,7 @@ class EFTelemetryDataManager {
         val transformedMethodNames = if (anonimizeTelemetry) {
             moveSuggestions.map {
                 ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion(
-                    getAndSetAnonMethodName(it.methodName), "", getAndSetAnonClassName(it.targetClass), "")
+                    getAndSetAnonMethodName(it.methodName), "", getAndSetAnonClassName(it.targetClass), "", null)
 
             }
         }else{ moveSuggestions}
@@ -431,6 +434,10 @@ class EFTelemetryDataManager {
                 if(anonimizeTelemetry) "LLM gave some reasoning. Hiding for anonymity." else unparseableResponse
             targetClassData.llmResponseTime = llmResponseTime
         }
+    }
+
+    fun addMethodCount(size: Int) {
+        currentTelemetryData.methodCount = size
     }
 }
 

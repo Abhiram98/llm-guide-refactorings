@@ -43,10 +43,15 @@ duplication_counter = set()
 for ref in refdata:
     parent_commit = repo.commit(ref['sha1']).parents[0]
     file_path = ref['move_method_refactoring']['leftSideLocations'][0]['filePath']
+                # "description": "Move Method public getStartCommand(template String, startCommandValues Map<String,String>) : String from class org.apache.flink.runtime.clusterframework.BootstrapTools to public getStartCommand(template String, startCommandValues Map<String,String>) : String from class org.apache.flink.yarn.Utils",
+    description = ref['move_method_refactoring']['description']
+    full_class_name = description.split(" from class ", 1)[1].split(" to ", 1)[0]
+    class_name = full_class_name.split(".")[-1]
     if (parent_commit, file_path) in duplication_counter:
         continue
     write_data.append({
         "file_path": file_path,
+        "class_name": class_name,
         "commit_hash": parent_commit.hexsha,
         "new_commit_hash": ref['sha1']
     })
