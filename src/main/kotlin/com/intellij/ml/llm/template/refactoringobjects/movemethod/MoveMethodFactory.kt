@@ -150,7 +150,7 @@ class MoveMethodFactory {
                         runReadAction{ methodToMove.containingClass },
                         project,
                         llmChatModel,
-                        telemetryDataManager)?: targetPivotsSorted
+                        telemetryDataManager)?.filter { it.rationale!=null } ?: targetPivotsSorted
                 else
                     targetPivotsSorted
             if (pivotsSortedByLLM.isEmpty())
