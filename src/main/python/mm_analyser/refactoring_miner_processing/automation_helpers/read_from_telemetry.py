@@ -3,7 +3,7 @@ from mm_analyser import data_folder, resources_folder
 from mm_analyser.env import TELEMETRY_FILE_PATH
 from mm_analyser.refactoring_miner_processing.automation_helpers.AutmationHelpers import MmHelper, EmmHelper
 
-project_name = "kafka"
+project_name = "vue_pro"
 # helper = MmHelper(project_name)
 helper = EmmHelper()
 refminer_filtered_file = f"{data_folder}/refminer_data/{helper.directory}/{project_name}_res.json"

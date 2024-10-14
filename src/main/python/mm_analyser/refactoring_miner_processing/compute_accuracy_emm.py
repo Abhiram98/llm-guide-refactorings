@@ -205,18 +205,18 @@ plugin_outfiles = [
     'vue_pro_res.json',
     # 'elastic_res.json',
     # 'dbeaver_res.json',
-    'flink_res.json',
+    # 'flink_res.json',
     # 'spring_framework_res.json',
     # 'halo_res.json',
     # 'redisson_res.json',
-    'kafka_res.json',
+    # 'kafka_res.json',
     # 'springboot_res.json'
 ]
 
 combined_output = []
 # df = pd.read_csv(f'{data_folder}/refminer_data/static_moves.csv')
 for file_name in plugin_outfiles:
-    with open(f'{data_folder}/refminer_data/mm-assist-emm/{file_name}') as f:
+    with open(f'{data_folder}/refminer_data/mm-assist-emm-voyage/{file_name}') as f:
         data = json.load(f)
     combined_output += data
 combined_output = [i for i in combined_output if 'telemetry' in i

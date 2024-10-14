@@ -5,8 +5,9 @@ from collections import defaultdict
 from mm_analyser.env import PROJECTS_BASE_PATH
 from mm_analyser import data_folder, resources_folder
 from mm_analyser.refactoring_miner_processing.automation_helpers.AutmationHelpers import EmmHelper, MmHelper
+from mm_analyser.refactoring_miner_processing.filter.ExtractMoveMethodValidator import ExtractMoveMethodRef
 
-project_name = "kafka"
+project_name = "vue_pro"
 project_basepath_map = {
         'vue_pro': 'ruoyi-vue-pro',
         'flink': 'flink',
@@ -46,16 +47,15 @@ for ref in refdata:
     if parent_commit is None:
         continue
     file_path = ref['move_method_refactoring']['leftSideLocations'][0]['filePath']
-                # "description": "Move Method public getStartCommand(template String, startCommandValues Map<String,String>) : String from class org.apache.flink.runtime.clusterframework.BootstrapTools to public getStartCommand(template String, startCommandValues Map<String,String>) : String from class org.apache.flink.yarn.Utils",
-    description = ref['move_method_refactoring']['description']
-    full_class_name = description.split(" from class ", 1)[1].split(" to ", 1)[0]
+    emm_obj = ExtractMoveMethodRef.create_from(ref['move_method_refactoring'])
+    full_class_name = emm_obj.original_class
     class_name = full_class_name.split(".")[-1]
     if (parent_commit, file_path) in duplication_counter:
         continue
     write_data.append({
         "file_path": file_path,
         "class_name": class_name,
-        "commit_hash": parent_commit.hexsha,
+        "commit_hash": parent_commit,
         "new_commit_hash": ref['sha1']
     })
     duplication_counter.add((parent_commit, file_path))

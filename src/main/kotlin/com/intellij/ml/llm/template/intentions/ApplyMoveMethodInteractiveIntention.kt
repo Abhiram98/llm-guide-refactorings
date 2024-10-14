@@ -115,11 +115,11 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         addMethodCompatibilityData(methodCompatibilitySuggestionsWithSore)
         logMethods(bruteForceSuggestions, -1, 0)
         logMethods(methodCompatibilitySuggestions, -2, 0)
-//        telemetryDataManager.setRefactoringObjects(emptyList())
-//        sendTelemetryData()
+        telemetryDataManager.setRefactoringObjects(emptyList())
+        sendTelemetryData()
         log2fileAndViewer("*** Combining responses from iterations ***", logger)
 //        logMethods(methodCompatibilitySuggestions, -1, 0)
-//        return
+        return
         if (methodCompatibilitySuggestions.isEmpty()) {
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
             telemetryDataManager.setRefactoringObjects(emptyList())

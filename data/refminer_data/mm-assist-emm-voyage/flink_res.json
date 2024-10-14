@@ -79,7 +79,7 @@
             "newBranchName": "extract-getWindowSize-createEndingState-639deec"
         },
         "telemetry": {
-            "id": "5ffa82f1-6ebb-42df-85b1-13bdc2d0a87c",
+            "id": "f4c71744-7595-469a-8fe0-393b755abacf",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 905,
                 "lineStart": 136,
@@ -99,6 +99,18 @@
                     "iteration_num": -1,
                     "suggested_move_methods": [
                         {
+                            "method_name": "compileFactory",
+                            "method_signature": " compileFactory()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "checkPatternWindowTimes",
+                            "method_signature": "private checkPatternWindowTimes()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
                             "method_name": "checkPatternSkipStrategy",
                             "method_signature": "private checkPatternSkipStrategy()",
                             "target_class": "",
@@ -117,14 +129,158 @@
                             "rationale": ""
                         },
                         {
+                            "method_name": "createEndingState",
+                            "method_signature": "private createEndingState()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createMiddleStates",
+                            "method_signature": "private createMiddleStates(final State<T> sinkState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createStartState",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private createStartState(State<T> sinkState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "convertPattern",
+                            "method_signature": "private convertPattern(final State<T> sinkState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createState",
+                            "method_signature": "private createState(State.StateType stateType, boolean isTake)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
                             "method_name": "createState",
                             "method_signature": "private createState(String name, State.StateType stateType)",
                             "target_class": "",
                             "rationale": ""
                         },
                         {
+                            "method_name": "createStopState",
+                            "method_signature": "private createStopState(\n                final IterativeCondition<T> notCondition, final String name)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "copyWithoutTransitiveNots",
+                            "method_signature": "private copyWithoutTransitiveNots(final State<T> sinkState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "copy",
+                            "method_signature": "private copy(final State<T> state)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addStopStates",
+                            "method_signature": "private addStopStates(final State<T> state)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addStopStateToLooping",
+                            "method_signature": "private addStopStateToLooping(final State<T> loopingState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
                             "method_name": "createTimesState",
                             "method_signature": "@SuppressWarnings(\"unchecked\")\n        private createTimesState(\n                final State<T> sinkState, final State<T> proceedState, Times times)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "isCurrentGroupPatternFirstOfLoop",
+                            "method_signature": "private isCurrentGroupPatternFirstOfLoop()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "headOfGroup",
+                            "method_signature": "private headOfGroup(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "isPatternOptional",
+                            "method_signature": "private isPatternOptional(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "isHeadOfOptionalGroupPattern",
+                            "method_signature": "private isHeadOfOptionalGroupPattern(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createSingletonState",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private createSingletonState(final State<T> sinkState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createSingletonState",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private createSingletonState(\n                final State<T> sinkState,\n                final State<T> proceedState,\n                final IterativeCondition<T> takeCondition,\n                final IterativeCondition<T> ignoreCondition,\n                final boolean isOptional)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createGroupPatternState",
+                            "method_signature": "private createGroupPatternState(\n                final GroupPattern<T, ?> groupPattern,\n                final State<T> sinkState,\n                final State<T> proceedState,\n                final boolean isOptional)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createLoopingGroupPatternState",
+                            "method_signature": "private createLoopingGroupPatternState(\n                final GroupPattern<T, ?> groupPattern, final State<T> sinkState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createLooping",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private createLooping(final State<T> sinkState)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "extendWithUntilCondition",
+                            "method_signature": "private extendWithUntilCondition(\n                IterativeCondition<T> condition,\n                IterativeCondition<T> untilCondition,\n                boolean isTakeCondition)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getInnerIgnoreCondition",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private getInnerIgnoreCondition(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getIgnoreCondition",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private getIgnoreCondition(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getTakeCondition",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private getTakeCondition(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "updateWithGreedyCondition",
+                            "method_signature": "private updateWithGreedyCondition(\n                State<T> state, IterativeCondition<T> takeCondition)",
                             "target_class": "",
                             "rationale": ""
                         }
@@ -135,14 +291,8 @@
                     "iteration_num": -2,
                     "suggested_move_methods": [
                         {
-                            "method_name": "checkPatternNameUniqueness",
-                            "method_signature": "private checkPatternNameUniqueness()",
-                            "target_class": "",
-                            "rationale": ""
-                        },
-                        {
-                            "method_name": "checkPatternSkipStrategy",
-                            "method_signature": "private checkPatternSkipStrategy()",
+                            "method_name": "extendWithUntilCondition",
+                            "method_signature": "private extendWithUntilCondition(\n                IterativeCondition<T> condition,\n                IterativeCondition<T> untilCondition,\n                boolean isTakeCondition)",
                             "target_class": "",
                             "rationale": ""
                         },
@@ -153,14 +303,80 @@
                             "rationale": ""
                         },
                         {
+                            "method_name": "checkPatternSkipStrategy",
+                            "method_signature": "private checkPatternSkipStrategy()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "checkPatternWindowTimes",
+                            "method_signature": "private checkPatternWindowTimes()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "updateWithGreedyCondition",
+                            "method_signature": "private updateWithGreedyCondition(\n                State<T> state, IterativeCondition<T> takeCondition)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "headOfGroup",
+                            "method_signature": "private headOfGroup(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "isPatternOptional",
+                            "method_signature": "private isPatternOptional(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
                             "method_name": "checkPatternNameUniqueness",
                             "method_signature": "private checkPatternNameUniqueness(final Pattern pattern)",
                             "target_class": "",
                             "rationale": ""
                         },
                         {
-                            "method_name": "createTimesState",
-                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private createTimesState(\n                final State<T> sinkState, final State<T> proceedState, Times times)",
+                            "method_name": "isHeadOfOptionalGroupPattern",
+                            "method_signature": "private isHeadOfOptionalGroupPattern(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "createStopState",
+                            "method_signature": "private createStopState(\n                final IterativeCondition<T> notCondition, final String name)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "checkPatternNameUniqueness",
+                            "method_signature": "private checkPatternNameUniqueness()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addStopStates",
+                            "method_signature": "private addStopStates(final State<T> state)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getTakeCondition",
+                            "method_signature": "@SuppressWarnings(\"unchecked\")\n        private getTakeCondition(Pattern<T, ?> pattern)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "copy",
+                            "method_signature": "private copy(final State<T> state)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "isCurrentGroupPatternFirstOfLoop",
+                            "method_signature": "private isCurrentGroupPatternFirstOfLoop()",
                             "target_class": "",
                             "rationale": ""
                         }
@@ -169,23 +385,14 @@
                 }
             ],
             "methodCompatibilityScores": {
-                "private checkPatternNameUniqueness()": {
+                "private extendWithUntilCondition(\n                IterativeCondition<T> condition,\n                IterativeCondition<T> untilCondition,\n                boolean isTakeCondition)": {
                     "first": {
-                        "method_name": "checkPatternNameUniqueness",
-                        "method_signature": "private checkPatternNameUniqueness()",
+                        "method_name": "extendWithUntilCondition",
+                        "method_signature": "private extendWithUntilCondition(\n                IterativeCondition<T> condition,\n                IterativeCondition<T> untilCondition,\n                boolean isTakeCondition)",
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.5183138085685245
-                },
-                "private checkPatternSkipStrategy()": {
-                    "first": {
-                        "method_name": "checkPatternSkipStrategy",
-                        "method_signature": "private checkPatternSkipStrategy()",
-                        "target_class": "",
-                        "rationale": ""
-                    },
-                    "second": 0.5435284203884001
+                    "second": 0.37408518583271566
                 },
                 "private createState(String name, State.StateType stateType)": {
                     "first": {
@@ -194,7 +401,52 @@
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.6744609667462226
+                    "second": 0.40301830842580366
+                },
+                "private checkPatternSkipStrategy()": {
+                    "first": {
+                        "method_name": "checkPatternSkipStrategy",
+                        "method_signature": "private checkPatternSkipStrategy()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.406910323427389
+                },
+                "private checkPatternWindowTimes()": {
+                    "first": {
+                        "method_name": "checkPatternWindowTimes",
+                        "method_signature": "private checkPatternWindowTimes()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.4142859222976852
+                },
+                "private updateWithGreedyCondition(\n                State<T> state, IterativeCondition<T> takeCondition)": {
+                    "first": {
+                        "method_name": "updateWithGreedyCondition",
+                        "method_signature": "private updateWithGreedyCondition(\n                State<T> state, IterativeCondition<T> takeCondition)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.433743954098944
+                },
+                "private headOfGroup(Pattern<T, ?> pattern)": {
+                    "first": {
+                        "method_name": "headOfGroup",
+                        "method_signature": "private headOfGroup(Pattern<T, ?> pattern)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.45309970759270685
+                },
+                "private isPatternOptional(Pattern<T, ?> pattern)": {
+                    "first": {
+                        "method_name": "isPatternOptional",
+                        "method_signature": "private isPatternOptional(Pattern<T, ?> pattern)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.46213815990034035
                 },
                 "private checkPatternNameUniqueness(final Pattern pattern)": {
                     "first": {
@@ -203,16 +455,70 @@
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.6847158576664031
+                    "second": 0.4660949529887819
                 },
-                "@SuppressWarnings(\"unchecked\")\n        private createTimesState(\n                final State<T> sinkState, final State<T> proceedState, Times times)": {
+                "private isHeadOfOptionalGroupPattern(Pattern<T, ?> pattern)": {
                     "first": {
-                        "method_name": "createTimesState",
-                        "method_signature": "@SuppressWarnings(\"unchecked\")\n        private createTimesState(\n                final State<T> sinkState, final State<T> proceedState, Times times)",
+                        "method_name": "isHeadOfOptionalGroupPattern",
+                        "method_signature": "private isHeadOfOptionalGroupPattern(Pattern<T, ?> pattern)",
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.7905512738179686
+                    "second": 0.4768277568206824
+                },
+                "private createStopState(\n                final IterativeCondition<T> notCondition, final String name)": {
+                    "first": {
+                        "method_name": "createStopState",
+                        "method_signature": "private createStopState(\n                final IterativeCondition<T> notCondition, final String name)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.481365788268674
+                },
+                "private checkPatternNameUniqueness()": {
+                    "first": {
+                        "method_name": "checkPatternNameUniqueness",
+                        "method_signature": "private checkPatternNameUniqueness()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.48615574352050783
+                },
+                "private addStopStates(final State<T> state)": {
+                    "first": {
+                        "method_name": "addStopStates",
+                        "method_signature": "private addStopStates(final State<T> state)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.49746578991976675
+                },
+                "@SuppressWarnings(\"unchecked\")\n        private getTakeCondition(Pattern<T, ?> pattern)": {
+                    "first": {
+                        "method_name": "getTakeCondition",
+                        "method_signature": "@SuppressWarnings(\"unchecked\")\n        private getTakeCondition(Pattern<T, ?> pattern)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5017004151842831
+                },
+                "private copy(final State<T> state)": {
+                    "first": {
+                        "method_name": "copy",
+                        "method_signature": "private copy(final State<T> state)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5248465979546378
+                },
+                "private isCurrentGroupPatternFirstOfLoop()": {
+                    "first": {
+                        "method_name": "isCurrentGroupPatternFirstOfLoop",
+                        "method_signature": "private isCurrentGroupPatternFirstOfLoop()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5469730871521812
                 }
             },
             "targetClassMap": {}
@@ -2580,7 +2886,7 @@
             "newBranchName": "extract-handleRequest-asyncValue-60c771b"
         },
         "telemetry": {
-            "id": "3de48f65-a342-4de3-bcc8-4804e2a5ba53",
+            "id": "31cc1c96-441d-423d-94d6-686eb4ace483",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 53,
                 "lineStart": 189,
@@ -2849,7 +3155,7 @@
             "newBranchName": "extract-valueIsNull-process-ffa3869"
         },
         "telemetry": {
-            "id": "03d8c526-5649-49cb-bf85-ad82a883b1c9",
+            "id": "0ef54424-70eb-4419-9bc4-a2150b420c16",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 82,
                 "lineStart": 32,
@@ -2867,16 +3173,61 @@
             "iterationData": [
                 {
                     "iteration_num": -1,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "valueIsNull",
+                            "method_signature": "private valueIsNull(PutRequest<K, V> request)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "of",
+                            "method_signature": "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 },
                 {
                     "iteration_num": -2,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "valueIsNull",
+                            "method_signature": "private valueIsNull(PutRequest<K, V> request)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "of",
+                            "method_signature": "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 }
             ],
-            "methodCompatibilityScores": {},
+            "methodCompatibilityScores": {
+                "private valueIsNull(PutRequest<K, V> request)": {
+                    "first": {
+                        "method_name": "valueIsNull",
+                        "method_signature": "private valueIsNull(PutRequest<K, V> request)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.32792317053804654
+                },
+                "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)": {
+                    "first": {
+                        "method_name": "of",
+                        "method_signature": "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5466177887129934
+                }
+            },
             "targetClassMap": {}
         }
     },
@@ -3088,7 +3439,7 @@
             "newBranchName": "extract-getColumnFamilyHandle-testValueStateWriteBatch-ffa3869"
         },
         "telemetry": {
-            "id": "17d6ab64-540d-4499-ac23-06d1133a3ce0",
+            "id": "c38c5c89-d6d4-4da3-adc2-c887c696a7cf",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 76,
                 "lineStart": 33,
@@ -3106,16 +3457,40 @@
             "iterationData": [
                 {
                     "iteration_num": -1,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getColumnFamilyHandle",
+                            "method_signature": "private getColumnFamilyHandle(\n            ForStInnerTable<ContextKey<Integer>, String> table,\n            byte[] keyBytes)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 },
                 {
                     "iteration_num": -2,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getColumnFamilyHandle",
+                            "method_signature": "private getColumnFamilyHandle(\n            ForStInnerTable<ContextKey<Integer>, String> table,\n            byte[] keyBytes)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 }
             ],
-            "methodCompatibilityScores": {},
+            "methodCompatibilityScores": {
+                "private getColumnFamilyHandle(\n            ForStInnerTable<ContextKey<Integer>, String> table,\n            byte[] keyBytes)": {
+                    "first": {
+                        "method_name": "getColumnFamilyHandle",
+                        "method_signature": "private getColumnFamilyHandle(\n            ForStInnerTable<ContextKey<Integer>, String> table,\n            byte[] keyBytes)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.4191899542384456
+                }
+            },
             "targetClassMap": {}
         }
     },
@@ -3307,7 +3682,7 @@
             "newBranchName": "extract-buildSerializedKey-process-ffa3869"
         },
         "telemetry": {
-            "id": "ec09e30b-ccc7-4683-b021-473d8a954ea4",
+            "id": "273b4377-8666-4263-a7e6-533df8e3fc54",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 85,
                 "lineStart": 34,
@@ -3325,16 +3700,61 @@
             "iterationData": [
                 {
                     "iteration_num": -1,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "buildSerializedKey",
+                            "method_signature": "private buildSerializedKey(\n            WriteBatch writeBatch,\n            PutRequest<K, V> request,\n            ForStInnerTable<K, V> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "of",
+                            "method_signature": "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 },
                 {
                     "iteration_num": -2,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "of",
+                            "method_signature": "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "buildSerializedKey",
+                            "method_signature": "private buildSerializedKey(\n            WriteBatch writeBatch,\n            PutRequest<K, V> request,\n            ForStInnerTable<K, V> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 }
             ],
-            "methodCompatibilityScores": {},
+            "methodCompatibilityScores": {
+                "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)": {
+                    "first": {
+                        "method_name": "of",
+                        "method_signature": "static of(K key, @Nullable V value, ForStInnerTable<K, V> table)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5466038016788396
+                },
+                "private buildSerializedKey(\n            WriteBatch writeBatch,\n            PutRequest<K, V> request,\n            ForStInnerTable<K, V> table)": {
+                    "first": {
+                        "method_name": "buildSerializedKey",
+                        "method_signature": "private buildSerializedKey(\n            WriteBatch writeBatch,\n            PutRequest<K, V> request,\n            ForStInnerTable<K, V> table)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.664347784137224
+                }
+            },
             "targetClassMap": {}
         }
     },
@@ -3496,7 +3916,7 @@
             "newBranchName": "extract-buildSerializedKey-testWriteBatchWithNullValue-ffa3869"
         },
         "telemetry": {
-            "id": "8e4f71be-084e-4a0a-8e85-4d0c026e0d13",
+            "id": "2c36394a-83da-41c8-8262-1bdc7ff61c68",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 76,
                 "lineStart": 33,
@@ -3514,16 +3934,40 @@
             "iterationData": [
                 {
                     "iteration_num": -1,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "buildSerializedKey",
+                            "method_signature": "private buildSerializedKey(\n            PutRequest<ContextKey<Integer>, String> request,\n            ForStInnerTable<ContextKey<Integer>, String> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 },
                 {
                     "iteration_num": -2,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "buildSerializedKey",
+                            "method_signature": "private buildSerializedKey(\n            PutRequest<ContextKey<Integer>, String> request,\n            ForStInnerTable<ContextKey<Integer>, String> table)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 }
             ],
-            "methodCompatibilityScores": {},
+            "methodCompatibilityScores": {
+                "private buildSerializedKey(\n            PutRequest<ContextKey<Integer>, String> request,\n            ForStInnerTable<ContextKey<Integer>, String> table)": {
+                    "first": {
+                        "method_name": "buildSerializedKey",
+                        "method_signature": "private buildSerializedKey(\n            PutRequest<ContextKey<Integer>, String> request,\n            ForStInnerTable<ContextKey<Integer>, String> table)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.47648335601427527
+                }
+            },
             "targetClassMap": {}
         }
     },
@@ -4103,7 +4547,7 @@
             "newBranchName": "extract-rewrite-rewrite-54f037f"
         },
         "telemetry": {
-            "id": "6dc6650f-b8cf-4440-abd4-7b7755a97c1e",
+            "id": "ad00a723-e3e3-4c7b-908e-28ed639bfe29",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 446,
                 "lineStart": 40,
@@ -4121,16 +4565,208 @@
             "iterationData": [
                 {
                     "iteration_num": -1,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "rewrite",
+                            "method_signature": "public rewrite(String context)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "rewrite",
+                            "method_signature": "private rewrite(\n            Map<String, Pair<TokenStreamRewriter, List<LocalGroupElement>>> groups,\n            Map<String, List<String>> groupStrings)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "visitStatement",
+                            "method_signature": "public visitStatement(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "groupBlock",
+                            "method_signature": "private groupBlock(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addLocalGroup",
+                            "method_signature": "private addLocalGroup(\n                List<LocalGroupElement> localGroup, String context, TokenStreamRewriter rewriter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "canGroupAsSingleStatement",
+                            "method_signature": "private canGroupAsSingleStatement(ParserRuleContext context)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "shouldExtract",
+                            "method_signature": "private shouldExtract(StatementContext ctx)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getNumOfReturnOrJumpStatements",
+                            "method_signature": "private getNumOfReturnOrJumpStatements(ParserRuleContext ctx)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "rewrite",
+                            "method_signature": "private rewrite()",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 },
                 {
                     "iteration_num": -2,
-                    "suggested_move_methods": [],
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getNumOfReturnOrJumpStatements",
+                            "method_signature": "private getNumOfReturnOrJumpStatements(ParserRuleContext ctx)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "shouldExtract",
+                            "method_signature": "private shouldExtract(StatementContext ctx)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "canGroupAsSingleStatement",
+                            "method_signature": "private canGroupAsSingleStatement(ParserRuleContext context)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "rewrite",
+                            "method_signature": "private rewrite(\n            Map<String, Pair<TokenStreamRewriter, List<LocalGroupElement>>> groups,\n            Map<String, List<String>> groupStrings)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addLocalGroup",
+                            "method_signature": "private addLocalGroup(\n                List<LocalGroupElement> localGroup, String context, TokenStreamRewriter rewriter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "rewrite",
+                            "method_signature": "private rewrite()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "visitStatement",
+                            "method_signature": "public visitStatement(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "rewrite",
+                            "method_signature": "public rewrite(String context)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "groupBlock",
+                            "method_signature": "private groupBlock(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
                     "llm_response_time": 0
                 }
             ],
-            "methodCompatibilityScores": {},
+            "methodCompatibilityScores": {
+                "private getNumOfReturnOrJumpStatements(ParserRuleContext ctx)": {
+                    "first": {
+                        "method_name": "getNumOfReturnOrJumpStatements",
+                        "method_signature": "private getNumOfReturnOrJumpStatements(ParserRuleContext ctx)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.37760419845694626
+                },
+                "private shouldExtract(StatementContext ctx)": {
+                    "first": {
+                        "method_name": "shouldExtract",
+                        "method_signature": "private shouldExtract(StatementContext ctx)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.4623378052601426
+                },
+                "private canGroupAsSingleStatement(ParserRuleContext context)": {
+                    "first": {
+                        "method_name": "canGroupAsSingleStatement",
+                        "method_signature": "private canGroupAsSingleStatement(ParserRuleContext context)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5070011003095708
+                },
+                "private rewrite(\n            Map<String, Pair<TokenStreamRewriter, List<LocalGroupElement>>> groups,\n            Map<String, List<String>> groupStrings)": {
+                    "first": {
+                        "method_name": "rewrite",
+                        "method_signature": "private rewrite(\n            Map<String, Pair<TokenStreamRewriter, List<LocalGroupElement>>> groups,\n            Map<String, List<String>> groupStrings)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5753631259632471
+                },
+                "private addLocalGroup(\n                List<LocalGroupElement> localGroup, String context, TokenStreamRewriter rewriter)": {
+                    "first": {
+                        "method_name": "addLocalGroup",
+                        "method_signature": "private addLocalGroup(\n                List<LocalGroupElement> localGroup, String context, TokenStreamRewriter rewriter)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.6075775175112048
+                },
+                "private rewrite()": {
+                    "first": {
+                        "method_name": "rewrite",
+                        "method_signature": "private rewrite()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.6210296666843812
+                },
+                "public visitStatement(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)": {
+                    "first": {
+                        "method_name": "visitStatement",
+                        "method_signature": "public visitStatement(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.6616386126542987
+                },
+                "public rewrite(String context)": {
+                    "first": {
+                        "method_name": "rewrite",
+                        "method_signature": "public rewrite(String context)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.7920456133325883
+                },
+                "private groupBlock(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)": {
+                    "first": {
+                        "method_name": "groupBlock",
+                        "method_signature": "private groupBlock(\n                StatementContext ctx, String context, TokenStreamRewriter rewriter)",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.8541453657277202
+                }
+            },
             "targetClassMap": {}
         }
     },
@@ -4322,7 +4958,7 @@
             "newBranchName": "extract-addPartitionAndGetShuffleDescriptor-testAddAndReleasePartition-fe74f74"
         },
         "telemetry": {
-            "id": "0b482f1a-851d-4b7f-a179-86976d6cb974",
+            "id": "bfa90da1-375b-4a0d-b572-d94e618a6a1e",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 29,
                 "lineStart": 35,
@@ -4371,7 +5007,7 @@
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.29019050004400465
+                    "second": 0.776934236441386
                 }
             },
             "targetClassMap": {}
@@ -4765,7 +5401,7 @@
             "newBranchName": "extract-scheduleOperation-rescaleWhenCooldownPeriodIsOver-7fc3aac"
         },
         "telemetry": {
-            "id": "44d1ef00-479f-4de9-9aa9-e3ce00fa9f8a",
+            "id": "cdb3f43d-2638-44a9-812d-2bb789bb89e9",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 292,
                 "lineStart": 51,
@@ -4815,6 +5451,18 @@
                             "rationale": ""
                         },
                         {
+                            "method_name": "timeSinceLastRescale",
+                            "method_signature": "private timeSinceLastRescale()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "rescaleWhenCooldownPeriodIsOver",
+                            "method_signature": "private rescaleWhenCooldownPeriodIsOver()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
                             "method_name": "scheduleOperation",
                             "method_signature": "private scheduleOperation()",
                             "target_class": "",
@@ -4833,8 +5481,26 @@
                     "iteration_num": -2,
                     "suggested_move_methods": [
                         {
+                            "method_name": "timeSinceLastRescale",
+                            "method_signature": "private timeSinceLastRescale()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "rescaleWhenCooldownPeriodIsOver",
+                            "method_signature": "private rescaleWhenCooldownPeriodIsOver()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
                             "method_name": "stopWithSavepoint",
                             "method_signature": " stopWithSavepoint(\n            @Nullable final String targetDirectory,\n            boolean terminate,\n            SavepointFormatType formatType)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "scheduleOperation",
+                            "method_signature": "private scheduleOperation()",
                             "target_class": "",
                             "rationale": ""
                         },
@@ -4845,8 +5511,8 @@
                             "rationale": ""
                         },
                         {
-                            "method_name": "scheduleOperation",
-                            "method_signature": "private scheduleOperation()",
+                            "method_name": "deploySafely",
+                            "method_signature": "private deploySafely(ExecutionVertex executionVertex)",
                             "target_class": "",
                             "rationale": ""
                         },
@@ -4863,12 +5529,6 @@
                             "rationale": ""
                         },
                         {
-                            "method_name": "deploySafely",
-                            "method_signature": "private deploySafely(ExecutionVertex executionVertex)",
-                            "target_class": "",
-                            "rationale": ""
-                        },
-                        {
                             "method_name": "maybeRescale",
                             "method_signature": "private maybeRescale()",
                             "target_class": "",
@@ -4879,6 +5539,24 @@
                 }
             ],
             "methodCompatibilityScores": {
+                "private timeSinceLastRescale()": {
+                    "first": {
+                        "method_name": "timeSinceLastRescale",
+                        "method_signature": "private timeSinceLastRescale()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.35239020157559237
+                },
+                "private rescaleWhenCooldownPeriodIsOver()": {
+                    "first": {
+                        "method_name": "rescaleWhenCooldownPeriodIsOver",
+                        "method_signature": "private rescaleWhenCooldownPeriodIsOver()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.43669178747451515
+                },
                 " stopWithSavepoint(\n            @Nullable final String targetDirectory,\n            boolean terminate,\n            SavepointFormatType formatType)": {
                     "first": {
                         "method_name": "stopWithSavepoint",
@@ -4886,16 +5564,7 @@
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.2778992806020287
-                },
-                "private handleDeploymentFailure(ExecutionVertex executionVertex, JobException e)": {
-                    "first": {
-                        "method_name": "handleDeploymentFailure",
-                        "method_signature": "private handleDeploymentFailure(ExecutionVertex executionVertex, JobException e)",
-                        "target_class": "",
-                        "rationale": ""
-                    },
-                    "second": 0.39533920224596736
+                    "second": 0.43796781452675604
                 },
                 "private scheduleOperation()": {
                     "first": {
@@ -4904,25 +5573,16 @@
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.4236751091179707
+                    "second": 0.4739214769277229
                 },
-                "private deploy()": {
+                "private handleDeploymentFailure(ExecutionVertex executionVertex, JobException e)": {
                     "first": {
-                        "method_name": "deploy",
-                        "method_signature": "private deploy()",
+                        "method_name": "handleDeploymentFailure",
+                        "method_signature": "private handleDeploymentFailure(ExecutionVertex executionVertex, JobException e)",
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.47178407701919756
-                },
-                "private forceRescale()": {
-                    "first": {
-                        "method_name": "forceRescale",
-                        "method_signature": "private forceRescale()",
-                        "target_class": "",
-                        "rationale": ""
-                    },
-                    "second": 0.49093605697354614
+                    "second": 0.484011178492391
                 },
                 "private deploySafely(ExecutionVertex executionVertex)": {
                     "first": {
@@ -4931,7 +5591,25 @@
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.5025612763372612
+                    "second": 0.505606731365212
+                },
+                "private deploy()": {
+                    "first": {
+                        "method_name": "deploy",
+                        "method_signature": "private deploy()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.5383271824021966
+                },
+                "private forceRescale()": {
+                    "first": {
+                        "method_name": "forceRescale",
+                        "method_signature": "private forceRescale()",
+                        "target_class": "",
+                        "rationale": ""
+                    },
+                    "second": 0.6536527555177042
                 },
                 "private maybeRescale()": {
                     "first": {
@@ -4940,7 +5618,7 @@
                         "target_class": "",
                         "rationale": ""
                     },
-                    "second": 0.6076150906879475
+                    "second": 0.6924530498668446
                 }
             },
             "targetClassMap": {}
