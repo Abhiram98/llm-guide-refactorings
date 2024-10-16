@@ -1115,7 +1115,7 @@
         "url": "https://github.com/apache/kafka/commit/7dbdc15c668dfb5a4a91c79f339c22fb7178c368",
         "move_method_refactoring": {
             "type": "Extract And Move Method",
-            "description": "Extract And Move Method public maybeCheckpoint() : void extracted from package pollAndUpdate() : void in class org.apache.kafka.streams.processor.internals.GlobalStreamThread.StateConsumer & moved to class org.apache.kafka.streams.processor.internals.GlobalStateUpdateTask",
+            "description": "Extract And Move Method public maybeCheckpoint() : void extracted from package pollAndUpdate() : void in class org.apache.kafka.streams.processor.internals.GlobalStreamThread.StateConsumer & moved to class org.apache.kafka.streams.processor.internals.GlobalStateMaintainer",
             "leftSideLocations": [
                 {
                     "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStreamThread.java",
@@ -1190,7 +1190,7 @@
             ],
             "rightSideLocations": [
                 {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateUpdateTask.java",
+                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateMaintainer.java",
                     "startLine": 163,
                     "endLine": 170,
                     "startColumn": 5,
@@ -1200,7 +1200,7 @@
                     "codeElement": "public maybeCheckpoint() : void"
                 },
                 {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateUpdateTask.java",
+                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateMaintainer.java",
                     "startLine": 165,
                     "endLine": 165,
                     "startColumn": 9,
@@ -1210,7 +1210,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateUpdateTask.java",
+                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateMaintainer.java",
                     "startLine": 168,
                     "endLine": 168,
                     "startColumn": 13,
@@ -1220,7 +1220,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateUpdateTask.java",
+                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateMaintainer.java",
                     "startLine": 167,
                     "endLine": 167,
                     "startColumn": 13,
@@ -1230,7 +1230,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateUpdateTask.java",
+                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateMaintainer.java",
                     "startLine": 166,
                     "endLine": 169,
                     "startColumn": 9,
@@ -1240,7 +1240,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateUpdateTask.java",
+                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateMaintainer.java",
                     "startLine": 166,
                     "endLine": 166,
                     "startColumn": 13,
@@ -1250,7 +1250,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateUpdateTask.java",
+                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStateMaintainer.java",
                     "startLine": 166,
                     "endLine": 169,
                     "startColumn": 129,
@@ -5800,7 +5800,7 @@
         "extraction_results": {
             "success": true,
             "newCommitHash": "43fa7a86608100f7e4de70d740725c4d4db8f008",
-            "newBranchName": "extract-idempotentCreateSnapshot-replay-130af38"
+            "newBranchName": "extract-idempotentCreateSnapshot-replay-130af38-1"
         }
     },
     {
@@ -5879,8 +5879,8 @@
         "ref_id": 607,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "e62eecd5e8915b6e6f83df0729e7ecd1b5103dce",
-            "newBranchName": "extract-idempotentCreateSnapshot-replay-130af38"
+            "newCommitHash": "d356b9402b3973ba6e350870df2390fa05f0d01d",
+            "newBranchName": "extract-idempotentCreateSnapshot-replay-130af38-2"
         }
     },
     {
@@ -5959,7 +5959,7 @@
         "ref_id": 608,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "2d5adc292dd053243e3ad49fb9e5ee75e20fd598",
+            "newCommitHash": "729270178ac2a09f43888f33602453e319a798e1",
             "newBranchName": "extract-idempotentCreateSnapshot-replayEndTransactionMarker-130af38"
         }
     },
@@ -7107,7 +7107,7 @@
         "ref_id": 621,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "9eea6895d62aec7465dfbc4811e8b0bc61445662",
+            "newCommitHash": "7a2505c28c1143648be2a4758aca3af514748fde",
             "newBranchName": "extract-idempotentCreateSnapshot-activate-130af38"
         }
     },
