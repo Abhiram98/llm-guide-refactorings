@@ -1,86 +1,6 @@
 [
     {
         "repository": "https://github.com/apache/kafka.git",
-        "sha1": "5bc3aa428067dff1f2b9075ff5d1351fb05d4b10",
-        "url": "https://github.com/apache/kafka/commit/5bc3aa428067dff1f2b9075ff5d1351fb05d4b10",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method public flush(accessor DBAccessor) : void extracted from public flush() : void in class org.apache.kafka.streams.state.internals.RocksDBStore & moved to class org.apache.kafka.streams.state.internals.RocksDBStore.SingleColumnFamilyAccessor",
-            "leftSideLocations": [
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/state/internals/RocksDBStore.java",
-                    "startLine": 643,
-                    "endLine": 653,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public flush() : void"
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/state/internals/RocksDBStore.java",
-                    "startLine": 649,
-                    "endLine": 649,
-                    "startColumn": 13,
-                    "endColumn": 32,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/state/internals/RocksDBStore.java",
-                    "startLine": 961,
-                    "endLine": 964,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "public flush(accessor DBAccessor) : void"
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/state/internals/RocksDBStore.java",
-                    "startLine": 963,
-                    "endLine": 963,
-                    "startColumn": 13,
-                    "endColumn": 42,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/state/internals/RocksDBStore.java",
-                    "startLine": 645,
-                    "endLine": 655,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public flush() : void"
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/state/internals/RocksDBStore.java",
-                    "startLine": 651,
-                    "endLine": 651,
-                    "startColumn": 13,
-                    "endColumn": 41,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "cfAccessor.flush(dbAccessor)"
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 566,
-        "extraction_results": {
-            "success": true,
-            "newCommitHash": "5d9207c097766bead70cfb2f4160323d9a750cfc",
-            "newBranchName": "extract-flush-flush-c078e51"
-        }
-    },
-    {
-        "repository": "https://github.com/apache/kafka.git",
         "sha1": "e45e032b8d90435de2f338f77a732c88f8cca66e",
         "url": "https://github.com/apache/kafka/commit/e45e032b8d90435de2f338f77a732c88f8cca66e",
         "move_method_refactoring": {
@@ -195,7 +115,7 @@
         "ref_id": 567,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "1f1c194190a2c0be33606d4db7188eb04925d32a",
+            "newCommitHash": "886af689929a02781bb9b4d7dd6b3305235a6f6b",
             "newBranchName": "extract-maybeThrowAsyncError-deliverMessages-72b7028"
         }
     },
@@ -987,126 +907,6 @@
             "success": true,
             "newCommitHash": "617c4dda13dda70600b65f8dc16964d46f996a68",
             "newBranchName": "extract-tasksMax-connectorTaskConfigs-8da6508"
-        }
-    },
-    {
-        "repository": "https://github.com/apache/kafka.git",
-        "sha1": "d24abe0edebad37e554adea47408c3063037f744",
-        "url": "https://github.com/apache/kafka/commit/d24abe0edebad37e554adea47408c3063037f744",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method public assertNoOrEmptyResult(timeouts List<MockCoordinatorTimer.ExpiredTimeout<Void,Record>>) : void extracted from public testLastJoiningMembersAreKickedOutWhenRejoiningGroupWithMaxSize() : void in class org.apache.kafka.coordinator.group.GroupMetadataManagerTest & moved to class org.apache.kafka.coordinator.group.GroupMetadataManagerTestContext",
-            "leftSideLocations": [
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTest.java",
-                    "startLine": 5158,
-                    "endLine": 5217,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public testLastJoiningMembersAreKickedOutWhenRejoiningGroupWithMaxSize() : void"
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTest.java",
-                    "startLine": 10901,
-                    "endLine": 10901,
-                    "startColumn": 9,
-                    "endColumn": 42,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTest.java",
-                    "startLine": 10902,
-                    "endLine": 10902,
-                    "startColumn": 9,
-                    "endColumn": 81,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTest.java",
-                    "startLine": 10902,
-                    "endLine": 10902,
-                    "startColumn": 37,
-                    "endColumn": 79,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTestContext.java",
-                    "startLine": 106,
-                    "endLine": 109,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "public assertNoOrEmptyResult(timeouts List<MockCoordinatorTimer.ExpiredTimeout<Void,Record>>) : void"
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTestContext.java",
-                    "startLine": 107,
-                    "endLine": 107,
-                    "startColumn": 9,
-                    "endColumn": 42,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTestContext.java",
-                    "startLine": 108,
-                    "endLine": 108,
-                    "startColumn": 9,
-                    "endColumn": 81,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTestContext.java",
-                    "startLine": 108,
-                    "endLine": 108,
-                    "startColumn": 37,
-                    "endColumn": 79,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTest.java",
-                    "startLine": 4040,
-                    "endLine": 4097,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public testLastJoiningMembersAreKickedOutWhenRejoiningGroupWithMaxSize() : void"
-                },
-                {
-                    "filePath": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTest.java",
-                    "startLine": 4085,
-                    "endLine": 4085,
-                    "startColumn": 9,
-                    "endColumn": 84,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "GroupMetadataManagerTestContext.assertNoOrEmptyResult(context.sleep(10000))"
-                }
-            ],
-            "isStatic": true
-        },
-        "ref_id": 573,
-        "extraction_results": {
-            "success": true,
-            "newCommitHash": "d67ed1ff166294681b2b562d9437a2ba61f11db9",
-            "newBranchName": "extract-assertNoOrEmptyResult-testLastJoiningMembersAreKickedOutWhenRejoiningGroupWithMaxSize-be6653c"
         }
     },
     {
@@ -2043,7 +1843,7 @@
         "ref_id": 580,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "fa9a5d390256649011d80f3a1cd77fecfe7dda76",
+            "newCommitHash": "a8cc7a63b60777f7bafd567555e2ddc504e07391",
             "newBranchName": "extract-shouldInitialize-resetInitializingPositions-a1ca788"
         }
     },
@@ -3543,7 +3343,7 @@
         "ref_id": 585,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "d737539bfd2a4db119995ea4d2d5e7126c5d9c02",
+            "newCommitHash": "cc2ec73ca63c3856ab31a8907b66ffd90bf3a1f8",
             "newBranchName": "extract-registerStreamThread-createAndAddStreamThread-fc6f8b6"
         }
     },
@@ -5399,96 +5199,6 @@
     },
     {
         "repository": "https://github.com/apache/kafka.git",
-        "sha1": "4de83d38c926bd991ce3e2d2804537a392ae6691",
-        "url": "https://github.com/apache/kafka/commit/4de83d38c926bd991ce3e2d2804537a392ae6691",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method public init(context InternalProcessorContext<KOut,VOut>, processingExceptionHandler ProcessingExceptionHandler) : void extracted from private initializeTopology() : void in class org.apache.kafka.streams.processor.internals.StreamTask & moved to class org.apache.kafka.streams.processor.internals.ProcessorNode",
-            "leftSideLocations": [
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/StreamTask.java",
-                    "startLine": 1016,
-                    "endLine": 1028,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "private initializeTopology() : void"
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/StreamTask.java",
-                    "startLine": 1023,
-                    "endLine": 1023,
-                    "startColumn": 17,
-                    "endColumn": 45,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/ProcessorNode.java",
-                    "startLine": 139,
-                    "endLine": 142,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "public init(context InternalProcessorContext<KOut,VOut>, processingExceptionHandler ProcessingExceptionHandler) : void"
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/ProcessorNode.java",
-                    "startLine": 140,
-                    "endLine": 140,
-                    "startColumn": 9,
-                    "endColumn": 23,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/StreamTask.java",
-                    "startLine": 1025,
-                    "endLine": 1037,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "private initializeTopology() : void"
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/StreamTask.java",
-                    "startLine": 1032,
-                    "endLine": 1032,
-                    "startColumn": 17,
-                    "endColumn": 72,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "node.init(processorContext,processingExceptionHandler)"
-                },
-                {
-                    "filePath": "streams/src/main/java/org/apache/kafka/streams/processor/internals/ProcessorNode.java",
-                    "startLine": 141,
-                    "endLine": 141,
-                    "startColumn": 9,
-                    "endColumn": 70,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 602,
-        "extraction_results": {
-            "success": true,
-            "newCommitHash": "fa2cb0ebdf44479f6bad42bdb0f0cb5bc1cc37a7",
-            "newBranchName": "extract-init-initializeTopology-931bb62"
-        }
-    },
-    {
-        "repository": "https://github.com/apache/kafka.git",
         "sha1": "4e862c0903195eb11a715271c29304d28036273d",
         "url": "https://github.com/apache/kafka/commit/4e862c0903195eb11a715271c29304d28036273d",
         "move_method_refactoring": {
@@ -6340,7 +6050,7 @@
         "extraction_results": {
             "success": true,
             "newCommitHash": "8703298f378f5767ab7c5b8e0740c9b6b94fce07",
-            "newBranchName": "extract-idempotentCreateSnapshot-testAsListedGroup-130af38"
+            "newBranchName": "extract-idempotentCreateSnapshot-testAsListedGroup-130af38-1"
         }
     },
     {
@@ -8099,96 +7809,6 @@
             "success": true,
             "newCommitHash": "24a13d857757026051ebda38f04cfbee3cf54b2e",
             "newBranchName": "extract-newShareGroupSubscriptionMetadataRecord-shareGroupFenceMember-ad08ec6"
-        }
-    },
-    {
-        "repository": "https://github.com/apache/kafka.git",
-        "sha1": "932e84096a96e199c0772c81bddf3ea3789377ba",
-        "url": "https://github.com/apache/kafka/commit/932e84096a96e199c0772c81bddf3ea3789377ba",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method public onClose() : boolean extracted from public acknowledgeOnClose(acknowledgementsMap Map<TopicIdPartition,Acknowledgements>, deadlineMs long) : CompletableFuture<Void> in class org.apache.kafka.clients.consumer.internals.ShareConsumeRequestManager & moved to class org.apache.kafka.clients.consumer.internals.ShareConsumeRequestManager.AcknowledgeRequestState",
-            "leftSideLocations": [
-                {
-                    "filePath": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-                    "startLine": 433,
-                    "endLine": 496,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public acknowledgeOnClose(acknowledgementsMap Map<TopicIdPartition,Acknowledgements>, deadlineMs long) : CompletableFuture<Void>"
-                },
-                {
-                    "filePath": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-                    "startLine": 457,
-                    "endLine": 457,
-                    "startColumn": 25,
-                    "endColumn": 49,
-                    "codeElementType": "IF_STATEMENT_CONDITION",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-                    "startLine": 990,
-                    "endLine": 992,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "public onClose() : boolean"
-                },
-                {
-                    "filePath": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-                    "startLine": 991,
-                    "endLine": 991,
-                    "startColumn": 13,
-                    "endColumn": 64,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-                    "startLine": 434,
-                    "endLine": 502,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public acknowledgeOnClose(acknowledgementsMap Map<TopicIdPartition,Acknowledgements>, deadlineMs long) : CompletableFuture<Void>"
-                },
-                {
-                    "filePath": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-                    "startLine": 452,
-                    "endLine": 498,
-                    "startColumn": 9,
-                    "endColumn": 11,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "sessionHandlers.forEach((nodeId,sessionHandler) -> {\n  Node node=cluster.nodeById(nodeId);\n  if (node != null) {\n    Map<TopicIdPartition,Acknowledgements> acknowledgementsMapForNode=new HashMap<>();\n    for (    TopicIdPartition tip : sessionHandler.sessionPartitions()) {\n      Acknowledgements acknowledgements=acknowledgementsMap.getOrDefault(tip,Acknowledgements.empty());\n      if (fetchAcknowledgementsMap.get(tip) != null) {\n        acknowledgements.merge(fetchAcknowledgementsMap.remove(tip));\n      }\n      if (acknowledgements != null && !acknowledgements.isEmpty()) {\n        acknowledgementsMapForNode.put(tip,acknowledgements);\n        metricsManager.recordAcknowledgementSent(acknowledgements.size());\n        log.debug(\"Added closing acknowledge request for partition {} to node {}\",tip.topicPartition(),node.id());\n        resultCount.incrementAndGet();\n      }\n    }\n    acknowledgeRequestStates.putIfAbsent(nodeId,new Pair<>(null,null));\n    if (acknowledgeRequestStates.get(nodeId).getSyncRequest() != null && !acknowledgeRequestStates.get(nodeId).getSyncRequest().isEmpty()) {\n      log.error(\"Attempt to call close() when there is an existing sync request for node {}-{}\",node.id(),acknowledgeRequestStates.get(nodeId).getSyncRequest());\n      closeFuture.completeExceptionally(new IllegalStateException(\"Attempt to call close() when there is an existing sync request for node : \" + node.id()));\n    }\n else {\n      acknowledgeRequestStates.get(nodeId).setSyncRequest(new AcknowledgeRequestState(logContext,ShareConsumeRequestManager.class.getSimpleName() + \":3\",deadlineMs,retryBackoffMs,retryBackoffMaxMs,sessionHandler,nodeId,acknowledgementsMapForNode,this::handleShareAcknowledgeCloseSuccess,this::handleShareAcknowledgeCloseFailure,resultHandler,AcknowledgeRequestType.CLOSE));\n    }\n  }\n}\n)"
-                },
-                {
-                    "filePath": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-                    "startLine": 482,
-                    "endLine": 494,
-                    "startColumn": 21,
-                    "endColumn": 23,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "acknowledgeRequestStates.get(nodeId).setSyncRequest(new AcknowledgeRequestState(logContext,ShareConsumeRequestManager.class.getSimpleName() + \":3\",deadlineMs,retryBackoffMs,retryBackoffMaxMs,sessionHandler,nodeId,acknowledgementsMapForNode,this::handleShareAcknowledgeCloseSuccess,this::handleShareAcknowledgeCloseFailure,resultHandler,AcknowledgeRequestType.CLOSE))"
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 633,
-        "extraction_results": {
-            "success": true,
-            "newCommitHash": "9194b45995ef8c7fbbc4b94df1922f14be6036c8",
-            "newBranchName": "extract-onClose-acknowledgeOnClose-f6bfa94"
         }
     },
     {
