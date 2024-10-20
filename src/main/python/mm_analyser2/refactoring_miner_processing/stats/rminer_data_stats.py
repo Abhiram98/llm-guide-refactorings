@@ -2,14 +2,13 @@ import json
 import os
 import pandas as pd
 
-from mm_analyser import data_folder
+from mm_analyser2 import data_folder
 import mm_analyser.refactoring_miner_processing.MoveMethodValidator as MoveMethodValidator
-from mm_analyser.env import  PROJECTS_BASE_PATH, PROJECT_ALIAS_MAP
+from mm_analyser2.env import PROJECTS_BASE_PATH, PROJECT_ALIAS_MAP
 
 rminer_data_path = f"{data_folder}/refminer_data/contains_a_mm"
 files = os.listdir(rminer_data_path)
 json_files = [i for i in files if i.endswith(".json")]
-
 
 data = []
 total_count = 0
@@ -22,18 +21,15 @@ total_count = 0
 for fname in json_files:
     with open(os.path.join(rminer_data_path, fname)) as f:
         move_data = json.load(f)
-    total_count+=len(move_data['commits'])
-    continue
-    print(fname)
+    total_count += len(move_data['commits'])
 
-    for j,m in enumerate(move_data):
+    for j, m in enumerate(move_data):
         print((j, len(move_data)))
         if not m['move_method_refactoring']['isStatic']:
             continue
 
         oracle = m['move_method_refactoring']
         mm_obj = MoveMethodValidator.MoveMethodRef.create_from(oracle)
-
 
         orig_package = ".".join([i for i in mm_obj.original_class.split('.') if i[0].islower()])
         target_package = ".".join([i for i in mm_obj.target_class.split('.') if i[0].islower()])
@@ -77,8 +73,6 @@ for fname in json_files:
             )
         )
 
-
-
 columns = ["url", "description",
            "same_package", "source_class_inner",
            "target_class_inner", "source_file_is_test",
@@ -89,4 +83,3 @@ columns = ["url", "description",
 df = pd.DataFrame(data, columns=columns)
 print(df.head())
 df.to_csv(data_folder.joinpath("refminer_data/stats.csv"), index=False)
-

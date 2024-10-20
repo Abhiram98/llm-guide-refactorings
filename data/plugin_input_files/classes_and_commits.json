@@ -1,207 +1,50 @@
 [
     {
-        "file_path": "streams/src/main/java/org/apache/kafka/streams/state/internals/RocksDBStore.java",
-        "commit_hash": "5d9207c097766bead70cfb2f4160323d9a750cfc",
-        "new_commit_hash": "5bc3aa428067dff1f2b9075ff5d1351fb05d4b10"
+        "file_path": "tools/src/test/java/org/apache/kafka/tools/FeatureCommandTest.java",
+        "class_name": "FeatureCommandUnitTest",
+        "commit_hash": "47841e0bb96321e2399f15e5522ef38d14612600",
+        "new_commit_hash": "643db430a707479c9e87eec1ad67e1d4f43c9268"
     },
     {
-        "file_path": "connect/runtime/src/main/java/org/apache/kafka/connect/runtime/WorkerSinkTask.java",
-        "commit_hash": "1f1c194190a2c0be33606d4db7188eb04925d32a",
-        "new_commit_hash": "e45e032b8d90435de2f338f77a732c88f8cca66e"
+        "file_path": "connect/api/src/main/java/org/apache/kafka/connect/data/Values.java",
+        "class_name": "Values",
+        "commit_hash": "93238ae312ef7bea79160e59bb7a06623cc94a1b",
+        "new_commit_hash": "11ad5e8bca2444d8c51cd6b81ee84dcb41a047c2"
     },
     {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/OffsetMetadataManagerTest.java",
-        "commit_hash": "fd74defe96b3f3fc1d3616cb408a0bfdb81ca73a",
-        "new_commit_hash": "e7fa0edd6351c0949b9082c626597046e9def854"
+        "file_path": "connect/runtime/src/test/java/org/apache/kafka/connect/runtime/rest/RestClientTest.java",
+        "class_name": "RequestFailureParameterizedTest",
+        "commit_hash": "3a3f9ce48e59fafefd8b3fae50e5d8428b6bb4f0",
+        "new_commit_hash": "d5592d8fe62ec88e202ace61414233a730b48367"
     },
     {
-        "file_path": "connect/runtime/src/main/java/org/apache/kafka/connect/runtime/Worker.java",
-        "commit_hash": "617c4dda13dda70600b65f8dc16964d46f996a68",
-        "new_commit_hash": "4f0a40590833a141c78341ce95ffc782747c5ac8"
-    },
-    {
-        "file_path": "streams/src/main/java/org/apache/kafka/streams/processor/internals/GlobalStreamThread.java",
-        "commit_hash": "1d75be12be5762c23b7a31c0b37559f1ba8a719b",
-        "new_commit_hash": "7dbdc15c668dfb5a4a91c79f339c22fb7178c368"
-    },
-    {
-        "file_path": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/SubscriptionState.java",
-        "commit_hash": "fa9a5d390256649011d80f3a1cd77fecfe7dda76",
-        "new_commit_hash": "ebeef4eb64a36d46565629d2a370eeb1635a7293"
-    },
-    {
-        "file_path": "raft/src/main/java/org/apache/kafka/raft/KafkaRaftClient.java",
-        "commit_hash": "f62b73b6006f87b0004fd8ae26fec3980db04ca8",
-        "new_commit_hash": "459da4795a511f6933e940fcf105a824bd9e589c"
-    },
-    {
-        "file_path": "raft/src/main/java/org/apache/kafka/raft/KafkaRaftClient.java",
-        "commit_hash": "c1a446eb827fb6a57b6199f41beca07a2b229185",
-        "new_commit_hash": "459da4795a511f6933e940fcf105a824bd9e589c"
-    },
-    {
-        "file_path": "group-coordinator/src/main/java/org/apache/kafka/coordinator/group/runtime/CoordinatorRuntime.java",
-        "commit_hash": "009fda06cd29dc3f6fa3a6a31a7b34eccf3695a2",
-        "new_commit_hash": "638844f833b165d6f9ca52c173858d26b7254fac"
-    },
-    {
-        "file_path": "group-coordinator/src/main/java/org/apache/kafka/coordinator/group/runtime/CoordinatorRuntime.java",
-        "commit_hash": "fe9c6822775e39d22c74b77d5df030ccc5b570b0",
-        "new_commit_hash": "638844f833b165d6f9ca52c173858d26b7254fac"
-    },
-    {
-        "file_path": "streams/src/main/java/org/apache/kafka/streams/KafkaStreams.java",
-        "commit_hash": "d737539bfd2a4db119995ea4d2d5e7126c5d9c02",
-        "new_commit_hash": "9a239c6142a8f2eb36f1600d1012224c31e58e71"
-    },
-    {
-        "file_path": "raft/src/main/java/org/apache/kafka/raft/internals/VoterSet.java",
-        "commit_hash": "a59dce86eeab4914e3eae243b556d5c0ee07379a",
+        "file_path": "raft/src/test/java/org/apache/kafka/raft/KafkaRaftClientSnapshotTest.java",
+        "class_name": "KafkaRaftClientSnapshotTest",
+        "commit_hash": "5b0e96d78550fe8264fe5ddeb93ae76d6e40d3d2",
         "new_commit_hash": "adee6f0cc11c37edaf7b47c1f77457d66e80ebe4"
     },
     {
-        "file_path": "raft/src/test/java/org/apache/kafka/raft/RaftClientTestContext.java",
-        "commit_hash": "62284eacd3fc8ac2c2d1c96aec657cfc93a1434c",
-        "new_commit_hash": "adee6f0cc11c37edaf7b47c1f77457d66e80ebe4"
+        "file_path": "group-coordinator/src/main/java/org/apache/kafka/coordinator/group/consumer/ConsumerGroup.java",
+        "class_name": "ConsumerGroup",
+        "commit_hash": "c2de7c5e544b94fe669063e336846b7977b0c044",
+        "new_commit_hash": "60114a46a775e597410131dd67ac236d62f57b0c"
     },
     {
-        "file_path": "connect/runtime/src/main/java/org/apache/kafka/connect/runtime/rest/HerderRequestHandler.java",
-        "commit_hash": "a0c65163f3c3b5006b942822829c4c7c4acf3987",
-        "new_commit_hash": "27220d146c5d043da4adc3d636036bd6e7b112d2"
+        "file_path": "server/src/test/java/org/apache/kafka/server/AssignmentsManagerTest.java",
+        "class_name": "AssignmentsManagerTest",
+        "commit_hash": "98cdf9717049e87ba34bb5161276577fcb8bd1c4",
+        "new_commit_hash": "e1b2adea07cebaac6d1138ec18778c575aef57f4"
     },
     {
-        "file_path": "streams/src/main/java/org/apache/kafka/streams/processor/internals/StreamTask.java",
-        "commit_hash": "fa2cb0ebdf44479f6bad42bdb0f0cb5bc1cc37a7",
-        "new_commit_hash": "4de83d38c926bd991ce3e2d2804537a392ae6691"
+        "file_path": "clients/src/test/java/org/apache/kafka/clients/consumer/internals/ConsumerNetworkThreadTest.java",
+        "class_name": "ConsumerNetworkThreadTest",
+        "commit_hash": "81f0b13a700f0d29fd7148b52776a80f48fd72be",
+        "new_commit_hash": "21dd5cd421139d6134d738d6e7555f0db6e1f622"
     },
     {
-        "file_path": "group-coordinator/src/main/java/org/apache/kafka/coordinator/group/runtime/SnapshottableCoordinator.java",
-        "commit_hash": "c20cab42e1d9996007ecc6fa1defd949297eb8be",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/GroupMetadataManagerTestContext.java",
-        "commit_hash": "2fcf6a3cc81b951b12e3a2d1b90d4149720c9bce",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/OffsetMetadataManagerTest.java",
-        "commit_hash": "e62eecd5e8915b6e6f83df0729e7ecd1b5103dce",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/OffsetMetadataManagerTest.java",
-        "commit_hash": "2d5adc292dd053243e3ad49fb9e5ee75e20fd598",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/metrics/GroupCoordinatorMetricsShardTest.java",
-        "commit_hash": "a90c2d6088f885dc16d184ed13771ee9623b805d",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/metrics/GroupCoordinatorMetricsShardTest.java",
-        "commit_hash": "e118294a728c0c6eae034ce5820762d2b6315112",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/metrics/GroupCoordinatorMetricsTest.java",
-        "commit_hash": "f76c771f07e85852f1fca4bd5e7c2e881fe59b87",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/modern/consumer/ConsumerGroupTest.java",
-        "commit_hash": "8703298f378f5767ab7c5b8e0740c9b6b94fce07",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/modern/consumer/ConsumerGroupTest.java",
-        "commit_hash": "34bebf3af2ff8ca4a4ac8a279765fc681c4b95ea",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/modern/consumer/ConsumerGroupTest.java",
-        "commit_hash": "7226b58c84508faac4518b8bf061266c17e4bdf7",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/modern/consumer/ConsumerGroupTest.java",
-        "commit_hash": "2afeb4dfa4330fb206a36754f2ee15817ba410df",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/modern/share/ShareGroupTest.java",
-        "commit_hash": "615b67dc17c192240f1a481c9167bb8eb032c9f8",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/modern/share/ShareGroupTest.java",
-        "commit_hash": "6763e67eb5b4151e73ba5a9ed1ee0dd90c71759f",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "group-coordinator/src/test/java/org/apache/kafka/coordinator/group/modern/share/ShareGroupTest.java",
-        "commit_hash": "7e477e8eadf30c6142f19bbb76cff3b1bf7d8587",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "jmh-benchmarks/src/main/java/org/apache/kafka/jmh/timeline/TimelineHashMapBenchmark.java",
-        "commit_hash": "ebceb5d1219775a9e83c01195bca606578cff305",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/main/java/org/apache/kafka/controller/OffsetControlManager.java",
-        "commit_hash": "9eea6895d62aec7465dfbc4811e8b0bc61445662",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/main/java/org/apache/kafka/controller/OffsetControlManager.java",
-        "commit_hash": "2e8ab6ec5591a47e6a5217eac0b790aacf3695fb",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/main/java/org/apache/kafka/controller/OffsetControlManager.java",
-        "commit_hash": "f02c9361287ce0b3d5874fb1da2a212cf97ae04f",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/main/java/org/apache/kafka/controller/OffsetControlManager.java",
-        "commit_hash": "e4bf466a438e0f393135b84ed4b5611c7608ac3e",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/main/java/org/apache/kafka/controller/OffsetControlManager.java",
-        "commit_hash": "d0d1ef2e01ed6532f34cdbb087e241a4f6880007",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/test/java/org/apache/kafka/controller/AclControlManagerTest.java",
-        "commit_hash": "41521201e2c0ea4f6a97d434a4a1b58e6b71b232",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/test/java/org/apache/kafka/controller/FeatureControlManagerTest.java",
-        "commit_hash": "37798d9b1c134ab3b36c3c31004ba933de6687bd",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/test/java/org/apache/kafka/controller/FeatureControlManagerTest.java",
-        "commit_hash": "8f45b80fb602932dd6473cbc2a55946fd956e4b5",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "metadata/src/test/java/org/apache/kafka/controller/FeatureControlManagerTest.java",
-        "commit_hash": "bed236d73c831ae8aa19c7bdaed32680482e4f73",
-        "new_commit_hash": "4e862c0903195eb11a715271c29304d28036273d"
-    },
-    {
-        "file_path": "raft/src/test/java/org/apache/kafka/raft/VotedStateTest.java",
-        "commit_hash": "0545041c57c66aa4d42a43367f40b0139da63df4",
-        "new_commit_hash": "b4d5f163a9c5a480efe0a1de3bebf12e35be2a7f"
-    },
-    {
-        "file_path": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/ShareConsumeRequestManager.java",
-        "commit_hash": "9194b45995ef8c7fbbc4b94df1922f14be6036c8",
-        "new_commit_hash": "932e84096a96e199c0772c81bddf3ea3789377ba"
+        "file_path": "clients/src/main/java/org/apache/kafka/clients/consumer/internals/CommitRequestManager.java",
+        "class_name": "CommitRequestManager",
+        "commit_hash": "0fde28049aab195c19796c28e2e86a3d19884813",
+        "new_commit_hash": "6a2789cf70665bc564bfa582fec17f42b93f3616"
     }
 ]

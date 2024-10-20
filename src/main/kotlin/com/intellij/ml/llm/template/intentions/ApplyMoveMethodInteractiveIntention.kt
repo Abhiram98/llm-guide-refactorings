@@ -20,7 +20,6 @@ import com.intellij.ml.llm.template.telemetry.TelemetryElapsedTimeObserver
 import com.intellij.ml.llm.template.toolwindow.logViewer
 import com.intellij.ml.llm.template.ui.RefactoringSuggestionsPanel
 import com.intellij.ml.llm.template.utils.*
-import com.intellij.ml.llm.template.utils.PsiUtils.Companion.computeCosineSimilarity
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
@@ -47,7 +46,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
     lateinit var currentEditor: Editor
     lateinit var currentFile: PsiFile
     lateinit var currentProject: Project
-    val SUGGESTIONS4USER = 20
+    val SUGGESTIONS4USER = 3
     val tokenLimit = 128000
     val logger = Logger.getInstance(this::class.java)
     var showSuggestions = true
@@ -95,14 +94,20 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         llmChatModel = RefAgentSettingsManager.getInstance().createAndGetAiModel()!!
         logViewer.clear()
 
+        var methods : List<PsiMethod> = emptyList()
         val bruteForceSuggestions = runReadAction {
-            PsiUtils.getAllMethodsInClass(functionPsiElement as PsiClass)
+            methods = PsiUtils.getAllMethodsInClass(functionPsiElement as PsiClass)
+            telemetryDataManager.addMethodCount(methods.size)
+            methods.filter { !it.isConstructor } // filter constructors
+                .filter { !it.isDeprecated }    //filter deprecated methods
                 .filter { !it.name[0].isUpperCase() } // filter constructors
                 .filter { !isGetter(it) } // filter out getters and setters.
                 .filter { !isSetter(it) } // filter out getters and setters.
                 .filter { !it.text.contains("@Override") } // remove methods in an inheritance chain
                 .filter { !it.text.contains("@Test") } // remove test methods.
                 .filter { !it.hasModifier(JvmModifier.ABSTRACT) } // filter out abstract methods because they have no body.
+                .filter { it.body?.statements?.isNotEmpty() ?: false } // Exclude methods with empty bodies
+                .filter { it.body!!.statements.any { statement -> statement !is PsiComment } } // filter out methods with a body that only contains comments
                 .map { MoveMethodSuggestion(it.name, getSignatureString(it), "", "", it) }
         }
         val methodCompatibilitySuggestionsWithSore = getMethodCompatibility(bruteForceSuggestions, functionPsiElement as PsiClass)
@@ -113,7 +118,20 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
 //        telemetryDataManager.setRefactoringObjects(emptyList())
 //        sendTelemetryData()
         log2fileAndViewer("*** Combining responses from iterations ***", logger)
-        logMethods(methodCompatibilitySuggestions, -1, 0)
+//        sendTelemetryData()
+        val priority = getSuggestionPriority(methodCompatibilitySuggestions, project)
+
+        if (priority != null){
+            log2fileAndViewer("Prioritising suggestions...", logger)
+            logPriority(priority)
+            if (priority.size == 0) {
+                telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
+                telemetryDataManager.setRefactoringObjects(emptyList())
+                sendTelemetryData()
+            }
+//            sendTelemetryData()
+        }
+
         if (methodCompatibilitySuggestions.isEmpty()) {
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
             telemetryDataManager.setRefactoringObjects(emptyList())
@@ -127,44 +145,14 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
             }
             sendTelemetryData()
         } else {
-            log2fileAndViewer("Prioritising suggestions...", logger)
-            val priority = getSuggestionPriority(methodCompatibilitySuggestions, project)
-            if (priority != null) {
-                logPriority(priority)
-                if (priority.size == 0) {
-                    telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
-                    telemetryDataManager.setRefactoringObjects(emptyList())
-                    invokeLater {
-                        showEFNotification(
-                            project,
-                            LLMBundle.message("notification.extract.function.with.llm.no.suggestions.message"),
-                            NotificationType.INFORMATION
-                        )
-                    }
-                    sendTelemetryData()
-                } else {
-                    createRefactoringObjectsAndShowSuggestions(
-                        priority.subList(
-                            0,
-                            min(SUGGESTIONS4USER, priority.size)
-                        )
-                    )
-                }
-            } else {
-                telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
-                telemetryDataManager.setRefactoringObjects(emptyList())
-                log2fileAndViewer("No methods are important to move.", logger)
-                invokeLater {
-                    showEFNotification(
-                        project,
-                        LLMBundle.message("notification.extract.function.with.llm.no.suggestions.message"),
-                        NotificationType.INFORMATION
-                    )
-                }
-                sendTelemetryData()
-            }
+            createRefactoringObjectsAndShowSuggestions(
+                methodCompatibilitySuggestions.subList(
+                    0,
+                    min(SUGGESTIONS4USER, methodCompatibilitySuggestions.size)
+                )
+            )
+//            sendTelemetryData()
         }
-
     }
 
     private fun isSetter(it: PsiMethod) : Boolean {
@@ -317,7 +305,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         val messages =
             (prompter as MoveMethodRefactoringPrompt).askForMethodPriorityPrompt(
                 condenseMethodCode(functionPsiElement, uniqueSuggestions),
-                uniqueSuggestions
+                uniqueSuggestions, uniqueSuggestions.size
             )
         val response: LLMBaseResponse?
         val llmResponseTime = measureTimeMillis { response = llmResponseCache[messages.toString()]?:sendChatRequest(project, messages, llmChatModel)}
@@ -334,7 +322,9 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
             }
             if (methodPrioritySignatures!=null) {
                 llmResponseCache.put(messages.toString(), response)
-                val filteredSuggestions = uniqueSuggestions.filter { it.methodSignature in methodPrioritySignatures }
+                val filteredSuggestions = uniqueSuggestions.filter { suggestion ->
+                    methodPrioritySignatures.any {suggestion.methodName in it}
+                }
                 val sortedSuggestions = filteredSuggestions.sortedBy {
                     val index = methodPrioritySignatures.indexOf(it.methodSignature)
                     if (index == -1) {
@@ -343,7 +333,8 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                         index
                     }
                 }
-                telemetryDataManager.addLLMPriorityResponse(sortedSuggestions.map{it.methodSignature}, llmResponseTime)
+//                methodPrioritySignatures.get(0) == uniqueSuggestions.get(0).methodSignature
+                telemetryDataManager.addLLMPriorityResponse(sortedSuggestions.map{it.methodName}, llmResponseTime)
                 return sortedSuggestions
             }
         }
@@ -370,9 +361,11 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                         methodIndex
                     ) + psiClass.text.substring(methodIndex + suggestion.psiMethod.text.length, psiClass.text.length)
                 }
-                val methodText = suggestion.psiMethod.text
 
-                val similarity = computeCosineSimilarity(methodText, classTextWithoutMethod)
+                val methodText = suggestion.psiMethod.body?.text ?: ""                
+                val similarity = PsiUtils.computeCosineSimilarity(methodText, classTextWithoutMethod)
+//                val voyageAiEmbeddingModelIT = VoyageAiEmbeddingModelIT()
+//                val voyageSimilarity = voyageAiEmbeddingModelIT.computeVoyageAiCosineSimilarity(methodText, classTextWithoutMethod, VoyageAiEmbeddingModelName.VOYAGE_3_LITE)
                 Pair(suggestion, similarity)
             }.sortedBy { it.second }
     //                .map { it.first }
@@ -384,26 +377,38 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         return top15SuggestionsWithScore
     }
 
+    private fun isInputSizeWithinLimit(text: String): Boolean {
+        logger.warn("Input size is ${text.length / 4} characters.")
+        val inputTextSize = text.length / 4
+        return inputTextSize <= llmContextLimit
+    }
+
     private fun condenseMethodCode(
         functionPsi: PsiElement,
         uniqueSuggestions: List<MoveMethodSuggestion>
     ): String {
-        if (runReadAction{ functionPsi.text }.split("\\s+".toRegex()).size > llmContextLimit) {
-            return runReadAction{
-                val classPsi = functionPsi as PsiClass
-                val onlyMethodNames = uniqueSuggestions.map { it.methodName }
-                val classSourceBuilder = StringBuilder()
-                classSourceBuilder.append(classPsi.text.substring(0, classPsi.lBrace?.textOffset ?: 0))
-                classPsi.methods.filter { method ->
-                    onlyMethodNames.contains(method.name)
-                }.forEach { method ->
-                    classSourceBuilder.append("\n").append(method.text).append("\n")
-                }
-                classSourceBuilder.append("}")
-                return@runReadAction classSourceBuilder.toString()
-            }
-        }else
-            return runReadAction{ functionPsi.text }
+        if (!isInputSizeWithinLimit(runReadAction{functionPsi.text})){
+            logger.warn("Input size exceeds the LLM context limit of $llmContextLimit characters.")
+        }
+
+        return runReadAction{ functionPsi.text }
+//        if (runReadAction{functionPsi.text }.split("\\s+".toRegex()).size > llmContextLimit) {
+//            return runReadAction{
+//                val classPsi = functionPsi as PsiClass
+//                val onlyMethodNames = uniqueSuggestions.map { it.methodName }
+//                val classSourceBuilder = StringBuilder()
+//                classSourceBuilder.append(classPsi.text.substring(0, classPsi.lBrace?.textOffset ?: 0))
+//                classPsi.methods.filter { method ->
+//                    onlyMethodNames.contains(method.name)
+//                }.forEach { method ->
+//                    classSourceBuilder.append("\n").append(method.text).append("\n")
+//                }
+//                classSourceBuilder.append("}")
+//                return@runReadAction classSourceBuilder.toString()
+//            }
+//        } else {
+//
+//        }
     }
 
     override fun processLLMResponse(response: LLMBaseResponse, project: Project, editor: Editor, file: PsiFile) {

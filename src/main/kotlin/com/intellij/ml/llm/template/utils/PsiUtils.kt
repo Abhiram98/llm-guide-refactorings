@@ -22,6 +22,7 @@ import org.jetbrains.kotlin.idea.base.util.projectScope
 import org.jetbrains.kotlin.j2k.accessModifier
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
+import java.util.*
 import kotlin.math.sqrt
 
 
@@ -337,7 +338,7 @@ class PsiUtils {
 //            println("Number of utility classes found: ${utilityClasses.size}")
 //            return utilityClasses
 //        }
-
+//
         fun fetchPrioritizedClasses(
             containingClass: PsiClass,
             project: Project
@@ -345,50 +346,47 @@ class PsiUtils {
             val classList = PsiUtils.fetchClassesInProject(containingClass, project)
 
             // Define weights for each criterion
-            val STATIC_RATIO_WEIGHT = 1.0
-            val PACKAGE_PROXIMITY_WEIGHT = 1.0
-            val UTILITY_CLASS_WEIGHT = 2.0 // Higher weight to give more importance to utility classes
+            val STATIC_RATIO_WEIGHT = 0.0
+            val PACKAGE_PROXIMITY_WEIGHT = 3.0
+            val UTILITY_CLASS_WEIGHT = 1.0 // Higher weight to give more importance to utility classes
 
             // Source package name for package proximity calculation
             val sourcePackageName = (containingClass.containingFile as? PsiJavaFile)?.packageName ?: ""
 
             // Create a list to store classes with their computed weights
-            val classWithWeights = mutableListOf<Pair<PsiClass, Double>>()
+//            val classWithWeights = mutableListOf<Pair<PsiClass, Double>>()
 
-            for (psiClass in classList) {
-                val className = psiClass.name?.toLowerCase() ?: ""
-                val fileName = psiClass.containingFile?.name?.toLowerCase() ?: ""
+            val classWithWeights = classList.parallelStream().map { psiClass ->
+
+                val className = runReadAction { psiClass.name?.lowercase(Locale.getDefault()) ?: "" }
+                val fileName = runReadAction {  psiClass.containingFile?.name?.lowercase(Locale.getDefault()) ?: "" }
 
                 // Determine if the class is a utility class
                 val isUtilityClass = className.contains("util") || className.contains("utility") ||
                         fileName.contains("util") || fileName.contains("utility")
 
                 // Skip classes without methods
-                val classMethods = psiClass.methods
-                if (classMethods.isEmpty()) continue
-
-                // Calculate the static to instance method ratio
-                val staticMethods = classMethods.count { PsiUtils.isMethodStatic(it) }
-                val staticRatio = staticMethods.toDouble() / classMethods.size
+//                val classMethods = psiClass.methods
+//                // Calculate the static to instance method ratio
+//                val staticMethods = classMethods.count { isMethodStatic(it) }
+//                val staticRatio = staticMethods.toDouble() / classMethods.size
 
                 // Calculate package proximity
-                val targetPackageName = (psiClass.containingFile as? PsiJavaFile)?.packageName ?: ""
+                val targetPackageName = runReadAction {  (psiClass.containingFile as? PsiJavaFile)?.packageName ?: "" }
                 val packageProximity = calculatePackageProximity(sourcePackageName, targetPackageName)
 
                 // Assign a utility class bonus if applicable
                 val utilityBonus = if (isUtilityClass) UTILITY_CLASS_WEIGHT else 0.0
 
                 // Combine weights: Static ratio, package proximity, and utility class bonus
-                val combinedWeight = (STATIC_RATIO_WEIGHT * staticRatio) +
-                        (PACKAGE_PROXIMITY_WEIGHT * packageProximity) +
+                val combinedWeight = (PACKAGE_PROXIMITY_WEIGHT * packageProximity) +
                         utilityBonus
 
                 // Store the class and its combined weight
-                classWithWeights.add(Pair(psiClass, combinedWeight))
+               Pair(psiClass, combinedWeight)
             }
 
-            // Sort classes by their combined weight in descending order
-            return classWithWeights.sortedByDescending { it.second }.map { it.first }
+            return classWithWeights.toList().sortedByDescending { it.second }.map { it.first }
         }
 
         private fun calculatePackageProximity(sourcePackage: String, targetPackage: String): Double {
@@ -463,23 +461,26 @@ class PsiUtils {
         }
 
         fun fetchClassesInProject(containingClass: PsiClass, project: Project): List<PsiClass>{
-            val classList : MutableList<PsiClass> = mutableListOf()
-            AllClassesSearch.search(MyGlobalSearchScope(project), project).allowParallelProcessing()
-                .forEach(
-                    Processor<PsiClass> {
-                        psiClass: PsiClass->
+            return runReadAction {
+                val classList: MutableList<PsiClass> = mutableListOf()
+                AllClassesSearch.search(MyGlobalSearchScope(project), project).allowParallelProcessing()
+                    .forEach(
+                        Processor<PsiClass> { psiClass: PsiClass ->
 //                        psiClass: PsiClass-> classList.add(psiClass)
-                        if (psiClass.methods.isNotEmpty() &&
-                            !psiClass.isEnum &&
-                            !psiClass.isInterface &&
-                            !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
-                            !psiClass.isAnnotationType) {
-                            classList.add(psiClass)
+                            if (psiClass.methods.any { it.hasModifierProperty(PsiModifier.STATIC) } &&
+                                (psiClass.methods.isNotEmpty() || psiClass.fields.isNotEmpty()) &&
+                                !psiClass.isEnum &&
+                                !psiClass.isInterface &&
+                                !psiClass.isDeprecated &&
+                                !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
+                                !psiClass.isAnnotationType) {
+                                classList.add(psiClass)
+                            }
+                            true
                         }
-                        true
-                    }
-                )
-            return classList
+                    )
+                classList
+            }
         }
 
         fun fetchImportsInFile(file: PsiFile, project: Project): List<PsiClass> {
@@ -491,6 +492,10 @@ class PsiUtils {
                     }
                     null
                 }.filterNotNull()
+        }
+
+        fun fetchParentClassIfInnerClass(containingClass: PsiClass): List<PsiClass> {
+            return containingClass.containingClass?.let { runReadAction { listOf(it) } } ?: emptyList()
         }
 
         fun findClassFromQualifier(canonicalType: @NlsSafe String, project: Project): PsiClass? {

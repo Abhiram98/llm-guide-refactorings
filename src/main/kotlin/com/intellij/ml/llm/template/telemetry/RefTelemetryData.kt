@@ -20,6 +20,9 @@ data class RefTelemetryData(
     @SerializedName("id")
     var id: String,
 ) {
+    @SerializedName("methodCount")
+    var methodCount: Int = 0
+
     @SerializedName("hostFunctionTelemetryData")
     lateinit var hostFunctionTelemetryData: HostFunctionTelemetryData
 
@@ -443,6 +446,10 @@ class EFTelemetryDataManager {
                 if(anonimizeTelemetry) "LLM gave some reasoning. Hiding for anonymity." else unparseableResponse
             targetClassData.llmResponseTime = llmResponseTime
         }
+    }
+
+    fun addMethodCount(size: Int) {
+        currentTelemetryData.methodCount = size
     }
 
     fun addMethodCompatibility(methodCompatibilitySuggestions: List<Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>) {

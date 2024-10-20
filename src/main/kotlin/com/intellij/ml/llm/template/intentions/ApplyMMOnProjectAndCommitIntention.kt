@@ -2,14 +2,16 @@ package com.intellij.ml.llm.template.intentions
 
 import com.google.gson.JsonParser
 import com.intellij.ml.llm.template.utils.openFile
-import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.invokeLater
+import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VfsUtil
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
+import com.intellij.psi.impl.source.PsiJavaFileImpl
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.sync.withLock
 import org.eclipse.jgit.api.Git
@@ -33,6 +35,8 @@ class ApplyMMOnProjectAndCommitIntention: ApplyMoveMethodOnProjectIntention() {
         for (classAndCommit in fileAndCommits) {
             val filePath = classAndCommit.asJsonObject.get("file_path").asString
             val commitHash = classAndCommit.asJsonObject.get("commit_hash").asString
+            val className = classAndCommit.asJsonObject.get("class_name").asString
+
             runBlocking{
                 mutex.withLock {
                     invokeLaterFinished = false
@@ -48,8 +52,10 @@ class ApplyMMOnProjectAndCommitIntention: ApplyMoveMethodOnProjectIntention() {
                         newFile = editorFilePair.second
                     }
                     Thread.sleep(5000)
+                    val psiFile = newFile as? PsiJavaFileImpl
+                    val targetClass = runReadAction { findTargetClass(psiFile, className) }
                     DumbService.getInstance(project).smartInvokeLater {
-                        super.invokePlugin(project, newEditor, newFile)
+                        super.invokePlugin(project, newEditor, newFile, targetClass)
                         invokeLaterFinished = true
                     }
                     runBlocking{
@@ -65,7 +71,9 @@ class ApplyMMOnProjectAndCommitIntention: ApplyMoveMethodOnProjectIntention() {
                 }
             }
         }
-
-
+    }
+    private fun findTargetClass(psiFile: PsiJavaFileImpl?, className: String): PsiClass? {
+        if (psiFile == null) return null
+        return psiFile.classes.find { it.name == className } ?: psiFile.classes.flatMap { it.allInnerClasses.toList() }.find { it.name == className }
     }
 }
