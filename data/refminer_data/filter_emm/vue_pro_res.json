@@ -745,7 +745,7 @@
         "ref_id": 7,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "20b6f4ee8e05341157c97624725a5dedc7d574dc",
+            "newCommitHash": "c23e6e9b1d38db1fe7080082c573e1dfcc9c77b7",
             "newBranchName": "extract-getBusinessMap-buildContractDetailList-3f8fa6b"
         }
     },
@@ -845,7 +845,7 @@
         "ref_id": 8,
         "extraction_results": {
             "success": true,
-            "newCommitHash": "d1d2d04b2509ed05247f6d8c0ec68bd079c45cf6",
+            "newCommitHash": "4a6198bad61c180bdf1bf80cb552151c3202fac7",
             "newBranchName": "extract-getBusinessMap-getFollowUpRecordPage-3f8fa6b"
         }
     },
@@ -1275,7 +1275,7 @@
         "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/424210066ff3ce6f5a37d4d6da939d31cdd3eb52",
         "move_method_refactoring": {
             "type": "Extract And Move Method",
-            "description": "Extract And Move Method public validateAvailable(chatModal AiChatModalRes) : void extracted from public updateConversation(updateReqVO AiChatConversationUpdateReqVO) : Boolean in class cn.iocoder.yudao.module.ai.service.impl.AiChatConversationServiceImpl & moved to class cn.iocoder.yudao.module.ai.service.impl.AiChatModalServiceImpl",
+            "description": "Extract And Move Method public validateAvailable(chatModal AiChatModalRes) : void extracted from public updateConversation(updateReqVO AiChatConversationUpdateReqVO) : Boolean in class cn.iocoder.yudao.module.ai.service.impl.AiChatConversationServiceImpl & moved to class cn.iocoder.yudao.module.ai.service.impl.AiChatModalService",
             "leftSideLocations": [
                 {
                     "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatConversationServiceImpl.java",
@@ -1320,7 +1320,7 @@
             ],
             "rightSideLocations": [
                 {
-                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalServiceImpl.java",
+                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalService.java",
                     "startLine": 119,
                     "endLine": 125,
                     "startColumn": 5,
@@ -1330,7 +1330,7 @@
                     "codeElement": "public validateAvailable(chatModal AiChatModalRes) : void"
                 },
                 {
-                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalServiceImpl.java",
+                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalService.java",
                     "startLine": 123,
                     "endLine": 123,
                     "startColumn": 13,
@@ -1340,7 +1340,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalServiceImpl.java",
+                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalService.java",
                     "startLine": 122,
                     "endLine": 124,
                     "startColumn": 9,
@@ -1350,7 +1350,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalServiceImpl.java",
+                    "filePath": "yudao-module-ai/yudao-module-ai-biz/src/main/java/cn/iocoder/yudao/module/ai/service/impl/AiChatModalService.java",
                     "startLine": 122,
                     "endLine": 124,
                     "startColumn": 83,
@@ -1515,7 +1515,7 @@
         "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/285a431616e8cfcf55f6f473cf0ef918c9799bc3",
         "move_method_refactoring": {
             "type": "Extract And Move Method",
-            "description": "Extract And Move Method public updateConversationLastMessage(kefuMessage KeFuMessageDO) : void extracted from public sendKefuMessage(sendReqVO KeFuMessageSendReqVO) : Long in class cn.iocoder.yudao.module.promotion.service.kefu.KeFuMessageServiceImpl & moved to class cn.iocoder.yudao.module.promotion.service.kefu.KeFuConversationServiceImpl",
+            "description": "Extract And Move Method public updateConversationLastMessage(kefuMessage KeFuMessageDO) : void extracted from public sendKefuMessage(sendReqVO KeFuMessageSendReqVO) : Long in class cn.iocoder.yudao.module.promotion.service.kefu.KeFuMessageServiceImpl & moved to class cn.iocoder.yudao.module.promotion.service.kefu.KeFuConversationService",
             "leftSideLocations": [
                 {
                     "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuMessageServiceImpl.java",
@@ -1560,7 +1560,7 @@
             ],
             "rightSideLocations": [
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 47,
                     "endLine": 66,
                     "startColumn": 5,
@@ -1570,7 +1570,7 @@
                     "codeElement": "public updateConversationLastMessage(kefuMessage KeFuMessageDO) : void"
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 64,
                     "endLine": 64,
                     "startColumn": 13,
@@ -1580,7 +1580,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 62,
                     "endLine": 65,
                     "startColumn": 9,
@@ -1590,7 +1590,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 63,
                     "endLine": 65,
                     "startColumn": 73,
@@ -1620,7 +1620,7 @@
                     "codeElement": "conversationService.updateConversationLastMessage(kefuMessage)"
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 51,
                     "endLine": 51,
                     "startColumn": 9,
@@ -1630,7 +1630,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 53,
                     "endLine": 55,
                     "startColumn": 9,
@@ -1640,7 +1640,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 59,
                     "endLine": 59,
                     "startColumn": 13,
@@ -1650,7 +1650,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 58,
                     "endLine": 60,
                     "startColumn": 81,
@@ -1660,7 +1660,7 @@
                     "codeElement": null
                 },
                 {
-                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationServiceImpl.java",
+                    "filePath": "yudao-module-mall/yudao-module-promotion-biz/src/main/java/cn/iocoder/yudao/module/promotion/service/kefu/KeFuConversationService.java",
                     "startLine": 58,
                     "endLine": 60,
                     "startColumn": 9,
