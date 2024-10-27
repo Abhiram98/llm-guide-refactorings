@@ -2886,691 +2886,6 @@
     },
     {
         "repository": "https://github.com/elastic/elasticsearch.git",
-        "sha1": "eb1c490264870457d1c50228028a28d19f154f8e",
-        "url": "https://github.com/elastic/elasticsearch/commit/eb1c490264870457d1c50228028a28d19f154f8e",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method private getBlockLoader(columnReader boolean) : BlockLoader extracted from protected testBlockLoader(columnReader boolean, example SyntheticSourceExample, mapper MapperService, loaderFieldName String) : void in class org.elasticsearch.index.mapper.MapperTestCase & moved to class org.elasticsearch.index.mapper.MapperTestCase.BlockReaderSupport",
-            "leftSideLocations": [
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1264,
-                    "endLine": 1353,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "protected testBlockLoader(columnReader boolean, example SyntheticSourceExample, mapper MapperService, loaderFieldName String) : void"
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1266,
-                    "endLine": 1266,
-                    "startColumn": 9,
-                    "endColumn": 114,
-                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1266,
-                    "endLine": 1266,
-                    "startColumn": 54,
-                    "endColumn": 100,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1270,
-                    "endLine": 1270,
-                    "startColumn": 17,
-                    "endColumn": 59,
-                    "codeElementType": "THROW_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1275,
-                    "endLine": 1275,
-                    "startColumn": 17,
-                    "endColumn": 37,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1280,
-                    "endLine": 1280,
-                    "startColumn": 17,
-                    "endColumn": 65,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1285,
-                    "endLine": 1285,
-                    "startColumn": 17,
-                    "endColumn": 66,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1290,
-                    "endLine": 1290,
-                    "startColumn": 17,
-                    "endColumn": 113,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1267,
-                    "endLine": 1292,
-                    "startColumn": 9,
-                    "endColumn": 12,
-                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1269,
-                    "endLine": 1271,
-                    "startColumn": 39,
-                    "endColumn": 14,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1274,
-                    "endLine": 1276,
-                    "startColumn": 42,
-                    "endColumn": 14,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1279,
-                    "endLine": 1281,
-                    "startColumn": 57,
-                    "endColumn": 14,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1284,
-                    "endLine": 1286,
-                    "startColumn": 53,
-                    "endColumn": 14,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1289,
-                    "endLine": 1291,
-                    "startColumn": 75,
-                    "endColumn": 14,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1281,
-                    "endLine": 1314,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "private getBlockLoader(columnReader boolean) : BlockLoader"
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1282,
-                    "endLine": 1282,
-                    "startColumn": 13,
-                    "endColumn": 118,
-                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1282,
-                    "endLine": 1282,
-                    "startColumn": 58,
-                    "endColumn": 104,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1286,
-                    "endLine": 1286,
-                    "startColumn": 21,
-                    "endColumn": 63,
-                    "codeElementType": "THROW_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1296,
-                    "endLine": 1296,
-                    "startColumn": 21,
-                    "endColumn": 41,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1301,
-                    "endLine": 1301,
-                    "startColumn": 21,
-                    "endColumn": 69,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1306,
-                    "endLine": 1306,
-                    "startColumn": 21,
-                    "endColumn": 70,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1311,
-                    "endLine": 1311,
-                    "startColumn": 21,
-                    "endColumn": 117,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1283,
-                    "endLine": 1313,
-                    "startColumn": 13,
-                    "endColumn": 16,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1285,
-                    "endLine": 1287,
-                    "startColumn": 43,
-                    "endColumn": 18,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1295,
-                    "endLine": 1297,
-                    "startColumn": 46,
-                    "endColumn": 18,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1300,
-                    "endLine": 1302,
-                    "startColumn": 61,
-                    "endColumn": 18,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1305,
-                    "endLine": 1307,
-                    "startColumn": 57,
-                    "endColumn": 18,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1310,
-                    "endLine": 1312,
-                    "startColumn": 79,
-                    "endColumn": 18,
-                    "codeElementType": "BLOCK",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1333,
-                    "endLine": 1396,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "protected testBlockLoader(columnReader boolean, example SyntheticSourceExample, blockReaderSupport BlockReaderSupport) : void"
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1335,
-                    "endLine": 1335,
-                    "startColumn": 30,
-                    "endColumn": 77,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "blockReaderSupport.getBlockLoader(columnReader)"
-                },
-                {
-                    "filePath": "test/framework/src/main/java/org/elasticsearch/index/mapper/MapperTestCase.java",
-                    "startLine": 1336,
-                    "endLine": 1336,
-                    "startColumn": 50,
-                    "endColumn": 101,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "loadBlockExpected(blockReaderSupport,columnReader)"
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 102
-    },
-    {
-        "repository": "https://github.com/elastic/elasticsearch.git",
-        "sha1": "bec2115f8ffd2e6efedf3776a733d8c42a98e625",
-        "url": "https://github.com/elastic/elasticsearch/commit/bec2115f8ffd2e6efedf3776a733d8c42a98e625",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method public executor() : Executor extracted from public executor(threadPool ThreadPool) : Executor in class org.elasticsearch.transport.TransportService.ContextRestoreResponseHandler & moved to class org.elasticsearch.cluster.coordination.LeaderCheckerTests.CapturingTransportResponseHandler",
-            "leftSideLocations": [
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1439,
-                    "endLine": 1442,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public executor(threadPool ThreadPool) : Executor"
-                },
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1441,
-                    "endLine": 1441,
-                    "startColumn": 13,
-                    "endColumn": 50,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "server/src/test/java/org/elasticsearch/cluster/coordination/LeaderCheckerTests.java",
-                    "startLine": 576,
-                    "endLine": 579,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "public executor() : Executor"
-                },
-                {
-                    "filePath": "server/src/test/java/org/elasticsearch/cluster/coordination/LeaderCheckerTests.java",
-                    "startLine": 578,
-                    "endLine": 578,
-                    "startColumn": 13,
-                    "endColumn": 29,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1439,
-                    "endLine": 1442,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public executor() : Executor"
-                },
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1441,
-                    "endLine": 1441,
-                    "startColumn": 20,
-                    "endColumn": 39,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "delegate.executor()"
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 103
-    },
-    {
-        "repository": "https://github.com/elastic/elasticsearch.git",
-        "sha1": "bec2115f8ffd2e6efedf3776a733d8c42a98e625",
-        "url": "https://github.com/elastic/elasticsearch/commit/bec2115f8ffd2e6efedf3776a733d8c42a98e625",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method public executor() : Executor extracted from public executor(threadPool ThreadPool) : Executor in class org.elasticsearch.transport.TransportService.UnregisterChildTransportResponseHandler & moved to class org.elasticsearch.cluster.coordination.LeaderCheckerTests.CapturingTransportResponseHandler",
-            "leftSideLocations": [
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1716,
-                    "endLine": 1719,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public executor(threadPool ThreadPool) : Executor"
-                },
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1718,
-                    "endLine": 1718,
-                    "startColumn": 13,
-                    "endColumn": 49,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "server/src/test/java/org/elasticsearch/cluster/coordination/LeaderCheckerTests.java",
-                    "startLine": 576,
-                    "endLine": 579,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "public executor() : Executor"
-                },
-                {
-                    "filePath": "server/src/test/java/org/elasticsearch/cluster/coordination/LeaderCheckerTests.java",
-                    "startLine": 578,
-                    "endLine": 578,
-                    "startColumn": 13,
-                    "endColumn": 29,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1714,
-                    "endLine": 1717,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public executor() : Executor"
-                },
-                {
-                    "filePath": "server/src/main/java/org/elasticsearch/transport/TransportService.java",
-                    "startLine": 1716,
-                    "endLine": 1716,
-                    "startColumn": 20,
-                    "endColumn": 38,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "handler.executor()"
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 104
-    },
-    {
-        "repository": "https://github.com/elastic/elasticsearch.git",
-        "sha1": "aea4684b527d58b4d92f7a83b602c4ee63b39178",
-        "url": "https://github.com/elastic/elasticsearch/commit/aea4684b527d58b4d92f7a83b602c4ee63b39178",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method package start() : void extracted from public messageReceived(request DataNodeRequest, channel TransportChannel, task Task) : void in class org.elasticsearch.xpack.esql.plugin.ComputeService.DataNodeRequestHandler & moved to class org.elasticsearch.xpack.esql.plugin.ComputeService.DataNodeRequestExecutor",
-            "leftSideLocations": [
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 580,
-                    "endLine": 619,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public messageReceived(request DataNodeRequest, channel TransportChannel, task Task) : void"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 586,
-                    "endLine": 586,
-                    "startColumn": 23,
-                    "endColumn": 128,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 585,
-                    "endLine": 587,
-                    "startColumn": 13,
-                    "endColumn": 15,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 607,
-                    "endLine": 612,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "package start() : void"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 609,
-                    "endLine": 609,
-                    "startColumn": 23,
-                    "endColumn": 138,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 608,
-                    "endLine": 610,
-                    "startColumn": 13,
-                    "endColumn": 15,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 660,
-                    "endLine": 670,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public messageReceived(request DataNodeRequest, channel TransportChannel, task Task) : void"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 669,
-                    "endLine": 669,
-                    "startColumn": 13,
-                    "endColumn": 29,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "executor.start()"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 611,
-                    "endLine": 611,
-                    "startColumn": 13,
-                    "endColumn": 25,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 105
-    },
-    {
-        "repository": "https://github.com/elastic/elasticsearch.git",
-        "sha1": "47ca7aeb70935b2104053d605bb5aa5d1a55b0ba",
-        "url": "https://github.com/elastic/elasticsearch/commit/47ca7aeb70935b2104053d605bb5aa5d1a55b0ba",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method package start() : void extracted from public messageReceived(request DataNodeRequest, channel TransportChannel, task Task) : void in class org.elasticsearch.xpack.esql.plugin.ComputeService.DataNodeRequestHandler & moved to class org.elasticsearch.xpack.esql.plugin.ComputeService.DataNodeRequestExecutor",
-            "leftSideLocations": [
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 580,
-                    "endLine": 619,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public messageReceived(request DataNodeRequest, channel TransportChannel, task Task) : void"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 586,
-                    "endLine": 586,
-                    "startColumn": 23,
-                    "endColumn": 128,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 585,
-                    "endLine": 587,
-                    "startColumn": 13,
-                    "endColumn": 15,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 607,
-                    "endLine": 612,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "package start() : void"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 609,
-                    "endLine": 609,
-                    "startColumn": 23,
-                    "endColumn": 138,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 608,
-                    "endLine": 610,
-                    "startColumn": 13,
-                    "endColumn": 15,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 660,
-                    "endLine": 670,
-                    "startColumn": 9,
-                    "endColumn": 10,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public messageReceived(request DataNodeRequest, channel TransportChannel, task Task) : void"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 669,
-                    "endLine": 669,
-                    "startColumn": 13,
-                    "endColumn": 29,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "executor.start()"
-                },
-                {
-                    "filePath": "x-pack/plugin/esql/src/main/java/org/elasticsearch/xpack/esql/plugin/ComputeService.java",
-                    "startLine": 611,
-                    "endLine": 611,
-                    "startColumn": 13,
-                    "endColumn": 25,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 105
-    },
-    {
-        "repository": "https://github.com/elastic/elasticsearch.git",
         "sha1": "552d2f563b31df1d42e2d927efc8e9b17310bc21",
         "url": "https://github.com/elastic/elasticsearch/commit/552d2f563b31df1d42e2d927efc8e9b17310bc21",
         "move_method_refactoring": {
@@ -4162,7 +3477,10 @@
             ],
             "isStatic": false
         },
-        "ref_id": 110
+        "ref_id": 110,
+        "extraction_results": {
+            "success": false
+        }
     },
     {
         "repository": "https://github.com/elastic/elasticsearch.git",
@@ -4237,7 +3555,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 111
+        "ref_id": 111,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "62a22e006854663751ca64bf43a6d1423b53c3f9",
+            "newBranchName": "extract-readSlicedBytesReference-readCharArrayFromStream-89e714e"
+        }
     },
     {
         "repository": "https://github.com/elastic/elasticsearch.git",
@@ -4332,7 +3655,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 112
+        "ref_id": 112,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "7bb87f84773f38bc8a8a699bfc741bb2fd862409",
+            "newBranchName": "extract-toXContent-toXContent-5c80064"
+        }
     },
     {
         "repository": "https://github.com/elastic/elasticsearch.git",
@@ -4427,7 +3755,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 113
+        "ref_id": 113,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "bbaa2e3df123a4e6068f3efc5b63d9dc497ce11b",
+            "newBranchName": "extract-toXContent-toXContent-5c80064"
+        }
     },
     {
         "repository": "https://github.com/elastic/elasticsearch.git",
@@ -4577,7 +3910,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 115
+        "ref_id": 115,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "c0d6370ddf78b37e40ee0b61a6378f9f2f9067fa",
+            "newBranchName": "extract-createChildContext-createChildContext-c8a35d3"
+        }
     },
     {
         "repository": "https://github.com/elastic/elasticsearch.git",
@@ -5422,7 +4760,10 @@
             ],
             "isStatic": false
         },
-        "ref_id": 118
+        "ref_id": 118,
+        "extraction_results": {
+            "success": false
+        }
     },
     {
         "repository": "https://github.com/elastic/elasticsearch.git",
