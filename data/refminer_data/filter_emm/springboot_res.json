@@ -132,7 +132,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 783
+        "ref_id": 783,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "44130f5cc5c99c0bd2c9414b858dfe5487946b45",
+            "newBranchName": "extract-addIfAbsent-processEndpoint-c3b710a"
+        }
     },
     {
         "repository": "https://github.com/spring-projects/spring-boot.git",
@@ -217,7 +222,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 784
+        "ref_id": 784,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "de8f0c04ff35af0fc3308fb2b561cf1316b617a4",
+            "newBranchName": "extract-withBuildCache-createPhase-c848a5e"
+        }
     },
     {
         "repository": "https://github.com/spring-projects/spring-boot.git",
@@ -292,7 +302,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 785
+        "ref_id": 785,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "f48204b3e8454c4406ac76ac0d66955228ddea48",
+            "newBranchName": "extract-withImageName-createPhase-c848a5e"
+        }
     },
     {
         "repository": "https://github.com/spring-projects/spring-boot.git",
@@ -377,7 +392,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 786
+        "ref_id": 786,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "a66d8c8cade75ab2a92e9f5fb6ed30fe3e1b2203",
+            "newBranchName": "extract-withLaunchCache-createPhase-c848a5e"
+        }
     },
     {
         "repository": "https://github.com/spring-projects/spring-boot.git",
@@ -462,7 +482,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 787
+        "ref_id": 787,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "0d547a627a683b6ed3afd46351bbbb703055b8a9",
+            "newBranchName": "extract-withLayers-createPhase-c848a5e"
+        }
     },
     {
         "repository": "https://github.com/spring-projects/spring-boot.git",
@@ -537,7 +562,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 788
+        "ref_id": 788,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "f8ba4896a7c268442f407c1041be646d41e26938",
+            "newBranchName": "extract-withPlatform-createPhase-c848a5e"
+        }
     },
     {
         "repository": "https://github.com/spring-projects/spring-boot.git",
@@ -612,7 +642,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 789
+        "ref_id": 789,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "e8f41af9489a73a4d120ff364caf348d3b4d4a5c",
+            "newBranchName": "extract-withRunImage-createPhase-c848a5e"
+        }
     },
     {
         "repository": "https://github.com/spring-projects/spring-boot.git",
@@ -687,171 +722,11 @@
             ],
             "isStatic": false
         },
-        "ref_id": 790
-    },
-    {
-        "repository": "https://github.com/spring-projects/spring-boot.git",
-        "sha1": "e8391f121e2d3512c1b8461655d28d25ce13c605",
-        "url": "https://github.com/spring-projects/spring-boot/commit/e8391f121e2d3512c1b8461655d28d25ce13c605",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method package forTask(scheduledTask ScheduledTask) : TaskType extracted from public scheduledTasks() : ScheduledTasksDescriptor in class org.springframework.boot.actuate.scheduling.ScheduledTasksEndpoint & moved to class org.springframework.boot.actuate.scheduling.ScheduledTasksEndpoint.TaskType",
-            "leftSideLocations": [
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 66,
-                    "endLine": 75,
-                    "startColumn": 2,
-                    "endColumn": 3,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public scheduledTasks() : ScheduledTasksDescriptor"
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 70,
-                    "endLine": 70,
-                    "startColumn": 9,
-                    "endColumn": 31,
-                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 70,
-                    "endLine": 70,
-                    "startColumn": 9,
-                    "endColumn": 31,
-                    "codeElementType": "METHOD_REFERENCE",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 68,
-                    "endLine": 73,
-                    "startColumn": 3,
-                    "endColumn": 61,
-                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 243,
-                    "endLine": 250,
-                    "startColumn": 3,
-                    "endColumn": 4,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "package forTask(scheduledTask ScheduledTask) : TaskType"
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 245,
-                    "endLine": 245,
-                    "startColumn": 9,
-                    "endColumn": 63,
-                    "codeElementType": "IF_STATEMENT_CONDITION",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 245,
-                    "endLine": 245,
-                    "startColumn": 39,
-                    "endColumn": 62,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 245,
-                    "endLine": 247,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "IF_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 69,
-                    "endLine": 82,
-                    "startColumn": 2,
-                    "endColumn": 3,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public scheduledTasks() : ScheduledTasksDescriptor"
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 74,
-                    "endLine": 74,
-                    "startColumn": 25,
-                    "endColumn": 56,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "TaskType.forTask(scheduledTask)"
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 246,
-                    "endLine": 246,
-                    "startColumn": 6,
-                    "endColumn": 22,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 249,
-                    "endLine": 249,
-                    "startColumn": 4,
-                    "endColumn": 16,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 245,
-                    "endLine": 247,
-                    "startColumn": 65,
-                    "endColumn": 6,
-                    "codeElementType": "BLOCK",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 244,
-                    "endLine": 248,
-                    "startColumn": 48,
-                    "endColumn": 5,
-                    "codeElementType": "BLOCK",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "spring-boot-project/spring-boot-actuator/src/main/java/org/springframework/boot/actuate/scheduling/ScheduledTasksEndpoint.java",
-                    "startLine": 244,
-                    "endLine": 248,
-                    "startColumn": 4,
-                    "endColumn": 5,
-                    "codeElementType": "ENHANCED_FOR_STATEMENT",
-                    "description": "added statement in extracted method declaration",
-                    "codeElement": null
-                }
-            ],
-            "isStatic": true
-        },
-        "ref_id": 791
+        "ref_id": 790,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "665caf84975af12ed252f94795aa69aa23729f1d",
+            "newBranchName": "extract-withSkipRestore-createPhase-c848a5e"
+        }
     }
 ]
