@@ -1,0 +1,10 @@
+took 2562.7870 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.springframework.transaction.jta.JtaTransactionManager::applyTimeout(JtaTransactionObject, int):void	org.springframework.transaction.jta.JtaTransactionObject	1.0
+Move Method	org.springframework.transaction.support.TransactionTemplate::rollbackOnException(TransactionStatus, Throwable):void	org.springframework.transaction.PlatformTransactionManager	1.0
+Move Method	org.springframework.transaction.annotation.AnnotationTransactionInterceptorTests::assertGetTransactionAndCommitCount(int):void	org.springframework.transaction.testfixture.CallCountingTransactionManager	0.736056924678931
+Move Method	org.springframework.transaction.interceptor.TransactionAspectSupport.ReactiveTransactionSupport::createTransactionIfNecessary(ReactiveTransactionManager, TransactionAttribute, String):Mono<ReactiveTransactionInfo>	org.springframework.transaction.ReactiveTransactionManager	0.5161290322580647
+Move Method	org.springframework.transaction.annotation.AnnotationTransactionInterceptorTests::assertGetTransactionAndRollbackCount(int):void	org.springframework.transaction.testfixture.CallCountingTransactionManager	0.736056924678931
+Move Method	org.springframework.transaction.interceptor.TransactionAspectSupport::methodIdentification(Method, Class<?>, TransactionAttribute):String	org.springframework.transaction.interceptor.TransactionAttributeSource	1.0
+Move Method	org.springframework.transaction.annotation.TransactionBeanRegistrationAotProcessorTests::process(Class<?>):void	org.springframework.transaction.annotation.TransactionBeanRegistrationAotProcessor	0.8303030303030302
+Move Method	org.springframework.transaction.annotation.TransactionBeanRegistrationAotProcessorTests::createContribution(Class<?>):BeanRegistrationAotContribution	org.springframework.transaction.annotation.TransactionBeanRegistrationAotProcessor	1.0

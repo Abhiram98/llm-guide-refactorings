@@ -1,0 +1,5 @@
+took 7059.5810 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler::checkPatternNameUniqueness():void	org.apache.flink.cep.nfa.compiler.NFAStateNameHandler	0.7875000000000001
+Move Method	org.apache.flink.cep.operator.CepOperator::updateNFA(NFAState):void	org.apache.flink.cep.nfa.NFAState	1.0
+Move Method	org.apache.flink.cep.operator.CEPRescalingTest::verifyPattern(Object, Event, SubEvent, Event):void	org.apache.flink.cep.SubEvent	1.0

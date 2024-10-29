@@ -1,0 +1,7 @@
+took 700 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.jkiss.dbeaver.ext.oracle.model.OracleStructureAssistant::searchInSynonyms():boolean	org.jkiss.dbeaver.ext.oracle.model.OracleDataSource	0.3456163388432296
+Move Method	org.jkiss.dbeaver.ext.oracle.model.OracleSchema::getSchemaUser(DBRProgressMonitor):OracleUser	org.jkiss.dbeaver.ext.oracle.model.OracleUser	1.0
+Move Method	org.jkiss.dbeaver.ext.oracle.model.OracleDataSource::getDefaultSchema():OracleSchema	org.jkiss.dbeaver.ext.oracle.model.OracleSchema	0.539315330977027
+Move Method	org.jkiss.dbeaver.ext.oracle.model.OracleStructureAssistant::addObjectReference(Collection<DBSObjectReference>, String, OracleSchema, OracleObjectType, String, String, JDBCSession):void	org.jkiss.dbeaver.ext.oracle.model.OracleObjectType	0.6951871657754012
+Move Method	org.jkiss.dbeaver.ext.oracle.model.OracleDataSource::createPlanTable(JDBCSession, String):String	org.jkiss.dbeaver.ext.oracle.model.OracleSchema	0.6887572047443915

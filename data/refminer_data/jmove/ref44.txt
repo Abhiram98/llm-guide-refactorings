@@ -1,0 +1,5 @@
+took 980.1750 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.apache.flink.state.forst.ForStStateBackend::mergeConfigurableOptions(ReadableConfig, ReadableConfig):ReadableConfig	org.apache.flink.state.forst.ForStMemoryConfiguration	0.2583333333333333
+Move Method	org.apache.flink.state.forst.ForStResourceContainer::setColumnFamilyOptionsFromConfigurableOptions(ColumnFamilyOptions, Collection<AutoCloseable>):ColumnFamilyOptions	org.apache.flink.state.forst.ForStOptionsFactory	0.6416666666666666
+Move Method	org.apache.flink.state.forst.ForStNativeMetricMonitor::registerColumnFamily(String, ColumnFamilyHandle):void	org.apache.flink.state.forst.ForStNativeMetricOptions	1.0

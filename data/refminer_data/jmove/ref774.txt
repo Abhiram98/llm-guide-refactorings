@@ -1,0 +1,18 @@
+took 1700 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.springframework.expression.spel.standard.SpelCompiler::createExpressionClassextends CompiledExpression> (SpelNodeImpl):Class<?	org.springframework.expression.spel.ast.SpelNodeImpl	0.7584796598956008
+Move Method	org.springframework.expression.spel.CachedMethodExecutorTests::assertMethodExecution(Expression, Object, String):void	org.springframework.expression.ExpressionParser	0.4642857142857143
+Move Method	org.springframework.expression.spel.support.StandardEvaluationContext::registerMethodFilter(Class<?>, MethodFilter):void	org.springframework.expression.TypeLocator	0.7407407407407407
+Move Method	org.springframework.expression.spel.ast.Indexer.CollectionIndexingValueRef::growCollectionIfNecessary():void	org.springframework.expression.TypeConverter	0.9603174603174603
+Move Method	org.springframework.expression.spel.OperatorTests::getOperatorNode(SpelExpression):Operator	org.springframework.expression.spel.standard.SpelExpression	0.7534921032022276
+Move Method	org.springframework.expression.spel.SpelCompilationCoverageTests::verifyCompilationAndBehaviourWithNull2(String, SpelExpressionParser, StandardEvaluationContext):void	org.springframework.expression.spel.standard.SpelExpressionParser	0.49071557971014507
+Move Method	org.springframework.expression.spel.ast.Indexer.CollectionIndexingValueRef::getDefaultConstructor(Class<?>):Constructor<?>	org.springframework.expression.TypeConverter	0.4821428571428572
+Move Method	org.springframework.expression.spel.ParsingTests::parseCheck(String, String):void	org.springframework.expression.spel.standard.SpelExpressionParser	0.49459244262347557
+Move Method	org.springframework.expression.spel.support.ReflectionHelperTests::utilities():void	org.springframework.expression.ExpressionParser	0.35000000000000003
+Move Method	org.springframework.expression.spel.ast.InlineMap::getConstantValue():Map<Object,Object>	org.springframework.expression.TypedValue	1.0
+Move Method	org.springframework.expression.spel.ast.Indexer::convertValue(TypeConverter, Object, Class<T>):T	org.springframework.expression.TypeConverter	0.7773851590106009
+Move Method	org.springframework.expression.spel.ast.InlineList::getConstantValue():List<Object>	org.springframework.expression.TypedValue	1.0
+Move Method	org.springframework.expression.spel.ExpressionWithConversionTests::testConvert():void	org.springframework.expression.ExpressionParser	0.23906250000000004
+Move Method	org.springframework.expression.spel.ast.SpelNodeImpl::generateCode(MethodVisitor, CodeFlow):void	org.springframework.expression.spel.CodeFlow	0.8857142857142857
+Move Method	org.springframework.expression.spel.SpelCompilationCoverageTests::getAst():SpelNodeImpl	org.springframework.expression.spel.ast.SpelNodeImpl	0.47460317460317464
+Move Method	org.springframework.expression.spel.SpelCompilationCoverageTests::verifyCompilationAndBehaviourWithNull(String, SpelExpressionParser, StandardEvaluationContext):void	org.springframework.expression.spel.standard.SpelExpressionParser	0.49071557971014507

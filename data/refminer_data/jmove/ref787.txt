@@ -1,0 +1,22 @@
+took 9000 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.springframework.boot.buildpack.platform.docker.type.ImageArchive::writeLayer(Layout, Layer):LayerId	org.springframework.boot.buildpack.platform.io.Layout	1.0
+Move Method	org.springframework.boot.buildpack.platform.build.Builder::getBuildpacks(BuildRequest, ImageFetcher, BuilderMetadata, BuildpackLayersMetadata):Buildpacks	org.springframework.boot.buildpack.platform.build.BuildRequest	0.7305652471761538
+Move Method	org.springframework.boot.buildpack.platform.docker.ssl.PrivateKeyParserTests::tearDown():void	org.springframework.boot.buildpack.platform.docker.ssl.PemFileWriter	0.8406929347826086
+Move Method	org.springframework.boot.buildpack.platform.build.Lifecycle::getPlatformVersion(BuilderMetadata.Lifecycle):ApiVersion	org.springframework.boot.buildpack.platform.build.ApiVersion	0.7353942887084096
+Move Method	org.springframework.boot.buildpack.platform.build.Builder::getRunImageReference(BuilderMetadata):ImageReference	org.springframework.boot.buildpack.platform.build.BuilderMetadata	0.6891314359399466
+Move Method	org.springframework.boot.buildpack.platform.build.DirectoryBuildpack::findBuildpackCoordinates(Path):BuildpackCoordinates	org.springframework.boot.buildpack.platform.build.BuildpackCoordinates	1.0
+Move Method	org.springframework.boot.buildpack.platform.build.Lifecycle::configureDaemonAccess(Phase):void	org.springframework.boot.buildpack.platform.build.Phase	1.0
+Move Method	org.springframework.boot.buildpack.platform.build.Buildpacks::addOrderLayerContent(Layout):void	org.springframework.boot.buildpack.platform.io.Layout	1.0
+Move Method	org.springframework.boot.buildpack.platform.build.Lifecycle::run(Phase):void	org.springframework.boot.buildpack.platform.docker.DockerApi	0.7434615953073607
+Move Method	org.springframework.boot.buildpack.platform.docker.type.ImageArchive::writeEmptyLayer(Layout, String):void	org.springframework.boot.buildpack.platform.io.Layout	1.0
+Move Method	org.springframework.boot.buildpack.platform.build.ImageBuildpack.ExportedLayers::createLayerFile(TarArchive):Path	org.springframework.boot.buildpack.platform.io.TarArchive	0.2608034155776761
+Move Method	org.springframework.boot.buildpack.platform.build.Lifecycle::deleteVolume(VolumeName):void	org.springframework.boot.buildpack.platform.docker.DockerApi	0.7146536259439484
+Move Method	org.springframework.boot.buildpack.platform.docker.type.ImageArchive::writeConfig(Layout, List<LayerId>):String	org.springframework.boot.buildpack.platform.io.Layout	1.0
+Move Method	org.springframework.boot.buildpack.platform.docker.ssl.CertificateParserTests::tearDown():void	org.springframework.boot.buildpack.platform.docker.ssl.PemFileWriter	0.8406929347826086
+Move Method	org.springframework.boot.buildpack.platform.build.Builder::executeLifecycle(BuildRequest, EphemeralBuilder):void	org.springframework.boot.buildpack.platform.build.EphemeralBuilder	0.7104877267654667
+Move Method	org.springframework.boot.buildpack.platform.build.TestBuildpack::getContent(Layout):void	org.springframework.boot.buildpack.platform.io.Layout	1.0
+Move Method	org.springframework.boot.buildpack.platform.docker.type.ImageArchive::writeManifest(Layout, String, List<LayerId>):void	org.springframework.boot.buildpack.platform.io.Layout	1.0
+Move Method	org.springframework.boot.buildpack.platform.build.LifecycleTests::getCommand(ContainerConfig):ArrayNode	org.springframework.boot.buildpack.platform.docker.type.ContainerConfig	0.1736721611721612
+Move Method	org.springframework.boot.buildpack.platform.build.DirectoryBuildpack::writeBasePathEntries(Layout, Path):void	org.springframework.boot.buildpack.platform.io.Layout	1.0
+Move Method	org.springframework.boot.buildpack.platform.build.EphemeralBuilderTests::content(String):String	org.springframework.boot.buildpack.platform.docker.type.Image	0.17857142857142855

@@ -1,0 +1,6 @@
+took 3126.4740 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime.CoordinatorContext::failCurrentBatch(Throwable):void	org.apache.kafka.coordinator.group.runtime.SnapshottableCoordinator	1.0
+Move Method	org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime::enqueueFirst(CoordinatorEvent):void	org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor	1.0
+Move Method	org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime::enqueueLast(CoordinatorEvent):void	org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor	1.0
+Move Method	org.apache.kafka.coordinator.group.assignor.SimpleAssignorTest::testName():void	org.apache.kafka.coordinator.group.assignor.SimpleAssignor	0.5769230769230769

@@ -1,0 +1,50 @@
+took 43000 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.springframework.cache.interceptor.SimpleKeyGeneratorTests::generateKey(Object[]):Object	org.springframework.cache.interceptor.SimpleKeyGenerator	0.8
+Move Method	org.springframework.ui.context.support.ResourceBundleThemeSource::initParent(Theme):void	org.springframework.ui.context.ThemeSource	0.8
+Move Method	org.springframework.cache.interceptor.CacheAspectSupport::getOperationContext(CacheOperation, Method, Object[], Object, Class<?>):CacheOperationContext	org.springframework.cache.interceptor.CacheOperationSource	1.0
+Move Method	org.springframework.scheduling.config.ScheduledTaskRegistrar::scheduleFixedRateTask(FixedRateTask):ScheduledTask	org.springframework.scheduling.TaskScheduler	0.7578078078078081
+Move Method	org.springframework.scheduling.config.ScheduledTaskRegistrar::addFixedDelayTask(Runnable, Duration):void	org.springframework.scheduling.TaskScheduler	0.7628205128205128
+Move Method	org.springframework.validation.DataBinder::checkAllowedFields(MutablePropertyValues):void	org.springframework.validation.BindingErrorProcessor	0.7552995906593127
+Move Method	org.springframework.cache.annotation.AnnotationCacheOperationSourceTests::getOps(Class<?>, String):Collection<CacheOperation>	org.springframework.cache.annotation.AnnotationCacheOperationSource	0.730654761904762
+Move Method	org.springframework.jmx.access.MBeanClientInterceptor::handleConnectFailure(MethodInvocation, Exception):Object	org.springframework.jmx.access.ConnectorDelegate	0.6057692307692308
+Move Method	org.springframework.validation.beanvalidation.MethodValidationAdapterPropertyPathTests::assertSingleFieldError(ParameterErrors, int, Object, Integer, Object, String, Object):void	org.springframework.validation.method.ParameterErrors	0.434065934065934
+Move Method	org.springframework.context.annotation.LoadTimeWeavingConfiguration::loadTimeWeaver():LoadTimeWeaver	org.springframework.context.annotation.LoadTimeWeavingConfigurer	0.31818181818181823
+Move Method	org.springframework.cache.interceptor.CacheOperationExpressionEvaluatorTests::getOps(String):Collection<CacheOperation>	org.springframework.cache.annotation.AnnotationCacheOperationSource	0.7833333333333332
+Move Method	org.springframework.context.annotation.ClassPathBeanDefinitionScanner::doScan(String[]):Set<BeanDefinitionHolder>	org.springframework.context.annotation.ScopeMetadataResolver	1.0
+Move Method	org.springframework.jmx.export.MBeanExporter::injectNotificationPublisherIfNecessary(Object, ModelMBean, ObjectName):void	org.springframework.jmx.export.naming.ObjectNamingStrategy	0.8
+Move Method	org.springframework.context.annotation.ClassPathBeanDefinitionScanner::checkCandidate(String, BeanDefinition):boolean	org.springframework.context.annotation.ScopeMetadataResolver	0.42857142857142855
+Move Method	org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean::getRunnableToSchedule(ScheduledExecutorTask):Runnable	org.springframework.scheduling.concurrent.ScheduledExecutorTask	1.0
+Move Method	org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler::populateMetricDescriptor(Descriptor, ManagedMetric):void	org.springframework.jmx.export.metadata.ManagedMetric	0.8361111111111112
+Move Method	org.springframework.context.annotation.ConfigurationClassParser::isChainedImportOnStack(ConfigurationClass):boolean	org.springframework.context.annotation.ConfigurationClass	1.0
+Move Method	org.springframework.cache.interceptor.CacheAspectSupport::getBean(String, Class<T>):T	org.springframework.cache.interceptor.CacheOperationSource	0.8571428571428571
+Move Method	org.springframework.context.annotation.ConfigurationClassPostProcessor::processConfigBeanDefinitions(BeanDefinitionRegistry):void	org.springframework.context.annotation.AnnotationBeanNameGenerator	0.5175
+Move Method	org.springframework.jmx.access.NotificationListenerRegistrar::prepare():void	org.springframework.jmx.access.ConnectorDelegate	1.0
+Move Method	org.springframework.cache.interceptor.CacheAspectSupport::getCacheOperationMetadata(CacheOperation, Method, Class<?>):CacheOperationMetadata	org.springframework.cache.interceptor.CacheOperationSource	1.0
+Move Method	org.springframework.scheduling.config.TaskExecutorFactoryBean::determinePoolSizeRange(ThreadPoolTaskExecutor):void	org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor	0.5629629629629629
+Move Method	org.springframework.jmx.export.MBeanExporter::registerBeanNameOrInstance(Object, String):ObjectName	org.springframework.jmx.export.naming.ObjectNamingStrategy	0.5
+Move Method	org.springframework.context.event.ApplicationContextEventTests::multicastEvent(boolean, Class<?>, ApplicationEvent, ResolvableType):void	org.springframework.context.ApplicationEvent	0.6333333333333334
+Move Method	org.springframework.scheduling.config.ScheduledTaskRegistrar::scheduleFixedDelayTask(FixedDelayTask):ScheduledTask	org.springframework.scheduling.TaskScheduler	0.7578078078078081
+Move Method	org.springframework.jmx.export.MBeanExporter::getObjectName(Object, String):ObjectName	org.springframework.jmx.export.naming.ObjectNamingStrategy	1.0
+Move Method	org.springframework.scheduling.config.ScheduledTaskRegistrar::addFixedRateTask(Runnable, Duration):void	org.springframework.scheduling.TaskScheduler	0.7628205128205128
+Move Method	org.springframework.validation.beanvalidation.BeanValidationBeanRegistrationAotProcessorTests::createContribution(Class<?>):BeanRegistrationAotContribution	org.springframework.validation.beanvalidation.BeanValidationBeanRegistrationAotProcessor	0.4691820951488165
+Move Method	org.springframework.validation.beanvalidation.SpringValidatorAdapterTests::testUnwrap():void	org.springframework.validation.beanvalidation.SpringValidatorAdapter	0.29146638801811225
+Move Method	org.springframework.scheduling.annotation.AsyncAnnotationBeanPostProcessorTests::assertFutureWithException(Future<Object>, TestableAsyncUncaughtExceptionHandler):void	org.springframework.scheduling.annotation.TestableAsyncUncaughtExceptionHandler	0.3297979797979798
+Move Method	org.springframework.jmx.export.MBeanExporter::getMBeanInfo(Object, String):ModelMBeanInfo	org.springframework.jmx.export.assembler.MBeanInfoAssembler	1.0
+Move Method	org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader::registerBeanDefinitionForImportedConfigurationClass(ConfigurationClass):void	org.springframework.context.annotation.ConfigurationClass	0.436079003952307
+Move Method	org.springframework.context.event.ApplicationListenerMethodAdapterTests::invokeListener(Method, ApplicationEvent):void	org.springframework.context.ApplicationEvent	0.8666666666666667
+Move Method	org.springframework.jmx.access.MBeanClientInterceptor::prepare():void	org.springframework.jmx.access.ConnectorDelegate	0.6785714285714285
+Move Method	org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessorObservabilityTests::registerScheduledBean(Class<?>):void	org.springframework.context.support.StaticApplicationContext	0.5229437229437229
+Move Method	org.springframework.cache.interceptor.CacheEvaluationContextFactory::forOperation(CacheExpressionRootObject, Method, Object[]):CacheEvaluationContext	org.springframework.cache.interceptor.CacheExpressionRootObject	1.0
+Move Method	org.springframework.scripting.groovy.GroovyAspectTests::testAdvice(Advisor, LogUserAdvice, TestService, String, boolean):void	org.springframework.scripting.groovy.LogUserAdvice	0.29305555555555557
+Move Method	org.springframework.context.event.EventPublicationInterceptorTests::setup():void	org.springframework.context.event.EventPublicationInterceptor	0.8344155844155844
+Move Method	org.springframework.scheduling.config.ScheduledTaskRegistrar::addOneTimeTask(Runnable, Duration):void	org.springframework.scheduling.TaskScheduler	1.0
+Move Method	org.springframework.cache.interceptor.CacheAspectSupport::getCachesextends Cache> (CacheOperationInvocationContext<CacheOperation>, CacheResolver):Collection<?	org.springframework.cache.interceptor.CacheResolver	1.0
+Move Method	org.springframework.context.annotation.configuration.ScopingTests::createContext(Class<?>):GenericApplicationContext	org.springframework.context.support.GenericApplicationContext	0.7102150722840376
+Move Method	org.springframework.context.annotation.ConfigurationClassParser.DeferredImportSelectorHandler::handle(ConfigurationClass, DeferredImportSelector):void	org.springframework.context.annotation.ConfigurationClass	1.0
+Move Method	org.springframework.validation.DataBinder::validateConstructorArgument(Class<?>, String, String, Object):void	org.springframework.validation.BindingErrorProcessor	0.8152173913043478
+Move Method	org.springframework.context.support.GenericApplicationContextTests::registerMockMergedBeanDefinitionPostProcessor(GenericApplicationContext):MergedBeanDefinitionPostProcessor	org.springframework.context.support.GenericApplicationContext	0.7063085063085061
+Move Method	org.springframework.jmx.export.MBeanExporter::adaptMBeanIfPossible(Object):DynamicMBean	org.springframework.jmx.export.assembler.MBeanInfoAssembler	0.64
+Move Method	org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader::loadBeanDefinitionsForConfigurationClass(ConfigurationClass, TrackedConditionEvaluator):void	org.springframework.context.annotation.ConfigurationClass	0.6488396819526626
+Move Method	org.springframework.context.annotation.ConfigurationClassPostProcessor::enhanceConfigurationClasses(ConfigurableListableBeanFactory):void	org.springframework.context.annotation.AnnotationBeanNameGenerator	0.6525524337158686
+Move Method	org.springframework.cache.annotation.SpringCacheAnnotationParser::validateCacheOperation(AnnotatedElement, CacheOperation):void	org.springframework.cache.interceptor.CacheOperation	0.8666666666666666

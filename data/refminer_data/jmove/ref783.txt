@@ -1,0 +1,5 @@
+took 521.3940 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.springframework.boot.configurationprocessor.PropertyDescriptorResolver::getParameterName(VariableElement):String	org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment	0.9219124319750225
+Move Method	org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor::writeMetadata():ConfigurationMetadata	org.springframework.boot.configurationprocessor.MetadataCollector	1.0
+Move Method	org.springframework.boot.configurationprocessor.ConstructorParameterPropertyDescriptor::getDefaultValueFromAnnotation(MetadataGenerationEnvironment, Element):Object	org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment	1.0

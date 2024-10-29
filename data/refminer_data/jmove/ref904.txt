@@ -1,0 +1,16 @@
+took 700 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryRowsTableDataModel::prepareResultColumnsList(SQLQuerySymbolEntry, SQLQueryDataContext, SQLQueryRecognitionContext, List<? extends DBSEntityAttribute>):List<SQLQueryResultColumn>	org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbolEntry	0.7560846560846559
+Move Method	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryNodeModel::apply(SQLQueryNodeModelVisitor<T,R>, T):R	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryNodeModelVisitor	0.6666666666666666
+Move Method	org.jkiss.dbeaver.model.sql.semantics.context.SQLQueryDataContext.KnownSourcesInfo::registerAlias(SQLQueryRowsSourceModel, SQLQuerySymbol):void	org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbol	0.5191666666666668
+Move Method	org.jkiss.dbeaver.model.sql.translate.SQLQueryTranslator::translateColumnDataType(ColumnDefinition, SQLDialectDDLExtension, SQLDialect):boolean	org.jkiss.dbeaver.model.sql.translate.SQLTranslateContext	0.6722689075630252
+Move Method	org.jkiss.dbeaver.model.sql.semantics.completion.SQLQueryCompletionContext.::prepareLexicalItemCompletions(DBRProgressMonitor, SQLQueryLexicalScopeItem, int):List<SQLQueryCompletionItem>	org.jkiss.dbeaver.model.sql.semantics.SQLQueryLexicalScopeItem	0.7058451066524202
+Move Method	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryRowsTableDataModel::prepareColumnSymbol(SQLQueryDataContext, DBSEntityAttribute):SQLQuerySymbol	org.jkiss.dbeaver.model.sql.semantics.context.SQLQueryDataContext	0.6196524064171123
+Move Method	org.jkiss.dbeaver.model.sql.SQLScriptContext::executeControlCommand(SQLControlCommand):boolean	org.jkiss.dbeaver.model.sql.SQLParametersProvider	0.0
+Move Method	org.jkiss.dbeaver.model.sql.semantics.SQLQueryModelRecognizer.DebugGraphBuilder::expandObject(Object, Object):void	org.jkiss.dbeaver.model.sql.semantics.DirectedGraph	1.0
+Move Method	org.jkiss.dbeaver.model.sql.semantics.context.SQLQueryDataContext::extendWithRealTable(DBSEntity, SQLQueryRowsSourceModel):SQLQueryDataContext	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryRowsSourceModel	0.6766917293233081
+Move Method	org.jkiss.dbeaver.model.sql.semantics.context.SQLQueryExprType::findNamedMemberType(DBRProgressMonitor, String):SQLQueryExprType	org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbolDefinition	0.8571428571428571
+Move Method	org.jkiss.dbeaver.model.sql.semantics.context.SQLQueryDataContext::extendWithTableAlias(SQLQuerySymbol, SQLQueryRowsSourceModel):SQLQueryDataContext	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryRowsSourceModel	0.8430913348946136
+Move Method	org.jkiss.dbeaver.model.sql.semantics.SQLQueryModelRecognizer::collectQueryExpression(STMTreeNode):SQLQueryRowsSourceModel	org.jkiss.dbeaver.model.sql.semantics.context.SQLQueryDataContext	0.4428104575163398
+Move Method	org.jkiss.dbeaver.model.sql.semantics.model.SQLQuerySelectionResultModel::expandColumns(SQLQueryDataContext, SQLQueryRowsProjectionModel, SQLQueryRecognitionContext):List<SQLQueryResultColumn>	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryRowsProjectionModel	0.6116615067079463
+Move Method	org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryRowsCteSubqueryModel::prepareAliasDefinition():void	org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbolEntry	1.0

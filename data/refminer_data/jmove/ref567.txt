@@ -1,0 +1,24 @@
+time=took 3280.5840 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.apache.kafka.connect.runtime.isolation.PluginScanner::pluginDesc(Class<? extends T>, String, PluginType, PluginSource):PluginDesc<T>	org.apache.kafka.connect.runtime.isolation.PluginType	0.863486842105263
+Move Method	org.apache.kafka.connect.runtime.Worker::sourceTaskReporters(ConnectorTaskId, ConnectorConfig, ErrorHandlingMetrics):List<ErrorReporter>	org.apache.kafka.connect.util.ConnectorTaskId	0.36363636363636365
+Move Method	org.apache.kafka.connect.runtime.Worker::initConfigTransformer():WorkerConfigTransformer	org.apache.kafka.connect.runtime.WorkerConfigTransformer	1.0
+Move Method	org.apache.kafka.connect.runtime.WorkerSinkTask::rewind():void	org.apache.kafka.connect.runtime.WorkerSinkTaskContext	1.0
+Move Method	org.apache.kafka.connect.util.clusters.EmbeddedConnect::stopWorker(WorkerHandle):void	org.apache.kafka.connect.util.clusters.WorkerHandle	0.7160173160173161
+Move Method	org.apache.kafka.connect.runtime.AbstractWorkerSourceTask::maybeCreateTopic(String):void	org.apache.kafka.connect.util.TopicAdmin	0.6280445969125215
+Move Method	org.apache.kafka.connect.runtime.AbstractHerder::maybeAddConfigErrors(ConfigInfos, Callback<Created<ConnectorInfo>>):boolean	org.apache.kafka.connect.runtime.rest.entities.ConfigInfos	0.8793103448275863
+Move Method	org.apache.kafka.connect.runtime.Worker::resetSinkConnectorOffsets(String, String, Admin, Callback<Message>, boolean, Timer):void	org.apache.kafka.connect.runtime.Herder	0.6482631700023006
+Move Method	org.apache.kafka.connect.runtime.Worker::startSourceTask(ConnectorTaskId, ClusterConfigState, Map<String,String>, Map<String,String>, TaskStatus.Listener, TargetState):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.storage.KafkaStatusBackingStore::serialize(AbstractStatus<?>):byte[]	org.apache.kafka.connect.runtime.AbstractStatus	1.0
+Move Method	org.apache.kafka.connect.runtime.Worker::createWorkerErrantRecordReporter(SinkConnectorConfig, RetryWithToleranceOperator, Converter, Converter, HeaderConverter):WorkerErrantRecordReporter	org.apache.kafka.connect.runtime.SinkConnectorConfig	0.7618073047858942
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerder::writeTaskConfigs(String, List<Map<String,String>>):void	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.storage.KafkaConfigBackingStore::baseProducerProps(WorkerConfig):Map<String,Object>	org.apache.kafka.connect.runtime.WorkerConfig	0.5971561556953608
+Move Method	org.apache.kafka.connect.storage.KafkaOffsetBackingStore::newTopicDescription(String, WorkerConfig):NewTopic	org.apache.kafka.connect.runtime.WorkerConfig	0.4821842591178553
+Move Method	org.apache.kafka.connect.runtime.errors.DeadLetterQueueReporter::populateContextHeaders(ProducerRecord<byte[],byte[]>, ProcessingContext):void	org.apache.kafka.connect.runtime.errors.ProcessingContext	0.675909090909091
+Move Method	org.apache.kafka.connect.runtime.ExactlyOnceWorkerSourceTask::buildTransactionManager(WorkerConfig, SourceConnectorConfig, WorkerTransactionContext):TransactionBoundaryManager	org.apache.kafka.connect.runtime.WorkerTransactionContext	1.0
+Move Method	org.apache.kafka.connect.runtime.WorkerSinkTask::maybeThrowAsyncError():void	org.apache.kafka.connect.runtime.errors.WorkerErrantRecordReporter	0.9421199533500191
+Move Method	org.apache.kafka.connect.runtime.AbstractHerder::taskConfigsChanged(ClusterConfigState, String, List<Map<String,String>>):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.runtime.Worker::startSinkTask(ConnectorTaskId, ClusterConfigState, Map<String,String>, Map<String,String>, TaskStatus.Listener, TargetState):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerder::isSourceConnector(String):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerder.ZombieFencing::addCallback(Callback<Void>):void	org.apache.kafka.connect.util.FutureCallback	0.7636363636363634
+Move Method	org.apache.kafka.connect.runtime.WorkerTask.TaskMetricsGroup::addRatioMetric(State, MetricNameTemplate):void	org.apache.kafka.connect.runtime.StateTracker	1.0

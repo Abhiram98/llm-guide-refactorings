@@ -1,0 +1,5 @@
+took 1715.1170 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.springframework.cache.jcache.interceptor.AnnotationCacheOperationSourceTests::assertDefaults(AbstractJCacheKeyOperation<?>):void	org.springframework.cache.jcache.interceptor.AbstractJCacheKeyOperation	0.8971312332465163
+Move Method	org.springframework.cache.jcache.interceptor.KeyGeneratorAdapter::createCacheKeyInvocationContext(Object, JCacheOperation<?>, Object[]):CacheKeyInvocationContext<?>	org.springframework.cache.jcache.interceptor.JCacheOperationSource	0.6122448979591837
+Move Method	org.springframework.cache.jcache.interceptor.JCacheAspectSupport::execute(CacheOperationInvoker, Object, Method, Object[]):Object	org.springframework.cache.jcache.interceptor.JCacheOperationSource	1.0

@@ -1,0 +1,6 @@
+took 401.4960 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.apache.flink.state.forst.ForStWriteBatchOperationTest::buildSerializedKey(PutRequest<ContextKey<Integer>,String>, ForStInnerTable<ContextKey<Integer>,String>):byte[]	org.apache.flink.state.forst.ForStInnerTable	0.7800000000000001
+Move Method	org.apache.flink.state.forst.ForStNativeMetricMonitor::registerColumnFamily(String, ColumnFamilyHandle):void	org.apache.flink.state.forst.ForStNativeMetricOptions	1.0
+Move Method	org.apache.flink.state.forst.ForStResourceContainer::setColumnFamilyOptionsFromConfigurableOptions(ColumnFamilyOptions, Collection<AutoCloseable>):ColumnFamilyOptions	org.apache.flink.state.forst.ForStOptionsFactory	0.6416666666666666
+Move Method	org.apache.flink.state.forst.ForStStateBackend::mergeConfigurableOptions(ReadableConfig, ReadableConfig):ReadableConfig	org.apache.flink.state.forst.ForStMemoryConfiguration	0.2583333333333333

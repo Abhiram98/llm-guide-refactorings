@@ -1,0 +1,12 @@
+took 700 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.jkiss.dbeaver.registry.task.TaskManagerImpl::createJob(TaskImpl, DBTTaskExecutionListener):TaskRunJob	org.jkiss.dbeaver.registry.task.TaskImpl	0.8958889836349795
+Move Method	org.jkiss.dbeaver.registry.driver.DriverDescriptor::setDriverParameter(String, String, boolean):void	org.jkiss.dbeaver.registry.DataSourceProviderDescriptor	1.0
+Move Method	org.jkiss.dbeaver.registry.driver.DriverDescriptor::addDriverLibrary(String, DBPDriverLibrary.FileType):DBPDriverLibrary	org.jkiss.dbeaver.registry.driver.DriverClassLoader	0.8233209958558729
+Move Method	org.jkiss.dbeaver.registry.driver.DriverDescriptor::acceptLicense(String):boolean	org.jkiss.dbeaver.registry.driver.DriverClassLoader	1.0
+Move Method	org.jkiss.dbeaver.registry.driver.DriverDescriptor::readJarsFromDirextends Path> (Path):Collection<?	org.jkiss.dbeaver.registry.driver.DriverClassLoader	0.625
+Move Method	org.jkiss.dbeaver.registry.driver.DriverDescriptor::resolveFile(Path, DBPDriverLibrary, Path, Path):DriverFileInfo	org.jkiss.dbeaver.registry.driver.DriverClassLoader	0.8333333333333333
+Move Method	org.jkiss.dbeaver.registry.driver.DriverDescriptor::checkDriverVersion(DBRProgressMonitor):void	org.jkiss.dbeaver.registry.driver.DriverClassLoader	0.9285714285714285
+Move Method	org.jkiss.dbeaver.registry.driver.DriverDescriptor::syncDistributedDependencies(DBRProgressMonitor):List<Path>	org.jkiss.dbeaver.registry.driver.DriverClassLoader	1.0
+Move Method	org.jkiss.dbeaver.registry.storage.H2Migrator::getDriver(String):Driver	org.jkiss.dbeaver.registry.DataSourceProviderRegistry	0.8554345533310271
+Move Method	org.jkiss.dbeaver.registry.DataSourceSerializerLegacy.DataSourcesParser::readSecuredCredentials(Attributes, DataSourceDescriptor, String):String[]	org.jkiss.dbeaver.registry.DataSourceDescriptor	0.7668557314026938

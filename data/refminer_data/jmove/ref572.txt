@@ -1,0 +1,48 @@
+took 9000 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.apache.kafka.connect.runtime.WorkerTask.TaskMetricsGroup::addRatioMetric(State, MetricNameTemplate):void	org.apache.kafka.connect.runtime.StateTracker	1.0
+Move Method	org.apache.kafka.connect.runtime.Worker::createWorkerErrantRecordReporter(SinkConnectorConfig, RetryWithToleranceOperator<ConsumerRecord<byte[],byte[]>>, Converter, Converter, HeaderConverter):WorkerErrantRecordReporter	org.apache.kafka.connect.runtime.SinkConnectorConfig	0.6505271378367823
+Move Method	org.apache.kafka.connect.runtime.WorkerSinkTask::poll(long):void	org.apache.kafka.connect.runtime.WorkerSinkTaskContext	1.0
+Move Method	org.apache.kafka.connect.runtime.WorkerTest::verifyGenericIsolation():void	org.apache.kafka.connect.runtime.isolation.LoaderSwap	1.0
+Move Method	org.apache.kafka.connect.runtime.AbstractHerder::maybeAddConfigErrors(ConfigInfos, Callback<Created<ConnectorInfo>>):boolean	org.apache.kafka.connect.runtime.rest.entities.ConfigInfos	0.8793103448275863
+Move Method	org.apache.kafka.connect.runtime.ErrorHandlingTaskTest::assertSinkMetricValue(String, double):void	org.apache.kafka.connect.runtime.WorkerSinkTask	1.0
+Move Method	org.apache.kafka.connect.runtime.WorkerSinkTask::convertAndTransformRecord(ProcessingContext<ConsumerRecord<byte[],byte[]>>, ConsumerRecord<byte[],byte[]>):SinkRecord	org.apache.kafka.connect.runtime.TransformationChain	0.3869684620836287
+Move Method	org.apache.kafka.connect.runtime.Worker::startSinkTask(ConnectorTaskId, ClusterConfigState, Map<String,String>, Map<String,String>, TaskStatus.Listener, TargetState):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.runtime.Worker::initConfigTransformer():WorkerConfigTransformer	org.apache.kafka.connect.runtime.WorkerConfigTransformer	1.0
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerder::isSourceConnector(String):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.runtime.AbstractHerderTest::verifyValidationIsolation():void	org.apache.kafka.connect.runtime.isolation.LoaderSwap	1.0
+Move Method	org.apache.kafka.connect.runtime.Worker::sourceConnectorOffsets(String, ConnectorOffsetBackingStore, CloseableOffsetStorageReader, Callback<ConnectorOffsets>):void	org.apache.kafka.connect.storage.ConnectorOffsetBackingStore	0.8271103896103897
+Move Method	org.apache.kafka.connect.runtime.ErrorHandlingTaskTest::assertSourceMetricValue(String, double):void	org.apache.kafka.connect.runtime.MockConnectMetrics	0.8453781512605041
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerder.ZombieFencing::addCallback(Callback<Void>):void	org.apache.kafka.connect.util.FutureCallback	0.7636363636363634
+Move Method	org.apache.kafka.connect.runtime.ExactlyOnceWorkerSourceTaskTest::sourceConnectorProps(SourceTask.TransactionBoundary):Map<String,String>	org.apache.kafka.connect.runtime.SourceConnectorConfig	0.7994475985883077
+Move Method	org.apache.kafka.connect.runtime.ErrorHandlingTaskTest::assertErrorHandlingMetricValue(String, double):void	org.apache.kafka.connect.runtime.errors.ErrorHandlingMetrics	1.0
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerderTest::exactlyOnceSnapshot(SessionKey, Map<ConnectorTaskId,Map<String,String>>, Map<String,Integer>, Map<String,Integer>, Set<String>, Map<String,Integer>):ClusterConfigState	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.util.clusters.EmbeddedConnect::stopWorker(WorkerHandle):void	org.apache.kafka.connect.util.clusters.WorkerHandle	0.7160173160173161
+Move Method	org.apache.kafka.connect.runtime.AbstractWorkerSourceTask::maybeCreateTopic(String):void	org.apache.kafka.connect.util.TopicAdmin	0.6280445969125215
+Move Method	org.apache.kafka.connect.integration.ErrorHandlingIntegrationTest::checkForPartitionAssignment():boolean	org.apache.kafka.connect.integration.ConnectorHandle	0.7976011994002997
+Move Method	org.apache.kafka.connect.integration.ExactlyOnceSourceIntegrationTest::assertConnectorStopped(StartAndStopLatch):void	org.apache.kafka.connect.integration.StartAndStopLatch	1.0
+Move Method	org.apache.kafka.connect.integration.ExactlyOnceSourceIntegrationTest::transactionalProducer(String, String):KafkaProducer<byte[],byte[]>	org.apache.kafka.connect.util.clusters.EmbeddedConnectCluster	1.0
+Move Method	org.apache.kafka.connect.runtime.Worker::isSinkConnector(String):boolean	org.apache.kafka.connect.runtime.isolation.Plugins	0.944622822817174
+Move Method	org.apache.kafka.connect.runtime.Worker::startSourceTask(ConnectorTaskId, ClusterConfigState, Map<String,String>, Map<String,String>, TaskStatus.Listener, TargetState):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.storage.KafkaConfigBackingStore::baseProducerProps(WorkerConfig):Map<String,Object>	org.apache.kafka.connect.runtime.WorkerConfig	0.5971561556953608
+Move Method	org.apache.kafka.connect.runtime.AbstractHerder::validateConnectorConfig(Map<String,String>, Function<String,TemporaryStage>, boolean):ConfigInfos	org.apache.kafka.connect.runtime.Worker	0.5486144287638883
+Move Method	org.apache.kafka.connect.runtime.isolation.PluginScanner::pluginDesc(Class<? extends T>, String, PluginType, PluginSource):PluginDesc<T>	org.apache.kafka.connect.runtime.isolation.PluginType	0.863486842105263
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerder::connectorUsesSeparateOffsetsTopicClients(org.apache.kafka.connect.health.ConnectorType, Map<String,String>):boolean	org.apache.kafka.connect.runtime.distributed.DistributedConfig	1.0
+Move Method	org.apache.kafka.connect.storage.KafkaStatusBackingStore::serialize(AbstractStatus<?>):byte[]	org.apache.kafka.connect.runtime.AbstractStatus	1.0
+Move Method	org.apache.kafka.connect.runtime.WorkerSinkTask::rewind():void	org.apache.kafka.connect.runtime.WorkerSinkTaskContext	1.0
+Move Method	org.apache.kafka.connect.runtime.Worker::sourceTaskReporters(ConnectorTaskId, ConnectorConfig, ErrorHandlingMetrics):List<ErrorReporter<SourceRecord>>	org.apache.kafka.connect.runtime.errors.ErrorHandlingMetrics	0.5862731621102243
+Move Method	org.apache.kafka.connect.runtime.errors.DeadLetterQueueReporter::populateContextHeaders(ProducerRecord<byte[],byte[]>, ProcessingContext<ConsumerRecord<byte[],byte[]>>):void	org.apache.kafka.connect.runtime.errors.ProcessingContext	0.9513653661188474
+Move Method	org.apache.kafka.connect.integration.ExactlyOnceSourceIntegrationTest::assertConnectorStarted(StartAndStopLatch):void	org.apache.kafka.connect.integration.StartAndStopLatch	1.0
+Move Method	org.apache.kafka.connect.integration.RestExtensionIntegrationTest::extensionIsRegistered():boolean	org.apache.kafka.connect.util.clusters.EmbeddedConnectCluster	1.0
+Move Method	org.apache.kafka.connect.runtime.ExactlyOnceWorkerSourceTask::buildTransactionManager(WorkerConfig, SourceConnectorConfig, WorkerTransactionContext):TransactionBoundaryManager	org.apache.kafka.connect.runtime.WorkerTransactionContext	1.0
+Move Method	org.apache.kafka.connect.runtime.ErrorHandlingTaskTest::verifyCloseSource():void	org.apache.kafka.connect.storage.OffsetStorageReaderImpl	0.8068881314544437
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerderTest::exactlyOnceSnapshot(SessionKey, Map<ConnectorTaskId,Map<String,String>>, Map<String,Integer>, Map<String,Integer>, Set<String>):ClusterConfigState	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.storage.KafkaOffsetBackingStore::newTopicDescription(String, WorkerConfig):NewTopic	org.apache.kafka.connect.runtime.WorkerConfig	0.4821842591178553
+Move Method	org.apache.kafka.connect.runtime.ErrorHandlingTaskTest::badConverter():Converter	org.apache.kafka.connect.runtime.WorkerConfig	1.0
+Move Method	org.apache.kafka.connect.runtime.WorkerTest::assertStartupStatistics(Worker, int, int, int, int):void	org.apache.kafka.connect.runtime.Worker	0.6893421665837163
+Move Method	org.apache.kafka.connect.runtime.Worker::connectorTaskConfigs(String, ConnectorConfig):List<Map<String,String>>	org.apache.kafka.connect.runtime.isolation.Plugins	0.5125354740328002
+Move Method	org.apache.kafka.connect.runtime.distributed.DistributedHerder::writeTaskConfigs(String, List<Map<String,String>>):void	org.apache.kafka.connect.storage.ClusterConfigState	1.0
+Move Method	org.apache.kafka.connect.integration.ExactlyOnceSourceIntegrationTest::assertProducersAreFencedOnReconfiguration(int, int, String, Map<String,String>):void	org.apache.kafka.connect.util.clusters.EmbeddedConnectCluster	0.7335600907029479
+Move Method	org.apache.kafka.connect.integration.ConnectorRestartApiIntegrationTest::assertNoRestartingState(ConnectorStateInfo):void	org.apache.kafka.connect.runtime.rest.entities.ConnectorStateInfo	0.1721674876847291
+Move Method	org.apache.kafka.connect.runtime.Worker::resetSinkConnectorOffsets(String, String, Admin, Callback<Message>, boolean, Timer):void	org.apache.kafka.connect.runtime.Herder	0.6482631700023006
+Move Method	org.apache.kafka.connect.runtime.AbstractHerder::taskConfigsChanged(ClusterConfigState, String, List<Map<String,String>>):boolean	org.apache.kafka.connect.storage.ClusterConfigState	1.0
