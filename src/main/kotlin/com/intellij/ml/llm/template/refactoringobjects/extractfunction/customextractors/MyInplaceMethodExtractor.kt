@@ -109,7 +109,7 @@ class MyInplaceMethodExtractor(private val editor: Editor,
                     InplaceExtractMethodCollector.executed.log(initialMethodName != methodName)
                     installGotItTooltips(editor, callIdentifierRange?.range, methodIdentifierRange?.range)
                     MyMethodExtractor.sendRefactoringDoneEvent(extractedMethod)
-                    extractor.replaceDuplicates(editor, extractedMethod)
+//                    extractor.replaceDuplicates(editor, extractedMethod)
                 }
                 .disposeWithTemplate(disposable)
                 .createTemplate(file, listOf(templateField))
