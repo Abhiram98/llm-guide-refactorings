@@ -79,7 +79,7 @@
             "newBranchName": "extract-hasCacheOperations-matches-219004e"
         },
         "telemetry": {
-            "id": "49fe850b-ded9-4617-ad79-a623fbe6c7a7",
+            "id": "2a574035-d7d0-4981-a313-e32bbb39a936",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 89,
                 "lineStart": 29,
@@ -98,7 +98,7 @@
                         "lineEnd": 61,
                         "refactoringType": "MyMoveInstanceMethodRefactoring",
                         "refactoringInfo": "Move method hasCacheOperations to class CacheOperationSource",
-                        "description": "Move method hasCacheOperations to org.springframework.cache.interceptor.CacheOperationSource\nRationale: The method 'hasCacheOperations' is directly related to 'CacheOperationSource' as it uses the 'getCacheOperations' method from this interface to determine if a method has cache operations. This means that it fundamentally relies on the functionality provided by 'CacheOperationSource'. Moving the method to 'CacheOperationSource' ensures that all logic related to cache operations is encapsulated within one class, promoting cohesive design and making it easier to maintain and extend the code. Furthermore, by residing within 'CacheOperationSource', it aligns with the principle of placing methods within the classes that they are concerned with, enhancing clarity and reducing coupling.",
+                        "description": "Move method hasCacheOperations to org.springframework.cache.interceptor.CacheOperationSource\nRationale: The method `hasCacheOperations` checks for cache operations on a given method and target class, which directly involves the `CacheOperationSource` interface. The `CacheOperationSource` is responsible for sourcing cache operation attributes and has a method `getCacheOperations` that is used within `hasCacheOperations`. Therefore, placing `hasCacheOperations` within `CacheOperationSource` enhances cohesion by keeping related functionality within the same context, making the design more modular and easier to maintain. Moving the method out of its current class is justified if the current class does not pertain directly to cache operations or should not handle the retrieval and checking logic for cache operations.",
                         "couldCreateRefObject": true,
                         "applied": false,
                         "startedRefactoringFlow": false,
@@ -109,57 +109,25 @@
             "iterationData": [
                 {
                     "iteration_num": 1,
-                    "suggested_move_methods": [
-                        {
-                            "method_name": "hasCacheOperations",
-                            "method_signature": "private boolean hasCacheOperations(Method method, Class<?> targetClass)",
-                            "target_class": "CacheOperationSource",
-                            "rationale": "The hasCacheOperations method relies on the CacheOperationSource instance to perform its check. Moving this method to the CacheOperationSource class would encapsulate the logic related to cache operations within the appropriate class, enhancing cohesion."
-                        },
-                        {
-                            "method_name": "isCandidateClass",
-                            "method_signature": "public boolean isCandidateClass(Class<?> clazz)",
-                            "target_class": "CacheOperationSource",
-                            "rationale": "The isCandidateClass method filters out classes based on logic that likely pertains directly to cache operations. As such, it should be part of the CacheOperationSource class to align filtering capabilities with the context of cache operations."
-                        },
-                        {
-                            "method_name": "getCacheOperationSource",
-                            "method_signature": "private CacheOperationSource getCacheOperationSource()",
-                            "target_class": "CacheOperationSourcePointcut",
-                            "rationale": "The CacheOperationSourceClassFilter uses getCacheOperationSource to retrieve the cache operation source. Ideally, this method should be part of the CacheOperationSourcePointcut class since it supports the pointcut's functionality and is specific to the class's internal logic."
-                        }
-                    ],
-                    "llm_response_time": 4353
+                    "suggested_move_methods": [],
+                    "llm_response_time": 3694
                 },
                 {
                     "iteration_num": 2,
                     "suggested_move_methods": [
                         {
                             "method_name": "getCacheOperationSource",
-                            "method_signature": "public CacheOperationSource getCacheOperationSource()",
+                            "method_signature": "private CacheOperationSource getCacheOperationSource()",
                             "target_class": "CacheOperationSourcePointcut",
-                            "rationale": "The method getCacheOperationSource() is used in CacheOperationSourceClassFilter but logically belongs to CacheOperationSourcePointcut as it is directly related to the cacheOperationSource field of CacheOperationSourcePointcut. This would also promote encapsulation by keeping the field and its accessor method together."
+                            "rationale": "The method getCacheOperationSource() is related to the CacheOperationSourcePointcut class and can be more appropriately placed there to maintain better class cohesion."
                         }
                     ],
-                    "llm_response_time": 5791
+                    "llm_response_time": 1639
                 },
                 {
                     "iteration_num": 3,
-                    "suggested_move_methods": [
-                        {
-                            "method_name": "hasCacheOperations",
-                            "method_signature": "private boolean hasCacheOperations(Method method, Class<?> targetClass)",
-                            "target_class": "CacheOperationSource",
-                            "rationale": "The method hasCacheOperations() directly interacts with CacheOperationSource and logically belongs to it as it is concerned with the operations provided by CacheOperationSource."
-                        },
-                        {
-                            "method_name": "isCandidateClass",
-                            "method_signature": "public boolean isCandidateClass(Class<?> clazz)",
-                            "target_class": "CacheOperationSource",
-                            "rationale": "The method isCandidateClass() is directly relevant to determining the candidates within CacheOperationSource, and it should be moved to maintain separation of concerns."
-                        }
-                    ],
-                    "llm_response_time": 1997
+                    "suggested_move_methods": [],
+                    "llm_response_time": 1462
                 },
                 {
                     "iteration_num": -1,
@@ -213,7 +181,7 @@
             "llmMethodPriority": {
                 "tf-idf": {
                     "priority_method_names": [],
-                    "llm_response_time": 1783
+                    "llm_response_time": 1940
                 },
                 "tf-idf-5": {
                     "priority_method_names": [],
@@ -233,7 +201,7 @@
                 },
                 "voyage-3": {
                     "priority_method_names": [],
-                    "llm_response_time": 1
+                    "llm_response_time": 0
                 }
             },
             "targetClassMap": {
@@ -247,8 +215,8 @@
                     "target_classes_sorted_by_llm": [
                         "CacheOperationSource"
                     ],
-                    "llm_response_time": 2802,
-                    "similarity_computation_time": 5,
+                    "llm_response_time": 2270,
+                    "similarity_computation_time": 0,
                     "similarity_metric": "cosine"
                 }
             }
@@ -334,7 +302,7 @@
             "newBranchName": "extract-hasTransactionAttribute-matches-219004e"
         },
         "telemetry": {
-            "id": "b9a5b43e-aa20-4332-a879-30a7832c37c8",
+            "id": "4c9b2ce1-7a54-4188-8bdd-e8a1b56b6628",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 90,
                 "lineStart": 29,
@@ -353,7 +321,7 @@
                         "lineEnd": 60,
                         "refactoringType": "MyMoveInstanceMethodRefactoring",
                         "refactoringInfo": "Move method hasTransactionAttribute to class TransactionAttributeSource",
-                        "description": "Move method hasTransactionAttribute to org.springframework.transaction.interceptor.TransactionAttributeSource\nRationale: The method hasTransactionAttribute() checks if a transaction attribute is present by using the getTransactionAttribute() method of the TransactionAttributeSource interface. This coupling indicates that hasTransactionAttribute() closely aligns with the responsibilities of the TransactionAttributeSource class. Therefore, it would make sense to move hasTransactionAttribute() to this class to maintain cohesion and encapsulate the logic for transaction attribute management within a single class.",
+                        "description": "Move method hasTransactionAttribute to org.springframework.transaction.interceptor.TransactionAttributeSource\nRationale: The hasTransactionAttribute() method depends directly on TransactionAttributeSource.getTransactionAttribute(). This indicates a strong cohesion with the TransactionAttributeSource interface. Moving this method to TransactionAttributeSource centralizes transaction attribute logic within the class designed to manage it. This enhances the maintainability and clarity of the codebase by keeping related functionalities together.",
                         "couldCreateRefObject": true,
                         "applied": false,
                         "startedRefactoringFlow": false,
@@ -369,52 +337,46 @@
                             "method_name": "hasTransactionAttribute",
                             "method_signature": "private boolean hasTransactionAttribute(Method method, Class<?> targetClass)",
                             "target_class": "TransactionAttributeSource",
-                            "rationale": "The method hasTransactionAttribute is closely related to the TransactionAttributeSource functionality as it directly checks for transaction attributes. It would be more appropriate to have this method within the TransactionAttributeSource class."
+                            "rationale": "The method `hasTransactionAttribute` directly interacts with the `TransactionAttributeSource` and checks for transaction attributes. It would be more appropriate to locate this method within `TransactionAttributeSource` to encapsulate transaction logic within that class."
                         },
                         {
-                            "method_name": "equals",
-                            "method_signature": "public boolean equals(@Nullable Object other)",
+                            "method_name": "isCandidateClass",
+                            "method_signature": "public boolean isCandidateClass(Class<?> clazz)",
                             "target_class": "TransactionAttributeSource",
-                            "rationale": "The equals method within the TransactionAttributeSourceClassFilter inner class is comparing instances of TransactionAttributeSourceClassFilter and the transactionAttributeSource. This logic seems more suited to be within the TransactionAttributeSource class where equality comparisons would be more relevant."
+                            "rationale": "The method `isCandidateClass` seems to be core functionality that determines whether a class is worth examining for transaction attributes, which aligns closely with the responsibilities of the `TransactionAttributeSource`."
                         },
                         {
-                            "method_name": "hashCode",
-                            "method_signature": "public int hashCode()",
-                            "target_class": "TransactionAttributeSource",
-                            "rationale": "The hashCode method within the TransactionAttributeSourceClassFilter inner class works based on transactionAttributeSource. This logic is more consistent with the TransactionAttributeSource class where hashCode implementation would typically be more pertinent."
-                        },
-                        {
-                            "method_name": "toString",
-                            "method_signature": "public String toString()",
-                            "target_class": "TransactionAttributeSource",
-                            "rationale": "The toString method within the TransactionAttributeSourceClassFilter inner class heavily reflects state related to the transactionAttributeSource. Therefore, it should be moved to the TransactionAttributeSource class where this context is more relevant."
+                            "method_name": "getTransactionAttributeSource",
+                            "method_signature": "private TransactionAttributeSource getTransactionAttributeSource()",
+                            "target_class": "TransactionAttributeSourcePointcut",
+                            "rationale": "The method `getTransactionAttributeSource` is a simple getter for the private field `transactionAttributeSource` of the `TransactionAttributeSourcePointcut` class. Although it appears within an inner class, which makes sense contextually, there might be a better approach to access it directly. This recommendation is debatable but worth consideration to reduce complexity."
                         }
                     ],
-                    "llm_response_time": 6045
+                    "llm_response_time": 3546
                 },
                 {
                     "iteration_num": 2,
                     "suggested_move_methods": [
                         {
-                            "method_name": "isCandidateClass",
-                            "method_signature": "public boolean isCandidateClass(Class<?> clazz)",
-                            "target_class": "TransactionAttributeSource",
-                            "rationale": "The method isCandidateClass() within TransactionAttributeSourceClassFilter is more relevant to the TransactionAttributeSource class and would make sense being there as it involves determining if a class's methods are worth searching based on the transaction attributes."
+                            "method_name": "getTransactionAttributeSource",
+                            "method_signature": "private TransactionAttributeSource getTransactionAttributeSource()",
+                            "target_class": "TransactionAttributeSourcePointcut",
+                            "rationale": "The method getTransactionAttributeSource() is accessing the transactionAttributeSource field, which is a private member of the outer class TransactionAttributeSourcePointcut. Moving this method to the outer class will increase encapsulation and improve the readability of the code."
                         }
                     ],
-                    "llm_response_time": 1717
+                    "llm_response_time": 1523
                 },
                 {
                     "iteration_num": 3,
                     "suggested_move_methods": [
                         {
                             "method_name": "getTransactionAttributeSource",
-                            "method_signature": "private TransactionAttributeSource getTransactionAttributeSource()",
+                            "method_signature": "private TransactionAttributeSource getTransactionAttributeSource(): TransactionAttributeSource",
                             "target_class": "TransactionAttributeSourcePointcut",
-                            "rationale": "The getTransactionAttributeSource() method is used to access the transactionAttributeSource field which belongs to the outer TransactionAttributeSourcePointcut class. Keeping getter methods in the class that owns the data maintains encapsulation and makes the class more cohesive."
+                            "rationale": "This method is used in the outer class for both matching methods and equality checks. Moving it to the outer class would improve encapsulation and readability while still allowing usage within the inner class."
                         }
                     ],
-                    "llm_response_time": 1887
+                    "llm_response_time": 1545
                 },
                 {
                     "iteration_num": -1,
@@ -470,7 +432,7 @@
                     "priority_method_names": [
                         "private hasTransactionAttribute(Method method, Class<?> targetClass)"
                     ],
-                    "llm_response_time": 1011
+                    "llm_response_time": 1372
                 },
                 "tf-idf-5": {
                     "priority_method_names": [
@@ -494,7 +456,7 @@
                     "priority_method_names": [
                         "private hasTransactionAttribute(Method method, Class<?> targetClass)"
                     ],
-                    "llm_response_time": 0
+                    "llm_response_time": 1
                 },
                 "voyage-3": {
                     "priority_method_names": [
@@ -514,8 +476,8 @@
                     "target_classes_sorted_by_llm": [
                         "TransactionAttributeSource"
                     ],
-                    "llm_response_time": 2165,
-                    "similarity_computation_time": 0,
+                    "llm_response_time": 1518,
+                    "similarity_computation_time": 1,
                     "similarity_metric": "cosine"
                 }
             }
@@ -601,7 +563,7 @@
             "newBranchName": "extract-hasCacheOperation-matches-219004e"
         },
         "telemetry": {
-            "id": "f2e5f8c9-01a1-4c3e-88a7-5d53cc36c4c2",
+            "id": "3272856b-f5dc-49cc-8872-3cfd6f29da5b",
             "hostFunctionTelemetryData": {
                 "hostFunctionSize": 35,
                 "lineStart": 68,
@@ -620,7 +582,7 @@
                         "lineEnd": 84,
                         "refactoringType": "MyMoveInstanceMethodRefactoring",
                         "refactoringInfo": "Move method hasCacheOperation to class JCacheOperationSource",
-                        "description": "Move method hasCacheOperation to org.springframework.cache.jcache.interceptor.JCacheOperationSource\nRationale: The 'hasCacheOperation' method checks the presence of cache operations for a given method and target class, which directly aligns with the responsibilities of the 'JCacheOperationSource' interface. Since 'JCacheOperationSource' is designed to source cache operation attributes, it makes logical sense to move this method there. Additionally, the method is currently doing a task that overlaps with the purpose of 'JCacheOperationSource', thus moving it to 'JCacheOperationSource' would enhance cohesion and maintainability of the code.",
+                        "description": "Move method hasCacheOperation to org.springframework.cache.jcache.interceptor.JCacheOperationSource\nRationale: The method hasCacheOperation() directly interacts with cache operation retrieval logic via cacheOperationSource and evaluates whether a cache operation is present. JCacheOperationSource is specifically designed to provide cache operation attributes based on JSR-107 annotations, making it the most appropriate class to house this method. Relocating hasCacheOperation() helps in keeping related functionality together, enhancing cohesion and ensuring that responsibilities related to cache operations are consolidated within JCacheOperationSource.",
                         "couldCreateRefObject": true,
                         "applied": false,
                         "startedRefactoringFlow": false,
@@ -633,43 +595,30 @@
                     "iteration_num": 1,
                     "suggested_move_methods": [
                         {
-                            "method_name": "getCacheOperation",
-                            "method_signature": "public CacheOperation getCacheOperation(Method method, Class<?> targetClass)",
+                            "method_name": "hasCacheOperation",
+                            "method_signature": "private boolean hasCacheOperation(Method method, Class<?> targetClass)",
                             "target_class": "JCacheOperationSource",
-                            "rationale": "The method hasCacheOperation relies on getCacheOperation from cacheOperationSource. It would be more cohesive to have the invocation of getCacheOperation() within the JCacheOperationSource class, making JCacheOperationSource responsible for determining the existence of cache operations."
+                            "rationale": "The hasCacheOperation() method interacts directly with JCacheOperationSource and checks its operations. It fits naturally into the JCacheOperationSource class as it would encapsulate the behavior more appropriately."
                         }
                     ],
-                    "llm_response_time": 2027
+                    "llm_response_time": 1751
                 },
                 {
                     "iteration_num": 2,
                     "suggested_move_methods": [
                         {
-                            "method_name": "setCacheOperationSource",
-                            "method_signature": "public void setCacheOperationSource(@Nullable JCacheOperationSource cacheOperationSource)",
-                            "target_class": "JCacheOperationSource",
-                            "rationale": "This is a standard setter method that updates the JCacheOperationSource inside this class. It appears this setter is used to inform the JCacheOperationSourcePointcut class about the JCacheOperationSource instance to use. Such methods are commonly placed where the source belongs."
-                        },
-                        {
                             "method_name": "hasCacheOperation",
                             "method_signature": "private boolean hasCacheOperation(Method method, Class<?> targetClass)",
                             "target_class": "JCacheOperationSource",
-                            "rationale": "Given that this method checks for a cache operation's existence using JCacheOperationSource, it would be more appropriate and cohesive to move this method to the JCacheOperationSource class where related cache operations are managed."
+                            "rationale": "The hasCacheOperation method is accessing a method from JCacheOperationSource and is more related to the logic of checking cache operations, which should be a responsibility of JCacheOperationSource rather than JCacheOperationSourcePointcut."
                         }
                     ],
-                    "llm_response_time": 2702
+                    "llm_response_time": 1531
                 },
                 {
                     "iteration_num": 3,
-                    "suggested_move_methods": [
-                        {
-                            "method_name": "hasCacheOperation",
-                            "method_signature": "private boolean hasCacheOperation(Method method, Class<?> targetClass)",
-                            "target_class": "JCacheOperationSource",
-                            "rationale": "The hasCacheOperation() method heavily depends on the JCacheOperationSource class. It's primarily concerned with checking cache operations, which aligns more closely with the responsibilities of the JCacheOperationSource class. Moving it can help consolidate cache-related logic within the JCacheOperationSource class."
-                        }
-                    ],
-                    "llm_response_time": 1989
+                    "suggested_move_methods": [],
+                    "llm_response_time": 1696
                 },
                 {
                     "iteration_num": -1,
@@ -725,7 +674,7 @@
                     "priority_method_names": [
                         "private hasCacheOperation(Method method, Class<?> targetClass)"
                     ],
-                    "llm_response_time": 1208
+                    "llm_response_time": 1251
                 },
                 "tf-idf-5": {
                     "priority_method_names": [
@@ -769,7 +718,7 @@
                     "target_classes_sorted_by_llm": [
                         "JCacheOperationSource"
                     ],
-                    "llm_response_time": 1818,
+                    "llm_response_time": 1880,
                     "similarity_computation_time": 1,
                     "similarity_metric": "cosine"
                 }
@@ -956,299 +905,284 @@
             "newBranchName": "extract-getSchedulerFor-handle-08c9b5c"
         },
         "telemetry": {
-          "id": "580104a8-35bb-44ce-9fd9-d0965cb5964e",
-          "hostFunctionTelemetryData": {
-            "hostFunctionSize": 323,
-            "lineStart": 54,
-            "lineEnd": 376,
-            "bodyLineStart": 54,
-            "language": "java",
-            "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
-            "sourceCode": "/**\n * Supports the invocation of\n * {@link org.springframework.web.bind.annotation.RequestMapping @RequestMapping}\n * handler methods.\n *\n * @author Rossen Stoyanchev\n * @since 5.0\n */\npublic class RequestMappingHandlerAdapter\n\t\timplements HandlerAdapter, DispatchExceptionHandler, ApplicationContextAware, InitializingBean {\n\n\tprivate static final Log logger = LogFactory.getLog(RequestMappingHandlerAdapter.class);\n\n\t/**\n\t * Log category to use for network failure after a client has gone away.\n\t * @see DisconnectedClientHelper\n\t */\n\tprivate static final String DISCONNECTED_CLIENT_LOG_CATEGORY =\n\t\t\t\"org.springframework.web.reactive.result.method.annotation.DisconnectedClient\";\n\n\tprivate static final DisconnectedClientHelper disconnectedClientHelper =\n\t\t\tnew DisconnectedClientHelper(DISCONNECTED_CLIENT_LOG_CATEGORY);\n\n\n\tprivate List<HttpMessageReader<?>> messageReaders = Collections.emptyList();\n\n\t@Nullable\n\tprivate WebBindingInitializer webBindingInitializer;\n\n\t@Nullable\n\tprivate ArgumentResolverConfigurer argumentResolverConfigurer;\n\n\t@Nullable\n\tprivate Scheduler scheduler;\n\n\t@Nullable\n\tprivate Predicate<HandlerMethod> blockingMethodPredicate;\n\n\t@Nullable\n\tprivate ReactiveAdapterRegistry reactiveAdapterRegistry;\n\n\t@Nullable\n\tprivate ConfigurableApplicationContext applicationContext;\n\n\t@Nullable\n\tprivate ControllerMethodResolver methodResolver;\n\n\t@Nullable\n\tprivate ModelInitializer modelInitializer;\n\n\n\t@Nullable\n\tpublic Scheduler getScheduler() {\n\t\treturn scheduler;\n\t}\n\n\t@Nullable\n\tpublic Predicate<HandlerMethod> getBlockingMethodPredicate() {\n\t\treturn blockingMethodPredicate;\n\t}\n\n\n\t/**\n\t * Configure HTTP message readers to de-serialize the request body with.\n\t * <p>By default this is set to {@link ServerCodecConfigurer}'s readers with defaults.\n\t */\n\tpublic void setMessageReaders(List<HttpMessageReader<?>> messageReaders) {\n\t\tAssert.notNull(messageReaders, \"'messageReaders' must not be null\");\n\t\tthis.messageReaders = messageReaders;\n\t}\n\n\t/**\n\t * Return the configurer for HTTP message readers.\n\t */\n\tpublic List<HttpMessageReader<?>> getMessageReaders() {\n\t\treturn this.messageReaders;\n\t}\n\n\t/**\n\t * Provide a WebBindingInitializer with \"global\" initialization to apply\n\t * to every DataBinder instance.\n\t */\n\tpublic void setWebBindingInitializer(@Nullable WebBindingInitializer webBindingInitializer) {\n\t\tthis.webBindingInitializer = webBindingInitializer;\n\t}\n\n\t/**\n\t * Return the configured WebBindingInitializer, or {@code null} if none.\n\t */\n\t@Nullable\n\tpublic WebBindingInitializer getWebBindingInitializer() {\n\t\treturn this.webBindingInitializer;\n\t}\n\n\t/**\n\t * Configure resolvers for controller method arguments.\n\t */\n\tpublic void setArgumentResolverConfigurer(@Nullable ArgumentResolverConfigurer configurer) {\n\t\tthis.argumentResolverConfigurer = configurer;\n\t}\n\n\t/**\n\t * Return the configured resolvers for controller method arguments.\n\t */\n\t@Nullable\n\tpublic ArgumentResolverConfigurer getArgumentResolverConfigurer() {\n\t\treturn this.argumentResolverConfigurer;\n\t}\n\n\t/**\n\t * Configure an executor to invoke blocking controller methods with.\n\t * <p>By default, this is not set in which case controller methods are\n\t * invoked without the use of an Executor.\n\t * @param executor the task executor to use\n\t * @since 6.1\n\t */\n\tpublic void setBlockingExecutor(@Nullable Executor executor) {\n\t\tthis.scheduler = (executor != null ? Schedulers.fromExecutor(executor) : null);\n\t}\n\n\t/**\n\t * Provide a predicate to decide which controller methods to invoke through\n\t * the configured {@link #setBlockingExecutor blockingExecutor}.\n\t * <p>If an executor is configured, the default predicate matches controller\n\t * methods whose return type is not recognized by the configured\n\t * {@link org.springframework.core.ReactiveAdapterRegistry}.\n\t * @param predicate the predicate to use\n\t * @since 6.1\n\t */\n\tpublic void setBlockingMethodPredicate(Predicate<HandlerMethod> predicate) {\n\t\tthis.blockingMethodPredicate = predicate;\n\t}\n\n\t/**\n\t * Configure the registry for adapting various reactive types.\n\t * <p>By default this is an instance of {@link ReactiveAdapterRegistry} with\n\t * default settings.\n\t */\n\tpublic void setReactiveAdapterRegistry(@Nullable ReactiveAdapterRegistry registry) {\n\t\tthis.reactiveAdapterRegistry = registry;\n\t}\n\n\t/**\n\t * Return the configured registry for adapting reactive types.\n\t */\n\t@Nullable\n\tpublic ReactiveAdapterRegistry getReactiveAdapterRegistry() {\n\t\treturn this.reactiveAdapterRegistry;\n\t}\n\n\t/**\n\t * A {@link ConfigurableApplicationContext} is expected for resolving\n\t * expressions in method argument default values as well as for\n\t * detecting {@code @ControllerAdvice} beans.\n\t */\n\t@Override\n\tpublic void setApplicationContext(ApplicationContext applicationContext) {\n\t\tif (applicationContext instanceof ConfigurableApplicationContext cac) {\n\t\t\tthis.applicationContext = cac;\n\t\t}\n\t}\n\n\n\t@Override\n\tpublic void afterPropertiesSet() throws Exception {\n\t\tAssert.notNull(this.applicationContext, \"ApplicationContext is required\");\n\n\t\tif (CollectionUtils.isEmpty(this.messageReaders)) {\n\t\t\tServerCodecConfigurer codecConfigurer = ServerCodecConfigurer.create();\n\t\t\tthis.messageReaders = codecConfigurer.getReaders();\n\t\t}\n\n\t\tif (this.argumentResolverConfigurer == null) {\n\t\t\tthis.argumentResolverConfigurer = new ArgumentResolverConfigurer();\n\t\t}\n\n\t\tif (this.reactiveAdapterRegistry == null) {\n\t\t\tthis.reactiveAdapterRegistry = ReactiveAdapterRegistry.getSharedInstance();\n\t\t}\n\n\t\tif (this.scheduler != null && this.blockingMethodPredicate == null) {\n\t\t\tthis.blockingMethodPredicate = new NonReactiveHandlerMethodPredicate(this.reactiveAdapterRegistry);\n\t\t}\n\n\t\tthis.methodResolver = new ControllerMethodResolver(\n\t\t\t\tthis.argumentResolverConfigurer, this.reactiveAdapterRegistry, this.applicationContext,\n\t\t\t\tthis.messageReaders, this.webBindingInitializer);\n\n\t\tthis.modelInitializer = new ModelInitializer(this.methodResolver, this.reactiveAdapterRegistry);\n\t}\n\n\n\t@Override\n\tpublic boolean supports(Object handler) {\n\t\treturn handler instanceof HandlerMethod;\n\t}\n\n\t@Override\n\tpublic Mono<HandlerResult> handle(ServerWebExchange exchange, Object handler) {\n\n\t\tAssert.state(this.methodResolver != null &&\n\t\t\t\tthis.modelInitializer != null && this.reactiveAdapterRegistry != null, \"Not initialized\");\n\n\t\tHandlerMethod handlerMethod = (HandlerMethod) handler;\n\n\t\tInitBinderBindingContext bindingContext = new InitBinderBindingContext(\n\t\t\t\tthis.webBindingInitializer, this.methodResolver.getInitBinderMethods(handlerMethod),\n\t\t\t\tthis.methodResolver.hasMethodValidator() && handlerMethod.shouldValidateArguments(),\n\t\t\t\tthis.reactiveAdapterRegistry);\n\n\t\tInvocableHandlerMethod invocableMethod = this.methodResolver.getRequestMappingMethod(handlerMethod);\n\n\t\tDispatchExceptionHandler exceptionHandler =\n\t\t\t\t(exchange2, ex) -> handleException(exchange, ex, handlerMethod, bindingContext);\n\n\t\tMono<HandlerResult> resultMono = this.modelInitializer\n\t\t\t\t.initModel(handlerMethod, bindingContext, exchange)\n\t\t\t\t.then(Mono.defer(() -> invocableMethod.invoke(exchange, bindingContext)))\n\t\t\t\t.doOnNext(result -> result.setExceptionHandler(exceptionHandler))\n\t\t\t\t.onErrorResume(ex -> exceptionHandler.handleError(exchange, ex));\n\n\t\tresultMono = getSchedulerFor(handlerMethod, resultMono);\n\n\t\treturn resultMono;\n\t}\n\n\tprivate @NotNull Mono<HandlerResult> getSchedulerFor(HandlerMethod handlerMethod, Mono<HandlerResult> resultMono) {\n\t\tif (this.getScheduler() != null) {\n\t\t\tAssert.state(this.getBlockingMethodPredicate() != null, \"Expected HandlerMethod Predicate\");\n\t\t\tif (this.getBlockingMethodPredicate().test(handlerMethod)) {\n\t\t\t\tresultMono = resultMono.subscribeOn(this.getScheduler());\n\t\t\t}\n\t\t}\n\t\treturn resultMono;\n\t}\n\n\tprivate Mono<HandlerResult> handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext) {\n\n\t\tAssert.state(this.methodResolver != null, \"Not initialized\");\n\n\t\t// Success and error responses may use different content types\n\t\texchange.getAttributes().remove(HandlerMapping.PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE);\n\t\texchange.getResponse().getHeaders().clearContentHeaders();\n\n\t\tInvocableHandlerMethod invocable =\n\t\t\t\tthis.methodResolver.getExceptionHandlerMethod(exception, handlerMethod);\n\n\t\tif (invocable != null) {\n\t\t\tArrayList<Throwable> exceptions = new ArrayList<>();\n\t\t\ttry {\n\t\t\t\tif (logger.isDebugEnabled()) {\n\t\t\t\t\tlogger.debug(exchange.getLogPrefix() + \"Using @ExceptionHandler \" + invocable);\n\t\t\t\t}\n\t\t\t\tif (bindingContext != null) {\n\t\t\t\t\tbindingContext.getModel().asMap().clear();\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tbindingContext = new BindingContext();\n\t\t\t\t}\n\n\t\t\t\t// Expose causes as provided arguments as well\n\t\t\t\tThrowable exToExpose = exception;\n\t\t\t\twhile (exToExpose != null) {\n\t\t\t\t\texceptions.add(exToExpose);\n\t\t\t\t\tThrowable cause = exToExpose.getCause();\n\t\t\t\t\texToExpose = (cause != exToExpose ? cause : null);\n\t\t\t\t}\n\t\t\t\tObject[] arguments = new Object[exceptions.size() + 1];\n\t\t\t\texceptions.toArray(arguments);  // efficient arraycopy call in ArrayList\n\t\t\t\targuments[arguments.length - 1] = handlerMethod;\n\n\t\t\t\treturn invocable.invoke(exchange, bindingContext, arguments)\n\t\t\t\t\t\t.onErrorResume(invocationEx ->\n\t\t\t\t\t\t\t\thandleExceptionHandlerFailure(exchange, exception, invocationEx, exceptions, invocable));\n\t\t\t}\n\t\t\tcatch (Throwable invocationEx) {\n\t\t\t\treturn handleExceptionHandlerFailure(exchange, exception, invocationEx, exceptions, invocable);\n\t\t\t}\n\t\t}\n\t\treturn Mono.error(exception);\n\t}\n\n\tprivate static Mono<HandlerResult> handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable) {\n\n\t\tif (disconnectedClientHelper.checkAndLogClientDisconnectedException(invocationEx)) {\n\t\t\treturn Mono.empty();\n\t\t}\n\n\t\t// Any other than the original exception (or a cause) is unintended here,\n\t\t// probably an accident (e.g. failed assertion or the like).\n\t\tif (!exceptions.contains(invocationEx) && logger.isWarnEnabled()) {\n\t\t\tlogger.warn(exchange.getLogPrefix() + \"Failure in @ExceptionHandler \" + invocable, invocationEx);\n\t\t}\n\n\t\treturn Mono.error(exception);\n\t}\n\n\t@Override\n\tpublic Mono<HandlerResult> handleError(ServerWebExchange exchange, Throwable ex) {\n\t\treturn handleException(exchange, ex, null, null);\n\t}\n\n\n\t/**\n\t * Match methods with a return type without an adapter in {@link ReactiveAdapterRegistry}\n\t * which are not suspending functions.\n\t */\n\tprivate record NonReactiveHandlerMethodPredicate(ReactiveAdapterRegistry adapterRegistry)\n\t\t\timplements Predicate<HandlerMethod> {\n\n\t\t@Override\n\t\tpublic boolean test(HandlerMethod handlerMethod) {\n\t\t\tClass<?> returnType = handlerMethod.getReturnType().getParameterType();\n\t\t\treturn (this.adapterRegistry.getAdapter(returnType) == null\n\t\t\t\t\t&& !KotlinDetector.isSuspendingFunction(handlerMethod.getMethod()));\n\t\t}\n\t}\n\n}",
-            "methodCount": 21
-          },
-          "candidatesTelemetryData": {
-            "numberOfSuggestions": 2,
-            "candidates": [
-              {
-                "lineStart": 337,
-                "lineEnd": 352,
-                "refactoringType": "MyMoveStaticMethodRefactoring",
-                "refactoringInfo": "Move Static method handleExceptionHandlerFailure to class NonReactiveHandlerMethodPredicate",
-                "description": "move method handleExceptionHandlerFailure to PsiClass:NonReactiveHandlerMethodPredicate\nRationale: The method handleExceptionHandlerFailure deals with handling exceptions in a reactive web exchange context, involving factors like invocable methods, invocation exceptions, and an exchange object, which are all part of handling methods in a web environment. Although the provided NonReactiveHandlerMethodPredicate class currently does not have methods like handleExceptionHandlerFailure, the logic from handleExceptionHandlerFailure directly intersects with the logic of checking handler methods and their properties. Placing handleExceptionHandlerFailure in this class fits better because it pertains to the overall handling and determining the properties of handler methods, which is the responsibility of NonReactiveHandlerMethodPredicate.",
-                "couldCreateRefObject": true,
-                "applied": false,
-                "startedRefactoringFlow": false,
-                "undone": false
-              },
-              {
-                "lineStart": 289,
-                "lineEnd": 335,
-                "refactoringType": "MyMoveInstanceMethodRefactoring",
-                "refactoringInfo": "Move method handleException to class ServerWebExchange",
-                "description": "Move method handleException to org.springframework.web.server.ServerWebExchange\nRationale: The method handleException handles various aspects related to an HTTP request-response interaction, such as modifying request attributes and clearing response headers, which are responsibilities closely tied to the ServerWebExchange class. As ServerWebExchange deals directly with HTTP requests and responses, this method is best suited within that class.",
-                "couldCreateRefObject": true,
-                "applied": false,
-                "startedRefactoringFlow": false,
-                "undone": false
-              }
-            ]
-          },
-          "elapsedTime": [
-            {
-              "candidateIndex": 0,
-              "elapsedTime": 11192
+            "id": "4413b664-4d8e-4af2-bede-31d9efd8a7dc",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 323,
+                "lineStart": 54,
+                "lineEnd": 376,
+                "bodyLineStart": 54,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+                "sourceCode": "/**\n * Supports the invocation of\n * {@link org.springframework.web.bind.annotation.RequestMapping @RequestMapping}\n * handler methods.\n *\n * @author Rossen Stoyanchev\n * @since 5.0\n */\npublic class RequestMappingHandlerAdapter\n\t\timplements HandlerAdapter, DispatchExceptionHandler, ApplicationContextAware, InitializingBean {\n\n\tprivate static final Log logger = LogFactory.getLog(RequestMappingHandlerAdapter.class);\n\n\t/**\n\t * Log category to use for network failure after a client has gone away.\n\t * @see DisconnectedClientHelper\n\t */\n\tprivate static final String DISCONNECTED_CLIENT_LOG_CATEGORY =\n\t\t\t\"org.springframework.web.reactive.result.method.annotation.DisconnectedClient\";\n\n\tprivate static final DisconnectedClientHelper disconnectedClientHelper =\n\t\t\tnew DisconnectedClientHelper(DISCONNECTED_CLIENT_LOG_CATEGORY);\n\n\n\tprivate List<HttpMessageReader<?>> messageReaders = Collections.emptyList();\n\n\t@Nullable\n\tprivate WebBindingInitializer webBindingInitializer;\n\n\t@Nullable\n\tprivate ArgumentResolverConfigurer argumentResolverConfigurer;\n\n\t@Nullable\n\tprivate Scheduler scheduler;\n\n\t@Nullable\n\tprivate Predicate<HandlerMethod> blockingMethodPredicate;\n\n\t@Nullable\n\tprivate ReactiveAdapterRegistry reactiveAdapterRegistry;\n\n\t@Nullable\n\tprivate ConfigurableApplicationContext applicationContext;\n\n\t@Nullable\n\tprivate ControllerMethodResolver methodResolver;\n\n\t@Nullable\n\tprivate ModelInitializer modelInitializer;\n\n\n\t@Nullable\n\tpublic Scheduler getScheduler() {\n\t\treturn scheduler;\n\t}\n\n\t@Nullable\n\tpublic Predicate<HandlerMethod> getBlockingMethodPredicate() {\n\t\treturn blockingMethodPredicate;\n\t}\n\n\n\t/**\n\t * Configure HTTP message readers to de-serialize the request body with.\n\t * <p>By default this is set to {@link ServerCodecConfigurer}'s readers with defaults.\n\t */\n\tpublic void setMessageReaders(List<HttpMessageReader<?>> messageReaders) {\n\t\tAssert.notNull(messageReaders, \"'messageReaders' must not be null\");\n\t\tthis.messageReaders = messageReaders;\n\t}\n\n\t/**\n\t * Return the configurer for HTTP message readers.\n\t */\n\tpublic List<HttpMessageReader<?>> getMessageReaders() {\n\t\treturn this.messageReaders;\n\t}\n\n\t/**\n\t * Provide a WebBindingInitializer with \"global\" initialization to apply\n\t * to every DataBinder instance.\n\t */\n\tpublic void setWebBindingInitializer(@Nullable WebBindingInitializer webBindingInitializer) {\n\t\tthis.webBindingInitializer = webBindingInitializer;\n\t}\n\n\t/**\n\t * Return the configured WebBindingInitializer, or {@code null} if none.\n\t */\n\t@Nullable\n\tpublic WebBindingInitializer getWebBindingInitializer() {\n\t\treturn this.webBindingInitializer;\n\t}\n\n\t/**\n\t * Configure resolvers for controller method arguments.\n\t */\n\tpublic void setArgumentResolverConfigurer(@Nullable ArgumentResolverConfigurer configurer) {\n\t\tthis.argumentResolverConfigurer = configurer;\n\t}\n\n\t/**\n\t * Return the configured resolvers for controller method arguments.\n\t */\n\t@Nullable\n\tpublic ArgumentResolverConfigurer getArgumentResolverConfigurer() {\n\t\treturn this.argumentResolverConfigurer;\n\t}\n\n\t/**\n\t * Configure an executor to invoke blocking controller methods with.\n\t * <p>By default, this is not set in which case controller methods are\n\t * invoked without the use of an Executor.\n\t * @param executor the task executor to use\n\t * @since 6.1\n\t */\n\tpublic void setBlockingExecutor(@Nullable Executor executor) {\n\t\tthis.scheduler = (executor != null ? Schedulers.fromExecutor(executor) : null);\n\t}\n\n\t/**\n\t * Provide a predicate to decide which controller methods to invoke through\n\t * the configured {@link #setBlockingExecutor blockingExecutor}.\n\t * <p>If an executor is configured, the default predicate matches controller\n\t * methods whose return type is not recognized by the configured\n\t * {@link org.springframework.core.ReactiveAdapterRegistry}.\n\t * @param predicate the predicate to use\n\t * @since 6.1\n\t */\n\tpublic void setBlockingMethodPredicate(Predicate<HandlerMethod> predicate) {\n\t\tthis.blockingMethodPredicate = predicate;\n\t}\n\n\t/**\n\t * Configure the registry for adapting various reactive types.\n\t * <p>By default this is an instance of {@link ReactiveAdapterRegistry} with\n\t * default settings.\n\t */\n\tpublic void setReactiveAdapterRegistry(@Nullable ReactiveAdapterRegistry registry) {\n\t\tthis.reactiveAdapterRegistry = registry;\n\t}\n\n\t/**\n\t * Return the configured registry for adapting reactive types.\n\t */\n\t@Nullable\n\tpublic ReactiveAdapterRegistry getReactiveAdapterRegistry() {\n\t\treturn this.reactiveAdapterRegistry;\n\t}\n\n\t/**\n\t * A {@link ConfigurableApplicationContext} is expected for resolving\n\t * expressions in method argument default values as well as for\n\t * detecting {@code @ControllerAdvice} beans.\n\t */\n\t@Override\n\tpublic void setApplicationContext(ApplicationContext applicationContext) {\n\t\tif (applicationContext instanceof ConfigurableApplicationContext cac) {\n\t\t\tthis.applicationContext = cac;\n\t\t}\n\t}\n\n\n\t@Override\n\tpublic void afterPropertiesSet() throws Exception {\n\t\tAssert.notNull(this.applicationContext, \"ApplicationContext is required\");\n\n\t\tif (CollectionUtils.isEmpty(this.messageReaders)) {\n\t\t\tServerCodecConfigurer codecConfigurer = ServerCodecConfigurer.create();\n\t\t\tthis.messageReaders = codecConfigurer.getReaders();\n\t\t}\n\n\t\tif (this.argumentResolverConfigurer == null) {\n\t\t\tthis.argumentResolverConfigurer = new ArgumentResolverConfigurer();\n\t\t}\n\n\t\tif (this.reactiveAdapterRegistry == null) {\n\t\t\tthis.reactiveAdapterRegistry = ReactiveAdapterRegistry.getSharedInstance();\n\t\t}\n\n\t\tif (this.scheduler != null && this.blockingMethodPredicate == null) {\n\t\t\tthis.blockingMethodPredicate = new NonReactiveHandlerMethodPredicate(this.reactiveAdapterRegistry);\n\t\t}\n\n\t\tthis.methodResolver = new ControllerMethodResolver(\n\t\t\t\tthis.argumentResolverConfigurer, this.reactiveAdapterRegistry, this.applicationContext,\n\t\t\t\tthis.messageReaders, this.webBindingInitializer);\n\n\t\tthis.modelInitializer = new ModelInitializer(this.methodResolver, this.reactiveAdapterRegistry);\n\t}\n\n\n\t@Override\n\tpublic boolean supports(Object handler) {\n\t\treturn handler instanceof HandlerMethod;\n\t}\n\n\t@Override\n\tpublic Mono<HandlerResult> handle(ServerWebExchange exchange, Object handler) {\n\n\t\tAssert.state(this.methodResolver != null &&\n\t\t\t\tthis.modelInitializer != null && this.reactiveAdapterRegistry != null, \"Not initialized\");\n\n\t\tHandlerMethod handlerMethod = (HandlerMethod) handler;\n\n\t\tInitBinderBindingContext bindingContext = new InitBinderBindingContext(\n\t\t\t\tthis.webBindingInitializer, this.methodResolver.getInitBinderMethods(handlerMethod),\n\t\t\t\tthis.methodResolver.hasMethodValidator() && handlerMethod.shouldValidateArguments(),\n\t\t\t\tthis.reactiveAdapterRegistry);\n\n\t\tInvocableHandlerMethod invocableMethod = this.methodResolver.getRequestMappingMethod(handlerMethod);\n\n\t\tDispatchExceptionHandler exceptionHandler =\n\t\t\t\t(exchange2, ex) -> handleException(exchange, ex, handlerMethod, bindingContext);\n\n\t\tMono<HandlerResult> resultMono = this.modelInitializer\n\t\t\t\t.initModel(handlerMethod, bindingContext, exchange)\n\t\t\t\t.then(Mono.defer(() -> invocableMethod.invoke(exchange, bindingContext)))\n\t\t\t\t.doOnNext(result -> result.setExceptionHandler(exceptionHandler))\n\t\t\t\t.onErrorResume(ex -> exceptionHandler.handleError(exchange, ex));\n\n\t\tresultMono = getSchedulerFor(handlerMethod, resultMono);\n\n\t\treturn resultMono;\n\t}\n\n\tprivate @NotNull Mono<HandlerResult> getSchedulerFor(HandlerMethod handlerMethod, Mono<HandlerResult> resultMono) {\n\t\tif (this.getScheduler() != null) {\n\t\t\tAssert.state(this.getBlockingMethodPredicate() != null, \"Expected HandlerMethod Predicate\");\n\t\t\tif (this.getBlockingMethodPredicate().test(handlerMethod)) {\n\t\t\t\tresultMono = resultMono.subscribeOn(this.getScheduler());\n\t\t\t}\n\t\t}\n\t\treturn resultMono;\n\t}\n\n\tprivate Mono<HandlerResult> handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext) {\n\n\t\tAssert.state(this.methodResolver != null, \"Not initialized\");\n\n\t\t// Success and error responses may use different content types\n\t\texchange.getAttributes().remove(HandlerMapping.PRODUCIBLE_MEDIA_TYPES_ATTRIBUTE);\n\t\texchange.getResponse().getHeaders().clearContentHeaders();\n\n\t\tInvocableHandlerMethod invocable =\n\t\t\t\tthis.methodResolver.getExceptionHandlerMethod(exception, handlerMethod);\n\n\t\tif (invocable != null) {\n\t\t\tArrayList<Throwable> exceptions = new ArrayList<>();\n\t\t\ttry {\n\t\t\t\tif (logger.isDebugEnabled()) {\n\t\t\t\t\tlogger.debug(exchange.getLogPrefix() + \"Using @ExceptionHandler \" + invocable);\n\t\t\t\t}\n\t\t\t\tif (bindingContext != null) {\n\t\t\t\t\tbindingContext.getModel().asMap().clear();\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tbindingContext = new BindingContext();\n\t\t\t\t}\n\n\t\t\t\t// Expose causes as provided arguments as well\n\t\t\t\tThrowable exToExpose = exception;\n\t\t\t\twhile (exToExpose != null) {\n\t\t\t\t\texceptions.add(exToExpose);\n\t\t\t\t\tThrowable cause = exToExpose.getCause();\n\t\t\t\t\texToExpose = (cause != exToExpose ? cause : null);\n\t\t\t\t}\n\t\t\t\tObject[] arguments = new Object[exceptions.size() + 1];\n\t\t\t\texceptions.toArray(arguments);  // efficient arraycopy call in ArrayList\n\t\t\t\targuments[arguments.length - 1] = handlerMethod;\n\n\t\t\t\treturn invocable.invoke(exchange, bindingContext, arguments)\n\t\t\t\t\t\t.onErrorResume(invocationEx ->\n\t\t\t\t\t\t\t\thandleExceptionHandlerFailure(exchange, exception, invocationEx, exceptions, invocable));\n\t\t\t}\n\t\t\tcatch (Throwable invocationEx) {\n\t\t\t\treturn handleExceptionHandlerFailure(exchange, exception, invocationEx, exceptions, invocable);\n\t\t\t}\n\t\t}\n\t\treturn Mono.error(exception);\n\t}\n\n\tprivate static Mono<HandlerResult> handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable) {\n\n\t\tif (disconnectedClientHelper.checkAndLogClientDisconnectedException(invocationEx)) {\n\t\t\treturn Mono.empty();\n\t\t}\n\n\t\t// Any other than the original exception (or a cause) is unintended here,\n\t\t// probably an accident (e.g. failed assertion or the like).\n\t\tif (!exceptions.contains(invocationEx) && logger.isWarnEnabled()) {\n\t\t\tlogger.warn(exchange.getLogPrefix() + \"Failure in @ExceptionHandler \" + invocable, invocationEx);\n\t\t}\n\n\t\treturn Mono.error(exception);\n\t}\n\n\t@Override\n\tpublic Mono<HandlerResult> handleError(ServerWebExchange exchange, Throwable ex) {\n\t\treturn handleException(exchange, ex, null, null);\n\t}\n\n\n\t/**\n\t * Match methods with a return type without an adapter in {@link ReactiveAdapterRegistry}\n\t * which are not suspending functions.\n\t */\n\tprivate record NonReactiveHandlerMethodPredicate(ReactiveAdapterRegistry adapterRegistry)\n\t\t\timplements Predicate<HandlerMethod> {\n\n\t\t@Override\n\t\tpublic boolean test(HandlerMethod handlerMethod) {\n\t\t\tClass<?> returnType = handlerMethod.getReturnType().getParameterType();\n\t\t\treturn (this.adapterRegistry.getAdapter(returnType) == null\n\t\t\t\t\t&& !KotlinDetector.isSuspendingFunction(handlerMethod.getMethod()));\n\t\t}\n\t}\n\n}",
+                "methodCount": 21
             },
-            {
-              "candidateIndex": 1,
-              "elapsedTime": 845
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 337,
+                        "lineEnd": 352,
+                        "refactoringType": "MyMoveStaticMethodRefactoring",
+                        "refactoringInfo": "Move Static method handleExceptionHandlerFailure to class NonReactiveHandlerMethodPredicate",
+                        "description": "move method handleExceptionHandlerFailure to PsiClass:NonReactiveHandlerMethodPredicate\nRationale: The method handleExceptionHandlerFailure() specifically deals with handling exceptions in a reactive context, and though the NonReactiveHandlerMethodPredicate class currently focuses on identifying non-reactive handler methods, it serves as a logical place for housing functionality that pertains to categorizing and dealing with handler methods in general. Moving the method here would keep the functionality cohesive, since both involve handling methods within the same contextual logic. The method does not fit well in its current or any unspecified class, making NonReactiveHandlerMethodPredicate a more suitable location.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 289,
+                        "lineEnd": 335,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method handleException to class ServerWebExchange",
+                        "description": "Move method handleException to org.springframework.web.server.ServerWebExchange\nRationale: The handleException method heavily relies on the ServerWebExchange instance for all its functionality, including retrieving request attributes, clearing response headers, and more. Additionally, it depends on exchange-specific data like the log prefix and attributes, which makes ServerWebExchange a more appropriate home for this method, ensuring it remains closely coupled with its primary dependency.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handleException",
+                            "method_signature": "private Mono<HandlerResult> handleException(ServerWebExchange exchange, Throwable exception, @Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "The method `handleException` is related to dispatching and handling exceptions, which aligns with the responsibility of the `DispatchExceptionHandler` interface. Moving this method will improve cohesion."
+                        },
+                        {
+                            "method_name": "handleExceptionHandlerFailure",
+                            "method_signature": "private static Mono<HandlerResult> handleExceptionHandlerFailure(ServerWebExchange exchange, Throwable exception, Throwable invocationEx, ArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "This method is specifically tied to handling failures during exception handling, aligning well with the `DispatchExceptionHandler` interface."
+                        }
+                    ],
+                    "llm_response_time": 3526
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handleError",
+                            "method_signature": "public Mono<HandlerResult> handleError(ServerWebExchange exchange, Throwable ex)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "The handleError method is a direct implementation of the DispatchExceptionHandler interface and its purpose is to handle exceptions. This logic aligns better with the responsibilities of the DispatchExceptionHandler interface."
+                        },
+                        {
+                            "method_name": "handleException",
+                            "method_signature": "private Mono<HandlerResult> handleException(ServerWebExchange exchange, Throwable exception, @Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "The handleException method is an internal method for handling exceptions, which aligns with the responsibilities of the DispatchExceptionHandler interface. It is used by the handleError method and should be encapsulated within the DispatchExceptionHandler."
+                        },
+                        {
+                            "method_name": "handleExceptionHandlerFailure",
+                            "method_signature": "private static Mono<HandlerResult> handleExceptionHandlerFailure(ServerWebExchange exchange, Throwable exception, Throwable invocationEx, ArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "The handleExceptionHandlerFailure method is focused on handling failures during exception handling, and is related to the exception handling logic, making it a suitable candidate for moving to the DispatchExceptionHandler class."
+                        }
+                    ],
+                    "llm_response_time": 4026
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handleError",
+                            "method_signature": "public Mono<HandlerResult> handleError(ServerWebExchange exchange, Throwable ex)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "The method handleError deals with the handling of exceptions and fits more appropriately in the DispatchExceptionHandler class."
+                        },
+                        {
+                            "method_name": "handleException",
+                            "method_signature": "private Mono<HandlerResult> handleException(ServerWebExchange exchange, Throwable exception, @Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "The method handleException gets invoked in case of an exception, making it relevant to the DispatchExceptionHandler class, fitting the context of exception handling methods better."
+                        },
+                        {
+                            "method_name": "handleExceptionHandlerFailure",
+                            "method_signature": "private static Mono<HandlerResult> handleExceptionHandlerFailure(ServerWebExchange exchange, Throwable exception, Throwable invocationEx, ArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                            "target_class": "DispatchExceptionHandler",
+                            "rationale": "This method handles the failure during exception handling. It belongs in DispatchExceptionHandler class to logically group exception-related logic."
+                        },
+                        {
+                            "method_name": "setApplicationContext",
+                            "method_signature": "public void setApplicationContext(ApplicationContext applicationContext)",
+                            "target_class": "ApplicationContextAware",
+                            "rationale": "The method setApplicationContext is used for setting the ApplicationContext, which is more relevant to the ApplicationContextAware interface."
+                        }
+                    ],
+                    "llm_response_time": 4524
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handleException",
+                            "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "handleExceptionHandlerFailure",
+                            "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handleExceptionHandlerFailure",
+                            "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "handleException",
+                            "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)": {
+                        "first": {
+                            "method_name": "handleExceptionHandlerFailure",
+                            "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.45078175095471124
+                    },
+                    "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)": {
+                        "first": {
+                            "method_name": "handleException",
+                            "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5623125192847752
+                    }
+                },
+                "voyage": {
+                    "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)": {
+                        "first": {
+                            "method_name": "handleExceptionHandlerFailure",
+                            "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5130508929307962
+                    },
+                    "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)": {
+                        "first": {
+                            "method_name": "handleException",
+                            "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6084097464266331
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                        "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)"
+                    ],
+                    "llm_response_time": 4213
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                        "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                        "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                        "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                        "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
+                        "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "handleExceptionHandlerFailure": {
+                    "target_classes": [
+                        {
+                            "class_name": "NonReactiveHandlerMethodPredicate",
+                            "similarity_score": 0.30815781721396834
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "NonReactiveHandlerMethodPredicate"
+                    ],
+                    "llm_response_time": 2336,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "handleException": {
+                    "target_classes": [
+                        {
+                            "class_name": "ServerWebExchange",
+                            "similarity_score": 0.08663867071095029
+                        },
+                        {
+                            "class_name": "Log",
+                            "similarity_score": 0.03792153568144882
+                        },
+                        {
+                            "class_name": "WebBindingInitializer",
+                            "similarity_score": 0.06757213639576971
+                        },
+                        {
+                            "class_name": "ConfigurableApplicationContext",
+                            "similarity_score": 0.04774096732884229
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ServerWebExchange",
+                        "WebBindingInitializer",
+                        "ConfigurableApplicationContext"
+                    ],
+                    "llm_response_time": 2281,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
             }
-          ],
-          "processingTime": {
-            "llmResponseTime": -1,
-            "pluginProcessingTime": -1,
-            "totalTime": 132877
-          },
-          "iterationData": [
-            {
-              "iteration_num": 1,
-              "suggested_move_methods": [
-                {
-                  "method_name": "checkAndLogClientDisconnectedException",
-                  "method_signature": "public boolean checkAndLogClientDisconnectedException(Throwable exception)",
-                  "target_class": "DisconnectedClientHelper",
-                  "rationale": "The method `checkAndLogClientDisconnectedException` directly utilizes functionality specific to `DisconnectedClientHelper`. Therefore, it is more appropriate to move this method to the `DisconnectedClientHelper` class where its functionality can be better encapsulated and maintained."
-                }
-              ],
-              "llm_response_time": 2402
-            },
-            {
-              "iteration_num": 2,
-              "suggested_move_methods": [
-                {
-                  "method_name": "handleExceptionHandlerFailure",
-                  "method_signature": "private static Mono<HandlerResult> handleExceptionHandlerFailure(ServerWebExchange exchange, Throwable exception, Throwable invocationEx, ArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
-                  "target_class": "DisconnectedClientHelper",
-                  "rationale": "The handleExceptionHandlerFailure method is primarily focused on handling exceptions and leveraging functionalities from DisconnectedClientHelper. Moving this to DisconnectedClientHelper would centralize exception handling logic related to disconnected clients."
-                },
-                {
-                  "method_name": "handleException",
-                  "method_signature": "private Mono<HandlerResult> handleException(ServerWebExchange exchange, Throwable exception, @Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                  "target_class": "ExceptionHandler",
-                  "rationale": "The handleException method is concerned with exception handling logic which would be better suited in a dedicated ExceptionHandler class, therefore modularizing error handling."
-                }
-              ],
-              "llm_response_time": 2682
-            },
-            {
-              "iteration_num": 3,
-              "suggested_move_methods": [
-                {
-                  "method_name": "setApplicationContext",
-                  "method_signature": "public void setApplicationContext(ApplicationContext applicationContext)",
-                  "target_class": "ApplicationContextAware",
-                  "rationale": "The setApplicationContext method is a lifecycle method intended for the ApplicationContextAware interface, which indicates that a class is aware of the application context. Moving it to the ApplicationContextAware class centralizes responsibility and aligns better with the interface's purpose."
-                },
-                {
-                  "method_name": "afterPropertiesSet",
-                  "method_signature": "public void afterPropertiesSet() throws Exception",
-                  "target_class": "InitializingBean",
-                  "rationale": "The afterPropertiesSet method is part of the InitializingBean interface, which defines a method that will be called after all necessary properties on the bean have been set. Moving this to InitializingBean ensures that the method is used correctly within the lifecycle of Spring beans."
-                },
-                {
-                  "method_name": "handleError",
-                  "method_signature": "public Mono<HandlerResult> handleError(ServerWebExchange exchange, Throwable ex)",
-                  "target_class": "DispatchExceptionHandler",
-                  "rationale": "The handleError method deals with exception handling, which aligns with the responsibility of the DispatchExceptionHandler interface. Moving it there centralizes exception handling logic."
-                },
-                {
-                  "method_name": "handleException",
-                  "method_signature": "private Mono<HandlerResult> handleException(ServerWebExchange exchange, Throwable exception, @Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                  "target_class": "DispatchExceptionHandler",
-                  "rationale": "The handleException method deals with detailed exception handling logic. This method naturally complements the handleError method and belongs in DispatchExceptionHandler to encapsulate all related exception-handling logic."
-                },
-                {
-                  "method_name": "handleExceptionHandlerFailure",
-                  "method_signature": "private static Mono<HandlerResult> handleExceptionHandlerFailure(ServerWebExchange exchange, Throwable exception, Throwable invocationEx, ArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
-                  "target_class": "DispatchExceptionHandler",
-                  "rationale": "The handleExceptionHandlerFailure method deals with failures during the exception handling process and should be moved to the DispatchExceptionHandler class. It would make the exception-handling logic more cohesive and centralized."
-                },
-                {
-                  "method_name": "checkAndLogClientDisconnectedException",
-                  "method_signature": "private static boolean checkAndLogClientDisconnectedException(Throwable ex)",
-                  "target_class": "DisconnectedClientHelper",
-                  "rationale": "The checkAndLogClientDisconnectedException method deals specifically with disconnected clients, which is the responsibility of the DisconnectedClientHelper. Moving it there aligns with Single Responsibility Principle, making the codebase cleaner and more maintainable."
-                }
-              ],
-              "llm_response_time": 9944
-            },
-            {
-              "iteration_num": -1,
-              "suggested_move_methods": [
-                {
-                  "method_name": "handleException",
-                  "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                  "target_class": "",
-                  "rationale": ""
-                },
-                {
-                  "method_name": "handleExceptionHandlerFailure",
-                  "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
-                  "target_class": "",
-                  "rationale": ""
-                }
-              ],
-              "llm_response_time": 0
-            },
-            {
-              "iteration_num": -2,
-              "suggested_move_methods": [
-                {
-                  "method_name": "handleExceptionHandlerFailure",
-                  "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
-                  "target_class": "",
-                  "rationale": ""
-                },
-                {
-                  "method_name": "handleException",
-                  "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                  "target_class": "",
-                  "rationale": ""
-                }
-              ],
-              "llm_response_time": 0
-            }
-          ],
-          "methodCompatibilityScores": {
-            "tf-idf": {
-              "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)": {
-                "first": {
-                  "method_name": "handleExceptionHandlerFailure",
-                  "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
-                  "target_class": "",
-                  "rationale": ""
-                },
-                "second": 0.45078175095471124
-              },
-              "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)": {
-                "first": {
-                  "method_name": "handleException",
-                  "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                  "target_class": "",
-                  "rationale": ""
-                },
-                "second": 0.5623125192847752
-              }
-            },
-            "voyage": {
-              "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)": {
-                "first": {
-                  "method_name": "handleExceptionHandlerFailure",
-                  "method_signature": "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)",
-                  "target_class": "",
-                  "rationale": ""
-                },
-                "second": 0.5130508929307962
-              },
-              "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)": {
-                "first": {
-                  "method_name": "handleException",
-                  "method_signature": "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                  "target_class": "",
-                  "rationale": ""
-                },
-                "second": 0.6084097464266331
-              }
-            }
-          },
-          "llmMethodPriority": {
-            "tf-idf": {
-              "priority_method_names": [
-                "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)"
-              ],
-              "llm_response_time": 3821
-            },
-            "tf-idf-5": {
-              "priority_method_names": [
-                "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)"
-              ],
-              "llm_response_time": 0
-            },
-            "tf-df-3": {
-              "priority_method_names": [
-                "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)"
-              ],
-              "llm_response_time": 0
-            },
-            "voyage": {
-              "priority_method_names": [
-                "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)"
-              ],
-              "llm_response_time": 0
-            },
-            "voyage-5": {
-              "priority_method_names": [
-                "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)"
-              ],
-              "llm_response_time": 0
-            },
-            "voyage-3": {
-              "priority_method_names": [
-                "private handleException(\n\t\t\tServerWebExchange exchange, Throwable exception,\n\t\t\t@Nullable HandlerMethod handlerMethod, @Nullable BindingContext bindingContext)",
-                "private static handleExceptionHandlerFailure(\n\t\t\tServerWebExchange exchange, Throwable exception, Throwable invocationEx,\n\t\t\tArrayList<Throwable> exceptions, InvocableHandlerMethod invocable)"
-              ],
-              "llm_response_time": 0
-            }
-          },
-          "targetClassMap": {
-            "handleExceptionHandlerFailure": {
-              "target_classes": [
-                {
-                  "class_name": "NonReactiveHandlerMethodPredicate",
-                  "similarity_score": 0.30815781721396834
-                }
-              ],
-              "target_classes_sorted_by_llm": [
-                "NonReactiveHandlerMethodPredicate"
-              ],
-              "llm_response_time": 2694,
-              "similarity_computation_time": 1,
-              "similarity_metric": "cosine"
-            },
-            "handleException": {
-              "target_classes": [
-                {
-                  "class_name": "ServerWebExchange",
-                  "similarity_score": 0.08663867071095029
-                },
-                {
-                  "class_name": "Log",
-                  "similarity_score": 0.03792153568144882
-                },
-                {
-                  "class_name": "WebBindingInitializer",
-                  "similarity_score": 0.06757213639576971
-                },
-                {
-                  "class_name": "ConfigurableApplicationContext",
-                  "similarity_score": 0.04774096732884229
-                }
-              ],
-              "target_classes_sorted_by_llm": [
-                "ServerWebExchange",
-                "ConfigurableApplicationContext",
-                "WebBindingInitializer"
-              ],
-              "llm_response_time": 3587,
-              "similarity_computation_time": 7,
-              "similarity_metric": "cosine"
-            }
-          }
         }
     }
 ]
