@@ -1,0 +1,79 @@
+took 20000 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider::logForeignTypeInfo(HostedType):void	com.oracle.svm.hosted.meta.HostedType	0.7019695799695803
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::createAbstractImage(NativeImageKind, List<HostedMethod>, NativeImageHeap, HostedMetaAccess, NativeImageCodeCache):void	com.oracle.svm.hosted.ImageClassLoader	0.3312997213270437
+Move Method	com.oracle.svm.hosted.image.NativeImage::shouldWriteHeader(HostedMethod):boolean	com.oracle.svm.hosted.meta.HostedMethod	0.895611826283774
+Move Method	com.oracle.svm.hosted.image.NativeImage::markRelocationSitesFromBuffer(RelocatableBuffer, ProgbitsSectionImpl):void	com.oracle.svm.hosted.image.NativeImageHeap	0.5195364142956868
+Move Method	com.oracle.svm.hosted.c.NativeLibraries::processCLibraryAnnotations(ImageClassLoader):void	com.oracle.svm.hosted.ImageClassLoader	0.7637987012987012
+Move Method	com.oracle.svm.hosted.image.NativeImageHeap::recursiveAddObject(Object, boolean, Object):void	com.oracle.svm.hosted.meta.HostedUniverse	0.762388865614672
+Move Method	com.oracle.svm.hosted.image.NativeImage::getAnnotatedParameterTypes(HostedMethod):AnnotatedType[]	com.oracle.svm.hosted.meta.HostedMethod	1.0
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider.ParamLocationProducer::paramLocation(int):NativeImageDebugLocalValue	com.oracle.svm.hosted.meta.HostedMethod	1.0
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::registerEntryPoints(Map<Method,CEntryPointData>):void	com.oracle.svm.hosted.ImageClassLoader	0.46040606769773423
+Move Method	com.oracle.svm.hosted.SVMHost::getAnalysisGraph(AnalysisMethod):StructuredGraph	com.oracle.svm.hosted.analysis.SVMParsingSupport	0.6183333333333334
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider.ParamLocationProducer::thisLocation():NativeImageDebugLocalValue	com.oracle.svm.hosted.meta.HostedMethod	1.0
+Move Method	com.oracle.svm.hosted.ProgressReporter::printExperimentalOptions(ImageClassLoader):void	com.oracle.svm.hosted.ImageClassLoader	0.47017585255544525
+Move Method	com.oracle.svm.hosted.image.NativeImage.NativeTextSectionImpl::defineMethodSymbol(Section, HostedMethod, Map<String,HostedMethod>, String, String, boolean, CompilationResult):void	com.oracle.svm.hosted.image.NativeImageCodeCache	0.46386267603447456
+Move Method	com.oracle.svm.hosted.ProgressReporter::printErrorMessage(Optional<Throwable>, OptionValues):void	com.oracle.svm.hosted.NativeImageSystemIOWrappers	0.6083333333333332
+Move Method	com.oracle.svm.hosted.image.NativeImageCodeCache::writeConstants(NativeImageHeapWriter, RelocatableBuffer):void	com.oracle.svm.hosted.image.NativeImageHeapWriter	1.0
+Move Method	com.oracle.svm.hosted.image.NativeImage::markFunctionRelocationSite(ProgbitsSectionImpl, int, RelocatableBuffer.Info):void	com.oracle.svm.hosted.image.MethodPointerRelocationProvider	1.0
+Move Method	com.oracle.svm.hosted.classinitialization.SimulateClassInitializerSupport::checkStrictlyInitializeAtRunTime(SimulateClassInitializerClusterMember):void	com.oracle.svm.hosted.classinitialization.ClassInitializationSupport	1.0
+Move Method	com.oracle.svm.hosted.image.NativeImageHeap::registerAsImmutable(Object, Predicate<Object>):void	com.oracle.svm.hosted.meta.HostedConstantReflectionProvider	0.8906996229576877
+Move Method	com.oracle.svm.hosted.NativeImageClassLoaderSupport::reportBuilderClassesInApplication():void	com.oracle.svm.hosted.option.HostedOptionParser	0.623561125156304
+Move Method	com.oracle.svm.hosted.image.NativeImage::getMethod(HostedMethod):Method	com.oracle.svm.hosted.meta.HostedMethod	0.48448236331569644
+Move Method	com.oracle.svm.hosted.methodhandles.MethodHandleFeature::registerHeapMethodType(MethodType):void	com.oracle.svm.hosted.methodhandles.MethodHandleInvokerRenamingSubstitutionProcessor	0.26722027972027973
+Move Method	com.oracle.svm.hosted.reflect.ReflectionDataBuilder::registerTypesForTypeAnnotations(AnnotatedElement):void	com.oracle.svm.hosted.annotation.SubstrateAnnotationExtractor	1.0
+Move Method	com.oracle.svm.hosted.code.CompileQueue::scheduleDeoptTargets():void	com.oracle.svm.hosted.code.AnalysisToHostedGraphTransplanter	0.9107259570494864
+Move Method	com.oracle.svm.hosted.code.RestrictHeapAccessAnnotationChecker.RestrictHeapAccessWarningVisitor::postRestrictHeapAccessWarning(AnalysisMethod, Map<AnalysisMethod,RestrictionInfo>):void	com.oracle.svm.hosted.code.RestrictHeapAccessCalleesImpl	0.726911976911977
+Move Method	com.oracle.svm.hosted.FeatureImpl.BeforeAnalysisAccessImpl::registerAsUnsafeAccessed(Field, Object):void	com.oracle.svm.hosted.ReachabilityHandler	0.9161290322580645
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider::createDebugTypeInfo(HostedType):NativeImageDebugTypeInfo	com.oracle.svm.hosted.meta.HostedType	0.8639862825580688
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::runPointsToAnalysis(String, OptionValues, DebugContext):boolean	com.oracle.svm.hosted.FeatureHandler	0.6463857130523798
+Move Method	com.oracle.svm.hosted.SVMHost::handleLinkageError(Class<?>, String, LinkageError):LinkageError	com.oracle.svm.hosted.LinkAtBuildTimeSupport	1.0
+Move Method	com.oracle.svm.hosted.c.info.InfoTreeBuilder::verifyRawStructFieldAccessors(StructFieldInfo):void	com.oracle.svm.hosted.c.info.StructFieldInfo	0.9375188196326407
+Move Method	com.oracle.svm.hosted.NativeImageGeneratorRunner::createJavaMainSupport(Method, ImageClassLoader):JavaMainSupport	com.oracle.svm.hosted.ImageClassLoader	0.9129527879527883
+Move Method	com.oracle.svm.hosted.dashboard.DashboardDumpFeature::toJson(CodeBreakdown, JsonBuilder.ObjectBuilder):void	com.oracle.svm.hosted.dashboard.CodeBreakdown	0.725925925925926
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider::logRawStructureInfo(HostedType, RawStructureInfo):void	com.oracle.svm.hosted.meta.HostedType	0.8958096346216767
+Move Method	com.oracle.svm.hosted.HostedConfiguration::createStrengthenGraphs(Inflation, HostedUniverse):StrengthenGraphs	com.oracle.svm.hosted.meta.HostedUniverse	1.0
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider::logForeignPointerType(HostedType, ElementInfo):void	com.oracle.svm.hosted.c.info.ElementInfo	1.0
+Move Method	com.oracle.svm.hosted.code.CompileQueue::makeInlineDecision(HostedMethod, HostedMethod):boolean	com.oracle.svm.hosted.code.AnalysisToHostedGraphTransplanter	0.9115288591759181
+Move Method	com.oracle.svm.hosted.NativeImageGeneratorRunner::reportEpilog(String, ProgressReporter, ImageClassLoader, boolean, Throwable, OptionValues):void	com.oracle.svm.hosted.ImageClassLoader	0.7880952380952382
+Move Method	com.oracle.svm.hosted.image.DisallowedImageHeapObjectFeature::error(String, Object, String):RuntimeException	com.oracle.svm.hosted.classinitialization.ClassInitializationSupport	0.7199463696369638
+Move Method	com.oracle.svm.hosted.thread.VMThreadFeature::offsetOf(FastThreadLocal):int	com.oracle.svm.hosted.thread.VMThreadLocalCollector	1.0
+Move Method	com.oracle.svm.hosted.substitute.AnnotationSubstitutionProcessor::lookupAnnotation(AnnotatedElement, Class<T>):T	com.oracle.svm.hosted.classinitialization.ClassInitializationSupport	0.2630788403515676
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::run(Map<Method,CEntryPointData>, JavaMainSupport, String, NativeImageKind, SubstitutionProcessor, EconomicSet<String>, TimerCollection):void	com.oracle.svm.hosted.ImageClassLoader	0.7763481913078923
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider::logStructInfo(HostedType, StructInfo):void	com.oracle.svm.hosted.meta.HostedType	0.8675729243105128
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::printTypes(PrintWriter):void	com.oracle.svm.hosted.meta.HostedUniverse	0.7108062685929107
+Move Method	com.oracle.svm.hosted.NativeImageGeneratorRunner::getMainEntryMethod(ImageClassLoader):Method	com.oracle.svm.hosted.ImageClassLoader	0.7237311385459535
+Move Method	com.oracle.svm.hosted.SecurityServicesFeature::registerService(DuringAnalysisAccess, Service):void	com.oracle.svm.hosted.ImageClassLoader	0.8772212869435092
+Move Method	com.oracle.svm.hosted.code.CompileQueue::afterParseCanonicalization():PhaseSuite<HighTierContext>	com.oracle.svm.hosted.code.AnalysisToHostedGraphTransplanter	0.9049874960113388
+Move Method	com.oracle.svm.hosted.meta.UniverseBuilder::collectDeclaredMethods():void	com.oracle.svm.hosted.meta.HostedUniverse	0.7519407085313651
+Move Method	com.oracle.svm.hosted.image.MethodPointerRelocationProvider::markMethodPointerRelocation(ObjectFile.ProgbitsSectionImpl, int, ObjectFile.RelocationKind, HostedMethod, boolean):void	com.oracle.svm.hosted.meta.HostedMethod	1.0
+Move Method	com.oracle.svm.hosted.HostedConfiguration::createCompileQueue(DebugContext, FeatureHandler, HostedUniverse, RuntimeConfiguration, boolean):CompileQueue	com.oracle.svm.hosted.meta.HostedUniverse	0.687557603686636
+Move Method	com.oracle.svm.hosted.code.CompileQueue::checkRestrictHeapAnnotations(DebugContext):void	com.oracle.svm.hosted.code.AnalysisToHostedGraphTransplanter	0.776797385620915
+Move Method	com.oracle.svm.hosted.ProgressReporter::println():void	com.oracle.svm.hosted.NativeImageSystemIOWrappers	1.0
+Move Method	com.oracle.svm.hosted.image.NativeImageHeap::getSize(Object, HostedType):long	com.oracle.svm.hosted.meta.HostedType	0.7338715338715335
+Move Method	com.oracle.svm.hosted.c.query.SizeAndSignednessVerifier::limitValueToEnumBytes(EnumInfo, EnumConstantInfo):long	com.oracle.svm.hosted.c.info.EnumConstantInfo	0.9578231292517009
+Move Method	com.oracle.svm.hosted.code.RuntimeMetadataEncoderImpl::registerParameterAnnotationValues(AnalysisMethod):AnnotationValue[][]	com.oracle.svm.hosted.reflect.ReflectionDataBuilder	0.9295095929711313
+Move Method	com.oracle.svm.hosted.image.sources.SourceManager::locateSource(String, String, Class<?>):Path	com.oracle.svm.hosted.image.sources.SourceCache	1.0
+Move Method	com.oracle.svm.hosted.code.RuntimeMetadataEncoderImpl::registerTypeAnnotationValues(AnnotatedElement):TypeAnnotationValue[]	com.oracle.svm.hosted.reflect.ReflectionDataBuilder	1.0
+Move Method	com.oracle.svm.hosted.FeatureImpl.BeforeAnalysisAccessImpl::registerAsFrozenUnsafeAccessed(Field, Object):void	com.oracle.svm.hosted.ReachabilityHandler	0.9161290322580645
+Move Method	com.oracle.svm.hosted.image.NativeImage::getAnnotatedReturnType(HostedMethod):AnnotatedType	com.oracle.svm.hosted.meta.HostedMethod	1.0
+Move Method	com.oracle.svm.hosted.image.NativeImage::defineRelocationForSymbol(String, long):ObjectFile.Symbol	com.oracle.svm.hosted.image.MethodPointerRelocationProvider	0.5185185185185185
+Move Method	com.oracle.svm.hosted.config.RegistryAdapter::resolveNamedType(NamedConfigurationTypeDescriptor, boolean):TypeResult<Class<?>>	com.oracle.svm.hosted.ImageClassLoader	0.8866207095373766
+Move Method	com.oracle.svm.hosted.NativeImageGeneratorRunner::createImageGenerator(ImageClassLoader, HostedOptionParser, Pair<Method,CEntryPointData>, ProgressReporter):NativeImageGenerator	com.oracle.svm.hosted.ImageClassLoader	0.776185693103472
+Move Method	com.oracle.svm.hosted.image.NativeImage::writeMethodHeader(HostedMethod, CSourceCodeWriter, boolean):void	com.oracle.svm.hosted.meta.HostedMethod	1.0
+Move Method	com.oracle.svm.hosted.c.query.QueryResultParser::tryChangeSizeToDeclaredReturnType(ConstantInfo):void	com.oracle.svm.hosted.c.info.ConstantInfo	1.0
+Move Method	com.oracle.svm.hosted.code.RuntimeMetadataEncoderImpl::registerAnnotationDefaultValues(AnalysisMethod):AnnotationMemberValue	com.oracle.svm.hosted.reflect.ReflectionDataBuilder	0.9236226227984469
+Move Method	com.oracle.svm.hosted.code.RuntimeMetadataEncoderImpl::registerAnnotationValues(AnnotatedElement):AnnotationValue[]	com.oracle.svm.hosted.reflect.ReflectionDataBuilder	1.0
+Move Method	com.oracle.svm.hosted.image.NativeImageDebugInfoProvider::logPointerToInfo(HostedType, PointerToInfo):void	com.oracle.svm.hosted.meta.HostedType	0.8958096346216767
+Move Method	com.oracle.svm.hosted.HostedConfiguration::findAllFieldsForLayout(HostedUniverse, HostedMetaAccess, Map<AnalysisField,HostedField>, ArrayList<HostedField>, ArrayList<HostedField>, HostedInstanceClass):void	com.oracle.svm.hosted.meta.HostedInstanceClass	0.6737167775747794
+Move Method	com.oracle.svm.hosted.image.NativeImageHeap::addStaticFields():void	com.oracle.svm.hosted.meta.HostedUniverse	0.6392259062059679
+Move Method	com.oracle.svm.hosted.snippets.ReflectionPlugins::registerBulkInvocationPlugin(InvocationPlugins, Class<T>, String, Consumer<T>):void	com.oracle.svm.hosted.classinitialization.ClassInitializationSupport	0.6446759259259259
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::verifyAndSealShadowHeap(NativeImageCodeCache, DebugContext, NativeImageHeap):void	com.oracle.svm.hosted.image.NativeImageHeap	0.6837489695292863
+Move Method	com.oracle.svm.hosted.FeatureImpl.BeforeAnalysisAccessImpl::registerAsRead(Field, Object):void	com.oracle.svm.hosted.ReachabilityHandler	0.9161290322580645
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::setupNativeLibraries(HostedProviders, CEnumCallWrapperSubstitutionProcessor, ClassInitializationSupport, DebugContext):NativeLibraries	com.oracle.svm.hosted.cenum.CEnumCallWrapperSubstitutionProcessor	0.5498366473883107
+Move Method	com.oracle.svm.hosted.HostedConfiguration::createHostVM(OptionValues, ImageClassLoader, ClassInitializationSupport, AnnotationSubstitutionProcessor):SVMHost	com.oracle.svm.hosted.ImageClassLoader	0.6289682539682537
+Move Method	com.oracle.svm.hosted.meta.TypeCheckBuilder::buildTypeInformation(HostedUniverse, int):void	com.oracle.svm.hosted.meta.HostedUniverse	0.8520722675802884
+Move Method	com.oracle.svm.hosted.code.CompileQueue::parseAheadOfTimeCompiledMethods():void	com.oracle.svm.hosted.code.AnalysisToHostedGraphTransplanter	1.0
+Move Method	com.oracle.svm.hosted.meta.UniverseBuilder::collectMethodImplementations():void	com.oracle.svm.hosted.meta.HostedUniverse	0.6675348934988871
+Move Method	com.oracle.svm.hosted.NativeImageGenerator::processNativeLibraryImports(NativeLibraries, ClassInitializationSupport):void	com.oracle.svm.hosted.c.NativeLibraries	0.7336242263749712
+Move Method	com.oracle.svm.hosted.image.NativeImageCodeCache::verifyMethods(DebugContext, HostedUniverse, CodeInfoEncoder, CodeInfo, ConstantAccess):boolean	com.oracle.svm.hosted.meta.HostedUniverse	0.5879741036646168

@@ -1,0 +1,12 @@
+[
+  {
+    "source_class": "org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor",
+    "source_method": "setCacheOperationSource",
+    "target_class": "org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor.JCacheOperationSourcePointcut"
+  },
+  {
+    "source_class": "org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor.JCacheOperationSourcePointcut",
+    "source_method": "hasCacheOperation",
+    "target_class": "java.lang.Class<?>):boolean \t org.springframework.cache.jcache.interceptor.JCacheOperationSource"
+  }
+]

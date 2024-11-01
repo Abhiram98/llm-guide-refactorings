@@ -1,0 +1,1449 @@
+[
+    {
+        "oracle": "- method org.apache.lucene.codecs.SegmentInfoFormat::docValuesFormat():DocValuesFormat need move org.apache.lucene.codecs.lucene41.Lucene41Codec",
+        "class_name": "org.apache.lucene.codecs.SegmentInfoFormat",
+        "telemetry": {
+            "id": "eca24e05-9379-46e3-bfde-7a4eb9fbb999",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 26,
+                "lineStart": 23,
+                "lineEnd": 48,
+                "bodyLineStart": 23,
+                "language": "java",
+                "sourceCode": "/**\n * Expert: Controls the format of the \n * {@link SegmentInfo} (segment metadata file).\n * <p>\n * \n * @see SegmentInfo\n * @lucene.experimental\n */\npublic abstract class SegmentInfoFormat {\n  /** Sole constructor. (For invocation by subclass \n   *  constructors, typically implicit.) */\n  protected SegmentInfoFormat() {\n  }\n\n  /** Returns the {@link SegmentInfoReader} for reading\n   *  {@link SegmentInfo} instances. */\n  public abstract SegmentInfoReader getSegmentInfoReader();\n\n  /** Returns the {@link SegmentInfoWriter} for writing\n   *  {@link SegmentInfo} instances. */\n  public abstract SegmentInfoWriter getSegmentInfoWriter();\n\npublic DocValuesFormat docValuesFormat(Lucene41Codec lucene41Codec) {\n    return lucene41Codec.dvFormat;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 44,
+                        "lineEnd": 46,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.codecs.lucene41.Lucene41Codec\nRationale: The method directly accesses the 'dvFormat' field of the Lucene41Codec instance, indicating that it is closely related to the state and behavior of the Lucene41Codec class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 4525
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "docValuesFormat",
+                            "method_signature": "public DocValuesFormat docValuesFormat(Lucene41Codec lucene41Codec)",
+                            "target_class": "Lucene41Codec",
+                            "rationale": "The docValuesFormat method directly interacts with the Lucene41Codec class, making it more appropriate for this method to reside within the Lucene41Codec class."
+                        }
+                    ],
+                    "llm_response_time": 1393
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "docValuesFormat",
+                            "method_signature": "public DocValuesFormat docValuesFormat(Lucene41Codec lucene41Codec)",
+                            "target_class": "Lucene41Codec",
+                            "rationale": "The docValuesFormat method directly interacts with the Lucene41Codec class, making it more appropriate for this method to reside within the Lucene41Codec class."
+                        }
+                    ],
+                    "llm_response_time": 1110
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "docValuesFormat",
+                            "method_signature": "public DocValuesFormat docValuesFormat(Lucene41Codec lucene41Codec)",
+                            "target_class": "Lucene41Codec",
+                            "rationale": "The docValuesFormat method directly interacts with the Lucene41Codec class, suggesting that it is more appropriate for this method to reside within the Lucene41Codec class."
+                        }
+                    ],
+                    "llm_response_time": 1439
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "docValuesFormat",
+                            "method_signature": "public DocValuesFormat docValuesFormat(Lucene41Codec lucene41Codec)",
+                            "target_class": "Lucene41Codec",
+                            "rationale": "The docValuesFormat method directly interacts with the Lucene41Codec class, making it more appropriate for this method to reside within the Lucene41Codec class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "docValuesFormat"
+                ],
+                "llm_response_time": 498
+            },
+            "targetClassMap": {
+                "docValuesFormat": {
+                    "target_classes": [
+                        {
+                            "class_name": "Lucene41Codec",
+                            "similarity_score": 0.46788772041903265
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Lucene41Codec"
+                    ],
+                    "llm_response_time": 675,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.facet.params.FacetIndexingParams::testAndOrs():void need move org.apache.lucene.facet.search.DrillDownQueryTest",
+        "class_name": "org.apache.lucene.facet.params.FacetIndexingParams",
+        "telemetry": {
+            "id": "4cfd0a13-b555-4e76-abbf-07f50b4d664e",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 167,
+                "lineStart": 34,
+                "lineEnd": 200,
+                "bodyLineStart": 34,
+                "language": "java",
+                "sourceCode": "/**\n * Defines parameters that are needed for facets indexing. Note that this class\n * does not have any setters. That's because overriding the default parameters\n * is considered expert. If you wish to override them, simply extend this class\n * and override the relevant getter.\n * \n * <p>\n * <b>NOTE:</b> This class is also used during faceted search in order to e.g.\n * know which field holds the drill-down terms or the fulltree posting.\n * Therefore this class should be initialized once and you should refrain from\n * changing it. Also note that if you make any changes to it (e.g. suddenly\n * deciding that drill-down terms should be read from a different field) and use\n * it on an existing index, things may not work as expected.\n * \n * @lucene.experimental\n */\npublic class FacetIndexingParams {\n  \n  // the default CLP, can be a singleton\n  protected static final CategoryListParams DEFAULT_CATEGORY_LIST_PARAMS = new CategoryListParams();\n\n  /**\n   * A {@link FacetIndexingParams} which fixes a single\n   * {@link CategoryListParams} with\n   * {@link CategoryListParams#DEFAULT_ORDINAL_POLICY}.\n   */\n  public static final FacetIndexingParams DEFAULT = new FacetIndexingParams();\n  \n  /**\n   * The default delimiter with which {@link CategoryPath#components} are\n   * concatenated when written to the index, e.g. as drill-down terms. If you\n   * choose to override it by overiding {@link #getFacetDelimChar()}, you should\n   * make sure that you return a character that's not found in any path\n   * component.\n   */\n  public static final char DEFAULT_FACET_DELIM_CHAR = '\\u001F';\n  \n  private final int partitionSize = Integer.MAX_VALUE;\n\n  protected final CategoryListParams clParams;\n\n  /**\n   * Initializes new default params. You should use this constructor only if you\n   * intend to override any of the getters, otherwise you can use\n   * {@link #DEFAULT} to save unnecessary object allocations.\n   */\n  public FacetIndexingParams() {\n    this(DEFAULT_CATEGORY_LIST_PARAMS);\n  }\n\n  /** Initializes new params with the given {@link CategoryListParams}. */\n  public FacetIndexingParams(CategoryListParams categoryListParams) {\n    clParams = categoryListParams;\n  }\n\n  /**\n   * Returns the {@link CategoryListParams} for this {@link CategoryPath}. The\n   * default implementation returns the same {@link CategoryListParams} for all\n   * categories (even if {@code category} is {@code null}).\n   * \n   * @see PerDimensionIndexingParams\n   */\n  public CategoryListParams getCategoryListParams(CategoryPath category) {\n    return clParams;\n  }\n\n  /**\n   * Copies the text required to execute a drill-down query on the given\n   * category to the given {@code char[]}, and returns the number of characters\n   * that were written.\n   * <p>\n   * <b>NOTE:</b> You should make sure that the {@code char[]} is large enough,\n   * by e.g. calling {@link CategoryPath#fullPathLength()}.\n   */\n  public int drillDownTermText(CategoryPath path, char[] buffer) {\n    return path.copyFullPath(buffer, 0, getFacetDelimChar());\n  }\n  \n  /**\n   * Returns the size of a partition. <i>Partitions</i> allow you to divide\n   * (hence, partition) the categories space into small sets to e.g. improve RAM\n   * consumption during faceted search. For instance, {@code partitionSize=100K}\n   * would mean that if your taxonomy index contains 420K categories, they will\n   * be divided into 5 groups and at search time a {@link FacetArrays} will be\n   * allocated at the size of the partition.\n   * \n   * <p>\n   * This is real advanced setting and should be changed with care. By default,\n   * all categories are put in one partition. You should modify this setting if\n   * you have really large taxonomies (e.g. 1M+ nodes).\n   */\n  public int getPartitionSize() {\n    return partitionSize;\n  }\n  \n  /**\n   * Returns a list of all {@link CategoryListParams categoryListParams} that\n   * are used for facets indexing.\n   */\n  public List<CategoryListParams> getAllCategoryListParams() {\n    return Collections.singletonList(clParams);\n  }\n\n  @Override\n  public int hashCode() {\n    final int prime = 31;\n    int result = 1;\n    result = prime * result + ((clParams == null) ? 0 : clParams.hashCode());\n    result = prime * result + partitionSize;\n    \n    for (CategoryListParams clp : getAllCategoryListParams()) {\n      result ^= clp.hashCode();\n    }\n    \n    return result;\n  }\n\n  @Override\n  public boolean equals(Object obj) {\n    if (this == obj) {\n      return true;\n    }\n    if (obj == null) {\n      return false;\n    }\n    if (!(obj instanceof FacetIndexingParams)) {\n      return false;\n    }\n    FacetIndexingParams other = (FacetIndexingParams) obj;\n    if (clParams == null) {\n      if (other.clParams != null) {\n        return false;\n      }\n    } else if (!clParams.equals(other.clParams)) {\n      return false;\n    }\n    if (partitionSize != other.partitionSize) {\n      return false;\n    }\n    \n    Iterable<CategoryListParams> cLs = getAllCategoryListParams();\n    Iterable<CategoryListParams> otherCLs = other.getAllCategoryListParams();\n    \n    return cLs.equals(otherCLs);\n  }\n\n  /**\n   * Returns the delimiter character used internally for concatenating category\n   * path components, e.g. for drill-down terms.\n   */\n  public char getFacetDelimChar() {\n    return DEFAULT_FACET_DELIM_CHAR;\n  }\n\n@Test\n  public void testAndOrs(DrillDownQueryTest drillDownQueryTest) throws Exception {\n    IndexSearcher searcher = LuceneTestCase.newSearcher(DrillDownQueryTest.reader);\n\n    // test (a/1 OR a/2) AND b\n    DrillDownQuery q = new DrillDownQuery(this);\n    q.add(new CategoryPath(\"a/1\", '/'), new CategoryPath(\"a/2\", '/'));\n    q.add(new CategoryPath(\"b\"));\n    TopDocs docs = searcher.search(q, 100);\n    Assert.assertEquals(5, docs.totalHits);\n  }\n\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 99,
+                        "lineEnd": 109,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.facet.taxonomy.CategoryPath\nRationale: The method drillDownTermText directly interacts with the CategoryPath instance to copy the full path into a buffer, making it more appropriate for this functionality to reside within the CategoryPath class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 8794
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "drillDownTermText",
+                            "method_signature": "public int drillDownTermText(CategoryPath path, char[] buffer)",
+                            "target_class": "CategoryPath",
+                            "rationale": "The method drillDownTermText() operates directly on a CategoryPath object and is primarily concerned with its functionality. Moving it to the CategoryPath class would encapsulate related behavior and improve cohesion."
+                        },
+                        {
+                            "method_name": "getAllCategoryListParams",
+                            "method_signature": "public List<CategoryListParams> getAllCategoryListParams()",
+                            "target_class": "CategoryListParams",
+                            "rationale": "This method retrieves all CategoryListParams used for facets indexing. It would be more appropriate for it to reside in the CategoryListParams class, which can manage its own instances and provide context for its parameters."
+                        }
+                    ],
+                    "llm_response_time": 2930
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "drillDownTermText",
+                            "method_signature": "public int drillDownTermText(CategoryPath path, char[] buffer)",
+                            "target_class": "CategoryPath",
+                            "rationale": "The method drillDownTermText() operates directly on a CategoryPath object and is primarily concerned with its functionality. Moving it to the CategoryPath class would encapsulate related behavior and improve cohesion."
+                        },
+                        {
+                            "method_name": "getAllCategoryListParams",
+                            "method_signature": "public List<CategoryListParams> getAllCategoryListParams()",
+                            "target_class": "CategoryListParams",
+                            "rationale": "This method retrieves all CategoryListParams used for facets indexing. It would be more appropriate for it to reside in the CategoryListParams class, as it directly relates to the management of those parameters."
+                        }
+                    ],
+                    "llm_response_time": 2124
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "drillDownTermText",
+                            "method_signature": "public int drillDownTermText(CategoryPath path, char[] buffer)",
+                            "target_class": "CategoryPath",
+                            "rationale": "The method drillDownTermText() operates directly on a CategoryPath instance and is primarily concerned with manipulating the path. It would be more appropriate for this method to reside within the CategoryPath class."
+                        },
+                        {
+                            "method_name": "getAllCategoryListParams",
+                            "method_signature": "public List<CategoryListParams> getAllCategoryListParams()",
+                            "target_class": "CategoryListParams",
+                            "rationale": "The method getAllCategoryListParams() is focused on retrieving CategoryListParams, which suggests that it may be more relevant to the CategoryListParams class rather than the FacetIndexingParams class."
+                        }
+                    ],
+                    "llm_response_time": 3027
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "drillDownTermText",
+                            "method_signature": "public int drillDownTermText(CategoryPath path, char[] buffer)",
+                            "target_class": "CategoryPath",
+                            "rationale": "The method drillDownTermText() operates directly on a CategoryPath object and is primarily concerned with its functionality. Moving it to the CategoryPath class would encapsulate related behavior and improve cohesion."
+                        },
+                        {
+                            "method_name": "getAllCategoryListParams",
+                            "method_signature": "public List<CategoryListParams> getAllCategoryListParams()",
+                            "target_class": "CategoryListParams",
+                            "rationale": "This method retrieves all CategoryListParams used for facets indexing. It would be more appropriate for it to reside in the CategoryListParams class, which can manage its own instances and provide context for its parameters."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "drillDownTermText",
+                    "getAllCategoryListParams"
+                ],
+                "llm_response_time": 609
+            },
+            "targetClassMap": {
+                "drillDownTermText": {
+                    "target_classes": [
+                        {
+                            "class_name": "CategoryPath",
+                            "similarity_score": 0.48246975512746015
+                        },
+                        {
+                            "class_name": "CategoryListParams",
+                            "similarity_score": 0.7357418304547945
+                        },
+                        {
+                            "class_name": "CategoryListParams",
+                            "similarity_score": 0.7357418304547945
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "CategoryPath",
+                        "CategoryListParams",
+                        "CategoryListParams"
+                    ],
+                    "llm_response_time": 1832,
+                    "similarity_computation_time": 3,
+                    "similarity_metric": "cosine"
+                },
+                "getAllCategoryListParams": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1366,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "- method org.apache.lucene.analysis.ja.dict.UserDictionary::create(Reader):Tokenizer need move org.apache.lucene.analysis.ja.JapaneseTokenizerFactory",
+        "class_name": "org.apache.lucene.analysis.ja.dict.UserDictionary",
+        "telemetry": {
+            "id": "c776d231-fce4-4adf-b604-d81a71294def",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 241,
+                "lineStart": 39,
+                "lineEnd": 279,
+                "bodyLineStart": 39,
+                "language": "java",
+                "sourceCode": "/**\n * Class for building a User Dictionary.\n * This class allows for custom segmentation of phrases.\n */\npublic final class UserDictionary implements Dictionary {\n  \n  // phrase text -> phrase ID\n  private final TokenInfoFST fst;\n  \n  // holds wordid, length, length... indexed by phrase ID\n  private final int segmentations[][];\n  \n  // holds readings and POS, indexed by wordid\n  private final String data[];\n  \n  private static final int CUSTOM_DICTIONARY_WORD_ID_OFFSET = 100000000;\n  \n  public static final int WORD_COST = -100000;\n  \n  public static final int LEFT_ID = 5;\n  \n  public static final int RIGHT_ID = 5;\n  \n  public UserDictionary(Reader reader) throws IOException {\n    BufferedReader br = new BufferedReader(reader);\n    String line = null;\n    int wordId = CUSTOM_DICTIONARY_WORD_ID_OFFSET;\n    List<String[]> featureEntries = new ArrayList<String[]>();\n \n    // text, segmentation, readings, POS\n    while ((line = br.readLine()) != null) {\n      // Remove comments\n      line = line.replaceAll(\"#.*$\", \"\");\n      \n      // Skip empty lines or comment lines\n      if (line.trim().length() == 0) {\n        continue;\n      }\n      String[] values = CSVUtil.parse(line);\n      featureEntries.add(values);\n    }\n    \n    // TODO: should we allow multiple segmentations per input 'phrase'?\n    // the old treemap didn't support this either, and i'm not sure if its needed/useful?\n\n    Collections.sort(featureEntries, new Comparator<String[]>() {\n      @Override\n      public int compare(String[] left, String[] right) {\n        return left[0].compareTo(right[0]);\n     }\n    });\n    \n    List<String> data = new ArrayList<String>(featureEntries.size());\n    List<int[]> segmentations = new ArrayList<int[]>(featureEntries.size());\n    \n    PositiveIntOutputs fstOutput = PositiveIntOutputs.getSingleton(true);\n    Builder<Long> fstBuilder = new Builder<Long>(FST.INPUT_TYPE.BYTE2, fstOutput);\n    IntsRef scratch = new IntsRef();\n    long ord = 0;\n    \n    for (String[] values : featureEntries) {\n      String[] segmentation = values[1].replaceAll(\"  *\", \" \").split(\" \");\n      String[] readings = values[2].replaceAll(\"  *\", \" \").split(\" \");\n      String pos = values[3];\n      \n      if (segmentation.length != readings.length) {\n        throw new RuntimeException(\"Illegal user dictionary entry \" + values[0] +\n                                   \" - the number of segmentations (\" + segmentation.length + \")\" +\n                                   \" does not the match number of readings (\" + readings.length + \")\");\n      }\n      \n      int[] wordIdAndLength = new int[segmentation.length + 1]; // wordId offset, length, length....\n      wordIdAndLength[0] = wordId;\n      for (int i = 0; i < segmentation.length; i++) {\n        wordIdAndLength[i + 1] = segmentation[i].length();\n        data.add(readings[i] + INTERNAL_SEPARATOR + pos);\n        wordId++;\n      }\n      // add mapping to FST\n      String token = values[0];\n      scratch.grow(token.length());\n      scratch.length = token.length();\n      for (int i = 0; i < token.length(); i++) {\n        scratch.ints[i] = (int) token.charAt(i);\n      }\n      fstBuilder.add(scratch, ord);\n      segmentations.add(wordIdAndLength);\n      ord++;\n    }\n    this.fst = new TokenInfoFST(fstBuilder.finish(), false);\n    this.data = data.toArray(new String[data.size()]);\n    this.segmentations = segmentations.toArray(new int[segmentations.size()][]);\n  }\n  \n  /**\n   * Lookup words in text\n   * @param chars text\n   * @param off offset into text\n   * @param len length of text\n   * @return array of {wordId, position, length}\n   */\n  public int[][] lookup(char[] chars, int off, int len) throws IOException {\n    // TODO: can we avoid this treemap/toIndexArray?\n    TreeMap<Integer, int[]> result = new TreeMap<Integer, int[]>(); // index, [length, length...]\n    boolean found = false; // true if we found any results\n\n    final FST.BytesReader fstReader = fst.getBytesReader();\n\n    FST.Arc<Long> arc = new FST.Arc<Long>();\n    int end = off + len;\n    for (int startOffset = off; startOffset < end; startOffset++) {\n      arc = fst.getFirstArc(arc);\n      int output = 0;\n      int remaining = end - startOffset;\n      for (int i = 0; i < remaining; i++) {\n        int ch = chars[startOffset+i];\n        if (fst.findTargetArc(ch, arc, arc, i == 0, fstReader) == null) {\n          break; // continue to next position\n        }\n        output += arc.output.intValue();\n        if (arc.isFinal()) {\n          final int finalOutput = output + arc.nextFinalOutput.intValue();\n          result.put(startOffset-off, segmentations[finalOutput]);\n          found = true;\n        }\n      }\n    }\n    \n    return found ? toIndexArray(result) : EMPTY_RESULT;\n  }\n  \n  public TokenInfoFST getFST() {\n    return fst;\n  }\n\n  private static final int[][] EMPTY_RESULT = new int[0][];\n  \n  /**\n   * Convert Map of index and wordIdAndLength to array of {wordId, index, length}\n   * @return array of {wordId, index, length}\n   */\n  private int[][] toIndexArray(Map<Integer, int[]> input) {\n    ArrayList<int[]> result = new ArrayList<int[]>();\n    for (int i : input.keySet()) {\n      int[] wordIdAndLength = input.get(i);\n      int wordId = wordIdAndLength[0];\n      // convert length to index\n      int current = i;\n      for (int j = 1; j < wordIdAndLength.length; j++) { // first entry is wordId offset\n        int[] token = { wordId + j - 1, current, wordIdAndLength[j] };\n        result.add(token);\n        current += wordIdAndLength[j];\n      }\n    }\n    return result.toArray(new int[result.size()][]);\n  }\n\n  public int[] lookupSegmentation(int phraseID) {\n    return segmentations[phraseID];\n  }\n  \n  @Override\n  public int getLeftId(int wordId) {\n    return LEFT_ID;\n  }\n  \n  @Override\n  public int getRightId(int wordId) {\n    return RIGHT_ID;\n  }\n  \n  @Override\n  public int getWordCost(int wordId) {\n    return WORD_COST;\n  }\n  \n  @Override\n  public String getReading(int wordId, char surface[], int off, int len) {\n    return getFeature(wordId, 0);\n  }\n  \n  @Override\n  public String getPartOfSpeech(int wordId) {\n    return getFeature(wordId, 1);\n  }\n  \n  @Override\n  public String getBaseForm(int wordId, char surface[], int off, int len) {\n    return null; // TODO: add support?\n  }\n  \n  @Override\n  public String getPronunciation(int wordId, char surface[], int off, int len) {\n    return null; // TODO: add support?\n  }\n  \n  @Override\n  public String getInflectionType(int wordId) {\n    return null; // TODO: add support?\n  }\n\n  @Override\n  public String getInflectionForm(int wordId) {\n    return null; // TODO: add support?\n  }\n  \n  private String[] getAllFeaturesArray(int wordId) {\n    String allFeatures = data[wordId-CUSTOM_DICTIONARY_WORD_ID_OFFSET];\n    if(allFeatures == null) {\n      return null;\n    }\n    \n    return allFeatures.split(INTERNAL_SEPARATOR);\n  }\n  \n  \n  private String getFeature(int wordId, int... fields) {\n    String[] allFeatures = getAllFeaturesArray(wordId);\n    if (allFeatures == null) {\n      return null;\n    }\n    StringBuilder sb = new StringBuilder();\n    if (fields.length == 0) { // All features\n      for (String feature : allFeatures) {\n        sb.append(CSVUtil.quoteEscape(feature)).append(\",\");\n      }\n    } else if (fields.length == 1) { // One feature doesn't need to escape value\n      sb.append(allFeatures[fields[0]]).append(\",\");\n    } else {\n      for (int field : fields){\n        sb.append(CSVUtil.quoteEscape(allFeatures[field])).append(\",\");\n      }\n    }\n    return sb.deleteCharAt(sb.length() - 1).toString();\n  }\n\npublic Tokenizer create(JapaneseTokenizerFactory japaneseTokenizerFactory, Reader input) {\n    return new JapaneseTokenizer(input, this, japaneseTokenizerFactory.discardPunctuation, japaneseTokenizerFactory.mode);\n  }\n  \n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 274,
+                        "lineEnd": 276,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.analysis.ja.JapaneseTokenizerFactory\nRationale: The create method is responsible for instantiating a JapaneseTokenizer, which is closely related to the JapaneseTokenizerFactory that provides the necessary configuration parameters for its creation.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 175,
+                        "lineEnd": 193,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.analysis.ja.dict.TokenInfoFST\nRationale: The method toIndexArray processes a mapping of indices to word IDs and lengths, which is likely related to token information. Moving it to the TokenInfoFST class aligns the method's functionality with the class's purpose of handling token-related data.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 21811
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "create",
+                            "method_signature": "public Tokenizer create(JapaneseTokenizerFactory japaneseTokenizerFactory, Reader input)",
+                            "target_class": "JapaneseTokenizerFactory",
+                            "rationale": "The create() method is responsible for creating a Tokenizer instance, which is more related to the JapaneseTokenizerFactory class. Moving it there would adhere to the Single Responsibility Principle."
+                        },
+                        {
+                            "method_name": "getAllFeaturesArray",
+                            "method_signature": "private String[] getAllFeaturesArray(int wordId)",
+                            "target_class": "FeatureExtractor",
+                            "rationale": "The getAllFeaturesArray() method is focused on extracting features from the data array. It would be more appropriate to move this method to a dedicated FeatureExtractor class that handles feature-related operations."
+                        },
+                        {
+                            "method_name": "getFeature",
+                            "method_signature": "private String getFeature(int wordId, int... fields)",
+                            "target_class": "FeatureExtractor",
+                            "rationale": "Similar to getAllFeaturesArray(), the getFeature() method is also concerned with feature extraction. Moving it to a FeatureExtractor class would improve code organization and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 8531
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "create",
+                            "method_signature": "public Tokenizer create(JapaneseTokenizerFactory japaneseTokenizerFactory, Reader input)",
+                            "target_class": "JapaneseTokenizerFactory",
+                            "rationale": "The create() method is responsible for creating a Tokenizer instance, which is more related to the JapaneseTokenizerFactory class. Moving it there would adhere to the Single Responsibility Principle."
+                        },
+                        {
+                            "method_name": "lookupSegmentation",
+                            "method_signature": "public int[] lookupSegmentation(int phraseID)",
+                            "target_class": "SegmentationService",
+                            "rationale": "The lookupSegmentation() method is focused on retrieving segmentations, which could be better encapsulated in a dedicated SegmentationService class that handles segmentation-related operations."
+                        },
+                        {
+                            "method_name": "toIndexArray",
+                            "method_signature": "private int[][] toIndexArray(Map<Integer, int[]> input)",
+                            "target_class": "ArrayUtil",
+                            "rationale": "The toIndexArray() method converts a map to an array format, which is a utility function that could be better placed in a separate ArrayUtil class for reusability and clarity."
+                        },
+                        {
+                            "method_name": "getAllFeaturesArray",
+                            "method_signature": "private String[] getAllFeaturesArray(int wordId)",
+                            "target_class": "FeatureService",
+                            "rationale": "The getAllFeaturesArray() method is responsible for retrieving features associated with a word ID, which aligns with the responsibilities of a FeatureService class that manages feature-related operations."
+                        },
+                        {
+                            "method_name": "getFeature",
+                            "method_signature": "private String getFeature(int wordId, int... fields)",
+                            "target_class": "FeatureService",
+                            "rationale": "The getFeature() method retrieves specific features for a word ID, which is closely related to feature management and should be moved to a FeatureService class."
+                        }
+                    ],
+                    "llm_response_time": 8033
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "create",
+                            "method_signature": "public Tokenizer create(JapaneseTokenizerFactory japaneseTokenizerFactory, Reader input)",
+                            "target_class": "JapaneseTokenizerFactory",
+                            "rationale": "The create() method is responsible for creating a Tokenizer instance, which is more aligned with the responsibilities of the JapaneseTokenizerFactory class. Moving it there would adhere to the Single Responsibility Principle."
+                        },
+                        {
+                            "method_name": "lookupSegmentation",
+                            "method_signature": "public int[] lookupSegmentation(int phraseID)",
+                            "target_class": "SegmentationService",
+                            "rationale": "The lookupSegmentation() method is focused on retrieving segmentations based on a phrase ID, which suggests that it could belong to a dedicated service class that handles segmentation logic."
+                        },
+                        {
+                            "method_name": "toIndexArray",
+                            "method_signature": "private int[][] toIndexArray(Map<Integer, int[]> input)",
+                            "target_class": "ArrayUtil",
+                            "rationale": "The toIndexArray() method is a utility function that converts a map to an array format. Moving it to a utility class like ArrayUtil would promote code reuse and separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllFeaturesArray",
+                            "method_signature": "private String[] getAllFeaturesArray(int wordId)",
+                            "target_class": "FeatureService",
+                            "rationale": "The getAllFeaturesArray() method is responsible for retrieving features associated with a word ID, which aligns with the responsibilities of a service class dedicated to handling features."
+                        },
+                        {
+                            "method_name": "getFeature",
+                            "method_signature": "private String getFeature(int wordId, int... fields)",
+                            "target_class": "FeatureService",
+                            "rationale": "The getFeature() method is focused on retrieving specific features for a word ID, which is a clear responsibility that could be encapsulated within a FeatureService class."
+                        }
+                    ],
+                    "llm_response_time": 4506
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "create",
+                            "method_signature": "public Tokenizer create(JapaneseTokenizerFactory japaneseTokenizerFactory, Reader input)",
+                            "target_class": "JapaneseTokenizerFactory",
+                            "rationale": "The create() method is responsible for creating a Tokenizer instance, which is more related to the JapaneseTokenizerFactory class. Moving it there would adhere to the Single Responsibility Principle."
+                        },
+                        {
+                            "method_name": "getAllFeaturesArray",
+                            "method_signature": "private String[] getAllFeaturesArray(int wordId)",
+                            "target_class": "FeatureExtractor",
+                            "rationale": "The getAllFeaturesArray() method is focused on extracting features from the data array. It would be more appropriate to move this method to a dedicated FeatureExtractor class that handles feature-related operations."
+                        },
+                        {
+                            "method_name": "getFeature",
+                            "method_signature": "private String getFeature(int wordId, int... fields)",
+                            "target_class": "FeatureExtractor",
+                            "rationale": "Similar to getAllFeaturesArray(), the getFeature() method is also concerned with feature extraction. Moving it to a FeatureExtractor class would improve code organization and maintainability."
+                        },
+                        {
+                            "method_name": "lookupSegmentation",
+                            "method_signature": "public int[] lookupSegmentation(int phraseID)",
+                            "target_class": "SegmentationService",
+                            "rationale": "The lookupSegmentation() method is focused on retrieving segmentations, which could be better encapsulated in a dedicated SegmentationService class that handles segmentation-related operations."
+                        },
+                        {
+                            "method_name": "toIndexArray",
+                            "method_signature": "private int[][] toIndexArray(Map<Integer, int[]> input)",
+                            "target_class": "ArrayUtil",
+                            "rationale": "The toIndexArray() method converts a map to an array format, which is a utility function that could be better placed in a separate ArrayUtil class for reusability and clarity."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "create",
+                    "getAllFeaturesArray",
+                    "getFeature",
+                    "lookupSegmentation",
+                    "toIndexArray"
+                ],
+                "llm_response_time": 656
+            },
+            "targetClassMap": {
+                "create": {
+                    "target_classes": [
+                        {
+                            "class_name": "JapaneseTokenizerFactory",
+                            "similarity_score": 0.28827833009852755
+                        },
+                        {
+                            "class_name": "TokenInfoFST",
+                            "similarity_score": 0.3560168704776653
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JapaneseTokenizerFactory",
+                        "TokenInfoFST"
+                    ],
+                    "llm_response_time": 1208,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                },
+                "getAllFeaturesArray": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1279,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "getFeature": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1328,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "lookupSegmentation": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1927,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "toIndexArray": {
+                    "target_classes": [
+                        {
+                            "class_name": "TokenInfoFST",
+                            "similarity_score": 0.5034279902707228
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TokenInfoFST"
+                    ],
+                    "llm_response_time": 1172,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.analysis.util.RollingCharBuffer::normalizeIterationMark(char):char need move org.apache.lucene.analysis.ja.JapaneseIterationMarkCharFilter",
+        "class_name": "org.apache.lucene.analysis.util.RollingCharBuffer",
+        "telemetry": {
+            "id": "e0dae29b-0cad-4200-a279-2effc0b41b77",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 157,
+                "lineStart": 27,
+                "lineEnd": 183,
+                "bodyLineStart": 27,
+                "language": "java",
+                "sourceCode": "/** Acts like a forever growing char[] as you read\n *  characters into it from the provided reader, but\n *  internally it uses a circular buffer to only hold the\n *  characters that haven't been freed yet.  This is like a\n *  PushbackReader, except you don't have to specify\n *  up-front the max size of the buffer, but you do have to\n *  periodically call {@link #freeBefore}. */\n\npublic final class RollingCharBuffer {\n\n  private Reader reader;\n\n  private char[] buffer = new char[512];\n\n  // Next array index to write to in buffer:\n  private int nextWrite;\n\n  // Next absolute position to read from reader:\n  private int nextPos;\n\n  // How many valid chars (wrapped) are in the buffer:\n  private int count;\n\n  // True if we hit EOF\n  private boolean end;\n    \n  /** Clear array and switch to new reader. */\n  public void reset(Reader reader) {\n    this.reader = reader;\n    nextPos = 0;\n    nextWrite = 0;\n    count = 0;\n    end = false;\n  }\n\n  /* Absolute position read.  NOTE: pos must not jump\n   * ahead by more than 1!  Ie, it's OK to read arbitarily\n   * far back (just not prior to the last {@link\n   * #freeBefore}), but NOT ok to read arbitrarily far\n   * ahead.  Returns -1 if you hit EOF. */\n  public int get(int pos) throws IOException {\n    //System.out.println(\"    get pos=\" + pos + \" nextPos=\" + nextPos + \" count=\" + count);\n    if (pos == nextPos) {\n      if (end) {\n        return -1;\n      }\n      if (count == buffer.length) {\n        // Grow\n        final char[] newBuffer = new char[ArrayUtil.oversize(1+count, RamUsageEstimator.NUM_BYTES_CHAR)];\n        //System.out.println(Thread.currentThread().getName() + \": cb grow \" + newBuffer.length);\n        System.arraycopy(buffer, nextWrite, newBuffer, 0, buffer.length - nextWrite);\n        System.arraycopy(buffer, 0, newBuffer, buffer.length - nextWrite, nextWrite);\n        nextWrite = buffer.length;\n        buffer = newBuffer;\n      }\n      if (nextWrite == buffer.length) {\n        nextWrite = 0;\n      }\n\n      final int toRead = buffer.length - Math.max(count, nextWrite);\n      final int readCount = reader.read(buffer, nextWrite, toRead);\n      if (readCount == -1) {\n        end = true;\n        return -1;\n      }\n      final int ch = buffer[nextWrite];\n      nextWrite += readCount;\n      count += readCount;\n      nextPos += readCount;\n      return ch;\n    } else {\n      // Cannot read from future (except by 1):\n      assert pos < nextPos;\n\n      // Cannot read from already freed past:\n      assert nextPos - pos <= count: \"nextPos=\" + nextPos + \" pos=\" + pos + \" count=\" + count;\n\n      return buffer[getIndex(pos)];\n    }\n  }\n\n  // For assert:\n  private boolean inBounds(int pos) {\n    return pos >= 0 && pos < nextPos && pos >= nextPos - count;\n  }\n\n  private int getIndex(int pos) {\n    int index = nextWrite - (nextPos - pos);\n    if (index < 0) {\n      // Wrap:\n      index += buffer.length;\n      assert index >= 0;\n    }\n    return index;\n  }\n\n  public char[] get(int posStart, int length) {\n    assert length > 0;\n    assert inBounds(posStart): \"posStart=\" + posStart + \" length=\" + length;\n    //System.out.println(\"    buffer.get posStart=\" + posStart + \" len=\" + length);\n      \n    final int startIndex = getIndex(posStart);\n    final int endIndex = getIndex(posStart + length);\n    //System.out.println(\"      startIndex=\" + startIndex + \" endIndex=\" + endIndex);\n\n    final char[] result = new char[length];\n    if (endIndex >= startIndex && length < buffer.length) {\n      System.arraycopy(buffer, startIndex, result, 0, endIndex-startIndex);\n    } else {\n      // Wrapped:\n      final int part1 = buffer.length-startIndex;\n      System.arraycopy(buffer, startIndex, result, 0, part1);\n      System.arraycopy(buffer, 0, result, buffer.length-startIndex, length-part1);\n    }\n    return result;\n  }\n\n  /** Call this to notify us that no chars before this\n   *  absolute position are needed anymore. */\n  public void freeBefore(int pos) {\n    assert pos >= 0;\n    assert pos <= nextPos;\n    final int newCount = nextPos - pos;\n    assert newCount <= count: \"newCount=\" + newCount + \" count=\" + count;\n    assert newCount <= buffer.length: \"newCount=\" + newCount + \" buf.length=\" + buffer.length;\n    count = newCount;\n  }\n\n/**\n   * Normalizes the iteration mark character c\n   *\n   * @param japaneseIterationMarkCharFilter TODO\n * @param c iteration mark character to normalize\n * @return normalized iteration mark\n   * @throws IOException If there is a low-level I/O error.\n   */\n  public char normalizeIterationMark(JapaneseIterationMarkCharFilter japaneseIterationMarkCharFilter, char c) throws IOException {\n\n    // Case 1: Inside an iteration mark span\n    if (japaneseIterationMarkCharFilter.bufferPosition < japaneseIterationMarkCharFilter.iterationMarkSpanEndPosition) {\n      return japaneseIterationMarkCharFilter.normalize(japaneseIterationMarkCharFilter.sourceCharacter(japaneseIterationMarkCharFilter.bufferPosition, japaneseIterationMarkCharFilter.iterationMarksSpanSize), c);\n    }\n\n    // Case 2: New iteration mark spans starts where the previous one ended, which is illegal\n    if (japaneseIterationMarkCharFilter.bufferPosition == japaneseIterationMarkCharFilter.iterationMarkSpanEndPosition) {\n      // Emit the illegal iteration mark and increase end position to indicate that we can't\n      // start a new span on the next position either\n      japaneseIterationMarkCharFilter.iterationMarkSpanEndPosition++;\n      return c;\n    }\n\n    // Case 3: New iteration mark span\n    japaneseIterationMarkCharFilter.iterationMarksSpanSize = japaneseIterationMarkCharFilter.nextIterationMarkSpanSize();\n    japaneseIterationMarkCharFilter.iterationMarkSpanEndPosition = japaneseIterationMarkCharFilter.bufferPosition + japaneseIterationMarkCharFilter.iterationMarksSpanSize;\n    return japaneseIterationMarkCharFilter.normalize(japaneseIterationMarkCharFilter.sourceCharacter(japaneseIterationMarkCharFilter.bufferPosition, japaneseIterationMarkCharFilter.iterationMarksSpanSize), c);\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 154,
+                        "lineEnd": 181,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.analysis.ja.JapaneseIterationMarkCharFilter\nRationale: The method normalizeIterationMark directly manipulates the state of the JapaneseIterationMarkCharFilter instance, using its properties and methods. It is closely tied to the logic of handling iteration marks, making it a natural fit for this class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 5379
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "normalizeIterationMark",
+                            "method_signature": "public char normalizeIterationMark(JapaneseIterationMarkCharFilter japaneseIterationMarkCharFilter, char c) throws IOException",
+                            "target_class": "JapaneseIterationMarkCharFilter",
+                            "rationale": "The method normalizeIterationMark operates directly on the JapaneseIterationMarkCharFilter instance and manipulates its state. It would be more appropriate for this method to reside within the JapaneseIterationMarkCharFilter class, as it pertains to the normalization of iteration marks specific to that filter."
+                        }
+                    ],
+                    "llm_response_time": 1712
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "normalizeIterationMark",
+                            "method_signature": "public char normalizeIterationMark(JapaneseIterationMarkCharFilter japaneseIterationMarkCharFilter, char c) throws IOException",
+                            "target_class": "JapaneseIterationMarkCharFilter",
+                            "rationale": "The method normalizeIterationMark operates directly on the JapaneseIterationMarkCharFilter instance and manipulates its state. It would be more appropriate for this method to reside within the JapaneseIterationMarkCharFilter class, as it pertains to the normalization of iteration marks specific to that filter."
+                        }
+                    ],
+                    "llm_response_time": 1306
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "normalizeIterationMark",
+                            "method_signature": "public char normalizeIterationMark(JapaneseIterationMarkCharFilter japaneseIterationMarkCharFilter, char c) throws IOException",
+                            "target_class": "JapaneseIterationMarkCharFilter",
+                            "rationale": "The normalizeIterationMark method operates directly on the JapaneseIterationMarkCharFilter instance and manipulates its state. It would be more appropriate for this method to reside within the JapaneseIterationMarkCharFilter class, as it pertains to the normalization of iteration marks specific to that filter."
+                        }
+                    ],
+                    "llm_response_time": 1813
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "normalizeIterationMark",
+                            "method_signature": "public char normalizeIterationMark(JapaneseIterationMarkCharFilter japaneseIterationMarkCharFilter, char c) throws IOException",
+                            "target_class": "JapaneseIterationMarkCharFilter",
+                            "rationale": "The method normalizeIterationMark operates directly on the JapaneseIterationMarkCharFilter instance and manipulates its state. It would be more appropriate for this method to reside within the JapaneseIterationMarkCharFilter class, as it pertains to the normalization of iteration marks specific to that filter."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "normalizeIterationMark"
+                ],
+                "llm_response_time": 479
+            },
+            "targetClassMap": {
+                "normalizeIterationMark": {
+                    "target_classes": [
+                        {
+                            "class_name": "JapaneseIterationMarkCharFilter",
+                            "similarity_score": 0.6467126821651612
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JapaneseIterationMarkCharFilter"
+                    ],
+                    "llm_response_time": 1198,
+                    "similarity_computation_time": 3,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "- method org.apache.lucene.codecs.FieldInfosFormat::postingsFormat():PostingsFormat need move org.apache.lucene.codecs.simpletext.SimpleTextCodec",
+        "class_name": "org.apache.lucene.codecs.FieldInfosFormat",
+        "telemetry": {
+            "id": "c237e3a1-b63b-4f67-bd4e-f4c93072f4ed",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 22,
+                "lineStart": 25,
+                "lineEnd": 46,
+                "bodyLineStart": 25,
+                "language": "java",
+                "sourceCode": "/**\n * Encodes/decodes {@link FieldInfos}\n * @lucene.experimental\n */\npublic abstract class FieldInfosFormat {\n  /** Sole constructor. (For invocation by subclass \n   *  constructors, typically implicit.) */\n  protected FieldInfosFormat() {\n  }\n\n  /** Returns a {@link FieldInfosReader} to read field infos\n   *  from the index */\n  public abstract FieldInfosReader getFieldInfosReader() throws IOException;\n\n  /** Returns a {@link FieldInfosWriter} to write field infos\n   *  to the index */\n  public abstract FieldInfosWriter getFieldInfosWriter() throws IOException;\n\npublic PostingsFormat postingsFormat(SimpleTextCodec simpleTextCodec) {\n    return simpleTextCodec.postings;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 42,
+                        "lineEnd": 44,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.codecs.simpletext.SimpleTextCodec\nRationale: The method postingsFormat() directly accesses the 'postings' field of the SimpleTextCodec instance, indicating that it is closely related to the functionality and data of the SimpleTextCodec class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 4794
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "postingsFormat",
+                            "method_signature": "public PostingsFormat postingsFormat(SimpleTextCodec simpleTextCodec)",
+                            "target_class": "SimpleTextCodec",
+                            "rationale": "The postingsFormat method directly interacts with the SimpleTextCodec class, suggesting that it may be more appropriate for this method to reside within the SimpleTextCodec class."
+                        }
+                    ],
+                    "llm_response_time": 1339
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "postingsFormat",
+                            "method_signature": "public PostingsFormat postingsFormat(SimpleTextCodec simpleTextCodec)",
+                            "target_class": "SimpleTextCodec",
+                            "rationale": "The postingsFormat method directly interacts with the SimpleTextCodec class, suggesting that it may be more appropriate for this method to reside within the SimpleTextCodec class."
+                        }
+                    ],
+                    "llm_response_time": 1737
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "postingsFormat",
+                            "method_signature": "public PostingsFormat postingsFormat(SimpleTextCodec simpleTextCodec)",
+                            "target_class": "SimpleTextCodec",
+                            "rationale": "The postingsFormat method directly interacts with the SimpleTextCodec class, suggesting that it may be more appropriate for this method to reside within the SimpleTextCodec class."
+                        }
+                    ],
+                    "llm_response_time": 1123
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "postingsFormat",
+                            "method_signature": "public PostingsFormat postingsFormat(SimpleTextCodec simpleTextCodec)",
+                            "target_class": "SimpleTextCodec",
+                            "rationale": "The postingsFormat method directly interacts with the SimpleTextCodec class, suggesting that it may be more appropriate for this method to reside within the SimpleTextCodec class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "postingsFormat"
+                ],
+                "llm_response_time": 510
+            },
+            "targetClassMap": {
+                "postingsFormat": {
+                    "target_classes": [
+                        {
+                            "class_name": "SimpleTextCodec",
+                            "similarity_score": 0.5013438877456313
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "SimpleTextCodec"
+                    ],
+                    "llm_response_time": 1336,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.util.automaton.CharacterRunAutomaton::getEnablePositionIncrements():boolean need move org.apache.lucene.analysis.MockTokenFilter",
+        "class_name": "org.apache.lucene.util.automaton.CharacterRunAutomaton",
+        "telemetry": {
+            "id": "e9452c2d-3384-4bb0-a8ef-ac14f42913a9",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 43,
+                "lineStart": 22,
+                "lineEnd": 64,
+                "bodyLineStart": 22,
+                "language": "java",
+                "sourceCode": "/**\n * Automaton representation for matching char[].\n */\npublic class CharacterRunAutomaton extends RunAutomaton {\n\n  public CharacterRunAutomaton(Automaton a) {\n    super(a, Character.MAX_CODE_POINT, false);\n  }\n\n  /**\n   * Returns true if the given string is accepted by this automaton.\n   */\n  public boolean run(String s) {\n    int p = initial;\n    int l = s.length();\n    for (int i = 0, cp = 0; i < l; i += Character.charCount(cp)) {\n      p = step(p, cp = s.codePointAt(i));\n      if (p == -1) return false;\n    }\n    return accept[p];\n  }\n  \n  /**\n   * Returns true if the given string is accepted by this automaton\n   */\n  public boolean run(char[] s, int offset, int length) {\n    int p = initial;\n    int l = offset + length;\n    for (int i = offset, cp = 0; i < l; i += Character.charCount(cp)) {\n      p = step(p, cp = Character.codePointAt(s, i, l));\n      if (p == -1) return false;\n    }\n    return accept[p];\n  }\n\n/**\n   * @param mockTokenFilter TODO\n * @see #setEnablePositionIncrements(boolean)\n   */\n  public boolean getEnablePositionIncrements(MockTokenFilter mockTokenFilter) {\n    return mockTokenFilter.enablePositionIncrements;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 56,
+                        "lineEnd": 62,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.analysis.MockTokenFilter\nRationale: The method getEnablePositionIncrements directly accesses the enablePositionIncrements property of the MockTokenFilter class, making it more appropriate for this method to reside within the MockTokenFilter class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 5297
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getEnablePositionIncrements",
+                            "method_signature": "public boolean getEnablePositionIncrements(MockTokenFilter mockTokenFilter)",
+                            "target_class": "MockTokenFilter",
+                            "rationale": "The method getEnablePositionIncrements() directly accesses the properties of MockTokenFilter, indicating that it is more relevant to the MockTokenFilter class."
+                        }
+                    ],
+                    "llm_response_time": 1910
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getEnablePositionIncrements",
+                            "method_signature": "public boolean getEnablePositionIncrements(MockTokenFilter mockTokenFilter)",
+                            "target_class": "MockTokenFilter",
+                            "rationale": "The method getEnablePositionIncrements() directly accesses the properties of MockTokenFilter, indicating that it is more relevant to the MockTokenFilter class."
+                        }
+                    ],
+                    "llm_response_time": 1436
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getEnablePositionIncrements",
+                            "method_signature": "public boolean getEnablePositionIncrements(MockTokenFilter mockTokenFilter)",
+                            "target_class": "MockTokenFilter",
+                            "rationale": "The method getEnablePositionIncrements() directly interacts with the MockTokenFilter class, suggesting that it would be more appropriate for this method to reside within the MockTokenFilter class."
+                        }
+                    ],
+                    "llm_response_time": 1223
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getEnablePositionIncrements",
+                            "method_signature": "public boolean getEnablePositionIncrements(MockTokenFilter mockTokenFilter)",
+                            "target_class": "MockTokenFilter",
+                            "rationale": "The method getEnablePositionIncrements() directly accesses the properties of MockTokenFilter, indicating that it is more relevant to the MockTokenFilter class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "getEnablePositionIncrements"
+                ],
+                "llm_response_time": 610
+            },
+            "targetClassMap": {
+                "getEnablePositionIncrements": {
+                    "target_classes": [
+                        {
+                            "class_name": "MockTokenFilter",
+                            "similarity_score": 0.5026806833429505
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "MockTokenFilter"
+                    ],
+                    "llm_response_time": 893,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.facet.params.FacetSearchParams::getDrillDownAccumulator(FacetSearchParams):FacetsAccumulator need move org.apache.lucene.facet.search.DrillSideways",
+        "class_name": "org.apache.lucene.facet.params.FacetSearchParams",
+        "telemetry": {
+            "id": "cf53f3a8-435f-4908-9ba0-2f7955ba2a2b",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 80,
+                "lineStart": 27,
+                "lineEnd": 106,
+                "bodyLineStart": 27,
+                "language": "java",
+                "sourceCode": "/**\n * Defines parameters that are needed for faceted search. The list of\n * {@link FacetRequest facet requests} denotes the facets for which aggregated\n * should be done.\n * <p>\n * One can pass {@link FacetIndexingParams} in order to tell the search code how\n * to read the facets information. Note that you must use the same\n * {@link FacetIndexingParams} that were used for indexing.\n * \n * @lucene.experimental\n */\npublic class FacetSearchParams {\n\n  public final FacetIndexingParams indexingParams;\n  public final List<FacetRequest> facetRequests;\n  \n  /**\n   * Initializes with the given {@link FacetRequest requests} and default\n   * {@link FacetIndexingParams#DEFAULT}. If you used a different\n   * {@link FacetIndexingParams}, you should use\n   * {@link #FacetSearchParams(FacetIndexingParams, List)}.\n   */\n  public FacetSearchParams(FacetRequest... facetRequests) {\n    this(FacetIndexingParams.DEFAULT, Arrays.asList(facetRequests));\n  }\n  \n  /**\n   * Initializes with the given {@link FacetRequest requests} and default\n   * {@link FacetIndexingParams#DEFAULT}. If you used a different\n   * {@link FacetIndexingParams}, you should use\n   * {@link #FacetSearchParams(FacetIndexingParams, List)}.\n   */\n  public FacetSearchParams(List<FacetRequest> facetRequests) {\n    this(FacetIndexingParams.DEFAULT, facetRequests);\n  }\n  \n  /**\n   * Initializes with the given {@link FacetRequest requests} and\n   * {@link FacetIndexingParams}.\n   */\n  public FacetSearchParams(FacetIndexingParams indexingParams, FacetRequest... facetRequests) {\n    this(indexingParams, Arrays.asList(facetRequests));\n  }\n\n  /**\n   * Initializes with the given {@link FacetRequest requests} and\n   * {@link FacetIndexingParams}.\n   */\n  public FacetSearchParams(FacetIndexingParams indexingParams, List<FacetRequest> facetRequests) {\n    if (facetRequests == null || facetRequests.size() == 0) {\n      throw new IllegalArgumentException(\"at least one FacetRequest must be defined\");\n    }\n    this.facetRequests = facetRequests;\n    this.indexingParams = indexingParams;\n  }\n  \n  @Override\n  public String toString() {\n    final String INDENT = \"  \";\n    final char NEWLINE = '\\n';\n\n    StringBuilder sb = new StringBuilder(\"IndexingParams: \");\n    sb.append(NEWLINE).append(INDENT).append(indexingParams);\n    \n    sb.append(NEWLINE).append(\"FacetRequests:\");\n    for (FacetRequest facetRequest : facetRequests) {\n      sb.append(NEWLINE).append(INDENT).append(facetRequest);\n    }\n    \n    return sb.toString();\n  }\n\n/** Override this to use a custom drill-down {@link\n   *  FacetsAccumulator}. \n * @param drillSideways TODO*/\n  public FacetsAccumulator getDrillDownAccumulator(DrillSideways drillSideways) {\n    return FacetsAccumulator.create(this, drillSideways.searcher.getIndexReader(), drillSideways.taxoReader);\n  }\n  \n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 98,
+                        "lineEnd": 103,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.facet.search.DrillSideways\nRationale: The method getDrillDownAccumulator() directly uses the DrillSideways parameter and its properties, making it more relevant to the DrillSideways class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 6630
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getDrillDownAccumulator",
+                            "method_signature": "public FacetsAccumulator getDrillDownAccumulator(DrillSideways drillSideways)",
+                            "target_class": "FacetsAccumulator",
+                            "rationale": "The method getDrillDownAccumulator() is responsible for creating a FacetsAccumulator based on the current FacetSearchParams and a DrillSideways instance. It would be more appropriate for this method to reside in the FacetsAccumulator class, as it directly relates to the creation and management of that class's instances."
+                        }
+                    ],
+                    "llm_response_time": 1329
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getDrillDownAccumulator",
+                            "method_signature": "public FacetsAccumulator getDrillDownAccumulator(DrillSideways drillSideways)",
+                            "target_class": "FacetsAccumulator",
+                            "rationale": "The method getDrillDownAccumulator() is responsible for creating a FacetsAccumulator based on the FacetSearchParams and DrillSideways. It would be more appropriate for this method to reside in the FacetsAccumulator class, as it directly relates to the creation and management of that class's instances."
+                        }
+                    ],
+                    "llm_response_time": 1327
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getDrillDownAccumulator",
+                            "method_signature": "public FacetsAccumulator getDrillDownAccumulator(DrillSideways drillSideways)",
+                            "target_class": "FacetsAccumulator",
+                            "rationale": "The method getDrillDownAccumulator() is responsible for creating a FacetsAccumulator based on the current FacetSearchParams and a DrillSideways instance. It would be more appropriate for this method to reside in the FacetsAccumulator class, as it directly relates to the creation and management of that class's instances."
+                        }
+                    ],
+                    "llm_response_time": 1268
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getDrillDownAccumulator",
+                            "method_signature": "public FacetsAccumulator getDrillDownAccumulator(DrillSideways drillSideways)",
+                            "target_class": "FacetsAccumulator",
+                            "rationale": "The method getDrillDownAccumulator() is responsible for creating a FacetsAccumulator based on the current FacetSearchParams and a DrillSideways instance. It would be more appropriate for this method to reside in the FacetsAccumulator class, as it directly relates to the creation and management of that class's instances."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "getDrillDownAccumulator"
+                ],
+                "llm_response_time": 2566
+            },
+            "targetClassMap": {
+                "getDrillDownAccumulator": {
+                    "target_classes": [
+                        {
+                            "class_name": "DrillSideways",
+                            "similarity_score": 0.3942449707615077
+                        },
+                        {
+                            "class_name": "FacetIndexingParams",
+                            "similarity_score": 0.5396793213814624
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "DrillSideways",
+                        "FacetIndexingParams"
+                    ],
+                    "llm_response_time": 1156,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "- method org.apache.lucene.search.similarities.Similarity::setReaderTermsIndexDivisor(int):LiveIndexWriterConfig need move org.apache.lucene.index.LiveIndexWriterConfig",
+        "class_name": "org.apache.lucene.search.similarities.Similarity",
+        "telemetry": {
+            "id": "cf95cdde-fd69-4454-8f36-c638f1330e1e",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 288,
+                "lineStart": 39,
+                "lineEnd": 326,
+                "bodyLineStart": 39,
+                "language": "java",
+                "sourceCode": "/** \n * Similarity defines the components of Lucene scoring.\n * <p>\n * Expert: Scoring API.\n * <p>\n * This is a low-level API, you should only extend this API if you want to implement \n * an information retrieval <i>model</i>.  If you are instead looking for a convenient way \n * to alter Lucene's scoring, consider extending a higher-level implementation\n * such as {@link TFIDFSimilarity}, which implements the vector space model with this API, or \n * just tweaking the default implementation: {@link DefaultSimilarity}.\n * <p>\n * Similarity determines how Lucene weights terms, and Lucene interacts with\n * this class at both <a href=\"#indextime\">index-time</a> and \n * <a href=\"#querytime\">query-time</a>.\n * <p>\n * <a name=\"indextime\"/>\n * At indexing time, the indexer calls {@link #computeNorm(FieldInvertState)}, allowing\n * the Similarity implementation to set a per-document value for the field that will \n * be later accessible via {@link AtomicReader#getNormValues(String)}.  Lucene makes no assumption\n * about what is in this norm, but it is most useful for encoding length normalization \n * information.\n * <p>\n * Implementations should carefully consider how the normalization is encoded: while\n * Lucene's classical {@link TFIDFSimilarity} encodes a combination of index-time boost\n * and length normalization information with {@link SmallFloat} into a single byte, this \n * might not be suitable for all purposes.\n * <p>\n * Many formulas require the use of average document length, which can be computed via a \n * combination of {@link CollectionStatistics#sumTotalTermFreq()} and \n * {@link CollectionStatistics#maxDoc()} or {@link CollectionStatistics#docCount()}, \n * depending upon whether the average should reflect field sparsity.\n * <p>\n * Additional scoring factors can be stored in named\n * <code>NumericDocValuesField</code>s and accessed\n * at query-time with {@link AtomicReader#getNumericDocValues(String)}.\n * <p>\n * Finally, using index-time boosts (either via folding into the normalization byte or\n * via DocValues), is an inefficient way to boost the scores of different fields if the\n * boost will be the same for every document, instead the Similarity can simply take a constant\n * boost parameter <i>C</i>, and {@link PerFieldSimilarityWrapper} can return different \n * instances with different boosts depending upon field name.\n * <p>\n * <a name=\"querytime\"/>\n * At query-time, Queries interact with the Similarity via these steps:\n * <ol>\n *   <li>The {@link #computeWeight(float, CollectionStatistics, TermStatistics...)} method is called a single time,\n *       allowing the implementation to compute any statistics (such as IDF, average document length, etc)\n *       across <i>the entire collection</i>. The {@link TermStatistics} and {@link CollectionStatistics} passed in \n *       already contain all of the raw statistics involved, so a Similarity can freely use any combination\n *       of statistics without causing any additional I/O. Lucene makes no assumption about what is \n *       stored in the returned {@link Similarity.SimWeight} object.\n *   <li>The query normalization process occurs a single time: {@link Similarity.SimWeight#getValueForNormalization()}\n *       is called for each query leaf node, {@link Similarity#queryNorm(float)} is called for the top-level\n *       query, and finally {@link Similarity.SimWeight#normalize(float, float)} passes down the normalization value\n *       and any top-level boosts (e.g. from enclosing {@link BooleanQuery}s).\n *   <li>For each segment in the index, the Query creates a {@link #exactSimScorer(SimWeight, AtomicReaderContext)}\n *       (for queries with exact frequencies such as TermQuerys and exact PhraseQueries) or a \n *       {@link #sloppySimScorer(SimWeight, AtomicReaderContext)} (for queries with sloppy frequencies such as\n *       SpanQuerys and sloppy PhraseQueries). The score() method is called for each matching document.\n * </ol>\n * <p>\n * <a name=\"explaintime\"/>\n * When {@link IndexSearcher#explain(org.apache.lucene.search.Query, int)} is called, queries consult the Similarity's DocScorer for an \n * explanation of how it computed its score. The query passes in a the document id and an explanation of how the frequency\n * was computed.\n *\n * @see org.apache.lucene.index.IndexWriterConfig#setSimilarity(Similarity)\n * @see IndexSearcher#setSimilarity(Similarity)\n * @lucene.experimental\n */\npublic abstract class Similarity {\n  \n  /**\n   * Sole constructor. (For invocation by subclass \n   * constructors, typically implicit.)\n   */\n  public Similarity() {}\n  \n  /** Hook to integrate coordinate-level matching.\n   * <p>\n   * By default this is disabled (returns <code>1</code>), as with\n   * most modern models this will only skew performance, but some\n   * implementations such as {@link TFIDFSimilarity} override this.\n   *\n   * @param overlap the number of query terms matched in the document\n   * @param maxOverlap the total number of terms in the query\n   * @return a score factor based on term overlap with the query\n   */\n  public float coord(int overlap, int maxOverlap) {\n    return 1f;\n  }\n  \n  /** Computes the normalization value for a query given the sum of the\n   * normalized weights {@link SimWeight#getValueForNormalization()} of \n   * each of the query terms.  This value is passed back to the \n   * weight ({@link SimWeight#normalize(float, float)} of each query \n   * term, to provide a hook to attempt to make scores from different\n   * queries comparable.\n   * <p>\n   * By default this is disabled (returns <code>1</code>), but some\n   * implementations such as {@link TFIDFSimilarity} override this.\n   * \n   * @param valueForNormalization the sum of the term normalization values\n   * @return a normalization factor for query weights\n   */\n  public float queryNorm(float valueForNormalization) {\n    return 1f;\n  }\n  \n  /**\n   * Computes the normalization value for a field, given the accumulated\n   * state of term processing for this field (see {@link FieldInvertState}).\n   *\n   * <p>Matches in longer fields are less precise, so implementations of this\n   * method usually set smaller values when <code>state.getLength()</code> is large,\n   * and larger values when <code>state.getLength()</code> is small.\n   * \n   * @lucene.experimental\n   * \n   * @param state current processing state for this field\n   * @return computed norm value\n   */\n  public abstract long computeNorm(FieldInvertState state);\n\n  /**\n   * Compute any collection-level weight (e.g. IDF, average document length, etc) needed for scoring a query.\n   *\n   * @param queryBoost the query-time boost.\n   * @param collectionStats collection-level statistics, such as the number of tokens in the collection.\n   * @param termStats term-level statistics, such as the document frequency of a term across the collection.\n   * @return SimWeight object with the information this Similarity needs to score a query.\n   */\n  public abstract SimWeight computeWeight(float queryBoost, CollectionStatistics collectionStats, TermStatistics... termStats);\n  \n  /**\n   * Creates a new {@link Similarity.ExactSimScorer} to score matching documents from a segment of the inverted index.\n   * @param weight collection information from {@link #computeWeight(float, CollectionStatistics, TermStatistics...)}\n   * @param context segment of the inverted index to be scored.\n   * @return ExactSimScorer for scoring documents across <code>context</code>\n   * @throws IOException if there is a low-level I/O error\n   */\n  public abstract ExactSimScorer exactSimScorer(SimWeight weight, AtomicReaderContext context) throws IOException;\n  \n  /**\n   * Creates a new {@link Similarity.SloppySimScorer} to score matching documents from a segment of the inverted index.\n   * @param weight collection information from {@link #computeWeight(float, CollectionStatistics, TermStatistics...)}\n   * @param context segment of the inverted index to be scored.\n   * @return SloppySimScorer for scoring documents across <code>context</code>\n   * @throws IOException if there is a low-level I/O error\n   */\n  public abstract SloppySimScorer sloppySimScorer(SimWeight weight, AtomicReaderContext context) throws IOException;\n  \n  /**\n   * Sets the termsIndexDivisor passed to any readers that IndexWriter opens,\n   * for example when applying deletes or creating a near-real-time reader in\n   * {@link DirectoryReader#open(IndexWriter, boolean)}. If you pass -1, the\n   * terms index won't be loaded by the readers. This is only useful in advanced\n   * situations when you will only .next() through all terms; attempts to seek\n   * will hit an exception.\n   * \n   * <p>\n   * Takes effect immediately, but only applies to readers opened after this\n   * call\n   * <p>\n   * <b>NOTE:</b> divisor settings &gt; 1 do not apply to all PostingsFormat\n   * implementations, including the default one in this release. It only makes\n   * sense for terms indexes that can efficiently re-sample terms at load time.\n * @param liveIndexWriterConfig TODO\n * @param divisor TODO\n   */\n  public LiveIndexWriterConfig setReaderTermsIndexDivisor(LiveIndexWriterConfig liveIndexWriterConfig, int divisor) {\n    if (divisor <= 0 && divisor != -1) {\n      throw new IllegalArgumentException(\"divisor must be >= 1, or -1 (got \" + divisor + \")\");\n    }\n    liveIndexWriterConfig.readerTermsIndexDivisor = divisor;\n    return liveIndexWriterConfig;\n  }\n\n/**\n   * API for scoring exact queries such as {@link TermQuery} and \n   * exact {@link PhraseQuery}.\n   * <p>\n   * Frequencies are integers (the term or phrase frequency within the document)\n   */\n  public static abstract class ExactSimScorer {\n    \n    /**\n     * Sole constructor. (For invocation by subclass \n     * constructors, typically implicit.)\n     */\n    public ExactSimScorer() {}\n\n    /**\n     * Score a single document\n     * @param doc document id\n     * @param freq term frequency\n     * @return document's score\n     */\n    public abstract float score(int doc, int freq);\n    \n    /**\n     * Explain the score for a single document\n     * @param doc document id\n     * @param freq Explanation of how the term frequency was computed\n     * @return document's score\n     */\n    public Explanation explain(int doc, Explanation freq) {\n      Explanation result = new Explanation(score(doc, (int)freq.getValue()), \n          \"score(doc=\" + doc + \",freq=\" + freq.getValue() +\"), with freq of:\");\n      result.addDetail(freq);\n      return result;\n    }\n  }\n  \n  /**\n   * API for scoring \"sloppy\" queries such as {@link SpanQuery} and \n   * sloppy {@link PhraseQuery}.\n   * <p>\n   * Frequencies are floating-point values: an approximate \n   * within-document frequency adjusted for \"sloppiness\" by \n   * {@link SloppySimScorer#computeSlopFactor(int)}.\n   */\n  public static abstract class SloppySimScorer {\n    \n    /**\n     * Sole constructor. (For invocation by subclass \n     * constructors, typically implicit.)\n     */\n    public SloppySimScorer() {}\n\n    /**\n     * Score a single document\n     * @param doc document id within the inverted index segment\n     * @param freq sloppy term frequency\n     * @return document's score\n     */\n    public abstract float score(int doc, float freq);\n\n    /** Computes the amount of a sloppy phrase match, based on an edit distance. */\n    public abstract float computeSlopFactor(int distance);\n    \n    /** Calculate a scoring factor based on the data in the payload. */\n    public abstract float computePayloadFactor(int doc, int start, int end, BytesRef payload);\n    \n    /**\n     * Explain the score for a single document\n     * @param doc document id within the inverted index segment\n     * @param freq Explanation of how the sloppy term frequency was computed\n     * @return document's score\n     */\n    public Explanation explain(int doc, Explanation freq) {\n      Explanation result = new Explanation(score(doc, freq.getValue()), \n          \"score(doc=\" + doc + \",freq=\" + freq.getValue() +\"), with freq of:\");\n      result.addDetail(freq);\n      return result;\n    }\n  }\n  \n  /** Stores the weight for a query across the indexed collection. This abstract\n   * implementation is empty; descendants of {@code Similarity} should\n   * subclass {@code SimWeight} and define the statistics they require in the\n   * subclass. Examples include idf, average field length, etc.\n   */\n  public static abstract class SimWeight {\n    \n    /**\n     * Sole constructor. (For invocation by subclass \n     * constructors, typically implicit.)\n     */\n    public SimWeight() {}\n    \n    /** The value for normalization of contained query clauses (e.g. sum of squared weights).\n     * <p>\n     * NOTE: a Similarity implementation might not use any query normalization at all,\n     * its not required. However, if it wants to participate in query normalization,\n     * it can return a value here.\n     */\n    public abstract float getValueForNormalization();\n    \n    /** Assigns the query normalization factor and boost from parent queries to this.\n     * <p>\n     * NOTE: a Similarity implementation might not use this normalized value at all,\n     * its not required. However, its usually a good idea to at least incorporate \n     * the topLevelBoost (e.g. from an outer BooleanQuery) into its score.\n     */\n    public abstract void normalize(float queryNorm, float topLevelBoost);\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 190,
+                        "lineEnd": 214,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.index.LiveIndexWriterConfig\nRationale: The method setReaderTermsIndexDivisor directly modifies the readerTermsIndexDivisor property of the LiveIndexWriterConfig class, making it logical for the method to reside within this class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 4766
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "setReaderTermsIndexDivisor",
+                            "method_signature": "public LiveIndexWriterConfig setReaderTermsIndexDivisor(LiveIndexWriterConfig liveIndexWriterConfig, int divisor)",
+                            "target_class": "IndexWriterConfig",
+                            "rationale": "The method setReaderTermsIndexDivisor is related to configuring the IndexWriter's behavior, which makes it more appropriate to be part of the IndexWriterConfig class rather than the Similarity class."
+                        }
+                    ],
+                    "llm_response_time": 1458
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "setReaderTermsIndexDivisor",
+                            "method_signature": "public LiveIndexWriterConfig setReaderTermsIndexDivisor(LiveIndexWriterConfig liveIndexWriterConfig, int divisor)",
+                            "target_class": "IndexWriterConfig",
+                            "rationale": "The method setReaderTermsIndexDivisor is related to configuring the IndexWriter, which makes it more appropriate to be part of the IndexWriterConfig class rather than the Similarity class."
+                        }
+                    ],
+                    "llm_response_time": 1408
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "setReaderTermsIndexDivisor",
+                            "method_signature": "public LiveIndexWriterConfig setReaderTermsIndexDivisor(LiveIndexWriterConfig liveIndexWriterConfig, int divisor)",
+                            "target_class": "IndexWriterConfig",
+                            "rationale": "The method setReaderTermsIndexDivisor is related to configuring the IndexWriter, which makes it more appropriate to be part of the IndexWriterConfig class rather than the Similarity class."
+                        }
+                    ],
+                    "llm_response_time": 1284
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "setReaderTermsIndexDivisor",
+                            "method_signature": "public LiveIndexWriterConfig setReaderTermsIndexDivisor(LiveIndexWriterConfig liveIndexWriterConfig, int divisor)",
+                            "target_class": "IndexWriterConfig",
+                            "rationale": "The method setReaderTermsIndexDivisor is related to configuring the IndexWriter's behavior, which makes it more appropriate to be part of the IndexWriterConfig class rather than the Similarity class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "setReaderTermsIndexDivisor"
+                ],
+                "llm_response_time": 525
+            },
+            "targetClassMap": {
+                "setReaderTermsIndexDivisor": {
+                    "target_classes": [
+                        {
+                            "class_name": "LiveIndexWriterConfig",
+                            "similarity_score": 0.79489084436229
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "LiveIndexWriterConfig"
+                    ],
+                    "llm_response_time": 804,
+                    "similarity_computation_time": 4,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "- method org.apache.lucene.facet.complements.TotalFacetCounts::getComplementThreshold():double need move org.apache.lucene.facet.search.StandardFacetsAccumulator",
+        "class_name": "org.apache.lucene.facet.complements.TotalFacetCounts",
+        "telemetry": {
+            "id": "00b2895f-8ff2-41f9-929c-6425035cf033",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 143,
+                "lineStart": 47,
+                "lineEnd": 189,
+                "bodyLineStart": 47,
+                "language": "java",
+                "sourceCode": "/**\n * Maintain Total Facet Counts per partition, for given parameters:\n * <ul> \n *  <li>Index reader of an index</li>\n *  <li>Taxonomy index reader</li>\n *  <li>Facet indexing params (and particularly the category list params)</li>\n *  <li></li>\n * </ul>\n * The total facet counts are maintained as an array of arrays of integers, \n * where a separate array is kept for each partition.\n * \n * @lucene.experimental\n */\npublic class TotalFacetCounts {\n  \n  /** total facet counts per partition: totalCounts[partition][ordinal%partitionLength] */\n  private int[][] totalCounts = null;\n  \n  private final TaxonomyReader taxonomy;\n  private final FacetIndexingParams facetIndexingParams;\n\n  private final static AtomicInteger atomicGen4Test = new AtomicInteger(1);\n  /** Creation type for test purposes */\n  enum CreationType { Computed, Loaded } // for testing\n  final int gen4test;\n  final CreationType createType4test;\n  \n  /** \n   * Construct by key - from index Directory or by recomputing.\n   */\n  private TotalFacetCounts (TaxonomyReader taxonomy, FacetIndexingParams facetIndexingParams,\n      int[][] counts, CreationType createType4Test) {\n    this.taxonomy = taxonomy;\n    this.facetIndexingParams = facetIndexingParams;\n    this.totalCounts = counts;\n    this.createType4test = createType4Test;\n    this.gen4test = atomicGen4Test.incrementAndGet();\n  }\n\n  /**\n   * Fill a partition's array with the TotalCountsArray values.\n   * @param partitionArray array to fill\n   * @param partition number of required partition \n   */\n  public void fillTotalCountsForPartition(int[] partitionArray, int partition) {\n    int partitionSize = partitionArray.length;\n    int[] countArray = totalCounts[partition];\n    if (countArray == null) {\n      countArray = new int[partitionSize];\n      totalCounts[partition] = countArray;\n    }\n    int length = Math.min(partitionSize, countArray.length);\n    System.arraycopy(countArray, 0, partitionArray, 0, length);\n  }\n  \n  /**\n   * Return the total count of an input category\n   * @param ordinal ordinal of category whose total count is required \n   */\n  public int getTotalCount(int ordinal) {\n    int partition = PartitionsUtils.partitionNumber(facetIndexingParams,ordinal);\n    int offset = ordinal % PartitionsUtils.partitionSize(facetIndexingParams, taxonomy);\n    return totalCounts[partition][offset];\n  }\n  \n  /**\n   * Returns the complement threshold.\n   * @param standardFacetsAccumulator TODO\n * @see #setComplementThreshold(double)\n   */\n  public double getComplementThreshold(StandardFacetsAccumulator standardFacetsAccumulator) {\n    return standardFacetsAccumulator.complementThreshold;\n  }\n\nstatic TotalFacetCounts loadFromFile(File inputFile, TaxonomyReader taxonomy, \n      FacetIndexingParams facetIndexingParams) throws IOException {\n    DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(inputFile)));\n    try {\n      int[][] counts = new int[dis.readInt()][];\n      for (int i=0; i<counts.length; i++) {\n        int size = dis.readInt();\n        if (size<0) {\n          counts[i] = null;\n        } else {\n          counts[i] = new int[size];\n          for (int j=0; j<size; j++) {\n            counts[i][j] = dis.readInt();\n          }\n        }\n      }\n      return new TotalFacetCounts(taxonomy, facetIndexingParams, counts, CreationType.Loaded);\n    } finally {\n      dis.close();\n    }\n  }\n\n  static void storeToFile(File outputFile, TotalFacetCounts tfc) throws IOException {\n    DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(outputFile)));\n    try {\n      dos.writeInt(tfc.totalCounts.length);\n      for (int[] counts : tfc.totalCounts) {\n        if (counts == null) {\n          dos.writeInt(-1);\n        } else {\n          dos.writeInt(counts.length);\n          for (int i : counts) {\n            dos.writeInt(i);\n          }\n        }\n      }\n    } finally {\n      dos.close();\n    }\n  }\n  \n  // needed because FacetSearchParams do not allow empty FacetRequests\n  private static final FacetRequest DUMMY_REQ = new CountFacetRequest(CategoryPath.EMPTY, 1);\n\n  static TotalFacetCounts compute(final IndexReader indexReader, final TaxonomyReader taxonomy, \n      final FacetIndexingParams facetIndexingParams) throws IOException {\n    int partitionSize = PartitionsUtils.partitionSize(facetIndexingParams, taxonomy);\n    final int[][] counts = new int[(int) Math.ceil(taxonomy.getSize()  /(float) partitionSize)][partitionSize];\n    FacetSearchParams newSearchParams = new FacetSearchParams(facetIndexingParams, DUMMY_REQ); \n      //createAllListsSearchParams(facetIndexingParams,  this.totalCounts);\n    StandardFacetsAccumulator sfa = new StandardFacetsAccumulator(newSearchParams, indexReader, taxonomy) {\n      @Override\n      protected HashMap<CategoryListIterator, Aggregator> getCategoryListMap(\n          FacetArrays facetArrays, int partition) throws IOException {\n        \n        Aggregator aggregator = new CountingAggregator(counts[partition]);\n        HashMap<CategoryListIterator, Aggregator> map = new HashMap<CategoryListIterator, Aggregator>();\n        for (CategoryListParams clp: facetIndexingParams.getAllCategoryListParams()) {\n          map.put(clp.createCategoryListIterator(partition), aggregator);\n        }\n        return map;\n      }\n    };\n    sfa.setComplementThreshold(StandardFacetsAccumulator.DISABLE_COMPLEMENT);\n    sfa.accumulate(ScoredDocIdsUtils.createAllDocsScoredDocIDs(indexReader));\n    return new TotalFacetCounts(taxonomy, facetIndexingParams, counts, CreationType.Computed);\n  }\n  \n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 12713
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "loadFromFile",
+                            "method_signature": "static TotalFacetCounts loadFromFile(File inputFile, TaxonomyReader taxonomy, FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "The loadFromFile method is responsible for file I/O operations, which should be separated from the core logic of the TotalFacetCounts class. Moving it to a dedicated I/O class (e.g., TotalFacetCountsIO) will enhance the single responsibility principle."
+                        },
+                        {
+                            "method_name": "storeToFile",
+                            "method_signature": "static void storeToFile(File outputFile, TotalFacetCounts tfc) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "Similar to loadFromFile, the storeToFile method handles file output operations. It should be moved to a dedicated I/O class (e.g., TotalFacetCountsIO) to maintain separation of concerns and improve code organization."
+                        },
+                        {
+                            "method_name": "compute",
+                            "method_signature": "static TotalFacetCounts compute(final IndexReader indexReader, final TaxonomyReader taxonomy, final FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsCalculator",
+                            "rationale": "The compute method contains logic for calculating total facet counts, which could be better organized in a separate class (e.g., TotalFacetCountsCalculator) dedicated to computation and aggregation logic, thus adhering to the single responsibility principle."
+                        }
+                    ],
+                    "llm_response_time": 3439
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "loadFromFile",
+                            "method_signature": "static TotalFacetCounts loadFromFile(File inputFile, TaxonomyReader taxonomy, FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "The loadFromFile method is responsible for file I/O operations, which should be separated from the core logic of the TotalFacetCounts class. Moving it to a dedicated I/O class will enhance the single responsibility principle."
+                        },
+                        {
+                            "method_name": "storeToFile",
+                            "method_signature": "static void storeToFile(File outputFile, TotalFacetCounts tfc) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "Similar to loadFromFile, the storeToFile method handles file I/O operations. It should be moved to a dedicated I/O class to maintain separation of concerns and improve code organization."
+                        },
+                        {
+                            "method_name": "compute",
+                            "method_signature": "static TotalFacetCounts compute(final IndexReader indexReader, final TaxonomyReader taxonomy, final FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsCalculator",
+                            "rationale": "The compute method contains logic for calculating total facet counts, which could be better organized in a separate class dedicated to calculations. This will improve the clarity and maintainability of the TotalFacetCounts class."
+                        }
+                    ],
+                    "llm_response_time": 4107
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "loadFromFile",
+                            "method_signature": "static TotalFacetCounts loadFromFile(File inputFile, TaxonomyReader taxonomy, FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "The loadFromFile method is responsible for file I/O operations, which should be separated from the core logic of the TotalFacetCounts class. Moving it to a dedicated I/O class will enhance separation of concerns."
+                        },
+                        {
+                            "method_name": "storeToFile",
+                            "method_signature": "static void storeToFile(File outputFile, TotalFacetCounts tfc) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "Similar to loadFromFile, the storeToFile method handles file I/O operations. It should be moved to a dedicated I/O class to maintain a clean separation between data management and file handling."
+                        },
+                        {
+                            "method_name": "compute",
+                            "method_signature": "static TotalFacetCounts compute(final IndexReader indexReader, final TaxonomyReader taxonomy, final FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsCalculator",
+                            "rationale": "The compute method contains logic for calculating total facet counts, which is a distinct responsibility. Moving it to a separate calculator class will improve the organization of the code and make it easier to manage and test."
+                        }
+                    ],
+                    "llm_response_time": 4489
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "loadFromFile",
+                            "method_signature": "static TotalFacetCounts loadFromFile(File inputFile, TaxonomyReader taxonomy, FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "The loadFromFile method is responsible for file I/O operations, which should be separated from the core logic of the TotalFacetCounts class. Moving it to a dedicated I/O class (e.g., TotalFacetCountsIO) will enhance the single responsibility principle."
+                        },
+                        {
+                            "method_name": "storeToFile",
+                            "method_signature": "static void storeToFile(File outputFile, TotalFacetCounts tfc) throws IOException",
+                            "target_class": "TotalFacetCountsIO",
+                            "rationale": "Similar to loadFromFile, the storeToFile method handles file output operations. It should be moved to a dedicated I/O class (e.g., TotalFacetCountsIO) to maintain separation of concerns and improve code organization."
+                        },
+                        {
+                            "method_name": "compute",
+                            "method_signature": "static TotalFacetCounts compute(final IndexReader indexReader, final TaxonomyReader taxonomy, final FacetIndexingParams facetIndexingParams) throws IOException",
+                            "target_class": "TotalFacetCountsCalculator",
+                            "rationale": "The compute method contains logic for calculating total facet counts, which could be better organized in a separate class (e.g., TotalFacetCountsCalculator) dedicated to computation and aggregation logic, thus adhering to the single responsibility principle."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "loadFromFile",
+                    "storeToFile",
+                    "compute"
+                ],
+                "llm_response_time": 608
+            },
+            "targetClassMap": {
+                "loadFromFile": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1851,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "storeToFile": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1718,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "compute": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1124,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.benchmark.byTask.utils.Algorithm::getRunData():PerfRunData need move org.apache.lucene.benchmark.byTask.Benchmark",
+        "class_name": "org.apache.lucene.benchmark.byTask.utils.Algorithm",
+        "telemetry": {
+            "id": "7c6e7fb1-2bb9-4b04-bd9d-669286da53cf",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 339,
+                "lineStart": 33,
+                "lineEnd": 371,
+                "bodyLineStart": 33,
+                "language": "java",
+                "sourceCode": "/**\n * Test algorithm, as read from file\n */\npublic class Algorithm {\n  \n  private TaskSequence sequence;\n  private final String[] taskPackages;\n  \n  /**\n   * Read algorithm from file\n   * Property examined: alt.tasks.packages == comma separated list of \n   * alternate package names where tasks would be searched for, when not found \n   * in the default package (that of {@link PerfTask}{@link #getClass()}).\n   * If the same task class appears in more than one package, the package \n   * indicated first in this list will be used.\n   * @param runData perf-run-data used at running the tasks.\n   * @throws Exception if errors while parsing the algorithm \n   */\n  @SuppressWarnings(\"fallthrough\")\n  public Algorithm (PerfRunData runData) throws Exception {\n    Config config = runData.getConfig();\n    taskPackages = initTasksPackages(config);\n    String algTxt = config.getAlgorithmText();\n    sequence = new TaskSequence(runData,null,null,false);\n    TaskSequence currSequence = sequence;\n    PerfTask prevTask = null;\n    StreamTokenizer stok = new StreamTokenizer(new StringReader(algTxt));\n    stok.commentChar('#');\n    stok.eolIsSignificant(false);\n    stok.quoteChar('\"');\n    stok.quoteChar('\\'');\n    stok.ordinaryChar('/');\n    stok.ordinaryChar('(');\n    stok.ordinaryChar(')');\n    boolean colonOk = false;\n    boolean isDisableCountNextTask = false; // only for primitive tasks\n    currSequence.setDepth(0);\n    \n    while (stok.nextToken() != StreamTokenizer.TT_EOF) { \n      switch(stok.ttype) {\n  \n        case StreamTokenizer.TT_WORD:\n          String s = stok.sval;\n          Constructor<? extends PerfTask> cnstr = taskClass(config,s)\n            .asSubclass(PerfTask.class).getConstructor(PerfRunData.class);\n          PerfTask task = cnstr.newInstance(runData);\n          task.setAlgLineNum(stok.lineno());\n          task.setDisableCounting(isDisableCountNextTask);\n          isDisableCountNextTask = false;\n          currSequence.addTask(task);\n          if (task instanceof RepSumByPrefTask) {\n            stok.nextToken();\n            String prefix = stok.sval;\n            if (prefix==null || prefix.length()==0) { \n              throw new Exception(\"named report prefix problem - \"+stok.toString()); \n            }\n            ((RepSumByPrefTask) task).setPrefix(prefix);\n          }\n          // check for task param: '(' someParam ')'\n          stok.nextToken();\n          if (stok.ttype!='(') {\n            stok.pushBack();\n          } else {\n            // get params, for tasks that supports them - allow recursive parenthetical expressions\n            stok.eolIsSignificant(true);  // Allow params tokenizer to keep track of line number\n            StringBuilder params = new StringBuilder();\n            stok.nextToken();\n            if (stok.ttype != ')') {\n              int count = 1;\n              BALANCED_PARENS: while (true) {\n                switch (stok.ttype) {\n                  case StreamTokenizer.TT_NUMBER: {\n                    params.append(stok.nval);\n                    break;\n                  }\n                  case StreamTokenizer.TT_WORD: {\n                    params.append(stok.sval);\n                    break;\n                  }\n                  case StreamTokenizer.TT_EOF: {\n                    throw new RuntimeException(\"Unexpexted EOF: - \"+stok.toString());\n                  }\n                  case '\"':\n                  case '\\'': {\n                    params.append((char)stok.ttype);\n                    // re-escape delimiters, if any\n                    params.append(stok.sval.replaceAll(\"\" + (char)stok.ttype, \"\\\\\\\\\" + (char)stok.ttype));\n                    params.append((char)stok.ttype);\n                    break;\n                  }\n                  case '(': {\n                    params.append((char)stok.ttype);\n                    ++count;\n                    break;\n                  }\n                  case ')': {\n                    if (--count >= 1) {  // exclude final closing parenthesis\n                      params.append((char)stok.ttype);\n                    } else {\n                      break BALANCED_PARENS;\n                    }\n                    break;\n                  }\n                  default: {\n                    params.append((char)stok.ttype);\n                  }\n                }\n                stok.nextToken();\n              }\n            }\n            stok.eolIsSignificant(false);\n            String prm = params.toString().trim();\n            if (prm.length()>0) {\n              task.setParams(prm);\n            }\n          }\n\n          // ---------------------------------------\n          colonOk = false; prevTask = task;\n          break;\n  \n        default:\n          char c = (char)stok.ttype;\n          \n          switch(c) {\n          \n            case ':' :\n              if (!colonOk) throw new Exception(\"colon unexpexted: - \"+stok.toString());\n              colonOk = false;\n              // get repetitions number\n              stok.nextToken();\n              if ((char)stok.ttype == '*') {\n                ((TaskSequence)prevTask).setRepetitions(TaskSequence.REPEAT_EXHAUST);\n              } else {\n                if (stok.ttype!=StreamTokenizer.TT_NUMBER)  {\n                  throw new Exception(\"expected repetitions number or XXXs: - \"+stok.toString());\n                } else {\n                  double num = stok.nval;\n                  stok.nextToken();\n                  if (stok.ttype == StreamTokenizer.TT_WORD && stok.sval.equals(\"s\")) {\n                    ((TaskSequence) prevTask).setRunTime(num);\n                  } else {\n                    stok.pushBack();\n                    ((TaskSequence) prevTask).setRepetitions((int) num);\n                  }\n                }\n              }\n              // check for rate specification (ops/min)\n              stok.nextToken();\n              if (stok.ttype!=':') {\n                stok.pushBack();\n              } else {\n                // get rate number\n                stok.nextToken();\n                if (stok.ttype!=StreamTokenizer.TT_NUMBER) throw new Exception(\"expected rate number: - \"+stok.toString());\n                // check for unit - min or sec, sec is default\n                stok.nextToken();\n                if (stok.ttype!='/') {\n                  stok.pushBack();\n                  ((TaskSequence)prevTask).setRate((int)stok.nval,false); // set rate per sec\n                } else {\n                  stok.nextToken();\n                  if (stok.ttype!=StreamTokenizer.TT_WORD) throw new Exception(\"expected rate unit: 'min' or 'sec' - \"+stok.toString());\n                  String unit = stok.sval.toLowerCase(Locale.ROOT);\n                  if (\"min\".equals(unit)) {\n                    ((TaskSequence)prevTask).setRate((int)stok.nval,true); // set rate per min\n                  } else if (\"sec\".equals(unit)) {\n                    ((TaskSequence)prevTask).setRate((int)stok.nval,false); // set rate per sec\n                  } else {\n                    throw new Exception(\"expected rate unit: 'min' or 'sec' - \"+stok.toString());\n                  }\n                }\n              }\n              colonOk = false;\n              break;\n    \n            case '{' : \n            case '[' :  \n              // a sequence\n              // check for sequence name\n              String name = null;\n              stok.nextToken();\n              if (stok.ttype!='\"') {\n                stok.pushBack();\n              } else {\n                name = stok.sval;\n                if (stok.ttype!='\"' || name==null || name.length()==0) {\n                  throw new Exception(\"sequence name problem - \"+stok.toString()); \n                }\n              }\n              // start the sequence\n              TaskSequence seq2 = new TaskSequence(runData, name, currSequence, c=='[');\n              currSequence.addTask(seq2);\n              currSequence = seq2;\n              colonOk = false;\n              break;\n\n            case '&' :\n              if (currSequence.isParallel()) {\n                throw new Exception(\"Can only create background tasks within a serial task\");\n              }\n              stok.nextToken();\n              final int deltaPri;\n              if (stok.ttype != StreamTokenizer.TT_NUMBER) {\n                stok.pushBack();\n                deltaPri = 0;\n              } else {\n                // priority\n                deltaPri = (int) stok.nval;\n              }\n\n              if (prevTask == null) {\n                throw new Exception(\"& was unexpected\");\n              } else if (prevTask.getRunInBackground()) {\n                throw new Exception(\"double & was unexpected\");\n              } else {\n                prevTask.setRunInBackground(deltaPri);\n              }\n              break;\n    \n            case '>' :\n              currSequence.setNoChildReport(); /* intentional fallthrough */\n            case '}' : \n            case ']' : \n              // end sequence\n              colonOk = true; prevTask = currSequence;\n              currSequence = currSequence.getParent();\n              break;\n          \n            case '-' :\n              isDisableCountNextTask = true;\n              break;\n              \n          } //switch(c)\n          break;\n          \n      } //switch(stok.ttype)\n      \n    }\n    \n    if (sequence != currSequence) {\n      throw new Exception(\"Unmatched sequences\");\n    }\n    \n    // remove redundant top level enclosing sequences\n    while (sequence.isCollapsable() && sequence.getRepetitions()==1 && sequence.getRate()==0) {\n      ArrayList<PerfTask> t = sequence.getTasks();\n      if (t!=null && t.size()==1) {\n        PerfTask p = t.get(0);\n        if (p instanceof TaskSequence) {\n          sequence = (TaskSequence) p;\n          continue;\n        }\n      }\n      break;\n    }\n  }\n\n  private String[] initTasksPackages(Config config) {\n    String alts = config.get(\"alt.tasks.packages\", null);\n    String dfltPkg = PerfTask.class.getPackage().getName();\n    if (alts==null) {\n      return new String[]{ dfltPkg };\n    }\n    ArrayList<String> pkgs = new ArrayList<String>();\n    pkgs.add(dfltPkg);\n    for (String alt : alts.split(\",\")) {\n      pkgs.add(alt);\n    }\n    return pkgs.toArray(new String[0]);\n  }\n\n  private Class<?> taskClass(Config config, String taskName)\n      throws ClassNotFoundException {\n    for (String pkg : taskPackages) {\n      try {\n        return Class.forName(pkg+'.'+taskName+\"Task\");\n      } catch (ClassNotFoundException e) {\n        // failed in this package, might succeed in the next one... \n      }\n    }\n    // can only get here if failed to instantiate\n    throw new ClassNotFoundException(taskName+\" not found in packages \"+Arrays.toString(taskPackages));\n  }\n\n  @Override\n  public String toString() {\n    String newline = System.getProperty(\"line.separator\");\n    StringBuilder sb = new StringBuilder();\n    sb.append(sequence.toString());\n    sb.append(newline);\n    return sb.toString();\n  }\n\n  /**\n   * Execute this algorithm\n   */\n  public void execute() throws Exception {\n    try {\n      sequence.runAndMaybeStats(true);\n    } finally {\n      sequence.close();\n    }\n  }\n\n  /**\n   * Expert: for test purposes, return all tasks participating in this algorithm.\n   * @return all tasks participating in this algorithm.\n   */\n  public ArrayList<PerfTask> extractTasks() {\n    ArrayList<PerfTask> res = new ArrayList<PerfTask>();\n    extractTasks(res, sequence);\n    return res;\n  }\n  private void extractTasks (ArrayList<PerfTask> extrct, TaskSequence seq) {\n    if (seq==null) \n      return;\n    extrct.add(seq);\n    ArrayList<PerfTask> t = sequence.getTasks();\n    if (t==null) \n      return;\n    for (final PerfTask p : t) {\n      if (p instanceof TaskSequence) {\n        extractTasks(extrct, (TaskSequence)p);\n      } else {\n        extrct.add(p);\n      }\n    }\n  }\n\n/**\n   * @param benchmark TODO\n * @return Returns the runData.\n   */\n  public PerfRunData getRunData(Benchmark benchmark) {\n    return benchmark.runData;\n  }\n  \n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 3,
+                "candidates": [
+                    {
+                        "lineStart": 290,
+                        "lineEnd": 302,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.benchmark.byTask.utils.Config\nRationale: The method initTasksPackages() directly interacts with the Config object to retrieve configuration values, making it more appropriate for it to reside within the Config class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 346,
+                        "lineEnd": 360,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.benchmark.byTask.tasks.TaskSequence\nRationale: The method extractTasks is designed to work with TaskSequence objects, as it recursively processes sequences and their tasks. It is logical to move this method to the TaskSequence class to encapsulate the behavior related to task extraction within the class that represents a sequence of tasks.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 362,
+                        "lineEnd": 368,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.benchmark.byTask.Benchmark\nRationale: The method getRunData() directly accesses the runData property of the Benchmark class, indicating that it is closely related to the Benchmark's functionality and should be part of that class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 15110
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "initTasksPackages",
+                            "method_signature": "private String[] initTasksPackages(Config config)",
+                            "target_class": "Config",
+                            "rationale": "The method initTasksPackages() is responsible for retrieving and processing task package configurations, which is closely related to the Config class. Moving it there would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "taskClass",
+                            "method_signature": "private Class<?> taskClass(Config config, String taskName) throws ClassNotFoundException",
+                            "target_class": "TaskFactory",
+                            "rationale": "The taskClass() method is responsible for locating and instantiating task classes based on configuration. This functionality is more aligned with a factory pattern, so moving it to a TaskFactory class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "extractTasks",
+                            "method_signature": "public ArrayList<PerfTask> extractTasks()",
+                            "target_class": "TaskSequence",
+                            "rationale": "The extractTasks() method operates on a TaskSequence and is primarily concerned with retrieving tasks from it. Moving this method to the TaskSequence class would enhance the encapsulation of task-related operations."
+                        },
+                        {
+                            "method_name": "extractTasks",
+                            "method_signature": "private void extractTasks(ArrayList<PerfTask> extrct, TaskSequence seq)",
+                            "target_class": "TaskSequence",
+                            "rationale": "Similar to the public extractTasks() method, this private method also deals with extracting tasks from a TaskSequence. It should be moved to the TaskSequence class to maintain a single responsibility for task extraction."
+                        },
+                        {
+                            "method_name": "getRunData",
+                            "method_signature": "public PerfRunData getRunData(Benchmark benchmark)",
+                            "target_class": "Benchmark",
+                            "rationale": "The getRunData() method retrieves run data from a Benchmark instance. This method should be moved to the Benchmark class to maintain encapsulation and clarity regarding where run data is managed."
+                        }
+                    ],
+                    "llm_response_time": 4904
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "initTasksPackages",
+                            "method_signature": "private String[] initTasksPackages(Config config)",
+                            "target_class": "Config",
+                            "rationale": "The method initTasksPackages() is responsible for retrieving and processing task package configurations, which is closely related to the Config class. Moving it there would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "taskClass",
+                            "method_signature": "private Class<?> taskClass(Config config, String taskName) throws ClassNotFoundException",
+                            "target_class": "TaskFactory",
+                            "rationale": "The taskClass() method is responsible for locating and instantiating task classes based on configuration. This functionality is more aligned with a factory pattern, so it should be moved to a dedicated TaskFactory class."
+                        },
+                        {
+                            "method_name": "extractTasks",
+                            "method_signature": "public ArrayList<PerfTask> extractTasks()",
+                            "target_class": "TaskSequence",
+                            "rationale": "The extractTasks() method operates on a TaskSequence and is primarily concerned with retrieving tasks from it. This method should be moved to the TaskSequence class to maintain better encapsulation and separation of concerns."
+                        },
+                        {
+                            "method_name": "extractTasks",
+                            "method_signature": "private void extractTasks(ArrayList<PerfTask> extrct, TaskSequence seq)",
+                            "target_class": "TaskSequence",
+                            "rationale": "Similar to the public extractTasks() method, this private method also deals with the extraction of tasks from a TaskSequence. It should be moved to the TaskSequence class for better organization and encapsulation."
+                        },
+                        {
+                            "method_name": "getRunData",
+                            "method_signature": "public PerfRunData getRunData(Benchmark benchmark)",
+                            "target_class": "Benchmark",
+                            "rationale": "The getRunData() method retrieves the run data from a Benchmark instance. This method should be moved to the Benchmark class to enhance cohesion and make it more intuitive."
+                        }
+                    ],
+                    "llm_response_time": 4459
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "initTasksPackages",
+                            "method_signature": "private String[] initTasksPackages(Config config)",
+                            "target_class": "Config",
+                            "rationale": "The method initTasksPackages() is responsible for retrieving and processing task package configurations, which is closely related to the Config class. Moving it there would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "taskClass",
+                            "method_signature": "private Class<?> taskClass(Config config, String taskName) throws ClassNotFoundException",
+                            "target_class": "TaskFactory",
+                            "rationale": "The taskClass() method is responsible for locating and instantiating task classes based on configuration. This functionality is more aligned with a factory pattern, so it should be moved to a dedicated TaskFactory class."
+                        },
+                        {
+                            "method_name": "extractTasks",
+                            "method_signature": "public ArrayList<PerfTask> extractTasks()",
+                            "target_class": "TaskSequence",
+                            "rationale": "The extractTasks() method operates on a TaskSequence and is primarily concerned with extracting tasks from it. This functionality would be better suited within the TaskSequence class to maintain a clear separation of responsibilities."
+                        },
+                        {
+                            "method_name": "extractTasks",
+                            "method_signature": "private void extractTasks(ArrayList<PerfTask> extrct, TaskSequence seq)",
+                            "target_class": "TaskSequence",
+                            "rationale": "Similar to the public extractTasks() method, this private method also deals with the extraction of tasks from a TaskSequence. It should be moved to the TaskSequence class to encapsulate related functionality."
+                        },
+                        {
+                            "method_name": "getRunData",
+                            "method_signature": "public PerfRunData getRunData(Benchmark benchmark)",
+                            "target_class": "Benchmark",
+                            "rationale": "The getRunData() method retrieves run data from a Benchmark instance. This method should be moved to the Benchmark class to maintain encapsulation and clarity regarding where run data is managed."
+                        }
+                    ],
+                    "llm_response_time": 4955
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "initTasksPackages",
+                            "method_signature": "private String[] initTasksPackages(Config config)",
+                            "target_class": "Config",
+                            "rationale": "The method initTasksPackages() is responsible for retrieving and processing task package configurations, which is closely related to the Config class. Moving it there would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "taskClass",
+                            "method_signature": "private Class<?> taskClass(Config config, String taskName) throws ClassNotFoundException",
+                            "target_class": "TaskFactory",
+                            "rationale": "The taskClass() method is responsible for locating and instantiating task classes based on configuration. This functionality is more aligned with a factory pattern, so moving it to a TaskFactory class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "extractTasks",
+                            "method_signature": "public ArrayList<PerfTask> extractTasks()",
+                            "target_class": "TaskSequence",
+                            "rationale": "The extractTasks() method operates on a TaskSequence and is primarily concerned with retrieving tasks from it. Moving this method to the TaskSequence class would enhance the encapsulation of task-related operations."
+                        },
+                        {
+                            "method_name": "getRunData",
+                            "method_signature": "public PerfRunData getRunData(Benchmark benchmark)",
+                            "target_class": "Benchmark",
+                            "rationale": "The getRunData() method retrieves run data from a Benchmark instance. This method should be moved to the Benchmark class to maintain encapsulation and clarity regarding where run data is managed."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "initTasksPackages",
+                    "taskClass",
+                    "extractTasks",
+                    "getRunData"
+                ],
+                "llm_response_time": 703
+            },
+            "targetClassMap": {
+                "initTasksPackages": {
+                    "target_classes": [
+                        {
+                            "class_name": "Config",
+                            "similarity_score": 0.6195414288435636
+                        },
+                        {
+                            "class_name": "TaskSequence",
+                            "similarity_score": 0.6525254714154396
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Config",
+                        "TaskSequence"
+                    ],
+                    "llm_response_time": 1854,
+                    "similarity_computation_time": 4,
+                    "similarity_metric": "cosine"
+                },
+                "taskClass": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 2682,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "extractTasks": {
+                    "target_classes": [
+                        {
+                            "class_name": "TaskSequence",
+                            "similarity_score": 0.7054300978180938
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TaskSequence"
+                    ],
+                    "llm_response_time": 1876,
+                    "similarity_computation_time": 3,
+                    "similarity_metric": "cosine"
+                },
+                "getRunData": {
+                    "target_classes": [
+                        {
+                            "class_name": "Benchmark",
+                            "similarity_score": 0.580941461928408
+                        },
+                        {
+                            "class_name": "TaskSequence",
+                            "similarity_score": 0.3648906403608994
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Benchmark",
+                        "TaskSequence"
+                    ],
+                    "llm_response_time": 1536,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    }
+]

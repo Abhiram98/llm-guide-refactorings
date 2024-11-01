@@ -44,7 +44,7 @@ class VoyageAiEmbeddingModelIT {
         // given
 
         val model: EmbeddingModel = VoyageAiEmbeddingModel.builder()
-            .apiKey("pa-6GcL1W5Z4KBXn0zXcrHu4Dg9iF8_uHi25rQdpUVcXXk")
+            .apiKey(System.getenv("VOYAGE_API_KEY"))
             .modelName(modelName)
             .timeout(Duration.ofSeconds(60))
             .inputType("query")

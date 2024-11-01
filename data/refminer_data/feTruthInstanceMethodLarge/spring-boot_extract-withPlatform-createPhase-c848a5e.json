@@ -1,0 +1,122 @@
+[
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "getBuildCache",
+    "target_class": "org.springframework.boot.buildpack.platform.build.BuildRequest"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "getLaunchCache",
+    "target_class": "org.springframework.boot.buildpack.platform.build.BuildRequest"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "getApplicationDirectory",
+    "target_class": "org.springframework.boot.buildpack.platform.build.BuildRequest"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "getPlatformVersion",
+    "target_class": "org.springframework.boot.buildpack.platform.build.BuilderMetadata.Lifecycle"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "createPhase",
+    "target_class": "org.springframework.boot.buildpack.platform.build.BuildRequest"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "withPlatform",
+    "target_class": "java.lang.String):void \t org.springframework.boot.buildpack.platform.build.Phase"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "getLayersBindingSource",
+    "target_class": "org.springframework.boot.buildpack.platform.build.BuildRequest"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "getBuildWorkspaceBindingSource",
+    "target_class": "java.lang.String):org.springframework.boot.buildpack.platform.build.Cache \t org.springframework.boot.buildpack.platform.build.Cache"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "getCacheBindingSource",
+    "target_class": "org.springframework.boot.buildpack.platform.build.Cache"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "createVolumeCache",
+    "target_class": "org.springframework.boot.buildpack.platform.build.Cache"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "createVolumeCache",
+    "target_class": "java.lang.String):org.springframework.boot.buildpack.platform.build.Cache \t org.springframework.boot.buildpack.platform.build.BuildRequest"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "configureDaemonAccess",
+    "target_class": "org.springframework.boot.buildpack.platform.docker.configuration.ResolvedDockerHost"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "isVerboseLogging",
+    "target_class": "org.springframework.boot.buildpack.platform.build.LifecycleVersion"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "requiresProcessTypeDefault",
+    "target_class": "org.springframework.boot.buildpack.platform.build.ApiVersion"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "run",
+    "target_class": "org.springframework.boot.buildpack.platform.build.EphemeralBuilder"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "createContainer",
+    "target_class": "org.springframework.boot.buildpack.platform.build.EphemeralBuilder"
+  },
+  {
+    "source_class": "org.springframework.boot.buildpack.platform.build.Lifecycle",
+    "source_method": "deleteVolume",
+    "target_class": "org.springframework.boot.buildpack.platform.docker.DockerApi"
+  },
+  {
+    "source_class": "org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor",
+    "source_method": "getElementsAnnotatedOrMetaAnnotatedWith",
+    "target_class": "javax.lang.model.element.TypeElement):java.util.Map<javax.lang.model.element.Element,java.util.List<javax.lang.model.element.Element>> \t org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment"
+  },
+  {
+    "source_class": "org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor",
+    "source_method": "processAnnotatedTypeElement",
+    "target_class": "javax.lang.model.element.TypeElement, java.util.Deque<javax.lang.model.element.TypeElement>):void \t org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment"
+  },
+  {
+    "source_class": "org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor",
+    "source_method": "processEndpoint",
+    "target_class": "java.util.List<javax.lang.model.element.Element>):void \t org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment"
+  },
+  {
+    "source_class": "org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor",
+    "source_method": "hasMainReadOperation",
+    "target_class": "org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment"
+  },
+  {
+    "source_class": "org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor",
+    "source_method": "hasNoOrOptionalParameters",
+    "target_class": "org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment"
+  },
+  {
+    "source_class": "org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor",
+    "source_method": "getPrefix",
+    "target_class": "org.springframework.boot.configurationprocessor.MetadataGenerationEnvironment"
+  },
+  {
+    "source_class": "org.springframework.boot.configurationprocessor.ConfigurationMetadataAnnotationProcessor",
+    "source_method": "writeMetadata",
+    "target_class": "org.springframework.boot.configurationprocessor.metadata.ConfigurationMetadata"
+  }
+]

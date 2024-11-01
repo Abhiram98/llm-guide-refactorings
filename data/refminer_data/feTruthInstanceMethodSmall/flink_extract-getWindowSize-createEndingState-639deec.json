@@ -1,0 +1,52 @@
+[
+  {
+    "source_class": "org.apache.flink.runtime.rpc.pekko.ActorSystemBootstrapTools",
+    "source_method": "startRemoteActorSystem",
+    "target_class": "java.lang.String, java.lang.String, org.apache.flink.runtime.rpc.pekko.Logger):org.apache.flink.runtime.rpc.pekko.ActorSystem \t org.apache.flink.runtime.rpc.pekko.PekkoUtils"
+  },
+  {
+    "source_class": "org.apache.flink.runtime.rpc.pekko.ActorSystemBootstrapTools",
+    "source_method": "startRemoteActorSystem",
+    "target_class": "java.lang.String, java.lang.String, int, java.lang.String, int, org.apache.flink.runtime.rpc.pekko.Logger, org.apache.flink.runtime.rpc.pekko.Config, org.apache.flink.runtime.rpc.pekko.Config):org.apache.flink.runtime.rpc.pekko.ActorSystem \t org.apache.flink.runtime.rpc.pekko.PekkoUtils"
+  },
+  {
+    "source_class": "org.apache.flink.runtime.rpc.pekko.ActorSystemBootstrapTools",
+    "source_method": "startLocalActorSystem",
+    "target_class": "java.lang.String, org.apache.flink.runtime.rpc.pekko.Logger, org.apache.flink.runtime.rpc.pekko.Config, org.apache.flink.runtime.rpc.pekko.Config):org.apache.flink.runtime.rpc.pekko.ActorSystem \t org.apache.flink.runtime.rpc.pekko.PekkoUtils"
+  },
+  {
+    "source_class": "org.apache.flink.runtime.rpc.pekko.ActorSystemBootstrapTools",
+    "source_method": "startActorSystem",
+    "target_class": "java.lang.String, org.apache.flink.runtime.rpc.pekko.Logger):org.apache.flink.runtime.rpc.pekko.ActorSystem \t org.apache.flink.runtime.rpc.pekko.PekkoUtils"
+  },
+  {
+    "source_class": "org.apache.flink.runtime.clusterframework.BootstrapTools",
+    "source_method": "getTaskManagerShellCommand",
+    "target_class": "org.apache.flink.runtime.clusterframework.ContaineredTaskManagerParameters, java.lang.String, java.lang.String, boolean, boolean, boolean, java.lang.Class<?>, java.lang.String):java.lang.String \t org.apache.flink.runtime.util.config.memory.ProcessMemoryUtils"
+  },
+  {
+    "source_class": "org.apache.flink.table.planner.connectors.DynamicSourceUtils",
+    "source_method": "pushWatermarkAssigner",
+    "target_class": "org.apache.flink.table.planner.connectors.ResolvedSchema):void \t org.apache.flink.table.planner.calcite.FlinkRelBuilder"
+  },
+  {
+    "source_class": "org.apache.flink.table.planner.connectors.DynamicSourceUtils",
+    "source_method": "pushGeneratedProjection",
+    "target_class": "org.apache.flink.table.planner.connectors.ResolvedSchema):void \t org.apache.calcite.tools.RelBuilder"
+  },
+  {
+    "source_class": "org.apache.flink.table.planner.connectors.DynamicSourceUtils",
+    "source_method": "pushMetadataProjection",
+    "target_class": "org.apache.flink.table.planner.connectors.ResolvedSchema):void \t org.apache.calcite.tools.RelBuilder"
+  },
+  {
+    "source_class": "org.apache.flink.table.planner.connectors.DynamicSourceUtils",
+    "source_method": "pushTableScan",
+    "target_class": "org.apache.flink.table.planner.calcite.FlinkRelBuilder, org.apache.flink.table.planner.connectors.ContextResolvedTable, org.apache.flink.table.planner.connectors.FlinkStatistic, java.util.List<org.apache.flink.table.planner.connectors.RelHint>, org.apache.flink.table.planner.connectors.DynamicTableSource, java.util.List<org.apache.flink.table.planner.plan.abilities.source.SourceAbilitySpec>):void \t org.apache.flink.table.planner.utils.ShortcutUtils"
+  },
+  {
+    "source_class": "org.apache.flink.table.planner.connectors.DynamicSourceUtils",
+    "source_method": "prepareRowLevelModificationScan",
+    "target_class": "org.apache.flink.table.planner.utils.RowLevelModificationContextUtils"
+  }
+]

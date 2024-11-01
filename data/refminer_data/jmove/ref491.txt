@@ -1,0 +1,51 @@
+took 26000 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	com.oracle.svm.core.jdk.resources.NativeImageResourceFileSystem::removeTempPathForEntry(Path):void	com.oracle.svm.core.jdk.resources.NativeImageResourceFileSystemProvider	0.5192743764172335
+Move Method	com.oracle.svm.core.jdk.Target_java_lang_StackWalker::forEach(Consumer<? super StackFrame>):void	com.oracle.svm.core.thread.Target_jdk_internal_vm_Continuation	0.38100415840104923
+Move Method	com.oracle.svm.core.jdk.resources.NativeImageResourceFileSystem::createTempFileInSameDirectoryAs():Path	com.oracle.svm.core.jdk.resources.NativeImageResourceFileSystemProvider	0.5192743764172335
+Move Method	com.oracle.svm.core.jfr.JfrRecorderThread::persistBuffers(JfrChunkWriter):void	com.oracle.svm.core.jfr.JfrGlobalMemory	1.0
+Move Method	com.oracle.svm.core.graal.code.SubstrateBackend::isRuntimeToRuntimeCall(LIRFrameState):boolean	com.oracle.svm.core.graal.meta.RuntimeConfiguration	0.46957671957671954
+Move Method	com.oracle.svm.core.heap.dump.HeapDumpWriter::writeFieldData(Object, FieldInfo):void	com.oracle.svm.core.heap.dump.HeapDumpMetadata	0.2653209109730849
+Move Method	com.oracle.svm.core.thread.VMThreads::findIsolateThreadForCurrentOSThread(boolean):IsolateThread	com.oracle.svm.core.locks.VMMutex	0.8337231968810916
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::isEnabled(JfrEvent):boolean	com.oracle.svm.core.jfr.JfrEvent	1.0
+Move Method	com.oracle.svm.core.graal.code.SubstrateBackend::setRuntimeToRuntimeInvokeMethod(Method):void	com.oracle.svm.core.graal.meta.RuntimeConfiguration	0.5678571428571428
+Move Method	com.oracle.svm.core.thread.VMOperationControl.WorkQueues::waitForWorkAndExecute():void	com.oracle.svm.core.locks.VMMutex	1.0
+Move Method	com.oracle.svm.core.jfr.JfrChunkFileWriter::traverseThreadLocalBuffers(JfrBufferList, boolean):void	com.oracle.svm.core.jfr.JfrGlobalMemory	1.0
+Move Method	com.oracle.svm.core.jdk.Target_java_lang_StackWalker.AbstractStackFrameSpliterator::queryFrameInfo(CodeInfo, CodePointer):FrameInfoQueryResult	com.oracle.svm.core.code.FrameInfoQueryResult	0.5220238095238096
+Move Method	com.oracle.svm.core.thread.VMThreads::detachThread(IsolateThread, boolean):void	com.oracle.svm.core.locks.VMMutex	0.7736013986013984
+Move Method	com.oracle.svm.core.code.CodeInfoDecoder.FrameInfoCursor::initialize(CodeInfo, CodePointer, boolean):void	com.oracle.svm.core.code.ReusableTypeReader	0.5745341614906833
+Move Method	com.oracle.svm.core.heap.dump.HeapDumpWriter::dumpHeap(RawFileDescriptor):boolean	com.oracle.svm.core.heap.NoAllocationVerifier	1.0
+Move Method	com.oracle.svm.core.feature.InternalFeature::registerLowerings(RuntimeConfiguration, OptionValues, Providers, Map<Class<? extends Node>,NodeLoweringProvider<?>>, boolean):void	com.oracle.svm.core.graal.meta.RuntimeConfiguration	0.24136752136752138
+Move Method	com.oracle.svm.core.SubstrateDiagnostics.ImageCodeLocationInfoPrinter::printLocationInfo(Log, UnsignedWord):boolean	com.oracle.svm.core.log.Log	0.6447270441593752
+Move Method	com.oracle.svm.core.jdk.resources.NativeImageResourceFileSystem::iteratorOf(NativeImageResourcePath, DirectoryStream.Filter<? super Path>):Iterator<Path>	com.oracle.svm.core.jdk.resources.NativeImageResourceFileSystemProvider	1.0
+Move Method	com.oracle.svm.core.jfr.JfrStackTraceRepository::getOrPutStackTrace(Pointer, UnsignedWord, int, CIntPointer):JfrStackTraceTableEntry	com.oracle.svm.core.locks.VMMutex	0.5115566694514063
+Move Method	com.oracle.svm.core.thread.VMOperationControl.WorkQueues::enqueueUninterruptibly(NativeVMOperation, NativeVMOperationData):void	com.oracle.svm.core.locks.VMMutex	1.0
+Move Method	com.oracle.svm.core.jdk.resources.NativeImageResourcePath::newDirectoryStream(DirectoryStream.Filter<? super Path>):DirectoryStream<Path>	com.oracle.svm.core.jdk.resources.NativeImageResourceFileSystem	0.20710514848895048
+Move Method	com.oracle.svm.core.thread.VMOperationControl.VMOpStatusChange::print(Log, boolean):void	com.oracle.svm.core.log.Log	1.0
+Move Method	com.oracle.svm.core.code.RuntimeCodeInfoHistory.CodeCacheLogEntry::print(Log, boolean):void	com.oracle.svm.core.log.Log	1.0
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::setOutput(String):void	com.oracle.svm.core.jfr.JfrRecorderThread	0.8832611832611832
+Move Method	com.oracle.svm.core.code.CodeInfoEncoder::encodeAllAndInstall(CodeInfo, ReferenceAdjuster):void	com.oracle.svm.core.code.FrameInfoEncoder	0.6349955246373724
+Move Method	com.oracle.svm.core.thread.VMOperationControl.WorkQueues::enqueueAndExecute(VMOperation, NativeVMOperationData):void	com.oracle.svm.core.thread.VMOperation	0.8064182194616978
+Move Method	com.oracle.svm.core.thread.VMOperationControl::setInProgress(VMOperation, IsolateThread, IsolateThread, boolean):void	com.oracle.svm.core.thread.VMOperation	0.686371726417493
+Move Method	com.oracle.svm.core.jdk.Target_java_lang_StackWalker::getCallerClass():Class<?>	com.oracle.svm.core.thread.Target_jdk_internal_vm_Continuation	0.2463096559378468
+Move Method	com.oracle.svm.core.jvmstat.PerfDirectMemoryLong::allocate(PerfVariability, long):ByteBuffer	com.oracle.svm.core.jvmstat.PerfVariability	0.3
+Move Method	com.oracle.svm.core.thread.VMOperationControl.WorkQueues::enqueue(NativeVMOperation, NativeVMOperationData):void	com.oracle.svm.core.thread.NativeVMOperation	1.0
+Move Method	com.oracle.svm.core.thread.VMOperationControl::enqueueFromNonJavaThread(NativeVMOperation, NativeVMOperationData):void	com.oracle.svm.core.thread.NativeVMOperation	1.0
+Move Method	com.oracle.svm.core.deopt.Deoptimizer::readLocalVariable(int, FrameInfoQueryResult):JavaConstant	com.oracle.svm.core.code.FrameInfoQueryResult	1.0
+Move Method	com.oracle.svm.core.thread.VMThreads::threadExit():void	com.oracle.svm.core.locks.VMMutex	0.5031810294968188
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::commit(long):long	com.oracle.svm.core.jfr.JfrThreadLocal	0.5466695466695466
+Move Method	com.oracle.svm.core.SubstrateDiagnostics.FatalErrorState::trySet(Log, Pointer, CodePointer, RegisterDumper.Context, boolean):boolean	com.oracle.svm.core.log.Log	0.5218498922202623
+Move Method	com.oracle.svm.core.jfr.JfrThreadLocal::getJavaBuffer():JfrBuffer	com.oracle.svm.core.jfr.JfrBufferList	1.0
+Move Method	com.oracle.svm.core.jvmstat.PerfManager.PerfDataThread::initializeMemory():void	com.oracle.svm.core.locks.VMCondition	0.9792960662525878
+Move Method	com.oracle.svm.core.code.FrameInfoQueryResult::log(Log):Log	com.oracle.svm.core.log.Log	0.4200617283950616
+Move Method	com.oracle.svm.core.jfr.JfrChunkFileWriter::flushGlobalMemory(boolean):void	com.oracle.svm.core.jfr.JfrGlobalMemory	1.0
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::isLarge(JfrEvent):boolean	com.oracle.svm.core.jfr.JfrEvent	1.0
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::flush(Target_jdk_jfr_internal_event_EventWriter, int, int):boolean	com.oracle.svm.core.jfr.JfrThreadLocal	0.7136228227137317
+Move Method	com.oracle.svm.core.thread.VMOperationControl.WorkQueues::enqueueAndWait(VMOperation, NativeVMOperationData):void	com.oracle.svm.core.thread.VMOperation	0.9007217644776002
+Move Method	com.oracle.svm.core.jfr.JfrThreadLocal::getNativeBuffer():JfrBuffer	com.oracle.svm.core.jfr.JfrBufferList	1.0
+Move Method	com.oracle.svm.core.jdk.StackTraceUtils.BacktraceVisitor::visitFrameInfo(FrameInfoQueryResult):boolean	com.oracle.svm.core.code.FrameInfoQueryResult	0.6687011122822593
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::getClassId(Class<?>):long	com.oracle.svm.core.jfr.JfrTypeRepository	0.6039156195437505
+Move Method	com.oracle.svm.core.heap.Target_java_lang_ref_Reference::clearInactiveFinalReference():void	com.oracle.svm.core.heap.Target_java_lang_ref_ReferenceQueue	0.26666666666666666
+Move Method	com.oracle.svm.core.jvmstat.PerfLong::allocate(PerfVariability, long):void	com.oracle.svm.core.jvmstat.PerfVariability	0.6895796847635728
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::setLarge(JfrEvent, boolean):void	com.oracle.svm.core.jfr.JfrEvent	1.0
+Move Method	com.oracle.svm.core.jfr.SubstrateJVM::getThresholdTicks(JfrEvent):long	com.oracle.svm.core.jfr.JfrEvent	1.0

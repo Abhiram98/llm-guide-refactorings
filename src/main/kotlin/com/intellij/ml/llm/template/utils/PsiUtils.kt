@@ -469,13 +469,13 @@ class PsiUtils {
                     Processor<PsiClass> {
                         psiClass: PsiClass->
 //                        psiClass: PsiClass-> classList.add(psiClass)
-                        if (psiClass.methods.isNotEmpty() &&
-                            !psiClass.isEnum &&
-                            !psiClass.isInterface &&
-                            !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
-                            !psiClass.isAnnotationType) {
+//                        if (psiClass.methods.isNotEmpty() &&
+//                            !psiClass.isEnum &&
+//                            !psiClass.isInterface &&
+//                            !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
+//                            !psiClass.isAnnotationType) {
                             classList.add(psiClass)
-                        }
+//                        }
                         true
                     }
                 )

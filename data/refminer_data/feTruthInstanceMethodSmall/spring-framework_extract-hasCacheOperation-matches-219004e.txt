@@ -1,0 +1,3 @@
+Refactoring Type	Source Method	Target Class
+Move Method	org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor::setCacheOperationSource(org.springframework.cache.jcache.interceptor.JCacheOperationSource):void 	 org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor.JCacheOperationSourcePointcut
+Move Method	org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor.JCacheOperationSourcePointcut::hasCacheOperation(java.lang.reflect.Method, java.lang.Class<?>):boolean 	 org.springframework.cache.jcache.interceptor.JCacheOperationSource

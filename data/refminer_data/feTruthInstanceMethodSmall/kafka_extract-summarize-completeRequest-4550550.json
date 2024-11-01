@@ -1,0 +1,17 @@
+[
+  {
+    "source_class": "org.apache.kafka.connect.runtime.rest.HerderRequestHandler",
+    "source_method": "summarize",
+    "target_class": "org.apache.kafka.connect.util.Stage"
+  },
+  {
+    "source_class": "org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime",
+    "source_method": "enqueueLast",
+    "target_class": "org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor"
+  },
+  {
+    "source_class": "org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime",
+    "source_method": "enqueueFirst",
+    "target_class": "org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor"
+  }
+]

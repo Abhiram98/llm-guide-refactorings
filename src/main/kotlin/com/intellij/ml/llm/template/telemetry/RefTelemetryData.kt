@@ -39,10 +39,10 @@ data class RefTelemetryData(
     var iterationData: MutableList<MoveMethodIterationData> = mutableListOf()
 
     @SerializedName("methodCompatibilityScores")
-    var methodCompatibility: MutableMap<String, Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>> = mutableMapOf()
+    var methodCompatibility: MutableMap<String, MutableMap<String, Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>> = mutableMapOf()
 
     @SerializedName("llmMethodPriority")
-    lateinit var llmPriority: LlmMovePriority
+    val llmPriorityMap: MutableMap<String, LlmMovePriority> = mutableMapOf()
 
     @SerializedName("targetClassMap")
     var targetClassMap: MutableMap<String, TargetClass4Method> = mutableMapOf()
@@ -356,14 +356,15 @@ class EFTelemetryDataManager {
         currentTelemetryData.iterationData.add(MoveMethodIterationData(iter, transformedMethodNames, llmResponseTime))
     }
 
-    fun addLLMPriorityResponse(moveMethodSuggestions: List<String>, llmResponseTime: Long) {
+    fun addLLMPriorityResponse(moveMethodSuggestions: List<String>, llmResponseTime: Long, similarityMetric: String) {
         val transformedMethodNames = if (anonimizeTelemetry){
             moveMethodSuggestions.map{getAndSetAnonMethodName(it)}
         }else{moveMethodSuggestions}
-        currentTelemetryData.llmPriority = LlmMovePriority(transformedMethodNames, null, llmResponseTime)
+        currentTelemetryData.llmPriorityMap[similarityMetric] =
+            LlmMovePriority(transformedMethodNames, null, llmResponseTime)
     }
-    fun addLLMPriorityResponse(responseText: String, llmResponseTime: Long) {
-        currentTelemetryData.llmPriority = LlmMovePriority(
+    fun addLLMPriorityResponse(responseText: String, llmResponseTime: Long, similarityMetric: String) {
+        currentTelemetryData.llmPriorityMap[similarityMetric] = LlmMovePriority(
             null,
             if(anonimizeTelemetry) "LLM Gave some reasoning. Hiding for anonymity." else responseText,
             llmResponseTime
@@ -445,7 +446,8 @@ class EFTelemetryDataManager {
         }
     }
 
-    fun addMethodCompatibility(methodCompatibilitySuggestions: List<Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>) {
+    fun addMethodCompatibility(methodCompatibilitySuggestions: List<Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>>,
+                               similarityMetric: String) {
         val anonCompatibility = if(!anonimizeTelemetry){
             methodCompatibilitySuggestions.map { it.first.methodSignature to Pair(it.first, it.second) }
         }else {
@@ -457,7 +459,8 @@ class EFTelemetryDataManager {
                             it.second) 
             }
         }
-        currentTelemetryData.methodCompatibility.putAll(
+        currentTelemetryData.methodCompatibility.put(similarityMetric, mutableMapOf())
+        currentTelemetryData.methodCompatibility[similarityMetric]!!.putAll(
             anonCompatibility
         )
     }

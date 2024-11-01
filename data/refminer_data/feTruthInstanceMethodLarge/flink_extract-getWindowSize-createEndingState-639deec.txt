@@ -1,0 +1,26 @@
+Refactoring Type	Source Method	Target Class
+Move Method	org.apache.flink.kubernetes.KubernetesWorkerNode::getAttempt():long 	 org.apache.flink.runtime.clusterframework.types.ResourceID
+Move Method	org.apache.flink.cep.nfa.compiler.NFACompiler::compileFactory(org.apache.flink.cep.pattern.Pattern<T,?>, boolean):org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactory<T> 	 org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler
+Move Method	org.apache.flink.cep.nfa.compiler.NFACompiler::canProduceEmptyMatches(org.apache.flink.cep.pattern.Pattern<?,?>):boolean 	 org.apache.flink.cep.nfa.State
+Move Method	org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler::checkPatternNameUniqueness():void 	 org.apache.flink.cep.pattern.Pattern
+Move Method	org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler::checkPatternNameUniqueness(org.apache.flink.cep.pattern.Pattern):void 	 org.apache.flink.cep.pattern.Pattern
+Move Method	org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler::getWindowSize():java.util.Optional<java.lang.Long> 	 org.apache.flink.cep.pattern.Pattern
+Move Method	org.apache.flink.runtime.scheduler.adaptive.Executing::handleDeploymentFailure(org.apache.flink.runtime.executiongraph.ExecutionVertex, org.apache.flink.runtime.JobException):void 	 org.apache.flink.runtime.executiongraph.ExecutionVertex
+Move Method	org.apache.flink.optimizer.dag.DataSinkNode::getPredecessorNode():org.apache.flink.optimizer.dag.OptimizerNode 	 org.apache.flink.optimizer.dag.DagConnection
+Move Method	org.apache.flink.optimizer.dag.OptimizerNode::prunePlanAlternatives(java.util.List<org.apache.flink.optimizer.plan.PlanNode>):void 	 org.apache.flink.optimizer.plan.PlanNode
+Move Method	org.apache.flink.optimizer.dag.OptimizerNode::prunePlanAlternativesWithCommonBranching(java.util.List<org.apache.flink.optimizer.plan.PlanNode>):void 	 org.apache.flink.optimizer.dataproperties.InterestingProperties
+Move Method	org.apache.flink.optimizer.dag.OptimizerNode::areBranchCompatible(org.apache.flink.optimizer.plan.PlanNode, org.apache.flink.optimizer.plan.PlanNode):boolean 	 org.apache.flink.optimizer.plan.PlanNode
+Move Method	org.apache.flink.optimizer.dag.SingleInputNode::getPredecessorNode():org.apache.flink.optimizer.dag.OptimizerNode 	 org.apache.flink.optimizer.dag.DagConnection
+Move Method	org.apache.flink.optimizer.dag.SingleInputNode::addLocalCandidates(org.apache.flink.optimizer.plan.Channel, java.util.List<java.util.Set<? extends org.apache.flink.optimizer.plan.NamedChannel>>, org.apache.flink.optimizer.dataproperties.RequestedGlobalProperties, java.util.List<org.apache.flink.optimizer.plan.PlanNode>, org.apache.flink.optimizer.costs.CostEstimator):void 	 org.apache.flink.optimizer.plan.Channel
+Move Method	org.apache.flink.optimizer.dag.TwoInputNode::getFirstPredecessorNode():org.apache.flink.optimizer.dag.OptimizerNode 	 org.apache.flink.optimizer.dag.DagConnection
+Move Method	org.apache.flink.optimizer.dag.TwoInputNode::getSecondPredecessorNode():org.apache.flink.optimizer.dag.OptimizerNode 	 org.apache.flink.optimizer.dag.DagConnection
+Move Method	org.apache.flink.optimizer.dag.TwoInputNode::addLocalCandidates(org.apache.flink.optimizer.plan.Channel, org.apache.flink.optimizer.plan.Channel, java.util.List<java.util.Set<? extends org.apache.flink.optimizer.plan.NamedChannel>>, org.apache.flink.optimizer.dataproperties.RequestedGlobalProperties, org.apache.flink.optimizer.dataproperties.RequestedGlobalProperties, java.util.List<org.apache.flink.optimizer.plan.PlanNode>, org.apache.flink.optimizer.operators.OperatorDescriptorDual.LocalPropertiesPair[], org.apache.flink.optimizer.costs.CostEstimator):void 	 org.apache.flink.optimizer.plan.Channel
+Move Method	org.apache.flink.optimizer.plan.PlanNode::mergeBranchPlanMaps(java.util.Map<org.apache.flink.optimizer.dag.OptimizerNode,org.apache.flink.optimizer.plan.PlanNode>, java.util.Map<org.apache.flink.optimizer.dag.OptimizerNode,org.apache.flink.optimizer.plan.PlanNode>):void 	 org.apache.flink.optimizer.dag.OptimizerNode
+Move Method	org.apache.flink.optimizer.plan.PlanNode::getProgramOperator():org.apache.flink.optimizer.plan.Operator<?> 	 org.apache.flink.optimizer.dag.OptimizerNode
+Move Method	org.apache.flink.optimizer.plan.PlanNode::getCumulativeCostsShare():org.apache.flink.optimizer.costs.Costs 	 org.apache.flink.optimizer.dag.OptimizerNode
+Move Method	org.apache.flink.optimizer.plan.PlanNode::setCosts(org.apache.flink.optimizer.costs.Costs):void 	 org.apache.flink.optimizer.costs.Costs
+Move Method	org.apache.flink.optimizer.plan.PlanNode::getGuaranteedAvailableMemory():long 	 org.apache.flink.optimizer.dag.OptimizerNode
+Move Method	org.apache.flink.optimizer.plan.PlanNode::setBroadcastInputs(java.util.List<org.apache.flink.optimizer.plan.NamedChannel>):void 	 org.apache.flink.optimizer.dag.OptimizerNode
+Move Method	org.apache.flink.optimizer.plan.PlanNode::isOnDynamicPath():boolean 	 org.apache.flink.optimizer.dag.OptimizerNode
+Move Method	org.apache.flink.optimizer.plan.PlanNode::getCostWeight():int 	 org.apache.flink.optimizer.dag.OptimizerNode
+Move Method	org.apache.flink.optimizer.plan.SingleInputPlanNode::getPredecessor():org.apache.flink.optimizer.plan.PlanNode 	 org.apache.flink.optimizer.plan.Channel

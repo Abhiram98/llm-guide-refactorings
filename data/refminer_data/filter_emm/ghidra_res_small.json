@@ -1,0 +1,3689 @@
+[
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "a4f7bb24b909485d9a62b651f74f45641733cd9f",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/a4f7bb24b909485d9a62b651f74f45641733cd9f",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public cleanupUnusedOverride() : void extracted from protected decompilerActionPerformed(context DecompilerActionContext) : void in class ghidra.app.plugin.core.decompile.actions.DeletePrototypeOverrideAction & moved to class ghidra.program.model.pcode.DataTypeSymbol",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 83,
+                    "endLine": 97,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "protected decompilerActionPerformed(context DecompilerActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 88,
+                    "endLine": 88,
+                    "startColumn": 3,
+                    "endColumn": 49,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 89,
+                    "endLine": 89,
+                    "startColumn": 3,
+                    "endColumn": 66,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 126,
+                    "endLine": 152,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public cleanupUnusedOverride() : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 136,
+                    "endLine": 136,
+                    "startColumn": 3,
+                    "endColumn": 54,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 151,
+                    "endLine": 151,
+                    "startColumn": 3,
+                    "endColumn": 73,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 48,
+                    "endLine": 65,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "protected decompilerActionPerformed(context DecompilerActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 60,
+                    "endLine": 60,
+                    "startColumn": 4,
+                    "endColumn": 31,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "dts.cleanupUnusedOverride()"
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 128,
+                    "endLine": 128,
+                    "startColumn": 4,
+                    "endColumn": 74,
+                    "codeElementType": "THROW_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 133,
+                    "endLine": 133,
+                    "startColumn": 3,
+                    "endColumn": 39,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 135,
+                    "endLine": 135,
+                    "startColumn": 3,
+                    "endColumn": 38,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 137,
+                    "endLine": 137,
+                    "startColumn": 3,
+                    "endColumn": 32,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 138,
+                    "endLine": 138,
+                    "startColumn": 3,
+                    "endColumn": 55,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 140,
+                    "endLine": 140,
+                    "startColumn": 4,
+                    "endColumn": 27,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 142,
+                    "endLine": 142,
+                    "startColumn": 5,
+                    "endColumn": 11,
+                    "codeElementType": "BREAK_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 146,
+                    "endLine": 146,
+                    "startColumn": 5,
+                    "endColumn": 12,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 127,
+                    "endLine": 129,
+                    "startColumn": 20,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 127,
+                    "endLine": 129,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 141,
+                    "endLine": 143,
+                    "startColumn": 31,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 141,
+                    "endLine": 143,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 145,
+                    "endLine": 147,
+                    "startColumn": 63,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 144,
+                    "endLine": 147,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 139,
+                    "endLine": 148,
+                    "startColumn": 58,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 139,
+                    "endLine": 148,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "ENHANCED_FOR_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 805,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-cleanupUnusedOverride-a4f7bb24b9",
+            "newCommitHash": "74fb13381f494df1d3be0c212238e25f3a0ea97b"
+        }
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "38a01c04343ad6ec1432d021800af2b60f9d9153",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/38a01c04343ad6ec1432d021800af2b60f9d9153",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package showInViewedProject(ghidraURL URL, isFolder boolean) : void extracted from public processResult(domainFolder DomainFolder, url URL, monitor TaskMonitor) : void in class ghidra.framework.main.AcceptUrlContentTask & moved to class ghidra.framework.main.FrontEndPlugin",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 54,
+                    "endLine": 66,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public processResult(domainFolder DomainFolder, url URL, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 60,
+                    "endLine": 60,
+                    "startColumn": 4,
+                    "endColumn": 87,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 62,
+                    "endLine": 62,
+                    "startColumn": 5,
+                    "endColumn": 12,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 64,
+                    "endLine": 64,
+                    "startColumn": 4,
+                    "endColumn": 41,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 21,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 59,
+                    "endLine": 65,
+                    "startColumn": 22,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1159,
+                    "endLine": 1186,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package showInViewedProject(ghidraURL URL, isFolder boolean) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1161,
+                    "endLine": 1161,
+                    "startColumn": 3,
+                    "endColumn": 92,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1163,
+                    "endLine": 1163,
+                    "startColumn": 4,
+                    "endColumn": 11,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1176,
+                    "endLine": 1176,
+                    "startColumn": 6,
+                    "endColumn": 50,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1162,
+                    "endLine": 1164,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1162,
+                    "endLine": 1164,
+                    "startColumn": 20,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1175,
+                    "endLine": 1177,
+                    "startColumn": 38,
+                    "endColumn": 6,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 92,
+                    "endLine": 120,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public processResult(domainFolder DomainFolder, url URL, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 116,
+                    "endLine": 116,
+                    "startColumn": 5,
+                    "endColumn": 42,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "plugin.showInViewedProject(url,true)"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1166,
+                    "endLine": 1185,
+                    "startColumn": 3,
+                    "endColumn": 6,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 844,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "extract-showInViewedProject-38a01c0434",
+            "newCommitHash": "932f648008c4d26b2bc6010a50ccf8d66b0a76a1"
+        }
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "6e255143fb6e3a4f7846acd9027f57d7342ecb3e",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/6e255143fb6e3a4f7846acd9027f57d7342ecb3e",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public getSelectedNode() : SymbolTreeNode extracted from public isEnabledForContext(context SymbolTreeActionContext) : boolean in class ghidra.app.plugin.core.symboltree.actions.RenameAction & moved to class ghidra.app.plugin.core.symboltree.SymbolTreeActionContext",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 34,
+                    "endLine": 42,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public isEnabledForContext(context SymbolTreeActionContext) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 38,
+                    "endLine": 38,
+                    "startColumn": 4,
+                    "endColumn": 61,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 41,
+                    "endLine": 41,
+                    "startColumn": 3,
+                    "endColumn": 16,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 37,
+                    "endLine": 40,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 37,
+                    "endLine": 37,
+                    "startColumn": 7,
+                    "endColumn": 33,
+                    "codeElementType": "INFIX_EXPRESSION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 37,
+                    "endLine": 40,
+                    "startColumn": 35,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 58,
+                    "endLine": 71,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public getSelectedNode() : SymbolTreeNode"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 65,
+                    "endLine": 65,
+                    "startColumn": 4,
+                    "endColumn": 61,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 67,
+                    "endLine": 67,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 64,
+                    "endLine": 69,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 64,
+                    "endLine": 64,
+                    "startColumn": 33,
+                    "endColumn": 59,
+                    "codeElementType": "INFIX_EXPRESSION",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 64,
+                    "endLine": 69,
+                    "startColumn": 61,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 31,
+                    "endLine": 35,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public isEnabledForContext(context SymbolTreeActionContext) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 33,
+                    "endLine": 33,
+                    "startColumn": 25,
+                    "endColumn": 50,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "context.getSelectedNode()"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 70,
+                    "endLine": 70,
+                    "startColumn": 3,
+                    "endColumn": 15,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 47,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 845,
+        "extraction_results": {
+            "success": "true",
+            "newBranchName": "move-getSelectedNode-6e255143",
+            "newCommitHash": "f8ee49f75287012d49f3770ca171f4e45a446cc1"
+        }
+    },
+
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem extracted from private demangleMS(mangled String, demangleOnlyKnownPatterns boolean) : DemangledObject in class ghidra.app.util.demangler.microsoft.MicrosoftDemangler & moved to class mdemangler.MDMangGhidra",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 66,
+                    "endLine": 84,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private demangleMS(mangled String, demangleOnlyKnownPatterns boolean) : DemangledObject"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 74,
+                    "endLine": 74,
+                    "startColumn": 4,
+                    "endColumn": 59,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 54,
+                    "endLine": 67,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 66,
+                    "endLine": 66,
+                    "startColumn": 3,
+                    "endColumn": 54,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 66,
+                    "endLine": 83,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private demangleMS(mangled String, demangleOnlyKnownPatterns boolean) : DemangledObject"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 74,
+                    "endLine": 74,
+                    "startColumn": 4,
+                    "endColumn": 64,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "demangler.demangle(mangled,true,demangleOnlyKnownPatterns)"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 62,
+                    "endLine": 62,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 36,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 58,
+                    "endLine": 63,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 34,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 858,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-demangle-ead1cc",
+            "newCommitHash": "eaa13e594904c76b415dfb883c852f5bc28a86fd"
+        }
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem extracted from public testFunctionNamespace() : void in class mdemangler.MDMangExtraTest & moved to class mdemangler.MDMangGhidra",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 36,
+                    "endLine": 60,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public testFunctionNamespace() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 49,
+                    "endLine": 49,
+                    "startColumn": 3,
+                    "endColumn": 59,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 54,
+                    "endLine": 67,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 66,
+                    "endLine": 66,
+                    "startColumn": 3,
+                    "endColumn": 54,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 36,
+                    "endLine": 60,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public testFunctionNamespace() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 49,
+                    "endLine": 49,
+                    "startColumn": 25,
+                    "endColumn": 64,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "demangler.demangle(mangled,true,true)"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 57,
+                    "endLine": 57,
+                    "startColumn": 10,
+                    "endColumn": 66,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "demangler.demangle(mangledFunctionNamespace,true,true)"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 62,
+                    "endLine": 62,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 36,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 58,
+                    "endLine": 63,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 34,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 859,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-demangle-ead1cc",
+            "newCommitHash": "eaa13e594904c76b415dfb883c852f5bc28a86fd"
+        }
+    },
+
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ddd2f22c28a6980d16dd949509c59baa57d0b7aa",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ddd2f22c28a6980d16dd949509c59baa57d0b7aa",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package removeCompareAction() : void extracted from public serviceRemoved(interfaceClass Class<?>, service Object) : void in class ghidra.app.plugin.core.functionwindow.FunctionWindowPlugin & moved to class ghidra.app.plugin.core.functionwindow.FunctionWindowProvider",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/functionwindow/FunctionWindowPlugin.java",
+                    "startLine": 103,
+                    "endLine": 109,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public serviceRemoved(interfaceClass Class<?>, service Object) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/functionwindow/FunctionWindowPlugin.java",
+                    "startLine": 106,
+                    "endLine": 106,
+                    "startColumn": 4,
+                    "endColumn": 61,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/functionwindow/FunctionWindowProvider.java",
+                    "startLine": 91,
+                    "endLine": 93,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package removeCompareAction() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/functionwindow/FunctionWindowProvider.java",
+                    "startLine": 92,
+                    "endLine": 92,
+                    "startColumn": 3,
+                    "endColumn": 47,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/functionwindow/FunctionWindowPlugin.java",
+                    "startLine": 94,
+                    "endLine": 99,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public serviceRemoved(interfaceClass Class<?>, service Object) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/functionwindow/FunctionWindowPlugin.java",
+                    "startLine": 97,
+                    "endLine": 97,
+                    "startColumn": 4,
+                    "endColumn": 34,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "provider.removeCompareAction()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 861
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "3c36666600e01b97d9ed0a0d64d0f8bf69ecdc7a",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/3c36666600e01b97d9ed0a0d64d0f8bf69ecdc7a",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public resetState() : void extracted from public determineItemAndParse(dmang MDMang) : MDParsableItem in class mdemangler.object.MDMangObjectParser & moved to class mdemangler.MDMangGenericize",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/object/MDMangObjectParser.java",
+                    "startLine": 29,
+                    "endLine": 68,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public determineItemAndParse(dmang MDMang) : MDParsableItem"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/object/MDMangObjectParser.java",
+                    "startLine": 45,
+                    "endLine": 45,
+                    "startColumn": 4,
+                    "endColumn": 18,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/object/MDMangObjectParser.java",
+                    "startLine": 46,
+                    "endLine": 46,
+                    "startColumn": 4,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGenericize.java",
+                    "startLine": 37,
+                    "endLine": 46,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public resetState() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGenericize.java",
+                    "startLine": 40,
+                    "endLine": 40,
+                    "startColumn": 3,
+                    "endColumn": 43,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGenericize.java",
+                    "startLine": 43,
+                    "endLine": 43,
+                    "startColumn": 3,
+                    "endColumn": 20,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/object/MDMangObjectParser.java",
+                    "startLine": 29,
+                    "endLine": 48,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public determineItemAndParse(dmang MDMang) : MDParsableItem"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/object/MDMangObjectParser.java",
+                    "startLine": 37,
+                    "endLine": 37,
+                    "startColumn": 4,
+                    "endColumn": 22,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "dmang.resetState()"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGenericize.java",
+                    "startLine": 39,
+                    "endLine": 39,
+                    "startColumn": 3,
+                    "endColumn": 22,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGenericize.java",
+                    "startLine": 45,
+                    "endLine": 45,
+                    "startColumn": 3,
+                    "endColumn": 37,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGenericize.java",
+                    "startLine": 44,
+                    "endLine": 44,
+                    "startColumn": 3,
+                    "endColumn": 29,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 862
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "9ec93ee41f0612f9df9b5b82bb9c6e1692eaa785",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/9ec93ee41f0612f9df9b5b82bb9c6e1692eaa785",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public isBlinkingCursors() : boolean extracted from private initializeCursorBlinking() : void in class docking.widgets.fieldpanel.FieldPanel & moved to class generic.theme.Gui",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Docking/src/main/java/docking/widgets/fieldpanel/FieldPanel.java",
+                    "startLine": 403,
+                    "endLine": 407,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private initializeCursorBlinking() : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Docking/src/main/java/docking/widgets/fieldpanel/FieldPanel.java",
+                    "startLine": 405,
+                    "endLine": 405,
+                    "startColumn": 3,
+                    "endColumn": 92,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Docking/src/main/java/docking/widgets/fieldpanel/FieldPanel.java",
+                    "startLine": 405,
+                    "endLine": 405,
+                    "startColumn": 52,
+                    "endColumn": 84,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Gui/src/main/java/generic/theme/Gui.java",
+                    "startLine": 239,
+                    "endLine": 246,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public isBlinkingCursors() : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Gui/src/main/java/generic/theme/Gui.java",
+                    "startLine": 245,
+                    "endLine": 245,
+                    "startColumn": 3,
+                    "endColumn": 43,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Gui/src/main/java/generic/theme/Gui.java",
+                    "startLine": 245,
+                    "endLine": 245,
+                    "startColumn": 10,
+                    "endColumn": 42,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Docking/src/main/java/docking/widgets/fieldpanel/FieldPanel.java",
+                    "startLine": 403,
+                    "endLine": 405,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private initializeCursorBlinking() : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Docking/src/main/java/docking/widgets/fieldpanel/FieldPanel.java",
+                    "startLine": 404,
+                    "endLine": 404,
+                    "startColumn": 18,
+                    "endColumn": 41,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "Gui.isBlinkingCursors()"
+                }
+            ],
+            "isStatic": true
+        },
+        "ref_id": 863
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "8336bdde747a26b87a2cef104bda30e864aaa0bf",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/8336bdde747a26b87a2cef104bda30e864aaa0bf",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public determineAndParseDataType(dmang MDMang, isHighest boolean) : MDDataType extracted from public demangleType(errorOnRemainingChars boolean) : MDDataType in class mdemangler.MDMang & moved to class mdemangler.datatype.MDDataTypeParser",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 155,
+                    "endLine": 186,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public demangleType(errorOnRemainingChars boolean) : MDDataType"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 169,
+                    "endLine": 169,
+                    "startColumn": 3,
+                    "endColumn": 17,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 171,
+                    "endLine": 171,
+                    "startColumn": 4,
+                    "endColumn": 75,
+                    "codeElementType": "THROW_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 173,
+                    "endLine": 173,
+                    "startColumn": 3,
+                    "endColumn": 15,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 180,
+                    "endLine": 180,
+                    "startColumn": 3,
+                    "endColumn": 16,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 177,
+                    "endLine": 177,
+                    "startColumn": 4,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 174,
+                    "endLine": 174,
+                    "startColumn": 3,
+                    "endColumn": 71,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 170,
+                    "endLine": 172,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 170,
+                    "endLine": 172,
+                    "startColumn": 22,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 35,
+                    "endLine": 79,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public determineAndParseDataType(dmang MDMang, isHighest boolean) : MDDataType"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 57,
+                    "endLine": 57,
+                    "startColumn": 4,
+                    "endColumn": 24,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 52,
+                    "endLine": 52,
+                    "startColumn": 4,
+                    "endColumn": 75,
+                    "codeElementType": "THROW_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 58,
+                    "endLine": 58,
+                    "startColumn": 4,
+                    "endColumn": 22,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 61,
+                    "endLine": 61,
+                    "startColumn": 4,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 70,
+                    "endLine": 70,
+                    "startColumn": 5,
+                    "endColumn": 16,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 59,
+                    "endLine": 59,
+                    "startColumn": 4,
+                    "endColumn": 41,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 50,
+                    "endLine": 50,
+                    "startColumn": 3,
+                    "endColumn": 24,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 51,
+                    "endLine": 53,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 51,
+                    "endLine": 53,
+                    "startColumn": 28,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 155,
+                    "endLine": 174,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public demangleType(errorOnRemainingChars boolean) : MDDataType"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMang.java",
+                    "startLine": 166,
+                    "endLine": 166,
+                    "startColumn": 27,
+                    "endColumn": 82,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "MDDataTypeParser.determineAndParseDataType(this,false)"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 55,
+                    "endLine": 55,
+                    "startColumn": 3,
+                    "endColumn": 60,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 60,
+                    "endLine": 60,
+                    "startColumn": 4,
+                    "endColumn": 15,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 64,
+                    "endLine": 64,
+                    "startColumn": 4,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 65,
+                    "endLine": 65,
+                    "startColumn": 4,
+                    "endColumn": 49,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 67,
+                    "endLine": 67,
+                    "startColumn": 5,
+                    "endColumn": 25,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 68,
+                    "endLine": 68,
+                    "startColumn": 5,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 69,
+                    "endLine": 69,
+                    "startColumn": 5,
+                    "endColumn": 42,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 71,
+                    "endLine": 71,
+                    "startColumn": 5,
+                    "endColumn": 24,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 74,
+                    "endLine": 75,
+                    "startColumn": 5,
+                    "endColumn": 85,
+                    "codeElementType": "THROW_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 78,
+                    "endLine": 78,
+                    "startColumn": 3,
+                    "endColumn": 13,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 56,
+                    "endLine": 77,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "TRY_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 66,
+                    "endLine": 76,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "TRY_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 73,
+                    "endLine": 76,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "CATCH_CLAUSE",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/datatype/MDDataTypeParser.java",
+                    "startLine": 63,
+                    "endLine": 77,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "CATCH_CLAUSE",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": true
+        },
+        "ref_id": 864
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "34272fd3ff9b716df1d79fbb08291d57f1f4fd88",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/34272fd3ff9b716df1d79fbb08291d57f1f4fd88",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public matches(arg String) : boolean extracted from private checkArgument(optionName String, args String[], argi int) : boolean in class ghidra.app.util.headless.AnalyzeHeadless & moved to class ghidra.app.util.headless.AnalyzeHeadless.Arg",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/headless/AnalyzeHeadless.java",
+                    "startLine": 498,
+                    "endLine": 508,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private checkArgument(optionName String, args String[], argi int) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/headless/AnalyzeHeadless.java",
+                    "startLine": 501,
+                    "endLine": 501,
+                    "startColumn": 7,
+                    "endColumn": 47,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/headless/AnalyzeHeadless.java",
+                    "startLine": 97,
+                    "endLine": 99,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public matches(arg String) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/headless/AnalyzeHeadless.java",
+                    "startLine": 98,
+                    "endLine": 98,
+                    "startColumn": 4,
+                    "endColumn": 38,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/headless/AnalyzeHeadless.java",
+                    "startLine": 571,
+                    "endLine": 580,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private checkArgument(arg Arg, args String[], argi int) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/headless/AnalyzeHeadless.java",
+                    "startLine": 573,
+                    "endLine": 573,
+                    "startColumn": 8,
+                    "endColumn": 31,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "arg.matches(args[argi])"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 865
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ff032bee4b6a8f31d100957461c60392af5b0026",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ff032bee4b6a8f31d100957461c60392af5b0026",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method protected domainObjectRestored() : void extracted from package addToVersionControl(comment String, keepCheckedOut boolean, monitor TaskMonitor) : void in class ghidra.framework.data.GhidraFileData & moved to class ghidra.framework.data.DomainObjectAdapterDB",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1082,
+                    "endLine": 1202,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "package addToVersionControl(comment String, keepCheckedOut boolean, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1192,
+                    "endLine": 1192,
+                    "startColumn": 5,
+                    "endColumn": 33,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/DomainObjectAdapterDB.java",
+                    "startLine": 486,
+                    "endLine": 492,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "protected domainObjectRestored() : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/DomainObjectAdapterDB.java",
+                    "startLine": 491,
+                    "endLine": 491,
+                    "startColumn": 3,
+                    "endColumn": 16,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1082,
+                    "endLine": 1202,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "package addToVersionControl(comment String, keepCheckedOut boolean, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1192,
+                    "endLine": 1192,
+                    "startColumn": 5,
+                    "endColumn": 42,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "inUseDomainObj.domainObjectRestored()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 866
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ff032bee4b6a8f31d100957461c60392af5b0026",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ff032bee4b6a8f31d100957461c60392af5b0026",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method protected domainObjectRestored() : void extracted from package checkin(checkinHandler CheckinHandler, monitor TaskMonitor) : void in class ghidra.framework.data.GhidraFileData & moved to class ghidra.framework.data.DomainObjectAdapterDB",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1391,
+                    "endLine": 1563,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "package checkin(checkinHandler CheckinHandler, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1553,
+                    "endLine": 1553,
+                    "startColumn": 5,
+                    "endColumn": 33,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/DomainObjectAdapterDB.java",
+                    "startLine": 486,
+                    "endLine": 492,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "protected domainObjectRestored() : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/DomainObjectAdapterDB.java",
+                    "startLine": 491,
+                    "endLine": 491,
+                    "startColumn": 3,
+                    "endColumn": 16,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1391,
+                    "endLine": 1563,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "package checkin(checkinHandler CheckinHandler, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1553,
+                    "endLine": 1553,
+                    "startColumn": 5,
+                    "endColumn": 42,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "inUseDomainObj.domainObjectRestored()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 867
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ff032bee4b6a8f31d100957461c60392af5b0026",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ff032bee4b6a8f31d100957461c60392af5b0026",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method protected domainObjectRestored() : void extracted from package merge(okToUpgrade boolean, monitor TaskMonitor) : void in class ghidra.framework.data.GhidraFileData & moved to class ghidra.framework.data.DomainObjectAdapterDB",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1872,
+                    "endLine": 2033,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "package merge(okToUpgrade boolean, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 2008,
+                    "endLine": 2008,
+                    "startColumn": 5,
+                    "endColumn": 33,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/DomainObjectAdapterDB.java",
+                    "startLine": 486,
+                    "endLine": 492,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "protected domainObjectRestored() : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/DomainObjectAdapterDB.java",
+                    "startLine": 491,
+                    "endLine": 491,
+                    "startColumn": 3,
+                    "endColumn": 16,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 1872,
+                    "endLine": 2033,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "package merge(okToUpgrade boolean, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/data/GhidraFileData.java",
+                    "startLine": 2008,
+                    "endLine": 2008,
+                    "startColumn": 5,
+                    "endColumn": 42,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "inUseDomainObj.domainObjectRestored()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 868
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "3f86719c0b441f89e88502aa50534da5076df9f0",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/3f86719c0b441f89e88502aa50534da5076df9f0",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public writeToProgramInfo(program Program, fsrl FSRL) : void extracted from public setProgramProperties(prog Program, provider ByteProvider, executableFormatName String) : void in class ghidra.app.util.opinion.AbstractProgramLoader & moved to class ghidra.formats.gfilesystem.FSRL",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/opinion/AbstractProgramLoader.java",
+                    "startLine": 347,
+                    "endLine": 376,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public setProgramProperties(prog Program, provider ByteProvider, executableFormatName String) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/opinion/AbstractProgramLoader.java",
+                    "startLine": 370,
+                    "endLine": 371,
+                    "startColumn": 4,
+                    "endColumn": 76,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSRL.java",
+                    "startLine": 88,
+                    "endLine": 96,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public writeToProgramInfo(program Program, fsrl FSRL) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSRL.java",
+                    "startLine": 95,
+                    "endLine": 95,
+                    "startColumn": 3,
+                    "endColumn": 89,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/opinion/AbstractProgramLoader.java",
+                    "startLine": 346,
+                    "endLine": 374,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public setProgramProperties(prog Program, provider ByteProvider, executableFormatName String) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/util/opinion/AbstractProgramLoader.java",
+                    "startLine": 369,
+                    "endLine": 369,
+                    "startColumn": 4,
+                    "endColumn": 39,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "FSRL.writeToProgramInfo(prog,fsrl)"
+                }
+            ],
+            "isStatic": true
+        },
+        "ref_id": 869
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "3f86719c0b441f89e88502aa50534da5076df9f0",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/3f86719c0b441f89e88502aa50534da5076df9f0",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public isSymlink(f File) : boolean extracted from public getListing(directory GFile) : List<GFile> in class ghidra.formats.gfilesystem.LocalFileSystem & moved to class ghidra.formats.gfilesystem.FSUtilities",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 143,
+                    "endLine": 174,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public getListing(directory GFile) : List<GFile>"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 155,
+                    "endLine": 155,
+                    "startColumn": 8,
+                    "endColumn": 74,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 608,
+                    "endLine": 615,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public isSymlink(f File) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 610,
+                    "endLine": 610,
+                    "startColumn": 4,
+                    "endColumn": 57,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 147,
+                    "endLine": 179,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public getListing(directory GFile) : List<GFile>"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 160,
+                    "endLine": 160,
+                    "startColumn": 35,
+                    "endColumn": 66,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "FSUtilities.isSymlink(localDir)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 170,
+                    "endLine": 170,
+                    "startColumn": 42,
+                    "endColumn": 66,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "FSUtilities.isSymlink(f)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 613,
+                    "endLine": 613,
+                    "startColumn": 4,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 609,
+                    "endLine": 614,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "TRY_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 612,
+                    "endLine": 614,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "CATCH_CLAUSE",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": true
+        },
+        "ref_id": 870
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "3f86719c0b441f89e88502aa50534da5076df9f0",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/3f86719c0b441f89e88502aa50534da5076df9f0",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public isSymlink(f File) : boolean extracted from public getListing(directory GFile) : List<GFile> in class ghidra.formats.gfilesystem.LocalFileSystemSub & moved to class ghidra.formats.gfilesystem.FSUtilities",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystemSub.java",
+                    "startLine": 91,
+                    "endLine": 127,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public getListing(directory GFile) : List<GFile>"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystemSub.java",
+                    "startLine": 100,
+                    "endLine": 100,
+                    "startColumn": 7,
+                    "endColumn": 46,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 608,
+                    "endLine": 615,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public isSymlink(f File) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 610,
+                    "endLine": 610,
+                    "startColumn": 4,
+                    "endColumn": 57,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystemSub.java",
+                    "startLine": 90,
+                    "endLine": 127,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public getListing(directory GFile) : List<GFile>"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystemSub.java",
+                    "startLine": 99,
+                    "endLine": 99,
+                    "startColumn": 7,
+                    "endColumn": 38,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "FSUtilities.isSymlink(localDir)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystemSub.java",
+                    "startLine": 114,
+                    "endLine": 114,
+                    "startColumn": 24,
+                    "endColumn": 48,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "FSUtilities.isSymlink(f)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 613,
+                    "endLine": 613,
+                    "startColumn": 4,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 609,
+                    "endLine": 614,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "TRY_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 612,
+                    "endLine": 614,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "CATCH_CLAUSE",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": true
+        },
+        "ref_id": 871
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "3f86719c0b441f89e88502aa50534da5076df9f0",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/3f86719c0b441f89e88502aa50534da5076df9f0",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public readSymlink(f File) : String extracted from public getFileAttributes(f File) : FileAttributes in class ghidra.formats.gfilesystem.LocalFileSystem & moved to class ghidra.formats.gfilesystem.FSUtilities",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 182,
+                    "endLine": 206,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public getFileAttributes(f File) : FileAttributes"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 193,
+                    "endLine": 193,
+                    "startColumn": 4,
+                    "endColumn": 88,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 191,
+                    "endLine": 191,
+                    "startColumn": 3,
+                    "endColumn": 27,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 192,
+                    "endLine": 197,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "TRY_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 195,
+                    "endLine": 197,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "CATCH_CLAUSE",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 617,
+                    "endLine": 632,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public readSymlink(f File) : String"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 625,
+                    "endLine": 625,
+                    "startColumn": 4,
+                    "endColumn": 54,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 624,
+                    "endLine": 630,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "TRY_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 628,
+                    "endLine": 630,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "CATCH_CLAUSE",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 187,
+                    "endLine": 202,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public getFileAttributes(f File) : FileAttributes"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/LocalFileSystem.java",
+                    "startLine": 195,
+                    "endLine": 195,
+                    "startColumn": 61,
+                    "endColumn": 87,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "FSUtilities.readSymlink(f)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 626,
+                    "endLine": 626,
+                    "startColumn": 4,
+                    "endColumn": 30,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/formats/gfilesystem/FSUtilities.java",
+                    "startLine": 631,
+                    "endLine": 631,
+                    "startColumn": 3,
+                    "endColumn": 15,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": true
+        },
+        "ref_id": 872
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "3f86719c0b441f89e88502aa50534da5076df9f0",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/3f86719c0b441f89e88502aa50534da5076df9f0",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public getLoadableFSRL() : FSRL extracted from public getLoadableFSRL() : FSRL in class ghidra.plugins.fsbrowser.FSBActionContext & moved to class ghidra.plugins.fsbrowser.FSBFileNode",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 266,
+                    "endLine": 300,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public getLoadableFSRL() : FSRL"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 277,
+                    "endLine": 277,
+                    "startColumn": 3,
+                    "endColumn": 30,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBFileNode.java",
+                    "startLine": 142,
+                    "endLine": 145,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public getLoadableFSRL() : FSRL"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBFileNode.java",
+                    "startLine": 144,
+                    "endLine": 144,
+                    "startColumn": 3,
+                    "endColumn": 20,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 215,
+                    "endLine": 224,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public getLoadableFSRL() : FSRL"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 223,
+                    "endLine": 223,
+                    "startColumn": 25,
+                    "endColumn": 47,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "node.getLoadableFSRL()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 873
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "3f86719c0b441f89e88502aa50534da5076df9f0",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/3f86719c0b441f89e88502aa50534da5076df9f0",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public getContainer() : FSRL extracted from public getFSRL(dirsOk boolean) : FSRL in class ghidra.plugins.fsbrowser.FSBActionContext & moved to class ghidra.plugins.fsbrowser.FSBRootNode",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 96,
+                    "endLine": 124,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public getFSRL(dirsOk boolean) : FSRL"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 115,
+                    "endLine": 115,
+                    "startColumn": 4,
+                    "endColumn": 39,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBRootNode.java",
+                    "startLine": 174,
+                    "endLine": 179,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public getContainer() : FSRL"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBRootNode.java",
+                    "startLine": 176,
+                    "endLine": 178,
+                    "startColumn": 3,
+                    "endColumn": 12,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 107,
+                    "endLine": 131,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public getFSRL(dirsOk boolean) : FSRL"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 125,
+                    "endLine": 125,
+                    "startColumn": 4,
+                    "endColumn": 29,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "fsRootNode.getContainer()"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/plugins/fsbrowser/FSBActionContext.java",
+                    "startLine": 127,
+                    "endLine": 127,
+                    "startColumn": 11,
+                    "endColumn": 36,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "fsRootNode.getContainer()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 874
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "9ddc65d7e50bcb0323b12d3c362321fe8e998686",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/9ddc65d7e50bcb0323b12d3c362321fe8e998686",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public canUseCustomStorage() : boolean extracted from protected decompilerActionPerformed(context DecompilerActionContext) : void in class ghidra.app.plugin.core.decompile.actions.SpecifyCPrototypeAction & moved to class ghidra.app.plugin.core.function.editor.FunctionEditorModel",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/SpecifyCPrototypeAction.java",
+                    "startLine": 156,
+                    "endLine": 189,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "protected decompilerActionPerformed(context DecompilerActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/SpecifyCPrototypeAction.java",
+                    "startLine": 177,
+                    "endLine": 177,
+                    "startColumn": 9,
+                    "endColumn": 36,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/function/editor/FunctionEditorModel.java",
+                    "startLine": 753,
+                    "endLine": 755,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public canUseCustomStorage() : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/function/editor/FunctionEditorModel.java",
+                    "startLine": 754,
+                    "endLine": 754,
+                    "startColumn": 3,
+                    "endColumn": 45,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/SpecifyCPrototypeAction.java",
+                    "startLine": 156,
+                    "endLine": 189,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "protected decompilerActionPerformed(context DecompilerActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/SpecifyCPrototypeAction.java",
+                    "startLine": 177,
+                    "endLine": 177,
+                    "startColumn": 9,
+                    "endColumn": 36,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "model.canUseCustomStorage()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 875
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "88bec10e604d048d90e8085d5ad3928ad5ba3b47",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/88bec10e604d048d90e8085d5ad3928ad5ba3b47",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public getClasspath(propertyName String) : List<String> extracted from private getClasspathMap(propertyName String) : Map<Integer,String> in class ghidra.app.plugin.runtimeinfo.RuntimeInfoProvider & moved to class ghidra.GhidraClassLoader",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/runtimeinfo/RuntimeInfoProvider.java",
+                    "startLine": 242,
+                    "endLine": 259,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private getClasspathMap(propertyName String) : Map<Integer,String>"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/runtimeinfo/RuntimeInfoProvider.java",
+                    "startLine": 252,
+                    "endLine": 253,
+                    "startColumn": 3,
+                    "endColumn": 82,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/runtimeinfo/RuntimeInfoProvider.java",
+                    "startLine": 255,
+                    "endLine": 257,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "WHILE_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/runtimeinfo/RuntimeInfoProvider.java",
+                    "startLine": 255,
+                    "endLine": 257,
+                    "startColumn": 30,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Utility/src/main/java/ghidra/GhidraClassLoader.java",
+                    "startLine": 53,
+                    "endLine": 70,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public getClasspath(propertyName String) : List<String>"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Utility/src/main/java/ghidra/GhidraClassLoader.java",
+                    "startLine": 64,
+                    "endLine": 65,
+                    "startColumn": 3,
+                    "endColumn": 82,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Utility/src/main/java/ghidra/GhidraClassLoader.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "WHILE_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Utility/src/main/java/ghidra/GhidraClassLoader.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 30,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/runtimeinfo/RuntimeInfoProvider.java",
+                    "startLine": 241,
+                    "endLine": 256,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private getClasspathMap(propertyName String) : Map<Integer,String>"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/runtimeinfo/RuntimeInfoProvider.java",
+                    "startLine": 252,
+                    "endLine": 252,
+                    "startColumn": 23,
+                    "endColumn": 67,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "GhidraClassLoader.getClasspath(propertyName)"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Utility/src/main/java/ghidra/GhidraClassLoader.java",
+                    "startLine": 60,
+                    "endLine": 60,
+                    "startColumn": 3,
+                    "endColumn": 43,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Utility/src/main/java/ghidra/GhidraClassLoader.java",
+                    "startLine": 67,
+                    "endLine": 67,
+                    "startColumn": 4,
+                    "endColumn": 31,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Utility/src/main/java/ghidra/GhidraClassLoader.java",
+                    "startLine": 69,
+                    "endLine": 69,
+                    "startColumn": 3,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": true
+        },
+        "ref_id": 876
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "02b0dfe5d176cdf79b21bdbb6c71ea74e68d9da7",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/02b0dfe5d176cdf79b21bdbb6c71ea74e68d9da7",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method protected requestTableFocus() : void extracted from protected requestTableFocus() : void in class ghidra.app.plugin.core.compositeeditor.CompositeEditorTableAction & moved to class ghidra.app.plugin.core.compositeeditor.CompositeEditorProvider",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 90,
+                    "endLine": 107,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "protected requestTableFocus() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 97,
+                    "endLine": 97,
+                    "startColumn": 4,
+                    "endColumn": 25,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 98,
+                    "endLine": 98,
+                    "startColumn": 4,
+                    "endColumn": 11,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 102,
+                    "endLine": 102,
+                    "startColumn": 4,
+                    "endColumn": 37,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 105,
+                    "endLine": 105,
+                    "startColumn": 4,
+                    "endColumn": 46,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 95,
+                    "endLine": 95,
+                    "startColumn": 3,
+                    "endColumn": 78,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 96,
+                    "endLine": 99,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 101,
+                    "endLine": 106,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 96,
+                    "endLine": 99,
+                    "startColumn": 27,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 101,
+                    "endLine": 103,
+                    "startColumn": 39,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 104,
+                    "endLine": 106,
+                    "startColumn": 8,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 342,
+                    "endLine": 356,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "protected requestTableFocus() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 346,
+                    "endLine": 346,
+                    "startColumn": 4,
+                    "endColumn": 25,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 347,
+                    "endLine": 347,
+                    "startColumn": 4,
+                    "endColumn": 11,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 351,
+                    "endLine": 351,
+                    "startColumn": 4,
+                    "endColumn": 37,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 354,
+                    "endLine": 354,
+                    "startColumn": 4,
+                    "endColumn": 46,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 344,
+                    "endLine": 344,
+                    "startColumn": 3,
+                    "endColumn": 41,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 345,
+                    "endLine": 348,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 350,
+                    "endLine": 355,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 345,
+                    "endLine": 348,
+                    "startColumn": 27,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 350,
+                    "endLine": 352,
+                    "startColumn": 39,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorProvider.java",
+                    "startLine": 353,
+                    "endLine": 355,
+                    "startColumn": 8,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 89,
+                    "endLine": 93,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "protected requestTableFocus() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/CompositeEditorTableAction.java",
+                    "startLine": 91,
+                    "endLine": 91,
+                    "startColumn": 4,
+                    "endColumn": 32,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "provider.requestTableFocus()"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 877
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "02b0dfe5d176cdf79b21bdbb6c71ea74e68d9da7",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/02b0dfe5d176cdf79b21bdbb6c71ea74e68d9da7",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package showAddBitFieldEditor() : void extracted from public actionPerformed(context ActionContext) : void in class ghidra.app.plugin.core.compositeeditor.AddBitFieldAction & moved to class ghidra.app.plugin.core.compositeeditor.StructureEditorProvider",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/AddBitFieldAction.java",
+                    "startLine": 46,
+                    "endLine": 62,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public actionPerformed(context ActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/AddBitFieldAction.java",
+                    "startLine": 61,
+                    "endLine": 61,
+                    "startColumn": 3,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/AddBitFieldAction.java",
+                    "startLine": 58,
+                    "endLine": 58,
+                    "startColumn": 16,
+                    "endColumn": 62,
+                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/AddBitFieldAction.java",
+                    "startLine": 55,
+                    "endLine": 58,
+                    "startColumn": 3,
+                    "endColumn": 64,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/AddBitFieldAction.java",
+                    "startLine": 60,
+                    "endLine": 60,
+                    "startColumn": 3,
+                    "endColumn": 43,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 116,
+                    "endLine": 133,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package showAddBitFieldEditor() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 132,
+                    "endLine": 132,
+                    "startColumn": 3,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 129,
+                    "endLine": 129,
+                    "startColumn": 44,
+                    "endColumn": 77,
+                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 127,
+                    "endLine": 129,
+                    "startColumn": 3,
+                    "endColumn": 79,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 131,
+                    "endLine": 131,
+                    "startColumn": 3,
+                    "endColumn": 64,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/AddBitFieldAction.java",
+                    "startLine": 38,
+                    "endLine": 42,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public actionPerformed(context ActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/AddBitFieldAction.java",
+                    "startLine": 41,
+                    "endLine": 41,
+                    "startColumn": 3,
+                    "endColumn": 41,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "structProvider.showAddBitFieldEditor()"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 118,
+                    "endLine": 118,
+                    "startColumn": 3,
+                    "endColumn": 54,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 878
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "02b0dfe5d176cdf79b21bdbb6c71ea74e68d9da7",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/02b0dfe5d176cdf79b21bdbb6c71ea74e68d9da7",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package showBitFieldEditor() : void extracted from public actionPerformed(context ActionContext) : void in class ghidra.app.plugin.core.compositeeditor.EditBitFieldAction & moved to class ghidra.app.plugin.core.compositeeditor.StructureEditorProvider",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 60,
+                    "endLine": 76,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public actionPerformed(context ActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 67,
+                    "endLine": 67,
+                    "startColumn": 4,
+                    "endColumn": 11,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 75,
+                    "endLine": 75,
+                    "startColumn": 3,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 65,
+                    "endLine": 65,
+                    "startColumn": 3,
+                    "endColumn": 67,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 72,
+                    "endLine": 72,
+                    "startColumn": 15,
+                    "endColumn": 61,
+                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 70,
+                    "endLine": 72,
+                    "startColumn": 3,
+                    "endColumn": 63,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 74,
+                    "endLine": 74,
+                    "startColumn": 3,
+                    "endColumn": 43,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 28,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 135,
+                    "endLine": 148,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package showBitFieldEditor() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 140,
+                    "endLine": 140,
+                    "startColumn": 4,
+                    "endColumn": 11,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 147,
+                    "endLine": 147,
+                    "startColumn": 3,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 137,
+                    "endLine": 137,
+                    "startColumn": 3,
+                    "endColumn": 75,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 145,
+                    "endLine": 145,
+                    "startColumn": 15,
+                    "endColumn": 48,
+                    "codeElementType": "LAMBDA_EXPRESSION_BODY",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 143,
+                    "endLine": 145,
+                    "startColumn": 3,
+                    "endColumn": 50,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 146,
+                    "endLine": 146,
+                    "startColumn": 3,
+                    "endColumn": 64,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 138,
+                    "endLine": 141,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 138,
+                    "endLine": 141,
+                    "startColumn": 28,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 37,
+                    "endLine": 41,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public actionPerformed(context ActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/EditBitFieldAction.java",
+                    "startLine": 40,
+                    "endLine": 40,
+                    "startColumn": 3,
+                    "endColumn": 38,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "structProvider.showBitFieldEditor()"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/compositeeditor/StructureEditorProvider.java",
+                    "startLine": 139,
+                    "endLine": 139,
+                    "startColumn": 4,
+                    "endColumn": 55,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 879
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "c17d11a8d14f686924f5762e0b7cea5ec565fb39",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/c17d11a8d14f686924f5762e0b7cea5ec565fb39",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package clearCut(node ProgramNode) : void extracted from private pasteGroup(destNode ProgramNode, nodeToPaste ProgramNode) : boolean in class ghidra.app.plugin.core.programtree.PasteManager & moved to class ghidra.app.plugin.core.programtree.ProgramTreeActionManager",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 208,
+                    "endLine": 243,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private pasteGroup(destNode ProgramNode, nodeToPaste ProgramNode) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 234,
+                    "endLine": 234,
+                    "startColumn": 4,
+                    "endColumn": 34,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 561,
+                    "endLine": 564,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package clearCut(node ProgramNode) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 562,
+                    "endLine": 562,
+                    "startColumn": 3,
+                    "endColumn": 26,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 166,
+                    "endLine": 198,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private pasteGroup(tree ProgramDnDTree, destNode ProgramNode, nodeToPaste ProgramNode) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 190,
+                    "endLine": 190,
+                    "startColumn": 4,
+                    "endColumn": 39,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "actionManager.clearCut(nodeToPaste)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 563,
+                    "endLine": 563,
+                    "startColumn": 3,
+                    "endColumn": 28,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 880
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "c17d11a8d14f686924f5762e0b7cea5ec565fb39",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/c17d11a8d14f686924f5762e0b7cea5ec565fb39",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package clearCut(node ProgramNode) : void extracted from private pasteNode(destNode ProgramNode, nodeToPaste ProgramNode) : boolean in class ghidra.app.plugin.core.programtree.PasteManager & moved to class ghidra.app.plugin.core.programtree.ProgramTreeActionManager",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 245,
+                    "endLine": 298,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private pasteNode(destNode ProgramNode, nodeToPaste ProgramNode) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 256,
+                    "endLine": 256,
+                    "startColumn": 4,
+                    "endColumn": 34,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 561,
+                    "endLine": 564,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package clearCut(node ProgramNode) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 562,
+                    "endLine": 562,
+                    "startColumn": 3,
+                    "endColumn": 26,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 200,
+                    "endLine": 245,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private pasteNode(tree ProgramDnDTree, destNode ProgramNode, nodeToPaste ProgramNode) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 207,
+                    "endLine": 207,
+                    "startColumn": 4,
+                    "endColumn": 39,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "actionManager.clearCut(nodeToPaste)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 563,
+                    "endLine": 563,
+                    "startColumn": 3,
+                    "endColumn": 28,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 881
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "c17d11a8d14f686924f5762e0b7cea5ec565fb39",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/c17d11a8d14f686924f5762e0b7cea5ec565fb39",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package clearCut(node ProgramNode) : void extracted from private removeFromClipboard(node ProgramNode) : void in class ghidra.app.plugin.core.programtree.PasteManager & moved to class ghidra.app.plugin.core.programtree.ProgramTreeActionManager",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 355,
+                    "endLine": 364,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private removeFromClipboard(node ProgramNode) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 362,
+                    "endLine": 362,
+                    "startColumn": 3,
+                    "endColumn": 26,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 561,
+                    "endLine": 564,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package clearCut(node ProgramNode) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 562,
+                    "endLine": 562,
+                    "startColumn": 3,
+                    "endColumn": 26,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 303,
+                    "endLine": 306,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private removeFromClipboard(tree ProgramDnDTree, node ProgramNode) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/PasteManager.java",
+                    "startLine": 305,
+                    "endLine": 305,
+                    "startColumn": 3,
+                    "endColumn": 31,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "actionManager.clearCut(node)"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/programtree/ProgramTreeActionManager.java",
+                    "startLine": 563,
+                    "endLine": 563,
+                    "startColumn": 3,
+                    "endColumn": 28,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 882
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "d95200b1667287fd999493b01c3718f9ea3fece8",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/d95200b1667287fd999493b01c3718f9ea3fece8",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public forceMap() : void extracted from public programOpened(program Program) : void in class ghidra.app.plugin.core.debug.gui.modules.DebuggerModulesProvider & moved to class ghidra.app.plugin.core.debug.gui.modules.DebuggerModulesProvider.AutoMapState",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 1258,
+                    "endLine": 1262,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public programOpened(program Program) : void"
+                },
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 1260,
+                    "endLine": 1260,
+                    "startColumn": 3,
+                    "endColumn": 21,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 1261,
+                    "endLine": 1261,
+                    "startColumn": 3,
+                    "endColumn": 19,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 414,
+                    "endLine": 418,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public forceMap() : void"
+                },
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 415,
+                    "endLine": 415,
+                    "startColumn": 4,
+                    "endColumn": 28,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 417,
+                    "endLine": 417,
+                    "startColumn": 4,
+                    "endColumn": 19,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 1328,
+                    "endLine": 1337,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public programOpened(program Program) : void"
+                },
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 1336,
+                    "endLine": 1336,
+                    "startColumn": 3,
+                    "endColumn": 22,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "mapState.forceMap()"
+                },
+                {
+                    "filePath": "Ghidra/Debug/Debugger/src/main/java/ghidra/app/plugin/core/debug/gui/modules/DebuggerModulesProvider.java",
+                    "startLine": 416,
+                    "endLine": 416,
+                    "startColumn": 4,
+                    "endColumn": 23,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 883
+    }
+]

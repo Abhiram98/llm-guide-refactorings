@@ -1,0 +1,33 @@
+took 9000 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.openqa.selenium.remote.http.jdk.JdkHttpMessages::notChunkingBodyPublisher(HttpRequest):BodyPublisher	org.openqa.selenium.remote.http.HttpRequest	0.75
+Move Method	org.openqa.selenium.support.decorators.WebDriverDecorator::onError(Decorated<?>, Method, Object[], InvocationTargetException):Object	org.openqa.selenium.support.decorators.Decorated	1.0
+Move Method	org.openqa.selenium.bidi.Connection::addListener(Event<X>, Consumer<X>):void	org.openqa.selenium.bidi.Event	0.6915983606557378
+Move Method	org.openqa.selenium.docker.VersionCommand::getDockerProtocol():Optional<DockerProtocol>	org.openqa.selenium.remote.http.HttpHandler	0.5
+Move Method	org.openqa.selenium.remote.RemoteWebDriverBuilder::getBaseUri():URI	org.openqa.selenium.remote.http.ClientConfig	0.919305413687436
+Move Method	org.openqa.selenium.support.pagefactory.DefaultFieldDecorator::isDecoratableList(Field):boolean	org.openqa.selenium.support.pagefactory.ElementLocatorFactory	0.33333333333333337
+Move Method	org.openqa.selenium.grid.node.config.NodeOptions::report(Map.Entry<WebDriverInfo,Collection<SessionFactory>>):void	org.openqa.selenium.json.Json	0.6111111111111112
+Move Method	org.openqa.selenium.remote.http.jdk.JdkHttpMessages::createRequest(HttpRequest, HttpMethod, URI):java.net.http.HttpRequest	org.openqa.selenium.remote.http.HttpRequest	0.6946969696969699
+Move Method	org.openqa.selenium.bidi.Connection::handleResponse(String, Map<String,Object>):void	org.openqa.selenium.json.Json	0.7493912337662337
+Move Method	org.openqa.selenium.remote.codec.AbstractHttpCommandCodec::getParameter(String, String, SessionId, Map<String,?>):String	org.openqa.selenium.remote.SessionId	0.9107142857142857
+Move Method	org.openqa.selenium.grid.server.NetworkOptions::getSpecComplianceChecks():Filter	org.openqa.selenium.grid.config.Config	0.3351444473893454
+Move Method	org.openqa.selenium.support.decorators.WebDriverDecorator::call(Decorated<?>, Method, Object[]):Object	org.openqa.selenium.support.decorators.Decorated	1.0
+Move Method	org.openqa.selenium.devtools.Connection::handle(CharSequence):void	org.openqa.selenium.json.Json	0.7209587912087911
+Move Method	org.openqa.selenium.grid.node.docker.DockerOptions::getDockerSessionFactories(Tracer, HttpClient.Factory, NodeOptions):Map<Capabilities,Collection<SessionFactory>>	org.openqa.selenium.grid.node.config.NodeOptions	0.7649892441654453
+Move Method	org.openqa.selenium.remote.http.jdk.JdkHttpMessages::getRawUri(HttpRequest):URI	org.openqa.selenium.remote.http.ClientConfig	0.8683982683982685
+Move Method	org.openqa.selenium.grid.node.docker.DockerOptions::loadImages(Docker, String[]):void	org.openqa.selenium.docker.Docker	0.47959183673469385
+Move Method	org.openqa.selenium.bidi.module.Script::createEvaluateResult(Map<String,Object>):EvaluateResult	org.openqa.selenium.json.Json	0.5069811141239712
+Move Method	org.openqa.selenium.devtools.Connection::addListener(Event<X>, Consumer<X>):void	org.openqa.selenium.devtools.Event	1.0
+Move Method	org.openqa.selenium.remote.ErrorHandler::createThrowable(Class<T>, Class<?>[], Object[]):T	org.openqa.selenium.remote.ErrorCodes	0.42857142857142855
+Move Method	org.openqa.selenium.remote.http.jdk.JdkHttpClient::getWebSocketUri(HttpRequest):URI	org.openqa.selenium.remote.http.jdk.JdkHttpMessages	0.8749999999999999
+Move Method	org.openqa.selenium.By::getJavascriptExecutor(SearchContext):JavascriptExecutor	org.openqa.selenium.SearchContext	0.66
+Move Method	org.openqa.selenium.json.JsonTypeCoercer::coerce(JsonInput, Type, PropertySetting):T	org.openqa.selenium.json.JsonInput	0.8904720279720278
+Move Method	org.openqa.selenium.grid.node.docker.DockerSessionFactory::waitForServerToStart(HttpClient, Duration):void	org.openqa.selenium.remote.http.HttpClient	0.3216925549009106
+Move Method	org.openqa.selenium.grid.node.k8s.OneShotNode::extractHttpClient(RemoteWebDriver):HttpClient	org.openqa.selenium.remote.RemoteWebDriver	0.7288888012572219
+Move Method	org.openqa.selenium.remote.ProtocolHandshake::createSession(HttpHandler, Contents.Supplier):Either<SessionNotCreatedException,Result>	org.openqa.selenium.remote.http.HttpHandler	0.5
+Move Method	org.openqa.selenium.grid.node.k8s.OneShotNode::rewriteCapabilities(RemoteWebDriver):Capabilities	org.openqa.selenium.remote.RemoteWebDriver	0.6460964615463761
+Move Method	org.openqa.selenium.remote.RemoteWebDriverBuilder::createExecutor(HttpHandler, ProtocolHandshake.Result):CommandExecutor	org.openqa.selenium.remote.http.HttpHandler	0.41666666666666663
+Move Method	org.openqa.selenium.grid.server.NetworkOptions::getHttpClientFactory(Tracer):HttpClient.Factory	org.openqa.selenium.grid.config.Config	0.0
+Move Method	org.openqa.selenium.grid.node.Node::getUploadsFilesystem(SessionId):TemporaryFilesystem	org.openqa.selenium.remote.SessionId	0.6857142857142857
+Move Method	org.openqa.selenium.remote.RemoteWebDriver::setFoundBy(SearchContext, WebElement, String, String):void	org.openqa.selenium.remote.ElementLocation	0.9688644688644689
+Move Method	org.openqa.selenium.interactions.PointerInput::createPointerMove(Duration, Origin, Point):Interaction	org.openqa.selenium.Point	1.0

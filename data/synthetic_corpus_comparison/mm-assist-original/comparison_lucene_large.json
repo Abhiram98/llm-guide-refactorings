@@ -1,0 +1,1169 @@
+[
+    {
+        "oracle": "method org.apache.lucene.codecs.TermStats::finishTerm2(TermStats):void need move org.apache.lucene.codecs.lucene41.Lucene41PostingsWriter",
+        "class_name": "org.apache.lucene.codecs.TermStats",
+        "telemetry": {
+            "id": "a7568873-c5ff-47d4-8699-10f205cdf782",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 177,
+                "lineStart": 28,
+                "lineEnd": 204,
+                "bodyLineStart": 28,
+                "language": "java",
+                "sourceCode": "/**\n * Holder for per-term statistics.\n * \n * @see TermsEnum#docFreq\n * @see TermsEnum#totalTermFreq\n */\npublic class TermStats {\n  /** How many documents have at least one occurrence of\n   *  this term. */\n  public final int docFreq;\n  \n  /** Total number of times this term occurs across all\n   *  documents in the field. */\n  public final long totalTermFreq;\n\n  /** Sole constructor. */\n  public TermStats(int docFreq, long totalTermFreq) {\n    this.docFreq = docFreq;\n    this.totalTermFreq = totalTermFreq;\n  }\n\n/** Called when we are done adding docs to this term \n * @param lucene41PostingsWriter TODO*/\n  public void finishTerm2(Lucene41PostingsWriter lucene41PostingsWriter) throws IOException {\n    assert docFreq > 0;\n\n    // TODO: wasteful we are counting this (counting # docs\n    // for this term) in two places?\n    assert docFreq == lucene41PostingsWriter.docCount: docFreq + \" vs \" + lucene41PostingsWriter.docCount;\n\n    // if (DEBUG) {\n    //   System.out.println(\"FPW.finishTerm docFreq=\" + stats.docFreq);\n    // }\n\n    // if (DEBUG) {\n    //   if (docBufferUpto > 0) {\n    //     System.out.println(\"  write doc/freq vInt block (count=\" + docBufferUpto + \") at fp=\" + docOut.getFilePointer() + \" docTermStartFP=\" + docTermStartFP);\n    //   }\n    // }\n    \n    // docFreq == 1, don't write the single docid/freq to a separate file along with a pointer to it.\n    final int singletonDocID;\n    if (docFreq == 1) {\n      // pulse the singleton docid into the term dictionary, freq is implicitly totalTermFreq\n      singletonDocID = lucene41PostingsWriter.docDeltaBuffer[0];\n    } else {\n      singletonDocID = -1;\n      // vInt encode the remaining doc deltas and freqs:\n      for(int i=0;i<lucene41PostingsWriter.docBufferUpto;i++) {\n        final int docDelta = lucene41PostingsWriter.docDeltaBuffer[i];\n        final int freq = lucene41PostingsWriter.freqBuffer[i];\n        if (!lucene41PostingsWriter.fieldHasFreqs) {\n          lucene41PostingsWriter.docOut.writeVInt(docDelta);\n        } else if (lucene41PostingsWriter.freqBuffer[i] == 1) {\n          lucene41PostingsWriter.docOut.writeVInt((docDelta<<1)|1);\n        } else {\n          lucene41PostingsWriter.docOut.writeVInt(docDelta<<1);\n          lucene41PostingsWriter.docOut.writeVInt(freq);\n        }\n      }\n    }\n\n    final long lastPosBlockOffset;\n\n    if (lucene41PostingsWriter.fieldHasPositions) {\n      // if (DEBUG) {\n      //   if (posBufferUpto > 0) {\n      //     System.out.println(\"  write pos vInt block (count=\" + posBufferUpto + \") at fp=\" + posOut.getFilePointer() + \" posTermStartFP=\" + posTermStartFP + \" hasPayloads=\" + fieldHasPayloads + \" hasOffsets=\" + fieldHasOffsets);\n      //   }\n      // }\n\n      // totalTermFreq is just total number of positions(or payloads, or offsets)\n      // associated with current term.\n      assert totalTermFreq != -1;\n      if (totalTermFreq > BLOCK_SIZE) {\n        // record file offset for last pos in last block\n        lastPosBlockOffset = lucene41PostingsWriter.posOut.getFilePointer() - lucene41PostingsWriter.posTermStartFP;\n      } else {\n        lastPosBlockOffset = -1;\n      }\n      if (lucene41PostingsWriter.posBufferUpto > 0) {       \n        // TODO: should we send offsets/payloads to\n        // .pay...?  seems wasteful (have to store extra\n        // vLong for low (< BLOCK_SIZE) DF terms = vast vast\n        // majority)\n\n        // vInt encode the remaining positions/payloads/offsets:\n        int lastPayloadLength = -1;  // force first payload length to be written\n        int lastOffsetLength = -1;   // force first offset length to be written\n        int payloadBytesReadUpto = 0;\n        for(int i=0;i<lucene41PostingsWriter.posBufferUpto;i++) {\n          final int posDelta = lucene41PostingsWriter.posDeltaBuffer[i];\n          if (lucene41PostingsWriter.fieldHasPayloads) {\n            final int payloadLength = lucene41PostingsWriter.payloadLengthBuffer[i];\n            if (payloadLength != lastPayloadLength) {\n              lastPayloadLength = payloadLength;\n              lucene41PostingsWriter.posOut.writeVInt((posDelta<<1)|1);\n              lucene41PostingsWriter.posOut.writeVInt(payloadLength);\n            } else {\n              lucene41PostingsWriter.posOut.writeVInt(posDelta<<1);\n            }\n\n            // if (DEBUG) {\n            //   System.out.println(\"        i=\" + i + \" payloadLen=\" + payloadLength);\n            // }\n\n            if (payloadLength != 0) {\n              // if (DEBUG) {\n              //   System.out.println(\"          write payload @ pos.fp=\" + posOut.getFilePointer());\n              // }\n              lucene41PostingsWriter.posOut.writeBytes(lucene41PostingsWriter.payloadBytes, payloadBytesReadUpto, payloadLength);\n              payloadBytesReadUpto += payloadLength;\n            }\n          } else {\n            lucene41PostingsWriter.posOut.writeVInt(posDelta);\n          }\n\n          if (lucene41PostingsWriter.fieldHasOffsets) {\n            // if (DEBUG) {\n            //   System.out.println(\"          write offset @ pos.fp=\" + posOut.getFilePointer());\n            // }\n            int delta = lucene41PostingsWriter.offsetStartDeltaBuffer[i];\n            int length = lucene41PostingsWriter.offsetLengthBuffer[i];\n            if (length == lastOffsetLength) {\n              lucene41PostingsWriter.posOut.writeVInt(delta << 1);\n            } else {\n              lucene41PostingsWriter.posOut.writeVInt(delta << 1 | 1);\n              lucene41PostingsWriter.posOut.writeVInt(length);\n              lastOffsetLength = length;\n            }\n          }\n        }\n\n        if (lucene41PostingsWriter.fieldHasPayloads) {\n          assert payloadBytesReadUpto == lucene41PostingsWriter.payloadByteUpto;\n          lucene41PostingsWriter.payloadByteUpto = 0;\n        }\n      }\n      // if (DEBUG) {\n      //   System.out.println(\"  totalTermFreq=\" + stats.totalTermFreq + \" lastPosBlockOffset=\" + lastPosBlockOffset);\n      // }\n    } else {\n      lastPosBlockOffset = -1;\n    }\n\n    long skipOffset;\n    if (lucene41PostingsWriter.docCount > BLOCK_SIZE) {\n      skipOffset = lucene41PostingsWriter.skipWriter.writeSkip(lucene41PostingsWriter.docOut) - lucene41PostingsWriter.docTermStartFP;\n      \n      // if (DEBUG) {\n      //   System.out.println(\"skip packet \" + (docOut.getFilePointer() - (docTermStartFP + skipOffset)) + \" bytes\");\n      // }\n    } else {\n      skipOffset = -1;\n      // if (DEBUG) {\n      //   System.out.println(\"  no skip: docCount=\" + docCount);\n      // }\n    }\n\n    long payStartFP;\n    if (totalTermFreq >= BLOCK_SIZE) {\n      payStartFP = lucene41PostingsWriter.payTermStartFP;\n    } else {\n      payStartFP = -1;\n    }\n\n    // if (DEBUG) {\n    //   System.out.println(\"  payStartFP=\" + payStartFP);\n    // }\n\n    lucene41PostingsWriter.pendingTerms.add(new PendingTerm(lucene41PostingsWriter.docTermStartFP, lucene41PostingsWriter.posTermStartFP, payStartFP, skipOffset, lastPosBlockOffset, singletonDocID));\n    lucene41PostingsWriter.docBufferUpto = 0;\n    lucene41PostingsWriter.posBufferUpto = 0;\n    lucene41PostingsWriter.lastDocID = 0;\n    lucene41PostingsWriter.docCount = 0;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 48,
+                        "lineEnd": 202,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.codecs.lucene41.Lucene41PostingsWriter\nRationale: The finishTerm2 method directly interacts with the Lucene41PostingsWriter instance, manipulating its buffers and writing data to its output streams. This method's functionality is closely tied to the operations of the Lucene41PostingsWriter, making it logical to move it there for better encapsulation and maintainability.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 5048
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "finishTerm2",
+                            "method_signature": "public void finishTerm2(Lucene41PostingsWriter lucene41PostingsWriter) throws IOException",
+                            "target_class": "Lucene41PostingsWriter",
+                            "rationale": "The finishTerm2 method is heavily dependent on the Lucene41PostingsWriter class, as it manipulates its fields and methods extensively. Moving it to Lucene41PostingsWriter would encapsulate the functionality related to writing postings and improve cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1568
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "finishTerm2",
+                            "method_signature": "public void finishTerm2(Lucene41PostingsWriter lucene41PostingsWriter) throws IOException",
+                            "target_class": "Lucene41PostingsWriter",
+                            "rationale": "The finishTerm2 method operates directly on the Lucene41PostingsWriter instance and manipulates its state. It would be more appropriate for this method to reside within the Lucene41PostingsWriter class, as it is closely tied to its functionality."
+                        }
+                    ],
+                    "llm_response_time": 1308
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "finishTerm2",
+                            "method_signature": "public void finishTerm2(Lucene41PostingsWriter lucene41PostingsWriter) throws IOException",
+                            "target_class": "Lucene41PostingsWriter",
+                            "rationale": "The finishTerm2 method is heavily dependent on the Lucene41PostingsWriter class, as it manipulates its fields and methods extensively. Moving it to Lucene41PostingsWriter would enhance cohesion and encapsulation."
+                        }
+                    ],
+                    "llm_response_time": 1608
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "finishTerm2",
+                            "method_signature": "public void finishTerm2(Lucene41PostingsWriter lucene41PostingsWriter) throws IOException",
+                            "target_class": "Lucene41PostingsWriter",
+                            "rationale": "The finishTerm2 method is heavily dependent on the Lucene41PostingsWriter class, as it manipulates its fields and methods extensively. Moving it to Lucene41PostingsWriter would encapsulate the functionality related to writing postings and improve cohesion."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "finishTerm2"
+                ],
+                "llm_response_time": 490
+            },
+            "targetClassMap": {
+                "finishTerm2": {
+                    "target_classes": [
+                        {
+                            "class_name": "Lucene41PostingsWriter",
+                            "similarity_score": 0.8072155941998119
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Lucene41PostingsWriter"
+                    ],
+                    "llm_response_time": 1027,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.codecs.FieldsConsumer::flush(String, FieldsConsumer, SegmentWriteState):void need move org.apache.lucene.index.FreqProxTermsWriterPerField",
+        "class_name": "org.apache.lucene.codecs.FieldsConsumer",
+        "telemetry": {
+            "id": "15cb9e6c-0a2d-4130-bcb8-d35d095f3f1c",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 275,
+                "lineStart": 38,
+                "lineEnd": 312,
+                "bodyLineStart": 38,
+                "language": "java",
+                "sourceCode": "/** \n * Abstract API that consumes terms, doc, freq, prox, offset and\n * payloads postings.  Concrete implementations of this\n * actually do \"something\" with the postings (write it into\n * the index in a specific format).\n * <p>\n * The lifecycle is:\n * <ol>\n *   <li>FieldsConsumer is created by \n *       {@link PostingsFormat#fieldsConsumer(SegmentWriteState)}.\n *   <li>For each field, {@link #addField(FieldInfo)} is called,\n *       returning a {@link TermsConsumer} for the field.\n *   <li>After all fields are added, the consumer is {@link #close}d.\n * </ol>\n *\n * @lucene.experimental\n */\npublic abstract class FieldsConsumer implements Closeable {\n\n  /** Sole constructor. (For invocation by subclass \n   *  constructors, typically implicit.) */\n  protected FieldsConsumer() {\n  }\n\n  /** Add a new field */\n  public abstract TermsConsumer addField(FieldInfo field) throws IOException;\n  \n  /** Called when we are done adding everything. */\n  @Override\n  public abstract void close() throws IOException;\n\n  /** Called during merging to merge all {@link Fields} from\n   *  sub-readers.  This must recurse to merge all postings\n   *  (terms, docs, positions, etc.).  A {@link\n   *  PostingsFormat} can override this default\n   *  implementation to do its own merging. */\n  public void merge(MergeState mergeState, Fields fields) throws IOException {\n    for (String field : fields) {\n      FieldInfo info = mergeState.fieldInfos.fieldInfo(field);\n      assert info != null : \"FieldInfo for field is null: \"+ field;\n      Terms terms = fields.terms(field);\n      if (terms != null) {\n        final TermsConsumer termsConsumer = addField(info);\n        termsConsumer.merge(mergeState, info.getIndexOptions(), terms.iterator(null));\n      }\n    }\n  }\n\npublic void flush(String fieldName, FreqProxTermsWriterPerField freqProxTermsWriterPerField, final SegmentWriteState state)\n    throws IOException {\n\n    if (!freqProxTermsWriterPerField.fieldInfo.isIndexed()) {\n      return; // nothing to flush, don't bother the codec with the unindexed field\n    }\n    \n    final TermsConsumer termsConsumer = addField(freqProxTermsWriterPerField.fieldInfo);\n    final Comparator<BytesRef> termComp = termsConsumer.getComparator();\n\n    // CONFUSING: this.indexOptions holds the index options\n    // that were current when we first saw this field.  But\n    // it's possible this has changed, eg when other\n    // documents are indexed that cause a \"downgrade\" of the\n    // IndexOptions.  So we must decode the in-RAM buffer\n    // according to this.indexOptions, but then write the\n    // new segment to the directory according to\n    // currentFieldIndexOptions:\n    final IndexOptions currentFieldIndexOptions = freqProxTermsWriterPerField.fieldInfo.getIndexOptions();\n    assert currentFieldIndexOptions != null;\n\n    final boolean writeTermFreq = currentFieldIndexOptions.compareTo(IndexOptions.DOCS_AND_FREQS) >= 0;\n    final boolean writePositions = currentFieldIndexOptions.compareTo(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS) >= 0;\n    final boolean writeOffsets = currentFieldIndexOptions.compareTo(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS) >= 0;\n\n    final boolean readTermFreq = freqProxTermsWriterPerField.hasFreq;\n    final boolean readPositions = freqProxTermsWriterPerField.hasProx;\n    final boolean readOffsets = freqProxTermsWriterPerField.hasOffsets;\n\n    //System.out.println(\"flush readTF=\" + readTermFreq + \" readPos=\" + readPositions + \" readOffs=\" + readOffsets);\n\n    // Make sure FieldInfo.update is working correctly!:\n    assert !writeTermFreq || readTermFreq;\n    assert !writePositions || readPositions;\n    assert !writeOffsets || readOffsets;\n\n    assert !writeOffsets || writePositions;\n\n    final Map<Term,Integer> segDeletes;\n    if (state.segDeletes != null && state.segDeletes.terms.size() > 0) {\n      segDeletes = state.segDeletes.terms;\n    } else {\n      segDeletes = null;\n    }\n\n    final int[] termIDs = freqProxTermsWriterPerField.termsHashPerField.sortPostings(termComp);\n    final int numTerms = freqProxTermsWriterPerField.termsHashPerField.bytesHash.size();\n    final BytesRef text = new BytesRef();\n    final FreqProxPostingsArray postings = (FreqProxPostingsArray) freqProxTermsWriterPerField.termsHashPerField.postingsArray;\n    final ByteSliceReader freq = new ByteSliceReader();\n    final ByteSliceReader prox = new ByteSliceReader();\n\n    FixedBitSet visitedDocs = new FixedBitSet(state.segmentInfo.getDocCount());\n    long sumTotalTermFreq = 0;\n    long sumDocFreq = 0;\n\n    Term protoTerm = new Term(fieldName);\n    for (int i = 0; i < numTerms; i++) {\n      final int termID = termIDs[i];\n      //System.out.println(\"term=\" + termID);\n      // Get BytesRef\n      final int textStart = postings.textStarts[termID];\n      freqProxTermsWriterPerField.termsHashPerField.bytePool.setBytesRef(text, textStart);\n\n      freqProxTermsWriterPerField.termsHashPerField.initReader(freq, termID, 0);\n      if (readPositions || readOffsets) {\n        freqProxTermsWriterPerField.termsHashPerField.initReader(prox, termID, 1);\n      }\n\n      // TODO: really TermsHashPerField should take over most\n      // of this loop, including merge sort of terms from\n      // multiple threads and interacting with the\n      // TermsConsumer, only calling out to us (passing us the\n      // DocsConsumer) to handle delivery of docs/positions\n\n      final PostingsConsumer postingsConsumer = termsConsumer.startTerm(text);\n\n      final int delDocLimit;\n      if (segDeletes != null) {\n        protoTerm.bytes = text;\n        final Integer docIDUpto = segDeletes.get(protoTerm);\n        if (docIDUpto != null) {\n          delDocLimit = docIDUpto;\n        } else {\n          delDocLimit = 0;\n        }\n      } else {\n        delDocLimit = 0;\n      }\n\n      // Now termStates has numToMerge FieldMergeStates\n      // which all share the same term.  Now we must\n      // interleave the docID streams.\n      int docFreq = 0;\n      long totTF = 0;\n      int docID = 0;\n\n      while(true) {\n        //System.out.println(\"  cycle\");\n        final int termFreq;\n        if (freq.eof()) {\n          if (postings.lastDocCodes[termID] != -1) {\n            // Return last doc\n            docID = postings.lastDocIDs[termID];\n            if (readTermFreq) {\n              termFreq = postings.termFreqs[termID];\n            } else {\n              termFreq = -1;\n            }\n            postings.lastDocCodes[termID] = -1;\n          } else {\n            // EOF\n            break;\n          }\n        } else {\n          final int code = freq.readVInt();\n          if (!readTermFreq) {\n            docID += code;\n            termFreq = -1;\n          } else {\n            docID += code >>> 1;\n            if ((code & 1) != 0) {\n              termFreq = 1;\n            } else {\n              termFreq = freq.readVInt();\n            }\n          }\n\n          assert docID != postings.lastDocIDs[termID];\n        }\n\n        docFreq++;\n        assert docID < state.segmentInfo.getDocCount(): \"doc=\" + docID + \" maxDoc=\" + state.segmentInfo.getDocCount();\n\n        // NOTE: we could check here if the docID was\n        // deleted, and skip it.  However, this is somewhat\n        // dangerous because it can yield non-deterministic\n        // behavior since we may see the docID before we see\n        // the term that caused it to be deleted.  This\n        // would mean some (but not all) of its postings may\n        // make it into the index, which'd alter the docFreq\n        // for those terms.  We could fix this by doing two\n        // passes, ie first sweep marks all del docs, and\n        // 2nd sweep does the real flush, but I suspect\n        // that'd add too much time to flush.\n        visitedDocs.set(docID);\n        postingsConsumer.startDoc(docID, writeTermFreq ? termFreq : -1);\n        if (docID < delDocLimit) {\n          // Mark it deleted.  TODO: we could also skip\n          // writing its postings; this would be\n          // deterministic (just for this Term's docs).\n          \n          // TODO: can we do this reach-around in a cleaner way????\n          if (state.liveDocs == null) {\n            state.liveDocs = freqProxTermsWriterPerField.docState.docWriter.codec.liveDocsFormat().newLiveDocs(state.segmentInfo.getDocCount());\n          }\n          if (state.liveDocs.get(docID)) {\n            state.delCountOnFlush++;\n            state.liveDocs.clear(docID);\n          }\n        }\n\n        totTF += termFreq;\n        \n        // Carefully copy over the prox + payload info,\n        // changing the format to match Lucene's segment\n        // format.\n\n        if (readPositions || readOffsets) {\n          // we did record positions (& maybe payload) and/or offsets\n          int position = 0;\n          int offset = 0;\n          for(int j=0;j<termFreq;j++) {\n            final BytesRef thisPayload;\n\n            if (readPositions) {\n              final int code = prox.readVInt();\n              position += code >>> 1;\n\n              if ((code & 1) != 0) {\n\n                // This position has a payload\n                final int payloadLength = prox.readVInt();\n\n                if (freqProxTermsWriterPerField.payload == null) {\n                  freqProxTermsWriterPerField.payload = new BytesRef();\n                  freqProxTermsWriterPerField.payload.bytes = new byte[payloadLength];\n                } else if (freqProxTermsWriterPerField.payload.bytes.length < payloadLength) {\n                  freqProxTermsWriterPerField.payload.grow(payloadLength);\n                }\n\n                prox.readBytes(freqProxTermsWriterPerField.payload.bytes, 0, payloadLength);\n                freqProxTermsWriterPerField.payload.length = payloadLength;\n                thisPayload = freqProxTermsWriterPerField.payload;\n\n              } else {\n                thisPayload = null;\n              }\n\n              if (readOffsets) {\n                final int startOffset = offset + prox.readVInt();\n                final int endOffset = startOffset + prox.readVInt();\n                if (writePositions) {\n                  if (writeOffsets) {\n                    assert startOffset >=0 && endOffset >= startOffset : \"startOffset=\" + startOffset + \",endOffset=\" + endOffset + \",offset=\" + offset;\n                    postingsConsumer.addPosition(position, thisPayload, startOffset, endOffset);\n                  } else {\n                    postingsConsumer.addPosition(position, thisPayload, -1, -1);\n                  }\n                }\n                offset = startOffset;\n              } else if (writePositions) {\n                postingsConsumer.addPosition(position, thisPayload, -1, -1);\n              }\n            }\n          }\n        }\n        postingsConsumer.finishDoc();\n      }\n      termsConsumer.finishTerm(text, new TermStats(docFreq, writeTermFreq ? totTF : -1));\n      sumTotalTermFreq += totTF;\n      sumDocFreq += docFreq;\n    }\n\n    termsConsumer.finish(writeTermFreq ? sumTotalTermFreq : -1, sumDocFreq, visitedDocs.cardinality());\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 85,
+                        "lineEnd": 310,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.index.FreqProxTermsWriterPerField\nRationale: The flush method operates primarily on the data and state of the FreqProxTermsWriterPerField instance, handling term frequencies, positions, and offsets specific to the field being indexed. It is closely tied to the functionality of writing terms and their associated data, making it more appropriate for this class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 68,
+                        "lineEnd": 83,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.index.MergeState\nRationale: The merge method operates on the state of the merging process, utilizing the MergeState object to access field information and manage the merging of postings. It is more appropriate for this method to reside in the MergeState class, as it directly relates to the merging logic and state management.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 7250
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "flush",
+                            "method_signature": "public void flush(String fieldName, FreqProxTermsWriterPerField freqProxTermsWriterPerField, final SegmentWriteState state) throws IOException",
+                            "target_class": "FreqProxTermsWriterPerField",
+                            "rationale": "The flush method is tightly coupled with the FreqProxTermsWriterPerField class, as it directly manipulates its properties and methods. Moving it to FreqProxTermsWriterPerField would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "merge",
+                            "method_signature": "public void merge(MergeState mergeState, Fields fields) throws IOException",
+                            "target_class": "PostingsFormat",
+                            "rationale": "The merge method is responsible for merging postings, which is a core functionality of the PostingsFormat. Moving it there would align the method with the class that handles the overall posting format logic."
+                        }
+                    ],
+                    "llm_response_time": 2380
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "flush",
+                            "method_signature": "public void flush(String fieldName, FreqProxTermsWriterPerField freqProxTermsWriterPerField, final SegmentWriteState state) throws IOException",
+                            "target_class": "TermsConsumer",
+                            "rationale": "The flush method is responsible for writing terms and their associated data to the index, which is a core responsibility of the TermsConsumer class. Moving it there would better encapsulate the functionality related to term management."
+                        },
+                        {
+                            "method_name": "merge",
+                            "method_signature": "public void merge(MergeState mergeState, Fields fields) throws IOException",
+                            "target_class": "PostingsFormat",
+                            "rationale": "The merge method deals with merging postings from sub-readers, which is more aligned with the responsibilities of the PostingsFormat class. This would help in separating concerns and improving the cohesion of the classes."
+                        }
+                    ],
+                    "llm_response_time": 2248
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "flush",
+                            "method_signature": "public void flush(String fieldName, FreqProxTermsWriterPerField freqProxTermsWriterPerField, final SegmentWriteState state) throws IOException",
+                            "target_class": "FreqProxTermsWriterPerField",
+                            "rationale": "The flush method is tightly coupled with the FreqProxTermsWriterPerField class, as it directly manipulates its properties and methods. Moving it to FreqProxTermsWriterPerField would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "merge",
+                            "method_signature": "public void merge(MergeState mergeState, Fields fields) throws IOException",
+                            "target_class": "PostingsFormat",
+                            "rationale": "The merge method is responsible for merging postings, which is a core functionality of the PostingsFormat. Moving it to PostingsFormat would align it with the class's purpose and responsibilities."
+                        }
+                    ],
+                    "llm_response_time": 2021
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "flush",
+                            "method_signature": "public void flush(String fieldName, FreqProxTermsWriterPerField freqProxTermsWriterPerField, final SegmentWriteState state) throws IOException",
+                            "target_class": "FreqProxTermsWriterPerField",
+                            "rationale": "The flush method is tightly coupled with the FreqProxTermsWriterPerField class, as it directly manipulates its properties and methods. Moving it to FreqProxTermsWriterPerField would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "merge",
+                            "method_signature": "public void merge(MergeState mergeState, Fields fields) throws IOException",
+                            "target_class": "PostingsFormat",
+                            "rationale": "The merge method is responsible for merging postings, which is a core functionality of the PostingsFormat. Moving it there would align the method with the class that handles the overall posting format logic."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "flush",
+                    "merge"
+                ],
+                "llm_response_time": 513
+            },
+            "targetClassMap": {
+                "flush": {
+                    "target_classes": [
+                        {
+                            "class_name": "FreqProxTermsWriterPerField",
+                            "similarity_score": 0.8064948613768139
+                        },
+                        {
+                            "class_name": "SegmentWriteState",
+                            "similarity_score": 0.4009555116525366
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "FreqProxTermsWriterPerField",
+                        "SegmentWriteState"
+                    ],
+                    "llm_response_time": 2234,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                },
+                "merge": {
+                    "target_classes": [
+                        {
+                            "class_name": "MergeState",
+                            "similarity_score": 0.47017768912456487
+                        },
+                        {
+                            "class_name": "Fields",
+                            "similarity_score": 0.594017717629696
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "MergeState",
+                        "Fields"
+                    ],
+                    "llm_response_time": 1997,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.search.Collector::score2():float need move org.apache.lucene.facet.search.DrillSidewaysScorer",
+        "class_name": "org.apache.lucene.search.Collector",
+        "telemetry": {
+            "id": "1074ff42-5186-465b-9c69-d2a27f195c4c",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 217,
+                "lineStart": 28,
+                "lineEnd": 244,
+                "bodyLineStart": 28,
+                "language": "java",
+                "sourceCode": "/**\n * <p>Expert: Collectors are primarily meant to be used to\n * gather raw results from a search, and implement sorting\n * or custom result filtering, collation, etc. </p>\n *\n * <p>Lucene's core collectors are derived from Collector.\n * Likely your application can use one of these classes, or\n * subclass {@link TopDocsCollector}, instead of\n * implementing Collector directly:\n *\n * <ul>\n *      \n *   <li>{@link TopDocsCollector} is an abstract base class\n *   that assumes you will retrieve the top N docs,\n *   according to some criteria, after collection is\n *   done.  </li>\n *\n *   <li>{@link TopScoreDocCollector} is a concrete subclass\n *   {@link TopDocsCollector} and sorts according to score +\n *   docID.  This is used internally by the {@link\n *   IndexSearcher} search methods that do not take an\n *   explicit {@link Sort}. It is likely the most frequently\n *   used collector.</li>\n *\n *   <li>{@link TopFieldCollector} subclasses {@link\n *   TopDocsCollector} and sorts according to a specified\n *   {@link Sort} object (sort by field).  This is used\n *   internally by the {@link IndexSearcher} search methods\n *   that take an explicit {@link Sort}.\n *\n *   <li>{@link TimeLimitingCollector}, which wraps any other\n *   Collector and aborts the search if it's taken too much\n *   time.</li>\n *\n *   <li>{@link PositiveScoresOnlyCollector} wraps any other\n *   Collector and prevents collection of hits whose score\n *   is &lt;= 0.0</li>\n *\n * </ul>\n *\n * <p>Collector decouples the score from the collected doc:\n * the score computation is skipped entirely if it's not\n * needed.  Collectors that do need the score should\n * implement the {@link #setScorer} method, to hold onto the\n * passed {@link Scorer} instance, and call {@link\n * Scorer#score()} within the collect method to compute the\n * current hit's score.  If your collector may request the\n * score for a single hit multiple times, you should use\n * {@link ScoreCachingWrappingScorer}. </p>\n * \n * <p><b>NOTE:</b> The doc that is passed to the collect\n * method is relative to the current reader. If your\n * collector needs to resolve this to the docID space of the\n * Multi*Reader, you must re-base it by recording the\n * docBase from the most recent setNextReader call.  Here's\n * a simple example showing how to collect docIDs into a\n * BitSet:</p>\n * \n * <pre class=\"prettyprint\">\n * IndexSearcher searcher = new IndexSearcher(indexReader);\n * final BitSet bits = new BitSet(indexReader.maxDoc());\n * searcher.search(query, new Collector() {\n *   private int docBase;\n * \n *   <em>// ignore scorer</em>\n *   public void setScorer(Scorer scorer) {\n *   }\n *\n *   <em>// accept docs out of order (for a BitSet it doesn't matter)</em>\n *   public boolean acceptsDocsOutOfOrder() {\n *     return true;\n *   }\n * \n *   public void collect(int doc) {\n *     bits.set(doc + docBase);\n *   }\n * \n *   public void setNextReader(AtomicReaderContext context) {\n *     this.docBase = context.docBase;\n *   }\n * });\n * </pre>\n *\n * <p>Not all collectors will need to rebase the docID.  For\n * example, a collector that simply counts the total number\n * of hits would skip it.</p>\n * \n * <p><b>NOTE:</b> Prior to 2.9, Lucene silently filtered\n * out hits with score <= 0.  As of 2.9, the core Collectors\n * no longer do that.  It's very unusual to have such hits\n * (a negative query boost, or function query returning\n * negative custom scores, could cause it to happen).  If\n * you need that behavior, use {@link\n * PositiveScoresOnlyCollector}.</p>\n *\n * @lucene.experimental\n * \n * @since 2.9\n */\npublic abstract class Collector {\n  \n  /**\n   * Called before successive calls to {@link #collect(int)}. Implementations\n   * that need the score of the current document (passed-in to\n   * {@link #collect(int)}), should save the passed-in Scorer and call\n   * scorer.score() when needed.\n   */\n  public abstract void setScorer(Scorer scorer) throws IOException;\n  \n  /**\n   * Called once for every document matching a query, with the unbased document\n   * number.\n   * \n   * <p>\n   * Note: This is called in an inner search loop. For good search performance,\n   * implementations of this method should not call {@link IndexSearcher#doc(int)} or\n   * {@link org.apache.lucene.index.IndexReader#document(int)} on every hit.\n   * Doing so can slow searches by an order of magnitude or more.\n   */\n  public abstract void collect(int doc) throws IOException;\n\n  /**\n   * Called before collecting from each {@link AtomicReaderContext}. All doc ids in\n   * {@link #collect(int)} will correspond to {@link IndexReaderContext#reader}.\n   * \n   * Add {@link AtomicReaderContext#docBase} to the current  {@link IndexReaderContext#reader}'s\n   * internal document id to re-base ids in {@link #collect(int)}.\n   * \n   * @param context\n   *          next atomic reader context\n   */\n  public abstract void setNextReader(AtomicReaderContext context) throws IOException;\n\n  /**\n   * Return <code>true</code> if this collector does not\n   * require the matching docIDs to be delivered in int sort\n   * order (smallest to largest) to {@link #collect}.\n   *\n   * <p> Most Lucene Query implementations will visit\n   * matching docIDs in order.  However, some queries\n   * (currently limited to certain cases of {@link\n   * BooleanQuery}) can achieve faster searching if the\n   * <code>Collector</code> allows them to deliver the\n   * docIDs out of order.</p>\n   *\n   * <p> Many collectors don't mind getting docIDs out of\n   * order, so it's important to return <code>true</code>\n   * here.\n   */\n  public abstract boolean acceptsDocsOutOfOrder();\n\npublic void score2(DrillSidewaysScorer drillSidewaysScorer) throws IOException {\n    //if (DEBUG) {\n    //  System.out.println(\"\\nscore: reader=\" + context.reader());\n    //}\n    //System.out.println(\"score r=\" + context.reader());\n    setScorer(drillSidewaysScorer);\n    drillSidewaysScorer.drillDownCollector.setScorer(drillSidewaysScorer);\n    drillSidewaysScorer.drillDownCollector.setNextReader(drillSidewaysScorer.context);\n    for(DocsEnumsAndFreq dim : drillSidewaysScorer.dims) {\n      dim.sidewaysCollector.setScorer(drillSidewaysScorer);\n      dim.sidewaysCollector.setNextReader(drillSidewaysScorer.context);\n    }\n\n    // TODO: if we ever allow null baseScorer ... it will\n    // mean we DO score docs out of order ... hmm, or if we\n    // change up the order of the conjuntions below\n    assert drillSidewaysScorer.baseScorer != null;\n\n    // Position all scorers to their first matching doc:\n    int baseDocID = drillSidewaysScorer.baseScorer.nextDoc();\n\n    for(DocsEnumsAndFreq dim : drillSidewaysScorer.dims) {\n      for(DocsEnum docsEnum : dim.docsEnums) {\n        if (docsEnum != null) {\n          docsEnum.nextDoc();\n        }\n      }\n    }\n\n    final int numDims = drillSidewaysScorer.dims.length;\n\n    DocsEnum[][] docsEnums = new DocsEnum[numDims][];\n    Collector[] sidewaysCollectors = new Collector[numDims];\n    int maxFreq = 0;\n    for(int dim=0;dim<numDims;dim++) {\n      docsEnums[dim] = drillSidewaysScorer.dims[dim].docsEnums;\n      sidewaysCollectors[dim] = drillSidewaysScorer.dims[dim].sidewaysCollector;\n      maxFreq = Math.max(maxFreq, drillSidewaysScorer.dims[dim].freq);\n    }\n\n    // TODO: if we add cost API to Scorer, switch to that!\n    int estBaseHitCount = drillSidewaysScorer.context.reader().maxDoc() / (1+baseDocID);\n\n    /*\n    System.out.println(\"\\nbaseDocID=\" + baseDocID + \" est=\" + estBaseHitCount);\n    System.out.println(\"  maxDoc=\" + context.reader().maxDoc());\n    System.out.println(\"  maxFreq=\" + maxFreq);\n    System.out.println(\"  dims[0].freq=\" + dims[0].freq);\n    if (numDims > 1) {\n      System.out.println(\"  dims[1].freq=\" + dims[1].freq);\n    }\n    */\n\n    if (estBaseHitCount < maxFreq/10) {\n      //System.out.println(\"baseAdvance\");\n      drillSidewaysScorer.doBaseAdvanceScoring(this, docsEnums, sidewaysCollectors);\n    } else if (numDims > 1 && (drillSidewaysScorer.dims[1].freq < estBaseHitCount/10)) {\n      //System.out.println(\"drillDownAdvance\");\n      drillSidewaysScorer.doDrillDownAdvanceScoring(this, docsEnums, sidewaysCollectors);\n    } else {\n      //System.out.println(\"union\");\n      drillSidewaysScorer.doUnionScoring(this, docsEnums, sidewaysCollectors);\n    }\n  }\n  \n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 178,
+                        "lineEnd": 241,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.facet.search.DrillSidewaysScorer\nRationale: The method 'score2' directly manipulates the state and behavior of the DrillSidewaysScorer instance, including setting scorers and managing collections related to scoring. It is tightly coupled with the data and operations of the DrillSidewaysScorer, making it the most appropriate class for this method.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 4395
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "score2",
+                            "method_signature": "public void score2(DrillSidewaysScorer drillSidewaysScorer) throws IOException",
+                            "target_class": "DrillSidewaysScorer",
+                            "rationale": "The score2 method operates directly on the DrillSidewaysScorer and manipulates its state. It would be more cohesive to move this method to the DrillSidewaysScorer class, where it can directly manage its own scoring logic."
+                        }
+                    ],
+                    "llm_response_time": 1376
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "score2",
+                            "method_signature": "public void score2(DrillSidewaysScorer drillSidewaysScorer) throws IOException",
+                            "target_class": "DrillSidewaysScorer",
+                            "rationale": "The score2 method is tightly coupled with the DrillSidewaysScorer class, as it directly manipulates its properties and methods. Moving it to DrillSidewaysScorer would enhance cohesion and encapsulation."
+                        }
+                    ],
+                    "llm_response_time": 1087
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "score2",
+                            "method_signature": "public void score2(DrillSidewaysScorer drillSidewaysScorer) throws IOException",
+                            "target_class": "DrillSidewaysScorer",
+                            "rationale": "The score2 method operates directly on the DrillSidewaysScorer and its associated data. Moving it to the DrillSidewaysScorer class would encapsulate the scoring logic within the context of the scorer, improving cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1254
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "score2",
+                            "method_signature": "public void score2(DrillSidewaysScorer drillSidewaysScorer) throws IOException",
+                            "target_class": "DrillSidewaysScorer",
+                            "rationale": "The score2 method operates directly on the DrillSidewaysScorer and manipulates its state. It would be more cohesive to move this method to the DrillSidewaysScorer class, where it can directly manage its own scoring logic."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "score2"
+                ],
+                "llm_response_time": 506
+            },
+            "targetClassMap": {
+                "score2": {
+                    "target_classes": [
+                        {
+                            "class_name": "DrillSidewaysScorer",
+                            "similarity_score": 0.8060234719813468
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "DrillSidewaysScorer"
+                    ],
+                    "llm_response_time": 823,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.codecs.TermVectorsReader::getSortedDocValues(String):SortedDocValues need move org.apache.lucene.index.SegmentCoreReaders",
+        "class_name": "org.apache.lucene.codecs.TermVectorsReader",
+        "telemetry": {
+            "id": "fef454a6-8839-405d-a659-8293241006cd",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 51,
+                "lineStart": 32,
+                "lineEnd": 82,
+                "bodyLineStart": 32,
+                "language": "java",
+                "sourceCode": "/**\n * Codec API for reading term vectors:\n * \n * @lucene.experimental\n */\npublic abstract class TermVectorsReader implements Cloneable, Closeable {\n\n  /** Sole constructor. (For invocation by subclass \n   *  constructors, typically implicit.) */\n  protected TermVectorsReader() {\n  }\n\n  /** Returns term vectors for this document, or null if\n   *  term vectors were not indexed. If offsets are\n   *  available they are in an {@link OffsetAttribute}\n   *  available from the {@link DocsAndPositionsEnum}. */\n  public abstract Fields get(int doc) throws IOException;\n\n  /** Create a clone that one caller at a time may use to\n   *  read term vectors. */\n  @Override\n  public abstract TermVectorsReader clone();\n\npublic SortedDocValues getSortedDocValues(SegmentCoreReaders segmentCoreReaders, String field) throws IOException {\n    FieldInfo fi = segmentCoreReaders.fieldInfos.fieldInfo(field);\n    if (fi == null) {\n      // Field does not exist\n      return null;\n    }\n    if (fi.getDocValuesType() == null) {\n      // Field was not indexed with doc values\n      return null;\n    }\n    if (fi.getDocValuesType() != DocValuesType.SORTED) {\n      // DocValues were not sorted\n      return null;\n    }\n\n    assert segmentCoreReaders.dvProducer != null;\n\n    Map<String,Object> dvFields = segmentCoreReaders.docValuesLocal.get();\n\n    SortedDocValues dvs = (SortedDocValues) dvFields.get(field);\n    if (dvs == null) {\n      dvs = segmentCoreReaders.dvProducer.getSorted(fi);\n      dvFields.put(field, dvs);\n    }\n\n    return dvs;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 54,
+                        "lineEnd": 80,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.index.SegmentCoreReaders\nRationale: The method directly interacts with the SegmentCoreReaders instance, accessing its fieldInfos and docValuesLocal properties, making it logical for the method to reside within this class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 5990
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSortedDocValues",
+                            "method_signature": "public SortedDocValues getSortedDocValues(SegmentCoreReaders segmentCoreReaders, String field) throws IOException",
+                            "target_class": "SegmentCoreReaders",
+                            "rationale": "The getSortedDocValues method operates directly on the SegmentCoreReaders instance and is primarily concerned with retrieving sorted document values, making it more appropriate for the SegmentCoreReaders class."
+                        }
+                    ],
+                    "llm_response_time": 1499
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSortedDocValues",
+                            "method_signature": "public SortedDocValues getSortedDocValues(SegmentCoreReaders segmentCoreReaders, String field) throws IOException",
+                            "target_class": "SegmentCoreReaders",
+                            "rationale": "The getSortedDocValues method operates directly on the SegmentCoreReaders instance and is primarily concerned with retrieving sorted document values, making it more appropriate for the SegmentCoreReaders class."
+                        }
+                    ],
+                    "llm_response_time": 2064
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSortedDocValues",
+                            "method_signature": "public SortedDocValues getSortedDocValues(SegmentCoreReaders segmentCoreReaders, String field) throws IOException",
+                            "target_class": "SegmentCoreReaders",
+                            "rationale": "The getSortedDocValues method operates directly on the SegmentCoreReaders instance and is primarily concerned with retrieving sorted document values, making it more appropriate for the SegmentCoreReaders class."
+                        }
+                    ],
+                    "llm_response_time": 1946
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSortedDocValues",
+                            "method_signature": "public SortedDocValues getSortedDocValues(SegmentCoreReaders segmentCoreReaders, String field) throws IOException",
+                            "target_class": "SegmentCoreReaders",
+                            "rationale": "The getSortedDocValues method operates directly on the SegmentCoreReaders instance and is primarily concerned with retrieving sorted document values, making it more appropriate for the SegmentCoreReaders class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "getSortedDocValues"
+                ],
+                "llm_response_time": 405
+            },
+            "targetClassMap": {
+                "getSortedDocValues": {
+                    "target_classes": [
+                        {
+                            "class_name": "SegmentCoreReaders",
+                            "similarity_score": 0.8394707928782935
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "SegmentCoreReaders"
+                    ],
+                    "llm_response_time": 572,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.index.AtomicReader::correctBits(AtomicReader, Bits):FixedBitSet need move org.apache.lucene.sandbox.queries.DuplicateFilter",
+        "class_name": "org.apache.lucene.index.AtomicReader",
+        "telemetry": {
+            "id": "251c3951-7966-4b10-bca5-70a971077df3",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 234,
+                "lineStart": 30,
+                "lineEnd": 263,
+                "bodyLineStart": 30,
+                "language": "java",
+                "sourceCode": "/** {@code AtomicReader} is an abstract class, providing an interface for accessing an\n index.  Search of an index is done entirely through this abstract interface,\n so that any subclass which implements it is searchable. IndexReaders implemented\n by this subclass do not consist of several sub-readers,\n they are atomic. They support retrieval of stored fields, doc values, terms,\n and postings.\n\n <p>For efficiency, in this API documents are often referred to via\n <i>document numbers</i>, non-negative integers which each name a unique\n document in the index.  These document numbers are ephemeral -- they may change\n as documents are added to and deleted from an index.  Clients should thus not\n rely on a given document having the same number between sessions.\n\n <p>\n <a name=\"thread-safety\"></a><p><b>NOTE</b>: {@link\n IndexReader} instances are completely thread\n safe, meaning multiple threads can call any of its methods,\n concurrently.  If your application requires external\n synchronization, you should <b>not</b> synchronize on the\n <code>IndexReader</code> instance; use your own\n (non-Lucene) objects instead.\n*/\npublic abstract class AtomicReader extends IndexReader {\n\n  private final AtomicReaderContext readerContext = new AtomicReaderContext(this);\n  \n  /** Sole constructor. (For invocation by subclass \n   *  constructors, typically implicit.) */\n  protected AtomicReader() {\n    super();\n  }\n\n  @Override\n  public final AtomicReaderContext getContext() {\n    ensureOpen();\n    return readerContext;\n  }\n\n  /** \n   * Returns true if there are norms stored for this field.\n   * @deprecated (4.0) use {@link #getFieldInfos()} and check {@link FieldInfo#hasNorms()} \n   *                   for the field instead.\n   */\n  @Deprecated\n  public final boolean hasNorms(String field) throws IOException {\n    ensureOpen();\n    // note: using normValues(field) != null would potentially cause i/o\n    FieldInfo fi = getFieldInfos().fieldInfo(field);\n    return fi != null && fi.hasNorms();\n  }\n\n  /**\n   * Returns {@link Fields} for this reader.\n   * This method may return null if the reader has no\n   * postings.\n   */\n  public abstract Fields fields() throws IOException;\n  \n  @Override\n  public final int docFreq(Term term) throws IOException {\n    final Fields fields = fields();\n    if (fields == null) {\n      return 0;\n    }\n    final Terms terms = fields.terms(term.field());\n    if (terms == null) {\n      return 0;\n    }\n    final TermsEnum termsEnum = terms.iterator(null);\n    if (termsEnum.seekExact(term.bytes(), true)) {\n      return termsEnum.docFreq();\n    } else {\n      return 0;\n    }\n  }\n\n  /** Returns the number of documents containing the term\n   * <code>t</code>.  This method returns 0 if the term or\n   * field does not exists.  This method does not take into\n   * account deleted documents that have not yet been merged\n   * away. */\n  @Override\n  public final long totalTermFreq(Term term) throws IOException {\n    final Fields fields = fields();\n    if (fields == null) {\n      return 0;\n    }\n    final Terms terms = fields.terms(term.field());\n    if (terms == null) {\n      return 0;\n    }\n    final TermsEnum termsEnum = terms.iterator(null);\n    if (termsEnum.seekExact(term.bytes(), true)) {\n      return termsEnum.totalTermFreq();\n    } else {\n      return 0;\n    }\n  }\n\n  /** This may return null if the field does not exist.*/\n  public final Terms terms(String field) throws IOException {\n    final Fields fields = fields();\n    if (fields == null) {\n      return null;\n    }\n    return fields.terms(field);\n  }\n\n  /** Returns {@link DocsEnum} for the specified term.\n   *  This will return null if either the field or\n   *  term does not exist. \n   *  @see TermsEnum#docs(Bits, DocsEnum) */\n  public final DocsEnum termDocsEnum(Term term) throws IOException {\n    assert term.field() != null;\n    assert term.bytes() != null;\n    final Fields fields = fields();\n    if (fields != null) {\n      final Terms terms = fields.terms(term.field());\n      if (terms != null) {\n        final TermsEnum termsEnum = terms.iterator(null);\n        if (termsEnum.seekExact(term.bytes(), true)) {\n          return termsEnum.docs(getLiveDocs(), null);\n        }\n      }\n    }\n    return null;\n  }\n\n  /** Returns {@link DocsAndPositionsEnum} for the specified\n   *  term.  This will return null if the\n   *  field or term does not exist or positions weren't indexed. \n   *  @see TermsEnum#docsAndPositions(Bits, DocsAndPositionsEnum) */\n  public final DocsAndPositionsEnum termPositionsEnum(Term term) throws IOException {\n    assert term.field() != null;\n    assert term.bytes() != null;\n    final Fields fields = fields();\n    if (fields != null) {\n      final Terms terms = fields.terms(term.field());\n      if (terms != null) {\n        final TermsEnum termsEnum = terms.iterator(null);\n        if (termsEnum.seekExact(term.bytes(), true)) {\n          return termsEnum.docsAndPositions(getLiveDocs(), null);\n        }\n      }\n    }\n    return null;\n  }\n\n  /** Returns {@link NumericDocValues} for this field, or\n   *  null if no {@link NumericDocValues} were indexed for\n   *  this field.  The returned instance should only be\n   *  used by a single thread. */\n  public abstract NumericDocValues getNumericDocValues(String field) throws IOException;\n\n  /** Returns {@link BinaryDocValues} for this field, or\n   *  null if no {@link BinaryDocValues} were indexed for\n   *  this field.  The returned instance should only be\n   *  used by a single thread. */\n  public abstract BinaryDocValues getBinaryDocValues(String field) throws IOException;\n\n  /** Returns {@link SortedDocValues} for this field, or\n   *  null if no {@link SortedDocValues} were indexed for\n   *  this field.  The returned instance should only be\n   *  used by a single thread. */\n  public abstract SortedDocValues getSortedDocValues(String field) throws IOException;\n  \n  /** Returns {@link SortedSetDocValues} for this field, or\n   *  null if no {@link SortedSetDocValues} were indexed for\n   *  this field.  The returned instance should only be\n   *  used by a single thread. */\n  public abstract SortedSetDocValues getSortedSetDocValues(String field) throws IOException;\n\n  /** Returns {@link NumericDocValues} representing norms\n   *  for this field, or null if no {@link NumericDocValues}\n   *  were indexed. The returned instance should only be\n   *  used by a single thread. */\n  public abstract NumericDocValues getNormValues(String field) throws IOException;\n\n  /**\n   * Get the {@link FieldInfos} describing all fields in\n   * this reader.\n   * @lucene.experimental\n   */\n  public abstract FieldInfos getFieldInfos();\n  \n  /** Returns the {@link Bits} representing live (not\n   *  deleted) docs.  A set bit indicates the doc ID has not\n   *  been deleted.  If this method returns null it means\n   *  there are no deleted documents (all documents are\n   *  live).\n   *\n   *  The returned instance has been safely published for\n   *  use by multiple threads without additional\n   *  synchronization.\n   */\n  public abstract Bits getLiveDocs();\n\npublic FixedBitSet correctBits(DuplicateFilter duplicateFilter, Bits acceptDocs) throws IOException {\n    FixedBitSet bits = new FixedBitSet(maxDoc()); //assume all are INvalid\n    Terms terms = fields().terms(duplicateFilter.fieldName);\n\n    if (terms == null) {\n      return bits;\n    }\n\n    TermsEnum termsEnum = terms.iterator(null);\n    DocsEnum docs = null;\n    while (true) {\n      BytesRef currTerm = termsEnum.next();\n      if (currTerm == null) {\n        break;\n      } else {\n        docs = termsEnum.docs(acceptDocs, docs, DocsEnum.FLAG_NONE);\n        int doc = docs.nextDoc();\n        if (doc != DocIdSetIterator.NO_MORE_DOCS) {\n          if (duplicateFilter.keepMode == KeepMode.KM_USE_FIRST_OCCURRENCE) {\n            bits.set(doc);\n          } else {\n            int lastDoc = doc;\n            while (true) {\n              lastDoc = doc;\n              doc = docs.nextDoc();\n              if (doc == DocIdSetIterator.NO_MORE_DOCS) {\n                break;\n              }\n            }\n            bits.set(lastDoc);\n          }\n        }\n      }\n    }\n    return bits;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 226,
+                        "lineEnd": 261,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.sandbox.queries.DuplicateFilter\nRationale: The method correctBits() is closely related to filtering duplicates based on the provided DuplicateFilter instance, making it logical to associate this functionality with the DuplicateFilter class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 5518
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "correctBits",
+                            "method_signature": "public FixedBitSet correctBits(DuplicateFilter duplicateFilter, Bits acceptDocs) throws IOException",
+                            "target_class": "DuplicateFilter",
+                            "rationale": "The correctBits method is primarily concerned with filtering duplicates based on the DuplicateFilter's criteria. It would be more appropriate for this method to reside within the DuplicateFilter class, as it directly manipulates and utilizes its properties."
+                        }
+                    ],
+                    "llm_response_time": 1355
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "correctBits",
+                            "method_signature": "public FixedBitSet correctBits(DuplicateFilter duplicateFilter, Bits acceptDocs) throws IOException",
+                            "target_class": "DuplicateFilter",
+                            "rationale": "The correctBits method operates directly on the DuplicateFilter and is primarily concerned with filtering duplicates. It would be more appropriate for this method to reside within the DuplicateFilter class, as it encapsulates the logic related to duplicate handling."
+                        }
+                    ],
+                    "llm_response_time": 2165
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "correctBits",
+                            "method_signature": "public FixedBitSet correctBits(DuplicateFilter duplicateFilter, Bits acceptDocs) throws IOException",
+                            "target_class": "DuplicateFilter",
+                            "rationale": "The correctBits method is primarily concerned with filtering duplicates based on the DuplicateFilter's criteria. It would be more appropriate for this method to reside within the DuplicateFilter class, as it directly manipulates and utilizes its properties."
+                        }
+                    ],
+                    "llm_response_time": 1311
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "correctBits",
+                            "method_signature": "public FixedBitSet correctBits(DuplicateFilter duplicateFilter, Bits acceptDocs) throws IOException",
+                            "target_class": "DuplicateFilter",
+                            "rationale": "The correctBits method is primarily concerned with filtering duplicates based on the DuplicateFilter's criteria. It would be more appropriate for this method to reside within the DuplicateFilter class, as it directly manipulates and utilizes its properties."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "correctBits"
+                ],
+                "llm_response_time": 608
+            },
+            "targetClassMap": {
+                "correctBits": {
+                    "target_classes": [
+                        {
+                            "class_name": "DuplicateFilter",
+                            "similarity_score": 0.7816559346789013
+                        },
+                        {
+                            "class_name": "Bits",
+                            "similarity_score": 0.4228390346088126
+                        },
+                        {
+                            "class_name": "AtomicReaderContext",
+                            "similarity_score": 0.5093251243381162
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "DuplicateFilter",
+                        "AtomicReaderContext",
+                        "Bits"
+                    ],
+                    "llm_response_time": 1402,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.store.ByteArrayDataOutput::build2(IntsRef, Iterable<CategoryPath>):Map<String,BytesRef> need move org.apache.lucene.facet.associations.AssociationsListBuilder",
+        "class_name": "org.apache.lucene.store.ByteArrayDataOutput",
+        "telemetry": {
+            "id": "cff4e691-e696-4372-a83d-937c284245f5",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 90,
+                "lineStart": 30,
+                "lineEnd": 119,
+                "bodyLineStart": 30,
+                "language": "java",
+                "sourceCode": "/**\n * DataOutput backed by a byte array.\n * <b>WARNING:</b> This class omits most low-level checks,\n * so be sure to test heavily with assertions enabled.\n * @lucene.experimental\n */\npublic class ByteArrayDataOutput extends DataOutput {\n  private byte[] bytes;\n\n  private int pos;\n  private int limit;\n\n  public ByteArrayDataOutput(byte[] bytes) {\n    reset(bytes);\n  }\n\n  public ByteArrayDataOutput(byte[] bytes, int offset, int len) {\n    reset(bytes, offset, len);\n  }\n\n  public ByteArrayDataOutput() {\n    reset(BytesRef.EMPTY_BYTES);\n  }\n\n  public void reset(byte[] bytes) {\n    reset(bytes, 0, bytes.length);\n  }\n  \n  public void reset(byte[] bytes, int offset, int len) {\n    this.bytes = bytes;\n    pos = offset;\n    limit = offset + len;\n  }\n  \n  public int getPosition() {\n    return pos;\n  }\n\n  @Override\n  public void writeByte(byte b) {\n    assert pos < limit;\n    bytes[pos++] = b;\n  }\n\n  @Override\n  public void writeBytes(byte[] b, int offset, int length) {\n    assert pos + length <= limit;\n    System.arraycopy(b, offset, bytes, pos, length);\n    pos += length;\n  }\n\npublic Map<String,BytesRef> build2(AssociationsListBuilder associationsListBuilder, IntsRef ordinals, Iterable<CategoryPath> categories) throws IOException {\n    final HashMap<String,BytesRef> res = new HashMap<String,BytesRef>();\n    int idx = 0;\n    for (CategoryPath cp : categories) {\n      // build per-association key BytesRef\n      CategoryAssociation association = associationsListBuilder.associations.getAssociation(cp);\n      \n      if (association == null) {\n        // it is ok to set a null association for a category - it's treated as a\n        // regular category in that case.\n        ++idx;\n        continue;\n      }\n\n      BytesRef bytes = res.get(association.getCategoryListID());\n      if (bytes == null) {\n        bytes = new BytesRef(32);\n        res.put(association.getCategoryListID(), bytes);\n      }\n      \n      int maxBytesNeeded = 4 /* int */ + association.maxBytesNeeded() + bytes.length;\n      if (bytes.bytes.length < maxBytesNeeded) {\n        bytes.grow(maxBytesNeeded);\n      }\n      \n      // reset the output to write from bytes.length (current position) until the end\n      reset(bytes.bytes, bytes.length, bytes.bytes.length - bytes.length);\n      writeInt(ordinals.ints[idx++]);\n      \n      // encode the association bytes\n      association.serialize(this);\n      \n      // update BytesRef\n      bytes.length = getPosition();\n    }\n\n    return res;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 80,
+                        "lineEnd": 117,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.facet.associations.AssociationsListBuilder\nRationale: The method 'build2' primarily interacts with associations and category paths, which are closely related to the functionality of the AssociationsListBuilder class. It utilizes the associations from this class to build a map of BytesRef, making it more appropriate for this method to reside within AssociationsListBuilder.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 5065
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "build2",
+                            "method_signature": "public Map<String,BytesRef> build2(AssociationsListBuilder associationsListBuilder, IntsRef ordinals, Iterable<CategoryPath> categories) throws IOException",
+                            "target_class": "AssociationBuilder",
+                            "rationale": "The build2() method is responsible for constructing a mapping of category associations, which is more aligned with the responsibilities of an AssociationBuilder class. This separation of concerns will enhance maintainability and clarity."
+                        }
+                    ],
+                    "llm_response_time": 1537
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "build2",
+                            "method_signature": "public Map<String,BytesRef> build2(AssociationsListBuilder associationsListBuilder, IntsRef ordinals, Iterable<CategoryPath> categories) throws IOException",
+                            "target_class": "AssociationBuilder",
+                            "rationale": "The build2 method is responsible for constructing a map of associations based on the provided parameters, which suggests that it should belong to a class that specifically handles the logic of building associations, rather than being part of a data output class."
+                        }
+                    ],
+                    "llm_response_time": 1838
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "build2",
+                            "method_signature": "public Map<String,BytesRef> build2(AssociationsListBuilder associationsListBuilder, IntsRef ordinals, Iterable<CategoryPath> categories) throws IOException",
+                            "target_class": "AssociationBuilder",
+                            "rationale": "The build2() method is responsible for constructing a map of associations based on the provided parameters, which suggests that it belongs in a dedicated class focused on building or managing associations."
+                        }
+                    ],
+                    "llm_response_time": 1237
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "build2",
+                            "method_signature": "public Map<String,BytesRef> build2(AssociationsListBuilder associationsListBuilder, IntsRef ordinals, Iterable<CategoryPath> categories) throws IOException",
+                            "target_class": "AssociationBuilder",
+                            "rationale": "The build2() method is responsible for constructing a mapping of category associations, which is more aligned with the responsibilities of an AssociationBuilder class. This separation of concerns will enhance maintainability and clarity."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "build2"
+                ],
+                "llm_response_time": 391
+            },
+            "targetClassMap": {
+                "build2": {
+                    "target_classes": [
+                        {
+                            "class_name": "AssociationsListBuilder",
+                            "similarity_score": 0.30556862990940564
+                        },
+                        {
+                            "class_name": "IntsRef",
+                            "similarity_score": 0.5933481005479809
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "AssociationsListBuilder",
+                        "IntsRef"
+                    ],
+                    "llm_response_time": 1818,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.search.TermQuery::testKeepsLastFilter():void need move org.apache.lucene.sandbox.queries.DuplicateFilterTest",
+        "class_name": "org.apache.lucene.search.TermQuery",
+        "telemetry": {
+            "id": "e04f8f8c-fc6b-412d-b42f-97776b517b38",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 200,
+                "lineStart": 46,
+                "lineEnd": 245,
+                "bodyLineStart": 46,
+                "language": "java",
+                "sourceCode": "/** A Query that matches documents containing a term.\n  This may be combined with other terms with a {@link BooleanQuery}.\n  */\npublic class TermQuery extends Query {\n  private final Term term;\n  private final int docFreq;\n  private final TermContext perReaderTermState;\n\n  final class TermWeight extends Weight {\n    private final Similarity similarity;\n    private final Similarity.SimWeight stats;\n    private final TermContext termStates;\n\n    public TermWeight(IndexSearcher searcher, TermContext termStates)\n      throws IOException {\n      assert termStates != null : \"TermContext must not be null\";\n      this.termStates = termStates;\n      this.similarity = searcher.getSimilarity();\n      this.stats = similarity.computeWeight(\n          getBoost(), \n          searcher.collectionStatistics(term.field()), \n          searcher.termStatistics(term, termStates));\n    }\n\n    @Override\n    public String toString() { return \"weight(\" + TermQuery.this + \")\"; }\n\n    @Override\n    public Query getQuery() { return TermQuery.this; }\n\n    @Override\n    public float getValueForNormalization() {\n      return stats.getValueForNormalization();\n    }\n\n    @Override\n    public void normalize(float queryNorm, float topLevelBoost) {\n      stats.normalize(queryNorm, topLevelBoost);\n    }\n\n    @Override\n    public Scorer scorer(AtomicReaderContext context, boolean scoreDocsInOrder,\n        boolean topScorer, Bits acceptDocs) throws IOException {\n      assert termStates.topReaderContext == ReaderUtil.getTopLevelContext(context) : \"The top-reader used to create Weight (\" + termStates.topReaderContext + \") is not the same as the current reader's top-reader (\" + ReaderUtil.getTopLevelContext(context);\n      final TermsEnum termsEnum = getTermsEnum(context);\n      if (termsEnum == null) {\n        return null;\n      }\n      DocsEnum docs = termsEnum.docs(acceptDocs, null);\n      assert docs != null;\n      return new TermScorer(this, docs, similarity.exactSimScorer(stats, context), termsEnum.docFreq());\n    }\n    \n    /**\n     * Returns a {@link TermsEnum} positioned at this weights Term or null if\n     * the term does not exist in the given context\n     */\n    private TermsEnum getTermsEnum(AtomicReaderContext context) throws IOException {\n      final TermState state = termStates.get(context.ord);\n      if (state == null) { // term is not present in that reader\n        assert termNotInReader(context.reader(), term) : \"no termstate found but term exists in reader term=\" + term;\n        return null;\n      }\n      //System.out.println(\"LD=\" + reader.getLiveDocs() + \" set?=\" + (reader.getLiveDocs() != null ? reader.getLiveDocs().get(0) : \"null\"));\n      final TermsEnum termsEnum = context.reader().terms(term.field()).iterator(null);\n      termsEnum.seekExact(term.bytes(), state);\n      return termsEnum;\n    }\n    \n    private boolean termNotInReader(AtomicReader reader, Term term) throws IOException {\n      // only called from assert\n      //System.out.println(\"TQ.termNotInReader reader=\" + reader + \" term=\" + field + \":\" + bytes.utf8ToString());\n      return reader.docFreq(term) == 0;\n    }\n    \n    @Override\n    public Explanation explain(AtomicReaderContext context, int doc) throws IOException {\n      Scorer scorer = scorer(context, true, false, context.reader().getLiveDocs());\n      if (scorer != null) {\n        int newDoc = scorer.advance(doc);\n        if (newDoc == doc) {\n          float freq = scorer.freq();\n          ExactSimScorer docScorer = similarity.exactSimScorer(stats, context);\n          ComplexExplanation result = new ComplexExplanation();\n          result.setDescription(\"weight(\"+getQuery()+\" in \"+doc+\") [\" + similarity.getClass().getSimpleName() + \"], result of:\");\n          Explanation scoreExplanation = docScorer.explain(doc, new Explanation(freq, \"termFreq=\" + freq));\n          result.addDetail(scoreExplanation);\n          result.setValue(scoreExplanation.getValue());\n          result.setMatch(true);\n          return result;\n        }\n      }\n      return new ComplexExplanation(false, 0.0f, \"no matching term\");      \n    }\n  }\n\n  /** Constructs a query for the term <code>t</code>. */\n  public TermQuery(Term t) {\n    this(t, -1);\n  }\n\n  /** Expert: constructs a TermQuery that will use the\n   *  provided docFreq instead of looking up the docFreq\n   *  against the searcher. */\n  public TermQuery(Term t, int docFreq) {\n    term = t;\n    this.docFreq = docFreq;\n    perReaderTermState = null;\n  }\n  \n  /** Expert: constructs a TermQuery that will use the\n   *  provided docFreq instead of looking up the docFreq\n   *  against the searcher. */\n  public TermQuery(Term t, TermContext states) {\n    assert states != null;\n    term = t;\n    docFreq = states.docFreq();\n    perReaderTermState = states;\n  }\n\n  /** Returns the term of this query. */\n  public Term getTerm() { return term; }\n\n  @Override\n  public Weight createWeight(IndexSearcher searcher) throws IOException {\n    final IndexReaderContext context = searcher.getTopReaderContext();\n    final TermContext termState;\n    if (perReaderTermState == null || perReaderTermState.topReaderContext != context) {\n      // make TermQuery single-pass if we don't have a PRTS or if the context differs!\n      termState = TermContext.build(context, term, true); // cache term lookups!\n    } else {\n     // PRTS was pre-build for this IS\n     termState = this.perReaderTermState;\n    }\n\n    // we must not ignore the given docFreq - if set use the given value (lie)\n    if (docFreq != -1)\n      termState.setDocFreq(docFreq);\n    \n    return new TermWeight(searcher, termState);\n  }\n\n  @Override\n  public void extractTerms(Set<Term> terms) {\n    terms.add(getTerm());\n  }\n\n  /** Prints a user-readable version of this query. */\n  @Override\n  public String toString(String field) {\n    StringBuilder buffer = new StringBuilder();\n    if (!term.field().equals(field)) {\n      buffer.append(term.field());\n      buffer.append(\":\");\n    }\n    buffer.append(term.text());\n    buffer.append(ToStringUtils.boost(getBoost()));\n    return buffer.toString();\n  }\n\n  /** Returns true iff <code>o</code> is equal to this. */\n  @Override\n  public boolean equals(Object o) {\n    if (!(o instanceof TermQuery))\n      return false;\n    TermQuery other = (TermQuery)o;\n    return (this.getBoost() == other.getBoost())\n      && this.term.equals(other.term);\n  }\n\n  /** Returns a hash code value for this object.*/\n  @Override\n  public int hashCode() {\n    return Float.floatToIntBits(getBoost()) ^ term.hashCode();\n  }\n\npublic void testKeepsLastFilter(DuplicateFilterTest duplicateFilterTest) throws Throwable {\n    DuplicateFilter df = new DuplicateFilter(DuplicateFilterTest.KEY_FIELD);\n    df.setKeepMode(DuplicateFilter.KeepMode.KM_USE_LAST_OCCURRENCE);\n    ScoreDoc[] hits = duplicateFilterTest.searcher.search(this, df, 1000).scoreDocs;\n    Assert.assertTrue(\"Filtered searching should have found some matches\", hits.length > 0);\n    for (ScoreDoc hit : hits) {\n      Document d = duplicateFilterTest.searcher.doc(hit.doc);\n      String url = d.get(DuplicateFilterTest.KEY_FIELD);\n      DocsEnum td = _TestUtil.docs(LuceneTestCase.random(), duplicateFilterTest.reader,\n                                   DuplicateFilterTest.KEY_FIELD,\n                                   new BytesRef(url),\n                                   MultiFields.getLiveDocs(duplicateFilterTest.reader),\n                                   null,\n                                   0);\n\n      int lastDoc = 0;\n      while (td.nextDoc() != DocIdSetIterator.NO_MORE_DOCS) {\n        lastDoc = td.docID();\n      }\n      Assert.assertEquals(\"Duplicate urls should return last doc\", lastDoc, hit.doc);\n    }\n  }\n\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 221,
+                        "lineEnd": 242,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.sandbox.queries.DuplicateFilterTest\nRationale: The method testKeepsLastFilter is specifically designed to test the functionality of the DuplicateFilter class, and it utilizes the DuplicateFilterTest class for setup and assertions. Therefore, it is most appropriate for this method to reside within the DuplicateFilterTest class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 4257
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "testKeepsLastFilter",
+                            "method_signature": "public void testKeepsLastFilter(DuplicateFilterTest duplicateFilterTest) throws Throwable",
+                            "target_class": "DuplicateFilterTest",
+                            "rationale": "The testKeepsLastFilter method is a unit test that is more appropriate in the DuplicateFilterTest class, as it is testing the behavior of the DuplicateFilter in relation to the TermQuery."
+                        }
+                    ],
+                    "llm_response_time": 1262
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "testKeepsLastFilter",
+                            "method_signature": "public void testKeepsLastFilter(DuplicateFilterTest duplicateFilterTest) throws Throwable",
+                            "target_class": "DuplicateFilterTest",
+                            "rationale": "The testKeepsLastFilter method is a test case that is more appropriate in the DuplicateFilterTest class, as it is specifically testing the behavior of the DuplicateFilter in relation to the TermQuery."
+                        }
+                    ],
+                    "llm_response_time": 1289
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "testKeepsLastFilter",
+                            "method_signature": "public void testKeepsLastFilter(DuplicateFilterTest duplicateFilterTest) throws Throwable",
+                            "target_class": "DuplicateFilterTest",
+                            "rationale": "The testKeepsLastFilter method is a test case that is more appropriate in the DuplicateFilterTest class, as it is specifically testing the behavior of the DuplicateFilter class."
+                        }
+                    ],
+                    "llm_response_time": 1164
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "testKeepsLastFilter",
+                            "method_signature": "public void testKeepsLastFilter(DuplicateFilterTest duplicateFilterTest) throws Throwable",
+                            "target_class": "DuplicateFilterTest",
+                            "rationale": "The testKeepsLastFilter method is a unit test that is more appropriate in the DuplicateFilterTest class, as it is testing the behavior of the DuplicateFilter in relation to the TermQuery."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "testKeepsLastFilter"
+                ],
+                "llm_response_time": 478
+            },
+            "targetClassMap": {
+                "testKeepsLastFilter": {
+                    "target_classes": [
+                        {
+                            "class_name": "DuplicateFilterTest",
+                            "similarity_score": 0.7946955133125445
+                        },
+                        {
+                            "class_name": "Term",
+                            "similarity_score": 0.26940591455252544
+                        },
+                        {
+                            "class_name": "TermContext",
+                            "similarity_score": 0.28140845117445096
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "DuplicateFilterTest",
+                        "TermContext",
+                        "Term"
+                    ],
+                    "llm_response_time": 1940,
+                    "similarity_computation_time": 3,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.index.StoredFieldVisitor::visitDocument2(int, StoredFieldVisitor):void need move org.apache.lucene.codecs.simpletext.SimpleTextStoredFieldsReader",
+        "class_name": "org.apache.lucene.index.StoredFieldVisitor",
+        "telemetry": {
+            "id": "bb552ea6-aee3-4190-990b-aae7f798310f",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 112,
+                "lineStart": 40,
+                "lineEnd": 151,
+                "bodyLineStart": 40,
+                "language": "java",
+                "sourceCode": "/**\n * Expert: provides a low-level means of accessing the stored field\n * values in an index.  See {@link IndexReader#document(int,\n * StoredFieldVisitor)}.\n *\n * See {@link DocumentStoredFieldVisitor}, which is a\n * <code>StoredFieldVisitor</code> that builds the\n * {@link Document} containing all stored fields.  This is\n * used by {@link IndexReader#document(int)}.\n *\n * @lucene.experimental */\n\npublic abstract class StoredFieldVisitor {\n\n  /** Sole constructor. (For invocation by subclass \n   * constructors, typically implicit.) */\n  protected StoredFieldVisitor() {\n  }\n  \n  /** Process a binary field. \n   * @param value newly allocated byte array with the binary contents. \n   */\n  public void binaryField(FieldInfo fieldInfo, byte[] value) throws IOException {\n  }\n\n  /** Process a string field */\n  public void stringField(FieldInfo fieldInfo, String value) throws IOException {\n  }\n\n  /** Process a int numeric field. */\n  public void intField(FieldInfo fieldInfo, int value) throws IOException {\n  }\n\n  /** Process a long numeric field. */\n  public void longField(FieldInfo fieldInfo, long value) throws IOException {\n  }\n\n  /** Process a float numeric field. */\n  public void floatField(FieldInfo fieldInfo, float value) throws IOException {\n  }\n\n  /** Process a double numeric field. */\n  public void doubleField(FieldInfo fieldInfo, double value) throws IOException {\n  }\n  \n  /**\n   * Hook before processing a field.\n   * Before a field is processed, this method is invoked so that\n   * subclasses can return a {@link Status} representing whether\n   * they need that particular field or not, or to stop processing\n   * entirely.\n   */\n  public abstract Status needsField(FieldInfo fieldInfo) throws IOException;\n  \n  public void visitDocument2(int n, SimpleTextStoredFieldsReader simpleTextStoredFieldsReader) throws IOException {\n    simpleTextStoredFieldsReader.in.seek(simpleTextStoredFieldsReader.offsets[n]);\n    simpleTextStoredFieldsReader.readLine();\n    assert StringHelper.startsWith(simpleTextStoredFieldsReader.scratch, NUM);\n    int numFields = simpleTextStoredFieldsReader.parseIntAt(NUM.length);\n    \n    for (int i = 0; i < numFields; i++) {\n      simpleTextStoredFieldsReader.readLine();\n      assert StringHelper.startsWith(simpleTextStoredFieldsReader.scratch, FIELD);\n      int fieldNumber = simpleTextStoredFieldsReader.parseIntAt(FIELD.length);\n      FieldInfo fieldInfo = simpleTextStoredFieldsReader.fieldInfos.fieldInfo(fieldNumber);\n      simpleTextStoredFieldsReader.readLine();\n      assert StringHelper.startsWith(simpleTextStoredFieldsReader.scratch, NAME);\n      simpleTextStoredFieldsReader.readLine();\n      assert StringHelper.startsWith(simpleTextStoredFieldsReader.scratch, TYPE);\n      \n      final BytesRef type;\n      if (simpleTextStoredFieldsReader.equalsAt(TYPE_STRING, simpleTextStoredFieldsReader.scratch, TYPE.length)) {\n        type = TYPE_STRING;\n      } else if (simpleTextStoredFieldsReader.equalsAt(TYPE_BINARY, simpleTextStoredFieldsReader.scratch, TYPE.length)) {\n        type = TYPE_BINARY;\n      } else if (simpleTextStoredFieldsReader.equalsAt(TYPE_INT, simpleTextStoredFieldsReader.scratch, TYPE.length)) {\n        type = TYPE_INT;\n      } else if (simpleTextStoredFieldsReader.equalsAt(TYPE_LONG, simpleTextStoredFieldsReader.scratch, TYPE.length)) {\n        type = TYPE_LONG;\n      } else if (simpleTextStoredFieldsReader.equalsAt(TYPE_FLOAT, simpleTextStoredFieldsReader.scratch, TYPE.length)) {\n        type = TYPE_FLOAT;\n      } else if (simpleTextStoredFieldsReader.equalsAt(TYPE_DOUBLE, simpleTextStoredFieldsReader.scratch, TYPE.length)) {\n        type = TYPE_DOUBLE;\n      } else {\n        throw new RuntimeException(\"unknown field type\");\n      }\n      \n      switch (needsField(fieldInfo)) {\n        case YES:  \n          simpleTextStoredFieldsReader.readField(type, fieldInfo, this);\n          break;\n        case NO:   \n          simpleTextStoredFieldsReader.readLine();\n          assert StringHelper.startsWith(simpleTextStoredFieldsReader.scratch, VALUE);\n          break;\n        case STOP: return;\n      }\n    }\n  }\n\n/**\n   * Enumeration of possible return values for {@link #needsField}.\n   */\n  public static enum Status {\n    /** YES: the field should be visited. */\n    YES,\n    /** NO: don't visit this field, but continue processing fields for this document. */\n    NO,\n    /** STOP: don't visit this field and stop processing any other fields for this document. */\n    STOP\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 93,
+                        "lineEnd": 137,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.codecs.simpletext.SimpleTextStoredFieldsReader\nRationale: The method visitDocument2 directly interacts with the SimpleTextStoredFieldsReader instance, utilizing its fields and methods extensively for reading and parsing document data. This makes it a natural fit for the SimpleTextStoredFieldsReader class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 4643
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "visitDocument2",
+                            "method_signature": "public void visitDocument2(int n, SimpleTextStoredFieldsReader simpleTextStoredFieldsReader) throws IOException",
+                            "target_class": "SimpleTextStoredFieldsReader",
+                            "rationale": "The visitDocument2 method is tightly coupled with the SimpleTextStoredFieldsReader class, as it directly manipulates its fields and methods. Moving it to SimpleTextStoredFieldsReader would enhance cohesion and encapsulation."
+                        }
+                    ],
+                    "llm_response_time": 1345
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "visitDocument2",
+                            "method_signature": "public void visitDocument2(int n, SimpleTextStoredFieldsReader simpleTextStoredFieldsReader) throws IOException",
+                            "target_class": "SimpleTextStoredFieldsReader",
+                            "rationale": "The visitDocument2 method is tightly coupled with the SimpleTextStoredFieldsReader class, as it directly manipulates its fields and methods. Moving it to SimpleTextStoredFieldsReader would enhance cohesion and encapsulation."
+                        }
+                    ],
+                    "llm_response_time": 1327
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "visitDocument2",
+                            "method_signature": "public void visitDocument2(int n, SimpleTextStoredFieldsReader simpleTextStoredFieldsReader) throws IOException",
+                            "target_class": "SimpleTextStoredFieldsReader",
+                            "rationale": "The visitDocument2 method directly manipulates the SimpleTextStoredFieldsReader and contains logic that is specific to reading and processing stored fields. Moving it to SimpleTextStoredFieldsReader would encapsulate the reading logic within the class that manages the stored fields."
+                        }
+                    ],
+                    "llm_response_time": 1332
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "visitDocument2",
+                            "method_signature": "public void visitDocument2(int n, SimpleTextStoredFieldsReader simpleTextStoredFieldsReader) throws IOException",
+                            "target_class": "SimpleTextStoredFieldsReader",
+                            "rationale": "The visitDocument2 method is tightly coupled with the SimpleTextStoredFieldsReader class, as it directly manipulates its fields and methods. Moving it to SimpleTextStoredFieldsReader would enhance cohesion and encapsulation."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "visitDocument2"
+                ],
+                "llm_response_time": 510
+            },
+            "targetClassMap": {
+                "visitDocument2": {
+                    "target_classes": [
+                        {
+                            "class_name": "SimpleTextStoredFieldsReader",
+                            "similarity_score": 0.6332225688334979
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "SimpleTextStoredFieldsReader"
+                    ],
+                    "llm_response_time": 1027,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.index.Fields::addAllDocVectors(Fields, MergeState):void need move org.apache.lucene.codecs.TermVectorsWriter",
+        "class_name": "org.apache.lucene.index.Fields",
+        "telemetry": {
+            "id": "9a0ec635-faba-4ca2-8779-d89d80a67bef",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 148,
+                "lineStart": 27,
+                "lineEnd": 174,
+                "bodyLineStart": 27,
+                "language": "java",
+                "sourceCode": "/** Flex API for access to fields and terms\n *  @lucene.experimental */\n\npublic abstract class Fields implements Iterable<String> {\n\n  /** Sole constructor. (For invocation by subclass \n   *  constructors, typically implicit.) */\n  protected Fields() {\n  }\n\n  /** Returns an iterator that will step through all fields\n   *  names.  This will not return null.  */\n  @Override\n  public abstract Iterator<String> iterator();\n\n  /** Get the {@link Terms} for this field.  This will return\n   *  null if the field does not exist. */\n  public abstract Terms terms(String field) throws IOException;\n\n  /** Returns the number of fields or -1 if the number of\n   * distinct field names is unknown. If &gt;= 0,\n   * {@link #iterator} will return as many field names. */\n  public abstract int size();\n  \n  /** Returns the number of terms for all fields, or -1 if this \n   *  measure isn't stored by the codec. Note that, just like \n   *  other term measures, this measure does not take deleted \n   *  documents into account. \n   *  @deprecated iterate fields and add their size() instead. \n   *   this method is only provided as a transition mechanism\n   *   to access this statistic for 3.x indexes, which do not\n   *   have this statistic per-field.\n   *  @see Terms#size() */\n  @Deprecated\n  public long getUniqueTermCount() throws IOException {\n    long numTerms = 0;\n    for (String field : this) {\n      Terms terms = terms(field);\n      if (terms != null) {\n        final long termCount = terms.size();\n        if (termCount == -1) {\n          return -1;\n        }\n          \n        numTerms += termCount;\n      }\n    }\n    return numTerms;\n  }\n\n  /** Safe (but, slowish) default method to write every\n   *  vector field in the document. \n * @param termVectorsWriter TODO\n * @param mergeState TODO*/\n  public final void addAllDocVectors(TermVectorsWriter termVectorsWriter, MergeState mergeState) throws IOException {\n    if (this == null) {\n      termVectorsWriter.startDocument(0);\n      termVectorsWriter.finishDocument();\n      return;\n    }\n\n    int numFields = size();\n    if (numFields == -1) {\n      // count manually! TODO: Maybe enforce that Fields.size() returns something valid?\n      numFields = 0;\n      for (final Iterator<String> it = iterator(); it.hasNext(); ) {\n        it.next();\n        numFields++;\n      }\n    }\n    termVectorsWriter.startDocument(numFields);\n    \n    String lastFieldName = null;\n    \n    TermsEnum termsEnum = null;\n    DocsAndPositionsEnum docsAndPositionsEnum = null;\n    \n    int fieldCount = 0;\n    for(String fieldName : this) {\n      fieldCount++;\n      final FieldInfo fieldInfo = mergeState.fieldInfos.fieldInfo(fieldName);\n\n      assert lastFieldName == null || fieldName.compareTo(lastFieldName) > 0: \"lastFieldName=\" + lastFieldName + \" fieldName=\" + fieldName;\n      lastFieldName = fieldName;\n\n      final Terms terms = terms(fieldName);\n      if (terms == null) {\n        // FieldsEnum shouldn't lie...\n        continue;\n      }\n      \n      final boolean hasPositions = terms.hasPositions();\n      final boolean hasOffsets = terms.hasOffsets();\n      final boolean hasPayloads = terms.hasPayloads();\n      assert !hasPayloads || hasPositions;\n      \n      int numTerms = (int) terms.size();\n      if (numTerms == -1) {\n        // count manually. It is stupid, but needed, as Terms.size() is not a mandatory statistics function\n        numTerms = 0;\n        termsEnum = terms.iterator(termsEnum);\n        while(termsEnum.next() != null) {\n          numTerms++;\n        }\n      }\n      \n      termVectorsWriter.startField(fieldInfo, numTerms, hasPositions, hasOffsets, hasPayloads);\n      termsEnum = terms.iterator(termsEnum);\n\n      int termCount = 0;\n      while(termsEnum.next() != null) {\n        termCount++;\n\n        final int freq = (int) termsEnum.totalTermFreq();\n        \n        termVectorsWriter.startTerm(termsEnum.term(), freq);\n\n        if (hasPositions || hasOffsets) {\n          docsAndPositionsEnum = termsEnum.docsAndPositions(null, docsAndPositionsEnum);\n          assert docsAndPositionsEnum != null;\n          \n          final int docID = docsAndPositionsEnum.nextDoc();\n          assert docID != DocIdSetIterator.NO_MORE_DOCS;\n          assert docsAndPositionsEnum.freq() == freq;\n\n          for(int posUpto=0; posUpto<freq; posUpto++) {\n            final int pos = docsAndPositionsEnum.nextPosition();\n            final int startOffset = docsAndPositionsEnum.startOffset();\n            final int endOffset = docsAndPositionsEnum.endOffset();\n            \n            final BytesRef payload = docsAndPositionsEnum.getPayload();\n\n            assert !hasPositions || pos >= 0;\n            termVectorsWriter.addPosition(pos, startOffset, endOffset, payload);\n          }\n        }\n        termVectorsWriter.finishTerm();\n      }\n      assert termCount == numTerms;\n      termVectorsWriter.finishField();\n    }\n    assert fieldCount == numFields;\n    termVectorsWriter.finishDocument();\n  }\n\n/** Zero-length {@code Fields} array. */\n  public final static Fields[] EMPTY_ARRAY = new Fields[0];\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 76,
+                        "lineEnd": 169,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.codecs.TermVectorsWriter\nRationale: The method addAllDocVectors is primarily responsible for writing vector fields to a TermVectorsWriter, making it more appropriate for this method to reside within the TermVectorsWriter class, as it directly interacts with its methods and functionality.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 4979
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [],
+                    "llm_response_time": 482
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getUniqueTermCount",
+                            "method_signature": "public long getUniqueTermCount() throws IOException",
+                            "target_class": "Terms",
+                            "rationale": "The method getUniqueTermCount() aggregates term counts from multiple fields, which is more relevant to the Terms class that deals with term-level operations."
+                        },
+                        {
+                            "method_name": "addAllDocVectors",
+                            "method_signature": "public final void addAllDocVectors(TermVectorsWriter termVectorsWriter, MergeState mergeState) throws IOException",
+                            "target_class": "DocumentWriter",
+                            "rationale": "The method addAllDocVectors() is responsible for writing document vectors, which is a more appropriate responsibility for a DocumentWriter class that handles document-level operations."
+                        }
+                    ],
+                    "llm_response_time": 2014
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getUniqueTermCount",
+                            "method_signature": "public long getUniqueTermCount() throws IOException",
+                            "target_class": "Terms",
+                            "rationale": "The method getUniqueTermCount() aggregates term counts from multiple fields, which is more relevant to the Terms class that deals with term-level operations."
+                        },
+                        {
+                            "method_name": "addAllDocVectors",
+                            "method_signature": "public final void addAllDocVectors(TermVectorsWriter termVectorsWriter, MergeState mergeState) throws IOException",
+                            "target_class": "DocumentWriter",
+                            "rationale": "The addAllDocVectors() method is responsible for writing document vectors, which is a higher-level operation that should be managed by a DocumentWriter class rather than being part of the Fields abstraction."
+                        }
+                    ],
+                    "llm_response_time": 1840
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getUniqueTermCount",
+                            "method_signature": "public long getUniqueTermCount() throws IOException",
+                            "target_class": "Terms",
+                            "rationale": "The method getUniqueTermCount() aggregates term counts from multiple fields, which is more relevant to the Terms class that deals with term-level operations."
+                        },
+                        {
+                            "method_name": "addAllDocVectors",
+                            "method_signature": "public final void addAllDocVectors(TermVectorsWriter termVectorsWriter, MergeState mergeState) throws IOException",
+                            "target_class": "DocumentWriter",
+                            "rationale": "The method addAllDocVectors() is responsible for writing document vectors, which is a more appropriate responsibility for a DocumentWriter class that handles document-level operations."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "addAllDocVectors",
+                    "getUniqueTermCount"
+                ],
+                "llm_response_time": 578
+            },
+            "targetClassMap": {
+                "addAllDocVectors": {
+                    "target_classes": [
+                        {
+                            "class_name": "TermVectorsWriter",
+                            "similarity_score": 0.4515308418838598
+                        },
+                        {
+                            "class_name": "MergeState",
+                            "similarity_score": 0.4786350434712038
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TermVectorsWriter",
+                        "MergeState"
+                    ],
+                    "llm_response_time": 1758,
+                    "similarity_computation_time": 10,
+                    "similarity_metric": "cosine"
+                },
+                "getUniqueTermCount": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 1427,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "oracle": "method org.apache.lucene.analysis.util.OpenStringBuilder::izeEndings():void need move org.apache.lucene.analysis.en.KStemmer",
+        "class_name": "org.apache.lucene.analysis.util.OpenStringBuilder",
+        "telemetry": {
+            "id": "b994873b-37bc-4707-a6f9-984e02a20ba9",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 161,
+                "lineStart": 22,
+                "lineEnd": 182,
+                "bodyLineStart": 22,
+                "language": "java",
+                "sourceCode": "/**\n * A StringBuilder that allows one to access the array.\n */\npublic class OpenStringBuilder implements Appendable, CharSequence {\n  protected char[] buf;\n  protected int len;\n\n  public OpenStringBuilder() {\n    this(32);\n  }\n\n  public OpenStringBuilder(int size) {\n    buf = new char[size];\n  }\n\n  public OpenStringBuilder(char[] arr, int len) {\n    set(arr, len);\n  }\n\n  public void setLength(int len) { this.len = len; }\n\n  public void set(char[] arr, int end) {\n    this.buf = arr;\n    this.len = end;\n  }\n\n  public char[] getArray() { return buf; }\n  public int size() { return len; }\n  @Override\n  public int length() { return len; }\n  public int capacity() { return buf.length; }\n\n  @Override\n  public Appendable append(CharSequence csq) {\n    return append(csq, 0, csq.length());\n  }\n\n  @Override\n  public Appendable append(CharSequence csq, int start, int end) {\n    reserve(end-start);\n    for (int i=start; i<end; i++) {\n      unsafeWrite(csq.charAt(i));\n    }\n    return this;\n  }\n\n  @Override\n  public Appendable append(char c) {\n    write(c);\n    return this;\n  }\n\n  @Override\n  public char charAt(int index) {\n    return buf[index];\n  }\n\n  public void setCharAt(int index, char ch) {\n    buf[index] = ch;    \n  }\n\n  @Override\n  public CharSequence subSequence(int start, int end) {\n    throw new UnsupportedOperationException(); // todo\n  }\n\n  public void unsafeWrite(char b) {\n    buf[len++] = b;\n  }\n\n  public void unsafeWrite(int b) { unsafeWrite((char)b); }\n\n  public void unsafeWrite(char b[], int off, int len) {\n    System.arraycopy(b, off, buf, this.len, len);\n    this.len += len;\n  }\n\n  protected void resize(int len) {\n    char newbuf[] = new char[Math.max(buf.length << 1, len)];\n    System.arraycopy(buf, 0, newbuf, 0, size());\n    buf = newbuf;\n  }\n\n  public void reserve(int num) {\n    if (len + num > buf.length) resize(len + num);\n  }\n\n  public void write(char b) {\n    if (len >= buf.length) {\n      resize(len +1);\n    }\n    unsafeWrite(b);\n  }\n\n  public void write(int b) { write((char)b); }\n\n  public final void write(char[] b) {\n    write(b,0,b.length);\n  }\n\n  public void write(char b[], int off, int len) {\n    reserve(len);\n    unsafeWrite(b, off, len);\n  }\n\n  public final void write(OpenStringBuilder arr) {\n    write(arr.buf, 0, len);\n  }\n\n  public void write(String s) {\n    reserve(s.length());\n    s.getChars(0,s.length(),buf, len);\n    len +=s.length();\n  }\n\n  public void flush() {\n  }\n\n  public final void reset() {\n    len =0;\n  }\n\n  public char[] toCharArray() {\n    char newbuf[] = new char[size()];\n    System.arraycopy(buf, 0, newbuf, 0, size());\n    return newbuf;\n  }\n\n  @Override\n  public String toString() {\n    return new String(buf, 0, size());\n  }\n\npublic void izeEndings(KStemmer kStemmer) {\n    int old_k = kStemmer.k;\n    \n    if (kStemmer.endsIn('i', 'z', 'e')) {\n      setLength(kStemmer.j + 1); /* try removing -ize entirely */\n      kStemmer.k = kStemmer.j;\n      if (kStemmer.lookup()) return;\n      unsafeWrite('i');\n      \n      if (kStemmer.doubleC(kStemmer.j)) { /* allow for a doubled consonant */\n        setLength(kStemmer.j);\n        kStemmer.k = kStemmer.j - 1;\n        if (kStemmer.lookup()) return;\n        unsafeWrite(charAt(kStemmer.j - 1));\n      }\n      \n      setLength(kStemmer.j + 1);\n      unsafeWrite('e'); /* try removing -ize and adding -e */\n      kStemmer.k = kStemmer.j + 1;\n      if (kStemmer.lookup()) return;\n      setLength(kStemmer.j + 1);\n      append(\"ize\");\n      kStemmer.k = old_k;\n      // nolookup()\n    }\n    return;\n  }\n}"
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 154,
+                        "lineEnd": 180,
+                        "refactoringType": "MyMoveMethodRefactoring",
+                        "description": "Move method to org.apache.lucene.analysis.en.KStemmer\nRationale: The method izeEndings directly manipulates the state of the KStemmer instance, including its properties and methods like endsIn, lookup, and doubleC. It is closely related to the stemming logic and should reside within the KStemmer class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 6925
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "izeEndings",
+                            "method_signature": "public void izeEndings(KStemmer kStemmer)",
+                            "target_class": "KStemmer",
+                            "rationale": "The method izeEndings() operates on the KStemmer instance and modifies its state. It would be more appropriate for this method to reside within the KStemmer class, as it directly relates to the stemming logic and manipulates the KStemmer's properties."
+                        }
+                    ],
+                    "llm_response_time": 1599
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "izeEndings",
+                            "method_signature": "public void izeEndings(KStemmer kStemmer)",
+                            "target_class": "KStemmer",
+                            "rationale": "The method izeEndings() operates on the KStemmer instance and modifies its state. It would be more appropriate for this method to reside within the KStemmer class, as it directly relates to the stemming logic and manipulates the KStemmer's properties."
+                        }
+                    ],
+                    "llm_response_time": 3067
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "izeEndings",
+                            "method_signature": "public void izeEndings(KStemmer kStemmer)",
+                            "target_class": "KStemmer",
+                            "rationale": "The method izeEndings() operates on the KStemmer instance and modifies its state. It would be more appropriate for this method to reside within the KStemmer class, as it directly relates to the stemming logic and manipulates the KStemmer's properties."
+                        }
+                    ],
+                    "llm_response_time": 1597
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "izeEndings",
+                            "method_signature": "public void izeEndings(KStemmer kStemmer)",
+                            "target_class": "KStemmer",
+                            "rationale": "The method izeEndings() operates on the KStemmer instance and modifies its state. It would be more appropriate for this method to reside within the KStemmer class, as it directly relates to the stemming logic and manipulates the KStemmer's properties."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "llmMethodPriority": {
+                "priority_method_names": [
+                    "izeEndings"
+                ],
+                "llm_response_time": 495
+            },
+            "targetClassMap": {
+                "izeEndings": {
+                    "target_classes": [
+                        {
+                            "class_name": "KStemmer",
+                            "similarity_score": 0.6673813575120074
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "KStemmer"
+                    ],
+                    "llm_response_time": 733,
+                    "similarity_computation_time": 9,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    }
+]

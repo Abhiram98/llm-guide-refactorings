@@ -1,11 +1,13 @@
 import json
 
+from mm_analyser import data_folder
 
-def myindex(list, ele):
+
+def myindex(list, ele, default=-1):
     try:
         return list.index(ele)
     except ValueError:
-        return -1
+        return default
 
 def calculate_vanilla_llm_recalls(telemetry, method_name, alias_method_name, target_class, evaluation_data):
     vanilla_llm_suggestions = [i for i in telemetry['iterationData'] if i['iteration_num']==3]
@@ -53,7 +55,7 @@ plugin_outfiles = [
 
 combined_output = []
 for file_name in plugin_outfiles:
-    with open(f'../../../../data/synthetic_corpus_comparison/{file_name}') as f:
+    with open(f'{data_folder}/synthetic_corpus_comparison/{file_name}') as f:
         data = json.load(f)
     combined_output += data
 combined_output = [i for i in combined_output if len(i['telemetry'].keys())]
@@ -74,9 +76,31 @@ for evaluation_data in combined_output:
         evaluation_data['recall_method_position'] = -1
         continue
 
-    filtered_llm_priority = [m for m in telemetry["llmMethodPriority"]['priority_method_names']
+    tf_idf_ranking = [i['suggested_move_methods'] for i in telemetry['iterationData'] if i['iteration_num'] == -2][0]
+    tf_idf_methods = [i['method_name'] for i in tf_idf_ranking]
+    voyage_ranking = sorted([(v['first']['method_name'], v['second']) for v in
+                             telemetry['methodCompatibilityScores']['voyage'].values()], key=lambda x: x[1])
+    voyage_methods = [i[0] for i in voyage_ranking]
+
+    sorted_methods = tf_idf_methods
+    # sorted_methods = voyage_methods
+
+    # check which of those method could actually be moved and filter the others out.
+    filtered_llm_priority = [m for m in sorted_methods
                              if
-                             m in telemetry["targetClassMap"] and len(telemetry["targetClassMap"][m]['target_classes'])]
+                             m in telemetry["targetClassMap"]
+                             and
+                             len(telemetry["targetClassMap"][m]['target_classes'])
+                             ]
+    if len(filtered_llm_priority) > 3 and telemetry['llmMethodPriority']['tf-idf']['priority_method_names'] != []:
+        priority_method_order = telemetry['llmMethodPriority']['tf-idf']['priority_method_names']
+        # priority_method_order = [i.split('(')[0].split(' ')[-1] for i in priority_method_order]
+        filtered_llm_priority.sort(key=lambda x: myindex([1 if x in i else 0 for i in priority_method_order], 1,
+                                                         default=len(sorted_methods) + 1))
+
+    # filtered_llm_priority = [m for m in telemetry["llmMethodPriority"]['priority_method_names']
+    #                          if
+    #                          m in telemetry["targetClassMap"] and len(telemetry["targetClassMap"][m]['target_classes'])]
     evaluation_data['recall_method_position'] = \
         max(myindex(filtered_llm_priority, method_name), myindex(filtered_llm_priority, alias_method_name))
     if evaluation_data['recall_method_position'] == -1:

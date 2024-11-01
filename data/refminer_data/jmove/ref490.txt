@@ -1,0 +1,321 @@
+took 200000 seconds.
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	jdk.graal.compiler.phases.common.DominatorBasedGlobalValueNumberingPhase.ValueMap::killValuesByIdentity(LocationIdentity):void	jdk.graal.compiler.nodes.cfg.LocationSet	1.0
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::processIf(IfNode):void	jdk.graal.compiler.nodes.IfNode	0.6617732645682758
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::getReturnValue(UnmodifiableEconomicMap<Node,Node>):Node	jdk.graal.compiler.nodes.ReturnNode	0.47333333333333333
+Move Method	jdk.graal.compiler.virtual.phases.ea.ReadEliminationClosure.ReadEliminationMergeProcessor::getCachedPhi(CacheEntry<?>, Stamp):ValuePhiNode	jdk.graal.compiler.core.common.type.Stamp	0.4887110016420361
+Move Method	jdk.graal.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::lowerIntegerDivRem(IntegerDivRemNode, LoweringTool):void	jdk.graal.compiler.nodes.calc.IntegerDivRemNode	0.4940331503142105
+Move Method	jdk.graal.compiler.hotspot.amd64.AMD64HotSpotEpilogueBlockEndOp::leaveFrameAndRestoreRbp(CompilationResultBuilder, AMD64MacroAssembler):void	jdk.graal.compiler.asm.amd64.AMD64MacroAssembler	0.48967210408800343
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::setReplaceeGraphStateAfter(Node, Node, UnmodifiableEconomicMap<Node,Node>, FrameState):void	jdk.graal.compiler.nodes.ReturnNode	0.6829059829059829
+Move Method	jdk.graal.compiler.replacements.aarch64.AArch64IntegerArithmeticSnippets::lower(IntegerDivRemNode, LoweringTool):void	jdk.graal.compiler.nodes.calc.IntegerDivRemNode	0.4512066142314318
+Move Method	jdk.graal.compiler.hightiercodegen.NodeLowerer::lowerStatement(Node):void	jdk.graal.compiler.graph.Node	0.582882661422484
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeClosure.MergeProcessor::getValueObjectVirtualCached(ValuePhiNode, VirtualObjectNode):VirtualObjectNode	jdk.graal.compiler.nodes.ValuePhiNode	0.47576992753623193
+Move Method	jdk.graal.compiler.java.BytecodeParser::genFloatConvert(FloatConvert, ValueNode):ValueNode	jdk.graal.compiler.core.common.calc.FloatConvert	0.46399583766909475
+Move Method	jdk.graal.compiler.nodes.loop.LoopEx::findInductionVariables():EconomicMap<Node,InductionVariable>	jdk.graal.compiler.nodes.loop.LoopFragmentInside	0.5916552724388165
+Move Method	jdk.graal.compiler.replacements.ReplacementsImpl.GraphMaker::finalizeGraph(StructuredGraph):void	jdk.graal.compiler.nodes.StructuredGraph	0.3076501658647955
+Move Method	jdk.graal.compiler.phases.common.OptimizeDivPhase::createDiv(ValueNode):ValueNode	jdk.graal.compiler.nodes.ValueNode	0.4133466001274074
+Move Method	jdk.graal.compiler.core.gen.NodeLIRBuilder::stateWithExceptionEdge(DeoptimizingNode, LabelRef):LIRFrameState	jdk.graal.compiler.core.gen.NodeMatchRules	0.9942857142857144
+Move Method	jdk.graal.compiler.core.gen.NodeLIRBuilder::getOperand(Node):Value	jdk.graal.compiler.graph.NodeMap	0.48347338935574236
+Move Method	jdk.graal.compiler.nodes.GraphEncoder::writeProperties(Node, Fields):void	jdk.graal.compiler.core.common.Fields	1.0
+Move Method	jdk.graal.compiler.nodes.loop.LoopEx::localFrequencySource():ProfileData.ProfileSource	jdk.graal.compiler.nodes.loop.LoopsData	0.9770408163265307
+Move Method	jdk.graal.compiler.virtual.phases.ea.GraphEffectList::initializePhiInput(PhiNode, int, ValueNode):void	jdk.graal.compiler.nodes.PhiNode	0.9642246642246645
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::removeSplitPropagate(ControlSplitNode, AbstractBeginNode):void	jdk.graal.compiler.nodes.AbstractBeginNode	0.875
+Move Method	jdk.graal.compiler.hotspot.HotSpotDebugInfoBuilder::raiseInvalidFrameStateError(FrameState):void	jdk.graal.compiler.nodes.FrameState	0.5739396520342751
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::copy(String, Consumer<UnmodifiableEconomicMap<Node,Node>>, DebugContext, OptionValues):StructuredGraph	jdk.graal.compiler.options.OptionValues	0.7063128772635814
+Move Method	jdk.graal.compiler.core.gen.NodeLIRBuilder::incrementSharedMatchCount(Node):void	jdk.graal.compiler.graph.NodeMap	0.9669467787114847
+Move Method	jdk.graal.compiler.replacements.DefaultJavaLoweringProvider::lowerLoadHubOrNullNode(LoadHubOrNullNode, LoweringTool):void	jdk.graal.compiler.nodes.extended.LoadHubOrNullNode	0.9374311785905988
+Move Method	jdk.graal.compiler.nodes.GraphDecoder::handlePhiFunctions(MethodScope, LoopScope, LoopScope, AbstractEndNode, AbstractMergeNode):void	jdk.graal.compiler.nodes.AbstractMergeNode	0.832806778951773
+Move Method	jdk.graal.compiler.replacements.classfile.ClassfileConstant.ExecutableRef::resolve(ClassfileConstantPool, int):ResolvedJavaMethod	jdk.graal.compiler.replacements.classfile.ClassfileConstantPool	1.0
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::removeFixed(FixedWithNextNode):void	jdk.graal.compiler.nodes.FixedWithNextNode	0.6166666666666667
+Move Method	jdk.graal.compiler.hotspot.stubs.HotSpotGraphKit::createGraphBuilderInstance(GraphBuilderConfiguration, OptimisticOptimizations, IntrinsicContext):GraphBuilderPhase.Instance	jdk.graal.compiler.phases.OptimisticOptimizations	0.28875739644970416
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::rewireFrameStatesBeforeFSA(ValueNode, UnmodifiableEconomicMap<Node,Node>, FixedNode):void	jdk.graal.compiler.nodes.FixedNode	0.6965174129353235
+Move Method	jdk.graal.compiler.nodes.loop.LoopEx::reassociateInvariants():boolean	jdk.graal.compiler.nodes.loop.LoopFragmentInside	0.5518865997428273
+Move Method	jdk.graal.compiler.nodes.GraphEncoder::writeEdges(Node, Edges, NodeOrder):void	jdk.graal.compiler.graph.Edges	1.0
+Move Method	jdk.graal.compiler.truffle.phases.FrameAccessVerificationPhase.DeoptEffect::logPerformanceWarningClearIntroducedPhi(Node):void	jdk.graal.compiler.graph.Node	0.9494018119910727
+Move Method	jdk.graal.compiler.printer.CFGPrinter::nodeToString(Node):String	jdk.graal.compiler.graph.Node	0.6627824773958039
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets.Templates::lower(NewMultiArrayWithExceptionNode, LoweringTool):void	jdk.graal.compiler.nodes.java.NewMultiArrayWithExceptionNode	0.7540813021782939
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::rewireFrameStates(ValueNode, UnmodifiableEconomicMap<Node,Node>, FixedNode):void	jdk.graal.compiler.nodes.ReturnNode	0.590912376301408
+Move Method	jdk.graal.compiler.hotspot.amd64.AMD64HotSpotBackend.HotSpotFrameContext::emitNmethodEntryBarrier(CompilationResultBuilder, AMD64HotSpotMacroAssembler):void	jdk.graal.compiler.hotspot.amd64.AMD64HotSpotMacroAssembler	0.6348741418764303
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets::allocateArray(KlassPointer, int, int, int, FillContent, int, boolean, boolean, boolean, boolean, HotSpotAllocationProfilingData, boolean):Object	jdk.graal.compiler.hotspot.word.KlassPointer	1.0
+Move Method	jdk.graal.compiler.java.BytecodeParser::createUnwind():void	jdk.graal.compiler.java.FrameStateBuilder	0.855429640224447
+Move Method	jdk.graal.compiler.nodes.loop.LoopEx::isCfgLoopExit(AbstractBeginNode):boolean	jdk.graal.compiler.nodes.loop.LoopsData	1.0
+Move Method	jdk.graal.compiler.truffle.PartialEvaluator::registerGraphBuilderInvocationPlugins(InvocationPlugins, boolean):void	jdk.graal.compiler.truffle.TruffleCompilerConfiguration	1.0
+Move Method	jdk.graal.compiler.replacements.DefaultJavaLoweringProvider::lowerFloatingIntegerDivRem(FloatingIntegerDivRemNode<?>, LoweringTool):void	jdk.graal.compiler.nodes.calc.FloatingIntegerDivRemNode	0.8499426499426501
+Move Method	jdk.graal.compiler.loop.phases.SpeculativeGuardMovementPhase.SpeculativeGuardMovement::computeEarliestBlock(Node):HIRBlock	jdk.graal.compiler.graph.NodeMap	0.7259819288216856
+Move Method	jdk.graal.compiler.truffle.ExpansionStatistics.TreeNode::getSourceString():String	jdk.graal.compiler.graph.NodeSourcePosition	0.9405085336119821
+Move Method	jdk.graal.compiler.hotspot.HotSpotBackend::updateStub(Stub, HotSpotLIRGenerationResult, FrameMap):void	jdk.graal.compiler.hotspot.HotSpotLIRGenerationResult	0.6654761904761903
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets::allocateInstance(KlassPointer, long, boolean, FillContent, boolean, HotSpotAllocationProfilingData, boolean):Object	jdk.graal.compiler.hotspot.word.KlassPointer	0.8065234359544338
+Move Method	jdk.graal.compiler.hotspot.stubs.Stub::createLIRSuites():LIRSuites	jdk.graal.compiler.hotspot.meta.HotSpotProviders	0.27402022756005057
+Move Method	jdk.graal.compiler.lir.alloc.lsra.ssa.SSALinearScanEliminateSpillMovePhase::isPhiResolutionMove(BasicBlock<?>, MoveOp, Interval):boolean	jdk.graal.compiler.lir.alloc.lsra.LinearScan	0.5779836925037152
+Move Method	jdk.graal.compiler.nodes.GraphDecoder::allocateFloatingNode(NodeClass<?>):Node	jdk.graal.compiler.graph.NodeClass	0.8583183580224164
+Move Method	jdk.graal.compiler.replacements.gc.G1WriteBarrierSnippets.G1WriteBarrierLowerer::lower(SnippetTemplate.AbstractTemplates, SnippetTemplate.SnippetInfo, G1PreWriteBarrierNode, LoweringTool):void	jdk.graal.compiler.nodes.gc.G1PreWriteBarrierNode	0.6648286727057896
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeClosure.MergeProcessor::getPhiCached(T, Stamp):PhiNode	jdk.graal.compiler.core.common.type.Stamp	0.3449982194789007
+Move Method	jdk.graal.compiler.hotspot.HotSpotBackendFactory::isWriteToNewObject(FixedWithNextNode, ValueNode):boolean	jdk.graal.compiler.nodes.FixedWithNextNode	0.6781914893617021
+Move Method	jdk.graal.compiler.truffle.PartialEvaluator::createDecodingInvocationPlugins(PartialEvaluatorConfiguration, Plugins, Providers):InvocationPlugins	jdk.graal.compiler.truffle.PartialEvaluatorConfiguration	0.5833333333333334
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::processNode(Node, HIRBlock, NodePredicate):void	jdk.graal.compiler.graph.iterators.NodePredicate	1.0
+Move Method	jdk.graal.compiler.hightiercodegen.CodeGenTool::getAllocatedVariable(ValueNode):ResolvedVar	jdk.graal.compiler.hightiercodegen.variables.VariableMap	1.0
+Move Method	jdk.graal.compiler.nodes.Invokable::updateInliningLogAfterClone(Node):void	jdk.graal.compiler.graph.Node	0.6219947702248583
+Move Method	jdk.graal.compiler.replacements.nodes.arithmetic.IntegerMulExactNode::canonicalXYconstant(ValueNode, ValueNode):ValueNode	jdk.graal.compiler.nodes.ValueNode	0.44877369007803786
+Move Method	jdk.graal.compiler.hotspot.aarch64.AArch64HotSpotLIRGenerator::emitRestoreRegisters(AArch64SaveRegistersOp):void	jdk.graal.compiler.lir.aarch64.AArch64SaveRegistersOp	0.46666666666666673
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::snippetKillAnyIsExceptionHandler(Node):boolean	jdk.graal.compiler.graph.Node	0.5695298064767086
+Move Method	jdk.graal.compiler.nodes.calc.IntegerLowerThanNode.LowerOp::getSucceedingStampForX(IntegerStamp, IntegerStamp, boolean, boolean):IntegerStamp	jdk.graal.compiler.core.common.type.IntegerStamp	0.8644274716156053
+Move Method	jdk.graal.compiler.java.BytecodeParser::checkPositiveIntConstantPushed(BciBlock):int	jdk.graal.compiler.bytecode.BytecodeStream	1.0
+Move Method	jdk.graal.compiler.nodes.GraphDecoder.LoopDetector::assignLoopExitState(LoopExitNode, AbstractMergeNode, AbstractEndNode):void	jdk.graal.compiler.nodes.LoopExitNode	0.7341541942220676
+Move Method	jdk.graal.compiler.nodes.GraphDecoder::recordGraphElements(EncodedGraph):void	jdk.graal.compiler.nodes.EncodedGraph	0.9620915032679737
+Move Method	jdk.graal.compiler.java.BytecodeParser::genIntegerRem(ValueNode, ValueNode, GuardingNode):ValueNode	jdk.graal.compiler.nodes.ValueNode	0.35663181067693994
+Move Method	jdk.graal.compiler.lir.constopt.ConstantLoadOptimization.Optimization::rewriteBlock(BasicBlock<?>):void	jdk.graal.compiler.core.common.cfg.BlockMap	1.0
+Move Method	jdk.graal.compiler.hotspot.HotSpotGraalCompiler::configGraphBuilderSuite(PhaseSuite<HighTierContext>, boolean, boolean, boolean, boolean, boolean):PhaseSuite<HighTierContext>	jdk.graal.compiler.phases.PhaseSuite	0.4885459183673469
+Move Method	jdk.graal.compiler.java.BytecodeParser::getActionForInvokeExceptionEdge(InlineInfo):ExceptionEdgeAction	jdk.graal.compiler.phases.OptimisticOptimizations	1.0
+Move Method	jdk.graal.compiler.hotspot.aarch64.AArch64HotSpotBackend::hasInvalidatePlaceholder(CompilationResult):boolean	jdk.graal.compiler.code.CompilationResult	0.7254340277777777
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::reduceTrivialMerge(AbstractMergeNode, boolean):void	jdk.graal.compiler.nodes.AbstractMergeNode	0.7877505354685885
+Move Method	jdk.graal.compiler.hightiercodegen.NodeLowerer::dispatch(Node):void	jdk.graal.compiler.graph.Node	0.823186032256828
+Move Method	jdk.graal.compiler.hotspot.stubs.Stub::openDebugContext(DebugContext):DebugContext	jdk.graal.compiler.debug.DebugContext	0.8077205584611988
+Move Method	jdk.graal.compiler.graph.Graph.NodeEventListener::event(NodeEvent, Node):void	jdk.graal.compiler.graph.Node	0.8076415226857698
+Move Method	jdk.graal.compiler.nodes.GraphDecoder.LoopDetector::findOrCreateLoop(EconomicMap<MergeNode,Loop>, MergeNode):Loop	jdk.graal.compiler.nodes.MergeNode	1.0
+Move Method	jdk.graal.compiler.java.BytecodeParser::createInstanceOf(TypeReference, ValueNode):LogicNode	jdk.graal.compiler.core.common.type.TypeReference	0.5258234262327031
+Move Method	jdk.graal.compiler.code.ObjdumpDisassemblerProvider::getObjdump(OptionValues):String	jdk.graal.compiler.options.OptionValues	0.8931999999999999
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeBlockState::objectMaterialized(VirtualObjectNode, AllocatedObjectNode, List<ValueNode>):void	jdk.graal.compiler.nodes.virtual.AllocatedObjectNode	1.0
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::checkReplaceWithConstant(Stamp, ValueNode):boolean	jdk.graal.compiler.nodes.ValueNode	0.6644612719779023
+Move Method	jdk.graal.compiler.hotspot.replacements.LogSnippets.Templates::lower(LogNode, LoweringTool):void	jdk.graal.compiler.replacements.nodes.LogNode	0.36883116883116884
+Move Method	jdk.graal.compiler.lir.alloc.lsra.LinearScanWalker::changeSpillState(Interval, int):void	jdk.graal.compiler.lir.alloc.lsra.LinearScan	0.7016631038879182
+Move Method	jdk.graal.compiler.hightiercodegen.irwalk.IRWalker::lowerNode(Node):boolean	jdk.graal.compiler.hightiercodegen.irwalk.IRWalkVerifier	1.0
+Move Method	jdk.graal.compiler.core.CompilationWrapper::getRetryOptions(OptionValues, String):OptionValues	jdk.graal.compiler.options.OptionValues	0.6352571428571429
+Move Method	jdk.graal.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::lowerStoreHubNode(StoreHubNode, StructuredGraph):void	jdk.graal.compiler.nodes.extended.StoreHubNode	0.6666666666666666
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets.Templates::lower(NewMultiArrayNode, LoweringTool):void	jdk.graal.compiler.nodes.java.NewMultiArrayNode	0.6036231784720414
+Move Method	jdk.graal.compiler.phases.schedule.SchedulePhase::verifyImmutableGraph(StructuredGraph):NodeEventScope	jdk.graal.compiler.nodes.StructuredGraph	0.6575797474414979
+Move Method	jdk.graal.compiler.printer.CFGPrinterObserver::shouldDump(DebugContext, boolean):boolean	jdk.graal.compiler.debug.DebugContext	0.4403318235880676
+Move Method	jdk.graal.compiler.loop.phases.SpeculativeGuardMovementPhase.SpeculativeGuardMovement::tryOptimizeCompare(GuardNode, CompareNode):Loop<HIRBlock>	jdk.graal.compiler.nodes.loop.LoopsData	0.832832532051282
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::tryProveCondition(LogicNode):TriState	jdk.graal.compiler.nodes.LogicNode	0.5706280193236716
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::assertSnippetKills(ValueNode):boolean	jdk.graal.compiler.nodes.ReturnNode	1.0
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::processNodes(HIRBlock):void	jdk.graal.compiler.core.common.cfg.BlockMap	0.7555555555555555
+Move Method	jdk.graal.compiler.hightiercodegen.irwalk.StackifierIRWalker::predeclareVariables(StructuredGraph):void	jdk.graal.compiler.nodes.StructuredGraph	0.5384026947119921
+Move Method	jdk.graal.compiler.hotspot.lir.VerifyMaxRegisterSizePhase::verifyOperands(LIRInstruction, Value, OperandMode, EnumSet<OperandFlag>):void	jdk.graal.compiler.lir.LIRInstruction	0.18965277777777784
+Move Method	jdk.graal.compiler.lir.asm.CompilationResultBuilder::emitLIR():void	jdk.graal.compiler.lir.LIR	0.48913919413919404
+Move Method	jdk.graal.compiler.virtual.phases.ea.GraphEffectList::addFixedNodeBefore(FixedWithNextNode, FixedNode):void	jdk.graal.compiler.nodes.FixedWithNextNode	1.0
+Move Method	jdk.graal.compiler.lir.amd64.AMD64Move.PointerCompressionOp::move(LIRKind, CompilationResultBuilder, AMD64MacroAssembler):void	jdk.graal.compiler.core.common.spi.LIRKindTool	1.0
+Move Method	jdk.graal.compiler.lir.alloc.lsra.Interval::checkSplitChild(Interval, int, LinearScan, int, LIRInstruction.OperandMode):boolean	jdk.graal.compiler.lir.alloc.lsra.LinearScan	0.9366560056858564
+Move Method	jdk.graal.compiler.replacements.PEGraphDecoder::tryInline(PEMethodScope, LoopScope, InvokeData, MethodCallTargetNode):LoopScope	jdk.graal.compiler.nodes.java.MethodCallTargetNode	0.6498848283162009
+Move Method	jdk.graal.compiler.truffle.phases.TruffleLoopSafepointEliminationPhase::isTruffleCall(Invoke):boolean	jdk.graal.compiler.nodes.Invoke	0.45790816326530615
+Move Method	jdk.graal.compiler.lir.LIR::setLIRforBlock(BasicBlock<?>, ArrayList<LIRInstruction>):void	jdk.graal.compiler.core.common.cfg.BlockMap	1.0
+Move Method	jdk.graal.compiler.hotspot.amd64.AMD64X87MathSnippets.Templates::lower(UnaryMathIntrinsicNode, LoweringTool):void	jdk.graal.compiler.replacements.nodes.UnaryMathIntrinsicNode	0.7366373885854406
+Move Method	jdk.graal.compiler.phases.common.CanonicalizerPhase::tryGlobalValueNumbering(Node, NodeClass<?>):boolean	jdk.graal.compiler.graph.Node	0.5750472764460769
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::replaceWithExceptionSplit(WithExceptionNode, WithExceptionNode):void	jdk.graal.compiler.nodes.WithExceptionNode	1.0
+Move Method	jdk.graal.compiler.java.BytecodeParser::createLogicNode(CanonicalCondition, ValueNode, ValueNode):LogicNode	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPluginContext	0.9298686947022107
+Move Method	jdk.graal.compiler.replacements.gc.G1WriteBarrierSnippets.G1WriteBarrierLowerer::lower(SnippetTemplate.AbstractTemplates, SnippetTemplate.SnippetInfo, G1ArrayRangePostWriteBarrierNode, LoweringTool):void	jdk.graal.compiler.nodes.gc.G1ArrayRangePostWriteBarrierNode	0.22988505747126436
+Move Method	jdk.graal.compiler.hotspot.replacements.AssertionSnippets.Templates::lower(AssertionNode, LoweringTool):void	jdk.graal.compiler.replacements.nodes.AssertionNode	0.5120094191522764
+Move Method	jdk.graal.compiler.hightiercodegen.NodeLowerer::lowerValue(ValueNode):void	jdk.graal.compiler.hightiercodegen.CodeGenTool	0.45017740150562363
+Move Method	jdk.graal.compiler.hotspot.SymbolicSnippetEncoder.SnippetObjectFilter::filterBytecode(DebugContext, ResolvedJavaMethodBytecode):EncodedSnippets.SymbolicResolvedJavaMethodBytecode	jdk.graal.compiler.bytecode.ResolvedJavaMethodBytecode	0.7053571428571428
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::reduceDegenerateLoopBegin(LoopBeginNode, boolean):void	jdk.graal.compiler.nodes.LoopBeginNode	0.6307802287581699
+Move Method	jdk.graal.compiler.nodes.loop.LoopFragment::mergeEarlyExits():void	jdk.graal.compiler.nodes.loop.LoopEx	0.49629295321567485
+Move Method	jdk.graal.compiler.asm.amd64.AMD64Assembler::jcc(ConditionFlag, Label):void	jdk.graal.compiler.asm.Label	1.0
+Move Method	jdk.graal.compiler.hotspot.HotSpotGraalCompiler::getLIRSuites(HotSpotProviders, OptionValues):LIRSuites	jdk.graal.compiler.options.OptionValues	0.3894642857142857
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::processUnary(UnaryNode, HIRBlock, NodePredicate):void	jdk.graal.compiler.nodes.calc.UnaryNode	1.0
+Move Method	jdk.graal.compiler.lir.alloc.lsra.LinearScan::getBlockData(BasicBlock<?>):BlockData	jdk.graal.compiler.core.common.cfg.BlockMap	1.0
+Move Method	jdk.graal.compiler.nodes.OptimizationLog::report(Class<?>, String, Node):void	jdk.graal.compiler.graph.Node	0.8626929854805949
+Move Method	jdk.graal.compiler.debug.ScopeImpl::interceptException(Throwable):RuntimeException	jdk.graal.compiler.debug.DebugContext	1.0
+Move Method	jdk.graal.compiler.core.aarch64.AArch64NodeMatchRules::emitExtendedAddSubShift(BinaryNode, ValueNode, ValueNode, ExtendType, int):ComplexMatchResult	jdk.graal.compiler.nodes.calc.BinaryNode	1.0
+Move Method	jdk.graal.compiler.replacements.gc.SerialWriteBarrierSnippets.SerialWriteBarrierLowerer::lower(SnippetTemplate.AbstractTemplates, SnippetTemplate.SnippetInfo, SnippetTemplate.SnippetInfo, SerialWriteBarrierNode, LoweringTool):void	jdk.graal.compiler.nodes.gc.SerialWriteBarrierNode	0.33515624999999993
+Move Method	jdk.graal.compiler.replacements.nodes.arithmetic.IntegerAddExactNode::canonicalXYconstant(ValueNode, ValueNode):ValueNode	jdk.graal.compiler.nodes.ValueNode	0.44877369007803786
+Move Method	jdk.graal.compiler.lir.asm.CompilationResultBuilder::recordMark(CompilationResult.MarkId):CompilationResult.CodeMark	jdk.graal.compiler.lir.asm.FrameContext	1.0
+Move Method	jdk.graal.compiler.printer.CFGPrinter::stateValueToString(ValueNode):String	jdk.graal.compiler.core.gen.NodeLIRBuilder	0.38086511107666926
+Move Method	jdk.graal.compiler.hightiercodegen.irwalk.StackifierIRWalker::lowerLoop(HIRBlock):void	jdk.graal.compiler.hightiercodegen.reconstruction.StackifierData	0.7015993265993264
+Move Method	jdk.graal.compiler.asm.amd64.AMD64Assembler::jmpb(Label):void	jdk.graal.compiler.asm.Label	1.0
+Move Method	jdk.graal.compiler.java.BytecodeParser::updateWithExceptionNode(WithExceptionNode):AbstractBeginNode	jdk.graal.compiler.nodes.WithExceptionNode	0.9464788732394368
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::processAbstractBegin(AbstractBeginNode):void	jdk.graal.compiler.nodes.AbstractBeginNode	0.6258220754751845
+Move Method	jdk.graal.compiler.java.BytecodeParser::genIfZero(Condition):void	jdk.graal.compiler.java.FrameStateBuilder	0.8639199370756748
+Move Method	jdk.graal.compiler.hotspot.HotSpotBackendFactory::isWriteToNewObject(FixedAccessNode):boolean	jdk.graal.compiler.nodes.memory.FixedAccessNode	1.0
+Move Method	jdk.graal.compiler.nodes.graphbuilderconf.GraphBuilderContext::replacePluginWithException(GeneratedInvocationPlugin, ResolvedJavaMethod, ValueNode[], PluginReplacementWithExceptionNode.ReplacementWithExceptionFunction):void	jdk.graal.compiler.nodes.graphbuilderconf.GeneratedInvocationPlugin	0.6607142857142857
+Move Method	jdk.graal.compiler.lir.alloc.lsra.LinearScan::getLastLirInstructionId(BasicBlock<?>):int	jdk.graal.compiler.lir.LIR	0.8181176470588237
+Move Method	jdk.graal.compiler.virtual.phases.ea.GraphEffectList::replaceFirstInput(Node, Node, Node):void	jdk.graal.compiler.graph.Node	0.8061244556819772
+Move Method	jdk.graal.compiler.nodes.StructuredGraph.ScheduleResult::print():String	jdk.graal.compiler.nodes.cfg.ControlFlowGraph	0.9398114848114847
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::updateStamps(ValueNode, UnmodifiableEconomicMap<Node,Node>):void	jdk.graal.compiler.nodes.ValueNode	0.6000494071146247
+Move Method	jdk.graal.compiler.replacements.StandardGraphBuilderPlugins.UnsafeAccessPlugin::createUnsafeAccess(ValueNode, GraphBuilderContext, UnsafeNodeConstructor, Class<? extends TrackedUnsafeAccess>):void	jdk.graal.compiler.nodes.graphbuilderconf.GraphBuilderContext	0.44723722316261766
+Move Method	jdk.graal.compiler.nodes.InliningLog::checkInvariants(StructuredGraph):void	jdk.graal.compiler.nodes.StructuredGraph	0.6944892164107176
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::replaceSplit(ControlSplitNode, Node, AbstractBeginNode):void	jdk.graal.compiler.graph.Node	0.799381935665121
+Move Method	jdk.graal.compiler.hotspot.replacements.MonitorSnippets.Templates::lower(MonitorExitNode, HotSpotRegistersProvider, LoweringTool):void	jdk.graal.compiler.nodes.java.MonitorExitNode	0.40625
+Move Method	jdk.graal.compiler.nodes.graphbuilderconf.GraphBuilderContext::emitBytecodeExceptionCheck(LogicNode, boolean, BytecodeExceptionNode.BytecodeExceptionKind, ValueNode[]):AbstractBeginNode	jdk.graal.compiler.nodes.LogicNode	0.5415783274440518
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::processNode(Node):void	jdk.graal.compiler.graph.Node	0.799381935665121
+Move Method	jdk.graal.compiler.lir.LIRInstructionClass::forEachState(LIRInstruction, InstructionStateProcedure):void	jdk.graal.compiler.lir.InstructionStateProcedure	1.0
+Move Method	jdk.graal.compiler.java.BytecodeParser::ensureBytecodeMayBeUnresolved():void	jdk.graal.compiler.bytecode.BytecodeStream	1.0
+Move Method	jdk.graal.compiler.lir.profiling.MoveProfilingPhase.Analyzer::addEntry(String, String, int):void	jdk.graal.compiler.lir.gen.DiagnosticLIRGeneratorTool	0.12244897959183673
+Move Method	jdk.graal.compiler.replacements.arraycopy.ArrayCopySnippets.Templates::snippet(Providers, ArrayCopySnippets, String):SnippetTemplate.SnippetInfo	jdk.graal.compiler.phases.util.Providers	0.8214285714285712
+Move Method	jdk.graal.compiler.hotspot.replacements.LoadExceptionObjectSnippets.Templates::lower(LoadExceptionObjectNode, HotSpotRegistersProvider, LoweringTool):void	jdk.graal.compiler.hotspot.word.HotSpotWordTypes	0.8837876614060257
+Move Method	jdk.graal.compiler.java.BytecodeParser::genIntegerNormalizeCompare(ValueNode, ValueNode):ValueNode	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPluginContext	1.0
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets::newmultiarray(KlassPointer, int, boolean, int[]):Object	jdk.graal.compiler.hotspot.word.KlassPointer	0.804255319148936
+Move Method	jdk.graal.compiler.lir.alloc.lsra.LinearScan::initBlockData(BasicBlock<?>):void	jdk.graal.compiler.core.common.cfg.BlockMap	1.0
+Move Method	jdk.graal.compiler.truffle.nodes.frame.VirtualFrameAccessorNode::insertDeoptimization(VirtualizerTool):void	jdk.graal.compiler.truffle.nodes.frame.NewFrameNode	0.5310236240604067
+Move Method	jdk.graal.compiler.hotspot.CompilationTask::runCompilation(OptionValues):HotSpotCompilationRequestResult	jdk.graal.compiler.hotspot.HotSpotGraalCompiler	0.7342737575349755
+Move Method	jdk.graal.compiler.replacements.BoxingSnippets.Templates::lower(UnboxNode, LoweringTool):void	jdk.graal.compiler.nodes.extended.UnboxNode	0.19842226738778462
+Move Method	jdk.graal.compiler.replacements.classfile.ClassfileConstant.FieldRef::resolve(ClassfileConstantPool, int):ResolvedJavaField	jdk.graal.compiler.replacements.classfile.ClassfileConstantPool	0.995721247563353
+Move Method	jdk.graal.compiler.graph.Edges::verifyUpdateValid(Node, int, Object):void	jdk.graal.compiler.graph.Node	0.779717064914168
+Move Method	jdk.graal.compiler.replacements.SnippetTemplate::inlineSnippet(Node, DebugContext, StructuredGraph, EconomicMap<Node,Node>):EconomicMap<Node,Node>	jdk.graal.compiler.graph.Node	0.6479922675463853
+Move Method	jdk.graal.compiler.hotspot.CompilationTask::filterOptions(OptionValues):OptionValues	jdk.graal.compiler.hotspot.HotSpotGraalCompiler	0.9906972147260388
+Move Method	jdk.graal.compiler.debug.ScopeImpl::handle(Throwable):RuntimeException	jdk.graal.compiler.debug.DebugContext	1.0
+Move Method	jdk.graal.compiler.java.BytecodeParser::genByteSizedStoreIndexed(ValueNode, ValueNode, ValueNode, GuardingNode, GuardingNode):void	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPluginContext	0.8510519580729163
+Move Method	jdk.graal.compiler.lir.alloc.lsra.LinearScanWalker::insertMove(int, Interval, Interval):void	jdk.graal.compiler.lir.alloc.lsra.MoveResolver	0.6246599285305175
+Move Method	jdk.graal.compiler.lir.profiling.MoveProfilingPhase.Analyzer::insertBenchmarkCounter(BasicBlock<?>):void	jdk.graal.compiler.lir.LIRInsertionBuffer	0.4653649465364947
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::processAbstractBegin(AbstractBeginNode):void	jdk.graal.compiler.nodes.AbstractBeginNode	0.6352551538518227
+Move Method	jdk.graal.compiler.replacements.nodes.MacroWithExceptionNode::verifyStamp():void	jdk.graal.compiler.core.common.type.StampPair	0.9375
+Move Method	jdk.graal.compiler.replacements.DefaultJavaLoweringProvider::lowerLoadArrayComponentHubNode(LoadArrayComponentHubNode):void	jdk.graal.compiler.nodes.extended.LoadArrayComponentHubNode	1.0
+Move Method	jdk.graal.compiler.graph.Graph::verifySourcePositions(boolean):boolean	jdk.graal.compiler.graph.NodeSourcePosition	1.0
+Move Method	jdk.graal.compiler.asm.aarch64.AArch64MacroAssembler::cacheWriteback(AArch64Address):void	jdk.graal.compiler.asm.aarch64.AArch64Address	1.0
+Move Method	jdk.graal.compiler.lir.asm.CompilationResultBuilder::isSuccessorEdge(LabelRef):boolean	jdk.graal.compiler.lir.LabelRef	1.0
+Move Method	jdk.graal.compiler.nodes.IfNode::connectEnds(List<EndNode>, ValuePhiNode, EconomicMap<AbstractEndNode,ValueNode>, AbstractBeginNode, AbstractMergeNode, SimplifierTool):void	jdk.graal.compiler.nodes.ValuePhiNode	0.6341979921497584
+Move Method	jdk.graal.compiler.loop.phases.SpeculativeGuardMovementPhase.SpeculativeGuardMovement::computeNewCompareGuards(CompareNode, InductionVariable, ValueNode, boolean, GuardingNode):OptimizedCompareTests	jdk.graal.compiler.nodes.calc.CompareNode	0.5003543954868671
+Move Method	jdk.graal.compiler.hotspot.replacements.RegisterFinalizerSnippets.Templates::lower(RegisterFinalizerNode, LoweringTool):void	jdk.graal.compiler.nodes.java.RegisterFinalizerNode	0.32680250783699066
+Move Method	jdk.graal.compiler.hotspot.stubs.Stub::createSuites():Suites	jdk.graal.compiler.hotspot.meta.HotSpotProviders	0.4158385093167702
+Move Method	jdk.graal.compiler.hotspot.replacements.VirtualThreadUpdateJFRSnippets.Templates::lower(VirtualThreadUpdateJFRNode, HotSpotRegistersProvider, LoweringTool):void	jdk.graal.compiler.hotspot.nodes.VirtualThreadUpdateJFRNode	0.3256704980842912
+Move Method	jdk.graal.compiler.truffle.hotspot.HotSpotTruffleSafepointLoweringSnippet.Templates::lower(TruffleSafepointNode, LoweringTool):void	jdk.graal.compiler.truffle.nodes.TruffleSafepointNode	0.3245192307692308
+Move Method	jdk.graal.compiler.replacements.arraycopy.ArrayCopySnippets.Templates::lower(ArrayCopyWithDelayedLoweringNode, LoweringTool):void	jdk.graal.compiler.replacements.arraycopy.ArrayCopyWithDelayedLoweringNode	0.6636363636363637
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeClosure::getObjectState(PartialEscapeBlockState<?>, ValueNode):ObjectState	jdk.graal.compiler.virtual.phases.ea.PartialEscapeBlockState	1.0
+Move Method	jdk.graal.compiler.replacements.IdentityHashCodeSnippets.Templates::lower(IdentityHashCodeNode, LoweringTool):void	jdk.graal.compiler.replacements.nodes.IdentityHashCodeNode	0.2548076923076923
+Move Method	jdk.graal.compiler.options.OptionValues::printHelp(PrintStream, String, String, OptionDescriptor):void	jdk.graal.compiler.options.OptionDescriptor	0.7351190476190478
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeClosure::ensureMaterialized(PartialEscapeBlockState<?>, int, FixedNode, GraphEffectList, CounterKey):boolean	jdk.graal.compiler.virtual.phases.ea.PartialEscapeBlockState	0.8007502480158731
+Move Method	jdk.graal.compiler.asm.amd64.AMD64MacroAssembler::alignFusedPair(Label, boolean, int):void	jdk.graal.compiler.asm.Label	1.0
+Move Method	jdk.graal.compiler.lir.asm.CompilationResultBuilder::labelWithinLIRRange(LIRInstruction, Label, int):boolean	jdk.graal.compiler.lir.asm.FrameContext	1.0
+Move Method	jdk.graal.compiler.lir.constopt.ConstantLoadOptimization.Optimization::verifyStateUsage(DefUseTree):void	jdk.graal.compiler.lir.constopt.DefUseTree	1.0
+Move Method	jdk.graal.compiler.lir.gen.LIRGenerator::hasBlockEnd(BasicBlock<?>):boolean	jdk.graal.compiler.lir.gen.LIRGenerationResult	0.5833333333333333
+Move Method	jdk.graal.compiler.replacements.nodes.arithmetic.IntegerSubExactNode::canonicalXYconstant(ValueNode, ValueNode):ValueNode	jdk.graal.compiler.nodes.ValueNode	0.44877369007803786
+Move Method	jdk.graal.compiler.java.BytecodeParser::genIncrement():void	jdk.graal.compiler.java.FrameStateBuilder	0.8639199370756748
+Move Method	jdk.graal.compiler.core.match.ComplexMatchValue::evaluate(NodeLIRBuilder):Value	jdk.graal.compiler.core.gen.NodeLIRBuilder	0.31887738101188395
+Move Method	jdk.graal.compiler.virtual.phases.ea.GraphEffectList::updateVirtualMapping(VirtualObjectState, int, ValueNode):void	jdk.graal.compiler.nodes.virtual.VirtualObjectState	0.9142857142857141
+Move Method	jdk.graal.compiler.lir.constopt.ConstantLoadOptimization.Optimization::deleteInstruction(DefUseTree):void	jdk.graal.compiler.lir.constopt.DefUseTree	1.0
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::processTypeSwitch(AbstractBeginNode, TypeSwitchNode):void	jdk.graal.compiler.nodes.java.TypeSwitchNode	0.6280742383717136
+Move Method	jdk.graal.compiler.replacements.gc.G1WriteBarrierSnippets.G1WriteBarrierLowerer::lower(SnippetTemplate.AbstractTemplates, SnippetTemplate.SnippetInfo, G1ArrayRangePreWriteBarrierNode, LoweringTool):void	jdk.graal.compiler.nodes.gc.G1ArrayRangePreWriteBarrierNode	0.22988505747126436
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets.Templates::lower(ValidateNewInstanceClassNode, LoweringTool):void	jdk.graal.compiler.nodes.java.ValidateNewInstanceClassNode	0.4262456293706294
+Move Method	jdk.graal.compiler.phases.common.LoweringPhase.Frame::enterAlwaysReached(HIRBlock):Frame<?>	jdk.graal.compiler.nodes.cfg.HIRBlock	0.42627847098435345
+Move Method	jdk.graal.compiler.java.BytecodeParser::cleanupFinalGraph():void	jdk.graal.compiler.nodes.StructuredGraph	0.4101196169685252
+Move Method	jdk.graal.compiler.nodes.loop.LoopEx::nodesInLoopBranch(NodeBitMap, AbstractBeginNode):void	jdk.graal.compiler.nodes.loop.LoopsData	0.8601499171968974
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::canScheduleAbove(Node, Node, ValueNode):boolean	jdk.graal.compiler.graph.NodeMap	0.7851262051782039
+Move Method	jdk.graal.compiler.hightiercodegen.reconstruction.stackifier.blocks.LabeledBlockGeneration::addToMaps(LabeledBlock):void	jdk.graal.compiler.hightiercodegen.reconstruction.stackifier.blocks.LabeledBlock	1.0
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::copy(ResolvedJavaMethod, OptionValues, DebugContext, boolean):StructuredGraph	jdk.graal.compiler.nodes.spi.ProfileProvider	0.6000000000000001
+Move Method	jdk.graal.compiler.loop.phases.SpeculativeGuardMovementPhase.SpeculativeGuardMovement::tryOptimizeInstanceOf(GuardNode, InstanceOfNode):Loop<HIRBlock>	jdk.graal.compiler.nodes.java.InstanceOfNode	0.7175614042390359
+Move Method	jdk.graal.compiler.virtual.phases.ea.EffectsClosure.MergeProcessor::createValuePhi(Stamp):ValuePhiNode	jdk.graal.compiler.nodes.AbstractMergeNode	0.49268754340347876
+Move Method	jdk.graal.compiler.hightiercodegen.lowerer.CommitAllocationLowerer::lowerArray(VirtualArrayNode, CodeGenTool):void	jdk.graal.compiler.hightiercodegen.CodeGenTool	0.969258589511754
+Move Method	jdk.graal.compiler.core.amd64.AMD64LoweringProviderMixin::lowerAMD64(Node):boolean	jdk.graal.compiler.graph.Node	0.2591319299062998
+Move Method	jdk.graal.compiler.lir.RedundantMoveElimination.Optimization::solveDataFlow(LIR):boolean	jdk.graal.compiler.lir.LIR	0.8748345647285578
+Move Method	jdk.graal.compiler.lir.util.IndexedValueMap::forEach(LIRInstruction, LIRInstruction.OperandMode, EnumSet<LIRInstruction.OperandFlag>, InstructionValueProcedure):void	jdk.graal.compiler.lir.InstructionValueProcedure	1.0
+Move Method	jdk.graal.compiler.nodes.calc.IntegerLowerThanNode.LowerOp::canonicalizePiXLowerPiXPlusC(PiNode, PiNode, boolean, NodeView):LogicConstantNode	jdk.graal.compiler.nodes.PiNode	0.7542490080233387
+Move Method	jdk.graal.compiler.java.BytecodeParser::genNormalizeCompare(ValueNode, ValueNode, boolean):ValueNode	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPluginContext	1.0
+Move Method	jdk.graal.compiler.lir.util.IndexedValueMap::visitEach(LIRInstruction, LIRInstruction.OperandMode, EnumSet<LIRInstruction.OperandFlag>, InstructionValueConsumer):void	jdk.graal.compiler.lir.InstructionValueConsumer	1.0
+Move Method	jdk.graal.compiler.lir.alloc.AllocationStageVerifier::verifyOperands(LIRInstruction, Value, OperandMode, EnumSet<OperandFlag>):void	jdk.graal.compiler.lir.LIRInstruction	0.17773809523809528
+Move Method	jdk.graal.compiler.replacements.BoxingSnippets.Templates::lower(BoxNode, LoweringTool):void	jdk.graal.compiler.nodes.extended.BoxNode	0.23910572186434254
+Move Method	jdk.graal.compiler.core.common.type.ArithmeticOpTable.FloatConvertOp::canOverflowInteger(Stamp):boolean	jdk.graal.compiler.core.common.type.Stamp	0.3184685852562441
+Move Method	jdk.graal.compiler.hightiercodegen.variables.VariableAllocation::getBlockUsage(ValueNode, Node, NodeMap<HIRBlock>):HIRBlock	jdk.graal.compiler.graph.NodeMap	0.573529411764706
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase::createVisitor(StructuredGraph, ScheduleResult, CoreProviders):ControlFlowGraph.RecursiveVisitor<?>	jdk.graal.compiler.nodes.StructuredGraph	0.6600141838919422
+Move Method	jdk.graal.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::lowerGenericArrayCopyCallNode(GenericArrayCopyCallNode):void	jdk.graal.compiler.hotspot.replacements.arraycopy.GenericArrayCopyCallNode	0.6845238095238094
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::getInfoElements(ValueNode):ConditionalEliminationUtil.InfoElement	jdk.graal.compiler.graph.NodeMap	0.573809523809524
+Move Method	jdk.graal.compiler.java.BytecodeParser::createStateAfterStartOfReplacementGraph():FrameState	jdk.graal.compiler.java.FrameStateBuilder	0.5521604909007842
+Move Method	jdk.graal.compiler.asm.amd64.AMD64Assembler::psubusw(Register, AMD64Address):void	jdk.graal.compiler.asm.amd64.AMD64Address	0.971340839303992
+Move Method	jdk.graal.compiler.loop.phases.SpeculativeGuardMovementPhase.SpeculativeGuardMovement::createLoopEnterCheck(CountedLoopInfo, LogicNode):LogicNode	jdk.graal.compiler.nodes.loop.CountedLoopInfo	0.9034973442026878
+Move Method	jdk.graal.compiler.phases.schedule.SchedulePhase.Instance::printScheduleHelper(String):String	jdk.graal.compiler.nodes.cfg.ControlFlowGraph	0.9886273448773447
+Move Method	jdk.graal.compiler.lir.constopt.ConstantLoadOptimization.Optimization::apply():void	jdk.graal.compiler.lir.LIR	1.0
+Move Method	jdk.graal.compiler.lir.profiling.MoveProfilingPhase.Analyzer::createGroupName():String	jdk.graal.compiler.lir.gen.LIRGenerationResult	0.5366137566137568
+Move Method	jdk.graal.compiler.replacements.nodes.MacroNode::createInvoke(boolean):InvokeNode	jdk.graal.compiler.nodes.FrameState	0.7559434175717069
+Move Method	jdk.graal.compiler.java.BytecodeParser::genConditionalForIf(BciBlock, LogicNode, int, int, int, boolean):void	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPluginContext	0.7636363636363637
+Move Method	jdk.graal.compiler.java.BytecodeParser::returnAfterConstant(BciBlock):boolean	jdk.graal.compiler.bytecode.BytecodeStream	1.0
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeClosure::mayBeMaterialized(VirtualObjectNode):boolean	jdk.graal.compiler.graph.NodeMap	1.0
+Move Method	jdk.graal.compiler.lir.profiling.MethodProfilingPhase.Analyzer::run():void	jdk.graal.compiler.lir.LIR	1.0
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::registerCondition(LogicNode, boolean, GuardingNode):void	jdk.graal.compiler.nodes.LogicNode	0.48831569664902996
+Move Method	jdk.graal.compiler.hotspot.aarch64.AArch64HotSpotZBarrieredOp::emitBarrier(CompilationResultBuilder, AArch64MacroAssembler):void	jdk.graal.compiler.lir.aarch64.AArch64AddressValue	0.38835470085470086
+Move Method	jdk.graal.compiler.replacements.PEGraphDecoder::getSpecialCallTarget(InvokeData, MethodCallTargetNode):ResolvedJavaMethod	jdk.graal.compiler.nodes.java.MethodCallTargetNode	0.6527671674730499
+Move Method	jdk.graal.compiler.hotspot.replacements.UnsafeSnippets.Templates::lower(UnsafeCopyMemoryNode, LoweringTool):void	jdk.graal.compiler.hotspot.replacements.UnsafeCopyMemoryNode	0.44334975369458124
+Move Method	jdk.graal.compiler.core.amd64.AMD64NodeMatchRules::emitReinterpretMemory(LIRKind, AddressableMemoryAccess):Value	jdk.graal.compiler.core.common.LIRKind	0.3275788014069265
+Move Method	jdk.graal.compiler.java.BytecodeParser::genIfNull(Condition):void	jdk.graal.compiler.java.FrameStateBuilder	0.8639199370756748
+Move Method	jdk.graal.compiler.java.BytecodeParser::getProfileData(boolean):BranchProbabilityData	jdk.graal.compiler.debug.CounterKey	0.7999999999999999
+Move Method	jdk.graal.compiler.core.aarch64.AArch64AddressLoweringByUse::getAArch64Kind(Stamp):AArch64Kind	jdk.graal.compiler.core.aarch64.AArch64LIRKindTool	1.0
+Move Method	jdk.graal.compiler.replacements.gc.G1WriteBarrierSnippets.G1WriteBarrierLowerer::lower(SnippetTemplate.AbstractTemplates, SnippetTemplate.SnippetInfo, G1PostWriteBarrierNode, LoweringTool):void	jdk.graal.compiler.nodes.gc.G1PostWriteBarrierNode	0.7926867187661947
+Move Method	jdk.graal.compiler.virtual.phases.ea.EffectsClosure::addScalarAlias(ValueNode, ValueNode):void	jdk.graal.compiler.graph.NodeBitMap	0.6053221288515407
+Move Method	jdk.graal.compiler.replacements.DefaultJavaLoweringProvider::lowerSecondHalf(UnpackEndianHalfNode):void	jdk.graal.compiler.nodes.calc.UnpackEndianHalfNode	0.5583333333333332
+Move Method	jdk.graal.compiler.lir.asm.CompilationResultBuilder::emitSlowPath(LIRInstruction.LIRInstructionSlowPath):void	jdk.graal.compiler.lir.asm.FrameContext	1.0
+Move Method	jdk.graal.compiler.asm.amd64.AMD64Assembler::addressInBytes(AMD64Address):int	jdk.graal.compiler.asm.amd64.AMD64Address	0.971340839303992
+Move Method	jdk.graal.compiler.debug.DebugContext::printMetricsCSV(PrintStream, Object, Integer, int, String):void	jdk.graal.compiler.debug.GlobalMetrics	0.7696716855145921
+Move Method	jdk.graal.compiler.java.BytecodeParser::genIntegerDiv(ValueNode, ValueNode, GuardingNode):ValueNode	jdk.graal.compiler.nodes.ValueNode	0.3114806703860292
+Move Method	jdk.graal.compiler.lir.constopt.ConstantLoadOptimization.Optimization::analyzeBlock(BasicBlock<?>):void	jdk.graal.compiler.lir.LIR	0.873294117647059
+Move Method	jdk.graal.compiler.replacements.PEGraphDecoder::handleNonInlinedInvoke(MethodScope, LoopScope, InvokeData):void	jdk.graal.compiler.nodes.StructuredGraph	0.486662483218989
+Move Method	jdk.graal.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::loadHubForMonitorEnterNode(MonitorEnterNode, LoweringTool, StructuredGraph):void	jdk.graal.compiler.nodes.java.MonitorEnterNode	0.5336750577994965
+Move Method	jdk.graal.compiler.replacements.nodes.MacroNode::verifyStamp():void	jdk.graal.compiler.core.common.type.StampPair	0.9375
+Move Method	jdk.graal.compiler.java.BytecodeParser::loadReferenceType(int, int):void	jdk.graal.compiler.nodes.graphbuilderconf.GraphBuilderConfiguration	1.0
+Move Method	jdk.graal.compiler.hotspot.SymbolicSnippetEncoder.SnippetObjectFilter::filterStampPair(DebugContext, StampPair):Object	jdk.graal.compiler.core.common.type.StampPair	0.7291666666666665
+Move Method	jdk.graal.compiler.java.BytecodeParser::genIfNode(LogicNode, FixedNode, FixedNode, BranchProbabilityData):ValueNode	jdk.graal.compiler.nodes.LogicNode	0.8214285714285714
+Move Method	jdk.graal.compiler.hotspot.replacements.StringToBytesSnippets.Templates::lower(StringToBytesNode, LoweringTool):void	jdk.graal.compiler.nodes.debug.StringToBytesNode	0.47131728045325777
+Move Method	jdk.graal.compiler.truffle.PartialEvaluator::appendParsingNodePlugins(Plugins):void	jdk.graal.compiler.truffle.TruffleCompilerConfiguration	1.0
+Move Method	jdk.graal.compiler.lir.constopt.ConstantLoadOptimization.Optimization::createLoads(DefUseTree, ConstantTree, BasicBlock<?>):void	jdk.graal.compiler.lir.constopt.DefUseTree	0.8879227053140099
+Move Method	jdk.graal.compiler.core.gen.NodeLIRBuilder::emitNode(ValueNode):void	jdk.graal.compiler.nodes.ValueNode	0.43064182194616973
+Move Method	jdk.graal.compiler.core.gen.NodeLIRBuilder::stateFor(NodeWithState, FrameState):LIRFrameState	jdk.graal.compiler.nodes.FrameState	0.7215613275613275
+Move Method	jdk.graal.compiler.loop.phases.SpeculativeGuardMovementPhase.SpeculativeGuardMovement::computeNewCompareGuards(CompareNode, InductionVariable, ValueNode, boolean, GuardingNode, ValueNode):OptimizedCompareTests	jdk.graal.compiler.nodes.calc.CompareNode	1.0
+Move Method	jdk.graal.compiler.asm.amd64.AMD64Assembler::jccb(ConditionFlag, Label):void	jdk.graal.compiler.asm.Label	1.0
+Move Method	jdk.graal.compiler.nodes.StructuredGraph::checkFrameStatesAgainstInlinedMethods():boolean	jdk.graal.compiler.nodes.spi.ProfileProvider	0.8045157193642831
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeClosure.MergeProcessor::getValuePhisCached(ValueNode, int):PhiNode[]	jdk.graal.compiler.nodes.ValueNode	0.43879133792177266
+Move Method	jdk.graal.compiler.hightiercodegen.reconstruction.stackifier.CFStackifierSortPhase.Instance::pushNewScope(HIRBlock, Scope):void	jdk.graal.compiler.hightiercodegen.reconstruction.stackifier.scopes.Scope	1.0
+Move Method	jdk.graal.compiler.java.BytecodeParser::processBytecode(int, int):void	jdk.graal.compiler.bytecode.BytecodeStream	0.7988482106129164
+Move Method	jdk.graal.compiler.nodes.graphbuilderconf.IntrinsicContext::createFrameState(StructuredGraph, SideEffectsState, StateSplit, NodeSourcePosition):FrameState	jdk.graal.compiler.graph.NodeSourcePosition	0.7915526363802224
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::processBinary(BinaryNode, HIRBlock, NodePredicate):void	jdk.graal.compiler.nodes.calc.BinaryNode	0.8311688311688312
+Move Method	jdk.graal.compiler.java.BytecodeParser::getProfileForInvoke(InvokeKind):JavaTypeProfile	jdk.graal.compiler.phases.OptimisticOptimizations	0.8385185185185187
+Move Method	jdk.graal.compiler.core.amd64.AMD64NodeMatchRules::getLirKind(LIRLowerableAccess):LIRKind	jdk.graal.compiler.nodes.memory.LIRLowerableAccess	0.72
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::getBestStamp(ValueNode):Stamp	jdk.graal.compiler.graph.NodeMap	0.29861111111111105
+Move Method	jdk.graal.compiler.hotspot.HotSpotGraalCompiler::compile(StructuredGraph, boolean, boolean, boolean, CompilationIdentifier, DebugContext):CompilationResult	jdk.graal.compiler.debug.DebugContext	0.7198334140663362
+Move Method	jdk.graal.compiler.hotspot.HotSpotHostBackend::emitStackOverflowCheck(CompilationResultBuilder):void	jdk.graal.compiler.lir.asm.CompilationResultBuilder	0.8936054887676363
+Move Method	jdk.graal.compiler.nodes.graphbuilderconf.GraphBuilderContext::invokeFallback(FixedWithNextNode, EndNode):Invoke	jdk.graal.compiler.nodes.EndNode	1.0
+Move Method	jdk.graal.compiler.hotspot.stubs.Stub::checkStubInvariants(CompilationResult):boolean	jdk.graal.compiler.code.CompilationResult	0.8570561383061377
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets::threadBeingInitializedCheck(KlassPointer):void	jdk.graal.compiler.hotspot.word.KlassPointer	0.5914880397639017
+Move Method	jdk.graal.compiler.printer.CFGPrinter::inFixedSchedule(Node):boolean	jdk.graal.compiler.graph.Node	0.799381935665121
+Move Method	jdk.graal.compiler.hotspot.replacements.ObjectSnippets.Templates::lower(Node, LoweringTool):void	jdk.graal.compiler.graph.Node	0.36465765859208116
+Move Method	jdk.graal.compiler.nodes.SimplifyingGraphDecoder::handleCanonicalization(LoopScope, int, FixedNode, Node):void	jdk.graal.compiler.nodes.FixedNode	0.7111111111111111
+Move Method	jdk.graal.compiler.phases.common.LoweringPhase::checkPostLowering(StructuredGraph, CoreProviders):boolean	jdk.graal.compiler.nodes.StructuredGraph	0.39382448338305676
+Move Method	jdk.graal.compiler.lir.constopt.ConstantLoadOptimization.Optimization::getInsertionBuffer(BasicBlock<?>):LIRInsertionBuffer	jdk.graal.compiler.core.common.cfg.BlockMap	1.0
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::processIntegerSwitch(AbstractBeginNode, IntegerSwitchNode):void	jdk.graal.compiler.nodes.extended.IntegerSwitchNode	0.4887895437895438
+Move Method	jdk.graal.compiler.java.BytecodeParser::emitCheckForInvokeSuperSpecial(ValueNode[]):void	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPluginContext	1.0
+Move Method	jdk.graal.compiler.nodes.GraphDecoder::verifyEdges():boolean	jdk.graal.compiler.nodes.StructuredGraph	0.4520438566809531
+Move Method	jdk.graal.compiler.hotspot.HotSpotHostBackend::makeCallingConvention(StructuredGraph, Stub):CallingConvention	jdk.graal.compiler.hotspot.stubs.Stub	0.431005589370251
+Move Method	jdk.graal.compiler.nodes.loop.LoopFragmentInside::createExitStateForNewSegmentEarlyExit(StructuredGraph, LoopExitNode, LoopExitNode, EconomicMap<Node,Node>):void	jdk.graal.compiler.nodes.LoopExitNode	1.0
+Move Method	jdk.graal.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::computeBase(LoweringTool, CheckcastArrayCopyCallNode, ValueNode, ValueNode):ValueNode	jdk.graal.compiler.hotspot.replacements.arraycopy.CheckcastArrayCopyCallNode	0.5911111111111113
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::registerNewStamp(ValueNode, Stamp, GuardingNode):void	jdk.graal.compiler.nodes.ValueNode	0.44268774703557306
+Move Method	jdk.graal.compiler.java.BytecodeParser::getProfileForTypeCheck(TypeReference):JavaTypeProfile	jdk.graal.compiler.phases.OptimisticOptimizations	0.8322138680033417
+Move Method	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPlugins::checkNewNodes(GraphBuilderContext, InvocationPlugin, NodeIterable<Node>):void	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPlugin	0.7493551587301587
+Move Method	jdk.graal.compiler.java.BytecodeParser::gotoOrFallThroughAfterConstant(BciBlock):boolean	jdk.graal.compiler.bytecode.BytecodeStream	1.0
+Move Method	jdk.graal.compiler.hotspot.SymbolicSnippetEncoder::verifySingle(DebugContext, StructuredGraph):boolean	jdk.graal.compiler.hotspot.HotSpotReplacementsImpl	0.6190146246096986
+Move Method	jdk.graal.compiler.hotspot.replacements.MonitorSnippets.Templates::lower(MonitorEnterNode, HotSpotRegistersProvider, LoweringTool):void	jdk.graal.compiler.nodes.java.MonitorEnterNode	0.6674311926605504
+Move Method	jdk.graal.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::lowerBytecodeExceptionNode(BytecodeExceptionNode):void	jdk.graal.compiler.core.common.spi.ForeignCallsProvider	0.5923202614379085
+Move Method	jdk.graal.compiler.lir.constopt.ConstantTree::getOrInitCost(BasicBlock<?>):NodeCost	jdk.graal.compiler.core.common.cfg.BlockMap	1.0
+Move Method	jdk.graal.compiler.core.gen.NodeLIRBuilder::doBlockPrologue(HIRBlock, OptionValues):void	jdk.graal.compiler.options.OptionValues	0.8829931972789118
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::registerNewStamp(ValueNode, Stamp):void	jdk.graal.compiler.graph.NodeStack	0.7674571805006589
+Move Method	jdk.graal.compiler.lir.alloc.lsra.LinearScanEliminateSpillMovePhase::canEliminateSpillMove(BasicBlock<?>, StandardOp.MoveOp):boolean	jdk.graal.compiler.lir.alloc.lsra.LinearScan	0.5562905003255358
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::tryProveGuardCondition(DeoptimizingGuard, LogicNode, ConditionalEliminationUtil.GuardRewirer):boolean	jdk.graal.compiler.nodes.LogicNode	0.4636243386243386
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::registerCombinedStamps(MergeNode):void	jdk.graal.compiler.nodes.MergeNode	0.8842592592592592
+Move Method	jdk.graal.compiler.core.match.MatchStatement::generate(NodeLIRBuilder, int, Node, HIRBlock, StructuredGraph.ScheduleResult):boolean	jdk.graal.compiler.core.match.MatchPattern	1.0
+Move Method	jdk.graal.compiler.nodes.cfg.ReversePostOrder.OpenLoopsData::allLexPredecessorsVisited():boolean	jdk.graal.compiler.nodes.LoopBeginNode	0.7034547152194209
+Move Method	jdk.graal.compiler.nodes.calc.MinMaxNode::tryCanonicalizeWithConstantInput(ValueNode, ValueNode):ValueNode	jdk.graal.compiler.nodes.ValueNode	0.42374835309617914
+Move Method	jdk.graal.compiler.phases.common.FloatingReadPhase.FloatingReadClosure::processFloatable(FloatableAccessNode, MemoryMapImpl):void	jdk.graal.compiler.nodes.memory.FloatableAccessNode	0.8226282051282052
+Move Method	jdk.graal.compiler.replacements.PEGraphDecoder::trySimplifyCallTarget(PEMethodScope, InvokeData, MethodCallTargetNode):MethodCallTargetNode	jdk.graal.compiler.nodes.java.MethodCallTargetNode	0.8277076308281524
+Move Method	jdk.graal.compiler.hotspot.HotSpotGraalCompiler::getSuites(HotSpotProviders, OptionValues):Suites	jdk.graal.compiler.options.OptionValues	0.4445370370370372
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase.Instance::processBlock(HIRBlock):void	jdk.graal.compiler.debug.DebugContext	0.5995231971675742
+Move Method	jdk.graal.compiler.nodes.GraphDecoder.LoopDetector::logIrreducibleLoops():void	jdk.graal.compiler.nodes.StructuredGraph	0.613321858933813
+Move Method	jdk.graal.compiler.hotspot.amd64.AMD64HotSpotLIRGenerator::emitRestoreRegisters(AMD64SaveRegistersOp):void	jdk.graal.compiler.lir.amd64.AMD64SaveRegistersOp	0.44523809523809527
+Move Method	jdk.graal.compiler.phases.common.ConditionalEliminationPhase::createVisitor(StructuredGraph, ControlFlowGraph, BlockMap<List<Node>>, NodeMap<HIRBlock>, CoreProviders):ControlFlowGraph.RecursiveVisitor<?>	jdk.graal.compiler.nodes.cfg.ControlFlowGraph	1.0
+Move Method	jdk.graal.compiler.lir.alloc.lsra.LinearScan::getFirstLirInstructionId(BasicBlock<?>):int	jdk.graal.compiler.lir.LIR	0.8181176470588237
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets.Templates::lower(NewArrayWithExceptionNode, LoweringTool):void	jdk.graal.compiler.nodes.java.NewArrayWithExceptionNode	0.8889290882778583
+Move Method	jdk.graal.compiler.java.BytecodeParser::genThrow():void	jdk.graal.compiler.java.FrameStateBuilder	0.6698749617300789
+Move Method	jdk.graal.compiler.java.BytecodeParser::setMergeStateAfter(BciBlock, FixedWithNextNode):void	jdk.graal.compiler.nodes.FixedWithNextNode	0.6369047619047619
+Move Method	jdk.graal.compiler.replacements.arraycopy.ArrayCopySnippets.Templates::lower(ArrayCopyNode, boolean, LoweringTool):void	jdk.graal.compiler.replacements.arraycopy.ArrayCopyNode	1.0
+Move Method	jdk.graal.compiler.replacements.gc.G1WriteBarrierSnippets.G1WriteBarrierLowerer::lower(SnippetTemplate.AbstractTemplates, SnippetTemplate.SnippetInfo, G1ReferentFieldReadBarrierNode, LoweringTool):void	jdk.graal.compiler.nodes.gc.G1ReferentFieldReadBarrierNode	0.4585597826086957
+Move Method	jdk.graal.compiler.java.BytecodeParser::genConstantTargetIf(BciBlock, BciBlock, LogicNode):void	jdk.graal.compiler.bytecode.BytecodeStream	1.0
+Move Method	jdk.graal.compiler.phases.common.FixReadsPhase.RawConditionalEliminationVisitor::addHelper(ValueNode, HIRBlock, NodePredicate):ValueNode	jdk.graal.compiler.nodes.StructuredGraph	0.4760112652547692
+Move Method	jdk.graal.compiler.replacements.IntrinsicGraphBuilder::buildGraph(InvocationPlugin):StructuredGraph	jdk.graal.compiler.nodes.graphbuilderconf.InvocationPlugin	0.5523409923409922
+Move Method	jdk.graal.compiler.virtual.phases.ea.PartialEscapeClosure::getAliasAndResolve(PartialEscapeBlockState<?>, ValueNode):ValueNode	jdk.graal.compiler.virtual.phases.ea.PartialEscapeBlockState	1.0
+Move Method	jdk.graal.compiler.lir.asm.CompilationResultBuilder::emitBlock(BasicBlock<?>):void	jdk.graal.compiler.lir.LIR	0.6304195804195805
+Move Method	jdk.graal.compiler.java.BytecodeParser::appendGoto(BciBlock):void	jdk.graal.compiler.nodes.FixedWithNextNode	1.0
+Move Method	jdk.graal.compiler.hightiercodegen.irwalk.StackifierIRWalker::generateForwardJump(HIRBlock, HIRBlock):void	jdk.graal.compiler.hightiercodegen.reconstruction.StackifierData	0.8198714204053692
+Move Method	jdk.graal.compiler.hightiercodegen.reconstruction.stackifier.CFStackifierSortPhase.Instance::initializeRemainingPredecessors(EconomicMap<HIRBlock,Integer>):void	jdk.graal.compiler.nodes.cfg.ControlFlowGraph	1.0
+Move Method	jdk.graal.compiler.lir.stackslotalloc.LSStackSlotAllocator.Allocator::finished(StackInterval):void	jdk.graal.compiler.lir.stackslotalloc.StackInterval	0.9692307692307692
+Move Method	jdk.graal.compiler.lir.profiling.MoveProfilingPhase.Analyzer::doBlock(BasicBlock<?>, MoveStatistics):void	jdk.graal.compiler.core.common.cfg.BasicBlock	0.6540372670807454
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets.Templates::lower(VerifyHeapNode, LoweringTool):void	jdk.graal.compiler.nodes.debug.VerifyHeapNode	0.7734374999999999
+Move Method	jdk.graal.compiler.lir.LIR::resetLabels():void	jdk.graal.compiler.core.common.cfg.BlockMap	1.0
+Move Method	jdk.graal.compiler.hotspot.meta.DefaultHotSpotLoweringProvider::lowerDeadEnd(DeadEndNode):void	jdk.graal.compiler.nodes.DeadEndNode	0.7781569965870306
+Move Method	jdk.graal.compiler.virtual.phases.ea.GraphEffectList::addVirtualMapping(FrameState, EscapeObjectState):void	jdk.graal.compiler.nodes.FrameState	1.0
+Move Method	jdk.graal.compiler.replacements.arraycopy.ArrayCopySnippets.Templates::instantiate(LoweringTool, SnippetTemplate.Arguments, BasicArrayCopyNode):void	jdk.graal.compiler.replacements.nodes.BasicArrayCopyNode	0.539230604054854
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets.Templates::lower(DynamicNewArrayWithExceptionNode, LoweringTool):void	jdk.graal.compiler.nodes.java.DynamicNewArrayWithExceptionNode	0.7342216918589233
+Move Method	jdk.graal.compiler.truffle.phases.InstrumentPhase::getOrCreatePoint(Node, MethodFilter):Point	jdk.graal.compiler.graph.Node	0.823186032256828
+Move Method	jdk.graal.compiler.lir.alloc.lsra.Interval::getSplitChildAtOpId(int, LIRInstruction.OperandMode, LinearScan):Interval	jdk.graal.compiler.lir.alloc.lsra.LinearScan	0.910340216212172
+Move Method	jdk.graal.compiler.hotspot.replacements.HotSpotAllocationSnippets.Templates::lower(KlassBeingInitializedCheckNode, LoweringTool):void	jdk.graal.compiler.hotspot.nodes.KlassBeingInitializedCheckNode	0.3245192307692308
+Move Method	jdk.graal.compiler.java.BytecodeParser::appendLoopBegin(FixedWithNextNode, int):LoopBeginNode	jdk.graal.compiler.nodes.FixedWithNextNode	0.6369047619047619

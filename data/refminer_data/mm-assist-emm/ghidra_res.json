@@ -1,0 +1,1875 @@
+[
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "a4f7bb24b909485d9a62b651f74f45641733cd9f",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/a4f7bb24b909485d9a62b651f74f45641733cd9f",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public cleanupUnusedOverride() : void extracted from protected decompilerActionPerformed(context DecompilerActionContext) : void in class ghidra.app.plugin.core.decompile.actions.DeletePrototypeOverrideAction & moved to class ghidra.program.model.pcode.DataTypeSymbol",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 83,
+                    "endLine": 97,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "protected decompilerActionPerformed(context DecompilerActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 88,
+                    "endLine": 88,
+                    "startColumn": 3,
+                    "endColumn": 49,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 89,
+                    "endLine": 89,
+                    "startColumn": 3,
+                    "endColumn": 66,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 126,
+                    "endLine": 152,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public cleanupUnusedOverride() : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 136,
+                    "endLine": 136,
+                    "startColumn": 3,
+                    "endColumn": 54,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 151,
+                    "endLine": 151,
+                    "startColumn": 3,
+                    "endColumn": 73,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 48,
+                    "endLine": 65,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "protected decompilerActionPerformed(context DecompilerActionContext) : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                    "startLine": 60,
+                    "endLine": 60,
+                    "startColumn": 4,
+                    "endColumn": 31,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "dts.cleanupUnusedOverride()"
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 128,
+                    "endLine": 128,
+                    "startColumn": 4,
+                    "endColumn": 74,
+                    "codeElementType": "THROW_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 133,
+                    "endLine": 133,
+                    "startColumn": 3,
+                    "endColumn": 39,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 135,
+                    "endLine": 135,
+                    "startColumn": 3,
+                    "endColumn": 38,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 137,
+                    "endLine": 137,
+                    "startColumn": 3,
+                    "endColumn": 32,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 138,
+                    "endLine": 138,
+                    "startColumn": 3,
+                    "endColumn": 55,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 140,
+                    "endLine": 140,
+                    "startColumn": 4,
+                    "endColumn": 27,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 142,
+                    "endLine": 142,
+                    "startColumn": 5,
+                    "endColumn": 11,
+                    "codeElementType": "BREAK_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 146,
+                    "endLine": 146,
+                    "startColumn": 5,
+                    "endColumn": 12,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 127,
+                    "endLine": 129,
+                    "startColumn": 20,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 127,
+                    "endLine": 129,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 141,
+                    "endLine": 143,
+                    "startColumn": 31,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 141,
+                    "endLine": 143,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 145,
+                    "endLine": 147,
+                    "startColumn": 63,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 144,
+                    "endLine": 147,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 139,
+                    "endLine": 148,
+                    "startColumn": 58,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java",
+                    "startLine": 139,
+                    "endLine": 148,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "ENHANCED_FOR_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 805,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-cleanupUnusedOverride-a4f7bb24b9",
+            "newCommitHash": "74fb13381f494df1d3be0c212238e25f3a0ea97b"
+        },
+        "telemetry": {
+            "id": "bd9f2c05-9cbc-45f0-8910-e3acb4e31fe1",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 67,
+                "lineStart": 33,
+                "lineEnd": 99,
+                "bodyLineStart": 33,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/ghidra/Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+                "sourceCode": "public class DeletePrototypeOverrideAction extends AbstractDecompilerAction {\n\n\tpublic DeletePrototypeOverrideAction() {\n\t\tsuper(\"Remove Signature Override\");\n\t\tsetHelpLocation(new HelpLocation(HelpTopics.DECOMPILER, \"ActionRemoveOverride\"));\n\t\tsetPopupMenuData(new MenuData(new String[] { \"Remove Signature Override\" }, \"Decompile\"));\n\t}\n\n\t@Override\n\tprotected boolean isEnabledForDecompilerContext(DecompilerActionContext context) {\n\n\t\tFunction function = context.getFunction();\n\t\tif (function == null || function instanceof UndefinedFunction) {\n\t\t\treturn false;\n\t\t}\n\n\t\treturn OverridePrototypeAction.getSymbol(function, context.getTokenAtCursor()) != null;\n\t}\n\n\t@Override\n\tprotected void decompilerActionPerformed(DecompilerActionContext context) {\n\t\tFunction func = context.getFunction();\n\t\tSymbol sym = OverridePrototypeAction.getSymbol(func, context.getTokenAtCursor());\n\t\tif (sym == null) {\n\t\t\treturn;\n\t\t}\n\t\tProgram program = func.getProgram();\n\t\tint txId = program.startTransaction(\"Remove Override Signature\");\n\t\ttry {\n\t\t\tDataTypeSymbol dts = HighFunctionDBUtil.readOverride(sym);\n\t\t\tsym.delete();\n\t\t\tnew DeletePrototypeOverrideAction().cleanupUnusedOverride(dts);\n\t\t}\n\t\tfinally {\n\t\t\tprogram.endTransaction(txId, true);\n\t\t}\n\t}\n\n\tprivate void cleanupUnusedOverride(DataTypeSymbol dts) {\n\t\tif (dts.getSymbol() == null) {\n\t\t\tthrow new RuntimeException(\"not instantiated with readSymbol method\");\n\t\t}\n\n\t\t// NOTE: Although the symbol may have just been deleted its name will still be\n\t\t// be accesible within its retained DB record.\n\t\tString overrideName = dts.getSymbol().getName(); // override marker symbol\n\n\t\tProgram program = dts.getSymbol().getProgram();\n\t\tSymbolTable symbolTable = program.getSymbolTable();\n\t\tString prefix = dts.getNmroot() + \"_\";\n\t\tString hashSuffix = \"_\" + DataTypeSymbol.extractHash(overrideName);\n\t\tfor (Symbol s : symbolTable.scanSymbolsByName(prefix)) {\n\t\t\tString n = s.getName();\n\t\t\tif (!n.startsWith(prefix)) {\n\t\t\t\tbreak; // stop scan\n\t\t\t}\n\t\t\tif (s.getSymbolType() == SymbolType.LABEL && n.endsWith(hashSuffix) &&\n\t\t\t\tHighFunction.isOverrideNamespace(s.getParentNamespace())) {\n\t\t\t\treturn; // do nothing if any symbol found\n\t\t\t}\n\t\t}\n\n\t\t// remove unused override signature\n\t\tprogram.getDataTypeManager().remove(dts.getDataType(), TaskMonitor.DUMMY);\n\t}\n\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 70,
+                        "lineEnd": 96,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method cleanupUnusedOverride to class DataTypeSymbol",
+                        "description": "Move method cleanupUnusedOverride to ghidra.program.model.pcode.DataTypeSymbol\nRationale: The method cleanupUnusedOverride() is closely related to the management and cleanup of symbols associated with data types, which is a core responsibility of the DataTypeSymbol class. This method checks for the existence of a symbol, scans the symbol table for overrides, and removes unused signatures, all of which pertain to the lifecycle and management of data types represented by DataTypeSymbol. Moving this method to DataTypeSymbol aligns its functionality with the class's purpose, enhancing cohesion and maintainability.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "cleanupUnusedOverride",
+                            "method_signature": "private void cleanupUnusedOverride(DataTypeSymbol dts)",
+                            "target_class": "DataTypeSymbol",
+                            "rationale": "The cleanupUnusedOverride method operates directly on DataTypeSymbol and is responsible for managing its state. It would be more appropriate for this method to reside within the DataTypeSymbol class, encapsulating the logic related to its own cleanup."
+                        }
+                    ],
+                    "llm_response_time": 2401
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "cleanupUnusedOverride",
+                            "method_signature": "private void cleanupUnusedOverride(DataTypeSymbol dts)",
+                            "target_class": "DataTypeSymbol",
+                            "rationale": "The cleanupUnusedOverride method operates directly on DataTypeSymbol and is responsible for managing its state. It would be more appropriate for this method to reside within the DataTypeSymbol class, encapsulating the logic related to its own cleanup."
+                        }
+                    ],
+                    "llm_response_time": 2870
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "cleanupUnusedOverride",
+                            "method_signature": "private void cleanupUnusedOverride(DataTypeSymbol dts)",
+                            "target_class": "DataTypeSymbol",
+                            "rationale": "The cleanupUnusedOverride method operates directly on DataTypeSymbol and is responsible for managing its state. It would be more appropriate for this method to reside within the DataTypeSymbol class, where it can encapsulate its own behavior."
+                        }
+                    ],
+                    "llm_response_time": 2444
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "cleanupUnusedOverride",
+                            "method_signature": "private cleanupUnusedOverride(DataTypeSymbol dts)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "cleanupUnusedOverride",
+                            "method_signature": "private cleanupUnusedOverride(DataTypeSymbol dts)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "private cleanupUnusedOverride(DataTypeSymbol dts)": {
+                        "first": {
+                            "method_name": "cleanupUnusedOverride",
+                            "method_signature": "private cleanupUnusedOverride(DataTypeSymbol dts)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5371352022540758
+                    }
+                },
+                "voyage": {
+                    "private cleanupUnusedOverride(DataTypeSymbol dts)": {
+                        "first": {
+                            "method_name": "cleanupUnusedOverride",
+                            "method_signature": "private cleanupUnusedOverride(DataTypeSymbol dts)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6018403432563068
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "private cleanupUnusedOverride(DataTypeSymbol dts)"
+                    ],
+                    "llm_response_time": 630
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "private cleanupUnusedOverride(DataTypeSymbol dts)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "private cleanupUnusedOverride(DataTypeSymbol dts)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "private cleanupUnusedOverride(DataTypeSymbol dts)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "private cleanupUnusedOverride(DataTypeSymbol dts)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "private cleanupUnusedOverride(DataTypeSymbol dts)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "cleanupUnusedOverride": {
+                    "target_classes": [
+                        {
+                            "class_name": "DataTypeSymbol",
+                            "similarity_score": 0.6740035030991056
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "DataTypeSymbol"
+                    ],
+                    "llm_response_time": 2304,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "38a01c04343ad6ec1432d021800af2b60f9d9153",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/38a01c04343ad6ec1432d021800af2b60f9d9153",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method package showInViewedProject(ghidraURL URL, isFolder boolean) : void extracted from public processResult(domainFolder DomainFolder, url URL, monitor TaskMonitor) : void in class ghidra.framework.main.AcceptUrlContentTask & moved to class ghidra.framework.main.FrontEndPlugin",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 54,
+                    "endLine": 66,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public processResult(domainFolder DomainFolder, url URL, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 60,
+                    "endLine": 60,
+                    "startColumn": 4,
+                    "endColumn": 87,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 62,
+                    "endLine": 62,
+                    "startColumn": 5,
+                    "endColumn": 12,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 64,
+                    "endLine": 64,
+                    "startColumn": 4,
+                    "endColumn": 41,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 21,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 59,
+                    "endLine": 65,
+                    "startColumn": 22,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1159,
+                    "endLine": 1186,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "package showInViewedProject(ghidraURL URL, isFolder boolean) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1161,
+                    "endLine": 1161,
+                    "startColumn": 3,
+                    "endColumn": 92,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1163,
+                    "endLine": 1163,
+                    "startColumn": 4,
+                    "endColumn": 11,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1176,
+                    "endLine": 1176,
+                    "startColumn": 6,
+                    "endColumn": 50,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1162,
+                    "endLine": 1164,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1162,
+                    "endLine": 1164,
+                    "startColumn": 20,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1175,
+                    "endLine": 1177,
+                    "startColumn": 38,
+                    "endColumn": 6,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 92,
+                    "endLine": 120,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public processResult(domainFolder DomainFolder, url URL, monitor TaskMonitor) : void"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                    "startLine": 116,
+                    "endLine": 116,
+                    "startColumn": 5,
+                    "endColumn": 42,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "plugin.showInViewedProject(url,true)"
+                },
+                {
+                    "filePath": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java",
+                    "startLine": 1166,
+                    "endLine": 1185,
+                    "startColumn": 3,
+                    "endColumn": 6,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 844,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "extract-showInViewedProject-38a01c0434",
+            "newCommitHash": "932f648008c4d26b2bc6010a50ccf8d66b0a76a1"
+        },
+        "telemetry": {
+            "id": "3fdbbced-e3c1-4389-8d81-250c0108982d",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 122,
+                "lineStart": 32,
+                "lineEnd": 153,
+                "bodyLineStart": 32,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+                "sourceCode": "public class AcceptUrlContentTask extends GhidraURLQueryTask {\n\n\tprivate FrontEndPlugin plugin;\n\n\tpublic AcceptUrlContentTask(URL url, FrontEndPlugin plugin) {\n\t\tsuper(\"Accepting URL\", url);\n\t\tthis.plugin = plugin;\n\t}\n\n\tprivate boolean isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2) {\n\t\tif (projectLoc1.isTransient() || projectLoc2.isTransient()) {\n\t\t\treturn false;\n\t\t}\n\t\tif (!projectLoc1.getName().equals(projectLoc2.getName())) {\n\t\t\treturn false;\n\t\t}\n\t\ttry {\n\t\t\tFile proj1Dir = projectLoc1.getProjectDir().getCanonicalFile();\n\t\t\tFile proj2Dir = projectLoc2.getProjectDir().getCanonicalFile();\n\t\t\treturn proj1Dir.equals(proj2Dir);\n\t\t}\n\t\tcatch (IOException e) {\n\t\t\treturn false;\n\t\t}\n\t}\n\n\t@Override\n\tpublic void processResult(DomainFile domainFile, URL url, TaskMonitor monitor)\n\t\t\tthrows IOException {\n\n\t\tProject activeProject = AppInfo.getActiveProject();\n\t\tif (activeProject == null) {\n\t\t\tMsg.showError(this, null, \"Ghidra Error\",\n\t\t\t\t\"Unable to accept URL without active project open\");\n\t\t\treturn;\n\t\t}\n\n\t\tSwing.runNow(() -> {\n\t\t\tif (FolderLinkContentHandler.FOLDER_LINK_CONTENT_TYPE\n\t\t\t\t\t.equals(domainFile.getContentType())) {\n\t\t\t\t// Simply select folder link-file within project - do not follow - let user do that.\n\t\t\t\tif (isSameLocalProject(activeProject.getProjectLocator(),\n\t\t\t\t\tdomainFile.getProjectLocator())) {\n\t\t\t\t\t// Select file within active project\n\t\t\t\t\tDomainFile df =\n\t\t\t\t\t\tactiveProject.getProjectData().getFile(domainFile.getPathname());\n\t\t\t\t\tif (df == null) {\n\t\t\t\t\t\treturn; // unexpected race condition\n\t\t\t\t\t}\n\t\t\t\t\tplugin.selectFiles(Set.of(df));\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\t// Select file within read-only viewed project\n\t\t\t\t\tshowInViewedProject(url, false);\n\t\t\t\t}\n\t\t\t}\n\t\t\telse {\n\t\t\t\tAppInfo.getFrontEndTool().getToolServices().launchDefaultToolWithURL(url);\n\t\t\t}\n\t\t});\n\t}\n\n\tprivate void showInViewedProject(URL url, boolean isFolder) {\n\n\t\tProjectDataTreePanel dtp = plugin.getProjectDataPanel().openView(GhidraURL.getProjectURL(url));\n\t\tif (dtp == null) {\n\t\t\treturn;\n\t\t}\n\n\t\tSwing.runLater(() -> {\n\t\t\t// delayed to ensure tree is displayed\n\n\t\t\tProjectData viewedProjectData = dtp.getProjectData();\n\n\t\t\tString path = GhidraURL.getProjectPathname(url);\n\n\t\t\tif (isFolder) {\n\t\t\t\tDomainFolder viewedProjectFolder = plugin.getViewProjectFolder(viewedProjectData, path);\n\t\t\t\tif (viewedProjectFolder != null) {\n\t\t\t\t\tdtp.selectDomainFolder(viewedProjectFolder);\n\t\t\t\t}\n\t\t\t}\n\t\t\telse {\n\t\t\t\tDomainFile viewedProjectFile = plugin.getViewProjectFile(viewedProjectData, path);\n\t\t\t\tif (viewedProjectFile != null) {\n\t\t\t\t\tdtp.selectDomainFile(viewedProjectFile);\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n\n\t@Override\n\tpublic void processResult(DomainFolder domainFolder, URL url, TaskMonitor monitor)\n\t\t\tthrows IOException {\n\n\t\tProject activeProject = AppInfo.getActiveProject();\n\t\tif (activeProject == null) {\n\t\t\tMsg.showError(this, null, \"Ghidra Error\",\n\t\t\t\t\"Unable to accept URL without active project open\");\n\t\t\treturn;\n\t\t}\n\n\t\tSwing.runNow(() -> {\n\t\t\tif (isSameLocalProject(activeProject.getProjectLocator(),\n\t\t\t\tdomainFolder.getProjectLocator())) {\n\t\t\t\t// Select folder within active project\n\t\t\t\tDomainFolder df =\n\t\t\t\t\tactiveProject.getProjectData().getFolder(domainFolder.getPathname());\n\t\t\t\tif (df == null) {\n\t\t\t\t\treturn; // unexpected race condition\n\t\t\t\t}\n\t\t\t\tplugin.selectFolder(df);\n\t\t\t}\n\t\t\telse {\n\t\t\t\t// Select folder within read-only viewed project\n\t\t\t\tshowInViewedProject(url, true);\n\t\t\t}\n\t\t});\n\n\t}\n\n}",
+                "methodCount": 5
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 40,
+                        "lineEnd": 55,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method isSameLocalProject to class ProjectLocator",
+                        "description": "Move method isSameLocalProject to ghidra.framework.model.ProjectLocator\nRationale: The method isSameLocalProject() is primarily concerned with comparing two ProjectLocator instances to determine if they refer to the same local project. This involves checking if both projects are not transient, comparing their names, and checking if their project directories are the same. Since the method operates directly on the properties and methods of ProjectLocator (like isTransient(), getName(), and getProjectDir()), it logically belongs within the ProjectLocator class. Moving it there will enhance cohesion, as it will encapsulate all project-related comparison logic within the ProjectLocator class, making the codebase cleaner and more maintainable.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 93,
+                        "lineEnd": 120,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method showInViewedProject to class FrontEndPlugin",
+                        "description": "Move method showInViewedProject to ghidra.framework.main.FrontEndPlugin\nRationale: The method showInViewedProject(URL url, boolean isFolder) is responsible for displaying a project or folder in the user interface, which directly relates to the functionality of the FrontEndPlugin class. This class manages the GUI elements of the Ghidra Project Window, including the ProjectDataTreePanel, which is used in the method. Moving this method to FrontEndPlugin will enhance cohesion by keeping all project view-related functionalities within the same class, making the codebase easier to maintain and understand.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isSameLocalProject",
+                            "method_signature": "private boolean isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)",
+                            "target_class": "ProjectLocator",
+                            "rationale": "The method isSameLocalProject() is primarily concerned with comparing two ProjectLocator instances. It would be more appropriate for this method to reside in the ProjectLocator class, where it can directly operate on its own data."
+                        },
+                        {
+                            "method_name": "showInViewedProject",
+                            "method_signature": "private void showInViewedProject(URL url, boolean isFolder)",
+                            "target_class": "ProjectDataTreePanel",
+                            "rationale": "The showInViewedProject() method is responsible for displaying project data in a specific panel. It would be more cohesive to move this method to the ProjectDataTreePanel class, where it can manage its own display logic."
+                        }
+                    ],
+                    "llm_response_time": 3250
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isSameLocalProject",
+                            "method_signature": "private boolean isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)",
+                            "target_class": "ProjectLocator",
+                            "rationale": "The method isSameLocalProject() is primarily concerned with comparing two ProjectLocator instances. It would be more appropriate for this method to reside in the ProjectLocator class, where it can directly operate on its own data."
+                        },
+                        {
+                            "method_name": "showInViewedProject",
+                            "method_signature": "private void showInViewedProject(URL url, boolean isFolder)",
+                            "target_class": "FrontEndPlugin",
+                            "rationale": "The showInViewedProject() method interacts closely with the FrontEndPlugin to display project data. Moving it to the FrontEndPlugin class would encapsulate the functionality related to displaying project content within the plugin itself."
+                        }
+                    ],
+                    "llm_response_time": 3294
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isSameLocalProject",
+                            "method_signature": "private boolean isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)",
+                            "target_class": "ProjectLocator",
+                            "rationale": "The method isSameLocalProject() is primarily concerned with comparing two ProjectLocator instances. It would be more appropriate for this method to reside in the ProjectLocator class, where it can directly operate on its own data."
+                        },
+                        {
+                            "method_name": "showInViewedProject",
+                            "method_signature": "private void showInViewedProject(URL url, boolean isFolder)",
+                            "target_class": "FrontEndPlugin",
+                            "rationale": "The showInViewedProject() method interacts closely with the FrontEndPlugin to display project data. Moving it to the FrontEndPlugin class would encapsulate the functionality related to displaying project content within the plugin itself."
+                        }
+                    ],
+                    "llm_response_time": 3760
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isSameLocalProject",
+                            "method_signature": "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "showInViewedProject",
+                            "method_signature": "private showInViewedProject(URL url, boolean isFolder)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isSameLocalProject",
+                            "method_signature": "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "showInViewedProject",
+                            "method_signature": "private showInViewedProject(URL url, boolean isFolder)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)": {
+                        "first": {
+                            "method_name": "isSameLocalProject",
+                            "method_signature": "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6089710210136777
+                    },
+                    "private showInViewedProject(URL url, boolean isFolder)": {
+                        "first": {
+                            "method_name": "showInViewedProject",
+                            "method_signature": "private showInViewedProject(URL url, boolean isFolder)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.7292949850613453
+                    }
+                },
+                "voyage": {
+                    "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)": {
+                        "first": {
+                            "method_name": "isSameLocalProject",
+                            "method_signature": "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.3676145422981977
+                    },
+                    "private showInViewedProject(URL url, boolean isFolder)": {
+                        "first": {
+                            "method_name": "showInViewedProject",
+                            "method_signature": "private showInViewedProject(URL url, boolean isFolder)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.63075599825119
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "private showInViewedProject(URL url, boolean isFolder)",
+                        "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)"
+                    ],
+                    "llm_response_time": 1517
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "private showInViewedProject(URL url, boolean isFolder)",
+                        "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "private showInViewedProject(URL url, boolean isFolder)",
+                        "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "private showInViewedProject(URL url, boolean isFolder)",
+                        "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "private showInViewedProject(URL url, boolean isFolder)",
+                        "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "private showInViewedProject(URL url, boolean isFolder)",
+                        "private isSameLocalProject(ProjectLocator projectLoc1, ProjectLocator projectLoc2)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "isSameLocalProject": {
+                    "target_classes": [
+                        {
+                            "class_name": "ProjectLocator",
+                            "similarity_score": 0.502024748648175
+                        },
+                        {
+                            "class_name": "ProjectLocator",
+                            "similarity_score": 0.502024748648175
+                        },
+                        {
+                            "class_name": "FrontEndPlugin",
+                            "similarity_score": 0.7000946209949586
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ProjectLocator",
+                        "ProjectLocator",
+                        "FrontEndPlugin"
+                    ],
+                    "llm_response_time": 5919,
+                    "similarity_computation_time": 4,
+                    "similarity_metric": "cosine"
+                },
+                "showInViewedProject": {
+                    "target_classes": [
+                        {
+                            "class_name": "FrontEndPlugin",
+                            "similarity_score": 0.7645420780459439
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "FrontEndPlugin"
+                    ],
+                    "llm_response_time": 2524,
+                    "similarity_computation_time": 5,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "6e255143fb6e3a4f7846acd9027f57d7342ecb3e",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/6e255143fb6e3a4f7846acd9027f57d7342ecb3e",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public getSelectedNode() : SymbolTreeNode extracted from public isEnabledForContext(context SymbolTreeActionContext) : boolean in class ghidra.app.plugin.core.symboltree.actions.RenameAction & moved to class ghidra.app.plugin.core.symboltree.SymbolTreeActionContext",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 34,
+                    "endLine": 42,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public isEnabledForContext(context SymbolTreeActionContext) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 38,
+                    "endLine": 38,
+                    "startColumn": 4,
+                    "endColumn": 61,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 41,
+                    "endLine": 41,
+                    "startColumn": 3,
+                    "endColumn": 16,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 37,
+                    "endLine": 40,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 37,
+                    "endLine": 37,
+                    "startColumn": 7,
+                    "endColumn": 33,
+                    "codeElementType": "INFIX_EXPRESSION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 37,
+                    "endLine": 40,
+                    "startColumn": 35,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 58,
+                    "endLine": 71,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public getSelectedNode() : SymbolTreeNode"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 65,
+                    "endLine": 65,
+                    "startColumn": 4,
+                    "endColumn": 61,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 67,
+                    "endLine": 67,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 64,
+                    "endLine": 69,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 64,
+                    "endLine": 64,
+                    "startColumn": 33,
+                    "endColumn": 59,
+                    "codeElementType": "INFIX_EXPRESSION",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 64,
+                    "endLine": 69,
+                    "startColumn": 61,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 31,
+                    "endLine": 35,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public isEnabledForContext(context SymbolTreeActionContext) : boolean"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                    "startLine": 33,
+                    "endLine": 33,
+                    "startColumn": 25,
+                    "endColumn": 50,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "context.getSelectedNode()"
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 70,
+                    "endLine": 70,
+                    "startColumn": 3,
+                    "endColumn": 15,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 47,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java",
+                    "startLine": 66,
+                    "endLine": 68,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 845,
+        "extraction_results": {
+            "success": "true",
+            "newBranchName": "move-getSelectedNode-6e255143",
+            "newCommitHash": "f8ee49f75287012d49f3770ca171f4e45a446cc1"
+        },
+        "telemetry": {
+            "id": "a1d96f19-e2a2-4d6a-b5a1-dd383826b6c6",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 30,
+                "lineStart": 23,
+                "lineEnd": 52,
+                "bodyLineStart": 23,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/ghidra/Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+                "sourceCode": "public class RenameAction extends SymbolTreeContextAction {\n\n\tpublic RenameAction(SymbolTreePlugin plugin) {\n\t\tsuper(\"Rename Symbol\", plugin.getName());\n\t\tsetPopupMenuData(\n\t\t\tnew MenuData(new String[] { \"Rename\" }, null, \"xxx\", MenuData.NO_MNEMONIC, \"1\"));\n\t}\n\n\t@Override\n\tpublic boolean isEnabledForContext(SymbolTreeActionContext context) {\n\t\tSymbolTreeNode node = getSelectedNode(context);\n\t\treturn node != null;\n\t}\n\n\tprivate SymbolTreeNode getSelectedNode(SymbolTreeActionContext context) {\n\t\tif (context.getSelectionPaths() != null && context.getSelectionPaths().length == 1) {\n\t\t\tObject object = context.getSelectionPaths()[0].getLastPathComponent();\n\t\t\tif (object instanceof SymbolTreeNode node) {\n\t\t\t\treturn node;\n\t\t\t}\n\t\t}\n\t\treturn null;\n\t}\n\n\t@Override\n\tpublic void actionPerformed(SymbolTreeActionContext context) {\n\t\tcontext.getSymbolTree().startEditing(getSelectedNode(context));\n\t}\n\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 36,
+                        "lineEnd": 44,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method getSelectedNode to class SymbolTreeActionContext",
+                        "description": "Move method getSelectedNode to ghidra.app.plugin.core.symboltree.SymbolTreeActionContext\nRationale: The method getSelectedNode() is closely related to the selection management of SymbolTreeActionContext, as it directly operates on the selectionPaths property of this class. Moving this method to SymbolTreeActionContext enhances cohesion by keeping all selection-related logic within the same class. This method checks the selection paths and retrieves a SymbolTreeNode, which is a specific operation that pertains to the context of symbol tree actions. By relocating it, we ensure that the class encapsulates all functionalities related to managing and interacting with selected nodes, improving maintainability and clarity.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSelectedNode",
+                            "method_signature": "private SymbolTreeNode getSelectedNode(SymbolTreeActionContext context)",
+                            "target_class": "SymbolTreeActionContext",
+                            "rationale": "The method getSelectedNode() operates directly on the context provided and is primarily concerned with the selection state of the context. Moving it to SymbolTreeActionContext would encapsulate the logic related to selection within the context itself."
+                        }
+                    ],
+                    "llm_response_time": 1583
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSelectedNode",
+                            "method_signature": "private SymbolTreeNode getSelectedNode(SymbolTreeActionContext context)",
+                            "target_class": "SymbolTreeActionContext",
+                            "rationale": "The method getSelectedNode() operates directly on the context provided and is primarily concerned with extracting information from it. Moving it to SymbolTreeActionContext would encapsulate the logic related to the context and improve cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1752
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSelectedNode",
+                            "method_signature": "private SymbolTreeNode getSelectedNode(SymbolTreeActionContext context)",
+                            "target_class": "SymbolTreeActionContext",
+                            "rationale": "The method getSelectedNode() operates directly on the context provided and is primarily concerned with extracting information from it. Moving it to SymbolTreeActionContext would encapsulate the logic related to the context and improve cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1704
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSelectedNode",
+                            "method_signature": "private getSelectedNode(SymbolTreeActionContext context)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getSelectedNode",
+                            "method_signature": "private getSelectedNode(SymbolTreeActionContext context)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "private getSelectedNode(SymbolTreeActionContext context)": {
+                        "first": {
+                            "method_name": "getSelectedNode",
+                            "method_signature": "private getSelectedNode(SymbolTreeActionContext context)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5066403971048988
+                    }
+                },
+                "voyage": {
+                    "private getSelectedNode(SymbolTreeActionContext context)": {
+                        "first": {
+                            "method_name": "getSelectedNode",
+                            "method_signature": "private getSelectedNode(SymbolTreeActionContext context)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5543013788040019
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "private getSelectedNode(SymbolTreeActionContext context)"
+                    ],
+                    "llm_response_time": 512
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "private getSelectedNode(SymbolTreeActionContext context)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "private getSelectedNode(SymbolTreeActionContext context)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "private getSelectedNode(SymbolTreeActionContext context)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "private getSelectedNode(SymbolTreeActionContext context)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "private getSelectedNode(SymbolTreeActionContext context)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "getSelectedNode": {
+                    "target_classes": [
+                        {
+                            "class_name": "SymbolTreeActionContext",
+                            "similarity_score": 0.7058790886903364
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "SymbolTreeActionContext"
+                    ],
+                    "llm_response_time": 1575,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem extracted from private demangleMS(mangled String, demangleOnlyKnownPatterns boolean) : DemangledObject in class ghidra.app.util.demangler.microsoft.MicrosoftDemangler & moved to class mdemangler.MDMangGhidra",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 66,
+                    "endLine": 84,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private demangleMS(mangled String, demangleOnlyKnownPatterns boolean) : DemangledObject"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 74,
+                    "endLine": 74,
+                    "startColumn": 4,
+                    "endColumn": 59,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 54,
+                    "endLine": 67,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 66,
+                    "endLine": 66,
+                    "startColumn": 3,
+                    "endColumn": 54,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 66,
+                    "endLine": 83,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private demangleMS(mangled String, demangleOnlyKnownPatterns boolean) : DemangledObject"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                    "startLine": 74,
+                    "endLine": 74,
+                    "startColumn": 4,
+                    "endColumn": 64,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "demangler.demangle(mangled,true,demangleOnlyKnownPatterns)"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 62,
+                    "endLine": 62,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 36,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 58,
+                    "endLine": 63,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 34,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 858,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-demangle-ead1cc",
+            "newCommitHash": "eaa13e594904c76b415dfb883c852f5bc28a86fd"
+        },
+        "telemetry": {
+            "id": "6e583383-a18c-477c-86a5-49481f2a651a",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 74,
+                "lineStart": 25,
+                "lineEnd": 98,
+                "bodyLineStart": 25,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/ghidra/Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+                "sourceCode": "/**\n * A class for demangling debug symbols created using Microsoft Visual Studio.\n */\npublic class MicrosoftDemangler implements Demangler {\n\n\tpublic MicrosoftDemangler() {\n\t}\n\n\t@Override\n\tpublic boolean canDemangle(Program program) {\n\t\tString executableFormat = program.getExecutableFormat();\n\t\treturn executableFormat != null && (executableFormat.indexOf(PeLoader.PE_NAME) != -1 ||\n\t\t\texecutableFormat.indexOf(MSCoffLoader.MSCOFF_NAME) != -1);\n\t}\n\n\t@Override\n\t@Deprecated(since = \"9.2\", forRemoval = true)\n\tpublic DemangledObject demangle(String mangled, boolean demangleOnlyKnownPatterns)\n\t\t\tthrows DemangledException {\n\t\ttry {\n\t\t\tDemangledObject demangled = demangleMS(mangled, demangleOnlyKnownPatterns);\n\t\t\treturn demangled;\n\t\t}\n\t\tcatch (DemangledException e) {\n\t\t\tthrow new DemangledException(true);\n\t\t}\n\t}\n\n\t@Override\n\tpublic DemangledObject demangle(String mangled, DemanglerOptions options)\n\t\t\tthrows DemangledException {\n\n\t\ttry {\n\t\t\tDemangledObject demangled = demangleMS(mangled, options.demangleOnlyKnownPatterns());\n\t\t\treturn demangled;\n\t\t}\n\t\tcatch (DemangledException e) {\n\t\t\tthrow new DemangledException(true);\n\t\t}\n\t}\n\n\tprivate DemangledObject demangleMS(String mangled, boolean demangleOnlyKnownPatterns)\n\t\t\tthrows DemangledException {\n\t\tif (mangled == null || mangled.length() == 0) {\n\t\t\tthrow new DemangledException(true);\n\t\t}\n\n\t\tMDMangGhidra demangler = new MDMangGhidra();\n\t\ttry {\n\t\t\tdemangle(mangled, demangleOnlyKnownPatterns, demangler, true);\n\t\t\tDemangledObject object = demangler.getObject();\n\t\t\treturn object;\n\t\t}\n\t\tcatch (MDException e) {\n\t\t\tDemangledException de = new DemangledException(\"Unable to demangle symbol: \" + mangled);\n\t\t\tde.initCause(e);\n\t\t\tthrow de;\n\t\t}\n\t}\n\n\tprivate void demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars) throws MDException {\n\t\t// TODO: Could possibly just ignore \"demangleOnlyKnownpatterns\"\n\t\tif (demangleOnlyKnownPatterns) {\n\t\t\tif (!(mangled.startsWith(\"?\") || mangled.startsWith(\".\") ||\n\t\t\t\tmangled.startsWith(\"__\") || (mangled.charAt(0) < 'a') ||\n\t\t\t\t(mangled.charAt(0) > 'z') || (mangled.charAt(0) < 'A') ||\n\t\t\t\t(mangled.charAt(0) > 'Z'))) {\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\n\t\tdemangler.demangle(mangled, errorOnRemainingChars);\n\t}\n}",
+                "methodCount": 6
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 84,
+                        "lineEnd": 96,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method demangle to class MDMangGhidra",
+                        "description": "Move method demangle to mdemangler.MDMangGhidra\nRationale: The demangle() method is closely related to the functionality of the MDMangGhidra class, which is responsible for demangling debug symbols. The method processes a mangled string and utilizes the demangler instance to perform the actual demangling operation. Since MDMangGhidra already contains methods that handle demangling and related data processing, moving demangle() to this class will enhance cohesion and maintainability. It will also allow for better encapsulation of demangling logic within the class that is specifically designed for this purpose.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private void demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars) throws MDException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangle method is tightly coupled with the MDMangGhidra class, which is responsible for the actual demangling process. Moving this method to MDMangGhidra would enhance cohesion and encapsulate the demangling logic within the class that performs it."
+                        },
+                        {
+                            "method_name": "demangleMS",
+                            "method_signature": "private DemangledObject demangleMS(String mangled, boolean demangleOnlyKnownPatterns) throws DemangledException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangleMS method is primarily responsible for using the MDMangGhidra instance to perform demangling. It should be moved to MDMangGhidra to keep the demangling logic centralized within the class that handles the demangling operations."
+                        }
+                    ],
+                    "llm_response_time": 3931
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private void demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars) throws MDException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangle method is tightly coupled with the MDMangGhidra class, which is responsible for the actual demangling process. Moving this method to MDMangGhidra would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "demangleMS",
+                            "method_signature": "private DemangledObject demangleMS(String mangled, boolean demangleOnlyKnownPatterns) throws DemangledException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangleMS method is primarily responsible for using the MDMangGhidra instance to perform demangling. It should be moved to MDMangGhidra to centralize demangling logic within that class."
+                        }
+                    ],
+                    "llm_response_time": 3648
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private void demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars) throws MDException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangle method is tightly coupled with the MDMangGhidra class, which is responsible for the actual demangling process. Moving this method to MDMangGhidra would enhance cohesion and encapsulation."
+                        },
+                        {
+                            "method_name": "demangleMS",
+                            "method_signature": "private DemangledObject demangleMS(String mangled, boolean demangleOnlyKnownPatterns) throws DemangledException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangleMS method is primarily responsible for using the MDMangGhidra instance to perform demangling. It should be moved to MDMangGhidra to centralize demangling logic within that class."
+                        }
+                    ],
+                    "llm_response_time": 3421
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)": {
+                        "first": {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.3923015533515162
+                    }
+                },
+                "voyage": {
+                    "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)": {
+                        "first": {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6794282944129619
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)"
+                    ],
+                    "llm_response_time": 1106
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "private demangle(String mangled, boolean demangleOnlyKnownPatterns, MDMangGhidra demangler, boolean errorOnRemainingChars)"
+                    ],
+                    "llm_response_time": 1
+                }
+            },
+            "targetClassMap": {
+                "demangle": {
+                    "target_classes": [
+                        {
+                            "class_name": "MDMangGhidra",
+                            "similarity_score": 0.38370702683399305
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "MDMangGhidra"
+                    ],
+                    "llm_response_time": 1741,
+                    "similarity_computation_time": 5,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    },
+    {
+        "repository": "https://github.com/NationalSecurityAgency/ghidra.git",
+        "sha1": "ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "url": "https://github.com/NationalSecurityAgency/ghidra/commit/ead1cc5b372d82e2fd7309c540e9fbacea637a44",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem extracted from public testFunctionNamespace() : void in class mdemangler.MDMangExtraTest & moved to class mdemangler.MDMangGhidra",
+            "leftSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 36,
+                    "endLine": 60,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "public testFunctionNamespace() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 49,
+                    "endLine": 49,
+                    "startColumn": 3,
+                    "endColumn": 59,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 54,
+                    "endLine": 67,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public demangle(mangledArg String, errorOnRemainingChars boolean, demangleOnlyKnownPatterns boolean) : MDParsableItem"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 66,
+                    "endLine": 66,
+                    "startColumn": 3,
+                    "endColumn": 54,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 36,
+                    "endLine": 60,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "public testFunctionNamespace() : void"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 49,
+                    "endLine": 49,
+                    "startColumn": 25,
+                    "endColumn": 64,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "demangler.demangle(mangled,true,true)"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                    "startLine": 57,
+                    "endLine": 57,
+                    "startColumn": 10,
+                    "endColumn": 66,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "demangler.demangle(mangledFunctionNamespace,true,true)"
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 62,
+                    "endLine": 62,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 61,
+                    "endLine": 63,
+                    "startColumn": 36,
+                    "endColumn": 5,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 58,
+                    "endLine": 63,
+                    "startColumn": 4,
+                    "endColumn": 5,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 34,
+                    "endColumn": 4,
+                    "codeElementType": "BLOCK",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 859,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-demangle-ead1cc",
+            "newCommitHash": "eaa13e594904c76b415dfb883c852f5bc28a86fd"
+        },
+        "telemetry": {
+            "id": "36988c3d-fc32-4098-9c2d-1ac0297b831c",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 68,
+                "lineStart": 30,
+                "lineEnd": 97,
+                "bodyLineStart": 30,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/ghidra/Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+                "sourceCode": "/**\n * This class performs extra demangler testing for special cases that do not fit\n * the testing pattern found in MDMangBaseTest and its derived test classes.\n */\npublic class MDMangExtraTest extends AbstractGenericTest {\n\n\t@Test\n\t//This test checks that we can provide a mangled string for a function namespace.\n\t// The return String from getOriginalMangled() is not null only for this special\n\t// circumstance.  So, in normal processing, we should check it for non-null to\n\t// determine that we have a result of this form.\n\t// The symbol here is from our cn3.cpp source target.\n\tpublic void testFunctionNamespace() throws Exception {\n\t\tString mangled = \"?fn3@?2??Bar3@Foo2b@@SAHXZ@4HA\";\n\t\tString wholeTruth = \"int `public: static int __cdecl Foo2b::Bar3(void)'::`3'::fn3\";\n\t\tString functionNamespaceMangledTruth = \"?Bar3@Foo2b@@SAHXZ\";\n\t\tString functionNamespaceTruth = \"public: static int __cdecl Foo2b::Bar3(void)\";\n\n\t\tMDMangGhidra demangler = new MDMangGhidra();\n\t\tMDParsableItem item = demangle(demangler, mangled, true, true);\n\n\t\tString demangled = item.toString();\n\t\tassertEquals(wholeTruth, demangled);\n\t\tDemangledObject obj = demangler.getObject();\n\t\tString mangledFunctionNamespace = obj.getNamespace().getNamespace().getMangledString();\n\t\tassertEquals(functionNamespaceMangledTruth, mangledFunctionNamespace);\n\n\t\titem = demangle(demangler, mangledFunctionNamespace, true, true);\n\t\tdemangled = item.toString();\n\t\tassertEquals(functionNamespaceTruth, demangled);\n\t}\n\n\tprivate MDParsableItem demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns) throws MDException {\n\t\t// TODO: Could possibly just ignore \"demangleOnlyKnownpatterns\"\n\t\tif (demangleOnlyKnownPatterns) {\n\t\t\tif (!(mangled.startsWith(\"?\") || mangled.startsWith(\".\") ||\n\t\t\t\tmangled.startsWith(\"__\") || (mangled.charAt(0) < 'a') ||\n\t\t\t\t(mangled.charAt(0) > 'z') || (mangled.charAt(0) < 'A') ||\n\t\t\t\t(mangled.charAt(0) > 'Z'))) {\n\t\t\t\treturn null;\n\t\t\t}\n\t\t}\n\n\t\treturn demangler.demangle(mangled, errorOnRemainingChars);\n\t}\n\n\t@Test\n\tpublic void testVxTableNestedQualifications() throws Exception {\n\t\t// Test string taken from MDMangBaseTest\n\t\tString mangled = \"??_7a@b@@6Bc@d@e@@f@g@h@@i@j@k@@@\";\n\t\tString truth = \"const b::a::`vftable'{for `e::d::c's `h::g::f's `k::j::i'}\";\n\n\t\tMDMangGhidra demangler = new MDMangGhidra();\n\t\tMDParsableItem item = demangle(demangler, mangled, true, true);\n\n\t\tString demangled = item.toString();\n\t\tassertEquals(truth, demangled);\n\n\t\tMDObjectCPP cppItem = (MDObjectCPP) item;\n\t\tMDVxTable vxTable = (MDVxTable) cppItem.getTypeInfo();\n\t\tList<MDQualification> qualifications = vxTable.getNestedQualifications();\n\t\tassertEquals(3, qualifications.size());\n\t\tassertEquals(\"e::d::c\", qualifications.get(0).toString());\n\t\tassertEquals(\"h::g::f\", qualifications.get(1).toString());\n\t\tassertEquals(\"k::j::i\", qualifications.get(2).toString());\n\t}\n\n}",
+                "methodCount": 3
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 61,
+                        "lineEnd": 73,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method demangle to class MDMangGhidra",
+                        "description": "Move method demangle to mdemangler.MDMangGhidra\nRationale: The demangle() method is closely related to the functionality of the MDMangGhidra class, which is responsible for demangling debug symbols. The method utilizes an instance of MDMangGhidra to perform the demangling operation, indicating that it is a helper function that directly supports the demangling process. Moving this method to MDMangGhidra will enhance cohesion by keeping all demangling-related logic within the same class, making the codebase easier to maintain and understand.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "elapsedTime": [
+                {
+                    "candidateIndex": 0,
+                    "elapsedTime": 2109
+                }
+            ],
+            "processingTime": {
+                "llmResponseTime": -1,
+                "pluginProcessingTime": -1,
+                "totalTime": 11430
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private MDParsableItem demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns) throws MDException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangle method is closely related to the functionality of the MDMangGhidra class, as it uses its instance to perform demangling. Moving it to MDMangGhidra would encapsulate the demangling logic within the class responsible for it."
+                        }
+                    ],
+                    "llm_response_time": 3567
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private MDParsableItem demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns) throws MDException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangle method is closely related to the functionality of the MDMangGhidra class, as it uses its instance to perform demangling. Moving it to MDMangGhidra would encapsulate the demangling logic within the class that is responsible for it."
+                        }
+                    ],
+                    "llm_response_time": 2641
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private MDParsableItem demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns) throws MDException",
+                            "target_class": "MDMangGhidra",
+                            "rationale": "The demangle method is closely related to the functionality of the MDMangGhidra class, as it uses its instance to perform demangling. Moving it to MDMangGhidra would encapsulate the demangling logic within the class that is responsible for it."
+                        }
+                    ],
+                    "llm_response_time": 1904
+                },
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)": {
+                        "first": {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.13135666180943034
+                    }
+                },
+                "voyage": {
+                    "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)": {
+                        "first": {
+                            "method_name": "demangle",
+                            "method_signature": "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.562006517316511
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)"
+                    ],
+                    "llm_response_time": 927
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "private demangle(MDMangGhidra demangler, String mangled, boolean errorOnRemainingChars, boolean demangleOnlyKnownPatterns)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "demangle": {
+                    "target_classes": [
+                        {
+                            "class_name": "MDMangGhidra",
+                            "similarity_score": 0.40109475413107293
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "MDMangGhidra"
+                    ],
+                    "llm_response_time": 1927,
+                    "similarity_computation_time": 3,
+                    "similarity_metric": "cosine"
+                }
+            }
+        }
+    }
+]

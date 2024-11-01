@@ -1,81 +1,6 @@
 [
     {
         "repository": "https://github.com/SeleniumHQ/selenium.git",
-        "sha1": "6cda69299366dd9e0976bede2fdbcfe42eb90cfa",
-        "url": "https://github.com/SeleniumHQ/selenium/commit/6cda69299366dd9e0976bede2fdbcfe42eb90cfa",
-        "move_method_refactoring": {
-            "type": "Extract And Move Method",
-            "description": "Extract And Move Method public getResult() : Either<SessionNotCreatedException,CreateSessionResponse> extracted from public addToQueue(request SessionRequest) : HttpResponse in class org.openqa.selenium.grid.sessionqueue.local.LocalNewSessionQueue & moved to class org.openqa.selenium.grid.sessionqueue.local.LocalNewSessionQueue.Data",
-            "leftSideLocations": [
-                {
-                    "filePath": "java/src/org/openqa/selenium/grid/sessionqueue/local/LocalNewSessionQueue.java",
-                    "startLine": 199,
-                    "endLine": 259,
-                    "startColumn": 3,
-                    "endColumn": 4,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration before extraction",
-                    "codeElement": "public addToQueue(request SessionRequest) : HttpResponse"
-                },
-                {
-                    "filePath": "java/src/org/openqa/selenium/grid/sessionqueue/local/LocalNewSessionQueue.java",
-                    "startLine": 219,
-                    "endLine": 219,
-                    "startColumn": 11,
-                    "endColumn": 32,
-                    "codeElementType": "EXPRESSION_STATEMENT",
-                    "description": "extracted code from source method declaration",
-                    "codeElement": null
-                }
-            ],
-            "rightSideLocations": [
-                {
-                    "filePath": "java/src/org/openqa/selenium/grid/sessionqueue/local/LocalNewSessionQueue.java",
-                    "startLine": 476,
-                    "endLine": 478,
-                    "startColumn": 5,
-                    "endColumn": 6,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "extracted method declaration",
-                    "codeElement": "public getResult() : Either<SessionNotCreatedException,CreateSessionResponse>"
-                },
-                {
-                    "filePath": "java/src/org/openqa/selenium/grid/sessionqueue/local/LocalNewSessionQueue.java",
-                    "startLine": 477,
-                    "endLine": 477,
-                    "startColumn": 7,
-                    "endColumn": 21,
-                    "codeElementType": "RETURN_STATEMENT",
-                    "description": "extracted code to extracted method declaration",
-                    "codeElement": null
-                },
-                {
-                    "filePath": "java/src/org/openqa/selenium/grid/sessionqueue/local/LocalNewSessionQueue.java",
-                    "startLine": 199,
-                    "endLine": 259,
-                    "startColumn": 3,
-                    "endColumn": 4,
-                    "codeElementType": "METHOD_DECLARATION",
-                    "description": "source method declaration after extraction",
-                    "codeElement": "public addToQueue(request SessionRequest) : HttpResponse"
-                },
-                {
-                    "filePath": "java/src/org/openqa/selenium/grid/sessionqueue/local/LocalNewSessionQueue.java",
-                    "startLine": 219,
-                    "endLine": 219,
-                    "startColumn": 20,
-                    "endColumn": 36,
-                    "codeElementType": "METHOD_INVOCATION",
-                    "description": "extracted method invocation",
-                    "codeElement": "data.getResult()"
-                }
-            ],
-            "isStatic": false
-        },
-        "ref_id": 793
-    },
-    {
-        "repository": "https://github.com/SeleniumHQ/selenium.git",
         "sha1": "4ecc1033caa9995427c25d36befb70b8faae96d7",
         "url": "https://github.com/SeleniumHQ/selenium/commit/4ecc1033caa9995427c25d36befb70b8faae96d7",
         "move_method_refactoring": {
@@ -157,7 +82,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 794
+        "ref_id": 794,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "85abd660c1a25d7bc9bdbfa121f45e9ed1130fe6",
+            "newBranchName": "inline-hasBrowserPath-4ecc1033ca"
+        }
     },
     {
         "repository": "https://github.com/SeleniumHQ/selenium.git",
@@ -242,7 +172,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 795
+        "ref_id": 795,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "85abd660c1a25d7bc9bdbfa121f45e9ed1130fe6",
+            "newBranchName": "inline-hasBrowserPath-4ecc1033ca"
+        }
     },
     {
         "repository": "https://github.com/SeleniumHQ/selenium.git",
@@ -327,7 +262,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 796
+        "ref_id": 796,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "85abd660c1a25d7bc9bdbfa121f45e9ed1130fe6",
+            "newBranchName": "inline-hasBrowserPath-4ecc1033ca"
+        }
     },
     {
         "repository": "https://github.com/SeleniumHQ/selenium.git",
@@ -412,7 +352,12 @@
             ],
             "isStatic": false
         },
-        "ref_id": 797
+        "ref_id": 797,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-enableBiDi-98c6eb0620",
+            "newCommitHash": "88e68a489e0c2d92862ce1f7489972acc885477b"
+        }
     },
     {
         "repository": "https://github.com/SeleniumHQ/selenium.git",
@@ -497,6 +442,11 @@
             ],
             "isStatic": false
         },
-        "ref_id": 798
+        "ref_id": 798,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-enableBiDi-98c6eb0620",
+            "newCommitHash": "88e68a489e0c2d92862ce1f7489972acc885477b"
+        }
     }
 ]

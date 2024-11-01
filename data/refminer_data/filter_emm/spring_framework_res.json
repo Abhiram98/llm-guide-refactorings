@@ -165,7 +165,7 @@
         "url": "https://github.com/spring-projects/spring-framework/commit/3d7ef3ebfc5be645730e2e1d601ccf5799bdf7cd",
         "move_method_refactoring": {
             "type": "Extract And Move Method",
-            "description": "Extract And Move Method public hasCacheOperation(method Method, targetClass Class<?>) : boolean extracted from public matches(method Method, targetClass Class<?>) : boolean in class org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor.JCacheOperationSourcePointcut & moved to class org.springframework.cache.jcache.interceptor.CacheOperationSource",
+            "description": "Extract And Move Method public hasCacheOperation(method Method, targetClass Class<?>) : boolean extracted from public matches(method Method, targetClass Class<?>) : boolean in class org.springframework.cache.jcache.interceptor.BeanFactoryJCacheOperationSourceAdvisor.JCacheOperationSourcePointcut & moved to class org.springframework.cache.jcache.interceptor.JCacheOperationSource",
             "leftSideLocations": [
                 {
                     "filePath": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",

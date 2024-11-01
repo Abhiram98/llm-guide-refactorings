@@ -1,0 +1,3 @@
+Refactoring Type	Source Method	Target Class
+Move Method	org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime::enqueue(org.apache.kafka.coordinator.group.runtime.CoordinatorEvent):void 	 org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor
+Move Method	org.apache.kafka.streams.processor.internals.GlobalStreamThread.StateConsumer::maybeCheckpoint(long):void 	 org.apache.kafka.streams.processor.internals.GlobalStateMaintainer

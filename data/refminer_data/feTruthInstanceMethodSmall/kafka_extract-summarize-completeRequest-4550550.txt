@@ -1,0 +1,4 @@
+Refactoring Type	Source Method	Target Class
+Move Method	org.apache.kafka.connect.runtime.rest.HerderRequestHandler::summarize(org.apache.kafka.connect.util.Stage):java.lang.String 	 org.apache.kafka.connect.util.Stage
+Move Method	org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime::enqueueLast(org.apache.kafka.coordinator.group.runtime.CoordinatorEvent):void 	 org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor
+Move Method	org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime::enqueueFirst(org.apache.kafka.coordinator.group.runtime.CoordinatorEvent):void 	 org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor

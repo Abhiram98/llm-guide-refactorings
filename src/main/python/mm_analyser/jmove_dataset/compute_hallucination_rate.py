@@ -1,4 +1,5 @@
 import json
+from mm_analyser import data_folder
 class MoveMethodSuggestion:
 
     def __init__(self, method_name, target_class):
@@ -42,7 +43,7 @@ files = [
 ]
 
 
-with open(f"../../../../data/synthetic_corpus_comparison/oracle/project_files_map.json") as f:
+with open(f"{data_folder}/synthetic_corpus_comparison/oracle/project_files_map.json") as f:
     project_files_map = json.load(f)
 
 
@@ -51,7 +52,7 @@ plausible_suggestions = 0
 critique_accepted = 0
 class_doesnt_exist = 0
 for fname in files:
-    with open(f"../../../../data/synthetic_corpus_comparison/{fname}") as f:
+    with open(f"{data_folder}/synthetic_corpus_comparison/mm-assist-original/{fname}") as f:
         project_data = json.load(f)
     project_data = [i for i in project_data if len(i['telemetry'].keys())]
     _, project_name, size = fname.split("_")
@@ -75,14 +76,22 @@ for fname in files:
             priority_methods = telemetry["llmMethodPriority"]["priority_method_names"]
         except:
             continue
+        # try:
+        #     brute_force_methods = [i for i in telemetry["iterationData"] if i['iteration_num'] == -1][0]
+        # except:
+        #     print("bad")
+        #     continue
+        # priority_methods = [j['method_name'] for j in brute_force_methods['suggested_move_methods']]
+
         total_suggestions += len(vanilla_suggestions)
         vanilla_suggestions_priority = [i for i in vanilla_suggestions
                                         if (i.method_name in priority_methods and i.method_name in telemetry["targetClassMap"])]
         critique_accepted += len(vanilla_suggestions_priority)
         for suggetion in vanilla_suggestions_priority:
+            source_class_code = telemetry['hostFunctionTelemetryData']['sourceCode']
             if (suggetion.target_class in telemetry["targetClassMap"][suggetion.method_name]["target_classes_sorted_by_llm"]):
                 plausible_suggestions += 1
-            elif (suggetion.target_class not in project_classes):
+            elif (suggetion.target_class not in source_class_code):
                 class_doesnt_exist += 1
 
 

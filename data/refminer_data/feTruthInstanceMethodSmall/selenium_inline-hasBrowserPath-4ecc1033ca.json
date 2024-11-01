@@ -1,0 +1,72 @@
+[
+  {
+    "source_class": "org.openqa.selenium.chrome.ChromeDriver",
+    "source_method": "generateExecutor",
+    "target_class": "org.openqa.selenium.chrome.ChromeOptions, org.openqa.selenium.remote.http.ClientConfig):org.openqa.selenium.chrome.ChromeDriver.ChromeDriverCommandExecutor \t org.openqa.selenium.remote.service.DriverFinder"
+  },
+  {
+    "source_class": "org.openqa.selenium.chrome.ChromeDriver",
+    "source_method": "hasBrowserPath",
+    "target_class": "org.openqa.selenium.remote.service.DriverFinder"
+  },
+  {
+    "source_class": "org.openqa.selenium.chrome.ChromeDriver",
+    "source_method": "builder",
+    "target_class": "org.openqa.selenium.remote.RemoteWebDriverBuilder"
+  },
+  {
+    "source_class": "org.openqa.selenium.chrome.ChromeDriver.ChromeDriverCommandExecutor",
+    "source_method": "getExtraCommands",
+    "target_class": "org.openqa.selenium.chrome.AddHasCdp"
+  },
+  {
+    "source_class": "org.openqa.selenium.edge.EdgeDriver",
+    "source_method": "generateExecutor",
+    "target_class": "org.openqa.selenium.edge.EdgeOptions, org.openqa.selenium.remote.http.ClientConfig):org.openqa.selenium.edge.EdgeDriver.EdgeDriverCommandExecutor \t org.openqa.selenium.MutableCapabilities"
+  },
+  {
+    "source_class": "org.openqa.selenium.edge.EdgeDriver",
+    "source_method": "hasBrowserPath",
+    "target_class": "org.openqa.selenium.remote.service.DriverFinder"
+  },
+  {
+    "source_class": "org.openqa.selenium.edge.EdgeDriver",
+    "source_method": "builder",
+    "target_class": "org.openqa.selenium.remote.RemoteWebDriverBuilder"
+  },
+  {
+    "source_class": "org.openqa.selenium.edge.EdgeDriver.EdgeDriverCommandExecutor",
+    "source_method": "getExtraCommands",
+    "target_class": "org.openqa.selenium.edge.AddHasCdp"
+  },
+  {
+    "source_class": "org.openqa.selenium.firefox.FirefoxDriver",
+    "source_method": "generateExecutor",
+    "target_class": "org.openqa.selenium.firefox.FirefoxOptions, org.openqa.selenium.remote.http.ClientConfig):org.openqa.selenium.firefox.FirefoxDriver.FirefoxDriverCommandExecutor \t org.openqa.selenium.remote.service.DriverService"
+  },
+  {
+    "source_class": "org.openqa.selenium.firefox.FirefoxDriver",
+    "source_method": "isHasBrowserPath",
+    "target_class": "org.openqa.selenium.remote.service.DriverFinder"
+  },
+  {
+    "source_class": "org.openqa.selenium.firefox.FirefoxDriver",
+    "source_method": "builder",
+    "target_class": "org.openqa.selenium.remote.RemoteWebDriverBuilder"
+  },
+  {
+    "source_class": "org.openqa.selenium.firefox.FirefoxDriver",
+    "source_method": "checkCapabilitiesAndProxy",
+    "target_class": "org.openqa.selenium.MutableCapabilities"
+  },
+  {
+    "source_class": "org.openqa.selenium.firefox.FirefoxDriver",
+    "source_method": "createBiDi",
+    "target_class": "org.openqa.selenium.remote.http.ClientConfig"
+  },
+  {
+    "source_class": "org.openqa.selenium.firefox.FirefoxDriver.FirefoxDriverCommandExecutor",
+    "source_method": "getExtraCommands",
+    "target_class": "org.openqa.selenium.firefox.AddHasExtensions"
+  }
+]

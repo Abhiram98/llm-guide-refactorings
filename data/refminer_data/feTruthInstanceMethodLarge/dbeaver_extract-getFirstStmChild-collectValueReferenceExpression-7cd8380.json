@@ -1,0 +1,132 @@
+[
+  {
+    "source_class": "org.jkiss.dbeaver.lang.SCMLeafNode",
+    "source_method": "getPlainValue",
+    "target_class": "org.jkiss.dbeaver.lang.SCMCompositeNode"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.ext.oracle.model.OracleDataSource",
+    "source_method": "getPublicSynonyms",
+    "target_class": "org.jkiss.dbeaver.ext.oracle.model.OracleSchema"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.ext.oracle.model.OracleDataSource",
+    "source_method": "getPublicDatabaseLinks",
+    "target_class": "org.jkiss.dbeaver.ext.oracle.model.OracleSchema"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.ext.oracle.model.OracleDataSource",
+    "source_method": "getUserRecycledObjects",
+    "target_class": "org.jkiss.dbeaver.ext.oracle.model.OracleSchema"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.ext.oracle.model.OracleSchema",
+    "source_method": "getTableColumn",
+    "target_class": "org.jkiss.dbeaver.ext.oracle.model.OracleTableBase, java.sql.ResultSet, java.lang.String):org.jkiss.dbeaver.ext.oracle.model.OracleTableColumn \t org.jkiss.dbeaver.ext.oracle.model.OracleTableBase"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.sql.semantics.SQLQueryModelRecognizer",
+    "source_method": "prepareDataContext",
+    "target_class": "org.jkiss.dbeaver.model.exec.DBCExecutionContext"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.sql.semantics.SQLQueryModelRecognizer",
+    "source_method": "makeValueConstantExpression",
+    "target_class": "org.jkiss.dbeaver.model.sql.semantics.context.SQLQueryExprType):org.jkiss.dbeaver.model.sql.semantics.model.SQLQueryValueExpression \t org.jkiss.dbeaver.model.stm.STMTreeNode"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.sql.semantics.SQLQueryModelRecognizer",
+    "source_method": "getFirstStmChild",
+    "target_class": "org.jkiss.dbeaver.model.stm.STMTreeNode"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.sql.semantics.SQLQueryModelRecognizer",
+    "source_method": "tryFallbackSymbolForStringLiteral",
+    "target_class": "org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbolEntry, boolean):org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbolClass \t org.jkiss.dbeaver.model.sql.SQLDialect"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.sql.semantics.SQLQueryModelRecognizer",
+    "source_method": "registerScopeItem",
+    "target_class": "org.jkiss.dbeaver.model.sql.semantics.SQLQueryLexicalScope"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.fs.DBNFileSystems",
+    "source_method": "getFileSystem",
+    "target_class": "java.lang.String):org.jkiss.dbeaver.model.navigator.fs.DBNFileSystem \t org.jkiss.dbeaver.model.fs.DBFVirtualFileSystem"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.fs.DBNFileSystems",
+    "source_method": "equalsFS",
+    "target_class": "org.jkiss.dbeaver.model.fs.DBFVirtualFileSystem):boolean \t org.jkiss.dbeaver.model.fs.DBFVirtualFileSystem"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.DBNDatabaseNode",
+    "source_method": "initializeNode",
+    "target_class": "org.jkiss.dbeaver.model.runtime.DBRProgressListener):boolean \t org.jkiss.dbeaver.model.runtime.DBRProgressListener"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.DBNDatabaseNode",
+    "source_method": "equalObjects",
+    "target_class": "org.jkiss.dbeaver.model.struct.DBSObject):boolean \t org.jkiss.dbeaver.model.DBUtils"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.DBNDatabaseNode",
+    "source_method": "extractPropertyValue",
+    "target_class": "java.lang.Object, org.jkiss.dbeaver.model.navigator.meta.DBXTreeItem):java.lang.Object \t org.jkiss.dbeaver.model.navigator.meta.DBXTreeItem"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.DBNDatabaseNode",
+    "source_method": "extractDynamicPropertyValue",
+    "target_class": "java.lang.Object, java.lang.String):java.lang.Object \t org.jkiss.dbeaver.model.navigator.meta.DBXTreeItem"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.DBNNode",
+    "source_method": "getFolderChildrenClass",
+    "target_class": "extends org.jkiss.dbeaver.model.struct.DBSObject> \t org.jkiss.dbeaver.model.navigator.meta.DBXTreeFolder"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.model.navigator.DBNNode",
+    "source_method": "nodeHasStructureContainers",
+    "target_class": "org.jkiss.dbeaver.model.navigator.meta.DBXTreeNode):boolean \t org.jkiss.dbeaver.model.navigator.meta.DBXTreeNode"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "saveConfigFile",
+    "target_class": "java.lang.String, java.lang.String, boolean, boolean):void \t org.jkiss.dbeaver.model.secret.DBSValueEncryptor"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "parseDriver",
+    "target_class": "java.lang.String, java.lang.String, boolean):org.jkiss.dbeaver.registry.driver.DriverDescriptor \t org.jkiss.dbeaver.Log"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "readObjectFiler",
+    "target_class": "org.jkiss.dbeaver.model.data.json.JSONUtils"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "saveFolder",
+    "target_class": "org.jkiss.dbeaver.registry.DataSourceFolder):void \t org.jkiss.dbeaver.model.data.json.JSONUtils"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "saveObjectFiler",
+    "target_class": "java.lang.String, java.lang.String, org.jkiss.dbeaver.model.struct.DBSObjectFilter):void \t org.jkiss.dbeaver.model.data.json.JSONUtils"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "saveSecuredCredentials",
+    "target_class": "org.jkiss.dbeaver.model.connection.DBPConfigurationProfile, java.lang.String, org.jkiss.dbeaver.registry.SecureCredentials):void \t org.jkiss.dbeaver.model.connection.DBPConfigurationProfile"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "readSecuredCredentials",
+    "target_class": "org.jkiss.dbeaver.model.connection.DBPConfigurationProfile, java.lang.String):org.jkiss.dbeaver.registry.SecureCredentials \t org.jkiss.dbeaver.model.connection.DBPConfigurationProfile"
+  },
+  {
+    "source_class": "org.jkiss.dbeaver.registry.DataSourceSerializerModern",
+    "source_method": "getReplacementDriver",
+    "target_class": "org.jkiss.dbeaver.registry.driver.DriverDescriptor"
+  }
+]

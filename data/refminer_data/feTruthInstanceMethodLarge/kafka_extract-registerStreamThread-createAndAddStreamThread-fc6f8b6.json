@@ -1,0 +1,672 @@
+[
+  {
+    "source_class": "org.apache.kafka.clients.consumer.internals.SubscriptionState",
+    "source_method": "assignedState",
+    "target_class": "org.apache.kafka.common.internals.PartitionStates"
+  },
+  {
+    "source_class": "org.apache.kafka.clients.consumer.internals.SubscriptionState",
+    "source_method": "assignedStateOrNull",
+    "target_class": "org.apache.kafka.common.internals.PartitionStates"
+  },
+  {
+    "source_class": "org.apache.kafka.clients.consumer.internals.SubscriptionState",
+    "source_method": "collectPartitions",
+    "target_class": "org.apache.kafka.common.internals.PartitionStates"
+  },
+  {
+    "source_class": "org.apache.kafka.clients.consumer.internals.SubscriptionState.TopicPartitionState",
+    "source_method": "validatePosition",
+    "target_class": "org.apache.kafka.clients.consumer.internals.SubscriptionState.FetchPosition"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "initConfigTransformer",
+    "target_class": "org.apache.kafka.connect.runtime.isolation.Plugins"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "isSinkConnector",
+    "target_class": "org.apache.kafka.connect.runtime.isolation.Plugins"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "awaitStopConnectors",
+    "target_class": "org.apache.kafka.common.utils.Time"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "isRunning",
+    "target_class": "org.apache.kafka.connect.runtime.WorkerConnector"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "exactlyOnceSourceTaskProducerConfigs",
+    "target_class": "org.apache.kafka.connect.runtime.WorkerConfig, org.apache.kafka.connect.runtime.ConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.connect.runtime.ConnectorClientConfigOverridePolicy, java.lang.String):java.util.Map<java.lang.String,java.lang.Object> \t org.apache.kafka.connect.runtime.WorkerConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "baseProducerConfigs",
+    "target_class": "java.lang.String, org.apache.kafka.connect.runtime.WorkerConfig, org.apache.kafka.connect.runtime.ConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.connect.runtime.ConnectorClientConfigOverridePolicy, java.lang.String):java.util.Map<java.lang.String,java.lang.Object> \t org.apache.kafka.common.config.AbstractConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "exactlyOnceSourceOffsetsConsumerConfigs",
+    "target_class": "java.lang.String, org.apache.kafka.connect.runtime.WorkerConfig, org.apache.kafka.connect.runtime.ConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.connect.runtime.ConnectorClientConfigOverridePolicy, java.lang.String):java.util.Map<java.lang.String,java.lang.Object> \t org.apache.kafka.connect.util.ConnectUtils"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "regularSourceOffsetsConsumerConfigs",
+    "target_class": "java.lang.String, org.apache.kafka.connect.runtime.WorkerConfig, org.apache.kafka.connect.runtime.ConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.connect.runtime.ConnectorClientConfigOverridePolicy, java.lang.String):java.util.Map<java.lang.String,java.lang.Object> \t org.apache.kafka.common.IsolationLevel"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "baseConsumerConfigs",
+    "target_class": "java.lang.String, org.apache.kafka.connect.runtime.WorkerConfig, org.apache.kafka.connect.runtime.ConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.connect.runtime.ConnectorClientConfigOverridePolicy, java.lang.String, org.apache.kafka.connect.runtime.ConnectorType):java.util.Map<java.lang.String,java.lang.Object> \t org.apache.kafka.common.config.AbstractConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "adminConfigs",
+    "target_class": "java.lang.String, org.apache.kafka.connect.runtime.WorkerConfig, org.apache.kafka.connect.runtime.ConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.connect.runtime.ConnectorClientConfigOverridePolicy, java.lang.String, org.apache.kafka.connect.runtime.ConnectorType):java.util.Map<java.lang.String,java.lang.Object> \t org.apache.kafka.connect.runtime.WorkerConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "connectorClientConfigOverrides",
+    "target_class": "org.apache.kafka.connect.runtime.ConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, java.lang.String, org.apache.kafka.connect.runtime.ConnectorType, ConnectorClientConfigRequest.ClientType, org.apache.kafka.connect.runtime.ConnectorClientConfigOverridePolicy):java.util.Map<java.lang.String,java.lang.Object> \t org.apache.kafka.common.config.AbstractConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "taskTransactionalId",
+    "target_class": "org.apache.kafka.connect.runtime.WorkerConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "sinkTaskReporters",
+    "target_class": "org.apache.kafka.connect.runtime.SinkConnectorConfig, org.apache.kafka.connect.runtime.errors.ErrorHandlingMetrics, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>):java.util.List<org.apache.kafka.connect.runtime.errors.ErrorReporter<org.apache.kafka.clients.consumer.ConsumerRecord<byte[],byte[]>>> \t org.apache.kafka.connect.runtime.SinkConnectorConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "createWorkerErrantRecordReporter",
+    "target_class": "org.apache.kafka.connect.runtime.errors.RetryWithToleranceOperator<org.apache.kafka.clients.consumer.ConsumerRecord<byte[],byte[]>>, org.apache.kafka.connect.runtime.Converter, org.apache.kafka.connect.runtime.Converter, org.apache.kafka.connect.runtime.HeaderConverter):org.apache.kafka.connect.runtime.errors.WorkerErrantRecordReporter \t org.apache.kafka.connect.runtime.SinkConnectorConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "awaitStopTasks",
+    "target_class": "org.apache.kafka.common.utils.Time"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "isTopicCreationEnabled",
+    "target_class": "org.apache.kafka.connect.runtime.WorkerConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "sourceConnectorOffsets",
+    "target_class": "org.apache.kafka.connect.runtime.Connector, java.util.Map<java.lang.String,java.lang.String>, org.apache.kafka.connect.util.Callback<org.apache.kafka.connect.runtime.rest.entities.ConnectorOffsets>):void \t org.apache.kafka.connect.runtime.WorkerConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "completeModifyOffsetsCallback",
+    "target_class": "boolean, org.apache.kafka.connect.util.Callback<org.apache.kafka.connect.runtime.rest.entities.Message>):void \t org.apache.kafka.connect.util.Callback"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "offsetStoreForRegularSourceTask",
+    "target_class": "org.apache.kafka.connect.runtime.SourceConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.clients.producer.Producer<byte[],byte[]>, java.util.Map<java.lang.String,java.lang.Object>, org.apache.kafka.connect.util.TopicAdmin):org.apache.kafka.connect.storage.ConnectorOffsetBackingStore \t org.apache.kafka.connect.util.ConnectorTaskId"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "offsetStoreForExactlyOnceSourceTask",
+    "target_class": "org.apache.kafka.connect.runtime.SourceConnectorConfig, java.lang.Class<? extends org.apache.kafka.connect.runtime.Connector>, org.apache.kafka.clients.producer.Producer<byte[],byte[]>, java.util.Map<java.lang.String,java.lang.Object>, org.apache.kafka.connect.util.TopicAdmin):org.apache.kafka.connect.storage.ConnectorOffsetBackingStore \t org.apache.kafka.connect.util.ConnectorTaskId"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "regularSourceTaskUsesConnectorSpecificOffsetsStore",
+    "target_class": "org.apache.kafka.connect.runtime.SourceConnectorConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker",
+    "source_method": "sourceConnectorTopicCreationEnabled",
+    "target_class": "org.apache.kafka.connect.runtime.WorkerConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker.ConnectorStatusMetricsGroup",
+    "source_method": "taskCounter",
+    "target_class": "org.apache.kafka.connect.util.ConnectorTaskId"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.Worker.ConnectorStatusMetricsGroup",
+    "source_method": "taskStatusCounter",
+    "target_class": "org.apache.kafka.connect.runtime.AbstractStatus.State):org.apache.kafka.connect.runtime.ConnectMetrics.LiteralSupplier<java.lang.Long> \t org.apache.kafka.connect.runtime.WorkerTask"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask",
+    "source_method": "commitOffsets",
+    "target_class": "boolean):void \t org.apache.kafka.clients.consumer.Consumer"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask",
+    "source_method": "pollConsumer",
+    "target_class": "org.apache.kafka.clients.consumer.Consumer"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask",
+    "source_method": "resumeAll",
+    "target_class": "org.apache.kafka.clients.consumer.Consumer"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask",
+    "source_method": "pauseAll",
+    "target_class": "org.apache.kafka.clients.consumer.Consumer"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask",
+    "source_method": "updatePartitionCount",
+    "target_class": "org.apache.kafka.clients.consumer.Consumer"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "computeSinkRecordLag",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "recordRead",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "recordSend",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "recordPut",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "recordPartitionCount",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "recordOffsetSequenceNumber",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "recordOffsetCommitSuccess",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.connect.runtime.WorkerSinkTask.SinkTaskMetricsGroup",
+    "source_method": "recordOffsetCommitSkip",
+    "target_class": "org.apache.kafka.common.metrics.Sensor"
+  },
+  {
+    "source_class": "org.apache.kafka.image.node.ConfigurationsImageNode",
+    "source_method": "resourceFromName",
+    "target_class": "org.apache.kafka.common.config.ConfigResource.Type"
+  },
+  {
+    "source_class": "org.apache.kafka.image.node.MetadataNode",
+    "source_method": "print",
+    "target_class": "org.apache.kafka.image.node.printer.MetadataNodePrinter"
+  },
+  {
+    "source_class": "org.apache.kafka.image.node.MetadataNode",
+    "source_method": "stringify",
+    "target_class": "org.apache.kafka.image.node.printer.NodeStringifier"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.internals.VoterSet",
+    "source_method": "voterNode",
+    "target_class": "org.apache.kafka.common.network.ListenerName):java.util.Optional<org.apache.kafka.common.Node> \t org.apache.kafka.raft.internals.VoterSet.VoterNode"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.internals.VoterSet",
+    "source_method": "isVoter",
+    "target_class": "org.apache.kafka.raft.internals.VoterSet.VoterNode"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.internals.VoterSet",
+    "source_method": "addVoter",
+    "target_class": "org.apache.kafka.raft.internals.VoterSet.VoterNode"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.internals.VoterSet",
+    "source_method": "removeVoter",
+    "target_class": "org.apache.kafka.raft.internals.VoterSet.VoterNode"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.internals.VoterSet",
+    "source_method": "fromVotersRecord",
+    "target_class": "org.apache.kafka.raft.internals.ReplicaKey"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.internals.VoterSet",
+    "source_method": "fromInetSocketAddresses",
+    "target_class": "java.util.Map<java.lang.Integer,java.net.InetSocketAddress>):org.apache.kafka.raft.internals.VoterSet \t org.apache.kafka.raft.internals.ReplicaKey"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeFireLeaderChange",
+    "target_class": "org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "endOffset",
+    "target_class": "org.apache.kafka.raft.ReplicatedLog"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "resetConnections",
+    "target_class": "org.apache.kafka.raft.RequestManager"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeTransitionToLeader",
+    "target_class": "long):boolean \t org.apache.kafka.raft.CandidateState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "transitionToCandidate",
+    "target_class": "org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "transitionToUnattached",
+    "target_class": "org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "transitionToResigned",
+    "target_class": "org.apache.kafka.raft.internals.FuturePurgatory"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "transitionToVoted",
+    "target_class": "int):void \t org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "onBecomeFollower",
+    "target_class": "org.apache.kafka.raft.internals.FuturePurgatory"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "transitionToFollower",
+    "target_class": "org.apache.kafka.common.Node, long):void \t org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "buildVoteResponse",
+    "target_class": "boolean):org.apache.kafka.raft.VoteResponseData \t org.apache.kafka.raft.ReplicatedLog"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "binaryExponentialElectionBackoffMs",
+    "target_class": "org.apache.kafka.raft.QuorumConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "strictExponentialElectionBackoffMs",
+    "target_class": "int):int \t org.apache.kafka.raft.QuorumConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "buildBeginQuorumEpochResponse",
+    "target_class": "org.apache.kafka.raft.ReplicatedLog"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "buildEndQuorumEpochResponse",
+    "target_class": "org.apache.kafka.raft.ReplicatedLog"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "hasConsistentLeader",
+    "target_class": "java.util.OptionalInt):boolean \t org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeHandleCommonResponse",
+    "target_class": "java.util.OptionalInt, int, long):java.util.Optional<java.lang.Boolean> \t org.apache.kafka.common.protocol.Errors"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeTransition",
+    "target_class": "int, long):void \t org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "handleResponse",
+    "target_class": "long):void \t org.apache.kafka.raft.RaftResponse.Inbound"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "validateVoterOnlyRequest",
+    "target_class": "int):java.util.Optional<org.apache.kafka.common.protocol.Errors> \t org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "validateLeaderOnlyRequest",
+    "target_class": "org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "buildEndQuorumEpochRequest",
+    "target_class": "org.apache.kafka.raft.ResignedState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "buildBeginQuorumEpochRequest",
+    "target_class": "org.apache.kafka.raft.ReplicatedLog"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "buildVoteRequest",
+    "target_class": "org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeSendAnyVoterFetch",
+    "target_class": "org.apache.kafka.raft.RequestManager"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "isRunning",
+    "target_class": "org.apache.kafka.raft.KafkaRaftClient.GracefulShutdown"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "isShuttingDown",
+    "target_class": "org.apache.kafka.raft.KafkaRaftClient.GracefulShutdown"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "pollResigned",
+    "target_class": "org.apache.kafka.raft.ResignedState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeSendVoteRequests",
+    "target_class": "long):long \t org.apache.kafka.raft.NetworkChannel"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "pollFollowerAsObserver",
+    "target_class": "long):long \t org.apache.kafka.raft.RequestManager"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeSendFetchOrFetchSnapshot",
+    "target_class": "long):long \t org.apache.kafka.snapshot.RawSnapshotWriter"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "pollVoted",
+    "target_class": "org.apache.kafka.raft.KafkaRaftClient.GracefulShutdown"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "pollUnattachedAsVoter",
+    "target_class": "long):long \t org.apache.kafka.raft.UnattachedState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "pollUnattachedAsObserver",
+    "target_class": "long):long \t org.apache.kafka.raft.UnattachedState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "pollCurrentState",
+    "target_class": "org.apache.kafka.raft.QuorumState"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "maybeCompleteShutdown",
+    "target_class": "org.apache.kafka.raft.KafkaRaftClient.GracefulShutdown"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "wakeup",
+    "target_class": "org.apache.kafka.raft.RaftMessageQueue"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "handle",
+    "target_class": "org.apache.kafka.raft.RaftMessageQueue"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "poll",
+    "target_class": "org.apache.kafka.common.utils.Time"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient",
+    "source_method": "voterNode",
+    "target_class": "org.apache.kafka.common.network.ListenerName):java.util.Optional<org.apache.kafka.common.Node> \t org.apache.kafka.raft.internals.KRaftControlRecordStateMachine"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient.GracefulShutdown",
+    "source_method": "update",
+    "target_class": "org.apache.kafka.common.utils.Timer"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient.GracefulShutdown",
+    "source_method": "hasTimedOut",
+    "target_class": "org.apache.kafka.common.utils.Timer"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient.GracefulShutdown",
+    "source_method": "remainingTimeMs",
+    "target_class": "org.apache.kafka.common.utils.Timer"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient.Registration",
+    "source_method": "unregister",
+    "target_class": "org.apache.kafka.raft.KafkaRaftClient.Registration.Ops"
+  },
+  {
+    "source_class": "org.apache.kafka.raft.KafkaRaftClient.ListenerContext",
+    "source_method": "shouldFireLeaderChange",
+    "target_class": "org.apache.kafka.raft.LeaderAndEpoch"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.processor.internals.ProcessorNode",
+    "source_method": "close",
+    "target_class": "org.apache.kafka.streams.processor.internals.InternalProcessorContext"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "setUncaughtExceptionHandler",
+    "target_class": "org.apache.kafka.streams.processor.internals.GlobalStreamThread"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "setGlobalStateRestoreListener",
+    "target_class": "org.apache.kafka.streams.KafkaStreams.DelegatingStateRestoreListener"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "setStandbyUpdateListener",
+    "target_class": "org.apache.kafka.streams.KafkaStreams.DelegatingStandbyUpdateListener"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "metrics",
+    "target_class": "extends org.apache.kafka.common.Metric> \t org.apache.kafka.streams.processor.internals.StreamThread"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "registerStreamThread",
+    "target_class": "org.apache.kafka.streams.processor.internals.StreamThread"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "getMetrics",
+    "target_class": "org.apache.kafka.common.utils.Time, java.lang.String):org.apache.kafka.common.metrics.Metrics \t org.apache.kafka.common.metrics.MetricConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "getNextThreadIndex",
+    "target_class": "org.apache.kafka.streams.processor.internals.StreamThread"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "getCacheSizePerThread",
+    "target_class": "org.apache.kafka.streams.processor.internals.TopologyMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "resizeThreadCache",
+    "target_class": "org.apache.kafka.streams.processor.internals.GlobalStreamThread"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "maybeCreateRocksDBMetricsRecordingService",
+    "target_class": "org.apache.kafka.streams.StreamsConfig):java.util.concurrent.ScheduledExecutorService \t org.apache.kafka.common.config.AbstractConfig"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "parseHostInfo",
+    "target_class": "org.apache.kafka.streams.state.HostInfo"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "cleanUp",
+    "target_class": "org.apache.kafka.streams.processor.internals.StateDirectory"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "allMetadata",
+    "target_class": "org.apache.kafka.streams.StreamsMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "metadataForAllStreamsClients",
+    "target_class": "org.apache.kafka.streams.processor.internals.StreamsMetadataState"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "allMetadataForStore",
+    "target_class": "org.apache.kafka.streams.StreamsMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "streamsMetadataForStore",
+    "target_class": "org.apache.kafka.streams.processor.internals.StreamsMetadataState"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "queryMetadataForKey",
+    "target_class": "K, org.apache.kafka.common.serialization.Serializer<K>):org.apache.kafka.streams.KeyQueryMetadata \t org.apache.kafka.streams.processor.internals.StreamsMetadataState"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "queryMetadataForKey",
+    "target_class": "K, org.apache.kafka.streams.processor.StreamPartitioner<? super K,?>):org.apache.kafka.streams.KeyQueryMetadata \t org.apache.kafka.streams.processor.internals.StreamsMetadataState"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "store",
+    "target_class": "org.apache.kafka.streams.processor.internals.TopologyMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "pause",
+    "target_class": "org.apache.kafka.streams.processor.internals.TopologyMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "isPaused",
+    "target_class": "org.apache.kafka.streams.processor.internals.TopologyMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "resume",
+    "target_class": "org.apache.kafka.streams.processor.internals.TopologyMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "getOrThrowException",
+    "target_class": "long, java.util.function.Supplier<java.lang.String>):T \t org.apache.kafka.common.KafkaFuture"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "localThreadsMetadata",
+    "target_class": "org.apache.kafka.streams.TaskMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "metadataForLocalThreads",
+    "target_class": "org.apache.kafka.streams.processor.internals.StreamThread"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.KafkaStreams",
+    "source_method": "query",
+    "target_class": "org.apache.kafka.streams.processor.internals.TopologyMetadata"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.common.Node.Util",
+    "source_method": "getIntConfig",
+    "target_class": "java.lang.String, int):int \t org.apache.kafka.trogdor.common.Node"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.fault.DegradedNetworkFaultWorker",
+    "source_method": "devicesForSpec",
+    "target_class": "org.apache.kafka.trogdor.fault.DegradedNetworkFaultSpec.NodeDegradeSpec"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.fault.DegradedNetworkFaultWorker",
+    "source_method": "disableTrafficControl",
+    "target_class": "java.lang.String):void \t org.apache.kafka.trogdor.common.Platform"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.fault.NetworkPartitionFaultWorker",
+    "source_method": "runIptablesCommands",
+    "target_class": "java.lang.String):void \t org.apache.kafka.trogdor.common.Platform"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ConfigurableProducerWorker.SendRecords",
+    "source_method": "recordDuration",
+    "target_class": "org.apache.kafka.trogdor.workload.Histogram"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ConnectionStressWorker.Stressor",
+    "source_method": "fromSpec",
+    "target_class": "org.apache.kafka.trogdor.workload.ConnectionStressSpec"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ConsumeBenchWorker.Prepare",
+    "source_method": "populatePartitionsByTopic",
+    "target_class": "java.util.Map<java.lang.String,java.util.List<org.apache.kafka.common.TopicPartition>>):java.util.Map<java.lang.String,java.util.List<org.apache.kafka.common.TopicPartition>> \t org.apache.kafka.common.PartitionInfo"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ConsumeBenchWorker.ThreadSafeConsumer",
+    "source_method": "assign",
+    "target_class": "org.apache.kafka.clients.consumer.KafkaConsumer"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ConsumeBenchWorker.ThreadSafeConsumer",
+    "source_method": "assignedPartitions",
+    "target_class": "org.apache.kafka.clients.consumer.KafkaConsumer"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ExternalCommandWorker",
+    "source_method": "startProcess",
+    "target_class": "org.apache.kafka.trogdor.workload.ExternalCommandSpec"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ExternalCommandWorker",
+    "source_method": "readObject",
+    "target_class": "org.apache.kafka.trogdor.common.JsonUtil"
+  },
+  {
+    "source_class": "org.apache.kafka.trogdor.workload.ProduceBenchWorker.SendRecords",
+    "source_method": "recordDuration",
+    "target_class": "org.apache.kafka.trogdor.workload.Histogram"
+  }
+]

@@ -1,6 +1,8 @@
 package com.intellij.ml.llm.template.intentions
 
 import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonParser
 import com.google.gson.annotations.SerializedName
 import com.intellij.codeInsight.unwrap.ScopeHighlighter
 import com.intellij.icons.AllIcons
@@ -31,14 +33,10 @@ import com.intellij.openapi.ui.popup.IconButton
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.JBPopupListener
 import com.intellij.openapi.ui.popup.LightweightWindowEvent
-import com.intellij.openapi.util.NlsSafe
 import com.intellij.psi.*
 import com.intellij.ui.awt.RelativePoint
 import dev.langchain4j.data.message.ChatMessage
 import dev.langchain4j.model.voyageai.VoyageAiEmbeddingModelName
-import dev.langchain4j.store.embedding.CosineSimilarity
-import java.awt.Point
-import java.awt.Rectangle
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
@@ -97,10 +95,13 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         MAX_ITERS = RefAgentSettingsManager.getInstance().getNumberOfIterations()
         llmChatModel = RefAgentSettingsManager.getInstance().createAndGetAiModel()!!
         logViewer.clear()
+        getVanillaLlmSuggestions(project, promptIterator) // get vanilla llm suggestions, just for ablation.
+
         val allMethodsInClass: List<PsiMethod> = runReadAction { PsiUtils.getAllMethodsInClass(functionPsiElement as PsiClass) }
+        val allClassNames = listOf((functionPsiElement as PsiClass).name!!)+ (functionPsiElement as PsiClass).allInnerClasses.map { it.name }.filterNotNull()
         val bruteForceSuggestions = runReadAction {
             allMethodsInClass
-                .filter { !it.name[0].isUpperCase() } // filter constructors
+                .filter { it.name !in allClassNames } // filter constructors
                 .filter { !isGetter(it) } // filter out getters and setters.
                 .filter { !isSetter(it) } // filter out getters and setters.
                 .filter { !it.text.contains("@Override") } // remove methods in an inheritance chain
@@ -109,18 +110,28 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                 .filter { hasSomeEnvy(it) }
                 .map { MoveMethodSuggestion(it.name, getSignatureString(it), "", "", it) }
         }
-        val methodCompatibilitySuggestionsWithSore = getMethodCompatibility(
-            bruteForceSuggestions, functionPsiElement as PsiClass, allMethodsInClass)
-        val methodCompatibilitySuggestions = methodCompatibilitySuggestionsWithSore.map { it.first }
-        addMethodCompatibilityData(methodCompatibilitySuggestionsWithSore)
+        val methodCompatibilityTfIdf = getMethodCompatibility(
+            bruteForceSuggestions, functionPsiElement as PsiClass, allMethodsInClass, "tf-idf")
+        val methodCompatibilityVoyage = getMethodCompatibility(
+            bruteForceSuggestions, functionPsiElement as PsiClass, allMethodsInClass, "voyage")
+        val tfidfSuggestions = methodCompatibilityTfIdf.map { it.first }
+        val voyageSuggestions = methodCompatibilityVoyage.map { it.first }
+        val allSuggestions = mutableListOf<MoveMethodSuggestion>()
+        allSuggestions.addAll(tfidfSuggestions)
+        val allSuggestionPsiMethods = allSuggestions.map { it.psiMethod }
+        voyageSuggestions.forEach {
+            if (it.psiMethod !in allSuggestionPsiMethods)
+                allSuggestions.add(it)
+        }
+
+        addMethodCompatibilityData(methodCompatibilityTfIdf, "tf-idf")
+        addMethodCompatibilityData(methodCompatibilityVoyage, "voyage")
+
+
         logMethods(bruteForceSuggestions, -1, 0)
-        logMethods(methodCompatibilitySuggestions, -2, 0)
-        telemetryDataManager.setRefactoringObjects(emptyList())
-        sendTelemetryData()
+        logMethods(allSuggestions, -2, 0)
         log2fileAndViewer("*** Combining responses from iterations ***", logger)
-//        logMethods(methodCompatibilitySuggestions, -1, 0)
-        return
-        if (methodCompatibilitySuggestions.isEmpty()) {
+        if (allSuggestions.isEmpty()) {
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
             telemetryDataManager.setRefactoringObjects(emptyList())
             // show message to user.
@@ -134,8 +145,8 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
             sendTelemetryData()
         } else {
             log2fileAndViewer("Prioritising suggestions...", logger)
-//            val priority = getSuggestionPriority(methodCompatibilitySuggestions, project)
-            val priority = methodCompatibilitySuggestions
+            getPriorities(tfidfSuggestions, voyageSuggestions) // only for ablation purposes, ask LLM to prioritise.
+            val priority = allSuggestions
             if (priority != null) {
                 logPriority(priority)
                 if (priority.size == 0) {
@@ -174,17 +185,51 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
 
     }
 
+    private fun getPriorities(
+        tfidfSuggestions: List<MoveMethodSuggestion>,
+        voyageSuggestions: List<MoveMethodSuggestion>
+    ) {
+        val tfIdfPriorityAll = getSuggestionPriority(tfidfSuggestions, currentProject, "tf-idf")
+        val tfIdfPriorityTop5 = getSuggestionPriority(tfidfSuggestions, currentProject, "tf-idf-5", 5)
+        val tfIdfPriorityTop3 = getSuggestionPriority(tfidfSuggestions, currentProject, "tf-df-3", 3)
+        val voyageIdfPriorityAll = getSuggestionPriority(voyageSuggestions, currentProject, "voyage")
+        val voyageIdfPriorityTop5 = getSuggestionPriority(voyageSuggestions, currentProject, "voyage-5", 5)
+        val voyageIdfPriorityTop3 = getSuggestionPriority(voyageSuggestions, currentProject, "voyage-3", 3)
+
+        if (tfIdfPriorityAll != null) {
+            logPriority(tfIdfPriorityAll)
+        }
+        if (tfIdfPriorityTop5 != null) {
+            logPriority(tfIdfPriorityTop5)
+        }
+        if (tfIdfPriorityTop3 != null) {
+            logPriority(tfIdfPriorityTop3)
+        }
+        if (voyageIdfPriorityAll != null) {
+            logPriority(voyageIdfPriorityAll)
+        }
+        if (voyageIdfPriorityTop5 != null) {
+            logPriority(voyageIdfPriorityTop5)
+        }
+        if (voyageIdfPriorityTop3 != null) {
+            logPriority(voyageIdfPriorityTop3)
+        }
+    }
+
     private fun hasSomeEnvy(psiMethod: PsiMethod): Boolean{
         val references = PsiUtils.getAllReferenceExpressions(psiMethod)
+        // foo.func()
         val envyReferences = mutableListOf<PsiReferenceExpression>()
         for (reference in references){
             if (reference.children.isEmpty() || reference.children[0] !is PsiReferenceExpression)
                 continue
             val resolvedReference = (reference.children[0] as PsiReferenceExpression).reference?.resolve()
             val filterCondition = if (resolvedReference is PsiField){
-                PsiUtils.isInProject(resolvedReference.type.canonicalText, psiMethod.project)
+                PsiUtils.isInProject(resolvedReference.type.canonicalText, psiMethod.project) ||
+                        PsiUtils.isInProject(resolvedReference.type.canonicalText.split("<")[0], psiMethod.project)
             }else if (resolvedReference is PsiParameter){
                 PsiUtils.isInProject(resolvedReference.type.canonicalText, psiMethod.project)
+                        || PsiUtils.isInProject(resolvedReference.type.canonicalText.split("<")[0], psiMethod.project)
             } else {
                 false
             }
@@ -332,7 +377,9 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
 
     private fun getSuggestionPriority(
         uniqueSuggestions: List<MoveMethodSuggestion>,
-        project: Project
+        project: Project,
+        similarityType: String,
+        limit: Int =-1,
     ) : List<MoveMethodSuggestion>? {
         val psiClass = runReadAction{ functionPsiElement as? PsiClass }
         if (psiClass == null) {
@@ -342,7 +389,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         val messages =
             (prompter as MoveMethodRefactoringPrompt).askForMethodPriorityPrompt(
                 condenseMethodCode(functionPsiElement, uniqueSuggestions),
-                uniqueSuggestions
+                if (limit==-1) uniqueSuggestions else uniqueSuggestions.subList(0, min(uniqueSuggestions.size, limit))
             )
         val response: LLMBaseResponse?
         val llmResponseTime = measureTimeMillis { response = llmResponseCache[messages.toString()]?:sendChatRequest(project, messages, llmChatModel)}
@@ -354,7 +401,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                 )
             } catch (e: Exception) {
                 log2fileAndViewer("LLM Response: " + response.getSuggestions()[0].text, logger)
-                telemetryDataManager.addLLMPriorityResponse(response.getSuggestions()[0].text, llmResponseTime)
+                telemetryDataManager.addLLMPriorityResponse(response.getSuggestions()[0].text, llmResponseTime, similarityType)
                 null
             }
             if (methodPrioritySignatures!=null) {
@@ -368,7 +415,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                         index
                     }
                 }
-                telemetryDataManager.addLLMPriorityResponse(sortedSuggestions.map{it.methodSignature}, llmResponseTime)
+                telemetryDataManager.addLLMPriorityResponse(sortedSuggestions.map{it.methodSignature}, llmResponseTime, similarityType)
                 return sortedSuggestions
             }
         }
@@ -378,7 +425,8 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
     private fun getMethodCompatibility(
         uniqueSuggestions: List<MoveMethodSuggestion>,
         psiClass: PsiClass,
-        allMethodsInClass: List<PsiMethod>
+        allMethodsInClass: List<PsiMethod>,
+        compatibilityType: String = "tf-idf"
     ): List<Pair<MoveMethodSuggestion, Double>> {
         val methodSimilarity = runReadAction {
             uniqueSuggestions.map { suggestion ->
@@ -392,8 +440,13 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                     classTextWithoutMethod = getClassWithoutMethod(classTextWithoutMethod, method)
                 }
 
-//                val similarity = VoyageAiEmbeddingModelIT().computeVoyageAiCosineSimilarity(suggestion.psiMethod.text, classTextWithoutMethod, VoyageAiEmbeddingModelName.VOYAGE_3_LITE)
-                val similarity = computeCosineSimilarity(suggestion.psiMethod.text, classTextWithoutMethod)
+                val similarity = if (compatibilityType=="tf-idf") {
+
+                    computeCosineSimilarity(suggestion.psiMethod.text, classTextWithoutMethod)
+                }
+                else{
+                    VoyageAiEmbeddingModelIT().computeVoyageAiCosineSimilarity(suggestion.psiMethod.text, classTextWithoutMethod, VoyageAiEmbeddingModelName.VOYAGE_3_LITE)
+                }
                 Pair(suggestion, similarity)
             }.sortedBy { it.second }
     //                .map { it.first }
@@ -467,9 +520,11 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         )
     }
 
-    private fun addMethodCompatibilityData(methodCompatibilitySuggestions: List<Pair<MoveMethodSuggestion, Double>>) {
+    private fun addMethodCompatibilityData(methodCompatibilitySuggestions: List<Pair<MoveMethodSuggestion, Double>>,
+                                           similarityType: String
+                                           ) {
         telemetryDataManager.addMethodCompatibility(
-            methodCompatibilitySuggestions
+            methodCompatibilitySuggestions, similarityType
         )
 
     }
@@ -480,6 +535,47 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                 index, moveMethodSuggestion ->  log2fileAndViewer(logMessage = "${index+1}. ${moveMethodSuggestion.methodSignature}", logger = logger)
         }
     }
+    
+    private fun getVanillaLlmSuggestions(project: Project, promptIterator: Iterator<MutableList<ChatMessage>>) {
+        val vanillaLLMSuggestions = mutableListOf<MoveMethodSuggestion>()
+
+        for (iter in 1..MAX_ITERS) {
+            log2fileAndViewer("******** ITERATION-$iter ********", logger)
+            val cacheKey = functionSrc + iter.toString()
+            val response: LLMBaseResponse?
+            val llmRequestTime = measureTimeMillis {
+                response = llmResponseCache[cacheKey] ?: sendChatRequest(project, promptIterator.next(), llmChatModel)
+            }
+
+            if (response != null) {
+                val llmText = response.getSuggestions()[0]
+                val processed = JsonUtils.sanitizeJson(llmText.text)
+                val refactoringSuggestions = try {
+                    (JsonParser.parseString(processed) as JsonArray)
+                        .map {
+                            try {
+                                Gson().fromJson(it, MoveMethodSuggestion::class.java)
+                            } catch (e: Exception) {
+                                print("failed to decode json ->$it")
+                                null
+                            }
+                        }.filterNotNull()
+                } catch (e: Exception) {
+                    print("Failed to parse ${processed}")
+                    log2fileAndViewer("LLM response: ${processed}", logger)
+                    e.printStackTrace()
+                    logMethods(listOf(), iter, llmRequestTime)
+                    null
+                }
+                if (refactoringSuggestions != null) {
+                    llmResponseCache[cacheKey] ?: llmResponseCache.put(cacheKey, response) // cache response
+                    vanillaLLMSuggestions.addAll(refactoringSuggestions)
+                    logMethods(refactoringSuggestions, iter, llmRequestTime)
+                }
+            }
+        }
+    }
+            
 
 
 }

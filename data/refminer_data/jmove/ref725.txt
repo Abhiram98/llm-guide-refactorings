@@ -1,0 +1,60 @@
+took 42000 seconds
+Refactoring Type	Source Method	Target Class	Similarity Indice
+Move Method	org.redisson.RedissonLiveObjectService::addExpireListener(CommandAsyncExecutor):void	org.redisson.liveobject.LiveObjectSearch	0.14857142857142858
+Move Method	org.redisson.jcache.JCache::evalWrite(String, Codec, RedisCommand<T>, String, List<Object>, Object[]):R	org.redisson.command.CommandAsyncExecutor	1.0
+Move Method	org.redisson.liveobject.core.RedissonObjectBuilder::getNamingScheme(Class<?>, Codec):NamingScheme	org.redisson.codec.ReferenceCodecProvider	0.6856878470080198
+Move Method	org.redisson.connection.pool.ConnectionPool::isHealthy(ClientConnectionsEntry):boolean	org.redisson.connection.ClientConnectionsEntry	0.9778384494293583
+Move Method	org.redisson.rx.RedissonKeysRx::createKeysIterator(MasterSlaveEntry, String, int):Publisher<String>	org.redisson.connection.MasterSlaveEntry	0.8279590818636829
+Move Method	org.redisson.liveobject.core.LiveObjectInterceptor::intercept(Method, Object[], Object, Object, Setter, Getter, RMap<String,?>, Setter, Getter):Object	org.redisson.RedissonLiveObjectService	0.364594739312335
+Move Method	org.redisson.connection.ServiceManager::toURI(String, String, String):RedisURI	org.redisson.api.NatMapper	0.6493055555555555
+Move Method	org.redisson.connection.MasterSlaveEntry::freeze(ClientConnectionsEntry, FreezeReason):ClientConnectionsEntry	org.redisson.connection.ClientConnectionsEntry	0.9352544907121817
+Move Method	org.redisson.RedissonBaseLock::evalWriteSyncedAsync(String, Codec, RedisCommand<T>, String, List<Object>, Object[]):RFuture<T>	org.redisson.command.CommandAsyncExecutor	1.0
+Move Method	org.redisson.jcache.JCache::waitSync(List<Object>):void	org.redisson.Redisson	0.8019816723038165
+Move Method	org.redisson.RedissonLock::tryLockInnerAsync(long, long, TimeUnit, long, RedisStrictCommand<T>):RFuture<T>	org.redisson.command.CommandAsyncExecutor	0.5385386064030133
+Move Method	org.redisson.client.RedisPubSubConnection::async(MultiDecoder<Object>, RedisCommand<T>, Object[]):ChannelFuture	org.redisson.client.protocol.RedisCommand	0.5392249527410208
+Move Method	org.redisson.client.RedisPubSubConnection::async(CompletableFuture<Void>, MultiDecoder<Object>, RedisCommand<T>, Object[]):ChannelFuture	org.redisson.client.protocol.RedisCommand	0.5397314949201741
+Move Method	org.redisson.transaction.RedissonTransaction::checkTimeout():void	org.redisson.api.TransactionOptions	1.0
+Move Method	org.redisson.connection.ReplicatedConnectionManager::checkNode(RedisURI, ReplicatedServersConfig, Set<InetSocketAddress>):CompletableFuture<Role>	org.redisson.config.ReplicatedServersConfig	0.9
+Move Method	org.redisson.spring.support.RemoteInvocationOptionDecorator::invokeOptions(Element, ParserContext, RedissonNamespaceParserSupport):String	org.redisson.spring.support.RedissonNamespaceParserSupport	0.7223502304147466
+Move Method	org.redisson.client.protocol.decoder.MultiDecoder::getDecoder(Codec, int, State):Decoder<Object>	org.redisson.client.handler.State	0.35
+Move Method	org.redisson.command.RedisCommonBatchExecutor::isWaitCommand(CommandData<?,?>):boolean	org.redisson.client.protocol.CommandData	1.0
+Move Method	org.redisson.remote.BaseRemoteProxy::tryPollAckAgainAsync(RemoteInvocationOptions, String, String):CompletionStage<RemoteServiceAck>	org.redisson.api.RemoteInvocationOptions	0.4592119275825346
+Move Method	org.redisson.connection.SentinelConnectionManager::checkSlavesChange(SentinelServersConfig, RedisConnection):CompletionStage<Void>	org.redisson.config.SentinelServersConfig	0.8523274133998185
+Move Method	org.redisson.cache.LocalCacheView::toCacheKey(Object):CacheKey	org.redisson.RedissonObject	0.9260988307560937
+Move Method	org.redisson.command.RedisQueuedBatchExecutor::getEntry():MasterSlaveEntry	org.redisson.connection.NodeSource	0.45833333333333326
+Move Method	org.redisson.connection.SentinelConnectionManager::checkSentinelsChange(SentinelServersConfig, RedisConnection):CompletionStage<Void>	org.redisson.config.SentinelServersConfig	0.8523274133998185
+Move Method	org.redisson.client.handler.RedisChannelInitializer::initSsl(RedisClientConfig, Channel):void	org.redisson.client.RedisClientConfig	0.8544851220274536
+Move Method	org.redisson.command.CommandBatchService::isWaitCommand(CommandData<?,?>):boolean	org.redisson.client.protocol.CommandData	1.0
+Move Method	org.redisson.command.CommandBatchService::executeAsync():RFuture<BatchResult<?>>	org.redisson.api.BatchOptions	0.7488032566496211
+Move Method	org.redisson.executor.TasksService::cancelExecutionAsync(String):RFuture<Boolean>	org.redisson.command.CommandAsyncExecutor	0.33075060532687645
+Move Method	org.redisson.spring.support.LocalCachedMapOptionsDecorator::invokeOptions(Element, ParserContext, RedissonNamespaceParserSupport):String	org.redisson.spring.support.RedissonNamespaceParserSupport	0.6934562211981566
+Move Method	org.redisson.redisnode.SentinelRedisNode::executeAsync(T, Codec, long, RedisCommand<T>, Object[]):RFuture<T>	org.redisson.command.CommandAsyncExecutor	1.0
+Move Method	org.redisson.connection.ReplicatedConnectionManager::slaveUp(InetSocketAddress, RedisURI):CompletableFuture<Void>	org.redisson.misc.RedisURI	0.6419979212805367
+Move Method	org.redisson.jcache.JCache::evalRead(String, Codec, RedisCommand<T>, String, List<Object>, Object[]):R	org.redisson.command.CommandAsyncExecutor	1.0
+Move Method	org.redisson.jcache.JCache::getUpdateTimeout(long):Long	org.redisson.jcache.configuration.JCacheConfiguration	1.0
+Move Method	org.redisson.client.RedisConnection::fireConnected():void	org.redisson.client.RedisClient	0.8648484848484849
+Move Method	org.redisson.command.CommandBatchService.Entry::addCommand(BatchCommandData<?,?>):void	org.redisson.client.protocol.BatchCommandData	0.9429747207524986
+Move Method	org.redisson.RedissonMap::mapWriterFuture(RFuture<M>, MapWriterTask, Function<M,Boolean>):RFuture<M>	org.redisson.api.MapOptions	0.8970993836671804
+Move Method	org.redisson.RedissonExecutorService::check(Object):void	org.redisson.api.RTopic	0.0625
+Move Method	org.redisson.client.handler.CommandDecoder::handleResult(CommandData<Object,Object>, List<Object>, Object, boolean):void	org.redisson.client.protocol.CommandData	1.0
+Move Method	org.redisson.client.handler.CommandDecoder::selectDecoder(CommandData<Object,Object>, List<Object>):Decoder<Object>	org.redisson.client.protocol.CommandData	1.0
+Move Method	org.redisson.RedissonMap::scanIteratorAsync(String, RedisClient, String, String, int):RFuture<ScanResult<Map.Entry<Object,Object>>>	org.redisson.client.RedisClient	0.6176215960239629
+Move Method	org.redisson.jcache.JCache::getCreationTimeout(long):Long	org.redisson.jcache.configuration.JCacheConfiguration	1.0
+Move Method	org.redisson.rx.RedissonReliableTopicRx::getMessages(Class<M>):Flowable<M>	org.redisson.api.RReliableTopic	0.24561403508771926
+Move Method	org.redisson.jcache.JCache::getAccessTimeout(long):Long	org.redisson.jcache.configuration.JCacheConfiguration	1.0
+Move Method	org.redisson.RedissonLocalCachedMap::readAll(RedisCommand<?>, List<Object>, R):RFuture<R>	org.redisson.command.CommandAsyncExecutor	0.5800376647834277
+Move Method	org.redisson.client.handler.CommandDecoder::messageDecoder(CommandData<Object,Object>, List<Object>):MultiDecoder<Object>	org.redisson.client.protocol.CommandData	1.0
+Move Method	org.redisson.executor.TasksRunnerService::decode(TaskParameters):T	org.redisson.command.CommandAsyncExecutor	0.4117094678696827
+Move Method	org.redisson.jcache.JCache::write(String, RedisCommand<T>, Object[]):R	org.redisson.command.CommandAsyncExecutor	0.8570982089193416
+Move Method	org.redisson.RedissonLiveObjectService::deleteExpired(Object, Class<?>):void	org.redisson.liveobject.LiveObjectSearch	0.7658773568880585
+Move Method	org.redisson.spring.cache.RedissonCache::get(RFuture<V>):V	org.redisson.api.RFuture	0.16923076923076927
+Move Method	org.redisson.client.RedisClient::applyChannelOptions(RedisClientConfig, Bootstrap):void	org.redisson.client.RedisClientConfig	1.0
+Move Method	org.redisson.liveobject.core.AccessorInterceptor::removeAsync(CommandBatchService, String, String, Codec, Object, String):void	org.redisson.command.CommandBatchService	0.5008214284591503
+Move Method	org.redisson.command.RedisExecutor::convertException(CompletableFuture<T>):RedisException	org.redisson.client.RedisException	0.6666666666666666
+Move Method	org.redisson.RedissonMap::scanKeyIteratorAsync(String, RedisClient, String, String, int):RFuture<ScanResult<Object>>	org.redisson.command.CommandAsyncExecutor	1.0
+Move Method	org.redisson.jcache.JCache::scanIterator(String, RedisClient, String):MapScanResult<Object,Object>	org.redisson.client.RedisClient	0.38268638197492133
+Move Method	org.redisson.connection.MasterSlaveEntry::connectionReadOp(RedisCommand<?>, boolean):CompletableFuture<RedisConnection>	org.redisson.connection.pool.MasterPubSubConnectionPool	1.0
+Move Method	org.redisson.RedissonMultimap::fastRemoveAsync(List<Object>, List<Object>, RedisCommand<T>):RFuture<T>	org.redisson.command.CommandAsyncExecutor	0.8776713338246133
+Move Method	org.redisson.client.handler.CommandPubSubDecoder::addPubSubCommand(ChannelName, CommandData<Object,Object>):void	org.redisson.client.protocol.CommandData	0.8936838624338627
+Move Method	org.redisson.remote.AsyncRemoteProxy::awaitResultAsync(RemoteInvocationOptions, RemotePromise<Object>, String, CompletableFuture<RRemoteServiceResponse>):void	org.redisson.api.RemoteInvocationOptions	0.9999999999999999
+Move Method	org.redisson.client.RedisConnection::fireDisconnected():void	org.redisson.client.RedisClient	0.8648484848484849

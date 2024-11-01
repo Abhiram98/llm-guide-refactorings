@@ -1,4 +1,5 @@
 import json
+import os
 from collections import Counter
 from mm_analyser import data_folder
 
@@ -17,18 +18,7 @@ def betterRating(rating1, rating2):
 
 
 files = [
-    'ref_telemetry_data-1.jsonl',
-    'ref_telemetry_data-2.jsonl',
-    'ref_telemetry_data-3.jsonl',
-    'ref_telemetry_data-4.jsonl',
-    'ref_telemetry_data-5.jsonl',
-    'ref_telemetry_data-6.jsonl',
-    'ref_telemetry_data-7.jsonl',
-    'ref_telemetry_data-8.jsonl',
-    'ref_telemetry_data-9.jsonl',
-    'ref_telemetry_data-10.jsonl',
-    'ref_telemetry_data-11.jsonl',
-    'ref_telemetry_data-12.jsonl',
+    i for i in os.listdir(f'{data_folder}/user_study/') if i.endswith('.jsonl')
 ]
 all_user_data = []
 raw_texts = set()
@@ -42,8 +32,14 @@ print(f"{len(raw_texts)=}")
 applied_candidates_count = 0
 total_candidates = 0
 ratings = []
+candidate_signatures = set()
 for telemetry in all_user_data:
+    sign = "".join([c['refactoringInfo'] for c in telemetry["candidatesTelemetryData"]["candidates"]])
+    if sign in candidate_signatures:
+        continue
+    candidate_signatures.add(sign)
     for candidate in telemetry["candidatesTelemetryData"]["candidates"]:
+
         total_candidates += 1
         if candidate["applied"]:
             applied_candidates_count += 1

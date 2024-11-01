@@ -127,6 +127,50 @@ class MoveMethodRefactoringPrompt: MethodPromptBase() {
         )
     }
 
+    fun askForMethodPriorityPrompt(
+        classCode: String,
+        moveMethodSuggestions: List<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion>,
+        limit: Int
+    ): MutableList<ChatMessage> {
+        return mutableListOf(
+            SystemMessage.from("You are an expert Java developer who specializes in move-method refactoring."),
+            UserMessage.from("""
+            Analyze this class and prioritize all candidate methods for potential movement. Follow these exact steps:
+
+            1. First, analyze each candidate method using this format:
+               - Method: [name]
+               - Purpose: [one-line description of what it does]
+               - Dependencies: [what data/methods it uses from current class vs other classes]
+               - Cohesion: [how related is it to class's main purpose]
+
+            2. Then, summarize:
+               - The main responsibility of this class
+               - Which methods align with this responsibility
+               - Which methods could be better placed elsewhere
+
+            3. Finally, provide a JSON array of the top **$limit** candidate method signatures ordered by priority (highest priority first).
+               **Ensure that exactly $limit method signatures are included.**
+
+            **DO NOT include any summary or analysis in the output. Only return the JSON array.**
+
+            Class code:
+            ${classCode}
+
+            Candidate method signatures:
+            ${moveMethodSuggestions.mapIndexed { index, suggestion -> "${index + 1}. ${suggestion.methodSignature}" }.joinToString("\n")}
+                     
+            **Your final output should be only a JSON list of the top $limit method signatures ordered from highest priority to lowest priority, like the example below:**
+
+            [
+                "public void calculateResults(String input)",
+                "private int fetchData(String query)",
+                "protected List<String> processItems(List<Integer> items)"
+                // ... up to $limit method signatures
+            ]
+        """.trimIndent())
+        )
+    }
+
     fun askForTargetClassPriorityPrompt(methodCode: String,
                                         potentialClassBody: String?,
                                         movePivots: List<MoveMethodFactory.MovePivot>): MutableList<ChatMessage>{

@@ -1,0 +1,12 @@
+Refactoring Type	Source Method	Target Class
+Move Method	org.openqa.selenium.chrome.ChromeDriver::generateExecutor(org.openqa.selenium.chrome.ChromeDriverService, org.openqa.selenium.chrome.ChromeOptions, org.openqa.selenium.remote.http.ClientConfig):org.openqa.selenium.chrome.ChromeDriver.ChromeDriverCommandExecutor 	 org.openqa.selenium.remote.service.DriverService
+Move Method	org.openqa.selenium.chrome.ChromeDriver::builder():org.openqa.selenium.remote.RemoteWebDriverBuilder 	 org.openqa.selenium.remote.RemoteWebDriverBuilder
+Move Method	org.openqa.selenium.chrome.ChromeDriver.ChromeDriverCommandExecutor::getExtraCommands():java.util.Map<java.lang.String,org.openqa.selenium.remote.CommandInfo> 	 org.openqa.selenium.chrome.AddHasCdp
+Move Method	org.openqa.selenium.edge.EdgeDriver::generateExecutor(org.openqa.selenium.edge.EdgeDriverService, org.openqa.selenium.edge.EdgeOptions, org.openqa.selenium.remote.http.ClientConfig):org.openqa.selenium.edge.EdgeDriver.EdgeDriverCommandExecutor 	 org.openqa.selenium.internal.Require
+Move Method	org.openqa.selenium.edge.EdgeDriver::builder():org.openqa.selenium.remote.RemoteWebDriverBuilder 	 org.openqa.selenium.remote.RemoteWebDriverBuilder
+Move Method	org.openqa.selenium.edge.EdgeDriver.EdgeDriverCommandExecutor::getExtraCommands():java.util.Map<java.lang.String,org.openqa.selenium.remote.CommandInfo> 	 org.openqa.selenium.edge.AddHasCdp
+Move Method	org.openqa.selenium.firefox.FirefoxDriver::generateExecutor(org.openqa.selenium.firefox.FirefoxDriverService, org.openqa.selenium.firefox.FirefoxOptions, org.openqa.selenium.remote.http.ClientConfig):org.openqa.selenium.firefox.FirefoxDriver.FirefoxDriverCommandExecutor 	 org.openqa.selenium.remote.service.DriverService
+Move Method	org.openqa.selenium.firefox.FirefoxDriver::builder():org.openqa.selenium.remote.RemoteWebDriverBuilder 	 org.openqa.selenium.remote.RemoteWebDriverBuilder
+Move Method	org.openqa.selenium.firefox.FirefoxDriver::checkCapabilitiesAndProxy(org.openqa.selenium.Capabilities):org.openqa.selenium.Capabilities 	 org.openqa.selenium.MutableCapabilities
+Move Method	org.openqa.selenium.firefox.FirefoxDriver::createBiDi(java.util.Optional<java.net.URI>):java.util.Optional<org.openqa.selenium.bidi.BiDi> 	 org.openqa.selenium.remote.http.ClientConfig
+Move Method	org.openqa.selenium.firefox.FirefoxDriver.FirefoxDriverCommandExecutor::getExtraCommands():java.util.Map<java.lang.String,org.openqa.selenium.remote.CommandInfo> 	 org.openqa.selenium.firefox.AddHasExtensions

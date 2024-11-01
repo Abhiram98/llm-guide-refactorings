@@ -1,0 +1,12 @@
+[
+  {
+    "source_class": "org.apache.kafka.coordinator.group.runtime.CoordinatorRuntime",
+    "source_method": "enqueue",
+    "target_class": "org.apache.kafka.coordinator.group.runtime.CoordinatorEventProcessor"
+  },
+  {
+    "source_class": "org.apache.kafka.streams.processor.internals.GlobalStreamThread.StateConsumer",
+    "source_method": "maybeCheckpoint",
+    "target_class": "org.apache.kafka.streams.processor.internals.GlobalStateMaintainer"
+  }
+]

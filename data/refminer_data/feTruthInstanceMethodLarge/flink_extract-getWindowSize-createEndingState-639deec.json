@@ -1,0 +1,127 @@
+[
+  {
+    "source_class": "org.apache.flink.kubernetes.KubernetesWorkerNode",
+    "source_method": "getAttempt",
+    "target_class": "org.apache.flink.runtime.clusterframework.types.ResourceID"
+  },
+  {
+    "source_class": "org.apache.flink.cep.nfa.compiler.NFACompiler",
+    "source_method": "compileFactory",
+    "target_class": "boolean):org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactory<T> \t org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler"
+  },
+  {
+    "source_class": "org.apache.flink.cep.nfa.compiler.NFACompiler",
+    "source_method": "canProduceEmptyMatches",
+    "target_class": "org.apache.flink.cep.nfa.State"
+  },
+  {
+    "source_class": "org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler",
+    "source_method": "checkPatternNameUniqueness",
+    "target_class": "org.apache.flink.cep.pattern.Pattern"
+  },
+  {
+    "source_class": "org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler",
+    "source_method": "checkPatternNameUniqueness",
+    "target_class": "org.apache.flink.cep.pattern.Pattern"
+  },
+  {
+    "source_class": "org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler",
+    "source_method": "getWindowSize",
+    "target_class": "org.apache.flink.cep.pattern.Pattern"
+  },
+  {
+    "source_class": "org.apache.flink.runtime.scheduler.adaptive.Executing",
+    "source_method": "handleDeploymentFailure",
+    "target_class": "org.apache.flink.runtime.JobException):void \t org.apache.flink.runtime.executiongraph.ExecutionVertex"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.DataSinkNode",
+    "source_method": "getPredecessorNode",
+    "target_class": "org.apache.flink.optimizer.dag.DagConnection"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.OptimizerNode",
+    "source_method": "prunePlanAlternatives",
+    "target_class": "org.apache.flink.optimizer.plan.PlanNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.OptimizerNode",
+    "source_method": "prunePlanAlternativesWithCommonBranching",
+    "target_class": "org.apache.flink.optimizer.dataproperties.InterestingProperties"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.OptimizerNode",
+    "source_method": "areBranchCompatible",
+    "target_class": "org.apache.flink.optimizer.plan.PlanNode):boolean \t org.apache.flink.optimizer.plan.PlanNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.SingleInputNode",
+    "source_method": "getPredecessorNode",
+    "target_class": "org.apache.flink.optimizer.dag.DagConnection"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.SingleInputNode",
+    "source_method": "addLocalCandidates",
+    "target_class": "java.util.List<java.util.Set<? extends org.apache.flink.optimizer.plan.NamedChannel>>, org.apache.flink.optimizer.dataproperties.RequestedGlobalProperties, java.util.List<org.apache.flink.optimizer.plan.PlanNode>, org.apache.flink.optimizer.costs.CostEstimator):void \t org.apache.flink.optimizer.plan.Channel"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.TwoInputNode",
+    "source_method": "getFirstPredecessorNode",
+    "target_class": "org.apache.flink.optimizer.dag.DagConnection"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.TwoInputNode",
+    "source_method": "getSecondPredecessorNode",
+    "target_class": "org.apache.flink.optimizer.dag.DagConnection"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.dag.TwoInputNode",
+    "source_method": "addLocalCandidates",
+    "target_class": "org.apache.flink.optimizer.plan.Channel, java.util.List<java.util.Set<? extends org.apache.flink.optimizer.plan.NamedChannel>>, org.apache.flink.optimizer.dataproperties.RequestedGlobalProperties, org.apache.flink.optimizer.dataproperties.RequestedGlobalProperties, java.util.List<org.apache.flink.optimizer.plan.PlanNode>, org.apache.flink.optimizer.operators.OperatorDescriptorDual.LocalPropertiesPair[], org.apache.flink.optimizer.costs.CostEstimator):void \t org.apache.flink.optimizer.plan.Channel"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "mergeBranchPlanMaps",
+    "target_class": "java.util.Map<org.apache.flink.optimizer.dag.OptimizerNode,org.apache.flink.optimizer.plan.PlanNode>):void \t org.apache.flink.optimizer.dag.OptimizerNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "getProgramOperator",
+    "target_class": "org.apache.flink.optimizer.dag.OptimizerNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "getCumulativeCostsShare",
+    "target_class": "org.apache.flink.optimizer.dag.OptimizerNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "setCosts",
+    "target_class": "org.apache.flink.optimizer.costs.Costs"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "getGuaranteedAvailableMemory",
+    "target_class": "org.apache.flink.optimizer.dag.OptimizerNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "setBroadcastInputs",
+    "target_class": "org.apache.flink.optimizer.dag.OptimizerNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "isOnDynamicPath",
+    "target_class": "org.apache.flink.optimizer.dag.OptimizerNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.PlanNode",
+    "source_method": "getCostWeight",
+    "target_class": "org.apache.flink.optimizer.dag.OptimizerNode"
+  },
+  {
+    "source_class": "org.apache.flink.optimizer.plan.SingleInputPlanNode",
+    "source_method": "getPredecessor",
+    "target_class": "org.apache.flink.optimizer.plan.Channel"
+  }
+]

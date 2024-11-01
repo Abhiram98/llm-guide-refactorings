@@ -1,0 +1,422 @@
+[
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "setDistributionType",
+    "target_class": "org.elasticsearch.gradle.testclusters.TestDistribution):void \t org.elasticsearch.gradle.ElasticsearchDistribution"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "cliJvmArgs",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyList"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "jvmOptionExpansions",
+    "target_class": "org.elasticsearch.gradle.Version"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getKeystoreSettings",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getKeystoreFiles",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getCliSetup",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyList"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getSettings",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getSettingKeys",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getSystemProperties",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getEnvironment",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getJvmArgs",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyList"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "getExtraConfigFiles",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.gradle.testclusters.ElasticsearchNode",
+    "source_method": "configureHttpWait",
+    "target_class": "org.elasticsearch.gradle.LazyPropertyMap"
+  },
+  {
+    "source_class": "org.elasticsearch.action.search.MultiSearchRequest",
+    "source_method": "readMultiLineFormat",
+    "target_class": "org.elasticsearch.action.search.XContentParserConfiguration, org.elasticsearch.common.bytes.BytesReference, org.elasticsearch.common.CheckedBiConsumer<org.elasticsearch.action.search.SearchRequest,org.elasticsearch.action.search.XContentParser,java.io.IOException>, java.lang.String[], org.elasticsearch.action.search.IndicesOptions, java.lang.String, java.lang.String, java.lang.Boolean, boolean, org.elasticsearch.common.TriFunction<java.lang.String,java.lang.Object,org.elasticsearch.action.search.SearchRequest,java.lang.Boolean>):void \t org.elasticsearch.action.search.SearchRequest"
+  },
+  {
+    "source_class": "org.elasticsearch.action.search.MultiSearchRequest",
+    "source_method": "writeSearchRequestParams",
+    "target_class": "org.elasticsearch.action.search.XContentBuilder):void \t org.elasticsearch.action.search.SearchRequest"
+  },
+  {
+    "source_class": "org.elasticsearch.action.search.SearchRequest",
+    "source_method": "hasKnnSearch",
+    "target_class": "org.elasticsearch.search.builder.SearchSourceBuilder"
+  },
+  {
+    "source_class": "org.elasticsearch.action.search.SearchRequest",
+    "source_method": "resolveTrackTotalHitsUpTo",
+    "target_class": "org.elasticsearch.search.builder.SearchSourceBuilder):int \t org.elasticsearch.search.builder.SearchSourceBuilder"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.metadata.DesiredNode",
+    "source_method": "readFrom",
+    "target_class": "org.elasticsearch.common.io.stream.StreamInput"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.metadata.DesiredNode",
+    "source_method": "parseLegacyVersion",
+    "target_class": "org.elasticsearch.Version"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.metadata.DesiredNode",
+    "source_method": "roundedDownMinProcessors",
+    "target_class": "org.elasticsearch.common.unit.Processors"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.metadata.DesiredNode",
+    "source_method": "roundedUpMaxProcessors",
+    "target_class": "org.elasticsearch.common.unit.Processors"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.metadata.DataStreamLifecycle",
+    "source_method": "isDataStreamsLifecycleOnlyMode",
+    "target_class": "org.elasticsearch.common.settings.Settings"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.node.DiscoveryNode",
+    "source_method": "isStateless",
+    "target_class": "org.elasticsearch.common.settings.Settings"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.node.DiscoveryNode",
+    "source_method": "hasRole",
+    "target_class": "org.elasticsearch.cluster.node.DiscoveryNodeRole):boolean \t org.elasticsearch.common.settings.Settings"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.node.DiscoveryNode",
+    "source_method": "createLocal",
+    "target_class": "org.elasticsearch.common.transport.TransportAddress, java.lang.String):org.elasticsearch.cluster.node.DiscoveryNode \t org.elasticsearch.common.settings.Setting"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.node.DiscoveryNode",
+    "source_method": "getRolesFromSettings",
+    "target_class": "org.elasticsearch.common.settings.Setting"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.node.DiscoveryNode",
+    "source_method": "inferVersionInformation",
+    "target_class": "org.elasticsearch.index.IndexVersions"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.node.DiscoveryNode",
+    "source_method": "deduplicateNodeIdentifier",
+    "target_class": "org.elasticsearch.common.util.StringLiteralDeduplicator"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.routing.RoutingNode",
+    "source_method": "addInternal",
+    "target_class": "boolean):void \t org.elasticsearch.cluster.routing.ShardRouting"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.routing.RoutingNode",
+    "source_method": "update",
+    "target_class": "org.elasticsearch.cluster.routing.ShardRouting):void \t org.elasticsearch.cluster.routing.ShardRouting"
+  },
+  {
+    "source_class": "org.elasticsearch.cluster.routing.RoutingNode",
+    "source_method": "remove",
+    "target_class": "org.elasticsearch.cluster.routing.ShardRouting"
+  },
+  {
+    "source_class": "org.elasticsearch.health.node.selection.HealthNode",
+    "source_method": "findTask",
+    "target_class": "org.elasticsearch.cluster.ClusterState"
+  },
+  {
+    "source_class": "org.elasticsearch.health.node.selection.HealthNode",
+    "source_method": "findHealthNode",
+    "target_class": "org.elasticsearch.persistent.PersistentTasksCustomMetadata.Assignment"
+  },
+  {
+    "source_class": "org.elasticsearch.index.mapper.vectors.DenseVectorFieldMapper.Builder",
+    "source_method": "similarity",
+    "target_class": "org.elasticsearch.index.mapper.FieldMapper.Parameter"
+  },
+  {
+    "source_class": "org.elasticsearch.index.mapper.vectors.DenseVectorFieldMapper",
+    "source_method": "parseIndexOptions",
+    "target_class": "java.lang.Object):org.elasticsearch.index.mapper.vectors.DenseVectorFieldMapper.IndexOptions \t org.elasticsearch.common.xcontent.support.XContentMapValues"
+  },
+  {
+    "source_class": "org.elasticsearch.node.Node",
+    "source_method": "deleteTemporaryApmConfig",
+    "target_class": "java.util.function.BiConsumer<java.lang.Exception,java.nio.file.Path>):void \t org.elasticsearch.monitor.jvm.JvmInfo"
+  },
+  {
+    "source_class": "org.elasticsearch.node.Node",
+    "source_method": "settings",
+    "target_class": "org.elasticsearch.env.Environment"
+  },
+  {
+    "source_class": "org.elasticsearch.node.Node",
+    "source_method": "configureNodeAndClusterIdStateListener",
+    "target_class": "org.elasticsearch.common.inject.Injector"
+  },
+  {
+    "source_class": "org.elasticsearch.node.Node",
+    "source_method": "stopIfStarted",
+    "target_class": "org.elasticsearch.common.component.Lifecycle.State"
+  },
+  {
+    "source_class": "org.elasticsearch.node.Node",
+    "source_method": "isClosed",
+    "target_class": "org.elasticsearch.common.component.Lifecycle"
+  },
+  {
+    "source_class": "org.elasticsearch.node.Node",
+    "source_method": "writePortsFile",
+    "target_class": "org.elasticsearch.common.transport.BoundTransportAddress):void \t org.elasticsearch.env.Environment"
+  },
+  {
+    "source_class": "org.elasticsearch.node.Node",
+    "source_method": "mergePluginSettings",
+    "target_class": "org.elasticsearch.common.settings.Settings):org.elasticsearch.common.settings.Settings \t org.elasticsearch.common.settings.Settings"
+  },
+  {
+    "source_class": "org.elasticsearch.search.internal.ShardSearchRequest",
+    "source_method": "computeWaitForCheckpoint",
+    "target_class": "org.elasticsearch.index.shard.ShardId, int):long \t org.elasticsearch.index.Index"
+  },
+  {
+    "source_class": "org.elasticsearch.search.internal.ShardSearchRequest",
+    "source_method": "source",
+    "target_class": "org.elasticsearch.search.builder.SearchSourceBuilder"
+  },
+  {
+    "source_class": "org.elasticsearch.search.internal.ShardSearchRequest",
+    "source_method": "cacheKey",
+    "target_class": "org.elasticsearch.common.io.stream.BytesStreamOutput"
+  },
+  {
+    "source_class": "org.elasticsearch.search.internal.ShardSearchRequest",
+    "source_method": "parseAliasFilter",
+    "target_class": "org.elasticsearch.cluster.metadata.IndexMetadata, java.lang.String[]):org.elasticsearch.index.query.QueryBuilder \t org.elasticsearch.cluster.metadata.IndexMetadata"
+  },
+  {
+    "source_class": "org.elasticsearch.search.internal.ShardSearchRequest",
+    "source_method": "getRuntimeMappings",
+    "target_class": "org.elasticsearch.search.builder.SearchSourceBuilder"
+  },
+  {
+    "source_class": "org.elasticsearch.search.query.QuerySearchRequest",
+    "source_method": "getDescription",
+    "target_class": "org.elasticsearch.action.OriginalIndices"
+  },
+  {
+    "source_class": "org.elasticsearch.snapshots.SnapshotShardsService",
+    "source_method": "cancelRemoved",
+    "target_class": "org.elasticsearch.cluster.SnapshotsInProgress"
+  },
+  {
+    "source_class": "org.elasticsearch.snapshots.SnapshotShardsService",
+    "source_method": "getShardStateId",
+    "target_class": "org.elasticsearch.snapshots.IndexCommit):java.lang.String \t org.elasticsearch.index.seqno.SequenceNumbers"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.trainedmodel.tree.TreeNode",
+    "source_method": "addOptionalDouble",
+    "target_class": "org.elasticsearch.xpack.core.ml.inference.trainedmodel.tree.ParseField, double):void \t org.elasticsearch.common.Numbers"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig",
+    "source_method": "createParser",
+    "target_class": "org.elasticsearch.xpack.core.ml.inference.persistence.InferenceIndexConstants"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig",
+    "source_method": "handleDefaultInput",
+    "target_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelType):org.elasticsearch.xpack.core.ml.inference.TrainedModelInput \t org.elasticsearch.xpack.core.ml.inference.TrainedModelType"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig",
+    "source_method": "ensureParsedDefinition",
+    "target_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig.LazyModelDefinition"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig",
+    "source_method": "ensureParsedDefinitionUnsafe",
+    "target_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig.LazyModelDefinition"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig.Builder",
+    "source_method": "setParsedDefinition",
+    "target_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelDefinition.Builder"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig.Builder",
+    "source_method": "checkIllegalSetting",
+    "target_class": "java.lang.String, org.elasticsearch.action.ActionRequestValidationException):org.elasticsearch.action.ActionRequestValidationException \t org.elasticsearch.action.ValidateActions"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig.Builder",
+    "source_method": "checkIllegalPackagedModelSetting",
+    "target_class": "java.lang.String, org.elasticsearch.action.ActionRequestValidationException):org.elasticsearch.action.ActionRequestValidationException \t org.elasticsearch.action.ValidateActions"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig.LazyModelDefinition",
+    "source_method": "fromStreamInput",
+    "target_class": "org.elasticsearch.common.io.stream.StreamInput"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.ml.inference.TrainedModelConfig.LazyModelDefinition",
+    "source_method": "getBase64CompressedDefinition",
+    "target_class": "org.elasticsearch.common.bytes.BytesReference"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.search.action.SubmitAsyncSearchRequest",
+    "source_method": "setBatchedReduceSize",
+    "target_class": "org.elasticsearch.action.search.SearchRequest"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.core.search.action.SubmitAsyncSearchRequest",
+    "source_method": "getBatchReduceSize",
+    "target_class": "org.elasticsearch.action.search.SearchRequest"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.eql.action.EqlSearchRequest",
+    "source_method": "validateRuntimeMappings",
+    "target_class": "org.elasticsearch.action.ActionRequestValidationException):org.elasticsearch.action.ActionRequestValidationException \t org.elasticsearch.action.ValidateActions"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.eql.action.EqlSearchRequest",
+    "source_method": "parseFetchFields",
+    "target_class": "org.elasticsearch.search.fetch.subphase.FieldAndFormat"
+  },
+  {
+    "source_class": "org.elasticsearch.compute.data.BytesRefVectorBlock",
+    "source_method": "getBytesRefLookup",
+    "target_class": "org.elasticsearch.common.unit.ByteSizeValue):org.elasticsearch.compute.data.BytesRefLookup \t org.elasticsearch.compute.data.BytesRefVector"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.esql.planner.LocalExecutionPlanner",
+    "source_method": "planAggregation",
+    "target_class": "org.elasticsearch.xpack.esql.planner.LocalExecutionPlannerContext):org.elasticsearch.xpack.esql.planner.PhysicalOperation \t org.elasticsearch.xpack.esql.planner.PhysicalOperationProviders"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.esql.planner.LocalExecutionPlanner",
+    "source_method": "planEsQueryNode",
+    "target_class": "org.elasticsearch.xpack.esql.planner.LocalExecutionPlannerContext):org.elasticsearch.xpack.esql.planner.PhysicalOperation \t org.elasticsearch.xpack.esql.planner.PhysicalOperationProviders"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.esql.planner.LocalExecutionPlanner",
+    "source_method": "planFieldExtractNode",
+    "target_class": "org.elasticsearch.xpack.esql.planner.LocalExecutionPlannerContext):org.elasticsearch.xpack.esql.planner.PhysicalOperation \t org.elasticsearch.xpack.esql.planner.PhysicalOperationProviders"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.esql.session.EsqlSession",
+    "source_method": "preAnalyzeIndices",
+    "target_class": "org.elasticsearch.action.ActionListener<org.elasticsearch.xpack.ql.index.IndexResolution>, java.util.Set<java.lang.String>):void \t org.elasticsearch.xpack.ql.analyzer.TableInfo"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.esql.session.EsqlSession",
+    "source_method": "fieldNames",
+    "target_class": "java.util.Set<java.lang.String>):java.util.Set<java.lang.String> \t org.elasticsearch.xpack.ql.plan.QueryPlan"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.esql.session.EsqlSession",
+    "source_method": "matchByName",
+    "target_class": "java.lang.String, boolean):boolean \t org.elasticsearch.common.regex.Regex"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.esql.session.EsqlSession",
+    "source_method": "specificValidity",
+    "target_class": "java.util.Map<java.lang.String,org.elasticsearch.action.fieldcaps.FieldCapabilities>):org.elasticsearch.xpack.ql.type.InvalidMappedField \t org.elasticsearch.action.fieldcaps.FieldCapabilities"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.ilm.IndexLifecycle",
+    "source_method": "xContentEntries",
+    "target_class": "org.elasticsearch.xpack.core.ilm.ReadOnlyAction"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.ql.tree.Node",
+    "source_method": "sourceLocation",
+    "target_class": "org.elasticsearch.xpack.ql.tree.Source"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.ql.tree.Node",
+    "source_method": "sourceText",
+    "target_class": "org.elasticsearch.xpack.ql.tree.Source"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "initialMasterNodesSettingValue",
+    "target_class": "org.elasticsearch.env.Environment"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "getSubjectAltNames",
+    "target_class": "org.elasticsearch.common.network.NetworkUtils"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "isInitialClusterNode",
+    "target_class": "org.elasticsearch.discovery.DiscoveryModule"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "fullyWriteFile",
+    "target_class": "java.lang.String, boolean, java.lang.String, org.elasticsearch.xpack.security.cli.CheckedConsumer<java.io.OutputStream,java.lang.Exception>):void \t org.elasticsearch.common.UUIDs"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "parseCertificateFromPem",
+    "target_class": "org.elasticsearch.xpack.security.cli.Terminal):java.security.cert.X509Certificate \t org.elasticsearch.xpack.core.ssl.CertParsingUtils"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "parseKeyFromPem",
+    "target_class": "org.elasticsearch.xpack.security.cli.Terminal):java.security.PrivateKey \t org.elasticsearch.ExceptionsHelper"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "removePreviousAutoconfiguration",
+    "target_class": "org.elasticsearch.common.settings.Settings"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.security.cli.AutoConfigureNode",
+    "source_method": "removeAutoConfigurationFromKeystore",
+    "target_class": "org.elasticsearch.xpack.security.cli.Terminal):void \t org.elasticsearch.common.settings.KeyStoreWrapper"
+  },
+  {
+    "source_class": "org.elasticsearch.xpack.transform.TransformNode",
+    "source_method": "isShuttingDown",
+    "target_class": "org.elasticsearch.cluster.ClusterState"
+  }
+]
