@@ -13,7 +13,7 @@ with open(plugin_outfile_path) as f:
 
 
 PROJECT_ALIAS_MAP_FLIPPED = {v:k for k,v in PROJECT_ALIAS_MAP.items()}
-project_name = "ruoyi-vue-pro"
+project_name = "graal"
 emm_data_path = f"{data_folder}/refminer_data/filter_emm/{PROJECT_ALIAS_MAP_FLIPPED[project_name]}"
 repo = git.Repo(f"{PROJECTS_BASE_PATH}/{project_name}")
 with open(emm_data_path) as f:

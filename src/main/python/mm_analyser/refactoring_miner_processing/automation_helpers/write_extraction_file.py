@@ -5,12 +5,12 @@ from mm_analyser.env import PROJECT_ALIAS_MAP, PROJECTS_BASE_PATH
 from mm_analyser import data_folder, resources_folder
 from mm_analyser.refactoring_miner_processing.filter.ExtractMoveMethodValidator import ExtractMoveMethodRef
 
-
+LIMIT=100
 plugin_file_name = "extraction_files_and_ranges.json"
 plugin_file_path = f"{data_folder}/plugin_input_files/{plugin_file_name}"
 
 PROJECT_ALIAS_MAP_FLIPPED = {v:k for k,v in PROJECT_ALIAS_MAP.items()}
-project_name = "ruoyi-vue-pro"
+project_name = "ghidra"
 emm_data_path = f"{data_folder}/refminer_data/filter_emm/{PROJECT_ALIAS_MAP_FLIPPED[project_name]}"
 repo = git.Repo(f"{PROJECTS_BASE_PATH}/{project_name}")
 with open(emm_data_path) as f:
@@ -19,8 +19,17 @@ with open(emm_data_path) as f:
 
 file_data = []
 one_liners = 0
-
-for mm in emm_data:
+count = 0
+for i, mm in enumerate(emm_data):
+    if mm['move_method_refactoring']['isStatic']:
+        print("skipping static method")
+        continue
+    if 'extraction_results' in mm:
+        print("previously complete. skipping")
+        continue
+    count += 1
+    if count>LIMIT:
+        break
     emm_ref = ExtractMoveMethodRef.create_from(mm["move_method_refactoring"])
     extracted_range = emm_ref.extracted_range
     commit_hash = mm['sha1']
