@@ -28,7 +28,7 @@ data class MethodSignature(val methodName: String, val paramsList: List<Paramete
                 return emptyList()
             return methodParams.substring(1, methodParams.length-1).split(", ")
                 .map {
-                    val nameAndType = it.strip().split(" ")
+                    val nameAndType = it.trim().split(" ")
                     Parameter(nameAndType[0], nameAndType[1])
                 }
         }

@@ -69,7 +69,7 @@ open class CreateBenchmarkForFile(
             .map{ it.asJsonObject.get("codeElement").asString}
             .get(0)
         val splitColonOld = oldVariableDeclaration.split(":")
-        val oldParam = Parameter(name= splitColonOld[0].strip(), type = splitColonOld[1].strip())
+        val oldParam = Parameter(name= splitColonOld[0].trim(), type = splitColonOld[1].trim())
 
         val newVariableDeclaration = refactoring.asJsonObject
             .get("rightSideLocations").asJsonArray
@@ -77,7 +77,7 @@ open class CreateBenchmarkForFile(
             .map{ it.asJsonObject.get("codeElement").asString}
             .get(0)
         val newSplitColon = newVariableDeclaration.split(":")
-        val newParam = Parameter(name= newSplitColon[0].strip(), type = newSplitColon[1].strip())
+        val newParam = Parameter(name= newSplitColon[0].trim(), type = newSplitColon[1].trim())
 
         val methodSignatureString = refactoring.asJsonObject
             .get("rightSideLocations").asJsonArray
@@ -135,13 +135,13 @@ open class CreateBenchmarkForFile(
             val oldName = refactoring.asJsonObject
                 .get("leftSideLocations").asJsonArray
                 .filter { it.asJsonObject.get("description").asString.equals("original variable declaration") }
-                .map{ it.asJsonObject.get("codeElement").asString.split(":")[0].strip()}
+                .map{ it.asJsonObject.get("codeElement").asString.split(":")[0].trim()}
                 .get(0)
 
             val newName = refactoring.asJsonObject
                 .get("rightSideLocations").asJsonArray
                 .filter { it.asJsonObject.get("description").asString.equals("renamed variable declaration") }
-                .map{ it.asJsonObject.get("codeElement").asString.split(":")[0].strip()}
+                .map{ it.asJsonObject.get("codeElement").asString.split(":")[0].trim()}
                 .get(0)
 
             val psiClass = (file as PsiJavaFileImpl).classes
