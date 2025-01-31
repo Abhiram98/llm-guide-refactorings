@@ -12,7 +12,7 @@ with open("v1_dataset_neo4j_neo4j.json") as f:
 #
 #     v2_hash = commit_parts[-1]
 #
-#     repo = git.Repo(f"/Users/abhiram/Documents/TBE/evaluation_projects/{project_folder_name}")
+#     repo = git_repo.Repo(f"/Users/abhiram/Documents/TBE/evaluation_projects/{project_folder_name}")
 #     v1_hash = repo.commit(v2_hash).parents[0].hexsha
 #
 #     ref_file["v2_hash"] = v2_hash
@@ -47,7 +47,7 @@ with open("v1_dataset_neo4j_neo4j_augmented.json", "w") as f:
     json.dump(v1_dataset, f, indent=4)
 
 # push branches
-git_repo = git.Repo("/Users/abhiram/Documents/TBE/evaluation_projects/neo4j/.git")
+git_repo = git.Repo("/Users/abhiram/Documents/TBE/evaluation_projects/neo4j/.git_repo")
 for r in v1_dataset:
     branch = r["v2_prime_branch"]
     try:

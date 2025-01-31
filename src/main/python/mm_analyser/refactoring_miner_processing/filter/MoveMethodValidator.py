@@ -20,7 +20,7 @@ class MoveMethodValidator(rm.RminerValidator):
     def preconditions(self, moveref: MoveMethodRef.MoveMethodRef):
         # return True
         # checkout before after
-        self.repo.git.checkout(self.commit_after, force=True)
+        self.repo.git_repo.checkout(self.commit_after, force=True)
         both_files_exist = (os.path.exists(
             os.path.join(self.project_basepath, moveref.right_file_path)
         ) and os.path.exists(
@@ -36,7 +36,7 @@ class MoveMethodValidator(rm.RminerValidator):
             return False
 
         # checkout commit before
-        self.repo.git.checkout(self.commit_before, force=True)
+        self.repo.git_repo.checkout(self.commit_before, force=True)
         return (os.path.exists(
             os.path.join(self.project_basepath, moveref.right_file_path)
         ) and os.path.exists(
@@ -104,7 +104,7 @@ class MoveMethodValidator(rm.RminerValidator):
         return True
 
     def find_field_types(self, left_file_path, original_class):
-        self.repo.git.checkout(self.commit_before, force=True)
+        self.repo.git_repo.checkout(self.commit_before, force=True)
         outputpath = f"{MoveMethodValidator.output_dir}/fieldTypes.json"
         filepath = os.path.join(self.project_basepath, left_file_path)
         result = subprocess.run([
@@ -122,7 +122,7 @@ class MoveMethodValidator(rm.RminerValidator):
         return [Field(field['field_name'], field['field_type']) for field in field_data]
 
     def is_class_static(self, class_qualified_name, file_path):
-        self.repo.git.checkout(self.commit_before, force=True)
+        self.repo.git_repo.checkout(self.commit_before, force=True)
         outputpath = f"{MoveMethodValidator.output_dir}/isClassStatic.txt"
         filepath = os.path.join(self.project_basepath, file_path)
         result = subprocess.run([

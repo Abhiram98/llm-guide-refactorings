@@ -9,7 +9,14 @@ def filter_refactorings(rminer_out):
         f = []
         for i in commit['refactorings']:
             if any([val in i['type'] for val in
-                    ["Type", "Add", "Remove", "Access Modifier", "Annotation"]]
+                    [
+                        # "Type",
+                        "Add",
+                        "Remove",
+                        "Access Modifier",
+                        "Annotation"
+                    ]
+                    ]
                    ):
                 continue
             f.append(i)
@@ -20,7 +27,12 @@ def filter_refactorings(rminer_out):
 
 
 if __name__ == '__main__':
-    with open("/Users/abhiram/Documents/TBE/evaluation_projects/cassandra-ref-miner.json") as f:
+    # file_path = "/Users/abhiram/Documents/TBE/evaluation_projects/cassandra-ref-miner.json"
+    # file_path = "/Users/abhiram/Documents/TBE/evaluation_projects/refminer-results/redisson_res.json"
+    # file_path = "/Users/abhiram/Documents/TBE/evaluation_projects/refminer-results/flink_res.json"
+    file_path = "/Users/abhiram/Documents/TBE/evaluation_projects/refminer-results/ghidra_res.json"
+
+    with open(file_path) as f:
         rminer_out = json.load(f)
 
     filter_refactorings(rminer_out)
@@ -30,8 +42,11 @@ if __name__ == '__main__':
     for commit in rminer_out['commits']:
         for r in commit['refactorings']:
             try:
+                file_path = r['leftSideLocations'][0]['filePath']
+                if 'Test' in file_path:
+                    continue
                 commit_file_changed_map[commit['sha1']].add(
-                    r['leftSideLocations'][0]['filePath']
+                    file_path
                 )
             except:
                 continue
@@ -55,16 +70,18 @@ if __name__ == '__main__':
         interesting_commits = one_commit[interesting_file]
         refactorings_performed_in_commits = [
             {**i, "refactorings": [j for j in i['refactorings'] if
-                                   len(j['leftSideLocations']) and j['leftSideLocations'][0]['filePath'] == interesting_file]}
+                                   len(j['leftSideLocations']) and j['leftSideLocations'][0][
+                                       'filePath'] == interesting_file]}
             for i in rminer_out['commits'] if i['sha1'] in interesting_commits]
         file_refactoring_map[interesting_file] = refactorings_performed_in_commits
 
     print(file_refactoring_map)
     file_refactoring_map_ge_5_refactorings = \
-        {k:v for k,v in file_refactoring_map.items() if len(v[0]['refactorings'])>=5}
+        {k: v for k, v in file_refactoring_map.items()
+         if len(v[0]['refactorings']) >= 3 and len(set([i['type'] for i in v[0]['refactorings']])) >= 2}
 
     # ge_2_commits[
     #     'x-pack/plugin/inference/src/main/java/org/elasticsearch/xpack/inference/services/elasticsearch/MultilingualE5SmallInternalServiceSettings.java']
 
-    with open("/Users/abhiram/Documents/TBE/evaluation_projects/casandra-interesting-files.json", "w") as f:
+    with open("/Users/abhiram/Documents/TBE/evaluation_projects/refminer-results/ghidra_res_ge5_v0.2.json", "w") as f:
         json.dump(file_refactoring_map_ge_5_refactorings, f, indent=4)

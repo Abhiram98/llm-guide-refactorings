@@ -19,6 +19,8 @@ dependencies {
         exclude("org.slf4j", "slf4j-api")
     }
 
+    implementation ("com.github.tsantalis:refactoring-miner:3.0.10")
+
     implementation("dev.langchain4j:langchain4j:0.33.0")
     implementation("dev.langchain4j:langchain4j-ollama:0.33.0")
     implementation("dev.langchain4j:langchain4j-open-ai:0.33.0")
