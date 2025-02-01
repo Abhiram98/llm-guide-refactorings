@@ -31,14 +31,30 @@ dependencies {
     implementation("com.github.javaparser:javaparser-symbol-solver-core:3.26.2")
 
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.6")
+    implementation("io.ktor:ktor-server-netty:3.0.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+    implementation("io.ktor:ktor-server-core-jvm:3.0.3")
+    implementation("io.ktor:ktor-server-host-common-jvm:3.0.3")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm:3.0.3")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:3.0.3")
+    implementation("io.ktor:ktor-server-netty-jvm:3.0.3")
+//    implementation("ch.qos.logback:logback-classic")
+    implementation("io.ktor:ktor-server-config-yaml:3.0.3")
+    testImplementation("io.ktor:ktor-client-content-negotiation:3.0.3")
+    testImplementation("io.ktor:ktor-server-test-host-jvm")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:3.0.3")
+    testImplementation("com.jayway.jsonpath:json-path:2.9.0")
 
     testImplementation(kotlin("test"))
+    testImplementation("io.ktor:ktor-server-test-host-jvm:3.0.3")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.0")
 }
 
 plugins {
     id("java")
     id("org.jetbrains.changelog") version "2.0.0"
     id("org.jetbrains.intellij") version "1.12.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
     kotlin("jvm") version "1.8.21"
     application
 }

@@ -25,16 +25,24 @@ class RenameVariableFactory {
         ): List<AbstractRefactoring> {
 
             val params = getParamsFromFuncCall(funcCall)
-            val newName = getStringFromParam(params[1])
-            val oldName = getStringFromParam(params[0])
+            return fromOldNewName(project, editor, file, getStringFromParam(params[1]), getStringFromParam(params[0]))
+        }
+
+        fun fromOldNewName(
+            project: Project,
+            editor: Editor,
+            file: PsiFile,
+            oldName: String,
+            newName: String,
+        ): List<AbstractRefactoring> {
             val functionPsi: PsiElement =
                 runReadAction {
-                    PsiUtils.getParentFunctionOrNull(editor, language = file.language)?:
-                    file.getChildOfType<PsiClass>()
+                    PsiUtils.getParentFunctionOrNull(editor, language = file.language)
+                        ?: file.getChildOfType<PsiClass>()
                 }!!
 
-            val renameObj = RenameVariableFactory.fromOldNewName(project, functionPsi, oldName, newName)
-            if (renameObj!=null)
+            val renameObj = fromOldNewName(project, functionPsi, oldName, newName)
+            if (renameObj != null)
                 return listOf(renameObj)
             return listOf()
         }

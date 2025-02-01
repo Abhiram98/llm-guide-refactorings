@@ -32,6 +32,12 @@
             <bundleName>messages.LLMBundle</bundleName>
             <categoryKey>intention.category.suggest.refactoring</categoryKey>
         </intentionAction>
+        <intentionAction>
+            <language>JAVA</language>
+            <className>com.intellij.ml.llm.template.intentions.RefactoringServerIntention</className>
+            <bundleName>messages.LLMBundle</bundleName>
+            <categoryKey>intention.category.suggest.refactoring</categoryKey>
+        </intentionAction>
 <!--        <intentionAction>-->
 <!--            <className>com.intellij.ml.llm.template.intentions.ApplyMoveMethodOnProjectIntention</className>-->
 <!--            <bundleName>messages.LLMBundle</bundleName>-->
