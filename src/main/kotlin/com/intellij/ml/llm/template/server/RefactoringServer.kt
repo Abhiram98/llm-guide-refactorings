@@ -1,5 +1,6 @@
 package com.intellij.ml.llm.template.server
 
+import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariable
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.openapi.application.invokeLater
@@ -30,6 +31,22 @@ class RefactoringServer(val project: Project, val editor: Editor, val file: PsiF
         val oldName: String,
         val newName: String
     )
+
+    @Serializable
+    data class ExtractMethodParams(
+        val startLine: Int,
+        val endLine: Int,
+        val newName: String
+    )
+
+    @Serializable
+    data class MoveMethodParams(
+        val methodName: String,
+        val methodSignature: String?,
+        val targetClass: String
+    )
+
+
 
     fun start(){
         println("Starting refactoring server")
@@ -64,6 +81,37 @@ class RefactoringServer(val project: Project, val editor: Editor, val file: PsiF
                     call.respond(HttpStatusCode.BadRequest)
                 } catch (ex: JsonConvertException) {
                     print("failed")
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+            }
+            post("/extract-method"){
+                try {
+                    val params = call.receive<ExtractMethodParams>()
+                    println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
+
+                    // Call IJ rename API here.
+                    val refObjs = ExtractMethodFactory.fromStartEndLine(editor, file, params.startLine, params.endLine, params.newName)
+                    if (refObjs.isNotEmpty())
+                        invokeLater { refObjs[0].performRefactoring(project, editor, file) }
+
+                    call.respond(HttpStatusCode.NoContent)
+                } catch (ex: IllegalStateException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: JsonConvertException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+            }
+            post("/move-method"){
+                try {
+                    val params = call.receive<MoveMethodParams>()
+                    println("attempting to move ${params.methodName} -> ${params.targetClass}")
+                    println("method signature: ${params.methodSignature}")
+
+
+                    call.respond(HttpStatusCode.NoContent)
+                } catch (ex: IllegalStateException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: JsonConvertException) {
                     call.respond(HttpStatusCode.BadRequest)
                 }
             }
