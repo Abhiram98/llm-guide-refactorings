@@ -23,6 +23,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import javax.swing.SwingUtilities.invokeAndWait
 
 class RefactoringServer(val project: Project, val editor: Editor, val file: PsiFile) {
 
@@ -73,7 +74,7 @@ class RefactoringServer(val project: Project, val editor: Editor, val file: PsiF
                     val renameObject = RenameVariableFactory.fromOldNewName(
                         project, editor, file, params.oldName, params.newName)
                     if (renameObject.isNotEmpty())
-                        invokeLater { renameObject[0].performRefactoring(project, editor, file) }
+                        invokeAndWait { renameObject[0].performRefactoring(project, editor, file) }
 
                     call.respond(HttpStatusCode.NoContent)
                 } catch (ex: IllegalStateException) {
@@ -91,14 +92,17 @@ class RefactoringServer(val project: Project, val editor: Editor, val file: PsiF
 
                     // Call IJ rename API here.
                     val refObjs = ExtractMethodFactory.fromStartEndLine(editor, file, params.startLine, params.endLine, params.newName)
-                    if (refObjs.isNotEmpty())
-                        invokeLater { refObjs[0].performRefactoring(project, editor, file) }
+                    if (refObjs.isNotEmpty()) {
+                        invokeAndWait{ refObjs[0].performRefactoring(project, editor, file) }
+                    }
 
                     call.respond(HttpStatusCode.NoContent)
                 } catch (ex: IllegalStateException) {
                     call.respond(HttpStatusCode.BadRequest)
+                    ex.printStackTrace()
                 } catch (ex: JsonConvertException) {
                     call.respond(HttpStatusCode.BadRequest)
+                    ex.printStackTrace()
                 }
             }
             post("/move-method"){
