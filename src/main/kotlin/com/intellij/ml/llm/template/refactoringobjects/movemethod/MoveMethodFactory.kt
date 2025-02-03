@@ -13,7 +13,6 @@ import com.intellij.ml.llm.template.refactoringobjects.MyRefactoringFactory
 import com.intellij.ml.llm.template.telemetry.EFTelemetryDataManager
 import com.intellij.ml.llm.template.utils.JsonUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
-import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
@@ -23,7 +22,6 @@ import com.intellij.psi.*
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.refactoring.move.MoveCallback
 import com.intellij.refactoring.move.MoveInstanceMembersUtil
-import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProcessor
 import com.intellij.refactoring.move.moveMembers.MoveMembersDialog
 import com.intellij.refactoring.openapi.impl.JavaRefactoringFactoryImpl
@@ -31,14 +29,12 @@ import com.intellij.refactoring.suggested.startOffset
 import com.intellij.usageView.UsageInfo
 import dev.langchain4j.model.chat.ChatLanguageModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.getChildOfType
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
-import org.jetbrains.kotlin.idea.refactoring.showWithTransaction
 
 
 class MoveMethodFactory {
@@ -382,15 +378,22 @@ class MoveMethodFactory {
         ): List<AbstractRefactoring>{
 
             if (PsiUtils.isMethodStatic(methodToMove)) {
-                val qualifiedClassName = PsiUtils.getQualifiedTypeInFile(
-                    methodToMove.containingFile, targetClassName
-                )
-                if (qualifiedClassName!=null){
-                    return createStaticMove(methodToMove, editor, qualifiedClassName)
+                val classesInProject: List<PsiClass> = PsiUtils.fetchClassesInProject(methodToMove.containingClass!!, project)
+                val matchingClasses = classesInProject
+                    .filter { it.name == targetClassName }
+                    .map { it.qualifiedName }
+                    .filterNotNull()
+                if (matchingClasses.isNotEmpty()){
+                    return createStaticMove(methodToMove, editor, matchingClasses[0], autoRefactor = true)
                 }
             }else{
                 val variableOfType = PsiUtils.getVariableOfType(methodToMove, targetClassName)
                 if (variableOfType!=null){
+                    val classPsi = PsiUtils.findClassFromQualifier((variableOfType as PsiVariable).type.canonicalText, project)
+                    if (classPsi!=null)
+                        return listOf(
+                            createInstanceMethodObj(project, methodToMove, editor, variableOfType, classPsi)
+                        )
 //                    return createMoveMethodRefactorings(variableOfType, project, methodToMove, editor)
                 }
             }
@@ -398,16 +401,51 @@ class MoveMethodFactory {
             return listOf()
         }
 
+        private fun createInstanceMethodObj(
+            project: Project,
+            methodToMove: PsiMethod,
+            editor: Editor,
+            variableOfType: PsiVariable,
+            classPsi: PsiClass
+        ) : MyAutoMoveInstanceMethodRefactoring {
+            val processor = runReadAction {
+                MoveInstanceMethodProcessor(
+                    project, methodToMove, variableOfType, "public",
+                    runReadAction {
+                        getParamNamesIfNeeded(
+                            MoveInstanceMembersUtil.getThisClassesToMembers(methodToMove),
+                            variableOfType as? PsiField
+                        )
+                    }
+                )
+            }
+            return MyAutoMoveInstanceMethodRefactoring(
+                methodToMove.startLine(editor.document),
+                methodToMove.endLine(editor.document),
+                methodToMove,
+                processor,
+                classPsi
+            )
+        }
+
         fun createStaticMove(
             methodToMove: PsiMethod,
             editor: Editor,
-            qualifiedClassName: String
-        ): List<MyMoveStaticMethodRefactoring> {
+            qualifiedClassName: String,
+            autoRefactor: Boolean = false
+        ): List<AbstractRefactoring> {
 
             val classToMoveTo = JavaPsiFacade.getInstance(methodToMove.project)
                 .findClass(qualifiedClassName, GlobalSearchScope.projectScope(methodToMove.project))
             if (classToMoveTo==null) return emptyList()
-
+            if (autoRefactor)
+                return listOf(
+                    MyAutoMoveStaticMethodRefactoring(
+                        methodToMove.startLine(editor.document),
+                        methodToMove.endLine(editor.document),
+                        methodToMove, classToMoveTo
+                    )
+                )
             return listOf(
                 MyMoveStaticMethodRefactoring(
                     methodToMove.startLine(editor.document),
@@ -458,7 +496,61 @@ class MoveMethodFactory {
                 val moveDialog = MyMoveInstanceMethodDialog(methodToMove, arrayOf(psiVariable), MyMoveCallBack(this))
                 moveDialog.show()
 //                applied = moveDialog.triggeredRefactoring
-                reverseRefactoring = getReverseRefactoringObject(project, editor, file)
+//                reverseRefactoring = getReverseRefactoringObject(project, editor, file)
+            }
+
+            override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
+                isValid = methodToMove.isPhysical
+                return isValid!!
+            }
+
+            override fun getRefactoringPreview(): String {
+                return "Move method ${methodToMove.name} to class ${classToMoveTo.name}"
+            }
+
+            override fun getStartOffset(): Int {
+                return methodToMove.startOffset
+            }
+
+            override fun getEndOffset(): Int {
+                return methodToMove.endOffset
+            }
+
+            override fun getReverseRefactoringObject(
+                project: Project,
+                editor: Editor,
+                file: PsiFile
+            ): AbstractRefactoring? {
+                TODO("Not yet implemented")
+            }
+
+            override fun recalibrateRefactoring(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+                if (isValid==true)
+                    return this
+                return null // TODO: implement search
+            }
+
+        }
+
+        class MyAutoMoveInstanceMethodRefactoring(
+            override val startLoc: Int,
+            override val endLoc: Int,
+            val methodToMove: PsiMethod,
+            val processor: MoveInstanceMethodProcessor,
+            val classToMoveTo: PsiClass,
+            val rationale: String? = null
+        ) : AbstractRefactoring(){
+
+            init {
+                description = runReadAction{
+                    "Move method ${methodToMove.name} to ${classToMoveTo.qualifiedName}\n" +
+                            "Rationale: $rationale"
+                }
+            }
+            override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
+                super.performRefactoring(project, editor, file)
+                applied = true
+                processor.run()
             }
 
             override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
@@ -536,6 +628,24 @@ class MoveMethodFactory {
             return parameterNames
         }
 
+        fun createMoveMethodFromName(
+            editor: Editor,
+            file: PsiFile,
+            project: Project,
+            methodName: String,
+            targetClassName: String
+        ): List<AbstractRefactoring> {
+            val outerClass: PsiElement? =
+                runReadAction {
+                    PsiUtils.getParentClassOrNull(editor, language = file.language) ?: file.getChildOfType<PsiClass>()
+                }
+            val methodToMove =
+                runReadAction { PsiUtils.getMethodNameFromClass(outerClass, methodName) } ?: return listOf()
+            return tryMoveToClass(
+                methodToMove, targetClassName, project, editor, file
+            )
+        }
+
     }
 
     class MyMoveCallBack(val ref: AbstractRefactoring): MoveCallback {
@@ -566,6 +676,74 @@ class MoveMethodFactory {
             val dialog = MoveMembersDialog(
                 file.project, methodToMove.containingClass!!, classToMoveTo, setOf(methodToMove), MyMoveCallBack(this))
             dialog.show()
+            reverseRefactoring = getReverseRefactoringObject(project, editor, file)
+        }
+
+        override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
+            isValid = methodToMove.isPhysical
+            return methodToMove.isPhysical
+        }
+
+        override fun getRefactoringPreview(): String {
+            return "Move Static method ${methodToMove.name} to class ${classToMoveTo.name?.split(".")?.last()}"
+        }
+
+        override fun getStartOffset(): Int {
+            return methodToMove.startOffset
+        }
+
+        override fun getEndOffset(): Int {
+            return methodToMove.endOffset
+        }
+
+        override fun getReverseRefactoringObject(
+            project: Project,
+            editor: Editor,
+            file: PsiFile
+        ): AbstractRefactoring? {
+
+            val foundMethod = PsiUtils.getMethodNameFromClass(classToMoveTo, methodName)
+            if (foundMethod!=null)
+                return MyMoveStaticMethodRefactoring(
+                    foundMethod.startLine(editor.document),
+                    foundMethod.endLine(editor.document),
+                    foundMethod, sourceClass)
+            return null
+        }
+
+        override fun recalibrateRefactoring(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+            if (isValid==true)
+                return this
+            return null // TODO: Impl search
+        }
+
+    }
+
+    class MyAutoMoveStaticMethodRefactoring(
+        override val startLoc: Int,
+        override val endLoc: Int,
+        val methodToMove: PsiMethod,
+        val classToMoveTo: PsiClass,
+        val rationale: String?=null
+    ) : AbstractRefactoring(){
+        val sourceClass: PsiClass = methodToMove.containingClass!!
+        val methodName = methodToMove.name
+        init {
+            description = "move method ${methodToMove.name} to $classToMoveTo\n" +
+                    "Rationale: $rationale"
+        }
+
+
+
+        override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
+            super.performRefactoring(project, editor, file)
+            val refFactory = JavaRefactoringFactoryImpl(project)
+            val moveRefactoring =
+                refFactory.createMoveMembers(
+                    arrayOf(methodToMove),
+                    classToMoveTo.qualifiedName,
+                    "public")
+            moveRefactoring.run()
             reverseRefactoring = getReverseRefactoringObject(project, editor, file)
         }
 

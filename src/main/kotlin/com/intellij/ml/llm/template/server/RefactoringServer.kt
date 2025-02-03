@@ -1,11 +1,13 @@
 package com.intellij.ml.llm.template.server
 
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariable
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
@@ -25,7 +27,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import javax.swing.SwingUtilities.invokeAndWait
 
-class RefactoringServer(val project: Project, val editor: Editor, val file: PsiFile) {
+class RefactoringServer(val project: Project, var editor: Editor, var file: PsiFile) {
 
     @Serializable
     data class RenameParams(
@@ -111,6 +113,10 @@ class RefactoringServer(val project: Project, val editor: Editor, val file: PsiF
                     println("attempting to move ${params.methodName} -> ${params.targetClass}")
                     println("method signature: ${params.methodSignature}")
 
+                    val moveMethodObjects = MoveMethodFactory.createMoveMethodFromName(editor, file, project, params.methodName, params.targetClass)
+                    if (moveMethodObjects.isNotEmpty()){
+                        invokeAndWait{ moveMethodObjects[0].performRefactoring(project, editor, file) }
+                    }
 
                     call.respond(HttpStatusCode.NoContent)
                 } catch (ex: IllegalStateException) {
@@ -118,6 +124,10 @@ class RefactoringServer(val project: Project, val editor: Editor, val file: PsiF
                 } catch (ex: JsonConvertException) {
                     call.respond(HttpStatusCode.BadRequest)
                 }
+            }
+            post("/edit-file") {
+                val fileName = call.receive<String>()
+                // TODO: find file name and change _file_ to point to the right file.
             }
         }
     }
