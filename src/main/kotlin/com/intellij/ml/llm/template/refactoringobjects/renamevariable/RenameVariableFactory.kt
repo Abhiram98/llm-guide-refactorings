@@ -47,6 +47,22 @@ class RenameVariableFactory {
             return listOf()
         }
 
+        fun fromOldNewNameAll(
+            project: Project,
+            editor: Editor,
+            file: PsiFile,
+            oldName: String,
+            newName: String,
+        ): List<AbstractRefactoring> {
+            val functionPsi: PsiElement =
+                runReadAction {
+                    PsiUtils.getParentFunctionOrNull(editor, language = file.language)
+                        ?: file.getChildOfType<PsiClass>()
+                }!!
+
+            return fromOldNewNameAll(project, functionPsi, oldName, newName)
+        }
+
         override val logicalName: String
             get() = "Rename Variable"
         override val apiFunctionName: String
@@ -79,6 +95,22 @@ class RenameVariableFactory {
                     outerPsiElement)
             return null
         }
+
+        fun fromOldNewNameAll(project: Project,
+                           outerPsiElement: PsiElement,
+                           oldName:String,
+                           newName: String): List<AbstractRefactoring>{
+            val varPsi = runReadAction { PsiUtils.getAllVariableFromPsi(outerPsiElement, oldName) }
+            return varPsi.map {
+                RenameVariable(
+                    runReadAction{ it.getLineNumber() },
+                    runReadAction{ it.getLineNumber() },
+                    oldName, newName, it, outerPsiElement
+                )
+            }
+        }
+
+
 
         fun fromMethodOldNewName(
             project: Project,

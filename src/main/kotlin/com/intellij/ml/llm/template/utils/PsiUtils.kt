@@ -150,6 +150,30 @@ class PsiUtils {
             return null
         }
 
+        fun getAllVariableFromPsi(psiElement: PsiElement?, variableName: String): List<PsiElement>{
+
+            var foundVariables: MutableSet<PsiElement> = mutableSetOf()
+            class VariableFinder: JavaRecursiveElementVisitor() {
+
+                override fun visitLocalVariable(variable: PsiLocalVariable) {
+                    super.visitLocalVariable(variable)
+                    if (variable.name == variableName)
+                        foundVariables.add(variable)
+                }
+
+                override fun visitReferenceExpression(expression: PsiReferenceExpression) {
+                    super.visitReferenceExpression(expression)
+                    if (expression.referenceName==variableName)
+                        expression.reference?.resolve()?.let { foundVariables.add(it) }
+                }
+
+            }
+            if (psiElement != null) {
+                psiElement.accept(VariableFinder())
+            }
+            return foundVariables.toList()
+        }
+
         fun getVariableAndReferencesFromPsi(psiElement: PsiElement?, variableName: String): List<PsiElement>{
 
             var matches: MutableList<PsiElement> = mutableListOf()

@@ -73,7 +73,6 @@ class MyMethodExtractor (private val functionNameProvider: FunctionNameProvider?
     }
 
     fun findAndSelectExtractOption(editor: Editor, file: PsiFile, range: TextRange): CompletableFuture<ExtractOptions>? {
-        try {
             if (!CommonRefactoringUtil.checkReadOnlyStatus(file.project, file)) return null
             val elements = ExtractSelector().suggestElementsToExtract(file, range)
             if (elements.isEmpty()) {
@@ -83,13 +82,7 @@ class MyMethodExtractor (private val functionNameProvider: FunctionNameProvider?
                 findAllOptionsToExtract(elements)
             }
             return selectOptionWithTargetClass(editor, file.project, allOptionsToExtract)
-        }
-        catch (e: ExtractException) {
-            val message = JavaRefactoringBundle.message("extract.method.error.prefix") + " " + (e.message ?: "")
-            CommonRefactoringUtil.showErrorHint(file.project, editor, message, ExtractMethodHandler.getRefactoringName(), HelpID.EXTRACT_METHOD)
-            showError(editor, e.problems)
-            return null
-        }
+
     }
 
     private fun <T, E: Exception> computeWithAnalyzeProgress(project: Project, throwableComputable: ThrowableComputable<T, E>): T {

@@ -9,6 +9,7 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
+import com.jetbrains.rd.generator.nova.fail
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
@@ -32,7 +33,8 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
     @Serializable
     data class RenameParams(
         val oldName: String,
-        val newName: String
+        val newName: String,
+        val lineNum: Int?
     )
 
     @Serializable
@@ -45,7 +47,6 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
     @Serializable
     data class MoveMethodParams(
         val methodName: String,
-        val methodSignature: String?,
         val targetClass: String
     )
 
@@ -70,13 +71,30 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
                 println("got a request")
                 try {
                     val params = call.receive<RenameParams>()
-                    println("renaming ${params.oldName} -> ${params.newName}")
+                    println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
 
                     // Call IJ rename API here.
-                    val renameObject = RenameVariableFactory.fromOldNewName(
+                    val renameObject = RenameVariableFactory.fromOldNewNameAll(
                         project, editor, file, params.oldName, params.newName)
-                    if (renameObject.isNotEmpty())
-                        invokeAndWait { renameObject[0].performRefactoring(project, editor, file) }
+                    if (renameObject.isNotEmpty()) {
+                        val refObj = if (renameObject.size > 1){
+                            if (params.lineNum == null)
+                                throw Exception("too many matching variables/field. " +
+                                        "Please choose a line number to identify the variable/field to be renamed.")
+                            val objs = renameObject.filter { it.startLoc + 1 == params.lineNum }
+                            if (objs.size > 1){
+                                throw Exception("too many matching variables/field. " +
+                                        "Please choose a line number to identify the variable/field to be renamed.")
+                            }else if (objs.isEmpty()){
+                                throw Exception("No matching variable/field at the given line number.")
+                            } else{
+                                objs[0]
+                            }
+                        }else {
+                            renameObject[0]
+                        }
+                        invokeAndWait { refObj.performRefactoring(project, editor, file) }
+                    }
 
                     call.respond(HttpStatusCode.NoContent)
                 } catch (ex: IllegalStateException) {
@@ -85,6 +103,8 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
                 } catch (ex: JsonConvertException) {
                     print("failed")
                     call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: Exception){
+                    call.respond(HttpStatusCode.BadRequest, message = ex.message.toString())
                 }
             }
             post("/extract-method"){
@@ -95,23 +115,37 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
                     // Call IJ rename API here.
                     val refObjs = ExtractMethodFactory.fromStartEndLine(editor, file, params.startLine, params.endLine, params.newName)
                     if (refObjs.isNotEmpty()) {
-                        invokeAndWait{ refObjs[0].performRefactoring(project, editor, file) }
+                        var failedException: Exception? = null
+                        invokeAndWait{
+                            try{ refObjs[0].performRefactoring(project, editor, file) }
+                            catch(ex: Exception){
+                                failedException = ex
+                            }
+                        }
+                        if (failedException==null)
+                            call.respond(HttpStatusCode.OK)
+                        else
+                            call.respond(message = failedException!!.message.toString(), status = HttpStatusCode.BadRequest)
+                    }
+                    else{
+                        call.respond(HttpStatusCode.NoContent)
                     }
 
-                    call.respond(HttpStatusCode.NoContent)
+
                 } catch (ex: IllegalStateException) {
                     call.respond(HttpStatusCode.BadRequest)
                     ex.printStackTrace()
                 } catch (ex: JsonConvertException) {
                     call.respond(HttpStatusCode.BadRequest)
                     ex.printStackTrace()
+                } catch (ex: Exception){
+                    call.respond(message = ex.message.toString(), status = HttpStatusCode.BadRequest)
                 }
             }
             post("/move-method"){
                 try {
                     val params = call.receive<MoveMethodParams>()
                     println("attempting to move ${params.methodName} -> ${params.targetClass}")
-                    println("method signature: ${params.methodSignature}")
 
                     val moveMethodObjects = MoveMethodFactory.createMoveMethodFromName(editor, file, project, params.methodName, params.targetClass)
                     if (moveMethodObjects.isNotEmpty()){
