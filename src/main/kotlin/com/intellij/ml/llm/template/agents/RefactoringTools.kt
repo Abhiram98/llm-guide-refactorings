@@ -17,6 +17,23 @@ object RefactoringTools {
         }
     }
 
+    object Rename {
+        const val NAME = "rename"
+
+        object Params {
+            const val oldName = "old_name"
+            const val newName = "new_name"
+            const val lineNum = "line_num"
+        }
+    }
+
+    object GetSource {
+        const val NAME = "get_updated_source"
+
+        object Params {
+        }
+    }
+
     internal val toolsList = listOf(
         ToolDescriptor(
             name = ExtractMethod.NAME,
@@ -43,5 +60,38 @@ object RefactoringTools {
             ),
             optionalParameters = listOf(),
         ),
+        ToolDescriptor(
+            name = Rename.NAME,
+            description = """Renames occurrences of a variable within the scope of a function or method.
+
+            This function is intended to refactor code by replacing all occurrences of the variable named `old_variable_name`
+            with the new variable name `new_name` within the scope of the function or method where it is called.""".trimIndent(),
+            requiredParameters = listOf(
+                ToolParameterDescriptor(
+                    name = Rename.Params.oldName,
+                    description = "The name of the variable to be renamed.",
+                    type = ToolParameterType.String,
+                ),
+                ToolParameterDescriptor(
+                    name = Rename.Params.newName,
+                    description = "The new name for the variable.",
+                    type = ToolParameterType.String,
+                )
+            ),
+            optionalParameters = listOf(
+                ToolParameterDescriptor(
+                    name = Rename.Params.lineNum,
+                    description = "An optional parameter to identify the variable using a line number, if there are multiple variables with the same name",
+                    type = ToolParameterType.String,
+                ),
+            ),
+        ),
+
+        ToolDescriptor(
+            name = GetSource.NAME,
+            description = """Get the updated source code of the file""".trimIndent(),
+            requiredParameters = listOf(),
+            optionalParameters = listOf(),
+        )
     )
 }

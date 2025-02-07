@@ -1,5 +1,6 @@
 package com.intellij.ml.llm.template.server
 
+import com.google.gson.annotations.SerializedName
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariable
@@ -26,21 +27,28 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.serialization.SerialName
 import javax.swing.SwingUtilities.invokeAndWait
 
 class RefactoringServer(val project: Project, var editor: Editor, var file: PsiFile) {
 
     @Serializable
     data class RenameParams(
+        @SerialName("old_name")
         val oldName: String,
+        @SerialName("new_name")
         val newName: String,
+        @SerialName("line_num")
         val lineNum: Int?
     )
 
     @Serializable
     data class ExtractMethodParams(
+        @SerialName("start_line")
         val startLine: Int,
+        @SerialName("end_line")
         val endLine: Int,
+        @SerialName("new_method_name")
         val newName: String
     )
 

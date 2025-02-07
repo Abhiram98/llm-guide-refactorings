@@ -2,20 +2,31 @@ package com.intellij.ml.llm.template.agents
 
 import ai.grazie.code.agents.core.JwtTokenProvider
 import ai.grazie.code.agents.core.event.EventHandler
+import ai.grazie.code.agents.core.model.Temperature
 import ai.grazie.code.agents.core.model.agent.AgentSystemPromptProvider
 import ai.grazie.code.agents.core.model.tools.ToolDescriptorProvider
 import ai.grazie.code.agents.core.tool.singleStageStatelessToolRegistry
 import ai.grazie.code.agents.ideformer.IdeFormerRunner
 import ai.grazie.code.agents.ideformer.model.agent.IdeFormerAgent
+import ai.grazie.model.llm.profile.LLMProfileID
 import ai.grazie.utils.annotations.ExperimentalAPI
+import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
+import com.intellij.ml.llm.template.server.RefactoringServer
 import com.intellij.ml.llm.template.utils.addLineNumbersToCodeSnippet
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
+import com.jetbrains.rd.generator.nova.fail
+import io.ktor.http.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import javax.swing.SwingUtilities
 
 
-class RefactoringAgentLauncher(val project: Project?, val editor: Editor?, val file: PsiFile?){
+class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
     object RefAgent: IdeFormerAgent.GrazieDefault("refactoring-agent")
     fun do_extract(){
 
@@ -39,8 +50,83 @@ class RefactoringAgentLauncher(val project: Project?, val editor: Editor?, val f
         val toolRegistry = singleStageStatelessToolRegistry(toolDescriptorProvider) {
             tool(RefactoringTools.ExtractMethod.NAME) { args ->
                 print("performing extract method.")
-                do_extract()
-                "success"
+                print("Args: $args")
+                try{
+                    val params = Json.decodeFromString<RefactoringServer.ExtractMethodParams>(args.toString())
+                    println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
+
+                    // Call IJ rename API here.
+                    val refObjs = ExtractMethodFactory.fromStartEndLine(
+                        editor,
+                        file,
+                        params.startLine,
+                        params.endLine,
+                        params.newName
+                    )
+                    val response = if (refObjs.isNotEmpty()) {
+                        var failedException: Exception? = null
+                        SwingUtilities.invokeAndWait {
+                            try {
+                                refObjs[0].performRefactoring(project, editor, file)
+                            } catch (ex: Exception) {
+                                failedException = ex
+                            }
+                        }
+                        if (failedException == null)
+                            "success"
+                        else
+                            throw failedException!!
+                    } else
+                        "couldn't create a refactoring object."
+                    return@tool response
+                }catch (exc: Exception) {
+                    return@tool "Error. " + exc.message.toString()
+                }
+            }
+
+            tool(RefactoringTools.Rename.NAME){
+                args ->
+                try{
+                    val params = Json.decodeFromString<RefactoringServer.RenameParams>(args.toString())
+                    println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
+
+                    // Call IJ rename API here.
+                    val renameObject = RenameVariableFactory.fromOldNewNameAll(
+                        project, editor, file, params.oldName, params.newName
+                    )
+                    val response = if (renameObject.isNotEmpty()) {
+                        val refObj = if (renameObject.size > 1) {
+                            if (params.lineNum == null)
+                                throw Exception(
+                                    "too many matching variables/field. " +
+                                            "Please choose a line number to identify the variable/field to be renamed."
+                                )
+                            val objs = renameObject.filter { it.startLoc + 1 == params.lineNum }
+                            if (objs.size > 1) {
+                                throw Exception(
+                                    "too many matching variables/field. " +
+                                            "Please choose a line number to identify the variable/field to be renamed."
+                                )
+                            } else if (objs.isEmpty()) {
+                                throw Exception("No matching variable/field at the given line number.")
+                            } else {
+                                objs[0]
+                            }
+                        } else {
+                            renameObject[0]
+                        }
+                        SwingUtilities.invokeAndWait { refObj.performRefactoring(project, editor, file) }
+                        "success"
+                    } else
+                        "could not identify a variable to rename"
+                    return@tool response
+                } catch (exc: Exception){
+                    return@tool "Error. " + exc.message.toString()
+                }
+            }
+
+            tool(RefactoringTools.GetSource.NAME){
+                args -> return@tool addLineNumbersToCodeSnippet(file.text, 1)
             }
         }
 
@@ -53,7 +139,10 @@ class RefactoringAgentLauncher(val project: Project?, val editor: Editor?, val f
          * and then feel free to use [AgentSystemPromptProvider.fromRegistry] method.
          */
         val agentConfig = IdeFormerAgent.GrazieDefault.Config(
-            llmConfig = IdeFormerAgent.GrazieDefault.Config.LLM(),
+            llmConfig = IdeFormerAgent.GrazieDefault.Config.LLM(
+                profile = LLMProfileID("openai-gpt-4o-mini"),
+                temperature = Temperature(0.5)
+            ),
 //        systemPrompt = AgentSystemPromptProvider.fromString(
 //            """
 //            You are an question answering agent with access to the calculator tools.
@@ -113,12 +202,12 @@ class RefactoringAgentLauncher(val project: Project?, val editor: Editor?, val f
                 eventHandler = eventHandler,
                 agent = RefAgent,
                 agentConfig = agentConfig
-            ).run("Refactoring this code. + $sourceCode")
+            ).run(sourceCode)
 
         }
     }
 }
 
 fun main(){
-    RefactoringAgentLauncher(null, null, null).launch()
+//    RefactoringAgentLauncher(null, null, null).launch()
 }

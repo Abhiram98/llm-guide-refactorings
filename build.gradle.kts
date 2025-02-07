@@ -47,8 +47,9 @@ dependencies {
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-client:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-daemon:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-executable:1.0.0-beta.25+0.4.12")
-    implementation("ai.jetbrains.code.files:code-files-jvm:1.0.0-beta.25+0.4.12")
-    implementation("ai.jetbrains.code.files:code-files-model:1.0.0-beta.25+0.4.12")
+//    implementation("ai.jetbrains.code.files:code-files-jvm:1.0.0-beta.25+0.4.12")
+//    implementation("ai.jetbrains.code.files:code-files-model:1.0.0-beta.25+0.4.12")
+//    implementation("org.jetbrains:ij-parsing-core:0.3.175")
 
 
 
