@@ -17,10 +17,6 @@ import com.intellij.ml.llm.template.utils.addLineNumbersToCodeSnippet
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
-import com.jetbrains.rd.generator.nova.fail
-import io.ktor.http.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import javax.swing.SwingUtilities
@@ -143,16 +139,6 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                 profile = LLMProfileID("openai-gpt-4o-mini"),
                 temperature = Temperature(0.5)
             ),
-//        systemPrompt = AgentSystemPromptProvider.fromString(
-//            """
-//            You are an question answering agent with access to the calculator tools.
-//            You need to answer 1 question with the best of your ability.
-//            Be as concise as possible in your answers, and only return the number in your final answer.
-//            Do not apply any locale-specific formatting to the result.
-//            DO NOT ANSWER ANY QUESTIONS THAT ARE BESIDES PERFORMING CALCULATIONS!
-//            DO NOT HALLUCINATE!
-//            """.trimIndent()
-//        ),
         )
 
         /**
@@ -206,8 +192,4 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
 
         }
     }
-}
-
-fun main(){
-//    RefactoringAgentLauncher(null, null, null).launch()
 }
