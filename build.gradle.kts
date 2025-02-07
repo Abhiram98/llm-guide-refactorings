@@ -40,6 +40,18 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm:3.0.3")
 //    implementation("ch.qos.logback:logback-classic")
     implementation("io.ktor:ktor-server-config-yaml:3.0.3")
+//    implementation("ai.grazie.agents:code-agents:0.3.122")
+    implementation("ai.jetbrains.code.agents:code-agents-core:1.0.0-beta.25+0.4.12")
+    implementation("ai.jetbrains.code.agents:code-agents-core-tools:1.0.0-beta.25+0.4.12")
+    implementation("ai.jetbrains.code.agents:code-agents-tools-registry:1.0.0-beta.25+0.4.12")
+    implementation("ai.jetbrains.code.agents:code-agents-ideformer-client:1.0.0-beta.25+0.4.12")
+    implementation("ai.jetbrains.code.agents:code-agents-ideformer-daemon:1.0.0-beta.25+0.4.12")
+    implementation("ai.jetbrains.code.agents:code-agents-ideformer-executable:1.0.0-beta.25+0.4.12")
+    implementation("ai.jetbrains.code.files:code-files-jvm:1.0.0-beta.25+0.4.12")
+    implementation("ai.jetbrains.code.files:code-files-model:1.0.0-beta.25+0.4.12")
+
+
+
     testImplementation("io.ktor:ktor-client-content-negotiation:3.0.3")
     testImplementation("io.ktor:ktor-server-test-host-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:3.0.3")
