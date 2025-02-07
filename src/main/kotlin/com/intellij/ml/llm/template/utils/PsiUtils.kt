@@ -161,10 +161,27 @@ class PsiUtils {
                         foundVariables.add(variable)
                 }
 
-                override fun visitReferenceExpression(expression: PsiReferenceExpression) {
-                    super.visitReferenceExpression(expression)
-                    if (expression.referenceName==variableName)
-                        expression.reference?.resolve()?.let { foundVariables.add(it) }
+//                override fun visitReferenceExpression(expression: PsiReferenceExpression) {
+//                    super.visitReferenceExpression(expression)
+//                    if (expression.referenceName==variableName)
+//                        expression.reference?.resolve()?.let { foundVariables.add(it) }
+//                }
+                override fun visitField(field: PsiField) {
+                    super.visitField(field)
+                    if (field.name == variableName)
+                        foundVariables.add(field)
+                }
+
+                override fun visitClass(aClass: PsiClass) {
+                    super.visitClass(aClass)
+                    if (aClass.name == variableName)
+                        foundVariables.add(aClass)
+                }
+
+                override fun visitMethod(method: PsiMethod) {
+                    super.visitMethod(method)
+                    if (method.name == variableName)
+                        foundVariables.add(method)
                 }
 
             }

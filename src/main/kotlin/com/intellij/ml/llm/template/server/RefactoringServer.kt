@@ -94,9 +94,9 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
                             renameObject[0]
                         }
                         invokeAndWait { refObj.performRefactoring(project, editor, file) }
+                        call.respond(HttpStatusCode.OK)
                     }
-
-                    call.respond(HttpStatusCode.NoContent)
+                    call.respond(HttpStatusCode.NotImplemented, message="Could not rename ${params.oldName}")
                 } catch (ex: IllegalStateException) {
                     print("failed to refactor")
                     call.respond(HttpStatusCode.BadRequest)

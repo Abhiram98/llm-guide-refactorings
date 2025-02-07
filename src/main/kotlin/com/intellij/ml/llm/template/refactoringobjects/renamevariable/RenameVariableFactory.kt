@@ -12,8 +12,10 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.psi.psiUtil.getChildOfType
+import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 
 class RenameVariableFactory {
     companion object: MyRefactoringFactory {
@@ -60,7 +62,7 @@ class RenameVariableFactory {
                         ?: file.getChildOfType<PsiClass>()
                 }!!
 
-            return fromOldNewNameAll(project, functionPsi, oldName, newName)
+            return fromOldNewNameAll(project, editor, functionPsi, oldName, newName)
         }
 
         override val logicalName: String
@@ -97,14 +99,15 @@ class RenameVariableFactory {
         }
 
         fun fromOldNewNameAll(project: Project,
+                              editor: Editor,
                            outerPsiElement: PsiElement,
                            oldName:String,
                            newName: String): List<AbstractRefactoring>{
             val varPsi = runReadAction { PsiUtils.getAllVariableFromPsi(outerPsiElement, oldName) }
             return varPsi.map {
                 RenameVariable(
-                    runReadAction{ it.getLineNumber() },
-                    runReadAction{ it.getLineNumber() },
+                    runReadAction{ editor.document.getLineNumber(it.startOffsetSkippingComments) },
+                    runReadAction{ editor.document.getLineNumber(it.startOffsetSkippingComments) },
                     oldName, newName, it, outerPsiElement
                 )
             }
