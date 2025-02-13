@@ -554,7 +554,13 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                     (JsonParser.parseString(processed) as JsonArray)
                         .map {
                             try {
-                                Gson().fromJson(it, MoveMethodSuggestion::class.java)
+                                val sug = Gson().fromJson(it, MoveMethodSuggestion::class.java)
+                                // TODO: match the method signature string, to the psi method.
+                                val matchedMethod = PsiUtils.getMethodNameFromClass(functionPsiElement, sug.methodName)
+                                if (matchedMethod!=null)
+                                    MoveMethodSuggestion(sug.methodName, sug.methodSignature, sug.targetClass, sug.rationale, matchedMethod)
+                                else
+                                    null
                             } catch (e: Exception) {
                                 print("failed to decode json ->$it")
                                 null
