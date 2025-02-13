@@ -28,9 +28,10 @@ object RefactoringTools {
     }
 
     object GetSource {
-        const val NAME = "get_updated_source"
+        const val NAME = "get_source_code"
 
         object Params {
+            const val filePath = "file_path"
         }
     }
 

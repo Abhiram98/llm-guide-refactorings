@@ -122,7 +122,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
             }
 
             tool(RefactoringTools.GetSource.NAME){
-                args -> return@tool addLineNumbersToCodeSnippet(file.text, 1)
+                args -> return@tool file.text
             }
         }
 
@@ -178,7 +178,8 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
             val client = IdeFormerService.getAgentClient(tokenProvider)
 
 
-            val sourceCode = addLineNumbersToCodeSnippet(file?.text?:"", 1)
+//            val sourceCode = addLineNumbersToCodeSnippet(file?.text?:"", 1)
+            val sourceCode = file.text
             /**
              * 8. Start your AI agent
              * */
