@@ -47,6 +47,9 @@ data class RefTelemetryData(
     @SerializedName("targetClassMap")
     var targetClassMap: MutableMap<String, TargetClass4Method> = mutableMapOf()
 
+    @SerializedName("llmTemperature")
+    var temperature: Double = RefAgentSettingsManager.getInstance().getTemperature()
+
     @Transient
     lateinit var refactoringObjects: List<AbstractRefactoring>
 }

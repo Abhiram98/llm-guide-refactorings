@@ -9,6 +9,7 @@ import ai.grazie.model.auth.v5.AuthData
 import ai.grazie.model.cloud.AuthType
 import ai.grazie.model.llm.annotation.ExperimentalLLM
 import ai.grazie.model.llm.chat.v5.*
+import ai.grazie.model.llm.parameters.LLMParameters
 import ai.grazie.model.llm.parameters.OpenAILLMParameters
 import ai.grazie.model.llm.profile.LLMProfileID
 import ai.grazie.model.llm.profile.OpenAIProfileIDs
@@ -59,17 +60,6 @@ class GrazieBaseRequest(body: OpenAiChatRequestBody) : LLMBaseRequest<OpenAiChat
         return body.model
     }
 
-    private fun getAttributes(): Attributes{
-        return Attributes(
-            mutableMapOf
-                (
-                Pair(
-                    OpenAILLMParameters.Chat.Temperature,
-                    Attributes.Value.Double(body.temperature?:0.5)
-                )
-            )
-        )
-    }
 
     override fun sendSync(): LLMBaseResponse? {
 
@@ -79,6 +69,9 @@ class GrazieBaseRequest(body: OpenAiChatRequestBody) : LLMBaseRequest<OpenAiChat
                     LLMPromptID("suggest-refactoring-research"),
                     getOpenAIProfileId(),
                     getChatMessages(),
+                    parameters = Attributes().put(
+                        LLMParameters.Temperature,
+                        Attributes.Value.Double(body.temperature?:0.5))
                 )
                 logger.debug("Grazie request ID: ${response}")
                 var finalString: String=""
