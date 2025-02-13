@@ -60,10 +60,18 @@ for file_name in plugin_outfiles:
     combined_output += data
 combined_output = [i for i in combined_output if len(i['telemetry'].keys())]
 
+getters = 0
+setters = 0
+
 for evaluation_data in combined_output:
     oracle = evaluation_data['oracle']
     method_name = oracle.split("::")[1].split('(')[0]
     alias_method_name = method_name + '2'
+    evaluation_data['method_name'] = method_name
+    if method_name.startswith('get'):
+        getters += 1
+    if method_name.startswith('set'):
+        setters += 1
 
     target_class = oracle.split('.')[-1]
 
@@ -112,6 +120,15 @@ for evaluation_data in combined_output:
         suggested_target_classes = telemetry['targetClassMap'][alias_method_name]['target_classes_sorted_by_llm']
     evaluation_data['recall_method_class_position'] = \
         myindex(suggested_target_classes, target_class)
+
+print(f"{getters=}")
+print(f"{setters=}")
+missed_methods = [i for i in combined_output if i['recall_method_position']==-1]
+getters_missed = len([i for i in missed_methods if i['method_name'].startswith('get')])
+setters_missed = len([i for i in missed_methods if i['method_name'].startswith('set')])
+print(f"{getters_missed=}")
+print(f"{setters_missed=}")
+
 
 recall_method_and_class_1 = len(
     [i for i in combined_output if i['recall_method_position'] == 0 and i['recall_method_class_position'] == 0]) / len(
