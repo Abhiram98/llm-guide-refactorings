@@ -1,4 +1,5 @@
 import json
+import numpy as np
 
 from mm_analyser import data_folder
 
@@ -9,23 +10,28 @@ def myindex(list, ele, default=-1):
     except ValueError:
         return default
 
+VANILLA_LLM_ITERS = 3
 def calculate_vanilla_llm_recalls(telemetry, method_name, alias_method_name, target_class, evaluation_data):
-    vanilla_llm_suggestions = [i for i in telemetry['iterationData'] if i['iteration_num']==3]
-    if (len(vanilla_llm_suggestions)==0):
-        evaluation_data['vanilla_recall_method_position'] = -1
-        evaluation_data['vanilla_recall_method_class_position'] = -1
-        return
-    method_order = [i['method_name'] for i in vanilla_llm_suggestions[0]['suggested_move_methods']]
-    evaluation_data['vanilla_recall_method_position'] = max(myindex(method_order, method_name), myindex(method_order, alias_method_name) )
+    evaluation_data['vanilla_recall_method_position'] = []
+    evaluation_data['vanilla_recall_method_class_position'] = []
+    for iter_num in range(1, VANILLA_LLM_ITERS+1):
+        vanilla_llm_suggestions = [i for i in telemetry['iterationData'] if i['iteration_num']==iter_num]
+        if (len(vanilla_llm_suggestions)==0):
+            evaluation_data['vanilla_recall_method_position'].append(-1)
+            evaluation_data['vanilla_recall_method_class_position'].append(-1)
+            continue
+        method_order = [i['method_name'] for i in vanilla_llm_suggestions[0]['suggested_move_methods']]
+        method_index = max(myindex(method_order, method_name), myindex(method_order, alias_method_name))
+        evaluation_data['vanilla_recall_method_position'].append(method_index)
 
-    if evaluation_data['vanilla_recall_method_position']==-1:
-        evaluation_data['vanilla_recall_method_class_position'] = -1
-        return
-    target_classes = [i['target_class'] for i in vanilla_llm_suggestions[0]['suggested_move_methods']]
-    if target_class in target_classes:
-        evaluation_data['vanilla_recall_method_class_position'] = 0
-    else:
-        evaluation_data['vanilla_recall_method_class_position'] = -1
+        if method_index==-1:
+            evaluation_data['vanilla_recall_method_class_position'].append(-1)
+            continue
+        target_classes = [i['target_class'] for i in vanilla_llm_suggestions[0]['suggested_move_methods']]
+        if target_class in target_classes:
+            evaluation_data['vanilla_recall_method_class_position'].append(0)
+        else:
+            evaluation_data['vanilla_recall_method_class_position'].append(-1)
 
 
 plugin_outfiles = [
@@ -178,45 +184,78 @@ print(f"recall class @inf = {recall_class_inf}")
 
 
 print("---Vanilla LLM recall---")
-vanilla_recall_method_and_class_1 = len(
-    [i for i in combined_output if i['vanilla_recall_method_position'] == 0 and i['vanilla_recall_method_class_position'] == 0]) / len(
-    combined_output)
-vanilla_recall_method_1 = len([i for i in combined_output if i['vanilla_recall_method_position'] == 0]) / len(combined_output)
 
-vanilla_recall_method_and_class_2 = len([i for i in combined_output if
-                                 i['vanilla_recall_method_position'] in [0, 1] and i['vanilla_recall_method_class_position'] == 0]) / len(combined_output)
-vanilla_recall_method_2 = len([i for i in combined_output if i['vanilla_recall_method_position'] in [0, 1]]) / len(combined_output)
+vanilla_recall_method_and_class_1_agg = []
+vanilla_recall_method_1_agg = []
+vanilla_recall_method_and_class_2_agg = []
+vanilla_recall_method_2_agg = []
+vanilla_recall_method_and_class_3_agg = []
+vanilla_recall_method_3_agg = []
+vanilla_recall_method_and_class_all_agg = []
+vanilla_recall_method_all_agg = []
+for iter_num in range(VANILLA_LLM_ITERS):
+    vanilla_recall_method_and_class_1 = len(
+        [i for i in combined_output if i['vanilla_recall_method_position'][iter_num] == 0 and i['vanilla_recall_method_class_position'][iter_num] == 0]) / len(
+        combined_output)
+    vanilla_recall_method_1 = len([i for i in combined_output if i['vanilla_recall_method_position'][iter_num] == 0]) / len(combined_output)
 
-vanilla_recall_method_and_class_3 = len([i for i in combined_output if
-                                 i['vanilla_recall_method_position'] in [0, 1, 2] and i['vanilla_recall_method_class_position'] == 0]) / len(combined_output)
-vanilla_recall_method_3 = len([i for i in combined_output if i['vanilla_recall_method_position'] in [0, 1, 2]]) / len(combined_output)
+    vanilla_recall_method_and_class_2 = len([i for i in combined_output if
+                                     i['vanilla_recall_method_position'][iter_num] in [0, 1] and i['vanilla_recall_method_class_position'][iter_num] == 0]) / len(combined_output)
+    vanilla_recall_method_2 = len([i for i in combined_output if i['vanilla_recall_method_position'][iter_num] in [0, 1]]) / len(combined_output)
 
-vanilla_recall_method_and_class_all = len([i for i in combined_output if
-                                 i['vanilla_recall_method_position']!=-1 and i['vanilla_recall_method_class_position'] !=-1]) / len(combined_output)
-vanilla_recall_method_all = len([i for i in combined_output if i['vanilla_recall_method_position'] !=-1]) / len(combined_output)
+    vanilla_recall_method_and_class_3 = len([i for i in combined_output if
+                                     i['vanilla_recall_method_position'][iter_num] in [0, 1, 2] and i['vanilla_recall_method_class_position'][iter_num] == 0]) / len(combined_output)
+    vanilla_recall_method_3 = len([i for i in combined_output if i['vanilla_recall_method_position'][iter_num] in [0, 1, 2]]) / len(combined_output)
+
+    vanilla_recall_method_and_class_all = len([i for i in combined_output if
+                                     i['vanilla_recall_method_position'][iter_num]!=-1 and i['vanilla_recall_method_class_position'][iter_num] !=-1]) / len(combined_output)
+    vanilla_recall_method_all = len([i for i in combined_output if i['vanilla_recall_method_position'][iter_num] !=-1]) / len(combined_output)
+
+    vanilla_recall_method_1_agg.append(vanilla_recall_method_1)
+    vanilla_recall_method_2_agg.append(vanilla_recall_method_2)
+    vanilla_recall_method_3_agg.append(vanilla_recall_method_3)
+    vanilla_recall_method_all_agg.append(vanilla_recall_method_all)
+
+    vanilla_recall_method_and_class_1_agg.append(vanilla_recall_method_and_class_1)
+    vanilla_recall_method_and_class_2_agg.append(vanilla_recall_method_and_class_2)
+    vanilla_recall_method_and_class_3_agg.append(vanilla_recall_method_and_class_3)
+    vanilla_recall_method_and_class_all_agg.append(vanilla_recall_method_and_class_all)
+
 
 print("recalling the correct MoveMethod:")
-print(f"recall method&class @1 = {vanilla_recall_method_and_class_1}")
-print(f"recall method&class @2 = {vanilla_recall_method_and_class_2}")
-print(f"recall method&class @3 = {vanilla_recall_method_and_class_3}")
-print(f"recall method&class @inf = {vanilla_recall_method_and_class_all}")
+print(f"recall method&class @1 = {np.mean(vanilla_recall_method_and_class_1_agg)} +- {np.std(vanilla_recall_method_and_class_1_agg)}")
+print(f"recall method&class @2 = {np.mean(vanilla_recall_method_and_class_2_agg)} +- {np.std(vanilla_recall_method_and_class_2_agg)}")
+print(f"recall method&class @3 = {np.mean(vanilla_recall_method_and_class_3_agg)} +- {np.std(vanilla_recall_method_and_class_3_agg)}")
+print(f"recall method&class @inf = {np.mean(vanilla_recall_method_and_class_all_agg)} +- {np.std(vanilla_recall_method_and_class_all_agg)}")
 print()
 
 print("recalling the correct method only (identifying method out of place)")
-print(f"recall method @1 = {vanilla_recall_method_1}")
-print(f"recall method @2 = {vanilla_recall_method_2}")
-print(f"recall method @3 = {vanilla_recall_method_3}")
-print(f"recall method @inf = {vanilla_recall_method_all}")
+print(f"recall method @1 = {np.mean(vanilla_recall_method_1_agg)} +- {np.std(vanilla_recall_method_1_agg)}")
+print(f"recall method @2 = {np.mean(vanilla_recall_method_2_agg)} +- {np.std(vanilla_recall_method_2_agg)}")
+print(f"recall method @3 = {np.mean(vanilla_recall_method_3_agg)} +- {np.std(vanilla_recall_method_3_agg)}")
+print(f"recall method @inf = {np.mean(vanilla_recall_method_all_agg)} +- {np.std(vanilla_recall_method_all_agg)}")
 print()
 
-vanilla_recalled_methods = [i for i in combined_output if i['vanilla_recall_method_position'] != -1]
-vanilla_recall_class_1 = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'] == 0]) / len(vanilla_recalled_methods)
-vanilla_recall_class_2 = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'] in [0, 1]]) / len(vanilla_recalled_methods)
-vanilla_recall_class_3 = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'] in [0, 1, 2]]) / len(vanilla_recalled_methods)
-vanilla_recall_class_inf = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'] != -1]) / len(vanilla_recalled_methods)
+vanilla_recall_class_1_agg = []
+vanilla_recall_class_2_agg = []
+vanilla_recall_class_3_agg = []
+vanilla_recall_class_all_agg = []
+
+for iter_num in range(VANILLA_LLM_ITERS):
+    vanilla_recalled_methods = [i for i in combined_output if i['vanilla_recall_method_position'][iter_num] != -1]
+    vanilla_recall_class_1 = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'][iter_num] == 0]) / len(vanilla_recalled_methods)
+    vanilla_recall_class_2 = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'][iter_num] in [0, 1]]) / len(vanilla_recalled_methods)
+    vanilla_recall_class_3 = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'][iter_num] in [0, 1, 2]]) / len(vanilla_recalled_methods)
+    vanilla_recall_class_inf = len([i for i in vanilla_recalled_methods if i['vanilla_recall_method_class_position'][iter_num] != -1]) / len(vanilla_recalled_methods)
+
+    vanilla_recall_class_1_agg.append(vanilla_recall_class_1)
+    vanilla_recall_class_2_agg.append(vanilla_recall_class_2)
+    vanilla_recall_class_3_agg.append(vanilla_recall_class_3)
+    vanilla_recall_class_all_agg.append(vanilla_recall_class_inf)
+
 print(f"recall of class for a recalled method. there were {len(vanilla_recalled_methods)} recalled at any position.")
-print(f"recall class @1 = {vanilla_recall_class_1}")
-print(f"recall class @2 = {vanilla_recall_class_2}")
-print(f"recall class @3 = {vanilla_recall_class_3}")
-print(f"recall class @inf = {vanilla_recall_class_inf}")
+print(f"recall class @1 = {np.mean(vanilla_recall_class_1_agg)} +- {np.std(vanilla_recall_class_1_agg)}")
+print(f"recall class @2 = {np.mean(vanilla_recall_class_2_agg)} +- {np.std(vanilla_recall_class_2_agg)}")
+print(f"recall class @3 = {np.mean(vanilla_recall_class_2_agg)} +- {np.std(vanilla_recall_class_3_agg)}")
+print(f"recall class @inf = {np.mean(vanilla_recall_class_all_agg)} +- {np.std(vanilla_recall_class_all_agg)}")
 
