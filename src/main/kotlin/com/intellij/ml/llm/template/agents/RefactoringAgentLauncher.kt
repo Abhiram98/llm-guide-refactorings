@@ -13,7 +13,9 @@ import ai.grazie.utils.annotations.ExperimentalAPI
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.ml.llm.template.server.RefactoringServer
+import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.utils.addLineNumbersToCodeSnippet
+import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
@@ -24,6 +26,9 @@ import javax.swing.SwingUtilities
 
 class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
     object RefAgent: IdeFormerAgent.GrazieDefault("refactoring-agent")
+
+    val testSelector = TestSelector(10)
+
     fun do_extract(){
 
     }
@@ -123,6 +128,16 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
 
             tool(RefactoringTools.GetSource.NAME){
                 args -> return@tool file.text
+            }
+
+            tool(RefactoringTools.CurateTests.NAME){
+                args ->
+                runReadAction{ testSelector.collectTestSamplesForCurrentFile(file.virtualFile, project) }
+                return@tool testSelector.getTestNames().toString()
+            }
+
+            tool(RefactoringTools.RunTestClass.NAME){
+                    args -> testSelector.runTests()
             }
         }
 

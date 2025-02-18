@@ -35,6 +35,22 @@ object RefactoringTools {
         }
     }
 
+    object CurateTests {
+        const val NAME = "curate_test_class"
+
+        object Params {
+            const val filePath = "file_path"
+        }
+    }
+
+    object RunTestClass {
+        const val NAME = "run_test_class"
+
+        object Params {
+            const val filePath = "file_path"
+        }
+    }
+
     internal val toolsList = listOf(
         ToolDescriptor(
             name = ExtractMethod.NAME,
@@ -93,6 +109,22 @@ object RefactoringTools {
             description = """Get the updated source code of the file""".trimIndent(),
             requiredParameters = listOf(),
             optionalParameters = listOf(),
+        ),
+
+        ToolDescriptor(
+            name = CurateTests.NAME,
+            description = """Find and/or create appropriate test-cases for the source code.""".trimIndent(),
+            requiredParameters = listOf(),
+            optionalParameters = listOf(),
+        ),
+
+        ToolDescriptor(
+            name = RunTestClass.NAME,
+            description = """Run the curated test-cases and report results.""".trimIndent(),
+            requiredParameters = listOf(),
+            optionalParameters = listOf(),
         )
+
+
     )
 }
