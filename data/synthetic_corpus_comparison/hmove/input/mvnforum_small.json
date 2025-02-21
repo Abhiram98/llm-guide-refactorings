@@ -1,0 +1,1181 @@
+{
+    "com.mvnforum.admin.CategoryXML::setCategoryOrder(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumCategoryXML": [
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "setParentCategory",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.CategoryXML",
+                        "param_name": "parentCategory"
+                    }
+                ],
+                "method_name_start_line": 86,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java"
+        },
+        {
+            "method_information": {
+                "line_num": 241,
+                "method_name": "setCategoryOrder",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.mvnforum.MvnForumCategoryXML",
+                        "param_name": "mvnForumCategoryXML"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 241,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/mvnforum/MvnForumCategoryXML.java"
+        },
+        {
+            "method_information": {
+                "line_num": 245,
+                "method_name": "exportCategoryWatchesForCategory",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "categoryID"
+                    }
+                ],
+                "method_name_start_line": 245,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 295,
+                "method_name": "exportCategory",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "categoryID"
+                    }
+                ],
+                "method_name_start_line": 295,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 347,
+                "method_name": "exportSubCategoryList",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "parentCategoryID"
+                    }
+                ],
+                "method_name_start_line": 347,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 377,
+                "method_name": "exportCategoryList",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    }
+                ],
+                "method_name_start_line": 377,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        }
+    ],
+    "com.mvnforum.admin.ThreadXML::addJiveThreadWatch(String, String, String):void->com.mvnforum.admin.importexport.jive.JiveThreadXML": [
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "addJiveThreadWatch",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.jive.JiveThreadXML",
+                        "param_name": "jiveThreadXML"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "type"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "expirable"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "username"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ThreadXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/jive/JiveThreadXML.java"
+        },
+        {
+            "method_information": {
+                "line_num": 351,
+                "method_name": "exportThreadWatchesForThread",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "threadID"
+                    }
+                ],
+                "method_name_start_line": 351,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ThreadXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 399,
+                "method_name": "exportFavoriteThreadsForThread",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "threadID"
+                    }
+                ],
+                "method_name_start_line": 399,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ThreadXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 442,
+                "method_name": "exportThread",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "threadID"
+                    }
+                ],
+                "method_name_start_line": 442,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ThreadXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 535,
+                "method_name": "exportThreadList",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "parentForumID"
+                    }
+                ],
+                "method_name_start_line": 535,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ThreadXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        }
+    ],
+    "net.myvietnam.mvncore.thirdparty.commonj.util.ThreadPool::isSuspending():boolean->net.myvietnam.mvncore.thirdparty.commonj.timers.FooTimerManager": [
+        {
+            "method_information": {
+                "line_num": 85,
+                "method_name": "isSuspending",
+                "parameter_types": [
+                    {
+                        "param_type": "net.myvietnam.mvncore.thirdparty.commonj.timers.FooTimerManager",
+                        "param_name": "fooTimerManager"
+                    }
+                ],
+                "method_name_start_line": 85,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/myvietnam/src/net/myvietnam/mvncore/thirdparty/commonj/util/ThreadPool.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/myvietnam/src/net/myvietnam/mvncore/thirdparty/commonj/timers/FooTimerManager.java"
+        }
+    ],
+    "com.mvnforum.admin.ForumXML::setForumPassword(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumForumXML": [
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "setParentCategory",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.CategoryXML",
+                        "param_name": "parentCategory"
+                    }
+                ],
+                "method_name_start_line": 86,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ForumXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/CategoryXML.java"
+        },
+        {
+            "method_information": {
+                "line_num": 427,
+                "method_name": "setForumPassword",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.mvnforum.MvnForumForumXML",
+                        "param_name": "mvnForumForumXML"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 427,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ForumXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/mvnforum/MvnForumForumXML.java"
+        },
+        {
+            "method_information": {
+                "line_num": 431,
+                "method_name": "exportForumWatchesForForum",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "forumID"
+                    }
+                ],
+                "method_name_start_line": 431,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ForumXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 480,
+                "method_name": "exportMemberForumPermissionsForForum",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "forumID"
+                    }
+                ],
+                "method_name_start_line": 480,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ForumXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 513,
+                "method_name": "exportGroupForumPermissionsForForum",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "forumID"
+                    }
+                ],
+                "method_name_start_line": 513,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ForumXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 545,
+                "method_name": "exportForum",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "forumID"
+                    }
+                ],
+                "method_name_start_line": 545,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ForumXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 631,
+                "method_name": "exportForumList",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "parentCategoryID"
+                    }
+                ],
+                "method_name_start_line": 631,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/ForumXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        }
+    ],
+    "com.mvnforum.auth.OnlineUserAction::convertGMTDate(java.util.Date):java.util.Date->com.mvnforum.auth.OnlineUserImpl": [
+        {
+            "method_information": {
+                "line_num": 89,
+                "method_name": "getDesc",
+                "parameter_types": [
+                    {
+                        "param_type": "net.myvietnam.mvncore.web.GenericRequest",
+                        "param_name": "request"
+                    }
+                ],
+                "method_name_start_line": 89,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 89,
+                "method_name": "getDesc",
+                "parameter_types": [
+                    {
+                        "param_type": "net.myvietnam.mvncore.web.GenericRequest",
+                        "param_name": "request"
+                    }
+                ],
+                "method_name_start_line": 89,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/myvietnam/src/net/myvietnam/mvncore/web/GenericRequest.java"
+        },
+        {
+            "method_information": {
+                "line_num": 97,
+                "method_name": "getPageID",
+                "parameter_types": [],
+                "method_name_start_line": 97,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 104,
+                "method_name": "getPageParam",
+                "parameter_types": [],
+                "method_name_start_line": 104,
+                "return_type": "Object",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 111,
+                "method_name": "getUrl",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 115,
+                "method_name": "getMemberID",
+                "parameter_types": [],
+                "method_name_start_line": 115,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 119,
+                "method_name": "getMemberName",
+                "parameter_types": [],
+                "method_name_start_line": 119,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 123,
+                "method_name": "isInvisibleMember",
+                "parameter_types": [],
+                "method_name_start_line": 123,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 127,
+                "method_name": "getFirstRequestTime",
+                "parameter_types": [],
+                "method_name_start_line": 127,
+                "return_type": "Timestamp",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 131,
+                "method_name": "getLastRequestTime",
+                "parameter_types": [],
+                "method_name_start_line": 131,
+                "return_type": "Timestamp",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 135,
+                "method_name": "getSessionCount",
+                "parameter_types": [],
+                "method_name_start_line": 135,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 139,
+                "method_name": "setSessionCount",
+                "parameter_types": [
+                    {
+                        "param_type": "int",
+                        "param_name": "count"
+                    }
+                ],
+                "method_name_start_line": 139,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "increaseSessionCount",
+                "parameter_types": [
+                    {
+                        "param_type": "int",
+                        "param_name": "delta"
+                    }
+                ],
+                "method_name_start_line": 143,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 147,
+                "method_name": "resetSessionCount",
+                "parameter_types": [],
+                "method_name_start_line": 147,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 152,
+                "method_name": "getOnlineDurarionDesc",
+                "parameter_types": [
+                    {
+                        "param_type": "java.sql.Timestamp",
+                        "param_name": "currentTime"
+                    },
+                    {
+                        "param_type": "java.util.Locale",
+                        "param_name": "locale"
+                    }
+                ],
+                "method_name_start_line": 152,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 157,
+                "method_name": "getDurationSinceLastRequestDesc",
+                "parameter_types": [
+                    {
+                        "param_type": "java.sql.Timestamp",
+                        "param_name": "currentTime"
+                    },
+                    {
+                        "param_type": "java.util.Locale",
+                        "param_name": "locale"
+                    }
+                ],
+                "method_name_start_line": 157,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 162,
+                "method_name": "getTimeString",
+                "parameter_types": [
+                    {
+                        "param_type": "int",
+                        "param_name": "duration"
+                    },
+                    {
+                        "param_type": "java.util.Locale",
+                        "param_name": "locale"
+                    }
+                ],
+                "method_name_start_line": 162,
+                "return_type": "String",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 197,
+                "method_name": "getRemoteAddr",
+                "parameter_types": [],
+                "method_name_start_line": 197,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 201,
+                "method_name": "getUserAgent",
+                "parameter_types": [],
+                "method_name_start_line": 201,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "initRemoteAddr_UserAgent",
+                "parameter_types": [
+                    {
+                        "param_type": "HttpServletRequest",
+                        "param_name": "request"
+                    }
+                ],
+                "method_name_start_line": 209,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 214,
+                "method_name": "initRemoteAddr_UserAgent",
+                "parameter_types": [
+                    {
+                        "param_type": "net.myvietnam.mvncore.web.GenericRequest",
+                        "param_name": "request"
+                    }
+                ],
+                "method_name_start_line": 214,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 214,
+                "method_name": "initRemoteAddr_UserAgent",
+                "parameter_types": [
+                    {
+                        "param_type": "net.myvietnam.mvncore.web.GenericRequest",
+                        "param_name": "request"
+                    }
+                ],
+                "method_name_start_line": 214,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/myvietnam/src/net/myvietnam/mvncore/web/GenericRequest.java"
+        },
+        {
+            "method_information": {
+                "line_num": 224,
+                "method_name": "setAction",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.auth.Action",
+                        "param_name": "action"
+                    }
+                ],
+                "method_name_start_line": 224,
+                "return_type": "void",
+                "modifier": ""
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 224,
+                "method_name": "setAction",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.auth.Action",
+                        "param_name": "action"
+                    }
+                ],
+                "method_name_start_line": 224,
+                "return_type": "void",
+                "modifier": ""
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 231,
+                "method_name": "updateLastRequestTime",
+                "parameter_types": [],
+                "method_name_start_line": 231,
+                "return_type": "void",
+                "modifier": ""
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 235,
+                "method_name": "setMemberID",
+                "parameter_types": [
+                    {
+                        "param_type": "int",
+                        "param_name": "memberID"
+                    }
+                ],
+                "method_name_start_line": 235,
+                "return_type": "void",
+                "modifier": ""
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 239,
+                "method_name": "setMemberName",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "memberName"
+                    }
+                ],
+                "method_name_start_line": 239,
+                "return_type": "void",
+                "modifier": ""
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 243,
+                "method_name": "setMemberInvisible",
+                "parameter_types": [
+                    {
+                        "param_type": "boolean",
+                        "param_name": "invisible"
+                    }
+                ],
+                "method_name_start_line": 243,
+                "return_type": "void",
+                "modifier": ""
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 247,
+                "method_name": "setRemoteAddr",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "remoteAddr"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "setUserAgent",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "userAgent"
+                    }
+                ],
+                "method_name_start_line": 251,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 255,
+                "method_name": "convertGMTDate",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.auth.OnlineUserImpl",
+                        "param_name": "onlineUserImpl"
+                    },
+                    {
+                        "param_type": "java.util.Date",
+                        "param_name": "gmtDate"
+                    }
+                ],
+                "method_name_start_line": 255,
+                "return_type": "java.util.Date",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/Action.java"
+        },
+        {
+            "method_information": {
+                "line_num": 255,
+                "method_name": "convertGMTDate",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.auth.OnlineUserImpl",
+                        "param_name": "onlineUserImpl"
+                    },
+                    {
+                        "param_type": "java.util.Date",
+                        "param_name": "gmtDate"
+                    }
+                ],
+                "method_name_start_line": 255,
+                "return_type": "java.util.Date",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserAction.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/auth/OnlineUserImpl.java"
+        }
+    ],
+    "com.mvnforum.admin.MemberXML::setMemberEmailVisible(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumMemberXML": [
+        {
+            "method_information": {
+                "line_num": 632,
+                "method_name": "setMemberEmailVisible",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.mvnforum.MvnForumMemberXML",
+                        "param_name": "mvnForumMemberXML"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 632,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/mvnforum/MvnForumMemberXML.java"
+        },
+        {
+            "method_information": {
+                "line_num": 636,
+                "method_name": "exportMessageFoldersForMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "memberName"
+                    }
+                ],
+                "method_name_start_line": 636,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 646,
+                "method_name": "exportMessageFoldersForMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "memberID"
+                    }
+                ],
+                "method_name_start_line": 646,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 683,
+                "method_name": "exportGlobalPermissionsForMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "memberName"
+                    }
+                ],
+                "method_name_start_line": 683,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 693,
+                "method_name": "exportGlobalPermissionsForMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "memberID"
+                    }
+                ],
+                "method_name_start_line": 693,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 719,
+                "method_name": "exportGlobalWatchesForMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "memberName"
+                    }
+                ],
+                "method_name_start_line": 719,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 729,
+                "method_name": "exportGlobalWatchesForMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "memberID"
+                    }
+                ],
+                "method_name_start_line": 729,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 773,
+                "method_name": "exportMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "memberName"
+                    }
+                ],
+                "method_name_start_line": 773,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 783,
+                "method_name": "exportMember",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "memberID"
+                    }
+                ],
+                "method_name_start_line": 783,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 987,
+                "method_name": "exportMemberList",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    }
+                ],
+                "method_name_start_line": 987,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/MemberXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        }
+    ],
+    "com.mvnforum.admin.AttachmentXML::setAttachDownloadCount(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumAttachmentXML": [
+        {
+            "method_information": {
+                "line_num": 313,
+                "method_name": "setAttachDownloadCount",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.mvnforum.MvnForumAttachmentXML",
+                        "param_name": "mvnForumAttachmentXML"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 313,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/AttachmentXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/mvnforum/MvnForumAttachmentXML.java"
+        },
+        {
+            "method_information": {
+                "line_num": 320,
+                "method_name": "exportAttachmentList",
+                "parameter_types": [
+                    {
+                        "param_type": "com.mvnforum.admin.importexport.XMLWriter",
+                        "param_name": "xmlWriter"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "parentPostID"
+                    }
+                ],
+                "method_name_start_line": 320,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/AttachmentXML.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/mvnforum/src/com/mvnforum/admin/importexport/XMLWriter.java"
+        }
+    ],
+    "net.myvietnam.mvncore.service.BinaryStorageHandle::loadData(String, String, BinaryStorageHandle):byte[]->net.myvietnam.mvncore.service.impl.BinaryStorageServiceImplBase": [
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "loadData",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "category"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "nameId"
+                    },
+                    {
+                        "param_type": "net.myvietnam.mvncore.service.impl.BinaryStorageServiceImplBase",
+                        "param_name": "binaryStorageServiceImplBase"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "byte[]",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/myvietnam/src/net/myvietnam/mvncore/service/BinaryStorageHandle.java",
+            "target_class_path": "jmove/dataset-tse/mvnforum/small/small/mvnforum-1.2.2-ga/myvietnam/src/net/myvietnam/mvncore/service/impl/BinaryStorageServiceImplBase.java"
+        }
+    ]
+}

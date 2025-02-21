@@ -1,0 +1,1630 @@
+{
+    "org.apache.lucene.codecs.TermStats::finishTerm2(TermStats):void->org.apache.lucene.codecs.lucene41.Lucene41PostingsWriter": [
+        {
+            "method_information": {
+                "line_num": 51,
+                "method_name": "finishTerm2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.codecs.lucene41.Lucene41PostingsWriter",
+                        "param_name": "lucene41PostingsWriter"
+                    }
+                ],
+                "method_name_start_line": 51,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/TermStats.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/lucene41/Lucene41PostingsWriter.java"
+        }
+    ],
+    "org.apache.lucene.codecs.FieldsConsumer::flush(String, FieldsConsumer, SegmentWriteState):void->org.apache.lucene.index.FreqProxTermsWriterPerField": [
+        {
+            "method_information": {
+                "line_num": 63,
+                "method_name": "addField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 63,
+                "return_type": "TermsConsumer",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/FieldsConsumer.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "merge",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.MergeState",
+                        "param_name": "mergeState"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.Fields",
+                        "param_name": "fields"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/FieldsConsumer.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/MergeState.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "merge",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.MergeState",
+                        "param_name": "mergeState"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.Fields",
+                        "param_name": "fields"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/FieldsConsumer.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "flush",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "fieldName"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.FreqProxTermsWriterPerField",
+                        "param_name": "freqProxTermsWriterPerField"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.SegmentWriteState",
+                        "param_name": "state"
+                    }
+                ],
+                "method_name_start_line": 86,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/FieldsConsumer.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FreqProxTermsWriterPerField.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "flush",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "fieldName"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.FreqProxTermsWriterPerField",
+                        "param_name": "freqProxTermsWriterPerField"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.SegmentWriteState",
+                        "param_name": "state"
+                    }
+                ],
+                "method_name_start_line": 86,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/FieldsConsumer.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/SegmentWriteState.java"
+        }
+    ],
+    "org.apache.lucene.search.Collector::score2():float->org.apache.lucene.facet.search.DrillSidewaysScorer": [
+        {
+            "method_information": {
+                "line_num": 135,
+                "method_name": "setScorer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.search.Scorer",
+                        "param_name": "scorer"
+                    }
+                ],
+                "method_name_start_line": 135,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/Collector.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/Scorer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 159,
+                "method_name": "setNextReader",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 159,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/Collector.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 179,
+                "method_name": "score2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.facet.search.DrillSidewaysScorer",
+                        "param_name": "drillSidewaysScorer"
+                    }
+                ],
+                "method_name_start_line": 179,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/Collector.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/search/DrillSidewaysScorer.java"
+        }
+    ],
+    "org.apache.lucene.codecs.TermVectorsReader::getSortedDocValues(String):SortedDocValues->org.apache.lucene.index.SegmentCoreReaders": [
+        {
+            "method_information": {
+                "line_num": 55,
+                "method_name": "getSortedDocValues",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.SegmentCoreReaders",
+                        "param_name": "segmentCoreReaders"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 55,
+                "return_type": "SortedDocValues",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/TermVectorsReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/SegmentCoreReaders.java"
+        }
+    ],
+    "org.apache.lucene.index.AtomicReader::correctBits(AtomicReader, Bits):FixedBitSet->org.apache.lucene.sandbox.queries.DuplicateFilter": [
+        {
+            "method_information": {
+                "line_num": 62,
+                "method_name": "getContext",
+                "parameter_types": [],
+                "method_name_start_line": 63,
+                "return_type": "AtomicReaderContext",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "hasNorms",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "fields",
+                "parameter_types": [],
+                "method_name_start_line": 86,
+                "return_type": "Fields",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 88,
+                "method_name": "docFreq",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 89,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 88,
+                "method_name": "docFreq",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 89,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 111,
+                "method_name": "totalTermFreq",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 112,
+                "return_type": "long",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 111,
+                "method_name": "totalTermFreq",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 112,
+                "return_type": "long",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 130,
+                "method_name": "terms",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 130,
+                "return_type": "Terms",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 142,
+                "method_name": "termDocsEnum",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 142,
+                "return_type": "DocsEnum",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 142,
+                "method_name": "termDocsEnum",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 142,
+                "return_type": "DocsEnum",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 162,
+                "method_name": "termPositionsEnum",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 162,
+                "return_type": "DocsAndPositionsEnum",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 162,
+                "method_name": "termPositionsEnum",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 162,
+                "return_type": "DocsAndPositionsEnum",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 182,
+                "method_name": "getNumericDocValues",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 182,
+                "return_type": "NumericDocValues",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 188,
+                "method_name": "getBinaryDocValues",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 188,
+                "return_type": "BinaryDocValues",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 194,
+                "method_name": "getSortedDocValues",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 194,
+                "return_type": "SortedDocValues",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 200,
+                "method_name": "getSortedSetDocValues",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 200,
+                "return_type": "SortedSetDocValues",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 206,
+                "method_name": "getNormValues",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 206,
+                "return_type": "NumericDocValues",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 213,
+                "method_name": "getFieldInfos",
+                "parameter_types": [],
+                "method_name_start_line": 213,
+                "return_type": "FieldInfos",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 225,
+                "method_name": "getLiveDocs",
+                "parameter_types": [],
+                "method_name_start_line": 225,
+                "return_type": "Bits",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 227,
+                "method_name": "correctBits",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.sandbox.queries.DuplicateFilter",
+                        "param_name": "duplicateFilter"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.Bits",
+                        "param_name": "acceptDocs"
+                    }
+                ],
+                "method_name_start_line": 227,
+                "return_type": "FixedBitSet",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 227,
+                "method_name": "correctBits",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.sandbox.queries.DuplicateFilter",
+                        "param_name": "duplicateFilter"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.Bits",
+                        "param_name": "acceptDocs"
+                    }
+                ],
+                "method_name_start_line": 227,
+                "return_type": "FixedBitSet",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/sandbox/src/java/org/apache/lucene/sandbox/queries/DuplicateFilter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 227,
+                "method_name": "correctBits",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.sandbox.queries.DuplicateFilter",
+                        "param_name": "duplicateFilter"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.Bits",
+                        "param_name": "acceptDocs"
+                    }
+                ],
+                "method_name_start_line": 227,
+                "return_type": "FixedBitSet",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/util/Bits.java"
+        }
+    ],
+    "org.apache.lucene.store.ByteArrayDataOutput::build2(IntsRef, Iterable<CategoryPath>):Map<String,BytesRef>->org.apache.lucene.facet.associations.AssociationsListBuilder": [
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "build2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.facet.associations.AssociationsListBuilder",
+                        "param_name": "associationsListBuilder"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.IntsRef",
+                        "param_name": "ordinals"
+                    },
+                    {
+                        "param_type": "java.lang.Iterable",
+                        "param_name": "categories"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "Map<String,BytesRef>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/store/ByteArrayDataOutput.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/associations/AssociationsListBuilder.java"
+        },
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "build2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.facet.associations.AssociationsListBuilder",
+                        "param_name": "associationsListBuilder"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.IntsRef",
+                        "param_name": "ordinals"
+                    },
+                    {
+                        "param_type": "java.lang.Iterable",
+                        "param_name": "categories"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "Map<String,BytesRef>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/store/ByteArrayDataOutput.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/util/IntsRef.java"
+        }
+    ],
+    "org.apache.lucene.search.TermQuery::testKeepsLastFilter():void->org.apache.lucene.sandbox.queries.DuplicateFilterTest": [
+        {
+            "method_information": {
+                "line_num": 70,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 71,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 70,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 71,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "getQuery",
+                "parameter_types": [],
+                "method_name_start_line": 74,
+                "return_type": "Query",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "getQuery",
+                "parameter_types": [],
+                "method_name_start_line": 74,
+                "return_type": "Query",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 76,
+                "method_name": "getValueForNormalization",
+                "parameter_types": [],
+                "method_name_start_line": 77,
+                "return_type": "float",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 76,
+                "method_name": "getValueForNormalization",
+                "parameter_types": [],
+                "method_name_start_line": 77,
+                "return_type": "float",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "normalize",
+                "parameter_types": [
+                    {
+                        "param_type": "float",
+                        "param_name": "queryNorm"
+                    },
+                    {
+                        "param_type": "float",
+                        "param_name": "topLevelBoost"
+                    }
+                ],
+                "method_name_start_line": 82,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "normalize",
+                "parameter_types": [
+                    {
+                        "param_type": "float",
+                        "param_name": "queryNorm"
+                    },
+                    {
+                        "param_type": "float",
+                        "param_name": "topLevelBoost"
+                    }
+                ],
+                "method_name_start_line": 82,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "scorer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "scoreDocsInOrder"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "topScorer"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.Bits",
+                        "param_name": "acceptDocs"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "Scorer",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "scorer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "scoreDocsInOrder"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "topScorer"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.Bits",
+                        "param_name": "acceptDocs"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "Scorer",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "scorer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "scoreDocsInOrder"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "topScorer"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.Bits",
+                        "param_name": "acceptDocs"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "Scorer",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "scorer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "scoreDocsInOrder"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "topScorer"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.util.Bits",
+                        "param_name": "acceptDocs"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "Scorer",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/util/Bits.java"
+        },
+        {
+            "method_information": {
+                "line_num": 103,
+                "method_name": "getTermsEnum",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 103,
+                "return_type": "TermsEnum",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 103,
+                "method_name": "getTermsEnum",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 103,
+                "return_type": "TermsEnum",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 103,
+                "method_name": "getTermsEnum",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 103,
+                "return_type": "TermsEnum",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 115,
+                "method_name": "termNotInReader",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReader",
+                        "param_name": "reader"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 115,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 115,
+                "method_name": "termNotInReader",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReader",
+                        "param_name": "reader"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 115,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 115,
+                "method_name": "termNotInReader",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReader",
+                        "param_name": "reader"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 115,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReader.java"
+        },
+        {
+            "method_information": {
+                "line_num": 115,
+                "method_name": "termNotInReader",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReader",
+                        "param_name": "reader"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.Term",
+                        "param_name": "term"
+                    }
+                ],
+                "method_name_start_line": 115,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 121,
+                "method_name": "explain",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "doc"
+                    }
+                ],
+                "method_name_start_line": 122,
+                "return_type": "Explanation",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 121,
+                "method_name": "explain",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "doc"
+                    }
+                ],
+                "method_name_start_line": 122,
+                "return_type": "Explanation",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 121,
+                "method_name": "explain",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.AtomicReaderContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "doc"
+                    }
+                ],
+                "method_name_start_line": 122,
+                "return_type": "Explanation",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/AtomicReaderContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 167,
+                "method_name": "getTerm",
+                "parameter_types": [],
+                "method_name_start_line": 167,
+                "return_type": "Term",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 167,
+                "method_name": "getTerm",
+                "parameter_types": [],
+                "method_name_start_line": 167,
+                "return_type": "Term",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 169,
+                "method_name": "createWeight",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.search.IndexSearcher",
+                        "param_name": "searcher"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "Weight",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 169,
+                "method_name": "createWeight",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.search.IndexSearcher",
+                        "param_name": "searcher"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "Weight",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 169,
+                "method_name": "createWeight",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.search.IndexSearcher",
+                        "param_name": "searcher"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "Weight",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/IndexSearcher.java"
+        },
+        {
+            "method_information": {
+                "line_num": 188,
+                "method_name": "extractTerms",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.Set",
+                        "param_name": "terms"
+                    }
+                ],
+                "method_name_start_line": 189,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 188,
+                "method_name": "extractTerms",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.Set",
+                        "param_name": "terms"
+                    }
+                ],
+                "method_name_start_line": 189,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 194,
+                "method_name": "toString",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 195,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 194,
+                "method_name": "toString",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 195,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 207,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "o"
+                    }
+                ],
+                "method_name_start_line": 208,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 207,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "o"
+                    }
+                ],
+                "method_name_start_line": 208,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 222,
+                "method_name": "testKeepsLastFilter",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.sandbox.queries.DuplicateFilterTest",
+                        "param_name": "duplicateFilterTest"
+                    }
+                ],
+                "method_name_start_line": 222,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
+        },
+        {
+            "method_information": {
+                "line_num": 222,
+                "method_name": "testKeepsLastFilter",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.sandbox.queries.DuplicateFilterTest",
+                        "param_name": "duplicateFilterTest"
+                    }
+                ],
+                "method_name_start_line": 222,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/TermContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 222,
+                "method_name": "testKeepsLastFilter",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.sandbox.queries.DuplicateFilterTest",
+                        "param_name": "duplicateFilterTest"
+                    }
+                ],
+                "method_name_start_line": 222,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/sandbox/src/test/org/apache/lucene/sandbox/queries/DuplicateFilterTest.java"
+        }
+    ],
+    "org.apache.lucene.index.StoredFieldVisitor::visitDocument2(int, StoredFieldVisitor):void->org.apache.lucene.codecs.simpletext.SimpleTextStoredFieldsReader": [
+        {
+            "method_information": {
+                "line_num": 62,
+                "method_name": "binaryField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "fieldInfo"
+                    },
+                    {
+                        "param_type": "byte[]",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 62,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 66,
+                "method_name": "stringField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "fieldInfo"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 66,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 70,
+                "method_name": "intField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "fieldInfo"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 70,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "longField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "fieldInfo"
+                    },
+                    {
+                        "param_type": "long",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 78,
+                "method_name": "floatField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "fieldInfo"
+                    },
+                    {
+                        "param_type": "float",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 78,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 82,
+                "method_name": "doubleField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "fieldInfo"
+                    },
+                    {
+                        "param_type": "double",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 82,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 92,
+                "method_name": "needsField",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.index.FieldInfo",
+                        "param_name": "fieldInfo"
+                    }
+                ],
+                "method_name_start_line": 92,
+                "return_type": "Status",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/FieldInfo.java"
+        },
+        {
+            "method_information": {
+                "line_num": 94,
+                "method_name": "visitDocument2",
+                "parameter_types": [
+                    {
+                        "param_type": "int",
+                        "param_name": "n"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.codecs.simpletext.SimpleTextStoredFieldsReader",
+                        "param_name": "simpleTextStoredFieldsReader"
+                    }
+                ],
+                "method_name_start_line": 94,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/StoredFieldVisitor.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/codecs/src/java/org/apache/lucene/codecs/simpletext/SimpleTextStoredFieldsReader.java"
+        }
+    ],
+    "org.apache.lucene.index.Fields::addAllDocVectors(Fields, MergeState):void->org.apache.lucene.codecs.TermVectorsWriter": [
+        {
+            "method_information": {
+                "line_num": 39,
+                "method_name": "iterator",
+                "parameter_types": [],
+                "method_name_start_line": 40,
+                "return_type": "Iterator<String>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java"
+        },
+        {
+            "method_information": {
+                "line_num": 44,
+                "method_name": "terms",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "field"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "Terms",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java"
+        },
+        {
+            "method_information": {
+                "line_num": 49,
+                "method_name": "size",
+                "parameter_types": [],
+                "method_name_start_line": 49,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java"
+        },
+        {
+            "method_information": {
+                "line_num": 60,
+                "method_name": "getUniqueTermCount",
+                "parameter_types": [],
+                "method_name_start_line": 61,
+                "return_type": "long",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java"
+        },
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "addAllDocVectors",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.codecs.TermVectorsWriter",
+                        "param_name": "termVectorsWriter"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.MergeState",
+                        "param_name": "mergeState"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java"
+        },
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "addAllDocVectors",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.codecs.TermVectorsWriter",
+                        "param_name": "termVectorsWriter"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.MergeState",
+                        "param_name": "mergeState"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/codecs/TermVectorsWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "addAllDocVectors",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.codecs.TermVectorsWriter",
+                        "param_name": "termVectorsWriter"
+                    },
+                    {
+                        "param_type": "org.apache.lucene.index.MergeState",
+                        "param_name": "mergeState"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Fields.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/MergeState.java"
+        }
+    ],
+    "org.apache.lucene.analysis.util.OpenStringBuilder::izeEndings():void->org.apache.lucene.analysis.en.KStemmer": [
+        {
+            "method_information": {
+                "line_num": 127,
+                "method_name": "write",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.analysis.util.OpenStringBuilder",
+                        "param_name": "arr"
+                    }
+                ],
+                "method_name_start_line": 127,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/analysis/common/src/java/org/apache/lucene/analysis/util/OpenStringBuilder.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/analysis/common/src/java/org/apache/lucene/analysis/util/OpenStringBuilder.java"
+        },
+        {
+            "method_information": {
+                "line_num": 155,
+                "method_name": "izeEndings",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.lucene.analysis.en.KStemmer",
+                        "param_name": "kStemmer"
+                    }
+                ],
+                "method_name_start_line": 155,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/analysis/common/src/java/org/apache/lucene/analysis/util/OpenStringBuilder.java",
+            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/analysis/common/src/java/org/apache/lucene/analysis/en/KStemmer.java"
+        }
+    ]
+}

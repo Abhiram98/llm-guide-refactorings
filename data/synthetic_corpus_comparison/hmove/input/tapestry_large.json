@@ -1,0 +1,829 @@
+{
+    "org.apache.tapestry5.ioc.internal.util.IdAllocator::copyMethod2(TransformMethodSignature, int, String):void->org.apache.tapestry5.internal.services.InternalClassTransformationImpl": [
+        {
+            "method_information": {
+                "line_num": 194,
+                "method_name": "copyMethod2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.InternalClassTransformationImpl",
+                        "param_name": "internalClassTransformationImpl"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.services.TransformMethodSignature",
+                        "param_name": "sourceMethod"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "modifiers"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "newMethodName"
+                    }
+                ],
+                "method_name_start_line": 194,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/util/IdAllocator.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/InternalClassTransformationImpl.java"
+        },
+        {
+            "method_information": {
+                "line_num": 194,
+                "method_name": "copyMethod2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.InternalClassTransformationImpl",
+                        "param_name": "internalClassTransformationImpl"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.services.TransformMethodSignature",
+                        "param_name": "sourceMethod"
+                    },
+                    {
+                        "param_type": "int",
+                        "param_name": "modifiers"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "newMethodName"
+                    }
+                ],
+                "method_name_start_line": 194,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/util/IdAllocator.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/TransformMethodSignature.java"
+        }
+    ],
+    "org.apache.tapestry5.ioc.internal.services.RegistryShutdownHubImpl::findServiceIdsForInterface(Class):List<String>->org.apache.tapestry5.ioc.internal.RegistryImpl": [
+        {
+            "method_information": {
+                "line_num": 44,
+                "method_name": "addRegistryShutdownListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.ioc.services.RegistryShutdownListener",
+                        "param_name": "listener"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/services/RegistryShutdownHubImpl.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/util/OneShotLock.java"
+        },
+        {
+            "method_information": {
+                "line_num": 44,
+                "method_name": "addRegistryShutdownListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.ioc.services.RegistryShutdownListener",
+                        "param_name": "listener"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/services/RegistryShutdownHubImpl.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/services/RegistryShutdownListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 55,
+                "method_name": "fireRegistryDidShutdown",
+                "parameter_types": [],
+                "method_name_start_line": 55,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/services/RegistryShutdownHubImpl.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/util/OneShotLock.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "findServiceIdsForInterface",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.ioc.internal.RegistryImpl",
+                        "param_name": "registryImpl"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "serviceInterface"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "List<String>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/services/RegistryShutdownHubImpl.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/util/OneShotLock.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "findServiceIdsForInterface",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.ioc.internal.RegistryImpl",
+                        "param_name": "registryImpl"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "serviceInterface"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "List<String>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/services/RegistryShutdownHubImpl.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/RegistryImpl.java"
+        }
+    ],
+    "org.apache.tapestry5.corelib.data.InsertPosition::addFormInjector(String, Link, InsertPosition, String):void->org.apache.tapestry5.internal.services.ClientBehaviorSupportImpl": [
+        {
+            "method_information": {
+                "line_num": 33,
+                "method_name": "addFormInjector2",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "clientId"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.Link",
+                        "param_name": "link"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.ClientBehaviorSupportImpl",
+                        "param_name": "clientBehaviorSupportImpl"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "showFunctionName"
+                    }
+                ],
+                "method_name_start_line": 33,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/data/InsertPosition.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/Link.java"
+        },
+        {
+            "method_information": {
+                "line_num": 33,
+                "method_name": "addFormInjector2",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "clientId"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.Link",
+                        "param_name": "link"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.ClientBehaviorSupportImpl",
+                        "param_name": "clientBehaviorSupportImpl"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "showFunctionName"
+                    }
+                ],
+                "method_name_start_line": 33,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/data/InsertPosition.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ClientBehaviorSupportImpl.java"
+        }
+    ],
+    "org.apache.tapestry5.corelib.internal.ComponentActionSink::afterRender(MarkupWriter):void->org.apache.tapestry5.corelib.components.FormFragment": [
+        {
+            "method_information": {
+                "line_num": 52,
+                "method_name": "store",
+                "parameter_types": [
+                    {
+                        "param_type": "T",
+                        "param_name": "component"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.ComponentAction",
+                        "param_name": "action"
+                    }
+                ],
+                "method_name_start_line": 52,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/internal/ComponentActionSink.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ClientDataSink.java"
+        },
+        {
+            "method_information": {
+                "line_num": 52,
+                "method_name": "store",
+                "parameter_types": [
+                    {
+                        "param_type": "T",
+                        "param_name": "component"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.ComponentAction",
+                        "param_name": "action"
+                    }
+                ],
+                "method_name_start_line": 52,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/internal/ComponentActionSink.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/ComponentAction.java"
+        },
+        {
+            "method_information": {
+                "line_num": 75,
+                "method_name": "getClientData",
+                "parameter_types": [],
+                "method_name_start_line": 75,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/internal/ComponentActionSink.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ClientDataSink.java"
+        },
+        {
+            "method_information": {
+                "line_num": 87,
+                "method_name": "afterRender",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.corelib.components.FormFragment",
+                        "param_name": "formFragment"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.MarkupWriter",
+                        "param_name": "writer"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/internal/ComponentActionSink.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ClientDataSink.java"
+        },
+        {
+            "method_information": {
+                "line_num": 87,
+                "method_name": "afterRender",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.corelib.components.FormFragment",
+                        "param_name": "formFragment"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.MarkupWriter",
+                        "param_name": "writer"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/internal/ComponentActionSink.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/components/FormFragment.java"
+        },
+        {
+            "method_information": {
+                "line_num": 87,
+                "method_name": "afterRender",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.corelib.components.FormFragment",
+                        "param_name": "formFragment"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.MarkupWriter",
+                        "param_name": "writer"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/internal/ComponentActionSink.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/MarkupWriter.java"
+        }
+    ],
+    "org.apache.tapestry5.internal.parser.AttributeToken::newAttributeElement(ComponentResources, AttributeToken):RenderCommand->org.apache.tapestry5.internal.services.PageElementFactoryImpl": [
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "newAttributeElement2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.ComponentResources",
+                        "param_name": "componentResources"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.PageElementFactoryImpl",
+                        "param_name": "pageElementFactoryImpl"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "RenderCommand",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/AttributeToken.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/ComponentResources.java"
+        },
+        {
+            "method_information": {
+                "line_num": 81,
+                "method_name": "newAttributeElement2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.ComponentResources",
+                        "param_name": "componentResources"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.PageElementFactoryImpl",
+                        "param_name": "pageElementFactoryImpl"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "RenderCommand",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/AttributeToken.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/PageElementFactoryImpl.java"
+        },
+        {
+            "method_information": {
+                "line_num": 91,
+                "method_name": "render",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.MarkupWriter",
+                        "param_name": "writer"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.runtime.RenderQueue",
+                        "param_name": "queue"
+                    }
+                ],
+                "method_name_start_line": 91,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/AttributeToken.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/MarkupWriter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 91,
+                "method_name": "render",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.MarkupWriter",
+                        "param_name": "writer"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.runtime.RenderQueue",
+                        "param_name": "queue"
+                    }
+                ],
+                "method_name_start_line": 91,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/AttributeToken.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/runtime/RenderQueue.java"
+        }
+    ],
+    "org.apache.tapestry5.internal.services.ComponentResultProcessorWrapper::fireValidateFormEvent(EventContext, ComponentResultProcessorWrapper):void->org.apache.tapestry5.corelib.components.Form": [
+        {
+            "method_information": {
+                "line_num": 43,
+                "method_name": "handleResult",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "result"
+                    }
+                ],
+                "method_name_start_line": 43,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentResultProcessorWrapper.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventResultProcessor.java"
+        },
+        {
+            "method_information": {
+                "line_num": 66,
+                "method_name": "isAborted",
+                "parameter_types": [],
+                "method_name_start_line": 66,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentResultProcessorWrapper.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventResultProcessor.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "fireValidateFormEvent",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.EventContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.corelib.components.Form",
+                        "param_name": "form"
+                    }
+                ],
+                "method_name_start_line": 73,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentResultProcessorWrapper.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventResultProcessor.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "fireValidateFormEvent",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.EventContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.corelib.components.Form",
+                        "param_name": "form"
+                    }
+                ],
+                "method_name_start_line": 73,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentResultProcessorWrapper.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "fireValidateFormEvent",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.EventContext",
+                        "param_name": "context"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.corelib.components.Form",
+                        "param_name": "form"
+                    }
+                ],
+                "method_name_start_line": 73,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentResultProcessorWrapper.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/components/Form.java"
+        }
+    ],
+    "org.apache.tapestry5.FieldFocusPriority::autofocus2(FieldFocusPriority, String):void->org.apache.tapestry5.internal.services.RenderSupportImpl": [
+        {
+            "method_information": {
+                "line_num": 50,
+                "method_name": "autofocus2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.RenderSupportImpl",
+                        "param_name": "renderSupportImpl"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "fieldId"
+                    }
+                ],
+                "method_name_start_line": 50,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/FieldFocusPriority.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/RenderSupportImpl.java"
+        }
+    ],
+    "org.apache.tapestry5.services.ComponentEventRequestParameters::handle2(ComponentEventRequestParameters):void->org.apache.tapestry5.internal.services.AjaxComponentEventRequestHandler": [
+        {
+            "method_information": {
+                "line_num": 61,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 62,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 72,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "o"
+                    }
+                ],
+                "method_name_start_line": 72,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 94,
+                "method_name": "getActivePageName",
+                "parameter_types": [],
+                "method_name_start_line": 94,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 104,
+                "method_name": "getContainingPageName",
+                "parameter_types": [],
+                "method_name_start_line": 104,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 113,
+                "method_name": "getNestedComponentId",
+                "parameter_types": [],
+                "method_name_start_line": 113,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 122,
+                "method_name": "getEventType",
+                "parameter_types": [],
+                "method_name_start_line": 122,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 133,
+                "method_name": "getPageActivationContext",
+                "parameter_types": [],
+                "method_name_start_line": 133,
+                "return_type": "EventContext",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 144,
+                "method_name": "getEventContext",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "EventContext",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 149,
+                "method_name": "handle2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.AjaxComponentEventRequestHandler",
+                        "param_name": "ajaxComponentEventRequestHandler"
+                    }
+                ],
+                "method_name_start_line": 149,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 149,
+                "method_name": "handle2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.AjaxComponentEventRequestHandler",
+                        "param_name": "ajaxComponentEventRequestHandler"
+                    }
+                ],
+                "method_name_start_line": 149,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/AjaxComponentEventRequestHandler.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "processResultValue",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 158,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        }
+    ],
+    "org.apache.tapestry5.services.PageRenderRequestParameters::createPageRenderLink2(PageRenderRequestParameters):Link->org.apache.tapestry5.internal.services.ComponentEventLinkEncoderImpl": [
+        {
+            "method_information": {
+                "line_num": 44,
+                "method_name": "getLogicalPageName",
+                "parameter_types": [],
+                "method_name_start_line": 44,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/PageRenderRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 49,
+                "method_name": "getActivationContext",
+                "parameter_types": [],
+                "method_name_start_line": 49,
+                "return_type": "EventContext",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/PageRenderRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 54,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "obj"
+                    }
+                ],
+                "method_name_start_line": 55,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/PageRenderRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 68,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 69,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/PageRenderRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "createPageRenderLink2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.ComponentEventLinkEncoderImpl",
+                        "param_name": "componentEventLinkEncoderImpl"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "Link",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/PageRenderRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/EventContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "createPageRenderLink2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.services.ComponentEventLinkEncoderImpl",
+                        "param_name": "componentEventLinkEncoderImpl"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "Link",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/PageRenderRequestParameters.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentEventLinkEncoderImpl.java"
+        }
+    ],
+    "org.apache.tapestry5.internal.parser.ExtensionPointToken::queueOverrideTokensForExtensionPoint(ExtensionPointToken, Stack<TemplateToken>, List<ComponentTemplate>):void->org.apache.tapestry5.internal.pageload.PageLoaderImpl": [
+        {
+            "method_information": {
+                "line_num": 46,
+                "method_name": "queueOverrideTokensForExtensionPoint",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.pageload.PageLoaderImpl",
+                        "param_name": "pageLoaderImpl"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.ioc.util.Stack",
+                        "param_name": "queue"
+                    },
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "overrideSearch"
+                    }
+                ],
+                "method_name_start_line": 46,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/ExtensionPointToken.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/pageload/PageLoaderImpl.java"
+        },
+        {
+            "method_information": {
+                "line_num": 46,
+                "method_name": "queueOverrideTokensForExtensionPoint",
+                "parameter_types": [
+                    {
+                        "param_type": "org.apache.tapestry5.internal.pageload.PageLoaderImpl",
+                        "param_name": "pageLoaderImpl"
+                    },
+                    {
+                        "param_type": "org.apache.tapestry5.ioc.util.Stack",
+                        "param_name": "queue"
+                    },
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "overrideSearch"
+                    }
+                ],
+                "method_name_start_line": 46,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/ExtensionPointToken.java",
+            "target_class_path": "jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/util/Stack.java"
+        }
+    ]
+}

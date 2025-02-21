@@ -1,0 +1,2453 @@
+{
+    "org.junit.runner.Result::printFailures(Result):void->org.junit.internal.TextListener": [
+        {
+            "method_information": {
+                "line_num": 69,
+                "method_name": "testRunStarted",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 70,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "testRunFinished",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Result",
+                        "param_name": "result"
+                    }
+                ],
+                "method_name_start_line": 75,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java"
+        },
+        {
+            "method_information": {
+                "line_num": 80,
+                "method_name": "testFinished",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 85,
+                "method_name": "testFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.Failure",
+                        "param_name": "failure"
+                    }
+                ],
+                "method_name_start_line": 86,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/Failure.java"
+        },
+        {
+            "method_information": {
+                "line_num": 90,
+                "method_name": "testIgnored",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 91,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 95,
+                "method_name": "testAssumptionFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.Failure",
+                        "param_name": "failure"
+                    }
+                ],
+                "method_name_start_line": 96,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/Failure.java"
+        },
+        {
+            "method_information": {
+                "line_num": 108,
+                "method_name": "printFailures",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.TextListener",
+                        "param_name": "textListener"
+                    }
+                ],
+                "method_name_start_line": 108,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/TextListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 121,
+                "method_name": "printFooter",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.TextListener",
+                        "param_name": "textListener"
+                    }
+                ],
+                "method_name_start_line": 121,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/TextListener.java"
+        }
+    ],
+    "junit.framework.TestResult::printFooter(TestResult):void->junit.textui.ResultPrinter": [
+        {
+            "method_information": {
+                "line_num": 37,
+                "method_name": "addError",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.Test",
+                        "param_name": "test"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "t"
+                    }
+                ],
+                "method_name_start_line": 37,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/Test.java"
+        },
+        {
+            "method_information": {
+                "line_num": 46,
+                "method_name": "addFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.Test",
+                        "param_name": "test"
+                    },
+                    {
+                        "param_type": "junit.framework.AssertionFailedError",
+                        "param_name": "t"
+                    }
+                ],
+                "method_name_start_line": 46,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/Test.java"
+        },
+        {
+            "method_information": {
+                "line_num": 46,
+                "method_name": "addFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.Test",
+                        "param_name": "test"
+                    },
+                    {
+                        "param_type": "junit.framework.AssertionFailedError",
+                        "param_name": "t"
+                    }
+                ],
+                "method_name_start_line": 46,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/AssertionFailedError.java"
+        },
+        {
+            "method_information": {
+                "line_num": 54,
+                "method_name": "addListener",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.TestListener",
+                        "param_name": "listener"
+                    }
+                ],
+                "method_name_start_line": 54,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 60,
+                "method_name": "removeListener",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.TestListener",
+                        "param_name": "listener"
+                    }
+                ],
+                "method_name_start_line": 60,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "endTest",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.Test",
+                        "param_name": "test"
+                    }
+                ],
+                "method_name_start_line": 74,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/Test.java"
+        },
+        {
+            "method_information": {
+                "line_num": 108,
+                "method_name": "run",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.TestCase",
+                        "param_name": "test"
+                    }
+                ],
+                "method_name_start_line": 108,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestCase.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "runProtected",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.Test",
+                        "param_name": "test"
+                    },
+                    {
+                        "param_type": "junit.framework.Protectable",
+                        "param_name": "p"
+                    }
+                ],
+                "method_name_start_line": 128,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/Test.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "runProtected",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.Test",
+                        "param_name": "test"
+                    },
+                    {
+                        "param_type": "junit.framework.Protectable",
+                        "param_name": "p"
+                    }
+                ],
+                "method_name_start_line": 128,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/Protectable.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "startTest",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.framework.Test",
+                        "param_name": "test"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/Test.java"
+        },
+        {
+            "method_information": {
+                "line_num": 171,
+                "method_name": "printFooter",
+                "parameter_types": [
+                    {
+                        "param_type": "junit.textui.ResultPrinter",
+                        "param_name": "resultPrinter"
+                    }
+                ],
+                "method_name_start_line": 171,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/junit/textui/ResultPrinter.java"
+        }
+    ],
+    "org.junit.runners.model.Statement::apply(Statement, FrameworkMethod, Object):Statement->org.junit.rules.TestWatchman": [
+        {
+            "method_information": {
+                "line_num": 21,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.rules.TestWatchman",
+                        "param_name": "testWatchman"
+                    },
+                    {
+                        "param_type": "org.junit.runners.model.FrameworkMethod",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "target"
+                    }
+                ],
+                "method_name_start_line": 21,
+                "return_type": "Statement",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/rules/TestWatchman.java"
+        },
+        {
+            "method_information": {
+                "line_num": 21,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.rules.TestWatchman",
+                        "param_name": "testWatchman"
+                    },
+                    {
+                        "param_type": "org.junit.runners.model.FrameworkMethod",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "target"
+                    }
+                ],
+                "method_name_start_line": 21,
+                "return_type": "Statement",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/FrameworkMethod.java"
+        },
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "evaluate2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.statements.ExpectException",
+                        "param_name": "expectException"
+                    }
+                ],
+                "method_name_start_line": 41,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/statements/ExpectException.java"
+        }
+    ],
+    "org.junit.experimental.theories.ParameterSignature::addFields(ParameterSignature, List<PotentialAssignment>):void->org.junit.experimental.theories.internal.AllMembersSupplier": [
+        {
+            "method_information": {
+                "line_num": 95,
+                "method_name": "addFields",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.experimental.theories.internal.AllMembersSupplier",
+                        "param_name": "allMembersSupplier"
+                    },
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "list"
+                    }
+                ],
+                "method_name_start_line": 95,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/experimental/theories/ParameterSignature.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/experimental/theories/internal/AllMembersSupplier.java"
+        }
+    ],
+    "org.junit.runner.Description::runBefores():void->org.junit.internal.runners.ClassRoadie": [
+        {
+            "method_information": {
+                "line_num": 44,
+                "method_name": "createSuiteDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "name"
+                    },
+                    {
+                        "param_type": "java.lang.annotation.Annotation",
+                        "param_name": "annotations"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 44,
+                "method_name": "createSuiteDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "name"
+                    },
+                    {
+                        "param_type": "java.lang.annotation.Annotation",
+                        "param_name": "annotations"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 58,
+                "method_name": "createTestDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "clazz"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "name"
+                    },
+                    {
+                        "param_type": "java.lang.annotation.Annotation",
+                        "param_name": "annotations"
+                    }
+                ],
+                "method_name_start_line": 58,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 58,
+                "method_name": "createTestDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "clazz"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "name"
+                    },
+                    {
+                        "param_type": "java.lang.annotation.Annotation",
+                        "param_name": "annotations"
+                    }
+                ],
+                "method_name_start_line": 58,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 70,
+                "method_name": "createTestDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "clazz"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "name"
+                    }
+                ],
+                "method_name_start_line": 70,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 70,
+                "method_name": "createTestDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "clazz"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "name"
+                    }
+                ],
+                "method_name_start_line": 70,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 79,
+                "method_name": "createSuiteDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "testClass"
+                    }
+                ],
+                "method_name_start_line": 79,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 79,
+                "method_name": "createSuiteDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "testClass"
+                    }
+                ],
+                "method_name_start_line": 79,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 108,
+                "method_name": "getDisplayName",
+                "parameter_types": [],
+                "method_name_start_line": 108,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 108,
+                "method_name": "getDisplayName",
+                "parameter_types": [],
+                "method_name_start_line": 108,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 116,
+                "method_name": "addChild",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 116,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 116,
+                "method_name": "addChild",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 116,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 116,
+                "method_name": "addChild",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 116,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 123,
+                "method_name": "getChildren",
+                "parameter_types": [],
+                "method_name_start_line": 123,
+                "return_type": "ArrayList<Description>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 123,
+                "method_name": "getChildren",
+                "parameter_types": [],
+                "method_name_start_line": 123,
+                "return_type": "ArrayList<Description>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 130,
+                "method_name": "isSuite",
+                "parameter_types": [],
+                "method_name_start_line": 130,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 130,
+                "method_name": "isSuite",
+                "parameter_types": [],
+                "method_name_start_line": 130,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 137,
+                "method_name": "isTest",
+                "parameter_types": [],
+                "method_name_start_line": 137,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 137,
+                "method_name": "isTest",
+                "parameter_types": [],
+                "method_name_start_line": 137,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 144,
+                "method_name": "testCount",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 144,
+                "method_name": "testCount",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 153,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 154,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 153,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 154,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "obj"
+                    }
+                ],
+                "method_name_start_line": 159,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "obj"
+                    }
+                ],
+                "method_name_start_line": 159,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 166,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 167,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 166,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 167,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 174,
+                "method_name": "isEmpty",
+                "parameter_types": [],
+                "method_name_start_line": 174,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 174,
+                "method_name": "isEmpty",
+                "parameter_types": [],
+                "method_name_start_line": 174,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 182,
+                "method_name": "childlessCopy",
+                "parameter_types": [],
+                "method_name_start_line": 182,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 182,
+                "method_name": "childlessCopy",
+                "parameter_types": [],
+                "method_name_start_line": 182,
+                "return_type": "Description",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 190,
+                "method_name": "getAnnotation",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "annotationType"
+                    }
+                ],
+                "method_name_start_line": 190,
+                "return_type": "T",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 190,
+                "method_name": "getAnnotation",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "annotationType"
+                    }
+                ],
+                "method_name_start_line": 190,
+                "return_type": "T",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 200,
+                "method_name": "getAnnotations",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "Collection<Annotation>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 200,
+                "method_name": "getAnnotations",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "Collection<Annotation>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 208,
+                "method_name": "getTestClass",
+                "parameter_types": [],
+                "method_name_start_line": 208,
+                "return_type": "Class<?>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 208,
+                "method_name": "getTestClass",
+                "parameter_types": [],
+                "method_name_start_line": 208,
+                "return_type": "Class<?>",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 223,
+                "method_name": "getClassName",
+                "parameter_types": [],
+                "method_name_start_line": 223,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 223,
+                "method_name": "getClassName",
+                "parameter_types": [],
+                "method_name_start_line": 223,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 234,
+                "method_name": "getMethodName",
+                "parameter_types": [],
+                "method_name_start_line": 234,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 234,
+                "method_name": "getMethodName",
+                "parameter_types": [],
+                "method_name_start_line": 234,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 238,
+                "method_name": "parseMethod",
+                "parameter_types": [],
+                "method_name_start_line": 238,
+                "return_type": "String",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 238,
+                "method_name": "parseMethod",
+                "parameter_types": [],
+                "method_name_start_line": 238,
+                "return_type": "String",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 245,
+                "method_name": "methodStringMatcher",
+                "parameter_types": [],
+                "method_name_start_line": 245,
+                "return_type": "Matcher",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 245,
+                "method_name": "methodStringMatcher",
+                "parameter_types": [],
+                "method_name_start_line": 245,
+                "return_type": "Matcher",
+                "modifier": "private "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 249,
+                "method_name": "runBefores",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.ClassRoadie",
+                        "param_name": "classRoadie"
+                    }
+                ],
+                "method_name_start_line": 249,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 249,
+                "method_name": "runBefores",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.ClassRoadie",
+                        "param_name": "classRoadie"
+                    }
+                ],
+                "method_name_start_line": 249,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 249,
+                "method_name": "runBefores",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.ClassRoadie",
+                        "param_name": "classRoadie"
+                    }
+                ],
+                "method_name_start_line": 249,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/ClassRoadie.java"
+        }
+    ],
+    "org.junit.runners.model.Statement::evaluate():void->org.junit.internal.runners.statements.ExpectException": [
+        {
+            "method_information": {
+                "line_num": 21,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.rules.TestWatchman",
+                        "param_name": "testWatchman"
+                    },
+                    {
+                        "param_type": "org.junit.runners.model.FrameworkMethod",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "target"
+                    }
+                ],
+                "method_name_start_line": 21,
+                "return_type": "Statement",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/rules/TestWatchman.java"
+        },
+        {
+            "method_information": {
+                "line_num": 21,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.rules.TestWatchman",
+                        "param_name": "testWatchman"
+                    },
+                    {
+                        "param_type": "org.junit.runners.model.FrameworkMethod",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "target"
+                    }
+                ],
+                "method_name_start_line": 21,
+                "return_type": "Statement",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/FrameworkMethod.java"
+        },
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "evaluate2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.statements.ExpectException",
+                        "param_name": "expectException"
+                    }
+                ],
+                "method_name_start_line": 41,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/statements/ExpectException.java"
+        }
+    ],
+    "org.junit.runner.notification.RunNotifier::runTestMethod():void->org.junit.internal.runners.MethodRoadie": [
+        {
+            "method_information": {
+                "line_num": 28,
+                "method_name": "addListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "listener"
+                    }
+                ],
+                "method_name_start_line": 28,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 34,
+                "method_name": "removeListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "listener"
+                    }
+                ],
+                "method_name_start_line": 34,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 51,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 51,
+                "return_type": "void",
+                "modifier": "abstract "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 57,
+                "method_name": "fireTestRunStarted",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 57,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 59,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 60,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 69,
+                "method_name": "fireTestRunFinished",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Result",
+                        "param_name": "result"
+                    }
+                ],
+                "method_name_start_line": 69,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java"
+        },
+        {
+            "method_information": {
+                "line_num": 71,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 72,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 83,
+                "method_name": "fireTestStarted",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 83,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 87,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 88,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 98,
+                "method_name": "fireTestFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.Failure",
+                        "param_name": "failure"
+                    }
+                ],
+                "method_name_start_line": 98,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/Failure.java"
+        },
+        {
+            "method_information": {
+                "line_num": 100,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 101,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 115,
+                "method_name": "fireTestAssumptionFailed",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.Failure",
+                        "param_name": "failure"
+                    }
+                ],
+                "method_name_start_line": 115,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/Failure.java"
+        },
+        {
+            "method_information": {
+                "line_num": 117,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 118,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "fireTestIgnored",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 128,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 130,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 131,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "fireTestFinished",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 143,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 145,
+                "method_name": "notifyListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "each"
+                    }
+                ],
+                "method_name_start_line": 146,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 165,
+                "method_name": "addFirstListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.RunListener",
+                        "param_name": "listener"
+                    }
+                ],
+                "method_name_start_line": 165,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 169,
+                "method_name": "runTestMethod",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.MethodRoadie",
+                        "param_name": "methodRoadie"
+                    }
+                ],
+                "method_name_start_line": 169,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/MethodRoadie.java"
+        }
+    ],
+    "org.junit.runner.manipulation.Filter::filter2(Filter):void->org.junit.internal.runners.JUnit38ClassRunner": [
+        {
+            "method_information": {
+                "line_num": 28,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 29,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 28,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 29,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 33,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 34,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 38,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "child"
+                    }
+                ],
+                "method_name_start_line": 39,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 43,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 43,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 53,
+                "method_name": "matchMethodDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "desiredDescription"
+                    }
+                ],
+                "method_name_start_line": 53,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 53,
+                "method_name": "matchMethodDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "desiredDescription"
+                    }
+                ],
+                "method_name_start_line": 53,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 55,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 56,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 55,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 56,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 67,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 68,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 79,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 79,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 79,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 79,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 85,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 85,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 93,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "child"
+                    }
+                ],
+                "method_name_start_line": 93,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 104,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 104,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 104,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 104,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 111,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 111,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 116,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 117,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 124,
+                "method_name": "filter2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit38ClassRunner",
+                        "param_name": "jUnit38ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 124,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 124,
+                "method_name": "filter2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit38ClassRunner",
+                        "param_name": "jUnit38ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 124,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/JUnit38ClassRunner.java"
+        },
+        {
+            "method_information": {
+                "line_num": 142,
+                "method_name": "filter3",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit4ClassRunner",
+                        "param_name": "jUnit4ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 142,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 142,
+                "method_name": "filter3",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit4ClassRunner",
+                        "param_name": "jUnit4ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 142,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/JUnit4ClassRunner.java"
+        }
+    ],
+    "org.junit.runner.manipulation.Filter::filter3(Filter):void->org.junit.internal.runners.JUnit4ClassRunner": [
+        {
+            "method_information": {
+                "line_num": 28,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 29,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 28,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 29,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 33,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 34,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 38,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "child"
+                    }
+                ],
+                "method_name_start_line": 39,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 43,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 43,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 53,
+                "method_name": "matchMethodDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "desiredDescription"
+                    }
+                ],
+                "method_name_start_line": 53,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 53,
+                "method_name": "matchMethodDescription",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "desiredDescription"
+                    }
+                ],
+                "method_name_start_line": 53,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 55,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 56,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 55,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 56,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 67,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 68,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 79,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 79,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 79,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 79,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 85,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 85,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 93,
+                "method_name": "apply",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "child"
+                    }
+                ],
+                "method_name_start_line": 93,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 104,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 104,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 104,
+                "method_name": "intersect",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.manipulation.Filter",
+                        "param_name": "second"
+                    }
+                ],
+                "method_name_start_line": 104,
+                "return_type": "Filter",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 111,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "shouldRun",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 111,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 116,
+                "method_name": "describe",
+                "parameter_types": [],
+                "method_name_start_line": 117,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 124,
+                "method_name": "filter2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit38ClassRunner",
+                        "param_name": "jUnit38ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 124,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 124,
+                "method_name": "filter2",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit38ClassRunner",
+                        "param_name": "jUnit38ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 124,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/JUnit38ClassRunner.java"
+        },
+        {
+            "method_information": {
+                "line_num": 142,
+                "method_name": "filter3",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit4ClassRunner",
+                        "param_name": "jUnit4ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 142,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 142,
+                "method_name": "filter3",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.runners.JUnit4ClassRunner",
+                        "param_name": "jUnit4ClassRunner"
+                    }
+                ],
+                "method_name_start_line": 142,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/runners/JUnit4ClassRunner.java"
+        }
+    ],
+    "org.junit.runner.Result::printFooter(Result):void->org.junit.internal.TextListener": [
+        {
+            "method_information": {
+                "line_num": 69,
+                "method_name": "testRunStarted",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 70,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "testRunFinished",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Result",
+                        "param_name": "result"
+                    }
+                ],
+                "method_name_start_line": 75,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java"
+        },
+        {
+            "method_information": {
+                "line_num": 80,
+                "method_name": "testFinished",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 81,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 85,
+                "method_name": "testFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.Failure",
+                        "param_name": "failure"
+                    }
+                ],
+                "method_name_start_line": 86,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/Failure.java"
+        },
+        {
+            "method_information": {
+                "line_num": 90,
+                "method_name": "testIgnored",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.Description",
+                        "param_name": "description"
+                    }
+                ],
+                "method_name_start_line": 91,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java"
+        },
+        {
+            "method_information": {
+                "line_num": 95,
+                "method_name": "testAssumptionFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.runner.notification.Failure",
+                        "param_name": "failure"
+                    }
+                ],
+                "method_name_start_line": 96,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/Failure.java"
+        },
+        {
+            "method_information": {
+                "line_num": 108,
+                "method_name": "printFailures",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.TextListener",
+                        "param_name": "textListener"
+                    }
+                ],
+                "method_name_start_line": 108,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/TextListener.java"
+        },
+        {
+            "method_information": {
+                "line_num": 121,
+                "method_name": "printFooter",
+                "parameter_types": [
+                    {
+                        "param_type": "org.junit.internal.TextListener",
+                        "param_name": "textListener"
+                    }
+                ],
+                "method_name_start_line": 121,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+            "target_class_path": "jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/internal/TextListener.java"
+        }
+    ]
+}
