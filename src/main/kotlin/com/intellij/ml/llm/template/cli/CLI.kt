@@ -111,12 +111,35 @@ fun main(args: Array<String>){
         }
     }
 
+    class MethodInformation: Subcommand("methodInformation", "List all the methods in the class with details (name, parameters, lineNum)") {
+        val className by option(ArgType.String, shortName = "c", description = "Class name").required()
+        val sourceDirs by option(ArgType.String, shortName = "s", description = "semicolon separate list of source directories").required()
+        override fun execute() {
+            try {
+                Files.createFile(Path(output))
+            } catch (e: Exception) {
+                print("file exists.")
+            }
+            Files.write(
+                Path(output),
+                Gson().toJson(
+                    JavaParsingUtils.getMethodInformation(
+                        Path(input),
+                        className,
+                        *(sourceDirs.split(";").toTypedArray())
+                    )
+                ).toByteArray()
+            )
+        }
+    }
+
     parser.subcommands(
         CheckIfStatic(),
         FindFieldTypes(),
         CheckIfClassStatic(),
         CheckIfClassExists(),
-        MethodCounter()
+        MethodCounter(),
+        MethodInformation()
         )
     parser.parse(args)
 

@@ -6,7 +6,8 @@ import java.util.regex.Pattern
 
 data class Parameter(val name: String, val type: String)
 
-data class MethodSignature(val methodName: String, val paramsList: List<Parameter>, val returnType:String, val modifier: String){
+data class MethodSignature(val methodName: String, val paramsList: List<Parameter>, val returnType:String, val modifier: String,
+                           val startLineNum:Int?=null, val methodNameStartLine:Int?=null){
     companion object{
         fun getMethodSignatureParts(methodSignature: String): MethodSignature? {
             val methodSignatureRegex = Pattern.compile("(\\w+) (\\w+)(\\(.*\\)) : ((\\w(<\\w+>)?)+)")

@@ -9,6 +9,8 @@ import com.github.javaparser.ast.visitor.VoidVisitorWithDefaults
 import com.github.javaparser.resolution.TypeSolver
 import com.github.javaparser.symbolsolver.JavaSymbolSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver
+import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver
+import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.EFCandidate
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 import java.nio.file.Path
@@ -147,6 +149,46 @@ class JavaParsingUtils {
 
         }
 
+        fun findQualifiedTypesInClass(path: Path, className: String, vararg sourceDirs: String): List<ClassField> {
+            val typeSolver: TypeSolver = CombinedTypeSolver(
+                sourceDirs.map { JavaParserTypeSolver(it) }.toList()
+                        + listOf(ReflectionTypeSolver())
+            )
+            val parsed = JavaParser(
+                ParserConfiguration()
+                    .setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_21)
+                    .setSymbolResolver(JavaSymbolSolver(typeSolver))
+            ).parse(path)
+
+            val parsedResult = parsed.result.get()
+
+            val matchedClasses = parsedResult
+                .findAll(ClassOrInterfaceDeclaration::class.java)
+                .filter {
+                    it.fullyQualifiedName.get() == className
+                }
+            val matchedEnums = parsedResult.findAll(EnumDeclaration::class.java).filter { it.fullyQualifiedName.get()==className }
+            val matchedRecords = parsedResult.findAll(RecordDeclaration::class.java).filter { it.fullyQualifiedName.get()==className }
+            if (matchedClasses.isEmpty() && matchedEnums.isEmpty() && matchedRecords.isEmpty()) throw Exception("class not found.")
+            return matchedClasses.union(matchedEnums).union(matchedRecords)
+                .map {
+                    it.fields.map {
+                        val qualifiedName = try{
+                            val fieldType = it.elementType.resolve()
+                            if (fieldType.isReferenceType)
+                                fieldType.asReferenceType().qualifiedName
+                            else
+                                it.elementType.asString()
+                        } catch (e: Exception) {
+                            print("Failed to resolve type for -> ${it.elementType.asString()}")
+                            it.elementType.asString()
+                        }
+                        ClassField(it.variables[0].nameAsString, qualifiedName, it.toString())
+                    }
+                }.reduce { acc, classFields -> acc + classFields }
+
+        }
+
         fun getMethodCount(path: Path): Int {
             val parsed = JavaParser(
                 ParserConfiguration()
@@ -154,6 +196,56 @@ class JavaParsingUtils {
             ).parse(path)
             val parsedResult = parsed.result.get()
             return parsedResult.findAll(MethodDeclaration::class.java).size
+        }
+
+        fun getMethodInformation(path: Path, className: String, vararg sourceDirs: String): List<MethodSignature> {
+            val typeSolver: TypeSolver = CombinedTypeSolver(
+                sourceDirs.map { JavaParserTypeSolver(it) }.toList()
+                        + listOf(ReflectionTypeSolver())
+            )
+            val parsed = JavaParser(
+                ParserConfiguration()
+                    .setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_21)
+                    .setSymbolResolver(JavaSymbolSolver(typeSolver))
+            ).parse(path)
+
+            val parsedResult = parsed.result.get()
+
+//            val matchedClasses = parsedResult
+//                .findAll(ClassOrInterfaceDeclaration::class.java)
+//                .filter {
+//                    it.fullyQualifiedName.get() == className
+//                }
+//            val matchedEnums = parsedResult.findAll(EnumDeclaration::class.java).filter { it.fullyQualifiedName.get()==className }
+//            val matchedRecords = parsedResult.findAll(RecordDeclaration::class.java).filter { it.fullyQualifiedName.get()==className }
+//            if (matchedClasses.isEmpty() && matchedEnums.isEmpty() && matchedRecords.isEmpty()) throw Exception("class not found.")
+
+
+            return parsedResult.findAll(MethodDeclaration::class.java).mapNotNull {
+//                MethodSignature(methodName = it.nameAsString, paramsList = it.parameters.map{}, returnType=it., )
+                MethodSignature(
+                    methodName = it.nameAsString,
+                    paramsList = it.parameters.map {
+                        it2 ->
+                        val qualType = try{
+                            val paramType = it2.type.resolve()
+                            if (paramType.isReferenceType) {
+                                paramType.asReferenceType().qualifiedName
+                            } else
+                                it2.type.asString()
+                        } catch (e: Exception) {
+                            it2.type.asString()
+                        }
+                        Parameter(
+                        it2.nameAsString, qualType)
+
+                                                   },
+                    modifier = it.modifiers.get(0).toString(),
+                    returnType = it.typeAsString,
+                    startLineNum = it.begin.get().line,
+                    methodNameStartLine = it.name.begin.get().line
+                )
+            }
         }
 
 

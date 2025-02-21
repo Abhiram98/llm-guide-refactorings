@@ -127,6 +127,21 @@ class JavaParsingUtilsTest{
     }
 
     @Test
+    fun `test find fields with qualified names`(){
+        val filePath = "/Users/abhiram/Documents/TBE/jmove/src/src/br/ufmg/dcc/labsoft/java/jmove/approach/CalculateMediaApproach.java"
+
+        val fields = JavaParsingUtils.findQualifiedTypesInClass(
+            Path(filePath),
+            "br.ufmg.dcc.labsoft.java.jmove.approach.CalculateMediaApproach",
+            "/Users/abhiram/Documents/TBE/jmove/src/src/"
+        )
+        print(fields)
+        assertTrue(
+            fields.isNotEmpty()
+        )
+    }
+
+    @Test
     fun testClassExists(){
         val path = "/Users/abhiram/Documents/TBE/evaluation_projects/elasticsearch/test/framework/src/main/java/org/elasticsearch/common/logging/ChunkedLoggingStreamTestUtils.java"
         val qualName= "org.elasticsearch.common.logging.ChunkedLoggingStreamTestUtils"
@@ -157,5 +172,20 @@ class JavaParsingUtilsTest{
         val variableTypes = JavaParsingUtils.findTypesInRange(Path(path), 215, 248)
         print(variableTypes)
         assertTrue(variableTypes.isNotEmpty())
+    }
+
+    @Test
+    fun `test find all methods in class`(){
+        val filePath = "/Users/abhiram/Documents/TBE/jmove/src/src/br/ufmg/dcc/labsoft/java/jmove/approach/CalculateMediaApproach.java"
+
+        val fields = JavaParsingUtils.getMethodInformation(
+            Path(filePath),
+            "br.ufmg.dcc.labsoft.java.jmove.approach.CalculateMediaApproach",
+            "/Users/abhiram/Documents/TBE/jmove/src/src/"
+        )
+        print(fields)
+        assertTrue(
+            fields.isNotEmpty()
+        )
     }
 }
