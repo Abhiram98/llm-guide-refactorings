@@ -1,9 +1,13 @@
 import re
+from pydantic import BaseModel, Field
 
-class Parameter:
-    def __init__(self, param_type, param_name):
-        self.param_type = param_type
-        self.param_name = param_name
+class Parameter(BaseModel):
+    # def __init__(self, param_type, param_name):
+    #     self.param_type = param_type
+    #     self.param_name = param_name
+    param_type: str = Field(description="type of the parameter")
+    param_name: str = Field(description="name of the parameter")
+
 
 class MethodSignature:
     def __init__(self,
@@ -47,7 +51,7 @@ class MethodSignature:
 
         params_list = method_params[1:-1].split(", ")
 
-        return [Parameter(param.split(" ")[1], param.split(" ")[0])
+        return [Parameter(param_type=param.split(" ")[1], param_name=param.split(" ")[0])
                 for param in params_list]
 
 

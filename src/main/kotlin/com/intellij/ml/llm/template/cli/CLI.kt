@@ -37,6 +37,20 @@ fun main(args: Array<String>){
             )
         }
     }
+
+    class FindQualFieldTypes: Subcommand("findQualFieldTypes", "Find field names and qualified types for a given class") {
+        val className by option(ArgType.String, shortName = "c", description = "Class name").required()
+        val sourceDirs by option(ArgType.String, shortName = "s", description = "semicolon separate list of source directories").required()
+        override fun execute() {
+            Files.write(
+                Path(output),
+                Gson().toJson(
+                    JavaParsingUtils.findQualifiedTypesInClass(Path(input), className,
+                        *sourceDirs.split(';').toTypedArray())
+                ).toByteArray()
+            )
+        }
+    }
     class CheckIfClassStatic: Subcommand("checkIfClassStatic", "Check if class is static?") {
         val className by option(ArgType.String, shortName = "c", description = "Class name").required()
 
@@ -139,7 +153,8 @@ fun main(args: Array<String>){
         CheckIfClassStatic(),
         CheckIfClassExists(),
         MethodCounter(),
-        MethodInformation()
+        MethodInformation(),
+        FindQualFieldTypes()
         )
     parser.parse(args)
 
