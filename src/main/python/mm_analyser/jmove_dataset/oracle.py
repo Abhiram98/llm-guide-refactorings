@@ -1,6 +1,8 @@
 import json
 import pathlib
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
+from typing import Any
+
 
 class JMoveOracle(BaseModel):
     source_class: str = Field(description="source class fully qualified.")
@@ -9,11 +11,32 @@ class JMoveOracle(BaseModel):
     project_name: str = Field(description="project which contains the oracle")
     method_size: str = Field(description="Size of the method, as defined by the JMove authors")
 
+
+    @computed_field
+    @property
+    def method_name(self) -> str:
+        return self.method_signature.split('(')[0]
+
+    @computed_field
+    @property
+    def alias_method_name(self) -> str:
+        return self.method_signature.split('(')[0] + '2'
+
+    def __hash__(self):
+        return hash(self.source_class + self.target_class + self.method_signature)
+
+    def __eq__(self, other):
+        return (isinstance(other, JMoveOracle) and
+                other.method_signature == self.method_signature and
+                other.source_class == self.source_class and
+                other.target_class == self.target_class
+                )
+
+
 from mm_analyser import data_folder
 
 with open(f"{data_folder}/synthetic_corpus_comparison/oracle/oracle.json") as f:
     oracle_raw_data = json.load(f)
-
 
 oracle_data: list[JMoveOracle] = []
 for project_name in oracle_raw_data:

@@ -240,7 +240,7 @@ class JavaParsingUtils {
                         it2.nameAsString, qualType)
 
                                                    },
-                    modifier = it.modifiers.get(0).toString(),
+                    modifier = if (it.modifiers.size>0) it.modifiers.get(0).toString() else "",
                     returnType = it.typeAsString,
                     startLineNum = it.begin.get().line,
                     methodNameStartLine = it.name.begin.get().line

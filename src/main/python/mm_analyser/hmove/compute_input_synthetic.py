@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from pathlib import Path
 import xml.etree.ElementTree as ET
 import subprocess
+from collections import defaultdict
 
 import mm_analyser.refactoring_miner_processing.MethodSignature as method_signature
 
@@ -53,10 +54,12 @@ class HMovePreparer:
             "-p", str(Path(HMovePreparer.gradle_path).parent),
             "run",
             f"--args="
-            f"methodInformation -i {file_path} -o {outputpath} -c \'{source_class}\' -s \'{source_dirs_}\'"
+            f"methodInformation -i \'{file_path}\' -o {outputpath} -c \'{source_class}\' -s \'{source_dirs_}\'"
         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode != 0:
-            raise Exception(f"Failed to find field types of class {source_class}")
+            print(result.stderr.decode('utf-8'))
+            print(result.stdout.decode('utf-8'))
+            raise Exception(f"Failed to find methods of class {source_class}")
         with open(outputpath) as f:
             field_data = json.load(f)
         subprocess.run(['rm', outputpath])
@@ -73,8 +76,7 @@ class HMovePreparer:
             for field in field_data]
 
     def compute(self):
-        hmove_data = [
-        ]
+        hmove_data: dict[dict[str, list[HMoveInput]]] = defaultdict(lambda: defaultdict(list))
         for data in jmove_oracle.oracle_data:
             outer_path = (self.jmove_directory_path
                           .joinpath(data.project_name)
@@ -110,15 +112,16 @@ class HMovePreparer:
                         print(f"Failed to find path of {target_class}")
                         continue
 
-                    hmove_data.append(
+                    hmove_data[data.project_name+data.method_size][f"{data.source_class}::{data.method_signature}->{data.target_class}"].append(
                         HMoveInput(method_information=method,
-                                   source_class_path=str(source_class_path),
-                                   target_class_path=str(target_class_path)
-                                   ).model_dump(mode='json')
+                                               source_class_path=str(source_class_path.relative_to(self.jmove_directory_path)),
+                                               target_class_path=str(target_class_path.relative_to(self.jmove_directory_path))
+                                               ).model_dump(mode='json')
                     )
 
-            with open(mm_analyser.data_folder.joinpath("synthetic_corpus_comparison/hmove/synthetic_input.json"), "w") as f:
-                json.dump(hmove_data, f, indent=4)
+
+            with open(mm_analyser.data_folder.joinpath(f"synthetic_corpus_comparison/hmove/input/{data.project_name}_{data.method_size}.json"), "w") as f:
+                json.dump(hmove_data[data.project_name+data.method_size], f, indent=4)
             # print(data.method_signature)
 
     def get_class_fields(self, source_class: str, file_path: Path, source_dirs: list[Path]):
@@ -129,7 +132,7 @@ class HMovePreparer:
             "-p", str(Path(HMovePreparer.gradle_path).parent),
             "run",
             f"--args="
-            f"findQualFieldTypes -i {file_path} -o {outputpath} -c \'{source_class}\' -s \'{source_dirs_}\'"
+            f"findQualFieldTypes -i \'{file_path}\' -o \'{outputpath}\' -c \'{source_class}\' -s \'{source_dirs_}\'"
         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode != 0:
             raise Exception(f"Failed to find field types of class {source_class}")
