@@ -4695,7 +4695,7 @@
         "url": "https://github.com/apache/kafka/commit/b4d5f163a9c5a480efe0a1de3bebf12e35be2a7f",
         "move_method_refactoring": {
             "type": "Extract And Move Method",
-            "description": "Extract And Move Method public votedKey() : Optional<ReplicaKey> extracted from public testElectionTimeout() : void in class org.apache.kafka.raft.VotedStateTest & moved to class org.apache.kafka.raft.UnattachedState",
+            "description": "Extract And Move Method public votedKey() : Optional<ReplicaKey> extracted from public testElectionTimeout() : void in class org.apache.kafka.raft.VotedStateTest & moved to class org.apache.kafka.raft.VotedState",
             "leftSideLocations": [
                 {
                     "filePath": "raft/src/test/java/org/apache/kafka/raft/VotedStateTest.java",
