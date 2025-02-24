@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 from mm_analyser import data_folder
-import mm_analyser.refactoring_miner_processing.MoveMethodValidator as MoveMethodValidator
+import mm_analyser.refactoring_miner_processing.filter.MoveMethodValidator as MoveMethodValidator
 from mm_analyser.env import PROJECTS_BASE_PATH, PROJECT_ALIAS_MAP
 
 rminer_data_path = f"{data_folder}/refminer_data/contains_a_mm"

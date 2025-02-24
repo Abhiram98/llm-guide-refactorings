@@ -6,6 +6,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 import subprocess
 from collections import defaultdict
+import os
 
 import mm_analyser.refactoring_miner_processing.MethodSignature as method_signature
 
@@ -37,9 +38,9 @@ class HMovePreparer:
     output_dir = f"{mm_analyser.data_folder}/refminer_data"
     gradle_path = f"{mm_analyser.project_root}/gradlew"
 
-    def __init__(self, jmove_directory_path: str):
+    def __init__(self, project_directory_path: str):
         self.source_dirs: list[str] = []
-        self.jmove_directory_path: Path = Path(jmove_directory_path)
+        self.project_directory_path: Path = Path(project_directory_path)
 
     def get_methods_in_class(self, source_class: str,
                              file_path: Path, source_dirs: list[Path]) -> list[MethodInformation]:
@@ -78,7 +79,7 @@ class HMovePreparer:
     def compute(self):
         hmove_data: dict[dict[str, list[HMoveInput]]] = defaultdict(lambda: defaultdict(list))
         for data in jmove_oracle.oracle_data:
-            outer_path = (self.jmove_directory_path
+            outer_path = (self.project_directory_path
                           .joinpath(data.project_name)
                           .joinpath(data.method_size)
                           .joinpath('big' if data.method_size == 'large' else 'small'))
@@ -114,9 +115,9 @@ class HMovePreparer:
 
                     hmove_data[data.project_name+data.method_size][f"{data.source_class}::{data.method_signature}->{data.target_class}"].append(
                         HMoveInput(method_information=method,
-                                               source_class_path=str(source_class_path.relative_to(self.jmove_directory_path)),
-                                               target_class_path=str(target_class_path.relative_to(self.jmove_directory_path))
-                                               ).model_dump(mode='json')
+                                   source_class_path=str(source_class_path.relative_to(self.project_directory_path)),
+                                   target_class_path=str(target_class_path.relative_to(self.project_directory_path))
+                                   ).model_dump(mode='json')
                     )
 
 
@@ -183,7 +184,6 @@ class HMovePreparer:
 
 
 if __name__ == '__main__':
-    import os
 
     jmove_directory_path = os.getenv('JMOVE_DIRECTORY_PATH')
-    HMovePreparer(jmove_directory_path=jmove_directory_path).compute()
+    HMovePreparer(project_directory_path=jmove_directory_path).compute()
