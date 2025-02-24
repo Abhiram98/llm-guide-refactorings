@@ -136,6 +136,8 @@ class HMovePreparer:
             f"findQualFieldTypes -i \'{file_path}\' -o \'{outputpath}\' -c \'{source_class}\' -s \'{source_dirs_}\'"
         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode != 0:
+            print(result.stderr.decode('utf-8'))
+            print(result.stdout.decode('utf-8'))
             raise Exception(f"Failed to find field types of class {source_class}")
         with open(outputpath) as f:
             field_data = json.load(f)
@@ -176,12 +178,29 @@ class HMovePreparer:
                         directory.joinpath(tag.get('path'))
                     )
             return src_dirs
-        raise Exception("not sure how to find sources.")
+        return self.find_sources_bruteforce(directory)
 
     def filter_classes_in_proj(self, class_fields: list[str], source_dirs) -> list[str]:
         '''Checks to see which of the classes are actually in the project.'''
         return class_fields
 
+    def find_sources_bruteforce(self, directory) -> list[Path]:
+        """
+        Searches for directories containing the structure src/main/java, or src/test java.
+        """
+        matching_directories = []
+
+        for item in os.walk(directory):
+            current_path, sub_dirs, files = item
+            if 'src' in sub_dirs:
+                if Path(current_path).joinpath('src/main/java').exists():
+                    matching_directories.append(Path(current_path).joinpath('src/main/java'))
+                if Path(current_path).joinpath('src/test/java').exists():
+                    matching_directories.append(Path(current_path).joinpath('src/test/java'))
+            if 'java' in sub_dirs:
+                if Path(current_path).joinpath('java/java/src').exists():
+                    matching_directories.append(Path(current_path).joinpath('java/java/src'))
+        return matching_directories
 
 if __name__ == '__main__':
 

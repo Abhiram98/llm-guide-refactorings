@@ -4,16 +4,35 @@ import mm_analyser.refactoring_miner_processing.oracle as rminer_oracle
 
 from collections import defaultdict
 import json
+import git
+from typing import Optional
 
 
 class HMovePreparerRW(hmove_in.HMovePreparer):
 
+    def __init__(self, project_directory_path: str, specific_projects: Optional[list[str]] = None, exclude_projects: Optional[list[str]]=None):
+        self.exclude_projects = exclude_projects
+        self.specific_project = specific_projects
+        super().__init__(project_directory_path)
+
     def compute(self):
         hmove_data: dict[str, dict[int, list[hmove_in.HMoveInput]]] = defaultdict(lambda: defaultdict(list))
         for oracle in rminer_oracle.get_instance_oracle():
+            if (self.specific_project is not None
+                    and oracle.project_name not in self.specific_project):
+                print(f"Skipping {oracle.ref_id} because {oracle.project_name} not in {self.specific_project}")
+                continue
+            if (self.exclude_projects is not None
+                    and oracle.project_name in self.exclude_projects):
+                print(f"Skipping {oracle.ref_id} because {oracle.project_name} in {self.exclude_projects}")
+                continue
+
             project_directory = self.project_directory_path.joinpath(oracle.project_name)
+            project_git = git.Repo(project_directory.joinpath('.git'))
+            project_git.git.checkout(oracle.project_branch_name)  # Checkout the appropriate branch.
 
             self.source_dirs = self.find_source_dirs(project_directory)
+            self.source_dirs = [i for i in self.source_dirs if i.exists()]
 
             print(f"{oracle.move_method_ref.original_class=}")
             print(f"{oracle.move_method_ref.target_class=}")
@@ -27,12 +46,12 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
 
             methods_in_class = self.get_methods_in_class(
                 oracle.move_method_ref.original_class,
-                oracle.move_method_ref.left_file_path,
+                project_directory.joinpath(oracle.move_method_ref.left_file_path),
                 self.source_dirs)
             print(methods_in_class)
             class_fields = self.get_class_fields(
                 oracle.move_method_ref.original_class,
-                oracle.move_method_ref.left_file_path,
+                project_directory.joinpath(oracle.move_method_ref.left_file_path),
                 self.source_dirs)
             print(class_fields)
 
@@ -50,19 +69,20 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
                     hmove_data[oracle.project_name][oracle.ref_id].append(
                         hmove_in.HMoveInput(
                             method_information=method,
-                            source_class_path=str(
-                                oracle.move_method_ref.left_file_path.relative_to(self.project_directory_path)),
+                            source_class_path=oracle.move_method_ref.left_file_path,
                             target_class_path=str(
                                 target_class_path.relative_to(self.project_directory_path))
                         ).model_dump(mode='json')
                     )
 
             with open(mm_analyser.data_folder.joinpath(
-                    f"synthetic_corpus_comparison/hmove/input_rw/{oracle.project_name}.json"), "w") as f:
+                    f"refminer_data/hmove/input/{oracle.project_name}.json"), "w") as f:
                 json.dump(hmove_data[oracle.project_name], f, indent=4)
 
 
 if __name__ == '__main__':
     import os
-    eval_projects_path = os.getenv('EVALUATION_PROJECTS_PATH')
-    HMovePreparerRW(project_directory_path=eval_projects_path).compute()
+    from mm_analyser.env import PROJECT_ALIAS_MAP, PROJECTS_BASE_PATH
+
+    HMovePreparerRW(project_directory_path=PROJECTS_BASE_PATH,
+                    specific_projects=['selenium']).compute()
