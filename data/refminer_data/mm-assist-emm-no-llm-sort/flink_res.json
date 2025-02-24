@@ -5,7 +5,7 @@
         "url": "https://github.com/apache/flink/commit/6f0d07633a5c8e6511f3d16e04561cb277b65407",
         "move_method_refactoring": {
             "type": "Extract And Move Method",
-            "description": "Extract And Move Method public getWindowSize() : Optional<Duration> extracted from private createEndingState() : State<T> in class org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler & moved to class org.apache.flink.cep.pattern.Quantifier.Times",
+            "description": "Extract And Move Method public getWindowSize() : Optional<Duration> extracted from private createEndingState() : State<T> in class org.apache.flink.cep.nfa.compiler.NFACompiler.NFAFactoryCompiler & moved to class org.apache.flink.cep.pattern.Pattern",
             "leftSideLocations": [
                 {
                     "filePath": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
