@@ -1,0 +1,242 @@
+{
+    "724": [
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "onMessage",
+                "parameter_types": [
+                    {
+                        "param_type": "org.redisson.RedissonLockEntry",
+                        "param_name": "value"
+                    },
+                    {
+                        "param_type": "java.lang.Long",
+                        "param_name": "message"
+                    }
+                ],
+                "method_name_start_line": 42,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/RedissonLockEntry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 60,
+                "method_name": "tryRunListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.redisson.RedissonLockEntry",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 60,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/RedissonLockEntry.java"
+        }
+    ],
+    "725": [
+        {
+            "method_information": {
+                "line_num": 38,
+                "method_name": "onMessage",
+                "parameter_types": [
+                    {
+                        "param_type": "org.redisson.RedissonLockEntry",
+                        "param_name": "value"
+                    },
+                    {
+                        "param_type": "java.lang.Long",
+                        "param_name": "message"
+                    }
+                ],
+                "method_name_start_line": 39,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/RedissonLockEntry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 45,
+                "method_name": "tryRunListener",
+                "parameter_types": [
+                    {
+                        "param_type": "org.redisson.RedissonLockEntry",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 45,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/RedissonLockEntry.java"
+        }
+    ],
+    "726": [
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "onMessage",
+                "parameter_types": [
+                    {
+                        "param_type": "org.redisson.RedissonLockEntry",
+                        "param_name": "value"
+                    },
+                    {
+                        "param_type": "java.lang.Long",
+                        "param_name": "message"
+                    }
+                ],
+                "method_name_start_line": 42,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/RedissonLockEntry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 57,
+                "method_name": "tryRunAllListeners",
+                "parameter_types": [
+                    {
+                        "param_type": "org.redisson.RedissonLockEntry",
+                        "param_name": "value"
+                    }
+                ],
+                "method_name_start_line": 57,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/RedissonLockEntry.java"
+        }
+    ],
+    "730": [
+        {
+            "method_information": {
+                "line_num": 44,
+                "method_name": "subscribeOnElements",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Supplier",
+                        "param_name": "func"
+                    },
+                    {
+                        "param_type": "java.util.function.Function",
+                        "param_name": "consumer"
+                    }
+                ],
+                "method_name_start_line": 44,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/connection/ServiceManager.java"
+        },
+        {
+            "method_information": {
+                "line_num": 54,
+                "method_name": "subscribeOnElements",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Supplier",
+                        "param_name": "func"
+                    },
+                    {
+                        "param_type": "java.util.function.Consumer",
+                        "param_name": "consumer"
+                    }
+                ],
+                "method_name_start_line": 55,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/connection/ServiceManager.java"
+        },
+        {
+            "method_information": {
+                "line_num": 65,
+                "method_name": "unsubscribe",
+                "parameter_types": [
+                    {
+                        "param_type": "int",
+                        "param_name": "listenerId"
+                    }
+                ],
+                "method_name_start_line": 65,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/connection/ServiceManager.java"
+        },
+        {
+            "method_information": {
+                "line_num": 72,
+                "method_name": "resubscribe",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Supplier",
+                        "param_name": "func"
+                    },
+                    {
+                        "param_type": "java.util.function.Consumer",
+                        "param_name": "consumer"
+                    }
+                ],
+                "method_name_start_line": 73,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/connection/ServiceManager.java"
+        },
+        {
+            "method_information": {
+                "line_num": 99,
+                "method_name": "resubscribe",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Supplier",
+                        "param_name": "func"
+                    },
+                    {
+                        "param_type": "java.util.function.Function",
+                        "param_name": "consumer"
+                    }
+                ],
+                "method_name_start_line": 99,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/connection/ServiceManager.java"
+        },
+        {
+            "method_information": {
+                "line_num": 125,
+                "method_name": "isShuttingDown",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 125,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+            "target_class_path": "redisson/redisson/src/main/java/org/redisson/connection/ServiceManager.java"
+        }
+    ]
+}

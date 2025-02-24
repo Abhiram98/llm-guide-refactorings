@@ -1,0 +1,444 @@
+{
+    "805": [
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "isEnabledForDecompilerContext",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.app.plugin.core.decompile.DecompilerActionContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 42,
+                "return_type": "boolean",
+                "modifier": "protected "
+            },
+            "source_class_path": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+            "target_class_path": "ghidra/Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/DecompilerActionContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 52,
+                "method_name": "decompilerActionPerformed",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.app.plugin.core.decompile.DecompilerActionContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 53,
+                "return_type": "void",
+                "modifier": "protected "
+            },
+            "source_class_path": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+            "target_class_path": "ghidra/Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/DecompilerActionContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 71,
+                "method_name": "cleanupUnusedOverride",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.program.model.pcode.DataTypeSymbol",
+                        "param_name": "dts"
+                    }
+                ],
+                "method_name_start_line": 71,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Features/Decompiler/src/main/java/ghidra/app/plugin/core/decompile/actions/DeletePrototypeOverrideAction.java",
+            "target_class_path": "ghidra/Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/pcode/DataTypeSymbol.java"
+        }
+    ],
+    "844": [
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "isSameLocalProject",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.ProjectLocator",
+                        "param_name": "projectLoc1"
+                    },
+                    {
+                        "param_type": "ghidra.framework.model.ProjectLocator",
+                        "param_name": "projectLoc2"
+                    }
+                ],
+                "method_name_start_line": 41,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java"
+        },
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "isSameLocalProject",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.ProjectLocator",
+                        "param_name": "projectLoc1"
+                    },
+                    {
+                        "param_type": "ghidra.framework.model.ProjectLocator",
+                        "param_name": "projectLoc2"
+                    }
+                ],
+                "method_name_start_line": 41,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/model/ProjectLocator.java"
+        },
+        {
+            "method_information": {
+                "line_num": 41,
+                "method_name": "isSameLocalProject",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.ProjectLocator",
+                        "param_name": "projectLoc1"
+                    },
+                    {
+                        "param_type": "ghidra.framework.model.ProjectLocator",
+                        "param_name": "projectLoc2"
+                    }
+                ],
+                "method_name_start_line": 41,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/model/ProjectLocator.java"
+        },
+        {
+            "method_information": {
+                "line_num": 58,
+                "method_name": "processResult",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.DomainFile",
+                        "param_name": "domainFile"
+                    },
+                    {
+                        "param_type": "java.net.URL",
+                        "param_name": "url"
+                    },
+                    {
+                        "param_type": "ghidra.util.task.TaskMonitor",
+                        "param_name": "monitor"
+                    }
+                ],
+                "method_name_start_line": 59,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java"
+        },
+        {
+            "method_information": {
+                "line_num": 58,
+                "method_name": "processResult",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.DomainFile",
+                        "param_name": "domainFile"
+                    },
+                    {
+                        "param_type": "java.net.URL",
+                        "param_name": "url"
+                    },
+                    {
+                        "param_type": "ghidra.util.task.TaskMonitor",
+                        "param_name": "monitor"
+                    }
+                ],
+                "method_name_start_line": 59,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/model/DomainFile.java"
+        },
+        {
+            "method_information": {
+                "line_num": 58,
+                "method_name": "processResult",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.DomainFile",
+                        "param_name": "domainFile"
+                    },
+                    {
+                        "param_type": "java.net.URL",
+                        "param_name": "url"
+                    },
+                    {
+                        "param_type": "ghidra.util.task.TaskMonitor",
+                        "param_name": "monitor"
+                    }
+                ],
+                "method_name_start_line": 59,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Utility/src/main/java/ghidra/util/task/TaskMonitor.java"
+        },
+        {
+            "method_information": {
+                "line_num": 94,
+                "method_name": "showInViewedProject",
+                "parameter_types": [
+                    {
+                        "param_type": "java.net.URL",
+                        "param_name": "url"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "isFolder"
+                    }
+                ],
+                "method_name_start_line": 94,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java"
+        },
+        {
+            "method_information": {
+                "line_num": 123,
+                "method_name": "processResult",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.DomainFolder",
+                        "param_name": "domainFolder"
+                    },
+                    {
+                        "param_type": "java.net.URL",
+                        "param_name": "url"
+                    },
+                    {
+                        "param_type": "ghidra.util.task.TaskMonitor",
+                        "param_name": "monitor"
+                    }
+                ],
+                "method_name_start_line": 124,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/main/FrontEndPlugin.java"
+        },
+        {
+            "method_information": {
+                "line_num": 123,
+                "method_name": "processResult",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.DomainFolder",
+                        "param_name": "domainFolder"
+                    },
+                    {
+                        "param_type": "java.net.URL",
+                        "param_name": "url"
+                    },
+                    {
+                        "param_type": "ghidra.util.task.TaskMonitor",
+                        "param_name": "monitor"
+                    }
+                ],
+                "method_name_start_line": 124,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Project/src/main/java/ghidra/framework/model/DomainFolder.java"
+        },
+        {
+            "method_information": {
+                "line_num": 123,
+                "method_name": "processResult",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.framework.model.DomainFolder",
+                        "param_name": "domainFolder"
+                    },
+                    {
+                        "param_type": "java.net.URL",
+                        "param_name": "url"
+                    },
+                    {
+                        "param_type": "ghidra.util.task.TaskMonitor",
+                        "param_name": "monitor"
+                    }
+                ],
+                "method_name_start_line": 124,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Framework/Project/src/main/java/ghidra/framework/main/AcceptUrlContentTask.java",
+            "target_class_path": "ghidra/Ghidra/Framework/Utility/src/main/java/ghidra/util/task/TaskMonitor.java"
+        }
+    ],
+    "845": [
+        {
+            "method_information": {
+                "line_num": 31,
+                "method_name": "isEnabledForContext",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.app.plugin.core.symboltree.SymbolTreeActionContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 32,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+            "target_class_path": "ghidra/Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 37,
+                "method_name": "getSelectedNode",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.app.plugin.core.symboltree.SymbolTreeActionContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 37,
+                "return_type": "SymbolTreeNode",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+            "target_class_path": "ghidra/Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 47,
+                "method_name": "actionPerformed",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.app.plugin.core.symboltree.SymbolTreeActionContext",
+                        "param_name": "context"
+                    }
+                ],
+                "method_name_start_line": 48,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/actions/RenameAction.java",
+            "target_class_path": "ghidra/Ghidra/Features/Base/src/main/java/ghidra/app/plugin/core/symboltree/SymbolTreeActionContext.java"
+        }
+    ],
+    "858": [
+        {
+            "method_information": {
+                "line_num": 33,
+                "method_name": "canDemangle",
+                "parameter_types": [
+                    {
+                        "param_type": "ghidra.program.model.listing.Program",
+                        "param_name": "program"
+                    }
+                ],
+                "method_name_start_line": 34,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+            "target_class_path": "ghidra/Ghidra/Framework/SoftwareModeling/src/main/java/ghidra/program/model/listing/Program.java"
+        },
+        {
+            "method_information": {
+                "line_num": 53,
+                "method_name": "demangle",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "mangled"
+                    },
+                    {
+                        "param_type": "ghidra.app.util.demangler.DemanglerOptions",
+                        "param_name": "options"
+                    }
+                ],
+                "method_name_start_line": 54,
+                "return_type": "DemangledObject",
+                "modifier": "public "
+            },
+            "source_class_path": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+            "target_class_path": "ghidra/Ghidra/Features/Base/src/main/java/ghidra/app/util/demangler/DemanglerOptions.java"
+        },
+        {
+            "method_information": {
+                "line_num": 85,
+                "method_name": "demangle",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "mangled"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "demangleOnlyKnownPatterns"
+                    },
+                    {
+                        "param_type": "mdemangler.MDMangGhidra",
+                        "param_name": "demangler"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "errorOnRemainingChars"
+                    }
+                ],
+                "method_name_start_line": 85,
+                "return_type": "void",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Features/MicrosoftDemangler/src/main/java/ghidra/app/util/demangler/microsoft/MicrosoftDemangler.java",
+            "target_class_path": "ghidra/Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java"
+        }
+    ],
+    "859": [
+        {
+            "method_information": {
+                "line_num": 62,
+                "method_name": "demangle",
+                "parameter_types": [
+                    {
+                        "param_type": "mdemangler.MDMangGhidra",
+                        "param_name": "demangler"
+                    },
+                    {
+                        "param_type": "java.lang.String",
+                        "param_name": "mangled"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "errorOnRemainingChars"
+                    },
+                    {
+                        "param_type": "boolean",
+                        "param_name": "demangleOnlyKnownPatterns"
+                    }
+                ],
+                "method_name_start_line": 62,
+                "return_type": "MDParsableItem",
+                "modifier": "private "
+            },
+            "source_class_path": "Ghidra/Features/MicrosoftDmang/src/test/java/mdemangler/MDMangExtraTest.java",
+            "target_class_path": "ghidra/Ghidra/Features/MicrosoftDmang/src/main/java/mdemangler/MDMangGhidra.java"
+        }
+    ]
+}

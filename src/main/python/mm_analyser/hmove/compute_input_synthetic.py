@@ -198,8 +198,8 @@ class HMovePreparer:
                 if Path(current_path).joinpath('src/test/java').exists():
                     matching_directories.append(Path(current_path).joinpath('src/test/java'))
             if 'java' in sub_dirs:
-                if Path(current_path).joinpath('java/java/src').exists():
-                    matching_directories.append(Path(current_path).joinpath('java/java/src'))
+                if Path(current_path).joinpath('java/src').exists():
+                    matching_directories.append(Path(current_path).joinpath('java/src'))
         return matching_directories
 
 if __name__ == '__main__':

@@ -63,6 +63,8 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
                     try:
                         target_class_path = self.get_path_from_qualname(target_class, self.source_dirs)
                     except:
+                        if 'java.' not in target_class:
+                            raise
                         print(f"Failed to find path of {target_class}")
                         continue
 
@@ -85,4 +87,4 @@ if __name__ == '__main__':
     from mm_analyser.env import PROJECT_ALIAS_MAP, PROJECTS_BASE_PATH
 
     HMovePreparerRW(project_directory_path=PROJECTS_BASE_PATH,
-                    specific_projects=['selenium']).compute()
+                    specific_projects=['spring-boot']).compute()
