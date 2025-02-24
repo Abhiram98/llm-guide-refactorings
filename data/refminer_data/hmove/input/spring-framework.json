@@ -1,1 +1,3778 @@
-{}
+{
+    "767": [
+        {
+            "method_information": {
+                "line_num": 50,
+                "method_name": "setCacheOperationSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.cache.interceptor.CacheOperationSource",
+                        "param_name": "cacheOperationSource"
+                    }
+                ],
+                "method_name_start_line": 50,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 50,
+                "method_name": "setCacheOperationSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.cache.interceptor.CacheOperationSource",
+                        "param_name": "cacheOperationSource"
+                    }
+                ],
+                "method_name_start_line": 50,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 54,
+                "method_name": "matches",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.reflect.Method",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "targetClass"
+                    }
+                ],
+                "method_name_start_line": 55,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 60,
+                "method_name": "hasCacheOperations",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.reflect.Method",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "targetClass"
+                    }
+                ],
+                "method_name_start_line": 60,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 64,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "other"
+                    }
+                ],
+                "method_name_start_line": 65,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 70,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 71,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 75,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 76,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 87,
+                "method_name": "matches",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "clazz"
+                    }
+                ],
+                "method_name_start_line": 88,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 95,
+                "method_name": "getCacheOperationSource",
+                "parameter_types": [],
+                "method_name_start_line": 95,
+                "return_type": "CacheOperationSource",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 99,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "other"
+                    }
+                ],
+                "method_name_start_line": 100,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
+        }
+    ],
+    "768": [
+        {
+            "method_information": {
+                "line_num": 49,
+                "method_name": "setTransactionAttributeSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.transaction.interceptor.TransactionAttributeSource",
+                        "param_name": "transactionAttributeSource"
+                    }
+                ],
+                "method_name_start_line": 49,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 49,
+                "method_name": "setTransactionAttributeSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.transaction.interceptor.TransactionAttributeSource",
+                        "param_name": "transactionAttributeSource"
+                    }
+                ],
+                "method_name_start_line": 49,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 53,
+                "method_name": "matches",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.reflect.Method",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "targetClass"
+                    }
+                ],
+                "method_name_start_line": 54,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 59,
+                "method_name": "hasTransactionAttribute",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.reflect.Method",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "targetClass"
+                    }
+                ],
+                "method_name_start_line": 59,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 63,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "other"
+                    }
+                ],
+                "method_name_start_line": 64,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 69,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 70,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 74,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 75,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 86,
+                "method_name": "matches",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "clazz"
+                    }
+                ],
+                "method_name_start_line": 87,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 96,
+                "method_name": "getTransactionAttributeSource",
+                "parameter_types": [],
+                "method_name_start_line": 96,
+                "return_type": "TransactionAttributeSource",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 100,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "other"
+                    }
+                ],
+                "method_name_start_line": 101,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 106,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 107,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 111,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 112,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
+            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
+        }
+    ],
+    "769": [
+        {
+            "method_information": {
+                "line_num": 50,
+                "method_name": "setCacheOperationSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.cache.jcache.interceptor.JCacheOperationSource",
+                        "param_name": "cacheOperationSource"
+                    }
+                ],
+                "method_name_start_line": 50,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 50,
+                "method_name": "setCacheOperationSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.cache.jcache.interceptor.JCacheOperationSource",
+                        "param_name": "cacheOperationSource"
+                    }
+                ],
+                "method_name_start_line": 50,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 58,
+                "method_name": "setClassFilter",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.aop.ClassFilter",
+                        "param_name": "classFilter"
+                    }
+                ],
+                "method_name_start_line": 58,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 58,
+                "method_name": "setClassFilter",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.aop.ClassFilter",
+                        "param_name": "classFilter"
+                    }
+                ],
+                "method_name_start_line": 58,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-aop/src/main/java/org/springframework/aop/ClassFilter.java"
+        },
+        {
+            "method_information": {
+                "line_num": 62,
+                "method_name": "getPointcut",
+                "parameter_types": [],
+                "method_name_start_line": 63,
+                "return_type": "Pointcut",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "setCacheOperationSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.cache.jcache.interceptor.JCacheOperationSource",
+                        "param_name": "cacheOperationSource"
+                    }
+                ],
+                "method_name_start_line": 73,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 73,
+                "method_name": "setCacheOperationSource",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.cache.jcache.interceptor.JCacheOperationSource",
+                        "param_name": "cacheOperationSource"
+                    }
+                ],
+                "method_name_start_line": 73,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 77,
+                "method_name": "matches",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.reflect.Method",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "targetClass"
+                    }
+                ],
+                "method_name_start_line": 78,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 82,
+                "method_name": "hasCacheOperation",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.reflect.Method",
+                        "param_name": "method"
+                    },
+                    {
+                        "param_type": "java.lang.Class",
+                        "param_name": "targetClass"
+                    }
+                ],
+                "method_name_start_line": 82,
+                "return_type": "boolean",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 87,
+                "method_name": "equals",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "other"
+                    }
+                ],
+                "method_name_start_line": 88,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 93,
+                "method_name": "hashCode",
+                "parameter_types": [],
+                "method_name_start_line": 94,
+                "return_type": "int",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        },
+        {
+            "method_information": {
+                "line_num": 98,
+                "method_name": "toString",
+                "parameter_types": [],
+                "method_name_start_line": 99,
+                "return_type": "String",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
+            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
+        }
+    ],
+    "774": [
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 105,
+                "method_name": "getScheduler",
+                "parameter_types": [],
+                "method_name_start_line": 106,
+                "return_type": "Scheduler",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 110,
+                "method_name": "getBlockingMethodPredicate",
+                "parameter_types": [],
+                "method_name_start_line": 111,
+                "return_type": "Predicate<HandlerMethod>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 120,
+                "method_name": "setMessageReaders",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.List",
+                        "param_name": "messageReaders"
+                    }
+                ],
+                "method_name_start_line": 120,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 128,
+                "method_name": "getMessageReaders",
+                "parameter_types": [],
+                "method_name_start_line": 128,
+                "return_type": "List<HttpMessageReader<?>>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 136,
+                "method_name": "setWebBindingInitializer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
+                        "param_name": "webBindingInitializer"
+                    }
+                ],
+                "method_name_start_line": 136,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 143,
+                "method_name": "getWebBindingInitializer",
+                "parameter_types": [],
+                "method_name_start_line": 144,
+                "return_type": "WebBindingInitializer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 151,
+                "method_name": "setArgumentResolverConfigurer",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
+                        "param_name": "configurer"
+                    }
+                ],
+                "method_name_start_line": 151,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 158,
+                "method_name": "getArgumentResolverConfigurer",
+                "parameter_types": [],
+                "method_name_start_line": 159,
+                "return_type": "ArgumentResolverConfigurer",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 170,
+                "method_name": "setBlockingExecutor",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.concurrent.Executor",
+                        "param_name": "executor"
+                    }
+                ],
+                "method_name_start_line": 170,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 183,
+                "method_name": "setBlockingMethodPredicate",
+                "parameter_types": [
+                    {
+                        "param_type": "java.util.function.Predicate",
+                        "param_name": "predicate"
+                    }
+                ],
+                "method_name_start_line": 183,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 192,
+                "method_name": "setReactiveAdapterRegistry",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
+                        "param_name": "registry"
+                    }
+                ],
+                "method_name_start_line": 192,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 199,
+                "method_name": "getReactiveAdapterRegistry",
+                "parameter_types": [],
+                "method_name_start_line": 200,
+                "return_type": "ReactiveAdapterRegistry",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 209,
+                "method_name": "setApplicationContext",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.context.ApplicationContext",
+                        "param_name": "applicationContext"
+                    }
+                ],
+                "method_name_start_line": 210,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 217,
+                "method_name": "afterPropertiesSet",
+                "parameter_types": [],
+                "method_name_start_line": 218,
+                "return_type": "void",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 246,
+                "method_name": "supports",
+                "parameter_types": [
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 247,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 251,
+                "method_name": "handle",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Object",
+                        "param_name": "handler"
+                    }
+                ],
+                "method_name_start_line": 252,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/server/ServerWebExchange.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 280,
+                "method_name": "getSchedulerFor",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "Mono<HandlerResult>",
+                        "param_name": "resultMono"
+                    }
+                ],
+                "method_name_start_line": 280,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/method/HandlerMethod.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/server/ServerWebExchange.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/method/HandlerMethod.java"
+        },
+        {
+            "method_information": {
+                "line_num": 290,
+                "method_name": "handleException",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.BindingContext",
+                        "param_name": "bindingContext"
+                    }
+                ],
+                "method_name_start_line": 290,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/BindingContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/server/ServerWebExchange.java"
+        },
+        {
+            "method_information": {
+                "line_num": 338,
+                "method_name": "handleExceptionHandlerFailure",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "exception"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "invocationEx"
+                    },
+                    {
+                        "param_type": "java.util.ArrayList",
+                        "param_name": "exceptions"
+                    },
+                    {
+                        "param_type": "org.springframework.web.reactive.result.method.InvocableHandlerMethod",
+                        "param_name": "invocable"
+                    }
+                ],
+                "method_name_start_line": 338,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "private "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/InvocableHandlerMethod.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 355,
+                "method_name": "handleError",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.server.ServerWebExchange",
+                        "param_name": "exchange"
+                    },
+                    {
+                        "param_type": "java.lang.Throwable",
+                        "param_name": "ex"
+                    }
+                ],
+                "method_name_start_line": 356,
+                "return_type": "Mono<HandlerResult>",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/server/ServerWebExchange.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-jcl/src/main/java/org/apache/commons/logging/Log.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/util/DisconnectedClientHelper.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/context/ConfigurableApplicationContext.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ControllerMethodResolver.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
+        },
+        {
+            "method_information": {
+                "line_num": 368,
+                "method_name": "test",
+                "parameter_types": [
+                    {
+                        "param_type": "org.springframework.web.method.HandlerMethod",
+                        "param_name": "handlerMethod"
+                    }
+                ],
+                "method_name_start_line": 369,
+                "return_type": "boolean",
+                "modifier": "public "
+            },
+            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
+            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/method/HandlerMethod.java"
+        }
+    ]
+}

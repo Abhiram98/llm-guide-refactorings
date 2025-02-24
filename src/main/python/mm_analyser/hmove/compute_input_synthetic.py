@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 import subprocess
 from collections import defaultdict
 import os
+from typing import Optional
 
 import mm_analyser.refactoring_miner_processing.MethodSignature as method_signature
 
@@ -164,9 +165,9 @@ class HMovePreparer:
             return candidates[0]
         elif len(candidates) > 1:
             raise Exception(f"too many options: {candidates}")
-        raise Exception("Couldn't find file.")
+        raise Exception(f"Couldn't find file for {qualified_name}.")
 
-    def find_source_dirs(self, directory: Path) -> list[Path]:
+    def find_source_dirs(self, directory: Path, source_patterns=None) -> list[Path]:
         classpath_file = directory.joinpath('.classpath')
         if os.path.exists(classpath_file):
             # XML parse and read src directories.
@@ -178,17 +179,19 @@ class HMovePreparer:
                         directory.joinpath(tag.get('path'))
                     )
             return src_dirs
-        return self.find_sources_bruteforce(directory)
+        return self.find_sources_bruteforce(directory, source_patterns)
 
     def filter_classes_in_proj(self, class_fields: list[str], source_dirs) -> list[str]:
         '''Checks to see which of the classes are actually in the project.'''
         return class_fields
 
-    def find_sources_bruteforce(self, directory) -> list[Path]:
+    def find_sources_bruteforce(self, directory, source_patterns: Optional[list[str]]=None) -> list[Path]:
         """
         Searches for directories containing the structure src/main/java, or src/test java.
         """
         matching_directories = []
+        if source_patterns is None:
+            source_patterns = []
 
         for item in os.walk(directory):
             current_path, sub_dirs, files = item
@@ -197,9 +200,13 @@ class HMovePreparer:
                     matching_directories.append(Path(current_path).joinpath('src/main/java'))
                 if Path(current_path).joinpath('src/test/java').exists():
                     matching_directories.append(Path(current_path).joinpath('src/test/java'))
+                # matching_directories.append(Path(current_path).joinpath('src'))
             if 'java' in sub_dirs:
                 if Path(current_path).joinpath('java/src').exists():
                     matching_directories.append(Path(current_path).joinpath('java/src'))
+            for s in source_patterns:
+                if s in sub_dirs:
+                    matching_directories.append(Path(current_path).joinpath(s))
         return matching_directories
 
 if __name__ == '__main__':

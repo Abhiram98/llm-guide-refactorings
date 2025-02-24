@@ -13,6 +13,10 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
     def __init__(self, project_directory_path: str, specific_projects: Optional[list[str]] = None, exclude_projects: Optional[list[str]]=None):
         self.exclude_projects = exclude_projects
         self.specific_project = specific_projects
+        self.source_patterns = {
+            'dbeaver': ['src'],
+            'graal': ['src']
+        }
         super().__init__(project_directory_path)
 
     def compute(self):
@@ -31,7 +35,8 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
             project_git = git.Repo(project_directory.joinpath('.git'))
             project_git.git.checkout(oracle.project_branch_name)  # Checkout the appropriate branch.
 
-            self.source_dirs = self.find_source_dirs(project_directory)
+            self.source_dirs = self.find_source_dirs(project_directory,
+                                                     source_patterns=self.source_patterns.get(oracle.project_name))
             self.source_dirs = [i for i in self.source_dirs if i.exists()]
 
             print(f"{oracle.move_method_ref.original_class=}")
@@ -63,9 +68,10 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
                     try:
                         target_class_path = self.get_path_from_qualname(target_class, self.source_dirs)
                     except:
-                        if 'java.' not in target_class:
-                            raise
-                        print(f"Failed to find path of {target_class}")
+                        known_names = ['java.', 'javax.', 'boolean', 'int', 'T', 'long', 'double', 'short']
+                        if not any(k in target_class for k in known_names):
+                            print(f"Failed to find path of {target_class}")
+                        # print(f"Failed to find path of {target_class}")
                         continue
 
                     hmove_data[oracle.project_name][oracle.ref_id].append(
@@ -87,4 +93,4 @@ if __name__ == '__main__':
     from mm_analyser.env import PROJECT_ALIAS_MAP, PROJECTS_BASE_PATH
 
     HMovePreparerRW(project_directory_path=PROJECTS_BASE_PATH,
-                    specific_projects=['spring-boot']).compute()
+                    specific_projects=['kafka']).compute()
