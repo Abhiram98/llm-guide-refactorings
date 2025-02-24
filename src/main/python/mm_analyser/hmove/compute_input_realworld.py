@@ -93,4 +93,4 @@ if __name__ == '__main__':
     from mm_analyser.env import PROJECT_ALIAS_MAP, PROJECTS_BASE_PATH
 
     HMovePreparerRW(project_directory_path=PROJECTS_BASE_PATH,
-                    specific_projects=['kafka']).compute()
+                    specific_projects=['selenium']).compute()
