@@ -28,6 +28,18 @@ class RealWorldInstanceOraclePoint(BaseModel):
     def project_name(self) -> str:
         return self.project_git.split('.git')[0].split('/')[-1]
 
+    @computed_field
+    @property
+    def alias_method_name(self) -> str:
+        return self.move_method_ref.right_signature.method_name +'1'
+
+
+    @computed_field
+    @property
+    def method_name(self) -> str:
+        return self.move_method_ref.right_signature.method_name
+
+
 def get_instance_oracle() -> list[RealWorldInstanceOraclePoint]:
     plugin_outfiles = [
         'vue_pro_res.json',
