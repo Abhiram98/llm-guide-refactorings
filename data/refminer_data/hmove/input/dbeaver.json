@@ -198,31 +198,6 @@
         },
         {
             "method_information": {
-                "line_num": 258,
-                "method_name": "initializeContextState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.runtime.DBRProgressMonitor",
-                        "param_name": "monitor"
-                    },
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext",
-                        "param_name": "context"
-                    },
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.impl.jdbc.JDBCExecutionContext",
-                        "param_name": "initFrom"
-                    }
-                ],
-                "method_name_start_line": 258,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "plugins/org.jkiss.dbeaver.ext.oracle/src/org/jkiss/dbeaver/ext/oracle/model/OracleDataSource.java",
-            "target_class_path": "dbeaver/plugins/org.jkiss.dbeaver.model.jdbc/src/org/jkiss/dbeaver/model/impl/jdbc/JDBCExecutionContext.java"
-        },
-        {
-            "method_information": {
                 "line_num": 351,
                 "method_name": "setNLSParameter",
                 "parameter_types": [
@@ -9092,31 +9067,6 @@
                 "modifier": "public "
             },
             "source_class_path": "plugins/org.jkiss.dbeaver.model.sql/src/org/jkiss/dbeaver/model/sql/semantics/SQLQueryModelRecognizer.java",
-            "target_class_path": "dbeaver/plugins/org.jkiss.dbeaver.model/src/org/jkiss/dbeaver/model/sql/SQLDialect.java"
-        },
-        {
-            "method_information": {
-                "line_num": 758,
-                "method_name": "tryFallbackSymbolForStringLiteral",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.sql.SQLDialect",
-                        "param_name": "dialect"
-                    },
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbolEntry",
-                        "param_name": "symbolEntry"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isColumnResolved"
-                    }
-                ],
-                "method_name_start_line": 759,
-                "return_type": "SQLQuerySymbolClass",
-                "modifier": "public "
-            },
-            "source_class_path": "plugins/org.jkiss.dbeaver.model.sql/src/org/jkiss/dbeaver/model/sql/semantics/SQLQueryModelRecognizer.java",
             "target_class_path": "dbeaver/plugins/org.jkiss.dbeaver.model.sql/src/org/jkiss/dbeaver/model/sql/semantics/SQLQuerySymbolEntry.java"
         },
         {
@@ -12628,31 +12578,6 @@
                 "modifier": "public "
             },
             "source_class_path": "plugins/org.jkiss.dbeaver.model.sql/src/org/jkiss/dbeaver/model/sql/semantics/SQLQueryModelRecognizer.java",
-            "target_class_path": "dbeaver/plugins/org.jkiss.dbeaver.model/src/org/jkiss/dbeaver/model/sql/SQLDialect.java"
-        },
-        {
-            "method_information": {
-                "line_num": 758,
-                "method_name": "tryFallbackSymbolForStringLiteral",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.sql.SQLDialect",
-                        "param_name": "dialect"
-                    },
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.sql.semantics.SQLQuerySymbolEntry",
-                        "param_name": "symbolEntry"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isColumnResolved"
-                    }
-                ],
-                "method_name_start_line": 759,
-                "return_type": "SQLQuerySymbolClass",
-                "modifier": "public "
-            },
-            "source_class_path": "plugins/org.jkiss.dbeaver.model.sql/src/org/jkiss/dbeaver/model/sql/semantics/SQLQueryModelRecognizer.java",
             "target_class_path": "dbeaver/plugins/org.jkiss.dbeaver.model.sql/src/org/jkiss/dbeaver/model/sql/semantics/SQLQuerySymbolEntry.java"
         },
         {
@@ -14414,39 +14339,6 @@
             },
             "source_class_path": "plugins/org.jkiss.dbeaver.registry/src/org/jkiss/dbeaver/registry/DataSourceSerializerModern.java",
             "target_class_path": "dbeaver/plugins/org.jkiss.dbeaver.registry/src/org/jkiss/dbeaver/registry/DataSourceConfigurationManager.java"
-        },
-        {
-            "method_information": {
-                "line_num": 381,
-                "method_name": "parseDataSources",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jkiss.dbeaver.model.DBPDataSourceConfigurationStorage",
-                        "param_name": "configurationStorage"
-                    },
-                    {
-                        "param_type": "org.jkiss.dbeaver.registry.DataSourceConfigurationManager",
-                        "param_name": "configurationManager"
-                    },
-                    {
-                        "param_type": "org.jkiss.dbeaver.registry.DataSourceRegistry.ParseResults",
-                        "param_name": "parseResults"
-                    },
-                    {
-                        "param_type": "java.util.Collection",
-                        "param_name": "dataSourceIds"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "refresh"
-                    }
-                ],
-                "method_name_start_line": 382,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "plugins/org.jkiss.dbeaver.registry/src/org/jkiss/dbeaver/registry/DataSourceSerializerModern.java",
-            "target_class_path": "dbeaver/plugins/org.jkiss.dbeaver.registry/src/org/jkiss/dbeaver/registry/DataSourceRegistry.java"
         },
         {
             "method_information": {

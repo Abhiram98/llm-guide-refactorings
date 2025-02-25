@@ -54,60 +54,6 @@
         },
         {
             "method_information": {
-                "line_num": 191,
-                "method_name": "draw",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.axis.ValueAxis",
-                        "param_name": "horizontalAxis"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.axis.ValueAxis",
-                        "param_name": "verticalAxis"
-                    }
-                ],
-                "method_name_start_line": 191,
-                "return_type": "GeneralPath",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/ClipPath.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java"
-        },
-        {
-            "method_information": {
-                "line_num": 236,
-                "method_name": "generateClipPath",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.axis.ValueAxis",
-                        "param_name": "horizontalAxis"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.axis.ValueAxis",
-                        "param_name": "verticalAxis"
-                    }
-                ],
-                "method_name_start_line": 236,
-                "return_type": "GeneralPath",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/ClipPath.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java"
-        },
-        {
-            "method_information": {
                 "line_num": 236,
                 "method_name": "generateClipPath",
                 "parameter_types": [
@@ -166,27 +112,6 @@
                 ],
                 "method_name_start_line": 174,
                 "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 215,
-                "method_name": "combine",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range1"
-                    },
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range2"
-                    }
-                ],
-                "method_name_start_line": 215,
-                "return_type": "Range",
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java",
@@ -435,23 +360,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/ChartPanel.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/PlotOrientation.java"
-        },
-        {
-            "method_information": {
-                "line_num": 761,
-                "method_name": "setChart",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.JFreeChart",
-                        "param_name": "chart"
-                    }
-                ],
-                "method_name_start_line": 761,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/ChartPanel.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/JFreeChart.java"
         },
         {
             "method_information": {
@@ -6303,23 +6211,6 @@
         },
         {
             "method_information": {
-                "line_num": 448,
-                "method_name": "setParent",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.plot.Plot",
-                        "param_name": "parent"
-                    }
-                ],
-                "method_name_start_line": 448,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/Plot.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/Plot.java"
-        },
-        {
-            "method_information": {
                 "line_num": 459,
                 "method_name": "getRootPlot",
                 "parameter_types": [],
@@ -6803,23 +6694,6 @@
         },
         {
             "method_information": {
-                "line_num": 629,
-                "method_name": "setDrawingSupplier",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.plot.DrawingSupplier",
-                        "param_name": "supplier"
-                    }
-                ],
-                "method_name_start_line": 629,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/Plot.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/DrawingSupplier.java"
-        },
-        {
-            "method_information": {
                 "line_num": 649,
                 "method_name": "setDrawingSupplier",
                 "parameter_types": [
@@ -6859,27 +6733,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/Plot.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/general/DatasetGroup.java"
-        },
-        {
-            "method_information": {
-                "line_num": 649,
-                "method_name": "setDrawingSupplier",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.plot.DrawingSupplier",
-                        "param_name": "supplier"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 649,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/Plot.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/plot/DrawingSupplier.java"
         },
         {
             "method_information": {
@@ -9590,65 +9443,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 352,
-                "method_name": "isVerticalTickLabels",
-                "parameter_types": [],
-                "method_name_start_line": 352,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 352,
-                "method_name": "isVerticalTickLabels",
-                "parameter_types": [],
-                "method_name_start_line": 352,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 366,
-                "method_name": "setVerticalTickLabels",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    }
-                ],
-                "method_name_start_line": 366,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 366,
-                "method_name": "setVerticalTickLabels",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    }
-                ],
-                "method_name_start_line": 366,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -9706,65 +9501,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 381,
-                "method_name": "isPositiveArrowVisible",
-                "parameter_types": [],
-                "method_name_start_line": 381,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 381,
-                "method_name": "isPositiveArrowVisible",
-                "parameter_types": [],
-                "method_name_start_line": 381,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 394,
-                "method_name": "setPositiveArrowVisible",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "visible"
-                    }
-                ],
-                "method_name_start_line": 394,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 394,
-                "method_name": "setPositiveArrowVisible",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "visible"
-                    }
-                ],
-                "method_name_start_line": 394,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -9822,65 +9559,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 407,
-                "method_name": "isNegativeArrowVisible",
-                "parameter_types": [],
-                "method_name_start_line": 407,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 407,
-                "method_name": "isNegativeArrowVisible",
-                "parameter_types": [],
-                "method_name_start_line": 407,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 420,
-                "method_name": "setNegativeArrowVisible",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "visible"
-                    }
-                ],
-                "method_name_start_line": 420,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 420,
-                "method_name": "setNegativeArrowVisible",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "visible"
-                    }
-                ],
-                "method_name_start_line": 420,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -9938,65 +9617,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 433,
-                "method_name": "getUpArrow",
-                "parameter_types": [],
-                "method_name_start_line": 433,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 433,
-                "method_name": "getUpArrow",
-                "parameter_types": [],
-                "method_name_start_line": 433,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 446,
-                "method_name": "setUpArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 446,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 446,
-                "method_name": "setUpArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 446,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -10054,65 +9675,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 462,
-                "method_name": "getDownArrow",
-                "parameter_types": [],
-                "method_name_start_line": 462,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 462,
-                "method_name": "getDownArrow",
-                "parameter_types": [],
-                "method_name_start_line": 462,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 475,
-                "method_name": "setDownArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 475,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 475,
-                "method_name": "setDownArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 475,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -10170,65 +9733,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 491,
-                "method_name": "getLeftArrow",
-                "parameter_types": [],
-                "method_name_start_line": 491,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 491,
-                "method_name": "getLeftArrow",
-                "parameter_types": [],
-                "method_name_start_line": 491,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 504,
-                "method_name": "setLeftArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 504,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 504,
-                "method_name": "setLeftArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 504,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -10286,65 +9791,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 520,
-                "method_name": "getRightArrow",
-                "parameter_types": [],
-                "method_name_start_line": 520,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 520,
-                "method_name": "getRightArrow",
-                "parameter_types": [],
-                "method_name_start_line": 520,
-                "return_type": "Shape",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 533,
-                "method_name": "setRightArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 533,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 533,
-                "method_name": "setRightArrow",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Shape",
-                        "param_name": "arrow"
-                    }
-                ],
-                "method_name_start_line": 533,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -10436,123 +9883,7 @@
                 "modifier": "protected "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 549,
-                "method_name": "drawAxisLine",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "cursor"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 549,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 549,
-                "method_name": "drawAxisLine",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "cursor"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 549,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 650,
-                "method_name": "calculateAnchorPoint",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.axis.ValueTick",
-                        "param_name": "tick"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "cursor"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 650,
-                "return_type": "float[]",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 650,
-                "method_name": "calculateAnchorPoint",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.axis.ValueTick",
-                        "param_name": "tick"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "cursor"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 650,
-                "return_type": "float[]",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -10705,139 +10036,7 @@
                 "modifier": "protected "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 687,
-                "method_name": "drawTickMarksAndLabels",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "cursor"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "plotArea"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 687,
-                "return_type": "AxisState",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 687,
-                "method_name": "drawTickMarksAndLabels",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "cursor"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "plotArea"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "dataArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 687,
-                "return_type": "AxisState",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 784,
-                "method_name": "reserveSpace",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.plot.Plot",
-                        "param_name": "plot"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "plotArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.axis.AxisSpace",
-                        "param_name": "space"
-                    }
-                ],
-                "method_name_start_line": 784,
-                "return_type": "AxisSpace",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 784,
-                "method_name": "reserveSpace",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.plot.Plot",
-                        "param_name": "plot"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "plotArea"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    },
-                    {
-                        "param_type": "org.jfree.chart.axis.AxisSpace",
-                        "param_name": "space"
-                    }
-                ],
-                "method_name_start_line": 784,
-                "return_type": "AxisSpace",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -11027,123 +10226,7 @@
                 "modifier": "protected "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 848,
-                "method_name": "findMaximumTickLabelHeight",
-                "parameter_types": [
-                    {
-                        "param_type": "java.util.List",
-                        "param_name": "ticks"
-                    },
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "drawArea"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "vertical"
-                    }
-                ],
-                "method_name_start_line": 848,
-                "return_type": "double",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 848,
-                "method_name": "findMaximumTickLabelHeight",
-                "parameter_types": [
-                    {
-                        "param_type": "java.util.List",
-                        "param_name": "ticks"
-                    },
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "drawArea"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "vertical"
-                    }
-                ],
-                "method_name_start_line": 848,
-                "return_type": "double",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 891,
-                "method_name": "findMaximumTickLabelWidth",
-                "parameter_types": [
-                    {
-                        "param_type": "java.util.List",
-                        "param_name": "ticks"
-                    },
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "drawArea"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "vertical"
-                    }
-                ],
-                "method_name_start_line": 891,
-                "return_type": "double",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 891,
-                "method_name": "findMaximumTickLabelWidth",
-                "parameter_types": [
-                    {
-                        "param_type": "java.util.List",
-                        "param_name": "ticks"
-                    },
-                    {
-                        "param_type": "java.awt.Graphics2D",
-                        "param_name": "g2"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "drawArea"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "vertical"
-                    }
-                ],
-                "method_name_start_line": 891,
-                "return_type": "double",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -11225,65 +10308,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 934,
-                "method_name": "isInverted",
-                "parameter_types": [],
-                "method_name_start_line": 934,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 934,
-                "method_name": "isInverted",
-                "parameter_types": [],
-                "method_name_start_line": 934,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 946,
-                "method_name": "setInverted",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    }
-                ],
-                "method_name_start_line": 946,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 946,
-                "method_name": "setInverted",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    }
-                ],
-                "method_name_start_line": 946,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -11341,65 +10366,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 963,
-                "method_name": "isAutoRange",
-                "parameter_types": [],
-                "method_name_start_line": 963,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 963,
-                "method_name": "isAutoRange",
-                "parameter_types": [],
-                "method_name_start_line": 963,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 976,
-                "method_name": "setAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "auto"
-                    }
-                ],
-                "method_name_start_line": 976,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 976,
-                "method_name": "setAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "auto"
-                    }
-                ],
-                "method_name_start_line": 976,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -11475,48 +10442,6 @@
                 "modifier": "protected "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 989,
-                "method_name": "setAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "auto"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 989,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 989,
-                "method_name": "setAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "auto"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 989,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
         },
         {
@@ -11541,65 +10466,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1009,
-                "method_name": "getAutoRangeMinimumSize",
-                "parameter_types": [],
-                "method_name_start_line": 1009,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1009,
-                "method_name": "getAutoRangeMinimumSize",
-                "parameter_types": [],
-                "method_name_start_line": 1009,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1021,
-                "method_name": "setAutoRangeMinimumSize",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "size"
-                    }
-                ],
-                "method_name_start_line": 1021,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1021,
-                "method_name": "setAutoRangeMinimumSize",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "size"
-                    }
-                ],
-                "method_name_start_line": 1021,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -11675,73 +10542,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1035,
-                "method_name": "setAutoRangeMinimumSize",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "size"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1035,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1035,
-                "method_name": "setAutoRangeMinimumSize",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "size"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1035,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1061,
-                "method_name": "getDefaultAutoRange",
-                "parameter_types": [],
-                "method_name_start_line": 1061,
-                "return_type": "Range",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1061,
-                "method_name": "getDefaultAutoRange",
-                "parameter_types": [],
-                "method_name_start_line": 1061,
-                "return_type": "Range",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -11799,82 +10600,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1075,
-                "method_name": "setDefaultAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1075,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1075,
-                "method_name": "setDefaultAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1075,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1075,
-                "method_name": "setDefaultAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1075,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1093,
-                "method_name": "getLowerMargin",
-                "parameter_types": [],
-                "method_name_start_line": 1093,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1093,
-                "method_name": "getLowerMargin",
-                "parameter_types": [],
-                "method_name_start_line": 1093,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -11932,65 +10658,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1108,
-                "method_name": "setLowerMargin",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "margin"
-                    }
-                ],
-                "method_name_start_line": 1108,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1108,
-                "method_name": "setLowerMargin",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "margin"
-                    }
-                ],
-                "method_name_start_line": 1108,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1126,
-                "method_name": "getUpperMargin",
-                "parameter_types": [],
-                "method_name_start_line": 1126,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1126,
-                "method_name": "getUpperMargin",
-                "parameter_types": [],
-                "method_name_start_line": 1126,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12048,65 +10716,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1141,
-                "method_name": "setUpperMargin",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "margin"
-                    }
-                ],
-                "method_name_start_line": 1141,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1141,
-                "method_name": "setUpperMargin",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "margin"
-                    }
-                ],
-                "method_name_start_line": 1141,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1156,
-                "method_name": "getFixedAutoRange",
-                "parameter_types": [],
-                "method_name_start_line": 1156,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1156,
-                "method_name": "getFixedAutoRange",
-                "parameter_types": [],
-                "method_name_start_line": 1156,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12164,65 +10774,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1167,
-                "method_name": "setFixedAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "length"
-                    }
-                ],
-                "method_name_start_line": 1167,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1167,
-                "method_name": "setFixedAutoRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "length"
-                    }
-                ],
-                "method_name_start_line": 1167,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1182,
-                "method_name": "getLowerBound",
-                "parameter_types": [],
-                "method_name_start_line": 1182,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1182,
-                "method_name": "getLowerBound",
-                "parameter_types": [],
-                "method_name_start_line": 1182,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12280,65 +10832,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1194,
-                "method_name": "setLowerBound",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "min"
-                    }
-                ],
-                "method_name_start_line": 1194,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1194,
-                "method_name": "setLowerBound",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "min"
-                    }
-                ],
-                "method_name_start_line": 1194,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1210,
-                "method_name": "getUpperBound",
-                "parameter_types": [],
-                "method_name_start_line": 1210,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1210,
-                "method_name": "getUpperBound",
-                "parameter_types": [],
-                "method_name_start_line": 1210,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12396,65 +10890,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1222,
-                "method_name": "setUpperBound",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "max"
-                    }
-                ],
-                "method_name_start_line": 1222,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1222,
-                "method_name": "setUpperBound",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "max"
-                    }
-                ],
-                "method_name_start_line": 1222,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1238,
-                "method_name": "getRange",
-                "parameter_types": [],
-                "method_name_start_line": 1238,
-                "return_type": "Range",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1238,
-                "method_name": "getRange",
-                "parameter_types": [],
-                "method_name_start_line": 1238,
-                "return_type": "Range",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12512,108 +10948,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1251,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1251,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1251,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1251,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1251,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1251,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1269,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "turnOffAutoRange"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1269,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1269,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "turnOffAutoRange"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1269,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12664,73 +10999,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1269,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "turnOffAutoRange"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1269,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1294,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "lower"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "upper"
-                    }
-                ],
-                "method_name_start_line": 1294,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1294,
-                "method_name": "setRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "lower"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "upper"
-                    }
-                ],
-                "method_name_start_line": 1294,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12806,108 +11074,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1305,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1305,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1305,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1305,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1305,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    }
-                ],
-                "method_name_start_line": 1305,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1322,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "turnOffAutoRange"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1322,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1322,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "turnOffAutoRange"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1322,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -12958,73 +11125,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1322,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.data.Range",
-                        "param_name": "range"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "turnOffAutoRange"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1322,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1339,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "lower"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "upper"
-                    }
-                ],
-                "method_name_start_line": 1339,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1339,
-                "method_name": "setRangeWithMargins",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "lower"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "upper"
-                    }
-                ],
-                "method_name_start_line": 1339,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -13108,48 +11208,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1350,
-                "method_name": "setRangeAboutValue",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "value"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "length"
-                    }
-                ],
-                "method_name_start_line": 1350,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1350,
-                "method_name": "setRangeAboutValue",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "value"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "length"
-                    }
-                ],
-                "method_name_start_line": 1350,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
         },
         {
@@ -13174,65 +11232,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1363,
-                "method_name": "isAutoTickUnitSelection",
-                "parameter_types": [],
-                "method_name_start_line": 1363,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1363,
-                "method_name": "isAutoTickUnitSelection",
-                "parameter_types": [],
-                "method_name_start_line": 1363,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1376,
-                "method_name": "setAutoTickUnitSelection",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    }
-                ],
-                "method_name_start_line": 1376,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1376,
-                "method_name": "setAutoTickUnitSelection",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    }
-                ],
-                "method_name_start_line": 1376,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -13308,73 +11308,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1389,
-                "method_name": "setAutoTickUnitSelection",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1389,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1389,
-                "method_name": "setAutoTickUnitSelection",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "flag"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "notify"
-                    }
-                ],
-                "method_name_start_line": 1389,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1406,
-                "method_name": "getStandardTickUnits",
-                "parameter_types": [],
-                "method_name_start_line": 1406,
-                "return_type": "TickUnitSource",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1406,
-                "method_name": "getStandardTickUnits",
-                "parameter_types": [],
-                "method_name_start_line": 1406,
-                "return_type": "TickUnitSource",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -13432,82 +11366,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1422,
-                "method_name": "setStandardTickUnits",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.axis.TickUnitSource",
-                        "param_name": "source"
-                    }
-                ],
-                "method_name_start_line": 1422,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1422,
-                "method_name": "setStandardTickUnits",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.axis.TickUnitSource",
-                        "param_name": "source"
-                    }
-                ],
-                "method_name_start_line": 1422,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1422,
-                "method_name": "setStandardTickUnits",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.axis.TickUnitSource",
-                        "param_name": "source"
-                    }
-                ],
-                "method_name_start_line": 1422,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1436,
-                "method_name": "getMinorTickCount",
-                "parameter_types": [],
-                "method_name_start_line": 1436,
-                "return_type": "int",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1436,
-                "method_name": "getMinorTickCount",
-                "parameter_types": [],
-                "method_name_start_line": 1436,
-                "return_type": "int",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -13565,91 +11424,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1450,
-                "method_name": "setMinorTickCount",
-                "parameter_types": [
-                    {
-                        "param_type": "int",
-                        "param_name": "count"
-                    }
-                ],
-                "method_name_start_line": 1450,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1450,
-                "method_name": "setMinorTickCount",
-                "parameter_types": [
-                    {
-                        "param_type": "int",
-                        "param_name": "count"
-                    }
-                ],
-                "method_name_start_line": 1450,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1469,
-                "method_name": "valueToJava2D",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "value"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "area"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 1469,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1469,
-                "method_name": "valueToJava2D",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "value"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "area"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 1469,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -13749,107 +11524,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1482,
-                "method_name": "lengthToJava2D",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "length"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "area"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 1482,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1482,
-                "method_name": "lengthToJava2D",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "length"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "area"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 1482,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1501,
-                "method_name": "java2DToValue",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "java2DValue"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "area"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 1501,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1501,
-                "method_name": "java2DToValue",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "java2DValue"
-                    },
-                    {
-                        "param_type": "java.awt.geom.Rectangle2D",
-                        "param_name": "area"
-                    },
-                    {
-                        "param_type": "RectangleEdge",
-                        "param_name": "edge"
-                    }
-                ],
-                "method_name_start_line": 1501,
-                "return_type": "double",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -13923,65 +11598,7 @@
                 "modifier": "protected "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1511,
-                "method_name": "autoAdjustRange",
-                "parameter_types": [],
-                "method_name_start_line": 1511,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1511,
-                "method_name": "autoAdjustRange",
-                "parameter_types": [],
-                "method_name_start_line": 1511,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1519,
-                "method_name": "centerRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "value"
-                    }
-                ],
-                "method_name_start_line": 1519,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1519,
-                "method_name": "centerRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "value"
-                    }
-                ],
-                "method_name_start_line": 1519,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -14049,83 +11666,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1540,
-                "method_name": "resizeRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    }
-                ],
-                "method_name_start_line": 1540,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1540,
-                "method_name": "resizeRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    }
-                ],
-                "method_name_start_line": 1540,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1557,
-                "method_name": "resizeRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "anchorValue"
-                    }
-                ],
-                "method_name_start_line": 1557,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1557,
-                "method_name": "resizeRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "anchorValue"
-                    }
-                ],
-                "method_name_start_line": 1557,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -14209,91 +11750,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1584,
-                "method_name": "resizeRange2",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "anchorValue"
-                    }
-                ],
-                "method_name_start_line": 1584,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1584,
-                "method_name": "resizeRange2",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "anchorValue"
-                    }
-                ],
-                "method_name_start_line": 1584,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1603,
-                "method_name": "zoomRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "lowerPercent"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "upperPercent"
-                    }
-                ],
-                "method_name_start_line": 1603,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1603,
-                "method_name": "zoomRange",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "lowerPercent"
-                    },
-                    {
-                        "param_type": "double",
-                        "param_name": "upperPercent"
-                    }
-                ],
-                "method_name_start_line": 1603,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -14369,40 +11826,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1625,
-                "method_name": "pan",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    }
-                ],
-                "method_name_start_line": 1625,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1625,
-                "method_name": "pan",
-                "parameter_types": [
-                    {
-                        "param_type": "double",
-                        "param_name": "percent"
-                    }
-                ],
-                "method_name_start_line": 1625,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
         },
         {
@@ -14427,65 +11850,7 @@
                 "modifier": "protected "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1641,
-                "method_name": "getAutoTickIndex",
-                "parameter_types": [],
-                "method_name_start_line": 1641,
-                "return_type": "int",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1641,
-                "method_name": "getAutoTickIndex",
-                "parameter_types": [],
-                "method_name_start_line": 1641,
-                "return_type": "int",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1652,
-                "method_name": "setAutoTickIndex",
-                "parameter_types": [
-                    {
-                        "param_type": "int",
-                        "param_name": "index"
-                    }
-                ],
-                "method_name_start_line": 1652,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1652,
-                "method_name": "setAutoTickIndex",
-                "parameter_types": [
-                    {
-                        "param_type": "int",
-                        "param_name": "index"
-                    }
-                ],
-                "method_name_start_line": 1652,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -14553,40 +11918,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1663,
-                "method_name": "equals",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Object",
-                        "param_name": "obj"
-                    }
-                ],
-                "method_name_start_line": 1663,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1663,
-                "method_name": "equals",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Object",
-                        "param_name": "obj"
-                    }
-                ],
-                "method_name_start_line": 1663,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
         },
         {
@@ -14611,65 +11942,7 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1726,
-                "method_name": "clone",
-                "parameter_types": [],
-                "method_name_start_line": 1726,
-                "return_type": "Object",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1726,
-                "method_name": "clone",
-                "parameter_types": [],
-                "method_name_start_line": 1726,
-                "return_type": "Object",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1738,
-                "method_name": "writeObject",
-                "parameter_types": [
-                    {
-                        "param_type": "java.io.ObjectOutputStream",
-                        "param_name": "stream"
-                    }
-                ],
-                "method_name_start_line": 1738,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1738,
-                "method_name": "writeObject",
-                "parameter_types": [
-                    {
-                        "param_type": "java.io.ObjectOutputStream",
-                        "param_name": "stream"
-                    }
-                ],
-                "method_name_start_line": 1738,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -14737,83 +12010,7 @@
                 "modifier": "private "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1754,
-                "method_name": "readObject",
-                "parameter_types": [
-                    {
-                        "param_type": "java.io.ObjectInputStream",
-                        "param_name": "stream"
-                    }
-                ],
-                "method_name_start_line": 1754,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1754,
-                "method_name": "readObject",
-                "parameter_types": [
-                    {
-                        "param_type": "java.io.ObjectInputStream",
-                        "param_name": "stream"
-                    }
-                ],
-                "method_name_start_line": 1754,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
             "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/TickUnitSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1773,
-                "method_name": "setRangeGridlinesVisible",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.plot.FastScatterPlot",
-                        "param_name": "fastScatterPlot"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "visible"
-                    }
-                ],
-                "method_name_start_line": 1773,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1773,
-                "method_name": "setRangeGridlinesVisible",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.plot.FastScatterPlot",
-                        "param_name": "fastScatterPlot"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "visible"
-                    }
-                ],
-                "method_name_start_line": 1773,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/axis/ValueAxis.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/data/Range.java"
         },
         {
             "method_information": {
@@ -14887,23 +12084,6 @@
                 "parameter_types": [],
                 "method_name_start_line": 73,
                 "return_type": "Title",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/event/TitleChangeEvent.java",
-            "target_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/title/Title.java"
-        },
-        {
-            "method_information": {
-                "line_num": 83,
-                "method_name": "notifyListeners",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jfree.chart.title.Title",
-                        "param_name": "title"
-                    }
-                ],
-                "method_name_start_line": 83,
-                "return_type": "void",
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jfreechart/small/small/jfreechart-1.0.13/source/org/jfree/chart/event/TitleChangeEvent.java",

@@ -548,44 +548,6 @@
         },
         {
             "method_information": {
-                "line_num": 731,
-                "method_name": "needsSecurityManager",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.impl.drda.NetworkServerControlImpl",
-                        "param_name": "server"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "command"
-                    }
-                ],
-                "method_name_start_line": 731,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/drda/NetworkServerControl.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/impl/drda/NetworkServerControlImpl.java"
-        },
-        {
-            "method_information": {
-                "line_num": 751,
-                "method_name": "verifySecurityState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.impl.drda.NetworkServerControlImpl",
-                        "param_name": "server"
-                    }
-                ],
-                "method_name_start_line": 751,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/drda/NetworkServerControl.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/impl/drda/NetworkServerControlImpl.java"
-        },
-        {
-            "method_information": {
                 "line_num": 751,
                 "method_name": "verifySecurityState",
                 "parameter_types": [
@@ -613,40 +575,6 @@
                 ],
                 "method_name_start_line": 760,
                 "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/drda/NetworkServerControl.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/impl/drda/NetworkServerControlImpl.java"
-        },
-        {
-            "method_information": {
-                "line_num": 760,
-                "method_name": "installSecurityManager",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.impl.drda.NetworkServerControlImpl",
-                        "param_name": "server"
-                    }
-                ],
-                "method_name_start_line": 760,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/drda/NetworkServerControl.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/impl/drda/NetworkServerControlImpl.java"
-        },
-        {
-            "method_information": {
-                "line_num": 823,
-                "method_name": "getHostNameForSocketPermission",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.impl.drda.NetworkServerControlImpl",
-                        "param_name": "server"
-                    }
-                ],
-                "method_name_start_line": 823,
-                "return_type": "String",
                 "modifier": "private "
             },
             "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/drda/NetworkServerControl.java",
@@ -702,23 +630,6 @@
                 ],
                 "method_name_start_line": 856,
                 "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/drda/NetworkServerControl.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/impl/drda/NetworkServerControlImpl.java"
-        },
-        {
-            "method_information": {
-                "line_num": 895,
-                "method_name": "getCodeSourcePrefix",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.impl.drda.NetworkServerControlImpl",
-                        "param_name": "server"
-                    }
-                ],
-                "method_name_start_line": 895,
-                "return_type": "String",
                 "modifier": "private "
             },
             "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/drda/org/apache/derby/drda/NetworkServerControl.java",
@@ -1386,23 +1297,6 @@
         },
         {
             "method_information": {
-                "line_num": 223,
-                "method_name": "setObserverException",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.iapi.error.StandardException",
-                        "param_name": "se"
-                    }
-                ],
-                "method_name_start_line": 223,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/store/raw/xact/RawTransaction.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/error/StandardException.java"
-        },
-        {
-            "method_information": {
                 "line_num": 244,
                 "method_name": "startNestedTopTransaction",
                 "parameter_types": [],
@@ -1944,23 +1838,6 @@
         },
         {
             "method_information": {
-                "line_num": 76,
-                "method_name": "setDataDictionary",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.dictionary.DataDictionary",
-                        "param_name": "dd"
-                    }
-                ],
-                "method_name_start_line": 76,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/dictionary/TupleDescriptor.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/dictionary/DataDictionary.java"
-        },
-        {
-            "method_information": {
                 "line_num": 87,
                 "method_name": "isPersistent",
                 "parameter_types": [],
@@ -2107,31 +1984,6 @@
             },
             "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/dictionary/TupleDescriptor.java",
             "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/impl/sql/catalog/SYSSTATEMENTSRowFactory.java"
-        },
-        {
-            "method_information": {
-                "line_num": 137,
-                "method_name": "buildDescriptor2",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.execute.ExecRow",
-                        "param_name": "row"
-                    },
-                    {
-                        "param_type": "org.apache.derby.impl.sql.catalog.SYSSTATEMENTSRowFactory",
-                        "param_name": "sysstatementsRowFactory"
-                    },
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.dictionary.DataDictionary",
-                        "param_name": "dd"
-                    }
-                ],
-                "method_name_start_line": 137,
-                "return_type": "TupleDescriptor",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/dictionary/TupleDescriptor.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/dictionary/DataDictionary.java"
         }
     ],
     "org.apache.derby.impl.sql.GenericStatement::lookupStatement(GenericStatement):PreparedStatement->org.apache.derby.impl.sql.conn.GenericLanguageConnectionContext": [
@@ -2347,39 +2199,6 @@
             },
             "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/impl/sql/GenericStatement.java",
             "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/conn/LanguageConnectionContext.java"
-        },
-        {
-            "method_information": {
-                "line_num": 172,
-                "method_name": "prepMinion",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.conn.LanguageConnectionContext",
-                        "param_name": "lcc"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "cacheMe"
-                    },
-                    {
-                        "param_type": "Object[]",
-                        "param_name": "paramDefaults"
-                    },
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.dictionary.SchemaDescriptor",
-                        "param_name": "spsSchema"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "internalSQL"
-                    }
-                ],
-                "method_name_start_line": 172,
-                "return_type": "PreparedStatement",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/impl/sql/GenericStatement.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/dictionary/SchemaDescriptor.java"
         },
         {
             "method_information": {
@@ -2612,39 +2431,6 @@
             },
             "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/impl/sql/GenericStatement.java",
             "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/PreparedStatement.java"
-        },
-        {
-            "method_information": {
-                "line_num": 676,
-                "method_name": "prepareStorable",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.conn.LanguageConnectionContext",
-                        "param_name": "lcc"
-                    },
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.PreparedStatement",
-                        "param_name": "ps"
-                    },
-                    {
-                        "param_type": "Object[]",
-                        "param_name": "paramDefaults"
-                    },
-                    {
-                        "param_type": "org.apache.derby.iapi.sql.dictionary.SchemaDescriptor",
-                        "param_name": "spsSchema"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "internalSQL"
-                    }
-                ],
-                "method_name_start_line": 676,
-                "return_type": "PreparedStatement",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/impl/sql/GenericStatement.java",
-            "target_class_path": "jmove/dataset-tse/derby/large/big/derby-10.9.1.0/db-derby-10.9.1.0-src/java/engine/org/apache/derby/iapi/sql/dictionary/SchemaDescriptor.java"
         },
         {
             "method_information": {

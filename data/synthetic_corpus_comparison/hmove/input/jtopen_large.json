@@ -97,27 +97,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/FTPThread.java",
             "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/FTP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 219,
-                "method_name": "readObject2",
-                "parameter_types": [
-                    {
-                        "param_type": "com.ibm.as400.access.FTP",
-                        "param_name": "ftp"
-                    },
-                    {
-                        "param_type": "java.io.ObjectInputStream",
-                        "param_name": "in"
-                    }
-                ],
-                "method_name_start_line": 219,
-                "return_type": "void",
-                "modifier": ""
-            },
-            "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/FTPThread.java",
-            "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/FTP.java"
         }
     ],
     "com.ibm.as400.vaccess.SQLMetaDataTableModel::readObject(java.io.ObjectInputStream):void->com.ibm.as400.vaccess.SQLMetaDataTablePane": [
@@ -2124,23 +2103,6 @@
         },
         {
             "method_information": {
-                "line_num": 1221,
-                "method_name": "setSystem",
-                "parameter_types": [
-                    {
-                        "param_type": "com.ibm.as400.access.AS400",
-                        "param_name": "system"
-                    }
-                ],
-                "method_name_start_line": 1221,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/data/ProgramCallDocument.java",
-            "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/AS400.java"
-        },
-        {
-            "method_information": {
                 "line_num": 1247,
                 "method_name": "setValue",
                 "parameter_types": [
@@ -2385,23 +2347,6 @@
         },
         {
             "method_information": {
-                "line_num": 1328,
-                "method_name": "savePcmlDocument",
-                "parameter_types": [
-                    {
-                        "param_type": "com.ibm.as400.data.PcmlDocument",
-                        "param_name": "pd"
-                    }
-                ],
-                "method_name_start_line": 1328,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/data/ProgramCallDocument.java",
-            "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/data/PcmlDocument.java"
-        },
-        {
-            "method_information": {
                 "line_num": 1349,
                 "method_name": "savePcmlDocument",
                 "parameter_types": [
@@ -2420,27 +2365,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/data/ProgramCallDocument.java",
             "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/AS400.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1349,
-                "method_name": "savePcmlDocument",
-                "parameter_types": [
-                    {
-                        "param_type": "com.ibm.as400.data.PcmlDocument",
-                        "param_name": "pd"
-                    },
-                    {
-                        "param_type": "java.io.OutputStream",
-                        "param_name": "outStream"
-                    }
-                ],
-                "method_name_start_line": 1349,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/data/ProgramCallDocument.java",
-            "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/data/PcmlDocument.java"
         },
         {
             "method_information": {
@@ -5689,23 +5613,6 @@
         },
         {
             "method_information": {
-                "line_num": 1161,
-                "method_name": "setConnection",
-                "parameter_types": [
-                    {
-                        "param_type": "com.ibm.as400.vaccess.SQLConnection",
-                        "param_name": "connection"
-                    }
-                ],
-                "method_name_start_line": 1161,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/vaccess/SQLResultSetTableModel.java",
-            "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/vaccess/SQLConnection.java"
-        },
-        {
-            "method_information": {
                 "line_num": 1184,
                 "method_name": "setQuery",
                 "parameter_types": [
@@ -7044,23 +6951,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/AS400JDBCDataSource.java",
             "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/EventLog.java"
-        },
-        {
-            "method_information": {
-                "line_num": 709,
-                "method_name": "getConnection",
-                "parameter_types": [
-                    {
-                        "param_type": "com.ibm.as400.access.AS400",
-                        "param_name": "as400"
-                    }
-                ],
-                "method_name_start_line": 709,
-                "return_type": "Connection",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/AS400JDBCDataSource.java",
-            "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/AS400.java"
         },
         {
             "method_information": {
@@ -20400,23 +20290,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/Permission.java",
             "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/PermissionAccess.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1218,
-                "method_name": "setSystem",
-                "parameter_types": [
-                    {
-                        "param_type": "com.ibm.as400.access.AS400",
-                        "param_name": "system"
-                    }
-                ],
-                "method_name_start_line": 1218,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/Permission.java",
-            "target_class_path": "jmove/dataset-tse/jtopen/large/big/jtopen-7.8/src/com/ibm/as400/access/AS400.java"
         },
         {
             "method_information": {

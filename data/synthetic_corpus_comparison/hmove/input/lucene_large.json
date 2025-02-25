@@ -972,27 +972,6 @@
         },
         {
             "method_information": {
-                "line_num": 115,
-                "method_name": "termNotInReader",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.lucene.index.AtomicReader",
-                        "param_name": "reader"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.index.Term",
-                        "param_name": "term"
-                    }
-                ],
-                "method_name_start_line": 115,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/search/TermQuery.java",
-            "target_class_path": "jmove/dataset-tse/lucene/large/big/lucene-4.2.0/core/src/java/org/apache/lucene/index/Term.java"
-        },
-        {
-            "method_information": {
                 "line_num": 121,
                 "method_name": "explain",
                 "parameter_types": [

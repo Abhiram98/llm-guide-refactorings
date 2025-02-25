@@ -70,23 +70,6 @@
         },
         {
             "method_information": {
-                "line_num": 126,
-                "method_name": "setDrawing",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.draw.Drawing",
-                        "param_name": "d"
-                    }
-                ],
-                "method_name_start_line": 126,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/draw/DrawingPanel.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/Drawing.java"
-        },
-        {
-            "method_information": {
                 "line_num": 133,
                 "method_name": "getDrawing",
                 "parameter_types": [],
@@ -363,27 +346,6 @@
         },
         {
             "method_information": {
-                "line_num": 189,
-                "method_name": "addCreationButtonsTo",
-                "parameter_types": [
-                    {
-                        "param_type": "javax.swing.JToolBar",
-                        "param_name": "tb"
-                    },
-                    {
-                        "param_type": "org.jhotdraw.draw.DrawingEditor",
-                        "param_name": "editor"
-                    }
-                ],
-                "method_name_start_line": 189,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/draw/DrawingPanel.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/DrawingEditor.java"
-        },
-        {
-            "method_information": {
                 "line_num": 195,
                 "method_name": "addDefaultCreationButtonsTo",
                 "parameter_types": [
@@ -497,35 +459,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/draw/DrawingPanel.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/DefaultDrawingView.java"
-        },
-        {
-            "method_information": {
-                "line_num": 195,
-                "method_name": "addDefaultCreationButtonsTo",
-                "parameter_types": [
-                    {
-                        "param_type": "javax.swing.JToolBar",
-                        "param_name": "tb"
-                    },
-                    {
-                        "param_type": "org.jhotdraw.draw.DrawingEditor",
-                        "param_name": "editor"
-                    },
-                    {
-                        "param_type": "java.util.Collection",
-                        "param_name": "drawingActions"
-                    },
-                    {
-                        "param_type": "java.util.Collection",
-                        "param_name": "selectionActions"
-                    }
-                ],
-                "method_name_start_line": 195,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/draw/DrawingPanel.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/DrawingEditor.java"
         },
         {
             "method_information": {
@@ -816,23 +749,6 @@
         },
         {
             "method_information": {
-                "line_num": 92,
-                "method_name": "createOverlay",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.draw.DrawingView",
-                        "param_name": "view"
-                    }
-                ],
-                "method_name_start_line": 92,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/text/FloatingTextArea.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/DrawingView.java"
-        },
-        {
-            "method_information": {
                 "line_num": 96,
                 "method_name": "requestFocus",
                 "parameter_types": [],
@@ -929,48 +845,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/text/FloatingTextArea.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/event/FigureListener.java"
-        },
-        {
-            "method_information": {
-                "line_num": 106,
-                "method_name": "createOverlay",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.draw.DrawingView",
-                        "param_name": "view"
-                    },
-                    {
-                        "param_type": "org.jhotdraw.draw.TextHolderFigure",
-                        "param_name": "figure"
-                    }
-                ],
-                "method_name_start_line": 106,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/text/FloatingTextArea.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/DrawingView.java"
-        },
-        {
-            "method_information": {
-                "line_num": 106,
-                "method_name": "createOverlay",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.draw.DrawingView",
-                        "param_name": "view"
-                    },
-                    {
-                        "param_type": "org.jhotdraw.draw.TextHolderFigure",
-                        "param_name": "figure"
-                    }
-                ],
-                "method_name_start_line": 106,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/text/FloatingTextArea.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/TextHolderFigure.java"
         },
         {
             "method_information": {
@@ -1796,23 +1670,6 @@
         },
         {
             "method_information": {
-                "line_num": 486,
-                "method_name": "setModel",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.gui.fontchooser.FontChooserModel",
-                        "param_name": "newValue"
-                    }
-                ],
-                "method_name_start_line": 486,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/gui/JFontChooser.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/gui/fontchooser/FontChooserModel.java"
-        },
-        {
-            "method_information": {
                 "line_num": 508,
                 "method_name": "applySelectedFontToFigures",
                 "parameter_types": [
@@ -1909,18 +1766,6 @@
         },
         {
             "method_information": {
-                "line_num": 64,
-                "method_name": "canUndo",
-                "parameter_types": [],
-                "method_name_start_line": 65,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
-        },
-        {
-            "method_information": {
                 "line_num": 68,
                 "method_name": "canRedo",
                 "parameter_types": [],
@@ -1930,18 +1775,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 68,
-                "method_name": "canRedo",
-                "parameter_types": [],
-                "method_name_start_line": 69,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -1971,23 +1804,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 87,
-                "method_name": "actionPerformed",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.event.ActionEvent",
-                        "param_name": "evt"
-                    }
-                ],
-                "method_name_start_line": 88,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2022,23 +1838,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 112,
-                "method_name": "actionPerformed",
-                "parameter_types": [
-                    {
-                        "param_type": "java.awt.event.ActionEvent",
-                        "param_name": "evt"
-                    }
-                ],
-                "method_name_start_line": 113,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2068,18 +1867,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 128,
-                "method_name": "getLabels",
-                "parameter_types": [],
-                "method_name_start_line": 128,
-                "return_type": "ResourceBundleUtil",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2109,23 +1896,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 142,
-                "method_name": "setLocale",
-                "parameter_types": [
-                    {
-                        "param_type": "java.util.Locale",
-                        "param_name": "l"
-                    }
-                ],
-                "method_name_start_line": 142,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2155,18 +1925,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 149,
-                "method_name": "discardAllEdits",
-                "parameter_types": [],
-                "method_name_start_line": 150,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2196,23 +1954,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 156,
-                "method_name": "setHasSignificantEdits",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "newValue"
-                    }
-                ],
-                "method_name_start_line": 156,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2242,18 +1983,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 166,
-                "method_name": "hasSignificantEdits",
-                "parameter_types": [],
-                "method_name_start_line": 166,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2283,23 +2012,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 186,
-                "method_name": "addEdit",
-                "parameter_types": [
-                    {
-                        "param_type": "javax.swing.undo.UndoableEdit",
-                        "param_name": "anEdit"
-                    }
-                ],
-                "method_name_start_line": 187,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2329,18 +2041,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 203,
-                "method_name": "getUndoAction",
-                "parameter_types": [],
-                "method_name_start_line": 203,
-                "return_type": "Action",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2365,18 +2065,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 210,
-                "method_name": "getRedoAction",
-                "parameter_types": [],
-                "method_name_start_line": 210,
-                "return_type": "Action",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2401,18 +2089,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 219,
-                "method_name": "updateActions",
-                "parameter_types": [],
-                "method_name_start_line": 219,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2437,18 +2113,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 250,
-                "method_name": "undo",
-                "parameter_types": [],
-                "method_name_start_line": 251,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2473,18 +2137,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 267,
-                "method_name": "redo",
-                "parameter_types": [],
-                "method_name_start_line": 268,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2509,18 +2161,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 284,
-                "method_name": "undoOrRedo",
-                "parameter_types": [],
-                "method_name_start_line": 285,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2550,23 +2190,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 296,
-                "method_name": "addPropertyChangeListener",
-                "parameter_types": [
-                    {
-                        "param_type": "java.beans.PropertyChangeListener",
-                        "param_name": "listener"
-                    }
-                ],
-                "method_name_start_line": 296,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2605,27 +2228,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 299,
-                "method_name": "addPropertyChangeListener",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "propertyName"
-                    },
-                    {
-                        "param_type": "java.beans.PropertyChangeListener",
-                        "param_name": "listener"
-                    }
-                ],
-                "method_name_start_line": 299,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2664,23 +2266,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 302,
-                "method_name": "removePropertyChangeListener",
-                "parameter_types": [
-                    {
-                        "param_type": "java.beans.PropertyChangeListener",
-                        "param_name": "listener"
-                    }
-                ],
-                "method_name_start_line": 302,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2719,27 +2304,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 305,
-                "method_name": "removePropertyChangeListener",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "propertyName"
-                    },
-                    {
-                        "param_type": "java.beans.PropertyChangeListener",
-                        "param_name": "listener"
-                    }
-                ],
-                "method_name_start_line": 305,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2786,31 +2350,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 309,
-                "method_name": "firePropertyChange",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "propertyName"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "oldValue"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "newValue"
-                    }
-                ],
-                "method_name_start_line": 309,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2861,31 +2400,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 312,
-                "method_name": "firePropertyChange",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "propertyName"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "oldValue"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "newValue"
-                    }
-                ],
-                "method_name_start_line": 312,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -2936,31 +2450,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 315,
-                "method_name": "firePropertyChange",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "propertyName"
-                    },
-                    {
-                        "param_type": "java.lang.Object",
-                        "param_name": "oldValue"
-                    },
-                    {
-                        "param_type": "java.lang.Object",
-                        "param_name": "newValue"
-                    }
-                ],
-                "method_name_start_line": 315,
-                "return_type": "void",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -3007,27 +2496,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/util/ResourceBundleUtil.java"
-        },
-        {
-            "method_information": {
-                "line_num": 325,
-                "method_name": "getLineOfOffset",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.samples.teddy.TeddyView",
-                        "param_name": "teddyView"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "offset"
-                    }
-                ],
-                "method_name_start_line": 325,
-                "return_type": "int",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -3903,23 +3371,6 @@
         }
     ],
     "org.jhotdraw.samples.svg.gui.ViewToolBar::setEditor():void->org.jhotdraw.samples.svg.SVGDrawingPanel": [
-        {
-            "method_information": {
-                "line_num": 57,
-                "method_name": "setView",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.draw.DrawingView",
-                        "param_name": "view"
-                    }
-                ],
-                "method_name_start_line": 57,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/svg/gui/ViewToolBar.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/draw/DrawingView.java"
-        },
         {
             "method_information": {
                 "line_num": 57,
@@ -5151,23 +4602,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/svg/SVGDrawingPanel.java",
             "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/svg/gui/ViewToolBar.java"
-        },
-        {
-            "method_information": {
-                "line_num": 90,
-                "method_name": "setUndoRedoManager",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jhotdraw.undo.UndoRedoManager",
-                        "param_name": "undo"
-                    }
-                ],
-                "method_name_start_line": 90,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/samples/svg/SVGDrawingPanel.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/org/jhotdraw/undo/UndoRedoManager.java"
         },
         {
             "method_information": {
@@ -11641,23 +11075,6 @@
         },
         {
             "method_information": {
-                "line_num": 358,
-                "method_name": "addChild",
-                "parameter_types": [
-                    {
-                        "param_type": "net.n3.nanoxml.IXMLElement",
-                        "param_name": "child"
-                    }
-                ],
-                "method_name_start_line": 358,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/XMLElement.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/IXMLElement.java"
-        },
-        {
-            "method_information": {
                 "line_num": 382,
                 "method_name": "insertChild",
                 "parameter_types": [
@@ -11671,44 +11088,6 @@
                     }
                 ],
                 "method_name_start_line": 382,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/XMLElement.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/IXMLElement.java"
-        },
-        {
-            "method_information": {
-                "line_num": 382,
-                "method_name": "insertChild",
-                "parameter_types": [
-                    {
-                        "param_type": "net.n3.nanoxml.IXMLElement",
-                        "param_name": "child"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "index"
-                    }
-                ],
-                "method_name_start_line": 382,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/XMLElement.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/IXMLElement.java"
-        },
-        {
-            "method_information": {
-                "line_num": 405,
-                "method_name": "removeChild",
-                "parameter_types": [
-                    {
-                        "param_type": "net.n3.nanoxml.IXMLElement",
-                        "param_name": "child"
-                    }
-                ],
-                "method_name_start_line": 405,
                 "return_type": "void",
                 "modifier": "public "
             },
@@ -12397,23 +11776,6 @@
                     }
                 ],
                 "method_name_start_line": 1057,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/XMLElement.java",
-            "target_class_path": "jmove/dataset-tse/jhotdraw/large/big/JHotDraw 7.6 original/Source/jhotdraw7/src/main/java/net/n3/nanoxml/IXMLElement.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1071,
-                "method_name": "equalsXMLElement",
-                "parameter_types": [
-                    {
-                        "param_type": "net.n3.nanoxml.IXMLElement",
-                        "param_name": "elt"
-                    }
-                ],
-                "method_name_start_line": 1071,
                 "return_type": "boolean",
                 "modifier": "public "
             },

@@ -68,23 +68,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
-        },
-        {
-            "method_information": {
-                "line_num": 96,
-                "method_name": "getCategoryListParams",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.lucene.facet.taxonomy.CategoryPath",
-                        "param_name": "category"
-                    }
-                ],
-                "method_name_start_line": 96,
-                "return_type": "CategoryListParams",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/taxonomy/CategoryPath.java"
         },
         {
@@ -148,27 +131,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
-        },
-        {
-            "method_information": {
-                "line_num": 108,
-                "method_name": "drillDownTermText",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.lucene.facet.taxonomy.CategoryPath",
-                        "param_name": "path"
-                    },
-                    {
-                        "param_type": "char[]",
-                        "param_name": "buffer"
-                    }
-                ],
-                "method_name_start_line": 108,
-                "return_type": "int",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/taxonomy/CategoryPath.java"
         },
         {
@@ -197,18 +159,6 @@
         },
         {
             "method_information": {
-                "line_num": 125,
-                "method_name": "getPartitionSize",
-                "parameter_types": [],
-                "method_name_start_line": 125,
-                "return_type": "int",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
-        },
-        {
-            "method_information": {
                 "line_num": 133,
                 "method_name": "getAllCategoryListParams",
                 "parameter_types": [],
@@ -233,18 +183,6 @@
         },
         {
             "method_information": {
-                "line_num": 133,
-                "method_name": "getAllCategoryListParams",
-                "parameter_types": [],
-                "method_name_start_line": 133,
-                "return_type": "List<CategoryListParams>",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
-        },
-        {
-            "method_information": {
                 "line_num": 137,
                 "method_name": "hashCode",
                 "parameter_types": [],
@@ -266,18 +204,6 @@
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java"
-        },
-        {
-            "method_information": {
-                "line_num": 137,
-                "method_name": "hashCode",
-                "parameter_types": [],
-                "method_name_start_line": 138,
-                "return_type": "int",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
         },
         {
             "method_information": {
@@ -315,23 +241,6 @@
         },
         {
             "method_information": {
-                "line_num": 151,
-                "method_name": "equals",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Object",
-                        "param_name": "obj"
-                    }
-                ],
-                "method_name_start_line": 152,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
-        },
-        {
-            "method_information": {
                 "line_num": 184,
                 "method_name": "getFacetDelimChar",
                 "parameter_types": [],
@@ -353,18 +262,6 @@
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java"
-        },
-        {
-            "method_information": {
-                "line_num": 184,
-                "method_name": "getFacetDelimChar",
-                "parameter_types": [],
-                "method_name_start_line": 184,
-                "return_type": "char",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
         },
         {
             "method_information": {
@@ -399,23 +296,6 @@
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java"
-        },
-        {
-            "method_information": {
-                "line_num": 188,
-                "method_name": "testAndOrs",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.lucene.facet.search.DrillDownQueryTest",
-                        "param_name": "drillDownQueryTest"
-                    }
-                ],
-                "method_name_start_line": 189,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/CategoryListParams.java"
         },
         {
             "method_information": {
@@ -1492,56 +1372,6 @@
         },
         {
             "method_information": {
-                "line_num": 121,
-                "method_name": "loadFromFile",
-                "parameter_types": [
-                    {
-                        "param_type": "java.io.File",
-                        "param_name": "inputFile"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.taxonomy.TaxonomyReader",
-                        "param_name": "taxonomy"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.params.FacetIndexingParams",
-                        "param_name": "facetIndexingParams"
-                    }
-                ],
-                "method_name_start_line": 121,
-                "return_type": "TotalFacetCounts",
-                "modifier": "static "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/taxonomy/TaxonomyReader.java"
-        },
-        {
-            "method_information": {
-                "line_num": 121,
-                "method_name": "loadFromFile",
-                "parameter_types": [
-                    {
-                        "param_type": "java.io.File",
-                        "param_name": "inputFile"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.taxonomy.TaxonomyReader",
-                        "param_name": "taxonomy"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.params.FacetIndexingParams",
-                        "param_name": "facetIndexingParams"
-                    }
-                ],
-                "method_name_start_line": 121,
-                "return_type": "TotalFacetCounts",
-                "modifier": "static "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java"
-        },
-        {
-            "method_information": {
                 "line_num": 143,
                 "method_name": "storeToFile",
                 "parameter_types": [
@@ -1623,27 +1453,6 @@
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/search/FacetRequest.java"
-        },
-        {
-            "method_information": {
-                "line_num": 143,
-                "method_name": "storeToFile",
-                "parameter_types": [
-                    {
-                        "param_type": "java.io.File",
-                        "param_name": "outputFile"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.complements.TotalFacetCounts",
-                        "param_name": "tfc"
-                    }
-                ],
-                "method_name_start_line": 143,
-                "return_type": "void",
-                "modifier": "static "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java"
         },
         {
             "method_information": {
@@ -1769,56 +1578,6 @@
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/core/src/java/org/apache/lucene/index/IndexReader.java"
-        },
-        {
-            "method_information": {
-                "line_num": 165,
-                "method_name": "compute",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.lucene.index.IndexReader",
-                        "param_name": "indexReader"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.taxonomy.TaxonomyReader",
-                        "param_name": "taxonomy"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.params.FacetIndexingParams",
-                        "param_name": "facetIndexingParams"
-                    }
-                ],
-                "method_name_start_line": 165,
-                "return_type": "TotalFacetCounts",
-                "modifier": "static "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/taxonomy/TaxonomyReader.java"
-        },
-        {
-            "method_information": {
-                "line_num": 165,
-                "method_name": "compute",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.lucene.index.IndexReader",
-                        "param_name": "indexReader"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.taxonomy.TaxonomyReader",
-                        "param_name": "taxonomy"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.facet.params.FacetIndexingParams",
-                        "param_name": "facetIndexingParams"
-                    }
-                ],
-                "method_name_start_line": 165,
-                "return_type": "TotalFacetCounts",
-                "modifier": "static "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/complements/TotalFacetCounts.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/facet/src/java/org/apache/lucene/facet/params/FacetIndexingParams.java"
         },
         {
             "method_information": {
@@ -2035,27 +1794,6 @@
                 "method_name_start_line": 342,
                 "return_type": "ArrayList<PerfTask>",
                 "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/benchmark/src/java/org/apache/lucene/benchmark/byTask/utils/Algorithm.java",
-            "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/benchmark/src/java/org/apache/lucene/benchmark/byTask/tasks/TaskSequence.java"
-        },
-        {
-            "method_information": {
-                "line_num": 347,
-                "method_name": "extractTasks",
-                "parameter_types": [
-                    {
-                        "param_type": "java.util.ArrayList",
-                        "param_name": "extrct"
-                    },
-                    {
-                        "param_type": "org.apache.lucene.benchmark.byTask.tasks.TaskSequence",
-                        "param_name": "seq"
-                    }
-                ],
-                "method_name_start_line": 347,
-                "return_type": "void",
-                "modifier": "private "
             },
             "source_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/benchmark/src/java/org/apache/lucene/benchmark/byTask/utils/Algorithm.java",
             "target_class_path": "jmove/dataset-tse/lucene/small/small/lucene-4.2.0/benchmark/src/java/org/apache/lucene/benchmark/byTask/tasks/TaskSequence.java"

@@ -82,49 +82,7 @@
                 "modifier": "public "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 71,
-                "method_name": "compileFactory",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "timeoutHandling"
-                    }
-                ],
-                "method_name_start_line": 72,
-                "return_type": "NFAFactory<T>",
-                "modifier": "public "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 71,
-                "method_name": "compileFactory",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "timeoutHandling"
-                    }
-                ],
-                "method_name_start_line": 72,
-                "return_type": "NFAFactory<T>",
-                "modifier": "public "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -192,41 +150,7 @@
                 "modifier": "public "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 99,
-                "method_name": "canProduceEmptyMatches",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 99,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 99,
-                "method_name": "canProduceEmptyMatches",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 99,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -251,18 +175,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 167,
-                "method_name": "compileFactory",
-                "parameter_types": [],
-                "method_name_start_line": 167,
-                "return_type": "void",
-                "modifier": ""
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -334,18 +246,6 @@
                 "modifier": ""
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 196,
-                "method_name": "getAfterMatchSkipStrategy",
-                "parameter_types": [],
-                "method_name_start_line": 196,
-                "return_type": "AfterMatchSkipStrategy",
-                "modifier": ""
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -371,18 +271,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 200,
-                "method_name": "getStates",
-                "parameter_types": [],
-                "method_name_start_line": 200,
-                "return_type": "List<State<T>>",
-                "modifier": ""
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -454,18 +342,6 @@
                 "modifier": ""
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 204,
-                "method_name": "getWindowTime",
-                "parameter_types": [],
-                "method_name_start_line": 204,
-                "return_type": "long",
-                "modifier": ""
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -491,18 +367,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 208,
-                "method_name": "getWindowTimes",
-                "parameter_types": [],
-                "method_name_start_line": 208,
-                "return_type": "Map<String,Long>",
-                "modifier": ""
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -574,18 +438,6 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 213,
-                "method_name": "checkPatternWindowTimes",
-                "parameter_types": [],
-                "method_name_start_line": 213,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -611,18 +463,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 224,
-                "method_name": "checkPatternSkipStrategy",
-                "parameter_types": [],
-                "method_name_start_line": 224,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -671,18 +511,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 245,
-                "method_name": "checkPatternNameUniqueness",
-                "parameter_types": [],
-                "method_name_start_line": 245,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -774,41 +602,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 262,
-                "method_name": "checkPatternNameUniqueness",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 262,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 262,
-                "method_name": "checkPatternNameUniqueness",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 262,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -833,18 +627,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 291,
-                "method_name": "getCurrentNotCondition",
-                "parameter_types": [],
-                "method_name_start_line": 291,
-                "return_type": "List<Tuple2<IterativeCondition<T>,String>>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -893,18 +675,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 319,
-                "method_name": "createEndingState",
-                "parameter_types": [],
-                "method_name_start_line": 319,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -953,18 +723,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 325,
-                "method_name": "getWindowSize",
-                "parameter_types": [],
-                "method_name_start_line": 325,
-                "return_type": "Optional<Long>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -1023,23 +781,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 336,
-                "method_name": "createMiddleStates",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 336,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -1158,23 +899,6 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 394,
-                "method_name": "createStartState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 395,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -1227,23 +951,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 401,
-                "method_name": "convertPattern",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 401,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -1337,27 +1044,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 425,
-                "method_name": "createState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State.StateType",
-                        "param_name": "stateType"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isTake"
-                    }
-                ],
-                "method_name_start_line": 425,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -1463,27 +1149,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 449,
-                "method_name": "createState",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "name"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State.StateType",
-                        "param_name": "stateType"
-                    }
-                ],
-                "method_name_start_line": 449,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -1589,27 +1254,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 456,
-                "method_name": "createStopState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "notCondition"
-                    },
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "name"
-                    }
-                ],
-                "method_name_start_line": 456,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -1740,23 +1384,6 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 483,
-                "method_name": "copyWithoutTransitiveNots",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 483,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -1842,23 +1469,6 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 535,
-                "method_name": "copy",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "state"
-                    }
-                ],
-                "method_name_start_line": 535,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -1944,23 +1554,6 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 551,
-                "method_name": "addStopStates",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "state"
-                    }
-                ],
-                "method_name_start_line": 551,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -2013,23 +1606,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 558,
-                "method_name": "addStopStateToLooping",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "loopingState"
-                    }
-                ],
-                "method_name_start_line": 558,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -2180,57 +1756,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 578,
-                "method_name": "createTimesState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Quantifier.Times",
-                        "param_name": "times"
-                    }
-                ],
-                "method_name_start_line": 579,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 578,
-                "method_name": "createTimesState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Quantifier.Times",
-                        "param_name": "times"
-                    }
-                ],
-                "method_name_start_line": 579,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/State.java"
         },
         {
             "method_information": {
@@ -2348,23 +1874,6 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 629,
-                "method_name": "setCurrentGroupPatternFirstOfLoop",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isFirstOfLoop"
-                    }
-                ],
-                "method_name_start_line": 630,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -2390,18 +1899,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 640,
-                "method_name": "isCurrentGroupPatternFirstOfLoop",
-                "parameter_types": [],
-                "method_name_start_line": 640,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -2493,41 +1990,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 655,
-                "method_name": "headOfGroup",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 655,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 655,
-                "method_name": "headOfGroup",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 655,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -2595,41 +2058,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 663,
-                "method_name": "isPatternOptional",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 663,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 663,
-                "method_name": "isPatternOptional",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 663,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -2697,41 +2126,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 667,
-                "method_name": "isHeadOfOptionalGroupPattern",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 667,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 667,
-                "method_name": "isHeadOfOptionalGroupPattern",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 667,
-                "return_type": "boolean",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -2766,23 +2161,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 685,
-                "method_name": "createSingletonState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 686,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -2965,39 +2343,6 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 706,
-                "method_name": "createSingletonState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "takeCondition"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "ignoreCondition"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isOptional"
-                    }
-                ],
-                "method_name_start_line": 707,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
         },
         {
@@ -3032,72 +2377,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/State.java"
-        },
-        {
-            "method_information": {
-                "line_num": 706,
-                "method_name": "createSingletonState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "takeCondition"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "ignoreCondition"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isOptional"
-                    }
-                ],
-                "method_name_start_line": 707,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/State.java"
-        },
-        {
-            "method_information": {
-                "line_num": 706,
-                "method_name": "createSingletonState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "takeCondition"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "ignoreCondition"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isOptional"
-                    }
-                ],
-                "method_name_start_line": 707,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/conditions/IterativeCondition.java"
         },
         {
             "method_information": {
@@ -3246,94 +2525,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 774,
-                "method_name": "createGroupPatternState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.GroupPattern",
-                        "param_name": "groupPattern"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isOptional"
-                    }
-                ],
-                "method_name_start_line": 774,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 774,
-                "method_name": "createGroupPatternState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.GroupPattern",
-                        "param_name": "groupPattern"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isOptional"
-                    }
-                ],
-                "method_name_start_line": 774,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 774,
-                "method_name": "createGroupPatternState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.GroupPattern",
-                        "param_name": "groupPattern"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "proceedState"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isOptional"
-                    }
-                ],
-                "method_name_start_line": 774,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/State.java"
         },
         {
             "method_information": {
@@ -3446,49 +2638,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 808,
-                "method_name": "createLoopingGroupPatternState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.GroupPattern",
-                        "param_name": "groupPattern"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 808,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 808,
-                "method_name": "createLoopingGroupPatternState",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.GroupPattern",
-                        "param_name": "groupPattern"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 808,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
         },
         {
             "method_information": {
@@ -3544,23 +2694,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 839,
-                "method_name": "createLooping",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "sinkState"
-                    }
-                ],
-                "method_name_start_line": 840,
-                "return_type": "State<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -3711,57 +2844,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 899,
-                "method_name": "extendWithUntilCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "condition"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "untilCondition"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isTakeCondition"
-                    }
-                ],
-                "method_name_start_line": 899,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 899,
-                "method_name": "extendWithUntilCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "condition"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "untilCondition"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "isTakeCondition"
-                    }
-                ],
-                "method_name_start_line": 899,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/conditions/IterativeCondition.java"
         },
         {
             "method_information": {
@@ -3854,41 +2937,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 918,
-                "method_name": "getInnerIgnoreCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 919,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 918,
-                "method_name": "getInnerIgnoreCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 919,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -3956,41 +3005,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 957,
-                "method_name": "getIgnoreCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 958,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 957,
-                "method_name": "getIgnoreCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 958,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -4058,41 +3073,7 @@
                 "modifier": "private "
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1004,
-                "method_name": "getTakeCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 1005,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/aftermatch/AfterMatchSkipStrategy.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1004,
-                "method_name": "getTakeCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.Pattern",
-                        "param_name": "pattern"
-                    }
-                ],
-                "method_name_start_line": 1005,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -4117,18 +3098,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1018,
-                "method_name": "getTrueFunction",
-                "parameter_types": [],
-                "method_name_start_line": 1019,
-                "return_type": "IterativeCondition<T>",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -4195,27 +3164,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1031,
-                "method_name": "updateWithGreedyCondition",
-                "parameter_types": [
-                    {
-                        "param_type": "org.apache.flink.cep.nfa.State",
-                        "param_name": "state"
-                    },
-                    {
-                        "param_type": "org.apache.flink.cep.pattern.conditions.IterativeCondition",
-                        "param_name": "takeCondition"
-                    }
-                ],
-                "method_name_start_line": 1031,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -4324,18 +3272,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1048,
-                "method_name": "createNFA",
-                "parameter_types": [],
-                "method_name_start_line": 1048,
-                "return_type": "NFA<T>",
-                "modifier": ""
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {
@@ -4384,18 +3320,6 @@
             },
             "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
             "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/GroupPattern.java"
-        },
-        {
-            "method_information": {
-                "line_num": 1080,
-                "method_name": "createNFA",
-                "parameter_types": [],
-                "method_name_start_line": 1081,
-                "return_type": "NFA<T>",
-                "modifier": "public "
-            },
-            "source_class_path": "flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/nfa/compiler/NFACompiler.java",
-            "target_class_path": "flink/flink-libraries/flink-cep/src/main/java/org/apache/flink/cep/pattern/Pattern.java"
         },
         {
             "method_information": {

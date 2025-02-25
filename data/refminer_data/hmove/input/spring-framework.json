@@ -19,23 +19,6 @@
         },
         {
             "method_information": {
-                "line_num": 50,
-                "method_name": "setCacheOperationSource",
-                "parameter_types": [
-                    {
-                        "param_type": "org.springframework.cache.interceptor.CacheOperationSource",
-                        "param_name": "cacheOperationSource"
-                    }
-                ],
-                "method_name_start_line": 50,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSourcePointcut.java",
-            "target_class_path": "spring-framework/spring-context/src/main/java/org/springframework/cache/interceptor/CacheOperationSource.java"
-        },
-        {
-            "method_information": {
                 "line_num": 54,
                 "method_name": "matches",
                 "parameter_types": [
@@ -189,23 +172,6 @@
         }
     ],
     "768": [
-        {
-            "method_information": {
-                "line_num": 49,
-                "method_name": "setTransactionAttributeSource",
-                "parameter_types": [
-                    {
-                        "param_type": "org.springframework.transaction.interceptor.TransactionAttributeSource",
-                        "param_name": "transactionAttributeSource"
-                    }
-                ],
-                "method_name_start_line": 49,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSourcePointcut.java",
-            "target_class_path": "spring-framework/spring-tx/src/main/java/org/springframework/transaction/interceptor/TransactionAttributeSource.java"
-        },
         {
             "method_information": {
                 "line_num": 49,
@@ -397,23 +363,6 @@
         },
         {
             "method_information": {
-                "line_num": 50,
-                "method_name": "setCacheOperationSource",
-                "parameter_types": [
-                    {
-                        "param_type": "org.springframework.cache.jcache.interceptor.JCacheOperationSource",
-                        "param_name": "cacheOperationSource"
-                    }
-                ],
-                "method_name_start_line": 50,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
-            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
-        },
-        {
-            "method_information": {
                 "line_num": 58,
                 "method_name": "setClassFilter",
                 "parameter_types": [
@@ -453,23 +402,6 @@
                 "parameter_types": [],
                 "method_name_start_line": 63,
                 "return_type": "Pointcut",
-                "modifier": "public "
-            },
-            "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
-            "target_class_path": "spring-framework/spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/JCacheOperationSource.java"
-        },
-        {
-            "method_information": {
-                "line_num": 73,
-                "method_name": "setCacheOperationSource",
-                "parameter_types": [
-                    {
-                        "param_type": "org.springframework.cache.jcache.interceptor.JCacheOperationSource",
-                        "param_name": "cacheOperationSource"
-                    }
-                ],
-                "method_name_start_line": 73,
-                "return_type": "void",
                 "modifier": "public "
             },
             "source_class_path": "spring-context-support/src/main/java/org/springframework/cache/jcache/interceptor/BeanFactoryJCacheOperationSourceAdvisor.java",
@@ -1139,23 +1071,6 @@
         },
         {
             "method_information": {
-                "line_num": 136,
-                "method_name": "setWebBindingInitializer",
-                "parameter_types": [
-                    {
-                        "param_type": "org.springframework.web.bind.support.WebBindingInitializer",
-                        "param_name": "webBindingInitializer"
-                    }
-                ],
-                "method_name_start_line": 136,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
-            "target_class_path": "spring-framework/spring-web/src/main/java/org/springframework/web/bind/support/WebBindingInitializer.java"
-        },
-        {
-            "method_information": {
                 "line_num": 143,
                 "method_name": "getWebBindingInitializer",
                 "parameter_types": [],
@@ -1385,23 +1300,6 @@
             },
             "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
             "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
-        },
-        {
-            "method_information": {
-                "line_num": 151,
-                "method_name": "setArgumentResolverConfigurer",
-                "parameter_types": [
-                    {
-                        "param_type": "org.springframework.web.reactive.result.method.annotation.ArgumentResolverConfigurer",
-                        "param_name": "configurer"
-                    }
-                ],
-                "method_name_start_line": 151,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
-            "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ArgumentResolverConfigurer.java"
         },
         {
             "method_information": {
@@ -1906,23 +1804,6 @@
             },
             "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
             "target_class_path": "spring-framework/spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/ModelInitializer.java"
-        },
-        {
-            "method_information": {
-                "line_num": 192,
-                "method_name": "setReactiveAdapterRegistry",
-                "parameter_types": [
-                    {
-                        "param_type": "org.springframework.core.ReactiveAdapterRegistry",
-                        "param_name": "registry"
-                    }
-                ],
-                "method_name_start_line": 192,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "spring-webflux/src/main/java/org/springframework/web/reactive/result/method/annotation/RequestMappingHandlerAdapter.java",
-            "target_class_path": "spring-framework/spring-core/src/main/java/org/springframework/core/ReactiveAdapterRegistry.java"
         },
         {
             "method_information": {

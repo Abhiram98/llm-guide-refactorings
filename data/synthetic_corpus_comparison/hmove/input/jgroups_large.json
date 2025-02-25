@@ -1339,23 +1339,6 @@
         },
         {
             "method_information": {
-                "line_num": 353,
-                "method_name": "setUpProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "up_prot"
-                    }
-                ],
-                "method_name_start_line": 353,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
                 "line_num": 357,
                 "method_name": "setDownProtocol",
                 "parameter_types": [
@@ -1407,23 +1390,6 @@
         },
         {
             "method_information": {
-                "line_num": 357,
-                "method_name": "setDownProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "down_prot"
-                    }
-                ],
-                "method_name_start_line": 357,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
                 "line_num": 361,
                 "method_name": "setProtocolStack",
                 "parameter_types": [
@@ -1472,23 +1438,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/logging/Log.java"
-        },
-        {
-            "method_information": {
-                "line_num": 361,
-                "method_name": "setProtocolStack",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.ProtocolStack",
-                        "param_name": "stack"
-                    }
-                ],
-                "method_name_start_line": 361,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java"
         },
         {
             "method_information": {
@@ -5038,31 +4987,6 @@
         },
         {
             "method_information": {
-                "line_num": 747,
-                "method_name": "send",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "dst"
-                    },
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "src"
-                    },
-                    {
-                        "param_type": "java.io.Serializable",
-                        "param_name": "obj"
-                    }
-                ],
-                "method_name_start_line": 748,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/Address.java"
-        },
-        {
-            "method_information": {
                 "line_num": 752,
                 "method_name": "send",
                 "parameter_types": [
@@ -5235,31 +5159,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 752,
-                "method_name": "send",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "dst"
-                    },
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "src"
-                    },
-                    {
-                        "param_type": "byte[]",
-                        "param_name": "buf"
-                    }
-                ],
-                "method_name_start_line": 752,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/Address.java"
         },
         {
             "method_information": {
@@ -5516,39 +5415,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 756,
-                "method_name": "send",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "dst"
-                    },
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "src"
-                    },
-                    {
-                        "param_type": "byte[]",
-                        "param_name": "buf"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "offset"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "length"
-                    }
-                ],
-                "method_name_start_line": 756,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/Address.java"
         },
         {
             "method_information": {
@@ -11595,35 +11461,6 @@
         },
         {
             "method_information": {
-                "line_num": 1778,
-                "method_name": "findParentNode",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.blocks.ReplicatedTree",
-                        "param_name": "replicatedTree"
-                    },
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "fqn"
-                    },
-                    {
-                        "param_type": "org.jgroups.blocks.ReplicatedTree.StringHolder",
-                        "param_name": "child_name"
-                    },
-                    {
-                        "param_type": "boolean",
-                        "param_name": "create_if_not_exists"
-                    }
-                ],
-                "method_name_start_line": 1778,
-                "return_type": "Node",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/blocks/ReplicatedTree.java"
-        },
-        {
-            "method_information": {
                 "line_num": 1808,
                 "method_name": "handleProbe",
                 "parameter_types": [
@@ -12090,23 +11927,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 61,
-                "method_name": "handleProbe",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "keys"
-                    }
-                ],
-                "method_name_start_line": 61,
-                "return_type": "Map<String,String>",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12148,18 +11968,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 73,
-                "method_name": "supportedKeys",
-                "parameter_types": [],
-                "method_name_start_line": 73,
-                "return_type": "String[]",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12196,18 +12004,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 100,
-                "method_name": "getSetupString",
-                "parameter_types": [],
-                "method_name_start_line": 100,
-                "return_type": "String",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12244,18 +12040,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 108,
-                "method_name": "getThreadFactory",
-                "parameter_types": [],
-                "method_name_start_line": 108,
-                "return_type": "ThreadFactory",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12292,18 +12076,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 115,
-                "method_name": "getTimerThreadFactory",
-                "parameter_types": [],
-                "method_name_start_line": 116,
-                "return_type": "ThreadFactory",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12317,23 +12089,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 124,
-                "method_name": "setThreadFactory",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.util.ThreadFactory",
-                        "param_name": "f"
-                    }
-                ],
-                "method_name_start_line": 124,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -12435,23 +12190,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 131,
-                "method_name": "setTimerThreadFactory",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.util.ThreadFactory",
-                        "param_name": "f"
-                    }
-                ],
-                "method_name_start_line": 131,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12510,18 +12248,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 135,
-                "method_name": "getChannel",
-                "parameter_types": [],
-                "method_name_start_line": 135,
-                "return_type": "Channel",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12558,18 +12284,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 144,
-                "method_name": "getTimerThreads",
-                "parameter_types": [],
-                "method_name_start_line": 144,
-                "return_type": "int",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12606,18 +12320,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 157,
-                "method_name": "getProtocols",
-                "parameter_types": [],
-                "method_name_start_line": 157,
-                "return_type": "Vector<Protocol>",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12631,23 +12333,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 168,
-                "method_name": "copyProtocols",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.ProtocolStack",
-                        "param_name": "targetStack"
-                    }
-                ],
-                "method_name_start_line": 168,
-                "return_type": "Vector<Protocol>",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -12757,27 +12442,6 @@
                 "modifier": "private "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 210,
-                "method_name": "findField",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Object",
-                        "param_name": "target"
-                    },
-                    {
-                        "param_type": "java.util.List",
-                        "param_name": "possible_names"
-                    }
-                ],
-                "method_name_start_line": 210,
-                "return_type": "Field",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12823,18 +12487,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 230,
-                "method_name": "getTransport",
-                "parameter_types": [],
-                "method_name_start_line": 230,
-                "return_type": "TP",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12871,18 +12523,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 234,
-                "method_name": "getSingletonTransports",
-                "parameter_types": [],
-                "method_name_start_line": 234,
-                "return_type": "ConcurrentMap<String,Tuple<TP,RefCounter>>",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12919,18 +12559,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 242,
-                "method_name": "dumpStats",
-                "parameter_types": [],
-                "method_name_start_line": 242,
-                "return_type": "Map<String,Object>",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -12977,23 +12605,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 258,
-                "method_name": "dumpStats",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "protocol_name"
-                    }
-                ],
-                "method_name_start_line": 258,
-                "return_type": "Map<String,Object>",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13035,18 +12646,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 281,
-                "method_name": "dumpTimerQueue",
-                "parameter_types": [],
-                "method_name_start_line": 281,
-                "return_type": "String",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13093,23 +12692,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 296,
-                "method_name": "printProtocolSpec",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "include_properties"
-                    }
-                ],
-                "method_name_start_line": 296,
-                "return_type": "String",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13151,18 +12733,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 338,
-                "method_name": "printProtocolSpecAsXML",
-                "parameter_types": [],
-                "method_name_start_line": 338,
-                "return_type": "String",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13199,18 +12769,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 374,
-                "method_name": "printProtocolSpecAsPlainString",
-                "parameter_types": [],
-                "method_name_start_line": 374,
-                "return_type": "String",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13257,23 +12815,6 @@
                 "modifier": "private "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 378,
-                "method_name": "printProtocolSpecAsPlainString",
-                "parameter_types": [
-                    {
-                        "param_type": "boolean",
-                        "param_name": "print_props"
-                    }
-                ],
-                "method_name_start_line": 378,
-                "return_type": "String",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13325,23 +12866,6 @@
                 "modifier": "private "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 397,
-                "method_name": "getProps",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    }
-                ],
-                "method_name_start_line": 397,
-                "return_type": "Map<String,String>",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13360,35 +12884,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 397,
-                "method_name": "getProps",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    }
-                ],
-                "method_name_start_line": 397,
-                "return_type": "Map<String,String>",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 456,
-                "method_name": "setup",
-                "parameter_types": [],
-                "method_name_start_line": 456,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -13448,18 +12943,6 @@
                 "modifier": "protected "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 467,
-                "method_name": "getProtocolStackFactory",
-                "parameter_types": [],
-                "method_name_start_line": 467,
-                "return_type": "ProtocolStackFactory",
-                "modifier": "protected "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13473,23 +12956,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 473,
-                "method_name": "setup",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.ProtocolStack",
-                        "param_name": "stack"
-                    }
-                ],
-                "method_name_start_line": 473,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -13607,31 +13073,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 495,
-                "method_name": "insertProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    },
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "neighbor_prot"
-                    }
-                ],
-                "method_name_start_line": 495,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -13661,56 +13102,6 @@
         },
         {
             "method_information": {
-                "line_num": 495,
-                "method_name": "insertProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    },
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "neighbor_prot"
-                    }
-                ],
-                "method_name_start_line": 495,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 511,
-                "method_name": "insertProtocolInStack",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "neighbor"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    }
-                ],
-                "method_name_start_line": 511,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
                 "line_num": 511,
                 "method_name": "insertProtocolInStack",
                 "parameter_types": [
@@ -13786,77 +13177,6 @@
         },
         {
             "method_information": {
-                "line_num": 511,
-                "method_name": "insertProtocolInStack",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "neighbor"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    }
-                ],
-                "method_name_start_line": 511,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 511,
-                "method_name": "insertProtocolInStack",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "neighbor"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    }
-                ],
-                "method_name_start_line": 511,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 532,
-                "method_name": "checkAndSwitchTop",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "oldTop"
-                    },
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "newTop"
-                    }
-                ],
-                "method_name_start_line": 532,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
                 "line_num": 532,
                 "method_name": "checkAndSwitchTop",
                 "parameter_types": [
@@ -13917,73 +13237,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 532,
-                "method_name": "checkAndSwitchTop",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "oldTop"
-                    },
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "newTop"
-                    }
-                ],
-                "method_name_start_line": 532,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 532,
-                "method_name": "checkAndSwitchTop",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "oldTop"
-                    },
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "newTop"
-                    }
-                ],
-                "method_name_start_line": 532,
-                "return_type": "void",
-                "modifier": "private "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 537,
-                "method_name": "insertProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    },
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "neighbor_prot"
-                    }
-                ],
-                "method_name_start_line": 537,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -14062,56 +13315,6 @@
         },
         {
             "method_information": {
-                "line_num": 537,
-                "method_name": "insertProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    },
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "neighbor_prot"
-                    }
-                ],
-                "method_name_start_line": 537,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 550,
-                "method_name": "insertProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    },
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "neighbor_prots"
-                    }
-                ],
-                "method_name_start_line": 550,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
                 "line_num": 550,
                 "method_name": "insertProtocol",
                 "parameter_types": [
@@ -14187,48 +13390,6 @@
         },
         {
             "method_information": {
-                "line_num": 550,
-                "method_name": "insertProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    },
-                    {
-                        "param_type": "int",
-                        "param_name": "position"
-                    },
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "neighbor_prots"
-                    }
-                ],
-                "method_name_start_line": 550,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 562,
-                "method_name": "insertProtocolAtTop",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    }
-                ],
-                "method_name_start_line": 562,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
                 "line_num": 562,
                 "method_name": "insertProtocolAtTop",
                 "parameter_types": [
@@ -14277,40 +13438,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 562,
-                "method_name": "insertProtocolAtTop",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.Protocol",
-                        "param_name": "prot"
-                    }
-                ],
-                "method_name_start_line": 562,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 588,
-                "method_name": "removeProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "prot_name"
-                    }
-                ],
-                "method_name_start_line": 588,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -14395,23 +13522,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 604,
-                "method_name": "removeProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "protocols"
-                    }
-                ],
-                "method_name_start_line": 604,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14463,23 +13573,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 617,
-                "method_name": "removeProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "prot"
-                    }
-                ],
-                "method_name_start_line": 617,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14531,23 +13624,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 637,
-                "method_name": "findProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "name"
-                    }
-                ],
-                "method_name_start_line": 637,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14589,18 +13665,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 649,
-                "method_name": "getBottomProtocol",
-                "parameter_types": [],
-                "method_name_start_line": 649,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14637,18 +13701,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 657,
-                "method_name": "getTopProtocol",
-                "parameter_types": [],
-                "method_name_start_line": 657,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14695,23 +13747,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 661,
-                "method_name": "findProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "clazz"
-                    }
-                ],
-                "method_name_start_line": 661,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14763,23 +13798,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 678,
-                "method_name": "findProtocol",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.Class",
-                        "param_name": "classes"
-                    }
-                ],
-                "method_name_start_line": 678,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14821,18 +13839,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 687,
-                "method_name": "initProtocolStack",
-                "parameter_types": [],
-                "method_name_start_line": 687,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14869,18 +13875,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 716,
-                "method_name": "destroy",
-                "parameter_types": [],
-                "method_name_start_line": 716,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -14894,27 +13888,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 757,
-                "method_name": "startStack",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "cluster_name"
-                    },
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "local_addr"
-                    }
-                ],
-                "method_name_start_line": 757,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -15032,23 +14005,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 827,
-                "method_name": "stopStack",
-                "parameter_types": [
-                    {
-                        "param_type": "java.lang.String",
-                        "param_name": "cluster_name"
-                    }
-                ],
-                "method_name_start_line": 827,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15090,18 +14046,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 864,
-                "method_name": "flushEvents",
-                "parameter_types": [],
-                "method_name_start_line": 864,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15115,23 +14059,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 872,
-                "method_name": "send",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.Message",
-                        "param_name": "msg"
-                    }
-                ],
-                "method_name_start_line": 872,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -15233,23 +14160,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 876,
-                "method_name": "receive",
-                "parameter_types": [
-                    {
-                        "param_type": "long",
-                        "param_name": "timeout"
-                    }
-                ],
-                "method_name_start_line": 876,
-                "return_type": "Object",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15291,18 +14201,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 886,
-                "method_name": "getName",
-                "parameter_types": [],
-                "method_name_start_line": 886,
-                "return_type": "String",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15316,23 +14214,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 891,
-                "method_name": "up",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.Event",
-                        "param_name": "evt"
-                    }
-                ],
-                "method_name_start_line": 891,
-                "return_type": "Object",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -15434,23 +14315,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 897,
-                "method_name": "down",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.Event",
-                        "param_name": "evt"
-                    }
-                ],
-                "method_name_start_line": 897,
-                "return_type": "Object",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15486,23 +14350,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/Event.java"
-        },
-        {
-            "method_information": {
-                "line_num": 904,
-                "method_name": "testDefaultAssignment",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.tests.ProtocolConfigurationTest",
-                        "param_name": "protocolConfigurationTest"
-                    }
-                ],
-                "method_name_start_line": 904,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -15594,18 +14441,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 949,
-                "method_name": "getInitCount",
-                "parameter_types": [],
-                "method_name_start_line": 949,
-                "return_type": "short",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15642,18 +14477,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 953,
-                "method_name": "getStartCount",
-                "parameter_types": [],
-                "method_name_start_line": 953,
-                "return_type": "short",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15690,18 +14513,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 961,
-                "method_name": "incrementInitCount",
-                "parameter_types": [],
-                "method_name_start_line": 961,
-                "return_type": "short",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15738,18 +14549,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 965,
-                "method_name": "decrementInitCount",
-                "parameter_types": [],
-                "method_name_start_line": 965,
-                "return_type": "short",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15786,18 +14585,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 970,
-                "method_name": "decrementStartCount",
-                "parameter_types": [],
-                "method_name_start_line": 970,
-                "return_type": "short",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15834,18 +14621,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 975,
-                "method_name": "incrementStartCount",
-                "parameter_types": [],
-                "method_name_start_line": 975,
-                "return_type": "short",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15882,18 +14657,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 979,
-                "method_name": "toString",
-                "parameter_types": [],
-                "method_name_start_line": 979,
-                "return_type": "String",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15930,18 +14693,6 @@
                 "modifier": "public "
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
-        },
-        {
-            "method_information": {
-                "line_num": 985,
-                "method_name": "setupProtocolStack",
-                "parameter_types": [],
-                "method_name_start_line": 985,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/JChannel.java"
         },
         {
@@ -15955,23 +14706,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/protocols/TP.java"
-        },
-        {
-            "method_information": {
-                "line_num": 986,
-                "method_name": "setupProtocolStack",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.ProtocolStack",
-                        "param_name": "copySource"
-                    }
-                ],
-                "method_name_start_line": 986,
-                "return_type": "Protocol",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/ProtocolStack.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/Protocol.java"
         },
         {
             "method_information": {
@@ -17334,23 +16068,6 @@
         },
         {
             "method_information": {
-                "line_num": 103,
-                "method_name": "sameSenders",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.util.Digest",
-                        "param_name": "other"
-                    }
-                ],
-                "method_name_start_line": 103,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java"
-        },
-        {
-            "method_information": {
                 "line_num": 111,
                 "method_name": "difference",
                 "parameter_types": [
@@ -17385,23 +16102,6 @@
         },
         {
             "method_information": {
-                "line_num": 111,
-                "method_name": "difference",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.util.Digest",
-                        "param_name": "other"
-                    }
-                ],
-                "method_name_start_line": 111,
-                "return_type": "Digest",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java"
-        },
-        {
-            "method_information": {
                 "line_num": 159,
                 "method_name": "highestSequence",
                 "parameter_types": [
@@ -17433,23 +16133,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/logging/Log.java"
-        },
-        {
-            "method_information": {
-                "line_num": 159,
-                "method_name": "highestSequence",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.util.Digest",
-                        "param_name": "other"
-                    }
-                ],
-                "method_name_start_line": 159,
-                "return_type": "Digest",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java"
         },
         {
             "method_information": {
@@ -17661,23 +16344,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/logging/Log.java"
-        },
-        {
-            "method_information": {
-                "line_num": 243,
-                "method_name": "isGreaterThanOrEqual",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.util.Digest",
-                        "param_name": "other"
-                    }
-                ],
-                "method_name_start_line": 243,
-                "return_type": "boolean",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/util/Digest.java"
         },
         {
             "method_information": {
@@ -18887,27 +17553,6 @@
         },
         {
             "method_information": {
-                "line_num": 64,
-                "method_name": "missingMessageReceived",
-                "parameter_types": [
-                    {
-                        "param_type": "long",
-                        "param_name": "seqno"
-                    },
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "original_sender"
-                    }
-                ],
-                "method_name_start_line": 64,
-                "return_type": "void",
-                "modifier": ""
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/NakReceiverWindow.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/Address.java"
-        },
-        {
-            "method_information": {
                 "line_num": 65,
                 "method_name": "messageGapDetected",
                 "parameter_types": [
@@ -19005,31 +17650,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/NakReceiverWindow.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/logging/Log.java"
-        },
-        {
-            "method_information": {
-                "line_num": 65,
-                "method_name": "messageGapDetected",
-                "parameter_types": [
-                    {
-                        "param_type": "long",
-                        "param_name": "from"
-                    },
-                    {
-                        "param_type": "long",
-                        "param_name": "to"
-                    },
-                    {
-                        "param_type": "org.jgroups.Address",
-                        "param_name": "src"
-                    }
-                ],
-                "method_name_start_line": 65,
-                "return_type": "void",
-                "modifier": ""
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/NakReceiverWindow.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/Address.java"
         },
         {
             "method_information": {
@@ -19415,23 +18035,6 @@
             },
             "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/NakReceiverWindow.java",
             "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/logging/Log.java"
-        },
-        {
-            "method_information": {
-                "line_num": 197,
-                "method_name": "setListener",
-                "parameter_types": [
-                    {
-                        "param_type": "org.jgroups.stack.NakReceiverWindow.Listener",
-                        "param_name": "l"
-                    }
-                ],
-                "method_name_start_line": 197,
-                "return_type": "void",
-                "modifier": "public "
-            },
-            "source_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/NakReceiverWindow.java",
-            "target_class_path": "jmove/dataset-tse/jgroups/large/big/jgroups-2.10.0/src/org/jgroups/stack/NakReceiverWindow.java"
         },
         {
             "method_information": {
