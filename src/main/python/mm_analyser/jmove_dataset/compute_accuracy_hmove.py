@@ -13,8 +13,10 @@ class HMoveRecall(BaseModel):
     recall_c_index: int = Field(description="index that the oracle-target-class was found at.")
     recall_mc_index: int = Field(description="index that the oracle was found at.")
 
-def compute_recall_from_json(hmove_results_json):
+def compute_recall_from_json(hmove_results_json) -> list[HMoveRecall]:
     recall_positions: list[HMoveRecall] = []
+    incorrect_run = 0
+
     for oracle_key in hmove_results_json:
         recall_ = HMoveRecall(recall_m_index=-1, recall_c_index=-1, recall_mc_index=-1)
         source_class_method, target_class = oracle_key.split('->')
@@ -43,6 +45,17 @@ def compute_recall_from_json(hmove_results_json):
                              and i['probability'] > 0.5
                              ]
 
+        # check if hmove ran correctly every time
+
+        has_incorrect = False
+        for rec in valid_suggestions:
+            if 'Subprocess output: Parent path as string:' not in rec['stdout']:
+                incorrect_run += 1
+                has_incorrect = True
+        if has_incorrect:
+            continue
+
+
         nomove_suggestions = [i for i in hmove_results_json[oracle_key] if
                               i['probability'] is not None
                               and not i['final_decision']
@@ -52,21 +65,39 @@ def compute_recall_from_json(hmove_results_json):
         print(f"{len(hmove_recommendations_sorted)=}")
 
         # Compute recall_mc
-        found = False
         for i, rec in enumerate(hmove_recommendations_sorted):
-            if (
+            if ( # Check if any match the oracle
                     (oracle.method_name == rec['method_info']['method_name']
                      or oracle.alias_method_name == rec['method_info']['method_name'])
                     and target_ in rec['method_info']['target_path']
                     and source_ in rec['method_info']['source_path']
             ):
-                found = True
-                recall_positions.append(i)
+                recall_.recall_mc_index = i
                 break
-        if not found:
-            recall_positions.append(-1)
 
-        # recall_positions.append(recall_)
+        # Compute recall_c
+        suggestions_for_oracle_method = [i for i in hmove_recommendations_sorted if i['method_info']['method_name'] in [oracle.method_name, oracle.alias_method_name]]
+        for i, rec in enumerate(suggestions_for_oracle_method):
+            if target_ in rec['method_info']['target_path']:
+                recall_.recall_c_index = i
+                break
+
+        # Compute recall_m
+        best_suggestion_for_method = []
+        covered_methods = []
+        for i, rec in enumerate(hmove_recommendations_sorted):
+            if rec['method_info']['method_name'] not in covered_methods:
+                best_suggestion_for_method.append((rec['method_info']['method_name'], rec['probability']))
+                covered_methods.append(rec['method_info']['method_name'])
+
+        for i, (method_name, probability) in enumerate(best_suggestion_for_method):
+            if method_name == oracle.method_name or method_name == oracle.alias_method_name:
+                recall_.recall_m_index = i
+                break
+        recall_positions.append(recall_)
+
+    print(f"{incorrect_run=}")
+
     return recall_positions
 
 
@@ -85,24 +116,50 @@ def compute_recall():
     ]
 
     hmove_results_path = mm_analyser.data_folder.joinpath('synthetic_corpus_comparison/hmove/output')
-    recall_positions = []
+    recall_positions: list[HMoveRecall] = []
     for filename in files:
         with open(hmove_results_path.joinpath(filename)) as f:
             hmove_results = json.load(f)
 
         recall_positions += compute_recall_from_json(hmove_results)
 
-    recall_1 = [i for i in recall_positions if i == 0]
-    recall_2 = [i for i in recall_positions if -1 < i <= 1]
-    recall_3 = [i for i in recall_positions if -1 < i <= 2]
-    recall_inf = [i for i in recall_positions if i>-1]
+
+    # Recall_M
+    recall_1 = [i for i in recall_positions if i.recall_m_index == 0]
+    recall_2 = [i for i in recall_positions if -1 < i.recall_m_index <= 1]
+    recall_3 = [i for i in recall_positions if -1 < i.recall_m_index <= 2]
+    recall_inf = [i for i in recall_positions if i.recall_m_index > -1]
 
     print(f"{len(recall_positions)=}")
-    print(f"recall@1={len(recall_1) / len(recall_positions)}")
-    print(f"recall@2={len(recall_2) / len(recall_positions)}")
-    print(f"recall@3={len(recall_3) / len(recall_positions)}")
-    print(f"recall@inf={len(recall_inf) / len(recall_positions)}")
+    print(f"recall_m@1={len(recall_1) / len(recall_positions)}")
+    print(f"recall_m@2={len(recall_2) / len(recall_positions)}")
+    print(f"recall_m@3={len(recall_3) / len(recall_positions)}")
+    print(f"recall_m@inf={len(recall_inf) / len(recall_positions)}")
 
+
+    # Recall_C
+    recall_1 = [i for i in recall_positions if i.recall_c_index == 0]
+    recall_2 = [i for i in recall_positions if -1 < i.recall_c_index <= 1]
+    recall_3 = [i for i in recall_positions if -1 < i.recall_c_index <= 2]
+    recall_inf = [i for i in recall_positions if i.recall_c_index > -1]
+
+    print(f"{len(recall_positions)=}")
+    print(f"recall_c@1={len(recall_1) / len(recall_positions)}")
+    print(f"recall_c@2={len(recall_2) / len(recall_positions)}")
+    print(f"recall_c@3={len(recall_3) / len(recall_positions)}")
+    print(f"recall_c@inf={len(recall_inf) / len(recall_positions)}")
+
+    # Recall_MC
+    recall_1 = [i for i in recall_positions if i.recall_mc_index == 0]
+    recall_2 = [i for i in recall_positions if -1 < i.recall_mc_index <= 1]
+    recall_3 = [i for i in recall_positions if -1 < i.recall_mc_index <= 2]
+    recall_inf = [i for i in recall_positions if i.recall_mc_index > -1]
+
+    print(f"{len(recall_positions)=}")
+    print(f"recall_mc@1={len(recall_1) / len(recall_positions)}")
+    print(f"recall_mc@2={len(recall_2) / len(recall_positions)}")
+    print(f"recall_mc@3={len(recall_3) / len(recall_positions)}")
+    print(f"recall_mc@inf={len(recall_inf) / len(recall_positions)}")
 
 
 if __name__ == '__main__':
