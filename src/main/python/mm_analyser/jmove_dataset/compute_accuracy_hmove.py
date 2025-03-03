@@ -47,13 +47,13 @@ def compute_recall_from_json(hmove_results_json) -> list[HMoveRecall]:
 
         # check if hmove ran correctly every time
 
-        has_incorrect = False
-        for rec in valid_suggestions:
-            if 'Subprocess output: Parent path as string:' not in rec['stdout']:
-                incorrect_run += 1
-                has_incorrect = True
-        if has_incorrect:
-            continue
+        # has_incorrect = False
+        # for rec in valid_suggestions:
+        #     if 'Subprocess output: Parent path as string:' not in rec['stdout']:
+        #         incorrect_run += 1
+        #         has_incorrect = True
+        # if has_incorrect:
+        #     continue
 
 
         nomove_suggestions = [i for i in hmove_results_json[oracle_key] if
@@ -105,6 +105,10 @@ def compute_recall():
     files = [
         'result_ant_large.json',
         'result_ant_small.json',
+        'result_derby_large.json',
+        'result_derby_small.json',
+        'result_jhotdraw_large.json',
+        'result_jhotdraw_small.json',
         'result_junit_large.json',
         'result_junit_small.json',
         'result_lucene_large.json',
@@ -130,6 +134,8 @@ def compute_recall():
     recall_3 = [i for i in recall_positions if -1 < i.recall_m_index <= 2]
     recall_inf = [i for i in recall_positions if i.recall_m_index > -1]
 
+    print()
+    print("-----results-----")
     print(f"{len(recall_positions)=}")
     print(f"recall_m@1={len(recall_1) / len(recall_positions)}")
     print(f"recall_m@2={len(recall_2) / len(recall_positions)}")

@@ -1,0 +1,1026 @@
+{
+  "com.mvnforum.admin.CategoryXML::setCategoryOrder(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumCategoryXML": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-08-04\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 30.738069 \u79d2\nSubprocess output: \nSubprocess failed with return code 1\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999995231628418\nfinal_result: True\nWe recommend to move the method starting at line 86 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999995231628418,
+      "final_decision": true,
+      "execution_time": 44.88332962989807,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "start_line": 86,
+        "method_name": "setParentCategory",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-08-49\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 24.502162 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-08-49\nFile created successfully: output_2025-03-01_06-08-49\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-08-49\\source\\CategoryXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-08-49\\source\\MvnForumCategoryXML.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.36942008591722697\nfinal_result: False\nThe method starting at line 241 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.36942008591722697,
+      "final_decision": false,
+      "execution_time": 41.806952238082886,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\mvnforum\\MvnForumCategoryXML.java",
+        "start_line": 241,
+        "method_name": "setCategoryOrder",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-09-31\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 28.988642 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-09-31\nFile created successfully: output_2025-03-01_06-09-31\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-09-31\\source\\CategoryXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-09-31\\source\\XMLWriter.java\n... collecting  relations ...\n3\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9688847661018372\nfinal_result: True\nWe recommend to move the method starting at line 245 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9688847661018372,
+      "final_decision": true,
+      "execution_time": 46.94865298271179,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 245,
+        "method_name": "exportCategoryWatchesForCategory",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-10-18\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 28.581949 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-10-18\nFile created successfully: output_2025-03-01_06-10-18\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-10-18\\source\\CategoryXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-10-18\\source\\XMLWriter.java\n... collecting  relations ...\n4\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9938263297080994\nfinal_result: True\nWe recommend to move the method starting at line 295 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9938263297080994,
+      "final_decision": true,
+      "execution_time": 46.88785266876221,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 295,
+        "method_name": "exportCategory",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-11-05\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 28.082239 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-11-05\nFile created successfully: output_2025-03-01_06-11-05\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-11-05\\source\\CategoryXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-11-05\\source\\XMLWriter.java\n... collecting  relations ...\n3\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9832579493522644\nfinal_result: True\nWe recommend to move the method starting at line 347 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9832579493522644,
+      "final_decision": true,
+      "execution_time": 45.674962520599365,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 347,
+        "method_name": "exportSubCategoryList",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-11-50\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 27.815398 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-11-50\nFile created successfully: output_2025-03-01_06-11-50\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-11-50\\source\\CategoryXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-11-50\\source\\XMLWriter.java\n... collecting  relations ...\n3\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9852108359336853\nfinal_result: True\nWe recommend to move the method starting at line 377 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9852108359336853,
+      "final_decision": true,
+      "execution_time": 45.49448370933533,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 377,
+        "method_name": "exportCategoryList",
+        "return_type": "void"
+      }
+    }
+  ],
+  "com.mvnforum.admin.ThreadXML::addJiveThreadWatch(String, String, String):void->com.mvnforum.admin.importexport.jive.JiveThreadXML": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-12-36\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 34.330016 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-12-36\nFile created successfully: output_2025-03-01_06-12-36\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-12-36\\source\\JiveThreadXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-12-36\\source\\ThreadXML.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5224594473838806\nfinal_result: True\nWe recommend to move the method starting at line 338 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5224594473838806,
+      "final_decision": true,
+      "execution_time": 51.18020462989807,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ThreadXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\jive\\JiveThreadXML.java",
+        "start_line": 338,
+        "method_name": "addJiveThreadWatch",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-13-27\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 38.627835 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-13-27\nFile created successfully: output_2025-03-01_06-13-27\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-13-27\\source\\ThreadXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-13-27\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9324843883514404\nfinal_result: True\nWe recommend to move the method starting at line 351 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9324843883514404,
+      "final_decision": true,
+      "execution_time": 58.811715841293335,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ThreadXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 351,
+        "method_name": "exportThreadWatchesForThread",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-14-26\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 38.513079 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-14-26\nFile created successfully: output_2025-03-01_06-14-26\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-14-26\\source\\ThreadXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-14-26\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9322033524513245\nfinal_result: True\nWe recommend to move the method starting at line 399 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9322033524513245,
+      "final_decision": true,
+      "execution_time": 57.6219756603241,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ThreadXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 399,
+        "method_name": "exportFavoriteThreadsForThread",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-15-23\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 40.014739 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-15-23\nFile created successfully: output_2025-03-01_06-15-23\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-15-23\\source\\ThreadXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-15-23\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9894686341285706\nfinal_result: True\nWe recommend to move the method starting at line 442 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9894686341285706,
+      "final_decision": true,
+      "execution_time": 59.4614417552948,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ThreadXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 442,
+        "method_name": "exportThread",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-16-23\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 38.851762 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-16-23\nFile created successfully: output_2025-03-01_06-16-23\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-16-23\\source\\ThreadXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-16-23\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.965503454208374\nfinal_result: True\nWe recommend to move the method starting at line 535 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.965503454208374,
+      "final_decision": true,
+      "execution_time": 58.04245400428772,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ThreadXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 535,
+        "method_name": "exportThreadList",
+        "return_type": "void"
+      }
+    }
+  ],
+  "net.myvietnam.mvncore.thirdparty.commonj.util.ThreadPool::isSuspending():boolean->net.myvietnam.mvncore.thirdparty.commonj.timers.FooTimerManager": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-17-21\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 17.899399 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-17-21\nFile created successfully: output_2025-03-01_06-17-21\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-17-21\\source\\FooTimerManager.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-17-21\\source\\ThreadPool.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.12535592952122449\nfinal_result: False\nThe method starting at line 85 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.12535592952122449,
+      "final_decision": false,
+      "execution_time": 34.289533376693726,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\myvietnam\\src\\net\\myvietnam\\mvncore\\thirdparty\\commonj\\util\\ThreadPool.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\myvietnam\\src\\net\\myvietnam\\mvncore\\thirdparty\\commonj\\timers\\FooTimerManager.java",
+        "start_line": 85,
+        "method_name": "isSuspending",
+        "return_type": "boolean"
+      }
+    }
+  ],
+  "com.mvnforum.admin.ForumXML::setForumPassword(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumForumXML": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-17-55\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 45.353411 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-17-55\nFile created successfully: output_2025-03-01_06-17-55\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-17-55\\source\\CategoryXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-17-55\\source\\ForumXML.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 1.0\nfinal_result: True\nWe recommend to move the method starting at line 86 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 1.0,
+      "final_decision": true,
+      "execution_time": 61.79539966583252,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ForumXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\CategoryXML.java",
+        "start_line": 86,
+        "method_name": "setParentCategory",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-18-57\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 42.366451 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-18-57\nFile created successfully: output_2025-03-01_06-18-57\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-18-57\\source\\ForumXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-18-57\\source\\MvnForumForumXML.java\n... collecting  relations ...\n3\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6039373374230189\nfinal_result: True\nWe recommend to move the method starting at line 427 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6039373374230189,
+      "final_decision": true,
+      "execution_time": 60.219035387039185,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ForumXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\mvnforum\\MvnForumForumXML.java",
+        "start_line": 427,
+        "method_name": "setForumPassword",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-19-58\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 43.509128 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-19-58\nFile created successfully: output_2025-03-01_06-19-58\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-19-58\\source\\ForumXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-19-58\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9497549533843994\nfinal_result: True\nWe recommend to move the method starting at line 431 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9497549533843994,
+      "final_decision": true,
+      "execution_time": 63.56001543998718,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ForumXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 431,
+        "method_name": "exportForumWatchesForForum",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-21-01\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 44.221516 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-21-01\nFile created successfully: output_2025-03-01_06-21-01\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-21-01\\source\\ForumXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-21-01\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9501248002052307\nfinal_result: True\nWe recommend to move the method starting at line 480 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9501248002052307,
+      "final_decision": true,
+      "execution_time": 63.803016662597656,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ForumXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 480,
+        "method_name": "exportMemberForumPermissionsForForum",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-22-05\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 43.511122 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-22-05\nFile created successfully: output_2025-03-01_06-22-05\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-22-05\\source\\ForumXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-22-05\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9497145414352417\nfinal_result: True\nWe recommend to move the method starting at line 513 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9497145414352417,
+      "final_decision": true,
+      "execution_time": 63.27455282211304,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ForumXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 513,
+        "method_name": "exportGroupForumPermissionsForForum",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-23-08\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 44.471280 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-23-08\nFile created successfully: output_2025-03-01_06-23-08\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-23-08\\source\\ForumXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-23-08\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9951249957084656\nfinal_result: True\nWe recommend to move the method starting at line 545 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9951249957084656,
+      "final_decision": true,
+      "execution_time": 64.39834856987,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ForumXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 545,
+        "method_name": "exportForum",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-24-12\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 43.267217 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-24-12\nFile created successfully: output_2025-03-01_06-24-12\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-24-12\\source\\ForumXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-24-12\\source\\XMLWriter.java\n... collecting  relations ...\n5\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9717187285423279\nfinal_result: True\nWe recommend to move the method starting at line 631 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9717187285423279,
+      "final_decision": true,
+      "execution_time": 62.69034695625305,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\ForumXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 631,
+        "method_name": "exportForumList",
+        "return_type": "void"
+      }
+    }
+  ],
+  "com.mvnforum.auth.OnlineUserAction::convertGMTDate(java.util.Date):java.util.Date->com.mvnforum.auth.OnlineUserImpl": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-25-16\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.534131 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-25-16\nFile created successfully: output_2025-03-01_06-25-16\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-25-16\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-25-16\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 89 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 27.83358383178711,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 89,
+        "method_name": "getDesc",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-25-43\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 12.326518 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-25-43\nFile created successfully: output_2025-03-01_06-25-43\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-25-43\\source\\GenericRequest.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-25-43\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.18779809707325512\nfinal_result: False\nThe method starting at line 89 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.18779809707325512,
+      "final_decision": false,
+      "execution_time": 28.77943205833435,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\myvietnam\\src\\net\\myvietnam\\mvncore\\web\\GenericRequest.java",
+        "start_line": 89,
+        "method_name": "getDesc",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-26-12\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.513048 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-26-12\nFile created successfully: output_2025-03-01_06-26-12\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-26-12\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-26-12\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 97 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.706570863723755,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 97,
+        "method_name": "getPageID",
+        "return_type": "int"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-26-38\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.827728 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-26-38\nFile created successfully: output_2025-03-01_06-26-38\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-26-38\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-26-38\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999510049819946\nfinal_result: True\nWe recommend to move the method starting at line 104 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999510049819946,
+      "final_decision": true,
+      "execution_time": 26.993164777755737,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 104,
+        "method_name": "getPageParam",
+        "return_type": "Object"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-05\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.595253 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-27-05\nFile created successfully: output_2025-03-01_06-27-05\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-05\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-05\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999587535858154\nfinal_result: True\nWe recommend to move the method starting at line 111 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999587535858154,
+      "final_decision": true,
+      "execution_time": 26.62848448753357,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 111,
+        "method_name": "getUrl",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-32\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.668099 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-27-32\nFile created successfully: output_2025-03-01_06-27-32\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-32\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-32\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 115 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.742897272109985,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 115,
+        "method_name": "getMemberID",
+        "return_type": "int"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-59\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.552975 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-27-59\nFile created successfully: output_2025-03-01_06-27-59\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-59\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-27-59\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 119 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.946515560150146,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 119,
+        "method_name": "getMemberName",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-28-26\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.383852 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-28-26\nFile created successfully: output_2025-03-01_06-28-26\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-28-26\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-28-26\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 123 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.422975540161133,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 123,
+        "method_name": "isInvisibleMember",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-28-52\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.876304 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-28-52\nFile created successfully: output_2025-03-01_06-28-52\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-28-52\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-28-52\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 127 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 27.306657075881958,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 127,
+        "method_name": "getFirstRequestTime",
+        "return_type": "Timestamp"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-29-20\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.691079 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-29-20\nFile created successfully: output_2025-03-01_06-29-20\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-29-20\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-29-20\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 131 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 27.197308778762817,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 131,
+        "method_name": "getLastRequestTime",
+        "return_type": "Timestamp"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-29-47\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.844535 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-29-47\nFile created successfully: output_2025-03-01_06-29-47\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-29-47\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-29-47\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 135 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 27.625200986862183,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 135,
+        "method_name": "getSessionCount",
+        "return_type": "int"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-30-15\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.686838 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-30-15\nFile created successfully: output_2025-03-01_06-30-15\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-30-15\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-30-15\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 139 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 27.202210664749146,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 139,
+        "method_name": "setSessionCount",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-30-42\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.960880 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-30-42\nFile created successfully: output_2025-03-01_06-30-42\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-30-42\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-30-42\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999784231185913\nfinal_result: True\nWe recommend to move the method starting at line 143 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999784231185913,
+      "final_decision": true,
+      "execution_time": 27.47068476676941,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 143,
+        "method_name": "increaseSessionCount",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-31-09\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.464844 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-31-09\nFile created successfully: output_2025-03-01_06-31-09\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-31-09\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-31-09\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 147 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.629170417785645,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 147,
+        "method_name": "resetSessionCount",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-31-36\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.774875 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-31-36\nFile created successfully: output_2025-03-01_06-31-36\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-31-36\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-31-36\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9968068599700928\nfinal_result: True\nWe recommend to move the method starting at line 152 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9968068599700928,
+      "final_decision": true,
+      "execution_time": 26.938881874084473,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 152,
+        "method_name": "getOnlineDurarionDesc",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-03\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.706020 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-32-03\nFile created successfully: output_2025-03-01_06-32-03\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-03\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-03\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9940733313560486\nfinal_result: True\nWe recommend to move the method starting at line 157 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9940733313560486,
+      "final_decision": true,
+      "execution_time": 27.397427082061768,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 157,
+        "method_name": "getDurationSinceLastRequestDesc",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-30\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.444344 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-32-30\nFile created successfully: output_2025-03-01_06-32-30\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-30\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-30\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9849608540534973\nfinal_result: True\nWe recommend to move the method starting at line 162 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9849608540534973,
+      "final_decision": true,
+      "execution_time": 26.725269079208374,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 162,
+        "method_name": "getTimeString",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-57\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.643074 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-32-57\nFile created successfully: output_2025-03-01_06-32-57\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-57\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-32-57\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 197 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.742968320846558,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 197,
+        "method_name": "getRemoteAddr",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-33-23\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.654445 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-33-23\nFile created successfully: output_2025-03-01_06-33-23\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-33-23\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-33-23\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 201 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.9487361907959,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 201,
+        "method_name": "getUserAgent",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-33-50\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.460977 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-33-50\nFile created successfully: output_2025-03-01_06-33-50\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-33-50\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-33-50\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 209 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.78575348854065,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 209,
+        "method_name": "initRemoteAddr_UserAgent",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-34-17\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.374937 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-34-17\nFile created successfully: output_2025-03-01_06-34-17\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-34-17\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-34-17\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 214 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.353058338165283,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 214,
+        "method_name": "initRemoteAddr_UserAgent",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-34-44\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 12.132997 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-34-44\nFile created successfully: output_2025-03-01_06-34-44\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-34-44\\source\\GenericRequest.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-34-44\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.18779809707325512\nfinal_result: False\nThe method starting at line 214 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.18779809707325512,
+      "final_decision": false,
+      "execution_time": 28.549112796783447,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\myvietnam\\src\\net\\myvietnam\\mvncore\\web\\GenericRequest.java",
+        "start_line": 214,
+        "method_name": "initRemoteAddr_UserAgent",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-35-12\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.349706 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-35-12\nFile created successfully: output_2025-03-01_06-35-12\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-35-12\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-35-12\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.999975323677063\nfinal_result: True\nWe recommend to move the method starting at line 224 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.999975323677063,
+      "final_decision": true,
+      "execution_time": 26.67273449897766,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 224,
+        "method_name": "setAction",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-35-39\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.434144 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-35-39\nFile created successfully: output_2025-03-01_06-35-39\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-35-39\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-35-39\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 231 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.68897771835327,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 231,
+        "method_name": "updateLastRequestTime",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-05\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.559030 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-36-05\nFile created successfully: output_2025-03-01_06-36-05\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-05\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-05\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 235 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.762823581695557,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 235,
+        "method_name": "setMemberID",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-32\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.861090 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-36-32\nFile created successfully: output_2025-03-01_06-36-32\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-32\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-32\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 239 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.98626136779785,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 239,
+        "method_name": "setMemberName",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-59\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.471706 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-36-59\nFile created successfully: output_2025-03-01_06-36-59\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-59\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-36-59\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999420642852783\nfinal_result: True\nWe recommend to move the method starting at line 243 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999420642852783,
+      "final_decision": true,
+      "execution_time": 26.825632095336914,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 243,
+        "method_name": "setMemberInvisible",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-37-27\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.848766 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-37-27\nFile created successfully: output_2025-03-01_06-37-27\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-37-27\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-37-27\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 247 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 27.925517082214355,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 247,
+        "method_name": "setRemoteAddr",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-37-54\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.670799 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-37-54\nFile created successfully: output_2025-03-01_06-37-54\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-37-54\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-37-54\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999821186065674\nfinal_result: True\nWe recommend to move the method starting at line 251 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999821186065674,
+      "final_decision": true,
+      "execution_time": 26.82574772834778,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 251,
+        "method_name": "setUserAgent",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-38-21\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 10.595769 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-38-21\nFile created successfully: output_2025-03-01_06-38-21\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-38-21\\source\\Action.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-38-21\\source\\OnlineUserAction.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6875350326299667\nfinal_result: True\nWe recommend to move the method starting at line 255 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6875350326299667,
+      "final_decision": true,
+      "execution_time": 26.892290353775024,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\Action.java",
+        "start_line": 255,
+        "method_name": "convertGMTDate",
+        "return_type": "java.util.Date"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-38-48\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 33.112785 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-38-48\nFile created successfully: output_2025-03-01_06-38-48\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-38-48\\source\\OnlineUserAction.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-38-48\\source\\OnlineUserImpl.java\n... collecting  relations ...\n6\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5852032025105405\nfinal_result: True\nWe recommend to move the method starting at line 255 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5852032025105405,
+      "final_decision": true,
+      "execution_time": 54.572269678115845,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserAction.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\auth\\OnlineUserImpl.java",
+        "start_line": 255,
+        "method_name": "convertGMTDate",
+        "return_type": "java.util.Date"
+      }
+    }
+  ],
+  "com.mvnforum.admin.MemberXML::setMemberEmailVisible(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumMemberXML": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-39-43\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 69.975370 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-39-43\nFile created successfully: output_2025-03-01_06-39-43\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-39-43\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-39-43\\source\\MvnForumMemberXML.java\n... collecting  relations ...\n7\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.27716653421521187\nfinal_result: False\nThe method starting at line 632 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.27716653421521187,
+      "final_decision": false,
+      "execution_time": 91.74782633781433,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\mvnforum\\MvnForumMemberXML.java",
+        "start_line": 632,
+        "method_name": "setMemberEmailVisible",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-41-15\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 61.909403 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-41-15\nFile created successfully: output_2025-03-01_06-41-15\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-41-15\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-41-15\\source\\XMLWriter.java\n... collecting  relations ...\n7\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9702404737472534\nfinal_result: True\nWe recommend to move the method starting at line 636 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9702404737472534,
+      "final_decision": true,
+      "execution_time": 84.86430144309998,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 636,
+        "method_name": "exportMessageFoldersForMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-42-39\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 62.802971 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-42-39\nFile created successfully: output_2025-03-01_06-42-39\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-42-39\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-42-39\\source\\XMLWriter.java\n... collecting  relations ...\n8\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.967951774597168\nfinal_result: True\nWe recommend to move the method starting at line 646 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.967951774597168,
+      "final_decision": true,
+      "execution_time": 85.11461114883423,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 646,
+        "method_name": "exportMessageFoldersForMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-44-04\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 62.255400 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-44-04\nFile created successfully: output_2025-03-01_06-44-04\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-44-04\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-44-04\\source\\XMLWriter.java\n... collecting  relations ...\n8\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9702404737472534\nfinal_result: True\nWe recommend to move the method starting at line 683 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9702404737472534,
+      "final_decision": true,
+      "execution_time": 86.44864511489868,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 683,
+        "method_name": "exportGlobalPermissionsForMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-45-30\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 60.891593 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-45-30\nFile created successfully: output_2025-03-01_06-45-30\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-45-30\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-45-30\\source\\XMLWriter.java\n... collecting  relations ...\n7\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.967951774597168\nfinal_result: True\nWe recommend to move the method starting at line 693 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.967951774597168,
+      "final_decision": true,
+      "execution_time": 82.64672994613647,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 693,
+        "method_name": "exportGlobalPermissionsForMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-46-53\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 61.433722 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-46-53\nFile created successfully: output_2025-03-01_06-46-53\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-46-53\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-46-53\\source\\XMLWriter.java\n... collecting  relations ...\n8\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9702404737472534\nfinal_result: True\nWe recommend to move the method starting at line 719 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9702404737472534,
+      "final_decision": true,
+      "execution_time": 83.56775212287903,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 719,
+        "method_name": "exportGlobalWatchesForMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-48-17\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 60.506034 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-48-17\nFile created successfully: output_2025-03-01_06-48-17\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-48-17\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-48-17\\source\\XMLWriter.java\n... collecting  relations ...\n7\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.967951774597168\nfinal_result: True\nWe recommend to move the method starting at line 729 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.967951774597168,
+      "final_decision": true,
+      "execution_time": 82.37777400016785,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 729,
+        "method_name": "exportGlobalWatchesForMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-49-39\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 60.982440 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-49-39\nFile created successfully: output_2025-03-01_06-49-39\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-49-39\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-49-39\\source\\XMLWriter.java\n... collecting  relations ...\n7\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9702404737472534\nfinal_result: True\nWe recommend to move the method starting at line 773 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9702404737472534,
+      "final_decision": true,
+      "execution_time": 82.49371004104614,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 773,
+        "method_name": "exportMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-51-01\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 60.566040 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-51-01\nFile created successfully: output_2025-03-01_06-51-01\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-51-01\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-51-01\\source\\XMLWriter.java\n... collecting  relations ...\n7\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9977642297744751\nfinal_result: True\nWe recommend to move the method starting at line 783 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9977642297744751,
+      "final_decision": true,
+      "execution_time": 82.07347130775452,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 783,
+        "method_name": "exportMember",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-52-23\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 61.828690 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-52-23\nFile created successfully: output_2025-03-01_06-52-23\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-52-23\\source\\MemberXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-52-23\\source\\XMLWriter.java\n... collecting  relations ...\n8\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9733982682228088\nfinal_result: True\nWe recommend to move the method starting at line 987 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9733982682228088,
+      "final_decision": true,
+      "execution_time": 83.7243869304657,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\MemberXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 987,
+        "method_name": "exportMemberList",
+        "return_type": "void"
+      }
+    }
+  ],
+  "com.mvnforum.admin.AttachmentXML::setAttachDownloadCount(String):void->com.mvnforum.admin.importexport.mvnforum.MvnForumAttachmentXML": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-53-48\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 21.678184 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-53-48\nFile created successfully: output_2025-03-01_06-53-48\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-53-48\\source\\AttachmentXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-53-48\\source\\MvnForumAttachmentXML.java\n... collecting  relations ...\n2\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.3390437224879861\nfinal_result: False\nThe method starting at line 313 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.3390437224879861,
+      "final_decision": false,
+      "execution_time": 38.64454007148743,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\AttachmentXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\mvnforum\\MvnForumAttachmentXML.java",
+        "start_line": 313,
+        "method_name": "setAttachDownloadCount",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-54-26\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 26.611326 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-54-26\nFile created successfully: output_2025-03-01_06-54-26\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-54-26\\source\\AttachmentXML.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-54-26\\source\\XMLWriter.java\n... collecting  relations ...\n3\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9556469917297363\nfinal_result: True\nWe recommend to move the method starting at line 320 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9556469917297363,
+      "final_decision": true,
+      "execution_time": 44.50090003013611,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\AttachmentXML.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\mvnforum\\src\\com\\mvnforum\\admin\\importexport\\XMLWriter.java",
+        "start_line": 320,
+        "method_name": "exportAttachmentList",
+        "return_type": "void"
+      }
+    }
+  ],
+  "net.myvietnam.mvncore.service.BinaryStorageHandle::loadData(String, String, BinaryStorageHandle):byte[]->net.myvietnam.mvncore.service.impl.BinaryStorageServiceImplBase": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-55-10\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\n\u63d0\u53d6\u5b9e\u4f53\u7528\u65f6: 3.144711 \u79d2\nSubprocess output: Parent path as string: output_2025-03-01_06-55-10\nFile created successfully: output_2025-03-01_06-55-10\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-55-10\\source\\BinaryStorageHandle.java\nFind Java File: C:\\Users\\raihanullahru737\\Desktop\\hmove\\hmove-\\hmoveTool\\output_2025-03-01_06-55-10\\source\\BinaryStorageServiceImplBase.java\n... collecting  relations ...\n1\nFinish!\n\nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999998807907104\nfinal_result: True\nWe recommend to move the method starting at line 74 in the source class to the target class.\n",
+      "stderr": "C:\\Users\\raihanullahru737\\AppData\\Roaming\\Python\\Python39\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999998807907104,
+      "final_decision": true,
+      "execution_time": 18.195112943649292,
+      "method_info": {
+        "source_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\myvietnam\\src\\net\\myvietnam\\mvncore\\service\\BinaryStorageHandle.java",
+        "target_path": "C:\\Users\\raihanullahru737\\Downloads\\jmove-master\\jmove\\dataset-tse\\mvnforum\\small\\small\\mvnforum-1.2.2-ga\\myvietnam\\src\\net\\myvietnam\\mvncore\\service\\impl\\BinaryStorageServiceImplBase.java",
+        "start_line": 74,
+        "method_name": "loadData",
+        "return_type": "byte[]"
+      }
+    }
+  ]
+}
