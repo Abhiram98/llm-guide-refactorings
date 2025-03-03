@@ -8,7 +8,8 @@ import mm_analyser.refactoring_miner_processing.oracle as rw_oracle
 
 
 def add_branch_data():
-    print("Adding branch name, project_name information to hmove data.")
+    CHUNK_SIZE = 200
+    print(f"Chunking hmove input into size of {CHUNK_SIZE}.")
     hmove_input_folder = mm_analyser.data_folder.joinpath('refminer_data/hmove/input')
     json_files = [i for i in os.listdir(hmove_input_folder) if i.endswith('.json')]
     real_world_oracle = rw_oracle.get_instance_oracle()
@@ -25,13 +26,9 @@ def add_branch_data():
 
             assert len(oracle_matches) == 1
             oracle = oracle_matches[0]
-            project_name = filename.rstrip('.json')
 
             for hmove_in in hmove_input_data[ref_id]:
                 hmove_in['branch_name'] = oracle.project_branch_name
-                if hmove_in['target_class_path'].startswith(project_name):
-                    hmove_in['target_class_path'] = hmove_in['target_class_path'][len(project_name+'/'):]
-                hmove_in['project_name'] = project_name
 
         with open(hmove_input_folder.joinpath(filename), "w") as f:
             json.dump(hmove_input_data, f, indent=4)
