@@ -227,13 +227,13 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
         )
     }
 
-    fun buildElapsedTimeTelemetryData(elapsedTimeTelemetryDataObserver: TelemetryElapsedTimeObserver) {
-        val elapsedTimeTelemetryData = elapsedTimeTelemetryDataObserver.getTelemetryData()
-        val efTelemetryData = telemetryDataManager.getData()
-        if (efTelemetryData != null) {
-            efTelemetryData.elapsedTime = elapsedTimeTelemetryData
-        }
-    }
+//    fun buildElapsedTimeTelemetryData(elapsedTimeTelemetryDataObserver: TelemetryElapsedTimeObserver) {
+//        val elapsedTimeTelemetryData = elapsedTimeTelemetryDataObserver.getTelemetryData()
+//        val efTelemetryData = telemetryDataManager.getData()
+//        if (efTelemetryData != null) {
+//            efTelemetryData.elapsedTime = elapsedTimeTelemetryData
+//        }
+//    }
 
     protected fun logLLMResponse(improvementsList: List<AtomicSuggestion>, useDelays: Boolean) {
         for (atomicSuggestion in improvementsList.withIndex()) {

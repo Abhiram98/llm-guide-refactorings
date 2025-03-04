@@ -87,4 +87,12 @@ class TelemetryElapsedTimeObserver: Observer {
             CandidateElapsedTimeTelemetryData(it.key, it.value)
         }
     }
+
+    fun buildElapsedTimeTelemetryData(telemetryDataManager: EFTelemetryDataManager) {
+        val elapsedTimeTelemetryData = this.getTelemetryData()
+        val efTelemetryData = telemetryDataManager.getData()
+        if (efTelemetryData != null) {
+            efTelemetryData.elapsedTime = elapsedTimeTelemetryData
+        }
+    }
 }

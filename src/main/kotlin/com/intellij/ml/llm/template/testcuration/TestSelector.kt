@@ -18,12 +18,21 @@ import com.intellij.psi.search.SearchScope
 import com.intellij.psi.search.searches.ReferencesSearch
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.containers.stream
+import java.io.File
+import java.util.concurrent.TimeUnit
+import kotlin.io.path.Path
 
 /**
  * A selector for samples for the LLM.
  */
 class TestSelector(val limitTestCount: Int) {
-    private val testNames = mutableSetOf(DEFAULT_TEST_NAME)
+    data class TestMethod(
+        val testClass: PsiClass,
+        val testMethod: PsiMethod
+    ){}
+
+    private val testNames: MutableSet<TestMethod> = mutableSetOf()
+
     private val initialTestCodes = mutableListOf(createTestSampleClass("", DEFAULT_TEST_CODE))
     private var testSamplesCode: String = ""
 
@@ -39,7 +48,7 @@ class TestSelector(val limitTestCount: Int) {
      *
      * @return The list of test names.
      */
-    fun getTestNames(): MutableList<String> = testNames.toMutableList()
+    fun getTestNames(): MutableList<TestMethod> = testNames.toMutableList()
 
     /**
      * Provides the initial test codes.
@@ -117,7 +126,40 @@ class TestSelector(val limitTestCount: Int) {
      * @return A report of the test run.
      **/
     fun runTests(): String{
-        return "All tests passed." // TODO: actually run tests.
+        var report = ""
+        for (testMethod in testNames){
+            val status = runTest(testMethod)
+            report += "${testMethod.testMethod.name}: $status\n"
+        }
+
+        return report
+    }
+
+    fun runAndKeepPassingTests(){
+        testNames.removeAll( testNames.filter { !runTest(it) } ) // Remove all failing tests
+    }
+
+    fun runTest(testMethod: TestMethod): Boolean{
+        // TODO: capture stdout and stderr in case test fails.
+        // TODO: Update logic for maven projects.
+
+        val projectBasePath = testMethod.testClass.project.basePath!!
+
+        val subProject = testMethod.testClass.project.basePath + '/' +
+                testMethod.testClass.containingFile.virtualFile.path
+                    .removePrefix("$projectBasePath/")
+                    .split('/')[0]
+        val result = ProcessBuilder(
+            listOf(
+                "./gradlew", ":${subProject}:test",
+                "--tests", "\"${testMethod.testClass.qualifiedName}.${testMethod.testMethod.name}\"")
+        )
+        .directory(File(projectBasePath))
+            .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+            .redirectError(ProcessBuilder.Redirect.INHERIT)
+            .start()
+            .waitFor(5, TimeUnit.MINUTES)
+        return result
     }
 
     /**
@@ -220,7 +262,7 @@ class TestSelector(val limitTestCount: Int) {
                 // TODO: change here to allow other testing frameworks.
             ) {
                 val code: String = createTestSampleClass(imports, psiMethod.text)
-                testNames.add(createMethodName(psiClass, psiMethod))
+                testNames.add(TestMethod(psiClass, psiMethod))
                 initialTestCodes.add(code)
             }
         }
@@ -250,7 +292,7 @@ class TestSelector(val limitTestCount: Int) {
      * @return A fully-qualified method name.
      */
     fun createMethodName(psiClass: PsiClass, method: PsiMethod): String =
-        "<html>${psiClass.qualifiedName}#${method.name}</html>"
+        "${psiClass.qualifiedName}.${method.name}"
 
     companion object {
         const val DEFAULT_TEST_NAME = "<html>provide manually</html>"

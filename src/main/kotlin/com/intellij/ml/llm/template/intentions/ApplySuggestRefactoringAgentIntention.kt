@@ -271,7 +271,7 @@ open class ApplySuggestRefactoringAgentIntention(
                         EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.STOP, 0)
                     )
                 )
-                buildElapsedTimeTelemetryData(elapsedTimeTelemetryDataObserver)
+                elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager)
                 highlighter.getAndSet(null).dropHighlight()
                 sendTelemetryData()
             }
