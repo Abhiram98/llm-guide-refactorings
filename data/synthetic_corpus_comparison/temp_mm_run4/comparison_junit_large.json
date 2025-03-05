@@ -1,0 +1,2045 @@
+[
+    {
+        "oracle": "method org.junit.runner.Result::printFailures(Result):void need move to org.junit.internal.TextListener",
+        "class_name": "org.junit.runner.Result",
+        "telemetry": {
+            "id": "cb890e01-abd2-452a-86b9-a6b4f92cf1ef",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 122,
+                "lineStart": 13,
+                "lineEnd": 134,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+                "sourceCode": "/**\n * A <code>Result</code> collects and summarizes information from running multiple\n * tests. Since tests are expected to run correctly, successful tests are only noted in\n * the count of tests that ran.\n */\npublic class Result implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\tprivate AtomicInteger fCount = new AtomicInteger();\n\tprivate AtomicInteger fIgnoreCount= new AtomicInteger();\n\tprivate final List<Failure> fFailures= Collections.synchronizedList(new ArrayList<Failure>());\n\tprivate long fRunTime= 0;\n\tprivate long fStartTime;\n\n\t/**\n\t * @return the number of tests run\n\t */\n\tpublic int getRunCount() {\n\t\treturn fCount.get();\n\t}\n\n\t/**\n\t * @return the number of tests that failed during the run\n\t */\n\tpublic int getFailureCount() {\n\t\treturn fFailures.size();\n\t}\n\n\t/**\n\t * @return the number of milliseconds it took to run the entire suite to run\n\t */\n\tpublic long getRunTime() {\n\t\treturn fRunTime;\n\t}\n\n\t/**\n\t * @return the {@link Failure}s describing tests that failed and the problems they encountered\n\t */\n\tpublic List<Failure> getFailures() {\n\t\treturn fFailures;\n\t}\n\n\t/**\n\t * @return the number of tests ignored during the run\n\t */\n\tpublic int getIgnoreCount() {\n\t\treturn fIgnoreCount.get();\n\t}\n\n\t/**\n\t * @return <code>true</code> if all tests succeeded\n\t */\n\tpublic boolean wasSuccessful() {\n\t\treturn getFailureCount() == 0;\n\t}\n\n\tprivate class Listener extends RunListener {\n\t\t@Override\n\t\tpublic void testRunStarted(Description description) throws Exception {\n\t\t\tfStartTime= System.currentTimeMillis();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testRunFinished(Result result) throws Exception {\n\t\t\tlong endTime= System.currentTimeMillis();\n\t\t\tfRunTime+= endTime - fStartTime;\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFinished(Description description) throws Exception {\n\t\t\tfCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFailure(Failure failure) throws Exception {\n\t\t\tfFailures.add(failure);\n\t\t}\n\n\t\t@Override\n\t\tpublic void testIgnored(Description description) throws Exception {\n\t\t\tfIgnoreCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testAssumptionFailure(Failure failure) {\n\t\t\t// do nothing: same as passing (for 4.5; may change in 4.6)\n\t\t}\n\t}\n\n\t/**\n\t * Internal use only.\n\t */\n\tpublic RunListener createListener() {\n\t\treturn new Listener();\n\t}\n\n\tpublic void printFailures(TextListener textListener) {\n\t\tList<Failure> failures= getFailures();\n\t\tif (failures.size() == 0)\n\t\t\treturn;\n\t\tif (failures.size() == 1)\n\t\t\ttextListener.getWriter().println(\"There was \" + failures.size() + \" failure:\");\n\t\telse\n\t\t\ttextListener.getWriter().println(\"There were \" + failures.size() + \" failures:\");\n\t\tint i= 1;\n\t\tfor (Failure each : failures)\n\t\t\ttextListener.printFailure(each, \"\" + i++);\n\t}\n\n\tpublic void printFooter(TextListener textListener) {\n\t\tif (wasSuccessful()) {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().print(\"OK\");\n\t\t\ttextListener.getWriter().println(\" (\" + getRunCount() + \" test\" + (getRunCount() == 1 ? \"\" : \"s\") + \")\");\n\t\n\t\t} else {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().println(\"FAILURES!!!\");\n\t\t\ttextListener.getWriter().println(\"Tests run: \" + getRunCount() + \",  Failures: \" + getFailureCount());\n\t\t}\n\t\ttextListener.getWriter().println();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 107,
+                        "lineEnd": 118,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method printFailures to class TextListener",
+                        "description": "Move method printFailures to org.junit.internal.TextListener\nRationale: The method printFailures() is responsible for printing the details of test failures, which directly relates to the functionality of the TextListener class. This class already handles how failures are printed through the printFailure() method. Moving printFailures() to TextListener will enhance cohesion by ensuring that all failure reporting logic is encapsulated within the same class. Additionally, since printFailures() utilizes the getWriter() method from TextListener to output messages, it logically fits within this class, making it more maintainable and easier to understand.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 120,
+                        "lineEnd": 132,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method printFooter to class TextListener",
+                        "description": "Move method printFooter to org.junit.internal.TextListener\nRationale: The printFooter() method is responsible for displaying the results of a test run, including success and failure messages. Since TextListener already handles output related to test results, moving this method to it would encapsulate all test result-related functionality within the TextListener class. This promotes better cohesion, as TextListener would manage both the header and footer of the test output, streamlining the responsibilities of the class. Additionally, the method relies on the getWriter() method from TextListener, which makes it a natural fit for this class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public printFailures(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.2935297060502415
+                    },
+                    "public printFooter(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.39008744048705124
+                    }
+                },
+                "voyage": {
+                    "public printFooter(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5583084430700699
+                    },
+                    "public printFailures(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.585010875973804
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public printFooter(TextListener textListener)",
+                        "public printFailures(TextListener textListener)"
+                    ],
+                    "llm_response_time": 1223
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public printFooter(TextListener textListener)",
+                        "public printFailures(TextListener textListener)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public printFooter(TextListener textListener)",
+                        "public printFailures(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public printFailures(TextListener textListener)",
+                        "public printFooter(TextListener textListener)"
+                    ],
+                    "llm_response_time": 910
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public printFailures(TextListener textListener)",
+                        "public printFooter(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public printFailures(TextListener textListener)",
+                        "public printFooter(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "printFailures": {
+                    "target_classes": [
+                        {
+                            "class_name": "TextListener",
+                            "similarity_score": 0.2861493558453397
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TextListener"
+                    ],
+                    "llm_response_time": 2020,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                },
+                "printFooter": {
+                    "target_classes": [
+                        {
+                            "class_name": "TextListener",
+                            "similarity_score": 0.455101068709195
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TextListener"
+                    ],
+                    "llm_response_time": 2044,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method junit.framework.TestResult::printFooter(TestResult):void need move to junit.textui.ResultPrinter",
+        "class_name": "junit.framework.TestResult",
+        "telemetry": {
+            "id": "aa8bb86a-55be-4325-be3c-c2681ff4ca52",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 177,
+                "lineStart": 10,
+                "lineEnd": 186,
+                "bodyLineStart": 10,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+                "sourceCode": "/**\n * A <code>TestResult</code> collects the results of executing\n * a test case. It is an instance of the Collecting Parameter pattern.\n * The test framework distinguishes between <i>failures</i> and <i>errors</i>.\n * A failure is anticipated and checked for with assertions. Errors are\n * unanticipated problems like an {@link ArrayIndexOutOfBoundsException}.\n *\n * @see Test\n */\npublic class TestResult extends Object {\n\tprotected List<TestFailure> fFailures;\n\tprotected List<TestFailure> fErrors;\n\tprotected List<TestListener> fListeners;\n\tprotected int fRunTests;\n\tprivate boolean fStop;\n\t\n\tpublic TestResult() {\n\t\tfFailures= new ArrayList<TestFailure>();\n\t\tfErrors= new ArrayList<TestFailure>();\n\t\tfListeners= new ArrayList<TestListener>();\n\t\tfRunTests= 0;\n\t\tfStop= false;\n\t}\n\t/**\n\t * Adds an error to the list of errors. The passed in exception\n\t * caused the error.\n\t */\n\tpublic synchronized void addError(Test test, Throwable t) {\n\t\tfErrors.add(new TestFailure(test, t));\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.addError(test, t);\n\t}\n\t/**\n\t * Adds a failure to the list of failures. The passed in exception\n\t * caused the failure.\n\t */\n\tpublic synchronized void addFailure(Test test, AssertionFailedError t) {\n\t\tfFailures.add(new TestFailure(test, t));\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.addFailure(test, t);\n\t}\n\t/**\n\t * Registers a TestListener\n\t */\n\tpublic synchronized void addListener(TestListener listener) {\n\t\tfListeners.add(listener);\n\t}\n\t/**\n\t * Unregisters a TestListener\n\t */\n\tpublic synchronized void removeListener(TestListener listener) {\n\t\tfListeners.remove(listener);\n\t}\n\t/**\n\t * Returns a copy of the listeners.\n\t */\n\tprivate synchronized List<TestListener> cloneListeners() {\n\t\tList<TestListener> result= new ArrayList<TestListener>();\n\t\tresult.addAll(fListeners);\n\t\treturn result;\n\t}\n\t/**\n\t * Informs the result that a test was completed.\n\t */\n\tpublic void endTest(Test test) {\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.endTest(test);\n\t}\n\t/**\n\t * Gets the number of detected errors.\n\t */\n\tpublic synchronized int errorCount() {\n\t\treturn fErrors.size();\n\t}\n\t/**\n\t * Returns an Enumeration for the errors\n\t */\n\tpublic synchronized Enumeration<TestFailure> errors() {\n\t\treturn Collections.enumeration(fErrors);\n\t}\n\t\n\n\t/**\n\t * Gets the number of detected failures.\n\t */\n\tpublic synchronized int failureCount() {\n\t\treturn fFailures.size();\n\t}\n\t/**\n\t * Returns an Enumeration for the failures\n\t */\n\tpublic synchronized Enumeration<TestFailure> failures() {\n\t\treturn Collections.enumeration(fFailures);\n\t}\n\t\n\t/**\n\t * Runs a TestCase.\n\t */\n\tprotected void run(final TestCase test) {\n\t\tstartTest(test);\n\t\tProtectable p= new Protectable() {\n\t\t\tpublic void protect() throws Throwable {\n\t\t\t\ttest.runBare();\n\t\t\t}\n\t\t};\n\t\trunProtected(test, p);\n\n\t\tendTest(test);\n\t}\n\t/**\n\t * Gets the number of run tests.\n\t */\n\tpublic synchronized int runCount() {\n\t\treturn fRunTests;\n\t}\n\t/**\n\t * Runs a TestCase.\n\t */\n\tpublic void runProtected(final Test test, Protectable p) {\n\t\ttry {\n\t\t\tp.protect();\n\t\t} \n\t\tcatch (AssertionFailedError e) {\n\t\t\taddFailure(test, e);\n\t\t}\n\t\tcatch (ThreadDeath e) { // don't catch ThreadDeath by accident\n\t\t\tthrow e;\n\t\t}\n\t\tcatch (Throwable e) {\n\t\t\taddError(test, e);\n\t\t}\n\t}\n\t/**\n\t * Checks whether the test run should stop\n\t */\n\tpublic synchronized boolean shouldStop() {\n\t\treturn fStop;\n\t}\n\t/**\n\t * Informs the result that a test will be started.\n\t */\n\tpublic void startTest(Test test) {\n\t\tfinal int count= test.countTestCases();\n\t\tsynchronized(this) {\n\t\t\tfRunTests+= count;\n\t\t}\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.startTest(test);\n\t}\n\t/**\n\t * Marks that the test run should stop.\n\t */\n\tpublic synchronized void stop() {\n\t\tfStop= true;\n\t}\n\t/**\n\t * Returns whether the entire test was successful or not.\n\t */\n\tpublic synchronized boolean wasSuccessful() {\n\t\treturn failureCount() == 0 && errorCount() == 0;\n\t}\n\tpublic void printFooter(ResultPrinter resultPrinter) {\n\t\tif (wasSuccessful()) {\n\t\t\tresultPrinter.getWriter().println();\n\t\t\tresultPrinter.getWriter().print(\"OK\");\n\t\t\tresultPrinter.getWriter().println (\" (\" + runCount() + \" test\" + (runCount() == 1 ? \"\": \"s\") + \")\");\n\t\n\t\t} else {\n\t\t\tresultPrinter.getWriter().println();\n\t\t\tresultPrinter.getWriter().println(\"FAILURES!!!\");\n\t\t\tresultPrinter.getWriter().println(\"Tests run: \"+runCount()+ \n\t\t\t\t         \",  Failures: \"+failureCount()+\n\t\t\t\t         \",  Errors: \"+errorCount());\n\t\t}\n\t    resultPrinter.getWriter().println();\n\t}\n}",
+                "methodCount": 20
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 7,
+                "candidates": [
+                    {
+                        "lineStart": 170,
+                        "lineEnd": 184,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method printFooter to class ResultPrinter",
+                        "description": "Move method printFooter to junit.textui.ResultPrinter\nRationale: The method printFooter(ResultPrinter resultPrinter) is responsible for printing the summary of test results, which aligns closely with the responsibilities of the ResultPrinter class. This class is already tasked with presenting test results, including headers, errors, and failures. Moving printFooter to ResultPrinter will enhance cohesion by ensuring that all printing logic related to test results resides in a single class. Additionally, this method utilizes the getWriter() method of ResultPrinter, indicating that it is inherently tied to the ResultPrinter's functionality, making it a suitable candidate for relocation.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 124,
+                        "lineEnd": 140,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method runProtected to class Protectable",
+                        "description": "Move method runProtected to junit.framework.Protectable\nRationale: The method runProtected() is designed to execute the protect() method from the Protectable interface, indicating a strong relationship with this class. It handles the execution of a Protectable instance and manages exceptions that may arise during its execution. Moving this method to Protectable aligns with the principle of encapsulating behavior related to protecting method execution, thus improving cohesion within the Protectable interface.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 104,
+                        "lineEnd": 117,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method run to class TestCase",
+                        "description": "Move method run to junit.framework.TestCase\nRationale: The method 'run(TestCase test)' is inherently designed to execute a test case, which aligns perfectly with the responsibilities of the TestCase class. Since TestCase already has methods for setting up, tearing down, and running tests, moving 'run' here will encapsulate the test execution logic within the class that represents a single test case. This will enhance cohesion by keeping all methods related to test execution within the TestCase class, thus following the Single Responsibility Principle.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 32,
+                        "lineEnd": 40,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method addError to class Test",
+                        "description": "Move method addError to junit.framework.Test\nRationale: The addError() method is responsible for adding an error related to a test and notifying listeners about it. Since the method operates directly on Test instances and deals with TestFailure objects, it is logical for it to reside within the Test class. This would encapsulate the error handling within the context of a test, aligning with the principle of cohesion, where related functionalities are kept together. Moving this method to the Test class also enhances the readability and maintainability of the code, making it clearer that error handling is a responsibility of the Test itself.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 41,
+                        "lineEnd": 49,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method addFailure to class Test",
+                        "description": "Move method addFailure to junit.framework.Test\nRationale: The addFailure() method is responsible for adding a failure related to a test case, which directly pertains to the functionality of the Test interface. Since the method deals with failures that occur during the execution of tests, it is more appropriate for it to reside within the Test class. This ensures that all test-related functionalities, including failure handling, are encapsulated within the Test class, promoting better cohesion and organization of code.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 70,
+                        "lineEnd": 76,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method endTest to class Test",
+                        "description": "Move method endTest to junit.framework.Test\nRationale: The endTest(Test test) method is responsible for notifying listeners when a test has completed. This functionality is closely related to the lifecycle of a test, which is inherently tied to the Test interface. Moving this method to the Test class aligns the notification mechanism with the test's execution context, enhancing cohesion. Additionally, since the method operates on a Test instance and deals with its completion, it makes logical sense for it to reside within the Test class rather than in a separate context.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 147,
+                        "lineEnd": 157,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method startTest to class Test",
+                        "description": "Move method startTest to junit.framework.Test\nRationale: The startTest(Test test) method is responsible for informing listeners that a test is about to start, which directly relates to the lifecycle of a Test instance. Since the method operates on a Test object and requires knowledge of its test cases (via countTestCases()), it is more appropriate for this method to reside within the Test class. Moving it there aligns with the principle of encapsulation, as the method will then be part of the Test's behavior, making the code cleaner and more cohesive.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addError",
+                            "method_signature": "public synchronized addError(Test test, Throwable t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addFailure",
+                            "method_signature": "public synchronized addFailure(Test test, AssertionFailedError t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "endTest",
+                            "method_signature": "public endTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "protect",
+                            "method_signature": "public protect()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "run",
+                            "method_signature": "protected run(final TestCase test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "runProtected",
+                            "method_signature": "public runProtected(final Test test, Protectable p)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "startTest",
+                            "method_signature": "public startTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "protect",
+                            "method_signature": "public protect()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "runProtected",
+                            "method_signature": "public runProtected(final Test test, Protectable p)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "run",
+                            "method_signature": "protected run(final TestCase test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addError",
+                            "method_signature": "public synchronized addError(Test test, Throwable t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "addFailure",
+                            "method_signature": "public synchronized addFailure(Test test, AssertionFailedError t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "endTest",
+                            "method_signature": "public endTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "startTest",
+                            "method_signature": "public startTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public printFooter(ResultPrinter resultPrinter)": {
+                        "first": {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.3081182416579107
+                    },
+                    "public protect()": {
+                        "first": {
+                            "method_name": "protect",
+                            "method_signature": "public protect()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.42679753259478465
+                    },
+                    "public runProtected(final Test test, Protectable p)": {
+                        "first": {
+                            "method_name": "runProtected",
+                            "method_signature": "public runProtected(final Test test, Protectable p)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5157117754716805
+                    },
+                    "protected run(final TestCase test)": {
+                        "first": {
+                            "method_name": "run",
+                            "method_signature": "protected run(final TestCase test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5810545248411582
+                    },
+                    "public synchronized addError(Test test, Throwable t)": {
+                        "first": {
+                            "method_name": "addError",
+                            "method_signature": "public synchronized addError(Test test, Throwable t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6026791708251308
+                    },
+                    "public synchronized addFailure(Test test, AssertionFailedError t)": {
+                        "first": {
+                            "method_name": "addFailure",
+                            "method_signature": "public synchronized addFailure(Test test, AssertionFailedError t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.61680991711388
+                    },
+                    "public endTest(Test test)": {
+                        "first": {
+                            "method_name": "endTest",
+                            "method_signature": "public endTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.628061076657494
+                    },
+                    "public startTest(Test test)": {
+                        "first": {
+                            "method_name": "startTest",
+                            "method_signature": "public startTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6347578965559197
+                    }
+                },
+                "voyage": {
+                    "public protect()": {
+                        "first": {
+                            "method_name": "protect",
+                            "method_signature": "public protect()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.4214572316645167
+                    },
+                    "public printFooter(ResultPrinter resultPrinter)": {
+                        "first": {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.46780784338366127
+                    },
+                    "protected run(final TestCase test)": {
+                        "first": {
+                            "method_name": "run",
+                            "method_signature": "protected run(final TestCase test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5115103574869344
+                    },
+                    "public endTest(Test test)": {
+                        "first": {
+                            "method_name": "endTest",
+                            "method_signature": "public endTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6188069010503574
+                    },
+                    "public runProtected(final Test test, Protectable p)": {
+                        "first": {
+                            "method_name": "runProtected",
+                            "method_signature": "public runProtected(final Test test, Protectable p)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.622885747155866
+                    },
+                    "public synchronized addError(Test test, Throwable t)": {
+                        "first": {
+                            "method_name": "addError",
+                            "method_signature": "public synchronized addError(Test test, Throwable t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.663419018496269
+                    },
+                    "public startTest(Test test)": {
+                        "first": {
+                            "method_name": "startTest",
+                            "method_signature": "public startTest(Test test)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6636751509743307
+                    },
+                    "public synchronized addFailure(Test test, AssertionFailedError t)": {
+                        "first": {
+                            "method_name": "addFailure",
+                            "method_signature": "public synchronized addFailure(Test test, AssertionFailedError t)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6637023966491412
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public synchronized addError(Test test, Throwable t)",
+                        "public synchronized addFailure(Test test, AssertionFailedError t)",
+                        "public endTest(Test test)",
+                        "public startTest(Test test)",
+                        "public runProtected(final Test test, Protectable p)",
+                        "protected run(final TestCase test)",
+                        "public printFooter(ResultPrinter resultPrinter)",
+                        "public protect()"
+                    ],
+                    "llm_response_time": 5093
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public printFooter(ResultPrinter resultPrinter)",
+                        "public synchronized addError(Test test, Throwable t)",
+                        "public runProtected(final Test test, Protectable p)",
+                        "protected run(final TestCase test)",
+                        "public protect()"
+                    ],
+                    "llm_response_time": 1228
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public runProtected(final Test test, Protectable p)",
+                        "public printFooter(ResultPrinter resultPrinter)",
+                        "public protect()"
+                    ],
+                    "llm_response_time": 1174
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public synchronized addError(Test test, Throwable t)",
+                        "public synchronized addFailure(Test test, AssertionFailedError t)",
+                        "public runProtected(final Test test, Protectable p)",
+                        "protected run(final TestCase test)",
+                        "public endTest(Test test)",
+                        "public startTest(Test test)",
+                        "public printFooter(ResultPrinter resultPrinter)",
+                        "public protect()"
+                    ],
+                    "llm_response_time": 1315
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "protected run(final TestCase test)",
+                        "public runProtected(final Test test, Protectable p)",
+                        "public endTest(Test test)",
+                        "public printFooter(ResultPrinter resultPrinter)",
+                        "public protect()"
+                    ],
+                    "llm_response_time": 947
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "protected run(final TestCase test)",
+                        "public printFooter(ResultPrinter resultPrinter)",
+                        "public protect()"
+                    ],
+                    "llm_response_time": 1007
+                }
+            },
+            "targetClassMap": {
+                "printFooter": {
+                    "target_classes": [
+                        {
+                            "class_name": "ResultPrinter",
+                            "similarity_score": 0.5368495015610334
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ResultPrinter"
+                    ],
+                    "llm_response_time": 2401,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "protect": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 2793,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                },
+                "runProtected": {
+                    "target_classes": [
+                        {
+                            "class_name": "Test",
+                            "similarity_score": 0.2901890975579174
+                        },
+                        {
+                            "class_name": "Protectable",
+                            "similarity_score": 0.3059262909226468
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Protectable",
+                        "Test"
+                    ],
+                    "llm_response_time": 2375,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                },
+                "run": {
+                    "target_classes": [
+                        {
+                            "class_name": "TestCase",
+                            "similarity_score": 0.45315085001070243
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TestCase"
+                    ],
+                    "llm_response_time": 1945,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "addError": {
+                    "target_classes": [
+                        {
+                            "class_name": "Test",
+                            "similarity_score": 0.36041672245820183
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Test"
+                    ],
+                    "llm_response_time": 2016,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "addFailure": {
+                    "target_classes": [
+                        {
+                            "class_name": "Test",
+                            "similarity_score": 0.40046302495355757
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Test"
+                    ],
+                    "llm_response_time": 1924,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "endTest": {
+                    "target_classes": [
+                        {
+                            "class_name": "Test",
+                            "similarity_score": 0.49082820896917284
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Test"
+                    ],
+                    "llm_response_time": 1998,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "startTest": {
+                    "target_classes": [
+                        {
+                            "class_name": "Test",
+                            "similarity_score": 0.47628751885840176
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Test"
+                    ],
+                    "llm_response_time": 2801,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.Statement::apply(Statement, FrameworkMethod, Object):Statement need move to org.junit.rules.TestWatchman",
+        "class_name": "org.junit.runners.model.Statement",
+        "telemetry": {
+            "id": "9f9a9d55-126d-4b1c-8693-380e3991ac51",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 50,
+                "lineStart": 11,
+                "lineEnd": 60,
+                "bodyLineStart": 11,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+                "sourceCode": "/**\n * Represents one or more actions to be taken at runtime in the course\n * of running a JUnit test suite.\n */\npublic abstract class Statement {\n\t/**\n\t * Run the action, throwing a {@code Throwable} if anything goes wrong.\n\t */\n\tpublic abstract void evaluate() throws Throwable;\n\n\tpublic Statement apply(final TestWatchman testWatchman, final FrameworkMethod method, Object target) {\n\t\treturn new Statement() {\n\t\t\t@Override\n\t\t\tpublic void evaluate() throws Throwable {\n\t\t\t\ttestWatchman.starting(method);\n\t\t\t\ttry {\n\t\t\t\t\tevaluate();\n\t\t\t\t\ttestWatchman.succeeded(method);\n\t\t\t\t} catch (AssumptionViolatedException e) {\n\t\t\t\t\tthrow e;\n\t\t\t\t} catch (Throwable t) {\n\t\t\t\t\ttestWatchman.failed(t, method);\n\t\t\t\t\tthrow t;\n\t\t\t\t} finally {\n\t\t\t\t\ttestWatchman.finished(method);\n\t\t\t\t}\n\t\t\t}\n\t\t};\n\t}\n\n\tpublic void evaluate2(ExpectException expectException) throws Exception {\n\t\tboolean complete = false;\n\t\ttry {\n\t\t\tevaluate();\n\t\t\tcomplete = true;\n\t\t} catch (AssumptionViolatedException e) {\n\t\t\tthrow e;\n\t\t} catch (Throwable e) {\n\t\t\tif (!expectException.fExpected.isAssignableFrom(e.getClass())) {\n\t\t\t\tString message= \"Unexpected exception, expected<\"\n\t\t\t\t\t\t\t+ expectException.fExpected.getName() + \"> but was<\"\n\t\t\t\t\t\t\t+ e.getClass().getName() + \">\";\n\t\t\t\tthrow new Exception(message, e);\n\t\t\t}\n\t\t}\n\t\tif (complete)\n\t\t\tthrow new AssertionError(\"Expected exception: \"\n\t\t\t\t\t+ expectException.fExpected.getName());\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 40,
+                        "lineEnd": 58,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method evaluate2 to class ExpectException",
+                        "description": "Move method evaluate2 to org.junit.internal.runners.statements.ExpectException\nRationale: The method evaluate2(ExpectException expectException) is designed to handle exception evaluation logic in the context of expected exceptions. It closely interacts with the ExpectException class, particularly in how it checks for expected exceptions during evaluation. Moving this method to the ExpectException class allows for better encapsulation of exception handling logic specific to the expectations set by this class. Additionally, the existing evaluate method in ExpectException already calls evaluate2, indicating a direct relationship between the two. This move would enhance code organization and maintainability by keeping related functionality together.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public evaluate2(ExpectException expectException)": {
+                        "first": {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5677214514732032
+                    }
+                },
+                "voyage": {
+                    "public evaluate2(ExpectException expectException)": {
+                        "first": {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5524113239976188
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 734
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "evaluate2": {
+                    "target_classes": [
+                        {
+                            "class_name": "ExpectException",
+                            "similarity_score": 0.3373283061511614
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ExpectException"
+                    ],
+                    "llm_response_time": 1839,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.experimental.theories.ParameterSignature::addFields(ParameterSignature, List<PotentialAssignment>):void need move to org.junit.experimental.theories.internal.AllMembersSupplier",
+        "class_name": "org.junit.experimental.theories.ParameterSignature",
+        "telemetry": {
+            "id": "8a6a88d0-be30-42bf-98aa-9a50164fa73c",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 94,
+                "lineStart": 17,
+                "lineEnd": 110,
+                "bodyLineStart": 17,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/experimental/theories/ParameterSignature.java",
+                "sourceCode": "public class ParameterSignature {\n\tpublic static ArrayList<ParameterSignature> signatures(Method method) {\n\t\treturn signatures(method.getParameterTypes(), method\n\t\t\t\t.getParameterAnnotations());\n\t}\n\n\tpublic static List<ParameterSignature> signatures(Constructor<?> constructor) {\n\t\treturn signatures(constructor.getParameterTypes(), constructor\n\t\t\t\t.getParameterAnnotations());\n\t}\n\n\tprivate static ArrayList<ParameterSignature> signatures(\n\t\t\tClass<?>[] parameterTypes, Annotation[][] parameterAnnotations) {\n\t\tArrayList<ParameterSignature> sigs= new ArrayList<ParameterSignature>();\n\t\tfor (int i= 0; i < parameterTypes.length; i++) {\n\t\t\tsigs.add(new ParameterSignature(parameterTypes[i],\n\t\t\t\t\tparameterAnnotations[i]));\n\t\t}\n\t\treturn sigs;\n\t}\n\n\tprivate final Class<?> type;\n\n\tprivate final Annotation[] annotations;\n\n\tprivate ParameterSignature(Class<?> type, Annotation[] annotations) {\n\t\tthis.type= type;\n\t\tthis.annotations= annotations;\n\t}\n\n\tpublic boolean canAcceptType(Class<?> candidate) {\n\t\treturn type.isAssignableFrom(candidate);\n\t}\n\n\tpublic Class<?> getType() {\n\t\treturn type;\n\t}\n\n\tpublic List<Annotation> getAnnotations() {\n\t\treturn Arrays.asList(annotations);\n\t}\n\n\tpublic boolean canAcceptArrayType(Class<?> type) {\n\t\treturn type.isArray() && canAcceptType(type.getComponentType());\n\t}\n\n\tpublic boolean hasAnnotation(Class<? extends Annotation> type) {\n\t\treturn getAnnotation(type) != null;\n\t}\n\n\tpublic <T extends Annotation> T findDeepAnnotation(Class<T> annotationType) {\n\t\tAnnotation[] annotations2= annotations;\n\t\treturn findDeepAnnotation(annotations2, annotationType, 3);\n\t}\n\n\tprivate <T extends Annotation> T findDeepAnnotation(\n\t\t\tAnnotation[] annotations, Class<T> annotationType, int depth) {\n\t\tif (depth == 0)\n\t\t\treturn null;\n\t\tfor (Annotation each : annotations) {\n\t\t\tif (annotationType.isInstance(each))\n\t\t\t\treturn annotationType.cast(each);\n\t\t\tAnnotation candidate= findDeepAnnotation(each.annotationType()\n\t\t\t\t\t.getAnnotations(), annotationType, depth - 1);\n\t\t\tif (candidate != null)\n\t\t\t\treturn annotationType.cast(candidate);\n\t\t}\n\n\t\treturn null;\n\t}\n\n\tpublic <T extends Annotation> T getAnnotation(Class<T> annotationType) {\n\t\tfor (Annotation each : getAnnotations())\n\t\t\tif (annotationType.isInstance(each))\n\t\t\t\treturn annotationType.cast(each);\n\t\treturn null;\n\t}\n\n\tpublic void addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list) {\n\t\tfor (final Field field : allMembersSupplier.fClass.getJavaClass().getFields()) {\n\t\t\tif (Modifier.isStatic(field.getModifiers())) {\n\t\t\t\tClass<?> type= field.getType();\n\t\t\t\tif (canAcceptArrayType(type)\n\t\t\t\t\t\t&& field.getAnnotation(DataPoints.class) != null) {\n\t\t\t\t\tallMembersSupplier.addArrayValues(field.getName(), list, allMembersSupplier.getStaticFieldValue(field));\n\t\t\t\t} else if (canAcceptType(type)\n\t\t\t\t\t\t&& field.getAnnotation(DataPoint.class) != null) {\n\t\t\t\t\tlist.add(PotentialAssignment\n\t\t\t\t\t\t\t.forValue(field.getName(), allMembersSupplier.getStaticFieldValue(field)));\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+                "methodCount": 13
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 94,
+                        "lineEnd": 108,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method addFields to class AllMembersSupplier",
+                        "description": "Move method addFields to org.junit.experimental.theories.internal.AllMembersSupplier\nRationale: The method addFields() is responsible for processing fields of a class and adding potential assignments based on certain annotations. Since AllMembersSupplier is designed to supply parameters based on all public members of a target class, it aligns perfectly with the functionality of addFields(). Moving this method to AllMembersSupplier will enhance the cohesion of the class, as it will centralize the logic related to field processing within the class that already handles parameter supply. This will also improve maintainability by keeping related functionalities together, allowing for easier updates and understanding of the codebase.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFields",
+                            "method_signature": "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFields",
+                            "method_signature": "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)": {
+                        "first": {
+                            "method_name": "addFields",
+                            "method_signature": "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5690228791859225
+                    }
+                },
+                "voyage": {
+                    "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)": {
+                        "first": {
+                            "method_name": "addFields",
+                            "method_signature": "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.3682640419828075
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)"
+                    ],
+                    "llm_response_time": 921
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "addFields": {
+                    "target_classes": [
+                        {
+                            "class_name": "AllMembersSupplier",
+                            "similarity_score": 0.643370910588108
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "AllMembersSupplier"
+                    ],
+                    "llm_response_time": 2320,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Description::runBefores():void need move to org.junit.internal.runners.ClassRoadie",
+        "class_name": "org.junit.runner.Description",
+        "telemetry": {
+            "id": "2810afa8-879d-4957-ac0d-41ace3f5d559",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 249,
+                "lineStart": 17,
+                "lineEnd": 265,
+                "bodyLineStart": 17,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+                "sourceCode": "/**\n * <p>A <code>Description</code> describes a test which is to be run or has been run. <code>Descriptions</code> \n * can be atomic (a single test) or compound (containing children tests). <code>Descriptions</code> are used\n * to provide feedback about the tests that are about to run (for example, the tree view\n * visible in many IDEs) or tests that have been run (for example, the failures view).</p>\n * \n * <p><code>Descriptions</code> are implemented as a single class rather than a Composite because\n * they are entirely informational. They contain no logic aside from counting their tests.</p>\n * \n * <p>In the past, we used the raw {@link junit.framework.TestCase}s and {@link junit.framework.TestSuite}s\n * to display the tree of tests. This was no longer viable in JUnit 4 because atomic tests no longer have \n * a superclass below {@link Object}. We needed a way to pass a class and name together. Description \n * emerged from this.</p>\n * \n * @see org.junit.runner.Request\n * @see org.junit.runner.Runner\n */\npublic class Description implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\n\t/**\n\t * Create a <code>Description</code> named <code>name</code>.\n\t * Generally, you will add children to this <code>Description</code>.\n\t * @param name the name of the <code>Description</code> \n\t * @param annotations \n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createSuiteDescription(String name, Annotation... annotations) {\n\t\tif (name.length() == 0)\n\t\t\tthrow new IllegalArgumentException(\"name must have non-zero length\");\n\t\treturn new Description(name, annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @param annotations meta-data about the test, for downstream interpreters\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name, Annotation... annotations) {\n\t\treturn new Description(String.format(\"%s(%s)\", name, clazz.getName()), annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.  \n\t * (This remains for binary compatibility with clients of JUnit 4.3)\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name) {\n\t\treturn createTestDescription(clazz, name, new Annotation[0]);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> named after <code>testClass</code>\n\t * @param testClass A {@link Class} containing tests \n\t * @return a <code>Description</code> of <code>testClass</code>\n\t */\n\tpublic static Description createSuiteDescription(Class<?> testClass) {\n\t\treturn new Description(testClass.getName(), testClass.getAnnotations());\n\t}\n\t\n\t/**\n\t * Describes a Runner which runs no tests\n\t */\n\tpublic static final Description EMPTY= new Description(\"No Tests\");\n\t\n\t/**\n\t * Describes a step in the test-running mechanism that goes so wrong no\n\t * other description can be used (for example, an exception thrown from a Runner's\n\t * constructor\n\t */\n\tpublic static final Description TEST_MECHANISM= new Description(\"Test mechanism\");\n\t\n\tprivate final ArrayList<Description> fChildren= new ArrayList<Description>();\n\tprivate final String fDisplayName;\n\t\n\tprivate final Annotation[] fAnnotations;\n\t\n\tprivate Description(final String displayName, Annotation... annotations) {\n\t\tfDisplayName= displayName;\n\t\tfAnnotations= annotations;\n\t}\n\n\t/**\n\t * @return a user-understandable label\n\t */\n\tpublic String getDisplayName() {\n\t\treturn fDisplayName;\n\t}\n\n\t/**\n\t * Add <code>Description</code> as a child of the receiver.\n\t * @param description the soon-to-be child.\n\t */\n\tpublic void addChild(Description description) {\n\t\tgetChildren().add(description);\n\t}\n\n\t/**\n\t * @return the receiver's children, if any\n\t */\n\tpublic ArrayList<Description> getChildren() {\n\t\treturn fChildren;\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is a suite\n\t */\n\tpublic boolean isSuite() {\n\t\treturn !isTest();\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is an atomic test\n\t */\n\tpublic boolean isTest() {\n\t\treturn getChildren().isEmpty();\n\t}\n\n\t/**\n\t * @return the total number of atomic tests in the receiver\n\t */\n\tpublic int testCount() {\n\t\tif (isTest())\n\t\t\treturn 1;\n\t\tint result= 0;\n\t\tfor (Description child : getChildren())\n\t\t\tresult+= child.testCount();\n\t\treturn result;\n\t}\n\n\t@Override\n\tpublic int hashCode() {\n\t\treturn getDisplayName().hashCode();\n\t}\n\n\t@Override\n\tpublic boolean equals(Object obj) {\n\t\tif (!(obj instanceof Description))\n\t\t\treturn false;\n\t\tDescription d = (Description) obj;\n\t\treturn getDisplayName().equals(d.getDisplayName());\n\t}\n\t\n\t@Override\n\tpublic String toString() {\n\t\treturn getDisplayName();\n\t}\n\n\t/**\n\t * @return true if this is a description of a Runner that runs no tests\n\t */\n\tpublic boolean isEmpty() {\n\t\treturn equals(EMPTY);\n\t}\n\n\t/**\n\t * @return a copy of this description, with no children (on the assumption that some of the\n\t * children will be added back)\n\t */\n\tpublic Description childlessCopy() {\n\t\treturn new Description(fDisplayName, fAnnotations);\n\t}\n\n\t/**\n\t * @return the annotation of type annotationType that is attached to this description node, \n\t * or null if none exists\n\t */\n\tpublic <T extends Annotation> T getAnnotation(Class<T> annotationType) {\n\t\tfor (Annotation each : fAnnotations)\n\t\t\tif (each.annotationType().equals(annotationType))\n\t\t\t\treturn annotationType.cast(each);\n\t\treturn null;\n\t}\n\n\t/**\n\t * @return all of the annotations attached to this description node\n\t */\n\tpublic Collection<Annotation> getAnnotations() {\n\t\treturn Arrays.asList(fAnnotations);\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the class of the test instance.\n\t */\n\tpublic Class<?> getTestClass() {\n\t\tString name= getClassName();\n\t\tif (name == null)\n\t\t\treturn null;\n\t\ttry {\n\t\t\treturn Class.forName(name);\n\t\t} catch (ClassNotFoundException e) {\n\t\t\treturn null;\n\t\t}\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the class of the test instance\n\t */\n\tpublic String getClassName() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\treturn matcher.matches()\n\t\t\t? matcher.group(2)\n\t\t\t: toString();\n\t}\n\t\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the method (or null if not)\n\t */\n\tpublic String getMethodName() {\n\t\treturn parseMethod();\n\t}\n\n\tprivate String parseMethod() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\tif (matcher.matches())\n\t\t\treturn matcher.group(1);\n\t\treturn null;\n\t}\n\n\tprivate Matcher methodStringMatcher() {\n\t\treturn Pattern.compile(\"(.*)\\\\((.*)\\\\)\").matcher(toString());\n\t}\n\n\tpublic void runBefores(ClassRoadie classRoadie) throws FailedBefore {\n\t\ttry {\n\t\t\ttry {\n\t\t\t\tList<Method> befores= classRoadie.fTestClass.getBefores();\n\t\t\t\tfor (Method before : befores)\n\t\t\t\t\tbefore.invoke(null);\n\t\t\t} catch (InvocationTargetException e) {\n\t\t\t\tthrow e.getTargetException();\n\t\t\t}\n\t\t} catch (org.junit.internal.AssumptionViolatedException e) {\n\t\t\tthrow new FailedBefore();\n\t\t} catch (Throwable e) {\n\t\t\tclassRoadie.addFailure(e);\n\t\t\tthrow new FailedBefore();\n\t\t}\n\t}\n}",
+                "methodCount": 24
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 248,
+                        "lineEnd": 263,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method runBefores to class ClassRoadie",
+                        "description": "Move method runBefores to org.junit.internal.runners.ClassRoadie\nRationale: The method runBefores(ClassRoadie classRoadie) is tightly coupled with the functionality of the ClassRoadie class, particularly in relation to managing the lifecycle of test executions. It is responsible for invoking 'before' methods defined in the test class, which is a core aspect of the test execution process handled by ClassRoadie. Moving this method to ClassRoadie would enhance cohesion, as it directly interacts with the TestClass associated with ClassRoadie. Furthermore, since ClassRoadie already has methods for managing test failures and invoking after methods, consolidating the before invocation logic within ClassRoadie would simplify the class's responsibilities and improve maintainability.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "runBefores",
+                            "method_signature": "public runBefores(ClassRoadie classRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runBefores",
+                            "method_signature": "public runBefores(ClassRoadie classRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public runBefores(ClassRoadie classRoadie)": {
+                        "first": {
+                            "method_name": "runBefores",
+                            "method_signature": "public runBefores(ClassRoadie classRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.29183618636255865
+                    },
+                    "public testCount()": {
+                        "first": {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5334748534301801
+                    }
+                },
+                "voyage": {
+                    "public runBefores(ClassRoadie classRoadie)": {
+                        "first": {
+                            "method_name": "runBefores",
+                            "method_signature": "public runBefores(ClassRoadie classRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.25472900802000137
+                    },
+                    "public testCount()": {
+                        "first": {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5680094244632377
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public runBefores(ClassRoadie classRoadie)"
+                    ],
+                    "llm_response_time": 933
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public runBefores(ClassRoadie classRoadie)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public runBefores(ClassRoadie classRoadie)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public runBefores(ClassRoadie classRoadie)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public runBefores(ClassRoadie classRoadie)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public runBefores(ClassRoadie classRoadie)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "runBefores": {
+                    "target_classes": [
+                        {
+                            "class_name": "ClassRoadie",
+                            "similarity_score": 0.720893851854865
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ClassRoadie"
+                    ],
+                    "llm_response_time": 2314,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "testCount": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 2562,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.Statement::evaluate():void need move to org.junit.internal.runners.statements.ExpectException",
+        "class_name": "org.junit.runners.model.Statement",
+        "telemetry": {
+            "id": "4a542037-c5d8-4335-a0f8-ddd77b622644",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 50,
+                "lineStart": 11,
+                "lineEnd": 60,
+                "bodyLineStart": 11,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+                "sourceCode": "/**\n * Represents one or more actions to be taken at runtime in the course\n * of running a JUnit test suite.\n */\npublic abstract class Statement {\n\t/**\n\t * Run the action, throwing a {@code Throwable} if anything goes wrong.\n\t */\n\tpublic abstract void evaluate() throws Throwable;\n\n\tpublic Statement apply(final TestWatchman testWatchman, final FrameworkMethod method, Object target) {\n\t\treturn new Statement() {\n\t\t\t@Override\n\t\t\tpublic void evaluate() throws Throwable {\n\t\t\t\ttestWatchman.starting(method);\n\t\t\t\ttry {\n\t\t\t\t\tevaluate();\n\t\t\t\t\ttestWatchman.succeeded(method);\n\t\t\t\t} catch (AssumptionViolatedException e) {\n\t\t\t\t\tthrow e;\n\t\t\t\t} catch (Throwable t) {\n\t\t\t\t\ttestWatchman.failed(t, method);\n\t\t\t\t\tthrow t;\n\t\t\t\t} finally {\n\t\t\t\t\ttestWatchman.finished(method);\n\t\t\t\t}\n\t\t\t}\n\t\t};\n\t}\n\n\tpublic void evaluate2(ExpectException expectException) throws Exception {\n\t\tboolean complete = false;\n\t\ttry {\n\t\t\tevaluate();\n\t\t\tcomplete = true;\n\t\t} catch (AssumptionViolatedException e) {\n\t\t\tthrow e;\n\t\t} catch (Throwable e) {\n\t\t\tif (!expectException.fExpected.isAssignableFrom(e.getClass())) {\n\t\t\t\tString message= \"Unexpected exception, expected<\"\n\t\t\t\t\t\t\t+ expectException.fExpected.getName() + \"> but was<\"\n\t\t\t\t\t\t\t+ e.getClass().getName() + \">\";\n\t\t\t\tthrow new Exception(message, e);\n\t\t\t}\n\t\t}\n\t\tif (complete)\n\t\t\tthrow new AssertionError(\"Expected exception: \"\n\t\t\t\t\t+ expectException.fExpected.getName());\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 40,
+                        "lineEnd": 58,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method evaluate2 to class ExpectException",
+                        "description": "Move method evaluate2 to org.junit.internal.runners.statements.ExpectException\nRationale: The method evaluate2(ExpectException expectException) is designed to handle exception evaluation logic in the context of expected exceptions. It closely interacts with the ExpectException class, particularly in how it checks for expected exceptions during evaluation. Moving this method to the ExpectException class allows for better encapsulation of exception handling logic specific to the expectations set by this class. Additionally, the existing evaluate method in ExpectException already calls evaluate2, indicating a direct relationship between the two. This move would enhance code organization and maintainability by keeping related functionality together.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public evaluate2(ExpectException expectException)": {
+                        "first": {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5677214514732032
+                    }
+                },
+                "voyage": {
+                    "public evaluate2(ExpectException expectException)": {
+                        "first": {
+                            "method_name": "evaluate2",
+                            "method_signature": "public evaluate2(ExpectException expectException)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5524113239976188
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public evaluate2(ExpectException expectException)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "evaluate2": {
+                    "target_classes": [
+                        {
+                            "class_name": "ExpectException",
+                            "similarity_score": 0.3373283061511614
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ExpectException"
+                    ],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.notification.RunNotifier::runTestMethod():void need move to org.junit.internal.runners.MethodRoadie",
+        "class_name": "org.junit.runner.notification.RunNotifier",
+        "telemetry": {
+            "id": "f96548bf-fa96-4fca-ad1f-6164869966ef",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 176,
+                "lineStart": 14,
+                "lineEnd": 189,
+                "bodyLineStart": 14,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+                "sourceCode": "/**\n * If you write custom runners, you may need to notify JUnit of your progress running tests.\n * Do this by invoking the <code>RunNotifier</code> passed to your implementation of\n * {@link org.junit.runner.Runner#run(RunNotifier)}. Future evolution of this class is likely to \n * move {@link #fireTestRunStarted(Description)} and {@link #fireTestRunFinished(Result)}\n * to a separate class since they should only be called once per run.\n */\npublic class RunNotifier {\n\tprivate final List<RunListener> fListeners= \n\t\tCollections.synchronizedList(new ArrayList<RunListener>());\n\tprivate boolean fPleaseStop= false;\n\t\n\t/** Internal use only\n\t */\n\tpublic void addListener(RunListener listener) {\n\t\tfListeners.add(listener);\n\t}\n\n\t/** Internal use only\n\t */\n\tpublic void removeListener(RunListener listener) {\n\t\tfListeners.remove(listener);\n    }\n\n\tprivate abstract class SafeNotifier {\n\t\tvoid run() {\n\t\t\tsynchronized (fListeners) {\n\t\t\t\tfor (Iterator<RunListener> all= fListeners.iterator(); all.hasNext();)\n\t\t\t\t\ttry {\n\t\t\t\t\t\tnotifyListener(all.next());\n\t\t\t\t\t} catch (Exception e) {\n\t\t\t\t\t\tall.remove(); // Remove the offending listener first to avoid an infinite loop\n\t\t\t\t\t\tfireTestFailure(new Failure(Description.TEST_MECHANISM, e));\n\t\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\n\t\tabstract protected void notifyListener(RunListener each) throws Exception;\n\t}\n\t\n\t/**\n\t * Do not invoke. \n\t */\n\tpublic void fireTestRunStarted(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Do not invoke.\n\t */\n\tpublic void fireTestRunFinished(final Result result) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunFinished(result);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Invoke to tell listeners that an atomic test is about to start.\n\t * @param description the description of the atomic test (generally a class and method name)\n\t * @throws StoppedByUserException thrown if a user has requested that the test run stop\n\t */\n\tpublic void fireTestStarted(final Description description) throws StoppedByUserException {\n\t\tif (fPleaseStop)\n\t\t\tthrow new StoppedByUserException();\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test failed.\n\t * @param failure the description of the test that failed and the exception thrown\n\t */\n\tpublic void fireTestFailure(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test flagged that it assumed\n\t * something false.\n\t * \n\t * @param failure\n\t *            the description of the test that failed and the\n\t *            {@link AssumptionViolatedException} thrown\n\t */\n\tpublic void fireTestAssumptionFailed(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testAssumptionFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test was ignored.\n\t * @param description the description of the ignored test\n\t */\n\tpublic void fireTestIgnored(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testIgnored(description);\n\t\t\t}\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test finished. Always invoke \n\t * {@link #fireTestFinished(Description)} if you invoke {@link #fireTestStarted(Description)} \n\t * as listeners are likely to expect them to come in pairs.\n\t * @param description the description of the test that finished\n\t */\n\tpublic void fireTestFinished(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFinished(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Ask that the tests run stop before starting the next test. Phrased politely because\n\t * the test currently running will not be interrupted. It seems a little odd to put this\n\t * functionality here, but the <code>RunNotifier</code> is the only object guaranteed \n\t * to be shared amongst the many runners involved.\n\t */\n\tpublic void pleaseStop() {\n\t\tfPleaseStop= true;\n\t}\n\n\t/**\n\t * Internal use only. The Result's listener must be first.\n\t */\n\tpublic void addFirstListener(RunListener listener) {\n\t\tfListeners.add(0, listener);\n\t}\n\n\tpublic void runTestMethod(MethodRoadie methodRoadie) {\n\t\ttry {\n\t\t\tmethodRoadie.fTestMethod.invoke(methodRoadie.fTest);\n\t\t\tif (methodRoadie.fTestMethod.expectsException())\n\t\t\t\tmethodRoadie.addFailure(new AssertionError(\"Expected exception: \" + methodRoadie.fTestMethod.getExpectedException().getName()));\n\t\t} catch (InvocationTargetException e) {\n\t\t\tThrowable actual= e.getTargetException();\n\t\t\tif (actual instanceof AssumptionViolatedException)\n\t\t\t\treturn;\n\t\t\telse if (!methodRoadie.fTestMethod.expectsException())\n\t\t\t\tmethodRoadie.addFailure(actual);\n\t\t\telse if (methodRoadie.fTestMethod.isUnexpected(actual)) {\n\t\t\t\tString message= \"Unexpected exception, expected<\" + methodRoadie.fTestMethod.getExpectedException().getName() + \"> but was<\"\n\t\t\t\t\t+ actual.getClass().getName() + \">\";\n\t\t\t\tmethodRoadie.addFailure(new Exception(message, actual));\n\t\t\t}\n\t\t} catch (Throwable e) {\n\t\t\tmethodRoadie.addFailure(e);\n\t\t}\n\t}\n}",
+                "methodCount": 21
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 168,
+                        "lineEnd": 187,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method runTestMethod to class MethodRoadie",
+                        "description": "Move method runTestMethod to org.junit.internal.runners.MethodRoadie\nRationale: The runTestMethod() function is heavily tied to the functionality of the MethodRoadie class, as it directly interacts with the fTestMethod and fTest fields. This method is responsible for executing a test method and handling exceptions that may arise during its execution, which aligns with the core responsibilities of the MethodRoadie class. Moving this method to MethodRoadie enhances cohesion by keeping all test execution logic within the same class, making the codebase cleaner and easier to maintain.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public runTestMethod(MethodRoadie methodRoadie)": {
+                        "first": {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.33910428568956175
+                    }
+                },
+                "voyage": {
+                    "public runTestMethod(MethodRoadie methodRoadie)": {
+                        "first": {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.4214153741335698
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public runTestMethod(MethodRoadie methodRoadie)"
+                    ],
+                    "llm_response_time": 709
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public runTestMethod(MethodRoadie methodRoadie)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public runTestMethod(MethodRoadie methodRoadie)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public runTestMethod(MethodRoadie methodRoadie)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public runTestMethod(MethodRoadie methodRoadie)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public runTestMethod(MethodRoadie methodRoadie)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "runTestMethod": {
+                    "target_classes": [
+                        {
+                            "class_name": "MethodRoadie",
+                            "similarity_score": 0.6347683333209091
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "MethodRoadie"
+                    ],
+                    "llm_response_time": 6496,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.manipulation.Filter::filter2(Filter):void need move to org.junit.internal.runners.JUnit38ClassRunner",
+        "class_name": "org.junit.runner.manipulation.Filter",
+        "telemetry": {
+            "id": "a7331b61-e43e-46f4-b257-9f9978ebc23d",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 138,
+                "lineStart": 14,
+                "lineEnd": 151,
+                "bodyLineStart": 14,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+                "sourceCode": "/**\n * The canonical case of filtering is when you want to run a single test method in a class. Rather\n * than introduce runner API just for that one case, JUnit provides a general filtering mechanism.\n * If you want to filter the tests to be run, extend <code>Filter</code> and apply an instance of\n * your filter to the {@link org.junit.runner.Request} before running it (see \n * {@link org.junit.runner.JUnitCore#run(Request)}. Alternatively, apply a <code>Filter</code> to \n * a {@link org.junit.runner.Runner} before running tests (for example, in conjunction with \n * {@link org.junit.runner.RunWith}.\n */\npublic abstract class Filter {\n\t/**\n\t * A null <code>Filter</code> that passes all tests through.\n\t */\n\tpublic static Filter ALL= new Filter() {\n\t\t@Override\n\t\tpublic boolean shouldRun(Description description) {\n\t\t\treturn true;\n\t\t}\n\n\t\t@Override\n\t\tpublic String describe() {\n\t\t\treturn \"all tests\";\n\t\t}\n\t\t\n\t\t@Override\n\t\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\t\t// do nothing\n\t\t}\n\n\t\t@Override\n\t\tpublic Filter intersect(Filter second) {\n\t\t\treturn second;\n\t\t}\n\t};\n\t\n\t/**\n\t * Returns a {@code Filter} that only runs the single method described by\n\t * {@code desiredDescription}\n\t */\n\tpublic static Filter matchMethodDescription(final Description desiredDescription) {\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\tif (description.isTest())\n\t\t\t\t\treturn desiredDescription.equals(description);\n\t\t\t\t\n\t\t\t\t// explicitly check if any children want to run\n\t\t\t\tfor (Description each : description.getChildren())\n\t\t\t\t\tif (shouldRun(each))\n\t\t\t\t\t\treturn true;\n\t\t\t\treturn false;\t\t\t\t\t\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn String.format(\"Method %s\", desiredDescription.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * @param description the description of the test to be run\n\t * @return <code>true</code> if the test should be run\n\t */\n\tpublic abstract boolean shouldRun(Description description);\n\n\t/**\n\t * Returns a textual description of this Filter\n\t * @return a textual description of this Filter\n\t */\n\tpublic abstract String describe();\n\n\t/**\n\t * Invoke with a {@link org.junit.runner.Runner} to cause all tests it intends to run\n\t * to first be checked with the filter. Only those that pass the filter will be run.\n\t * @param child the runner to be filtered by the receiver\n\t * @throws NoTestsRemainException if the receiver removes all tests\n\t */\n\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\tif (!(child instanceof Filterable))\n\t\t\treturn;\n\t\tFilterable filterable= (Filterable) child;\n\t\tfilterable.filter(this);\n\t}\n\n\t/**\n\t * Returns a new Filter that accepts the intersection of the tests accepted\n\t * by this Filter and {@code second}\n\t */\n\tpublic Filter intersect(final Filter second) {\n\t\tif (second == this || second == ALL) {\n\t\t\treturn this;\n\t\t}\n\t\tfinal Filter first= this;\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\treturn first.shouldRun(description)\n\t\t\t\t\t\t&& second.shouldRun(description);\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn first.describe() + \" and \" + second.describe();\n\t\t\t}\n\t\t};\n\t}\n\n\n\tpublic void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException {\n\t\tif (jUnit38ClassRunner.getTest() instanceof Filterable) {\n\t\t\tFilterable adapter= (Filterable) jUnit38ClassRunner.getTest();\n\t\t\tadapter.filter(this);\n\t\t} else if (jUnit38ClassRunner.getTest() instanceof TestSuite) {\n\t\t\tTestSuite suite= (TestSuite) jUnit38ClassRunner.getTest();\n\t\t\tTestSuite filtered= new TestSuite(suite.getName());\n\t\t\tint n= suite.testCount();\n\t\t\tfor (int i= 0; i < n; i++) {\n\t\t\t\tTest test= suite.testAt(i);\n\t\t\t\tif (shouldRun(JUnit38ClassRunner.makeDescription(test)))\n\t\t\t\t\tfiltered.addTest(test);\n\t\t\t}\n\t\t\tjUnit38ClassRunner.setTest(filtered);\n\t\t}\n\t}\n\n\n\tpublic void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException {\n\t\tfor (Iterator<Method> iter= jUnit4ClassRunner.fTestMethods.iterator(); iter.hasNext();) {\n\t\t\tMethod method= iter.next();\n\t\t\tif (!shouldRun(jUnit4ClassRunner.methodDescription(method)))\n\t\t\t\titer.remove();\n\t\t}\n\t\tif (jUnit4ClassRunner.fTestMethods.isEmpty())\n\t\t\tthrow new NoTestsRemainException();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 123,
+                        "lineEnd": 138,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method filter2 to class JUnit38ClassRunner",
+                        "description": "Move method filter2 to org.junit.internal.runners.JUnit38ClassRunner\nRationale: The method filter2() directly interacts with the JUnit38ClassRunner instance, specifically manipulating its test property. Since filter2() deals with filtering logic that is inherently tied to the way JUnit38ClassRunner manages its tests, it is logical to move this method to the JUnit38ClassRunner class. This will enhance cohesion by keeping all filtering-related logic within the class that is responsible for executing the tests and managing their states.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public filter2(JUnit38ClassRunner jUnit38ClassRunner)": {
+                        "first": {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.39052617789665095
+                    },
+                    "public filter3(JUnit4ClassRunner jUnit4ClassRunner)": {
+                        "first": {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.4164887588753297
+                    }
+                },
+                "voyage": {
+                    "public filter3(JUnit4ClassRunner jUnit4ClassRunner)": {
+                        "first": {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6457739225554435
+                    },
+                    "public filter2(JUnit38ClassRunner jUnit38ClassRunner)": {
+                        "first": {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.7406424949177624
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)"
+                    ],
+                    "llm_response_time": 961
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)"
+                    ],
+                    "llm_response_time": 1042
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "filter2": {
+                    "target_classes": [
+                        {
+                            "class_name": "JUnit38ClassRunner",
+                            "similarity_score": 0.629305172701744
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JUnit38ClassRunner"
+                    ],
+                    "llm_response_time": 1769,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "filter3": {
+                    "target_classes": [
+                        {
+                            "class_name": "JUnit4ClassRunner",
+                            "similarity_score": 0.5255079675749084
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JUnit4ClassRunner"
+                    ],
+                    "llm_response_time": 1674,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.manipulation.Filter::filter3(Filter):void need move to org.junit.internal.runners.JUnit4ClassRunner",
+        "class_name": "org.junit.runner.manipulation.Filter",
+        "telemetry": {
+            "id": "039f474c-8aca-4ed1-ad71-af9c95c3ad61",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 138,
+                "lineStart": 14,
+                "lineEnd": 151,
+                "bodyLineStart": 14,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+                "sourceCode": "/**\n * The canonical case of filtering is when you want to run a single test method in a class. Rather\n * than introduce runner API just for that one case, JUnit provides a general filtering mechanism.\n * If you want to filter the tests to be run, extend <code>Filter</code> and apply an instance of\n * your filter to the {@link org.junit.runner.Request} before running it (see \n * {@link org.junit.runner.JUnitCore#run(Request)}. Alternatively, apply a <code>Filter</code> to \n * a {@link org.junit.runner.Runner} before running tests (for example, in conjunction with \n * {@link org.junit.runner.RunWith}.\n */\npublic abstract class Filter {\n\t/**\n\t * A null <code>Filter</code> that passes all tests through.\n\t */\n\tpublic static Filter ALL= new Filter() {\n\t\t@Override\n\t\tpublic boolean shouldRun(Description description) {\n\t\t\treturn true;\n\t\t}\n\n\t\t@Override\n\t\tpublic String describe() {\n\t\t\treturn \"all tests\";\n\t\t}\n\t\t\n\t\t@Override\n\t\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\t\t// do nothing\n\t\t}\n\n\t\t@Override\n\t\tpublic Filter intersect(Filter second) {\n\t\t\treturn second;\n\t\t}\n\t};\n\t\n\t/**\n\t * Returns a {@code Filter} that only runs the single method described by\n\t * {@code desiredDescription}\n\t */\n\tpublic static Filter matchMethodDescription(final Description desiredDescription) {\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\tif (description.isTest())\n\t\t\t\t\treturn desiredDescription.equals(description);\n\t\t\t\t\n\t\t\t\t// explicitly check if any children want to run\n\t\t\t\tfor (Description each : description.getChildren())\n\t\t\t\t\tif (shouldRun(each))\n\t\t\t\t\t\treturn true;\n\t\t\t\treturn false;\t\t\t\t\t\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn String.format(\"Method %s\", desiredDescription.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * @param description the description of the test to be run\n\t * @return <code>true</code> if the test should be run\n\t */\n\tpublic abstract boolean shouldRun(Description description);\n\n\t/**\n\t * Returns a textual description of this Filter\n\t * @return a textual description of this Filter\n\t */\n\tpublic abstract String describe();\n\n\t/**\n\t * Invoke with a {@link org.junit.runner.Runner} to cause all tests it intends to run\n\t * to first be checked with the filter. Only those that pass the filter will be run.\n\t * @param child the runner to be filtered by the receiver\n\t * @throws NoTestsRemainException if the receiver removes all tests\n\t */\n\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\tif (!(child instanceof Filterable))\n\t\t\treturn;\n\t\tFilterable filterable= (Filterable) child;\n\t\tfilterable.filter(this);\n\t}\n\n\t/**\n\t * Returns a new Filter that accepts the intersection of the tests accepted\n\t * by this Filter and {@code second}\n\t */\n\tpublic Filter intersect(final Filter second) {\n\t\tif (second == this || second == ALL) {\n\t\t\treturn this;\n\t\t}\n\t\tfinal Filter first= this;\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\treturn first.shouldRun(description)\n\t\t\t\t\t\t&& second.shouldRun(description);\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn first.describe() + \" and \" + second.describe();\n\t\t\t}\n\t\t};\n\t}\n\n\n\tpublic void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException {\n\t\tif (jUnit38ClassRunner.getTest() instanceof Filterable) {\n\t\t\tFilterable adapter= (Filterable) jUnit38ClassRunner.getTest();\n\t\t\tadapter.filter(this);\n\t\t} else if (jUnit38ClassRunner.getTest() instanceof TestSuite) {\n\t\t\tTestSuite suite= (TestSuite) jUnit38ClassRunner.getTest();\n\t\t\tTestSuite filtered= new TestSuite(suite.getName());\n\t\t\tint n= suite.testCount();\n\t\t\tfor (int i= 0; i < n; i++) {\n\t\t\t\tTest test= suite.testAt(i);\n\t\t\t\tif (shouldRun(JUnit38ClassRunner.makeDescription(test)))\n\t\t\t\t\tfiltered.addTest(test);\n\t\t\t}\n\t\t\tjUnit38ClassRunner.setTest(filtered);\n\t\t}\n\t}\n\n\n\tpublic void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException {\n\t\tfor (Iterator<Method> iter= jUnit4ClassRunner.fTestMethods.iterator(); iter.hasNext();) {\n\t\t\tMethod method= iter.next();\n\t\t\tif (!shouldRun(jUnit4ClassRunner.methodDescription(method)))\n\t\t\t\titer.remove();\n\t\t}\n\t\tif (jUnit4ClassRunner.fTestMethods.isEmpty())\n\t\t\tthrow new NoTestsRemainException();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 123,
+                        "lineEnd": 138,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method filter2 to class JUnit38ClassRunner",
+                        "description": "Move method filter2 to org.junit.internal.runners.JUnit38ClassRunner\nRationale: The method filter2() directly interacts with the JUnit38ClassRunner instance, specifically manipulating its test property. Since filter2() deals with filtering logic that is inherently tied to the way JUnit38ClassRunner manages its tests, it is logical to move this method to the JUnit38ClassRunner class. This will enhance cohesion by keeping all filtering-related logic within the class that is responsible for executing the tests and managing their states.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public filter2(JUnit38ClassRunner jUnit38ClassRunner)": {
+                        "first": {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.39052617789665095
+                    },
+                    "public filter3(JUnit4ClassRunner jUnit4ClassRunner)": {
+                        "first": {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.4164887588753297
+                    }
+                },
+                "voyage": {
+                    "public filter3(JUnit4ClassRunner jUnit4ClassRunner)": {
+                        "first": {
+                            "method_name": "filter3",
+                            "method_signature": "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6457739225554435
+                    },
+                    "public filter2(JUnit38ClassRunner jUnit38ClassRunner)": {
+                        "first": {
+                            "method_name": "filter2",
+                            "method_signature": "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.7406424949177624
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)",
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public filter2(JUnit38ClassRunner jUnit38ClassRunner)",
+                        "public filter3(JUnit4ClassRunner jUnit4ClassRunner)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "filter2": {
+                    "target_classes": [
+                        {
+                            "class_name": "JUnit38ClassRunner",
+                            "similarity_score": 0.629305172701744
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JUnit38ClassRunner"
+                    ],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "filter3": {
+                    "target_classes": [
+                        {
+                            "class_name": "JUnit4ClassRunner",
+                            "similarity_score": 0.5255079675749084
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JUnit4ClassRunner"
+                    ],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Result::printFooter(Result):void need move to org.junit.internal.TextListener",
+        "class_name": "org.junit.runner.Result",
+        "telemetry": {
+            "id": "7ec63fb2-bce6-46f6-852d-71fe12442bfc",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 122,
+                "lineStart": 13,
+                "lineEnd": 134,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+                "sourceCode": "/**\n * A <code>Result</code> collects and summarizes information from running multiple\n * tests. Since tests are expected to run correctly, successful tests are only noted in\n * the count of tests that ran.\n */\npublic class Result implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\tprivate AtomicInteger fCount = new AtomicInteger();\n\tprivate AtomicInteger fIgnoreCount= new AtomicInteger();\n\tprivate final List<Failure> fFailures= Collections.synchronizedList(new ArrayList<Failure>());\n\tprivate long fRunTime= 0;\n\tprivate long fStartTime;\n\n\t/**\n\t * @return the number of tests run\n\t */\n\tpublic int getRunCount() {\n\t\treturn fCount.get();\n\t}\n\n\t/**\n\t * @return the number of tests that failed during the run\n\t */\n\tpublic int getFailureCount() {\n\t\treturn fFailures.size();\n\t}\n\n\t/**\n\t * @return the number of milliseconds it took to run the entire suite to run\n\t */\n\tpublic long getRunTime() {\n\t\treturn fRunTime;\n\t}\n\n\t/**\n\t * @return the {@link Failure}s describing tests that failed and the problems they encountered\n\t */\n\tpublic List<Failure> getFailures() {\n\t\treturn fFailures;\n\t}\n\n\t/**\n\t * @return the number of tests ignored during the run\n\t */\n\tpublic int getIgnoreCount() {\n\t\treturn fIgnoreCount.get();\n\t}\n\n\t/**\n\t * @return <code>true</code> if all tests succeeded\n\t */\n\tpublic boolean wasSuccessful() {\n\t\treturn getFailureCount() == 0;\n\t}\n\n\tprivate class Listener extends RunListener {\n\t\t@Override\n\t\tpublic void testRunStarted(Description description) throws Exception {\n\t\t\tfStartTime= System.currentTimeMillis();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testRunFinished(Result result) throws Exception {\n\t\t\tlong endTime= System.currentTimeMillis();\n\t\t\tfRunTime+= endTime - fStartTime;\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFinished(Description description) throws Exception {\n\t\t\tfCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFailure(Failure failure) throws Exception {\n\t\t\tfFailures.add(failure);\n\t\t}\n\n\t\t@Override\n\t\tpublic void testIgnored(Description description) throws Exception {\n\t\t\tfIgnoreCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testAssumptionFailure(Failure failure) {\n\t\t\t// do nothing: same as passing (for 4.5; may change in 4.6)\n\t\t}\n\t}\n\n\t/**\n\t * Internal use only.\n\t */\n\tpublic RunListener createListener() {\n\t\treturn new Listener();\n\t}\n\n\tpublic void printFailures(TextListener textListener) {\n\t\tList<Failure> failures= getFailures();\n\t\tif (failures.size() == 0)\n\t\t\treturn;\n\t\tif (failures.size() == 1)\n\t\t\ttextListener.getWriter().println(\"There was \" + failures.size() + \" failure:\");\n\t\telse\n\t\t\ttextListener.getWriter().println(\"There were \" + failures.size() + \" failures:\");\n\t\tint i= 1;\n\t\tfor (Failure each : failures)\n\t\t\ttextListener.printFailure(each, \"\" + i++);\n\t}\n\n\tpublic void printFooter(TextListener textListener) {\n\t\tif (wasSuccessful()) {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().print(\"OK\");\n\t\t\ttextListener.getWriter().println(\" (\" + getRunCount() + \" test\" + (getRunCount() == 1 ? \"\" : \"s\") + \")\");\n\t\n\t\t} else {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().println(\"FAILURES!!!\");\n\t\t\ttextListener.getWriter().println(\"Tests run: \" + getRunCount() + \",  Failures: \" + getFailureCount());\n\t\t}\n\t\ttextListener.getWriter().println();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 107,
+                        "lineEnd": 118,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method printFailures to class TextListener",
+                        "description": "Move method printFailures to org.junit.internal.TextListener\nRationale: The method printFailures() is responsible for printing the details of test failures, which directly relates to the functionality of the TextListener class. This class already handles how failures are printed through the printFailure() method. Moving printFailures() to TextListener will enhance cohesion by ensuring that all failure reporting logic is encapsulated within the same class. Additionally, since printFailures() utilizes the getWriter() method from TextListener to output messages, it logically fits within this class, making it more maintainable and easier to understand.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 120,
+                        "lineEnd": 132,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method printFooter to class TextListener",
+                        "description": "Move method printFooter to org.junit.internal.TextListener\nRationale: The printFooter() method is responsible for displaying the results of a test run, including success and failure messages. Since TextListener already handles output related to test results, moving this method to it would encapsulate all test result-related functionality within the TextListener class. This promotes better cohesion, as TextListener would manage both the header and footer of the test output, streamlining the responsibilities of the class. Additionally, the method relies on the getWriter() method from TextListener, which makes it a natural fit for this class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public printFailures(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.2935297060502415
+                    },
+                    "public printFooter(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.39008744048705124
+                    }
+                },
+                "voyage": {
+                    "public printFooter(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFooter",
+                            "method_signature": "public printFooter(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5583084430700699
+                    },
+                    "public printFailures(TextListener textListener)": {
+                        "first": {
+                            "method_name": "printFailures",
+                            "method_signature": "public printFailures(TextListener textListener)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.585010875973804
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public printFooter(TextListener textListener)",
+                        "public printFailures(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public printFooter(TextListener textListener)",
+                        "public printFailures(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public printFooter(TextListener textListener)",
+                        "public printFailures(TextListener textListener)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public printFailures(TextListener textListener)",
+                        "public printFooter(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public printFailures(TextListener textListener)",
+                        "public printFooter(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public printFailures(TextListener textListener)",
+                        "public printFooter(TextListener textListener)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "printFailures": {
+                    "target_classes": [
+                        {
+                            "class_name": "TextListener",
+                            "similarity_score": 0.2861493558453397
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TextListener"
+                    ],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "printFooter": {
+                    "target_classes": [
+                        {
+                            "class_name": "TextListener",
+                            "similarity_score": 0.455101068709195
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "TextListener"
+                    ],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    }
+]

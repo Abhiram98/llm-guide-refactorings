@@ -1,0 +1,1997 @@
+[
+    {
+        "oracle": "method org.junit.runner.notification.RunNotifier::addFailure(Throwable):void need move to org.junit.internal.runners.ClassRoadie",
+        "class_name": "org.junit.runner.notification.RunNotifier",
+        "telemetry": {
+            "id": "f75d15a5-a332-48c5-9091-460e6052dc89",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 159,
+                "lineStart": 13,
+                "lineEnd": 171,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+                "sourceCode": "/**\n * If you write custom runners, you may need to notify JUnit of your progress running tests.\n * Do this by invoking the <code>RunNotifier</code> passed to your implementation of\n * {@link org.junit.runner.Runner#run(RunNotifier)}. Future evolution of this class is likely to \n * move {@link #fireTestRunStarted(Description)} and {@link #fireTestRunFinished(Result)}\n * to a separate class since they should only be called once per run.\n */\npublic class RunNotifier {\n\tprivate final List<RunListener> fListeners= \n\t\tCollections.synchronizedList(new ArrayList<RunListener>());\n\tprivate boolean fPleaseStop= false;\n\t\n\t/** Internal use only\n\t */\n\tpublic void addListener(RunListener listener) {\n\t\tfListeners.add(listener);\n\t}\n\n\t/** Internal use only\n\t */\n\tpublic void removeListener(RunListener listener) {\n\t\tfListeners.remove(listener);\n    }\n\n\tprivate abstract class SafeNotifier {\n\t\tvoid run() {\n\t\t\tsynchronized (fListeners) {\n\t\t\t\tfor (Iterator<RunListener> all= fListeners.iterator(); all.hasNext();)\n\t\t\t\t\ttry {\n\t\t\t\t\t\tnotifyListener(all.next());\n\t\t\t\t\t} catch (Exception e) {\n\t\t\t\t\t\tall.remove(); // Remove the offending listener first to avoid an infinite loop\n\t\t\t\t\t\tfireTestFailure(new Failure(Description.TEST_MECHANISM, e));\n\t\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\n\t\tabstract protected void notifyListener(RunListener each) throws Exception;\n\t}\n\t\n\t/**\n\t * Do not invoke. \n\t */\n\tpublic void fireTestRunStarted(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Do not invoke.\n\t */\n\tpublic void fireTestRunFinished(final Result result) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunFinished(result);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Invoke to tell listeners that an atomic test is about to start.\n\t * @param description the description of the atomic test (generally a class and method name)\n\t * @throws StoppedByUserException thrown if a user has requested that the test run stop\n\t */\n\tpublic void fireTestStarted(final Description description) throws StoppedByUserException {\n\t\tif (fPleaseStop)\n\t\t\tthrow new StoppedByUserException();\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test failed.\n\t * @param failure the description of the test that failed and the exception thrown\n\t */\n\tpublic void fireTestFailure(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test flagged that it assumed\n\t * something false.\n\t * \n\t * @param failure\n\t *            the description of the test that failed and the\n\t *            {@link AssumptionViolatedException} thrown\n\t */\n\tpublic void fireTestAssumptionFailed(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testAssumptionFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test was ignored.\n\t * @param description the description of the ignored test\n\t */\n\tpublic void fireTestIgnored(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testIgnored(description);\n\t\t\t}\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test finished. Always invoke \n\t * {@link #fireTestFinished(Description)} if you invoke {@link #fireTestStarted(Description)} \n\t * as listeners are likely to expect them to come in pairs.\n\t * @param description the description of the test that finished\n\t */\n\tpublic void fireTestFinished(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFinished(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Ask that the tests run stop before starting the next test. Phrased politely because\n\t * the test currently running will not be interrupted. It seems a little odd to put this\n\t * functionality here, but the <code>RunNotifier</code> is the only object guaranteed \n\t * to be shared amongst the many runners involved.\n\t */\n\tpublic void pleaseStop() {\n\t\tfPleaseStop= true;\n\t}\n\n\t/**\n\t * Internal use only. The Result's listener must be first.\n\t */\n\tpublic void addFirstListener(RunListener listener) {\n\t\tfListeners.add(0, listener);\n\t}\n\n\tpublic void addFailure(ClassRoadie classRoadie, Throwable targetException) {\n\t\tfireTestFailure(new Failure(classRoadie.fDescription, targetException));\n\t}\n}",
+                "methodCount": 21
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 167,
+                        "lineEnd": 169,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method addFailure to class ClassRoadie",
+                        "description": "Move method addFailure to org.junit.internal.runners.ClassRoadie\nRationale: While ClassRoadie is currently the class that calls addFailure, it is primarily focused on running tests rather than managing their results. Keeping the method here would dilute its responsibilities, as it would mix test execution logic with failure reporting.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure",
+                            "method_signature": "public addFailure(ClassRoadie classRoadie, Throwable targetException)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure",
+                            "method_signature": "public addFailure(ClassRoadie classRoadie, Throwable targetException)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public addFailure(ClassRoadie classRoadie, Throwable targetException)": {
+                        "first": {
+                            "method_name": "addFailure",
+                            "method_signature": "public addFailure(ClassRoadie classRoadie, Throwable targetException)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.33648123245570694
+                    }
+                },
+                "voyage": {
+                    "public addFailure(ClassRoadie classRoadie, Throwable targetException)": {
+                        "first": {
+                            "method_name": "addFailure",
+                            "method_signature": "public addFailure(ClassRoadie classRoadie, Throwable targetException)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.4302870835425342
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public addFailure(ClassRoadie classRoadie, Throwable targetException)"
+                    ],
+                    "llm_response_time": 888
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public addFailure(ClassRoadie classRoadie, Throwable targetException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public addFailure(ClassRoadie classRoadie, Throwable targetException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public addFailure(ClassRoadie classRoadie, Throwable targetException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public addFailure(ClassRoadie classRoadie, Throwable targetException)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public addFailure(ClassRoadie classRoadie, Throwable targetException)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "addFailure": {
+                    "target_classes": [
+                        {
+                            "class_name": "ClassRoadie",
+                            "similarity_score": 0.4330817574228222
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ClassRoadie"
+                    ],
+                    "llm_response_time": 2722,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.TestClass::getArgumentStrings(boolean):Object[] need move to org.junit.experimental.theories.internal.Assignments",
+        "class_name": "org.junit.runners.model.TestClass",
+        "telemetry": {
+            "id": "8d2ea7fc-6dcb-430a-b2c7-ec0cf5e8a2e8",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 156,
+                "lineStart": 20,
+                "lineEnd": 175,
+                "bodyLineStart": 20,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runners/model/TestClass.java",
+                "sourceCode": "/**\n * Wraps a class to be run, providing method validation and annotation searching\n */\npublic class TestClass {\n\tprivate final Class<?> fClass;\n\n\tprivate Map<Class<?>, List<FrameworkMethod>> fMethodsForAnnotations= new HashMap<Class<?>, List<FrameworkMethod>>();\n\n\tprivate Map<Class<?>, List<FrameworkField>> fFieldsForAnnotations= new HashMap<Class<?>, List<FrameworkField>>();\n\n\t/**\n\t * Creates a {@code TestClass} wrapping {@code klass}. Each time this\n\t * constructor executes, the class is scanned for annotations, which can be\n\t * an expensive process (we hope in future JDK's it will not be.) Therefore,\n\t * try to share instances of {@code TestClass} where possible.\n\t */\n\tpublic TestClass(Class<?> klass) {\n\t\tfClass= klass;\n\t\tif (klass != null && klass.getConstructors().length > 1)\n\t\t\tthrow new IllegalArgumentException(\n\t\t\t\t\t\"Test class can only have one constructor\");\n\n\t\tfor (Class<?> eachClass : getSuperClasses(fClass)) {\n\t\t\tfor (Method eachMethod : eachClass.getDeclaredMethods())\n\t\t\t\taddToAnnotationLists(new FrameworkMethod(eachMethod),\n\t\t\t\t\t\tfMethodsForAnnotations);\n\t\t\tfor (Field eachField : eachClass.getDeclaredFields())\n\t\t\t\taddToAnnotationLists(new FrameworkField(eachField),\n\t\t\t\t\t\tfFieldsForAnnotations);\n\t\t}\n\t}\n\n\tprivate <T extends FrameworkMember<T>> void addToAnnotationLists(T member,\n\t\t\tMap<Class<?>, List<T>> map) {\n\t\tfor (Annotation each : member.getAnnotations()) {\n\t\t\tClass<? extends Annotation> type= each.annotationType();\n\t\t\tList<T> members= getAnnotatedMembers(map, type);\n\t\t\tif (member.isShadowedBy(members))\n\t\t\t\treturn;\n\t\t\tif (runsTopToBottom(type))\n\t\t\t\tmembers.add(0, member);\n\t\t\telse\n\t\t\t\tmembers.add(member);\n\t\t}\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden methods in this class and\n\t * its superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkMethod> getAnnotatedMethods(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fMethodsForAnnotations, annotationClass);\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden fields in this class and its\n\t * superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkField> getAnnotatedFields(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fFieldsForAnnotations, annotationClass);\n\t}\n\n\tprivate <T> List<T> getAnnotatedMembers(Map<Class<?>, List<T>> map,\n\t\t\tClass<? extends Annotation> type) {\n\t\tif (!map.containsKey(type))\n\t\t\tmap.put(type, new ArrayList<T>());\n\t\treturn map.get(type);\n\t}\n\n\tprivate boolean runsTopToBottom(Class<? extends Annotation> annotation) {\n\t\treturn annotation.equals(Before.class)\n\t\t\t\t|| annotation.equals(BeforeClass.class);\n\t}\n\n\tprivate List<Class<?>> getSuperClasses(Class<?> testClass) {\n\t\tArrayList<Class<?>> results= new ArrayList<Class<?>>();\n\t\tClass<?> current= testClass;\n\t\twhile (current != null) {\n\t\t\tresults.add(current);\n\t\t\tcurrent= current.getSuperclass();\n\t\t}\n\t\treturn results;\n\t}\n\n\t/**\n\t * Returns the underlying Java class.\n\t */\n\tpublic Class<?> getJavaClass() {\n\t\treturn fClass;\n\t}\n\n\t/**\n\t * Returns the class's name.\n\t */\n\tpublic String getName() {\n\t\tif (fClass == null)\n\t\t\treturn \"null\";\n\t\treturn fClass.getName();\n\t}\n\n\t/**\n\t * Returns the only public constructor in the class, or throws an {@code\n\t * AssertionError} if there are more or less than one.\n\t */\n\n\tpublic Constructor<?> getOnlyConstructor() {\n\t\tConstructor<?>[] constructors= fClass.getConstructors();\n\t\tAssert.assertEquals(1, constructors.length);\n\t\treturn constructors[0];\n\t}\n\n\t/**\n\t * Returns the annotations on this class\n\t */\n\tpublic Annotation[] getAnnotations() {\n\t\tif (fClass == null)\n\t\t\treturn new Annotation[0];\n\t\treturn fClass.getAnnotations();\n\t}\n\n\tpublic <T> List<T> getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass) {\n\t\tList<T> results= new ArrayList<T>();\n\t\tfor (FrameworkField each : getAnnotatedFields(annotationClass)) {\n\t\t\ttry {\n\t\t\t\tObject fieldValue= each.get(test);\n\t\t\t\tif (valueClass.isInstance(fieldValue))\n\t\t\t\t\tresults.add(valueClass.cast(fieldValue));\n\t\t\t} catch (IllegalAccessException e) {\n\t\t\t\tthrow new RuntimeException(\n\t\t\t\t\t\t\"How did getFields return a field we couldn't access?\", e);\n\t\t\t}\n\t\t}\n\t\treturn results;\n\t}\n\n\tpublic boolean isANonStaticInnerClass() {\n\t\treturn fClass.isMemberClass() && !isStatic(fClass.getModifiers());\n\t}\n\n\tpublic Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\tObject[] values= new Object[assignments.fAssigned.size()];\n\t\tfor (int i= 0; i < values.length; i++) {\n\t\t\tvalues[i]= assignments.fAssigned.get(i).getDescription();\n\t\t}\n\t\treturn values;\n\t}\n\n\tpublic Object[] getAllArguments(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\treturn assignments.getActualValues(0, assignments.fAssigned.size(), nullsOk);\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 170,
+                        "lineEnd": 173,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method getAllArguments to class Assignments",
+                        "description": "Move method getAllArguments to org.junit.experimental.theories.internal.Assignments\nRationale: The method getAllArguments() is primarily concerned with retrieving actual values from a list of assigned parameters, which is a core responsibility of the Assignments class. The method utilizes the getActualValues() method of the Assignments class, indicating that it directly interacts with the internal state of Assignments. Moving getAllArguments() to the Assignments class will enhance cohesion, as it will keep related functionality together, thereby improving maintainability and clarity of the code.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 161,
+                        "lineEnd": 168,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method getArgumentStrings to class Assignments",
+                        "description": "Move method getArgumentStrings to org.junit.experimental.theories.internal.Assignments\nRationale: The method getArgumentStrings() is designed to retrieve a list of descriptions from the assigned potential assignments. Since this method operates directly on the 'fAssigned' field of the Assignments class, which is a collection of PotentialAssignment objects, it logically belongs within the Assignments class. Moving this method to Assignments enhances cohesion by keeping related functionality together, specifically the management and retrieval of assignment-related data. Additionally, it avoids potential confusion about the method's purpose and usage, as it directly relates to the state and behavior of the Assignments class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public getAllArguments(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.41973983042079244
+                    },
+                    "public getArgumentStrings(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.46011083378893286
+                    },
+                    "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)": {
+                        "first": {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5806934505447694
+                    }
+                },
+                "voyage": {
+                    "public getArgumentStrings(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.24743954392879508
+                    },
+                    "public getAllArguments(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.2756497577881999
+                    },
+                    "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)": {
+                        "first": {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6440409192814923
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 1996
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 1427
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "getAllArguments": {
+                    "target_classes": [
+                        {
+                            "class_name": "Assignments",
+                            "similarity_score": 0.585009875050037
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Assignments"
+                    ],
+                    "llm_response_time": 2019,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "getArgumentStrings": {
+                    "target_classes": [
+                        {
+                            "class_name": "Assignments",
+                            "similarity_score": 0.615646768839375
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Assignments"
+                    ],
+                    "llm_response_time": 2309,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "getAnnotatedFieldValues": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 2840,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Runner::run2(TestResult):void need move to junit.framework.JUnit4TestAdapter",
+        "class_name": "org.junit.runner.Runner",
+        "telemetry": {
+            "id": "de34a1a0-aca6-496d-9df0-1812c6d75db6",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 40,
+                "lineStart": 8,
+                "lineEnd": 47,
+                "bodyLineStart": 8,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/Runner.java",
+                "sourceCode": "/**\n * A <code>Runner</code> runs tests and notifies a {@link org.junit.runner.notification.RunNotifier}\n * of significant events as it does so. You will need to subclass <code>Runner</code>\n * when using {@link org.junit.runner.RunWith} to invoke a custom runner. When creating\n * a custom runner, in addition to implementing the abstract methods here you must\n * also provide a constructor that takes as an argument the {@link Class} containing\n * the tests.\n * <p/>\n * The default runner implementation guarantees that the instances of the test case\n * class will be constructed immediately before running the test and that the runner\n * will retain no reference to the test case instances, generally making them \n * available for garbage collection.\n * \n * @see org.junit.runner.Description\n * @see org.junit.runner.RunWith\n */\npublic abstract class Runner implements Describable {\n\t/* (non-Javadoc)\n\t * @see org.junit.runner.Describable#getDescription()\n\t */\n\tpublic abstract Description getDescription();\n\n\t/**\n\t * Run the tests for this runner.\n\t * @param notifier will be notified of events while tests are being run--tests being \n\t * started, finishing, and failing\n\t */\n\tpublic abstract void run(RunNotifier notifier);\n\t\n\t/**\n\t * @return the number of tests to be run by the receiver\n\t */\n\tpublic int testCount() {\n\t\treturn getDescription().testCount();\n\t}\n\n\tpublic void run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result) {\n\t\trun(jUnit4TestAdapter.fCache.getNotifier(result, jUnit4TestAdapter));\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 43,
+                        "lineEnd": 45,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method run2 to class JUnit4TestAdapter",
+                        "description": "Move method run2 to junit.framework.JUnit4TestAdapter\nRationale: The run2 method is primarily concerned with executing a test and relies on the JUnit4TestAdapter to obtain the necessary test runner and notifier. This method directly interacts with the fCache of the JUnit4TestAdapter to retrieve the notifier for the given TestResult, indicating that it is more aligned with the responsibilities of the JUnit4TestAdapter class. Moving this method to JUnit4TestAdapter would encapsulate the test execution logic within the class that manages the test's lifecycle and context, promoting better cohesion and adherence to the Single Responsibility Principle.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "run2",
+                            "method_signature": "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "run2",
+                            "method_signature": "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)": {
+                        "first": {
+                            "method_name": "run2",
+                            "method_signature": "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.0972192124147473
+                    }
+                },
+                "voyage": {
+                    "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)": {
+                        "first": {
+                            "method_name": "run2",
+                            "method_signature": "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.49213072356408105
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)"
+                    ],
+                    "llm_response_time": 728
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "run2": {
+                    "target_classes": [
+                        {
+                            "class_name": "JUnit4TestAdapter",
+                            "similarity_score": 0.4966391308680567
+                        },
+                        {
+                            "class_name": "TestResult",
+                            "similarity_score": 0.3741423555108758
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JUnit4TestAdapter",
+                        "TestResult"
+                    ],
+                    "llm_response_time": 4284,
+                    "similarity_computation_time": 2,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method junit.framework.AssertionFailedError::addFailure2(Test, AssertionFailedError):void need move to junit.textui.ResultPrinter",
+        "class_name": "junit.framework.AssertionFailedError",
+        "telemetry": {
+            "id": "9831b411-9da5-4299-ab86-45ed5a49f30a",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 27,
+                "lineStart": 5,
+                "lineEnd": 31,
+                "bodyLineStart": 5,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/junit/framework/AssertionFailedError.java",
+                "sourceCode": "/**\n * Thrown when an assertion failed.\n */\npublic class AssertionFailedError extends AssertionError {\n\n\tprivate static final long serialVersionUID= 1L;\n\n\tpublic AssertionFailedError() {\n\t}\n\n\tpublic AssertionFailedError(String message) {\n\t\tsuper(defaultString(message));\n\t}\n\n\tprivate static String defaultString(String message) {\n\t\treturn message == null ? \"\" : message;\n\t}\n\n\t/**\n\t * @param test TODO\n\t * @param resultPrinter TODO\n\t * @see junit.framework.TestListener#addFailure(Test, AssertionFailedError)\n\t */\n\tpublic void addFailure2(Test test, ResultPrinter resultPrinter) {\n\t\tresultPrinter.getWriter().print(\"F\");\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 22,
+                        "lineEnd": 29,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method addFailure2 to class ResultPrinter",
+                        "description": "Move method addFailure2 to junit.textui.ResultPrinter\nRationale: The method addFailure2() is responsible for printing a failure indicator ('F') to the output stream, which is directly related to the functionality of the ResultPrinter class. This class is designed to handle the presentation of test results, including failures, errors, and overall test outcomes. Moving addFailure2() to ResultPrinter aligns with the single responsibility principle, ensuring that all output-related functionalities reside within the ResultPrinter class. Additionally, the existing method references the ResultPrinter directly through its parameter, indicating a clear relationship and making it more intuitive for the method to be part of this class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure2",
+                            "method_signature": "public addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure2",
+                            "method_signature": "public addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public addFailure2(Test test, ResultPrinter resultPrinter)": {
+                        "first": {
+                            "method_name": "addFailure2",
+                            "method_signature": "public addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.29866135717862297
+                    }
+                },
+                "voyage": {
+                    "public addFailure2(Test test, ResultPrinter resultPrinter)": {
+                        "first": {
+                            "method_name": "addFailure2",
+                            "method_signature": "public addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5366898521203178
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public addFailure2(Test test, ResultPrinter resultPrinter)"
+                    ],
+                    "llm_response_time": 893
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public addFailure2(Test test, ResultPrinter resultPrinter)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public addFailure2(Test test, ResultPrinter resultPrinter)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public addFailure2(Test test, ResultPrinter resultPrinter)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public addFailure2(Test test, ResultPrinter resultPrinter)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public addFailure2(Test test, ResultPrinter resultPrinter)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "addFailure2": {
+                    "target_classes": [
+                        {
+                            "class_name": "Test",
+                            "similarity_score": 0.4744033600317009
+                        },
+                        {
+                            "class_name": "ResultPrinter",
+                            "similarity_score": 0.4072956818033849
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "ResultPrinter",
+                        "Test"
+                    ],
+                    "llm_response_time": 4229,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.TestClass::getAllArguments(boolean):Object[] need move to org.junit.experimental.theories.internal.Assignments",
+        "class_name": "org.junit.runners.model.TestClass",
+        "telemetry": {
+            "id": "771fef18-eca0-42aa-8867-1e8dcd496b08",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 156,
+                "lineStart": 20,
+                "lineEnd": 175,
+                "bodyLineStart": 20,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runners/model/TestClass.java",
+                "sourceCode": "/**\n * Wraps a class to be run, providing method validation and annotation searching\n */\npublic class TestClass {\n\tprivate final Class<?> fClass;\n\n\tprivate Map<Class<?>, List<FrameworkMethod>> fMethodsForAnnotations= new HashMap<Class<?>, List<FrameworkMethod>>();\n\n\tprivate Map<Class<?>, List<FrameworkField>> fFieldsForAnnotations= new HashMap<Class<?>, List<FrameworkField>>();\n\n\t/**\n\t * Creates a {@code TestClass} wrapping {@code klass}. Each time this\n\t * constructor executes, the class is scanned for annotations, which can be\n\t * an expensive process (we hope in future JDK's it will not be.) Therefore,\n\t * try to share instances of {@code TestClass} where possible.\n\t */\n\tpublic TestClass(Class<?> klass) {\n\t\tfClass= klass;\n\t\tif (klass != null && klass.getConstructors().length > 1)\n\t\t\tthrow new IllegalArgumentException(\n\t\t\t\t\t\"Test class can only have one constructor\");\n\n\t\tfor (Class<?> eachClass : getSuperClasses(fClass)) {\n\t\t\tfor (Method eachMethod : eachClass.getDeclaredMethods())\n\t\t\t\taddToAnnotationLists(new FrameworkMethod(eachMethod),\n\t\t\t\t\t\tfMethodsForAnnotations);\n\t\t\tfor (Field eachField : eachClass.getDeclaredFields())\n\t\t\t\taddToAnnotationLists(new FrameworkField(eachField),\n\t\t\t\t\t\tfFieldsForAnnotations);\n\t\t}\n\t}\n\n\tprivate <T extends FrameworkMember<T>> void addToAnnotationLists(T member,\n\t\t\tMap<Class<?>, List<T>> map) {\n\t\tfor (Annotation each : member.getAnnotations()) {\n\t\t\tClass<? extends Annotation> type= each.annotationType();\n\t\t\tList<T> members= getAnnotatedMembers(map, type);\n\t\t\tif (member.isShadowedBy(members))\n\t\t\t\treturn;\n\t\t\tif (runsTopToBottom(type))\n\t\t\t\tmembers.add(0, member);\n\t\t\telse\n\t\t\t\tmembers.add(member);\n\t\t}\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden methods in this class and\n\t * its superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkMethod> getAnnotatedMethods(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fMethodsForAnnotations, annotationClass);\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden fields in this class and its\n\t * superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkField> getAnnotatedFields(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fFieldsForAnnotations, annotationClass);\n\t}\n\n\tprivate <T> List<T> getAnnotatedMembers(Map<Class<?>, List<T>> map,\n\t\t\tClass<? extends Annotation> type) {\n\t\tif (!map.containsKey(type))\n\t\t\tmap.put(type, new ArrayList<T>());\n\t\treturn map.get(type);\n\t}\n\n\tprivate boolean runsTopToBottom(Class<? extends Annotation> annotation) {\n\t\treturn annotation.equals(Before.class)\n\t\t\t\t|| annotation.equals(BeforeClass.class);\n\t}\n\n\tprivate List<Class<?>> getSuperClasses(Class<?> testClass) {\n\t\tArrayList<Class<?>> results= new ArrayList<Class<?>>();\n\t\tClass<?> current= testClass;\n\t\twhile (current != null) {\n\t\t\tresults.add(current);\n\t\t\tcurrent= current.getSuperclass();\n\t\t}\n\t\treturn results;\n\t}\n\n\t/**\n\t * Returns the underlying Java class.\n\t */\n\tpublic Class<?> getJavaClass() {\n\t\treturn fClass;\n\t}\n\n\t/**\n\t * Returns the class's name.\n\t */\n\tpublic String getName() {\n\t\tif (fClass == null)\n\t\t\treturn \"null\";\n\t\treturn fClass.getName();\n\t}\n\n\t/**\n\t * Returns the only public constructor in the class, or throws an {@code\n\t * AssertionError} if there are more or less than one.\n\t */\n\n\tpublic Constructor<?> getOnlyConstructor() {\n\t\tConstructor<?>[] constructors= fClass.getConstructors();\n\t\tAssert.assertEquals(1, constructors.length);\n\t\treturn constructors[0];\n\t}\n\n\t/**\n\t * Returns the annotations on this class\n\t */\n\tpublic Annotation[] getAnnotations() {\n\t\tif (fClass == null)\n\t\t\treturn new Annotation[0];\n\t\treturn fClass.getAnnotations();\n\t}\n\n\tpublic <T> List<T> getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass) {\n\t\tList<T> results= new ArrayList<T>();\n\t\tfor (FrameworkField each : getAnnotatedFields(annotationClass)) {\n\t\t\ttry {\n\t\t\t\tObject fieldValue= each.get(test);\n\t\t\t\tif (valueClass.isInstance(fieldValue))\n\t\t\t\t\tresults.add(valueClass.cast(fieldValue));\n\t\t\t} catch (IllegalAccessException e) {\n\t\t\t\tthrow new RuntimeException(\n\t\t\t\t\t\t\"How did getFields return a field we couldn't access?\", e);\n\t\t\t}\n\t\t}\n\t\treturn results;\n\t}\n\n\tpublic boolean isANonStaticInnerClass() {\n\t\treturn fClass.isMemberClass() && !isStatic(fClass.getModifiers());\n\t}\n\n\tpublic Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\tObject[] values= new Object[assignments.fAssigned.size()];\n\t\tfor (int i= 0; i < values.length; i++) {\n\t\t\tvalues[i]= assignments.fAssigned.get(i).getDescription();\n\t\t}\n\t\treturn values;\n\t}\n\n\tpublic Object[] getAllArguments(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\treturn assignments.getActualValues(0, assignments.fAssigned.size(), nullsOk);\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 170,
+                        "lineEnd": 173,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method getAllArguments to class Assignments",
+                        "description": "Move method getAllArguments to org.junit.experimental.theories.internal.Assignments\nRationale: The method getAllArguments() is primarily concerned with retrieving actual values from a list of assigned parameters, which is a core responsibility of the Assignments class. The method utilizes the getActualValues() method of the Assignments class, indicating that it directly interacts with the internal state of Assignments. Moving getAllArguments() to the Assignments class will enhance cohesion, as it will keep related functionality together, thereby improving maintainability and clarity of the code.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 161,
+                        "lineEnd": 168,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method getArgumentStrings to class Assignments",
+                        "description": "Move method getArgumentStrings to org.junit.experimental.theories.internal.Assignments\nRationale: The method getArgumentStrings() is designed to retrieve a list of descriptions from the assigned potential assignments. Since this method operates directly on the 'fAssigned' field of the Assignments class, which is a collection of PotentialAssignment objects, it logically belongs within the Assignments class. Moving this method to Assignments enhances cohesion by keeping related functionality together, specifically the management and retrieval of assignment-related data. Additionally, it avoids potential confusion about the method's purpose and usage, as it directly relates to the state and behavior of the Assignments class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public getAllArguments(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.41973983042079244
+                    },
+                    "public getArgumentStrings(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.46011083378893286
+                    },
+                    "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)": {
+                        "first": {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5806934505447694
+                    }
+                },
+                "voyage": {
+                    "public getArgumentStrings(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.24743954392879508
+                    },
+                    "public getAllArguments(Assignments assignments, boolean nullsOk)": {
+                        "first": {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.2756497577881999
+                    },
+                    "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)": {
+                        "first": {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6440409192814923
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public getAllArguments(Assignments assignments, boolean nullsOk)",
+                        "public getArgumentStrings(Assignments assignments, boolean nullsOk)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "getAllArguments": {
+                    "target_classes": [
+                        {
+                            "class_name": "Assignments",
+                            "similarity_score": 0.585009875050037
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Assignments"
+                    ],
+                    "llm_response_time": 1,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "getArgumentStrings": {
+                    "target_classes": [
+                        {
+                            "class_name": "Assignments",
+                            "similarity_score": 0.615646768839375
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Assignments"
+                    ],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                },
+                "getAnnotatedFieldValues": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Request::sortRequest(Request):Request need move to org.junit.experimental.max.MaxCore",
+        "class_name": "org.junit.runner.Request",
+        "telemetry": {
+            "id": "5d992f16-87d4-43fe-9215-ebaa3efcba4f",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 151,
+                "lineStart": 15,
+                "lineEnd": 165,
+                "bodyLineStart": 15,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/Request.java",
+                "sourceCode": "/**\n * <p>A <code>Request</code> is an abstract description of tests to be run. Older versions of \n * JUnit did not need such a concept--tests to be run were described either by classes containing\n * tests or a tree of {@link  org.junit.Test}s. However, we want to support filtering and sorting,\n * so we need a more abstract specification than the tests themselves and a richer\n * specification than just the classes.</p>\n * \n * <p>The flow when JUnit runs tests is that a <code>Request</code> specifies some tests to be run ->\n * a {@link org.junit.runner.Runner} is created for each class implied by the <code>Request</code> -> \n * the {@link org.junit.runner.Runner} returns a detailed {@link org.junit.runner.Description} \n * which is a tree structure of the tests to be run.</p>\n */\npublic abstract class Request {\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run a single test.\n\t * This is done by filtering out all other tests. This method is used to support rerunning\n\t * single tests.\n\t * @param clazz the class of the test\n\t * @param methodName the name of the test\n\t * @return a <code>Request</code> that will cause a single test be run\n\t */\n\tpublic static Request method(Class<?> clazz, String methodName) {\n\t\tDescription method= Description.createTestDescription(clazz, methodName);\n\t\treturn Request.aClass(clazz).filterWith(method);\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a class. The odd name is necessary because <code>class</code> is a reserved word.\n\t * @param clazz the class containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the class to be run\n\t */\n\tpublic static Request aClass(Class<?> clazz) {\n\t\treturn new ClassRequest(clazz);\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a class. If the class has a suite() method, it will be ignored.\n\t * @param clazz the class containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the class to be run\n\t */\n\tpublic static Request classWithoutSuiteMethod(Class<?> clazz) {\n\t\treturn new ClassRequest(clazz, false);\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a set of classes.\n\t * @param computer Helps construct Runners from classes\n\t * @param classes the classes containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the classes to be run\n\t */\n\tpublic static Request classes(Computer computer, Class<?>... classes) {\n\t\ttry {\n\t\t\tAllDefaultPossibilitiesBuilder builder= new AllDefaultPossibilitiesBuilder(true);\n\t\t\tRunner suite= computer.getSuite(builder, classes);\n\t\t\treturn runner(suite);\n\t\t} catch (InitializationError e) {\n\t\t\tthrow new RuntimeException(\n\t\t\t\t\t\"Bug in saff's brain: Suite constructor, called as above, should always complete\");\n\t\t}\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a set of classes with the default <code>Computer</code>.\n\t * @param classes the classes containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the classes to be run\n\t */\n\tpublic static Request classes(Class<?>... classes) {\n\t\treturn classes(JUnitCore.defaultComputer(), classes);\n\t}\n\t\n\n\t/**\n\t * Not used within JUnit.  Clients should simply instantiate ErrorReportingRunner themselves\n\t */\n\t@Deprecated\t\n\tpublic static Request errorReport(Class<?> klass, Throwable cause) {\n\t\treturn runner(new ErrorReportingRunner(klass, cause));\n\t}\n\n\t/**\n\t * @param runner the runner to return\n\t * @return a <code>Request</code> that will run the given runner when invoked\n\t */\n\tpublic static Request runner(final Runner runner) {\n\t\treturn new Request(){\n\t\t\t@Override\n\t\t\tpublic Runner getRunner() {\n\t\t\t\treturn runner;\n\t\t\t}\t\t\n\t\t};\n\t}\n\n\t/**\n\t * Returns a {@link Runner} for this Request\n\t * @return corresponding {@link Runner} for this Request\n\t */\n\tpublic abstract Runner getRunner();\n\n\t/**\n\t * Returns a Request that only runs contains tests whose {@link Description}\n\t * equals <code>desiredDescription</code>\n\t * @param desiredDescription {@link Description} of those tests that should be run\n\t * @return the filtered Request\n\t */\n\tpublic Request filterWith(final Description desiredDescription) {\n\t\treturn Filter.matchMethodDescription(desiredDescription).filterWith2(this);\n\t}\n\n\t/**\n\t * Returns a Request whose Tests can be run in a certain order, defined by \n\t * <code>comparator</code>\n\t * \n\t * For example, here is code to run a test suite in alphabetical order:\n\t * \n\t * <pre>\n\tprivate static Comparator<Description> forward() {\n\t\treturn new Comparator<Description>() {\n\t\t\tpublic int compare(Description o1, Description o2) {\n\t\t\t\treturn o1.getDisplayName().compareTo(o2.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\t\n\tpublic static main() {\n\t\tnew JUnitCore().run(Request.aClass(AllTests.class).sortWith(forward()));\n\t}\n\t * </pre>\n\t * \n\t * @param comparator definition of the order of the tests in this Request\n\t * @return a Request with ordered Tests\n\t */\n\tpublic Request sortWith(Comparator<Description> comparator) {\n\t\treturn new SortingRequest(this, comparator);\n\t}\n\n\t/**\n\t * @param maxCore TODO\n\t * @return a new Request, which contains all of the same tests, but in a new order.\n\t */\n\tpublic Request sortRequest(MaxCore maxCore) {\n\t\tif (this instanceof SortingRequest) // We'll pay big karma points for this\n\t\t\treturn this;\n\t\tList<Description> leaves= maxCore.findLeaves(this);\n\t\tCollections.sort(leaves, maxCore.fHistory.testComparator());\n\t\treturn maxCore.constructLeafRequest(leaves);\n\t}\n}",
+                "methodCount": 12
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 2,
+                "candidates": [
+                    {
+                        "lineStart": 153,
+                        "lineEnd": 163,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method sortRequest to class MaxCore",
+                        "description": "Move method sortRequest to org.junit.experimental.max.MaxCore\nRationale: The sortRequest method is closely tied to the functionality of the MaxCore class, which is responsible for managing the ordering and execution of tests. The method utilizes the MaxCore instance to find leaves and sort them based on the test history, which aligns with the core responsibilities of MaxCore. Moving sortRequest to MaxCore will enhance the cohesion of the class by keeping related functionalities together, while also allowing for better encapsulation of test management logic.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    },
+                    {
+                        "lineStart": 60,
+                        "lineEnd": 76,
+                        "refactoringType": "MyMoveStaticMethodRefactoring",
+                        "refactoringInfo": "Move Static method classes to class JUnitCore",
+                        "description": "move method classes to PsiClass:JUnitCore\nRationale: The 'classes' method is responsible for creating a Request that runs all tests in a set of classes, which aligns closely with the purpose of JUnitCore, which is designed to run tests. It provides a static method to run tests from specified classes, making it logical for the 'classes' method to reside here. Moving it to JUnitCore allows for better organization of related functionalities, as JUnitCore already handles the orchestration of test execution.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "classes",
+                            "method_signature": "public static classes(Computer computer, Class<?>... classes)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "sortRequest",
+                            "method_signature": "public sortRequest(MaxCore maxCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "sortRequest",
+                            "method_signature": "public sortRequest(MaxCore maxCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "classes",
+                            "method_signature": "public static classes(Computer computer, Class<?>... classes)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public sortRequest(MaxCore maxCore)": {
+                        "first": {
+                            "method_name": "sortRequest",
+                            "method_signature": "public sortRequest(MaxCore maxCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.532866609512038
+                    },
+                    "public static classes(Computer computer, Class<?>... classes)": {
+                        "first": {
+                            "method_name": "classes",
+                            "method_signature": "public static classes(Computer computer, Class<?>... classes)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.7493147560269499
+                    }
+                },
+                "voyage": {
+                    "public sortRequest(MaxCore maxCore)": {
+                        "first": {
+                            "method_name": "sortRequest",
+                            "method_signature": "public sortRequest(MaxCore maxCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5112869036791602
+                    },
+                    "public static classes(Computer computer, Class<?>... classes)": {
+                        "first": {
+                            "method_name": "classes",
+                            "method_signature": "public static classes(Computer computer, Class<?>... classes)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6126718033852794
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public static classes(Computer computer, Class<?>... classes)",
+                        "public sortRequest(MaxCore maxCore)"
+                    ],
+                    "llm_response_time": 1087
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public static classes(Computer computer, Class<?>... classes)",
+                        "public sortRequest(MaxCore maxCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public static classes(Computer computer, Class<?>... classes)",
+                        "public sortRequest(MaxCore maxCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public static classes(Computer computer, Class<?>... classes)",
+                        "public sortRequest(MaxCore maxCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public static classes(Computer computer, Class<?>... classes)",
+                        "public sortRequest(MaxCore maxCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public static classes(Computer computer, Class<?>... classes)",
+                        "public sortRequest(MaxCore maxCore)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "sortRequest": {
+                    "target_classes": [
+                        {
+                            "class_name": "MaxCore",
+                            "similarity_score": 0.5957496657966118
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "MaxCore"
+                    ],
+                    "llm_response_time": 2220,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                },
+                "classes": {
+                    "target_classes": [
+                        {
+                            "class_name": "Each",
+                            "similarity_score": 0.2852206609533873
+                        },
+                        {
+                            "class_name": "JUnitMatchers",
+                            "similarity_score": 0.5075167621423581
+                        },
+                        {
+                            "class_name": "ResultMatchers",
+                            "similarity_score": 0.4658451807545694
+                        },
+                        {
+                            "class_name": "Assume",
+                            "similarity_score": 0.5373350429054641
+                        },
+                        {
+                            "class_name": "Assert",
+                            "similarity_score": 0.48071400782460944
+                        },
+                        {
+                            "class_name": "JUnitCore",
+                            "similarity_score": 0.7395351526585604
+                        },
+                        {
+                            "class_name": "Computer",
+                            "similarity_score": 0.5035352203802516
+                        },
+                        {
+                            "class_name": "ParameterizedAssertionError",
+                            "similarity_score": 0.305326693570526
+                        },
+                        {
+                            "class_name": "IsCollectionContaining",
+                            "similarity_score": 0.28565867604781775
+                        },
+                        {
+                            "class_name": "Description",
+                            "similarity_score": 0.6369235677960506
+                        },
+                        {
+                            "class_name": "Filter",
+                            "similarity_score": 0.6122362556988596
+                        },
+                        {
+                            "class_name": "ParallelComputer",
+                            "similarity_score": 0.3389369039285077
+                        },
+                        {
+                            "class_name": "SuiteMethod",
+                            "similarity_score": 0.5053735438368733
+                        },
+                        {
+                            "class_name": "RuleChain",
+                            "similarity_score": 0.532169622406128
+                        },
+                        {
+                            "class_name": "Result",
+                            "similarity_score": 0.543929034367611
+                        },
+                        {
+                            "class_name": "RunListener",
+                            "similarity_score": 0.5909206814797551
+                        },
+                        {
+                            "class_name": "Runner",
+                            "similarity_score": 0.608019090130667
+                        },
+                        {
+                            "class_name": "RunNotifier",
+                            "similarity_score": 0.5205870325651636
+                        },
+                        {
+                            "class_name": "RunRules",
+                            "similarity_score": 0.29462422924529175
+                        },
+                        {
+                            "class_name": "Describable",
+                            "similarity_score": 0.4679683893254129
+                        },
+                        {
+                            "class_name": "RunWith",
+                            "similarity_score": 0.5555618987708029
+                        },
+                        {
+                            "class_name": "Failure",
+                            "similarity_score": 0.5676816191195184
+                        },
+                        {
+                            "class_name": "Filterable",
+                            "similarity_score": 0.47395103613033307
+                        },
+                        {
+                            "class_name": "Sortable",
+                            "similarity_score": 0.47504849473835997
+                        },
+                        {
+                            "class_name": "Sorter",
+                            "similarity_score": 0.5550218248054034
+                        },
+                        {
+                            "class_name": "PotentialAssignment",
+                            "similarity_score": 0.24881026498078435
+                        },
+                        {
+                            "class_name": "PrintableResult",
+                            "similarity_score": 0.5443940286795762
+                        },
+                        {
+                            "class_name": "TypeSafeMatcher",
+                            "similarity_score": 0.48138158757016153
+                        },
+                        {
+                            "class_name": "MultipleFailureException",
+                            "similarity_score": 0.5598974136709122
+                        },
+                        {
+                            "class_name": "ParameterSignature",
+                            "similarity_score": 0.2729247070474676
+                        },
+                        {
+                            "class_name": "StringContains",
+                            "similarity_score": 0.4111035756911048
+                        },
+                        {
+                            "class_name": "Suite",
+                            "similarity_score": 0.6914144997094871
+                        },
+                        {
+                            "class_name": "JUnit38ClassRunner",
+                            "similarity_score": 0.30780570606145885
+                        },
+                        {
+                            "class_name": "RuleFieldValidator",
+                            "similarity_score": 0.4458307628431716
+                        },
+                        {
+                            "class_name": "MaxHistory",
+                            "similarity_score": 0.4784113306213551
+                        },
+                        {
+                            "class_name": "Categories",
+                            "similarity_score": 0.5129260697185586
+                        },
+                        {
+                            "class_name": "MaxCore",
+                            "similarity_score": 0.6944957960932618
+                        },
+                        {
+                            "class_name": "ExpectedException",
+                            "similarity_score": 0.5512081109275874
+                        },
+                        {
+                            "class_name": "CategoryFilter",
+                            "similarity_score": 0.2280437467098512
+                        },
+                        {
+                            "class_name": "Assignments",
+                            "similarity_score": 0.34902731691481775
+                        },
+                        {
+                            "class_name": "CouldNotReadCoreException",
+                            "similarity_score": 0.3857115226095684
+                        },
+                        {
+                            "class_name": "FrameworkField",
+                            "similarity_score": 0.44065082014046414
+                        },
+                        {
+                            "class_name": "FrameworkMethod",
+                            "similarity_score": 0.47879389284920487
+                        },
+                        {
+                            "class_name": "MethodRoadie",
+                            "similarity_score": 0.3841575141419436
+                        },
+                        {
+                            "class_name": "MethodRule",
+                            "similarity_score": 0.5119198769201903
+                        },
+                        {
+                            "class_name": "MethodValidator",
+                            "similarity_score": 0.30294129119368346
+                        },
+                        {
+                            "class_name": "ClassRequest",
+                            "similarity_score": 0.27073747749259797
+                        },
+                        {
+                            "class_name": "ClassRoadie",
+                            "similarity_score": 0.4038755050361826
+                        },
+                        {
+                            "class_name": "RealSystem",
+                            "similarity_score": 0.2633078832813034
+                        },
+                        {
+                            "class_name": "EachTestNotifier",
+                            "similarity_score": 0.27245374085178004
+                        },
+                        {
+                            "class_name": "JUnit3Builder",
+                            "similarity_score": 0.26949155519982876
+                        },
+                        {
+                            "class_name": "JUnit4",
+                            "similarity_score": 0.4918657354017559
+                        },
+                        {
+                            "class_name": "JUnit4Builder",
+                            "similarity_score": 0.2690766333906969
+                        },
+                        {
+                            "class_name": "JUnit4ClassRunner",
+                            "similarity_score": 0.38581135590657567
+                        },
+                        {
+                            "class_name": "JUnitSystem",
+                            "similarity_score": 0.16545181073647292
+                        },
+                        {
+                            "class_name": "ReflectiveCallable",
+                            "similarity_score": 0.4387739295327892
+                        },
+                        {
+                            "class_name": "CombinableMatcher",
+                            "similarity_score": 0.2533357155842216
+                        },
+                        {
+                            "class_name": "AllDefaultPossibilitiesBuilder",
+                            "similarity_score": 0.3151463061647103
+                        },
+                        {
+                            "class_name": "AllMembersSupplier",
+                            "similarity_score": 0.38061529536678984
+                        },
+                        {
+                            "class_name": "Enclosed",
+                            "similarity_score": 0.5418595295010885
+                        },
+                        {
+                            "class_name": "AllTests",
+                            "similarity_score": 0.48580802732599115
+                        },
+                        {
+                            "class_name": "ComparisonCriteria",
+                            "similarity_score": 0.4372484205888584
+                        },
+                        {
+                            "class_name": "ComparisonFailure",
+                            "similarity_score": 0.4316882702463515
+                        },
+                        {
+                            "class_name": "ErrorCollector",
+                            "similarity_score": 0.5762743772938864
+                        },
+                        {
+                            "class_name": "AnnotatedBuilder",
+                            "similarity_score": 0.37303530043577615
+                        },
+                        {
+                            "class_name": "ErrorReportingRunner",
+                            "similarity_score": 0.22284649758942174
+                        },
+                        {
+                            "class_name": "ExactComparisonCriteria",
+                            "similarity_score": 0.2071598063652453
+                        },
+                        {
+                            "class_name": "ExcludeCategory",
+                            "similarity_score": 0.18028812784019332
+                        },
+                        {
+                            "class_name": "ExpectException",
+                            "similarity_score": 0.27850975514860354
+                        },
+                        {
+                            "class_name": "ArrayComparisonFailure",
+                            "similarity_score": 0.5038661558818117
+                        },
+                        {
+                            "class_name": "RunAfters",
+                            "similarity_score": 0.2959708971441514
+                        },
+                        {
+                            "class_name": "RunBefores",
+                            "similarity_score": 0.17024850870342756
+                        },
+                        {
+                            "class_name": "RunnerBuilder",
+                            "similarity_score": 0.5855912412864971
+                        },
+                        {
+                            "class_name": "RunnerScheduler",
+                            "similarity_score": 0.4400243000406501
+                        },
+                        {
+                            "class_name": "None",
+                            "similarity_score": 0.28191094171615616
+                        },
+                        {
+                            "class_name": "ExternalResource",
+                            "similarity_score": 0.4984539460889596
+                        },
+                        {
+                            "class_name": "AssumptionViolatedException",
+                            "similarity_score": 0.25517372552859163
+                        },
+                        {
+                            "class_name": "Fail",
+                            "similarity_score": 0.24311755438757737
+                        },
+                        {
+                            "class_name": "FailOnTimeout",
+                            "similarity_score": 0.2894967487864568
+                        },
+                        {
+                            "class_name": "NullBuilder",
+                            "similarity_score": 0.2441112790789414
+                        },
+                        {
+                            "class_name": "Ignore",
+                            "similarity_score": 0.5366951122614448
+                        },
+                        {
+                            "class_name": "IgnoredBuilder",
+                            "similarity_score": 0.25506228060033176
+                        },
+                        {
+                            "class_name": "IgnoredClassRunner",
+                            "similarity_score": 0.26425821129084504
+                        },
+                        {
+                            "class_name": "FilterRequest",
+                            "similarity_score": 0.5454754165079674
+                        },
+                        {
+                            "class_name": "IncludeCategory",
+                            "similarity_score": 0.18028812784019332
+                        },
+                        {
+                            "class_name": "InexactComparisonCriteria",
+                            "similarity_score": 0.20790041268272877
+                        },
+                        {
+                            "class_name": "InitializationError",
+                            "similarity_score": 0.4235882746042839
+                        },
+                        {
+                            "class_name": "BlockJUnit4ClassRunner",
+                            "similarity_score": 0.5553845655735187
+                        },
+                        {
+                            "class_name": "Category",
+                            "similarity_score": 0.44985163590528315
+                        },
+                        {
+                            "class_name": "Parameterized",
+                            "similarity_score": 0.54451048986401
+                        },
+                        {
+                            "class_name": "ParametersSuppliedBy",
+                            "similarity_score": 0.16545181073647292
+                        },
+                        {
+                            "class_name": "ParameterSupplier",
+                            "similarity_score": 0.154389528885293
+                        },
+                        {
+                            "class_name": "ParentRunner",
+                            "similarity_score": 0.5788110684333481
+                        },
+                        {
+                            "class_name": "InvokeMethod",
+                            "similarity_score": 0.20974845269470102
+                        },
+                        {
+                            "class_name": "SortingRequest",
+                            "similarity_score": 0.2556784439269409
+                        },
+                        {
+                            "class_name": "Statement",
+                            "similarity_score": 0.4474372768721465
+                        },
+                        {
+                            "class_name": "SubstringMatcher",
+                            "similarity_score": 0.19265953697589516
+                        },
+                        {
+                            "class_name": "SuiteClasses",
+                            "similarity_score": 0.5478823798434448
+                        },
+                        {
+                            "class_name": "SuiteMethodBuilder",
+                            "similarity_score": 0.3213970898833324
+                        },
+                        {
+                            "class_name": "Timeout",
+                            "similarity_score": 0.521053991724363
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JUnitCore",
+                        "Suite",
+                        "MaxCore"
+                    ],
+                    "llm_response_time": 4567,
+                    "similarity_computation_time": 8,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.notification.RunListener::removeListener(RunListener):void need move to org.junit.runner.JUnitCore",
+        "class_name": "org.junit.runner.notification.RunListener",
+        "telemetry": {
+            "id": "c20079b9-2031-4d55-bfe3-0552b05c39a3",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 93,
+                "lineStart": 8,
+                "lineEnd": 100,
+                "bodyLineStart": 8,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/notification/RunListener.java",
+                "sourceCode": "/**\n * <p>If you need to respond to the events during a test run, extend <code>RunListener</code>\n * and override the appropriate methods. If a listener throws an exception while processing a \n * test event, it will be removed for the remainder of the test run.</p>\n * \n * <p>For example, suppose you have a <code>Cowbell</code>\n * class that you want to make a noise whenever a test fails. You could write:\n * <pre>\n * public class RingingListener extends RunListener {\n *    public void testFailure(Failure failure) {\n *       Cowbell.ring();\n *    }\n * }\n * </pre>\n * </p>\n * \n * <p>To invoke your listener, you need to run your tests through <code>JUnitCore</code>.\n * <pre>\n * public void main(String... args) {\n *    JUnitCore core= new JUnitCore();\n *    core.addListener(new RingingListener());\n *    core.run(MyTestClass.class);\n * }\n * </pre>\n * </p>\n * @see org.junit.runner.JUnitCore\n */\npublic class RunListener {\n\n\t/**\n\t * Called before any tests have been run.\n\t * @param description describes the tests to be run\n\t */\n\tpublic void testRunStarted(Description description) throws Exception {\n\t}\n\t\n\t/**\n\t * Called when all tests have finished\n\t * @param result the summary of the test run, including all the tests that failed\n\t */\n\tpublic void testRunFinished(Result result) throws Exception {\n\t}\n\t\n\t/**\n\t * Called when an atomic test is about to be started.\n\t * @param description the description of the test that is about to be run \n\t * (generally a class and method name)\n\t */\n\tpublic void testStarted(Description description) throws Exception {\n\t}\n\n\t/**\n\t * Called when an atomic test has finished, whether the test succeeds or fails.\n\t * @param description the description of the test that just ran\n\t */\n\tpublic void testFinished(Description description) throws Exception {\n\t}\n\n\t/** \n\t * Called when an atomic test fails.\n\t * @param failure describes the test that failed and the exception that was thrown\n\t */\n\tpublic void testFailure(Failure failure) throws Exception {\n\t}\n\n\t/**\n\t * Called when an atomic test flags that it assumes a condition that is\n\t * false\n\t * \n\t * @param failure\n\t *            describes the test that failed and the\n\t *            {@link AssumptionViolatedException} that was thrown\n\t */\n\tpublic void testAssumptionFailure(Failure failure) {\n\t}\n\n\t/**\n\t * Called when a test will not be run, generally because a test method is annotated \n\t * with {@link org.junit.Ignore}.\n\t * \n\t * @param description describes the test that will not be run\n\t */\n\tpublic void testIgnored(Description description) throws Exception {\n\t}\n\n\t/**\n\t * Remove a listener.\n\t * @param jUnitCore TODO\n\t */\n\tpublic void removeListener(JUnitCore jUnitCore) {\n\t\tjUnitCore.fNotifier.removeListener(this);\n\t}\n}",
+                "methodCount": 8
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 92,
+                        "lineEnd": 98,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method removeListener to class JUnitCore",
+                        "description": "Move method removeListener to org.junit.runner.JUnitCore\nRationale: The method removeListener(JUnitCore jUnitCore) is directly interacting with the fNotifier field of JUnitCore, which is responsible for managing listeners during test execution. Since this method's functionality revolves around modifying the listener management of JUnitCore, it logically belongs within the JUnitCore class. Moving it there encapsulates the listener management functionality, ensuring that all related operations for adding and removing listeners are contained within the same class, promoting better cohesion and maintainability.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public removeListener(JUnitCore jUnitCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public removeListener(JUnitCore jUnitCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public removeListener(JUnitCore jUnitCore)": {
+                        "first": {
+                            "method_name": "removeListener",
+                            "method_signature": "public removeListener(JUnitCore jUnitCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5882365922190375
+                    }
+                },
+                "voyage": {
+                    "public removeListener(JUnitCore jUnitCore)": {
+                        "first": {
+                            "method_name": "removeListener",
+                            "method_signature": "public removeListener(JUnitCore jUnitCore)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5588349103068402
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public removeListener(JUnitCore jUnitCore)"
+                    ],
+                    "llm_response_time": 857
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public removeListener(JUnitCore jUnitCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public removeListener(JUnitCore jUnitCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public removeListener(JUnitCore jUnitCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public removeListener(JUnitCore jUnitCore)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public removeListener(JUnitCore jUnitCore)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "removeListener": {
+                    "target_classes": [
+                        {
+                            "class_name": "JUnitCore",
+                            "similarity_score": 0.49691960839157706
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "JUnitCore"
+                    ],
+                    "llm_response_time": 2105,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Description::apply(Statement, Description):Statement need move to org.junit.rules.Timeout",
+        "class_name": "org.junit.runner.Description",
+        "telemetry": {
+            "id": "64754355-2105-4ee1-ae65-e4fc198d361a",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 236,
+                "lineStart": 15,
+                "lineEnd": 250,
+                "bodyLineStart": 15,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/Description.java",
+                "sourceCode": "/**\n * <p>A <code>Description</code> describes a test which is to be run or has been run. <code>Descriptions</code> \n * can be atomic (a single test) or compound (containing children tests). <code>Descriptions</code> are used\n * to provide feedback about the tests that are about to run (for example, the tree view\n * visible in many IDEs) or tests that have been run (for example, the failures view).</p>\n * \n * <p><code>Descriptions</code> are implemented as a single class rather than a Composite because\n * they are entirely informational. They contain no logic aside from counting their tests.</p>\n * \n * <p>In the past, we used the raw {@link junit.framework.TestCase}s and {@link junit.framework.TestSuite}s\n * to display the tree of tests. This was no longer viable in JUnit 4 because atomic tests no longer have \n * a superclass below {@link Object}. We needed a way to pass a class and name together. Description \n * emerged from this.</p>\n * \n * @see org.junit.runner.Request\n * @see org.junit.runner.Runner\n */\npublic class Description implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\n\t/**\n\t * Create a <code>Description</code> named <code>name</code>.\n\t * Generally, you will add children to this <code>Description</code>.\n\t * @param name the name of the <code>Description</code> \n\t * @param annotations \n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createSuiteDescription(String name, Annotation... annotations) {\n\t\tif (name.length() == 0)\n\t\t\tthrow new IllegalArgumentException(\"name must have non-zero length\");\n\t\treturn new Description(name, annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @param annotations meta-data about the test, for downstream interpreters\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name, Annotation... annotations) {\n\t\treturn new Description(String.format(\"%s(%s)\", name, clazz.getName()), annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.  \n\t * (This remains for binary compatibility with clients of JUnit 4.3)\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name) {\n\t\treturn createTestDescription(clazz, name, new Annotation[0]);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> named after <code>testClass</code>\n\t * @param testClass A {@link Class} containing tests \n\t * @return a <code>Description</code> of <code>testClass</code>\n\t */\n\tpublic static Description createSuiteDescription(Class<?> testClass) {\n\t\treturn new Description(testClass.getName(), testClass.getAnnotations());\n\t}\n\t\n\t/**\n\t * Describes a Runner which runs no tests\n\t */\n\tpublic static final Description EMPTY= new Description(\"No Tests\");\n\t\n\t/**\n\t * Describes a step in the test-running mechanism that goes so wrong no\n\t * other description can be used (for example, an exception thrown from a Runner's\n\t * constructor\n\t */\n\tpublic static final Description TEST_MECHANISM= new Description(\"Test mechanism\");\n\t\n\tprivate final ArrayList<Description> fChildren= new ArrayList<Description>();\n\tprivate final String fDisplayName;\n\t\n\tprivate final Annotation[] fAnnotations;\n\t\n\tprivate Description(final String displayName, Annotation... annotations) {\n\t\tfDisplayName= displayName;\n\t\tfAnnotations= annotations;\n\t}\n\n\t/**\n\t * @return a user-understandable label\n\t */\n\tpublic String getDisplayName() {\n\t\treturn fDisplayName;\n\t}\n\n\t/**\n\t * Add <code>Description</code> as a child of the receiver.\n\t * @param description the soon-to-be child.\n\t */\n\tpublic void addChild(Description description) {\n\t\tgetChildren().add(description);\n\t}\n\n\t/**\n\t * @return the receiver's children, if any\n\t */\n\tpublic ArrayList<Description> getChildren() {\n\t\treturn fChildren;\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is a suite\n\t */\n\tpublic boolean isSuite() {\n\t\treturn !isTest();\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is an atomic test\n\t */\n\tpublic boolean isTest() {\n\t\treturn getChildren().isEmpty();\n\t}\n\n\t/**\n\t * @return the total number of atomic tests in the receiver\n\t */\n\tpublic int testCount() {\n\t\tif (isTest())\n\t\t\treturn 1;\n\t\tint result= 0;\n\t\tfor (Description child : getChildren())\n\t\t\tresult+= child.testCount();\n\t\treturn result;\n\t}\n\n\t@Override\n\tpublic int hashCode() {\n\t\treturn getDisplayName().hashCode();\n\t}\n\n\t@Override\n\tpublic boolean equals(Object obj) {\n\t\tif (!(obj instanceof Description))\n\t\t\treturn false;\n\t\tDescription d = (Description) obj;\n\t\treturn getDisplayName().equals(d.getDisplayName());\n\t}\n\t\n\t@Override\n\tpublic String toString() {\n\t\treturn getDisplayName();\n\t}\n\n\t/**\n\t * @return true if this is a description of a Runner that runs no tests\n\t */\n\tpublic boolean isEmpty() {\n\t\treturn equals(EMPTY);\n\t}\n\n\t/**\n\t * @return a copy of this description, with no children (on the assumption that some of the\n\t * children will be added back)\n\t */\n\tpublic Description childlessCopy() {\n\t\treturn new Description(fDisplayName, fAnnotations);\n\t}\n\n\t/**\n\t * @return the annotation of type annotationType that is attached to this description node, \n\t * or null if none exists\n\t */\n\tpublic <T extends Annotation> T getAnnotation(Class<T> annotationType) {\n\t\tfor (Annotation each : fAnnotations)\n\t\t\tif (each.annotationType().equals(annotationType))\n\t\t\t\treturn annotationType.cast(each);\n\t\treturn null;\n\t}\n\n\t/**\n\t * @return all of the annotations attached to this description node\n\t */\n\tpublic Collection<Annotation> getAnnotations() {\n\t\treturn Arrays.asList(fAnnotations);\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the class of the test instance.\n\t */\n\tpublic Class<?> getTestClass() {\n\t\tString name= getClassName();\n\t\tif (name == null)\n\t\t\treturn null;\n\t\ttry {\n\t\t\treturn Class.forName(name);\n\t\t} catch (ClassNotFoundException e) {\n\t\t\treturn null;\n\t\t}\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the class of the test instance\n\t */\n\tpublic String getClassName() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\treturn matcher.matches()\n\t\t\t? matcher.group(2)\n\t\t\t: toString();\n\t}\n\t\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the method (or null if not)\n\t */\n\tpublic String getMethodName() {\n\t\treturn parseMethod();\n\t}\n\n\tprivate String parseMethod() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\tif (matcher.matches())\n\t\t\treturn matcher.group(1);\n\t\treturn null;\n\t}\n\n\tprivate Matcher methodStringMatcher() {\n\t\treturn Pattern.compile(\"(.*)\\\\((.*)\\\\)\").matcher(toString());\n\t}\n\n\tpublic Statement apply(Statement base, Timeout timeout) {\n\t\treturn new FailOnTimeout(base, timeout.fMillis);\n\t}\n}",
+                "methodCount": 24
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 246,
+                        "lineEnd": 248,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method apply to class Timeout",
+                        "description": "Move method apply to org.junit.rules.Timeout\nRationale: The apply(Statement base, Timeout timeout) method is specifically designed to create a FailOnTimeout instance based on a given Statement and a Timeout. Since the Timeout class is responsible for managing timeout behavior in tests, it is logical for this method to reside within it. Moving the method to the Timeout class enhances cohesion, as it directly relates to the function of applying a timeout to a test statement. Additionally, this method creates a new instance of FailOnTimeout, which is closely tied to the Timeout's purpose, making it more appropriate that this method is encapsulated within the Timeout class.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "apply",
+                            "method_signature": "public apply(Statement base, Timeout timeout)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "apply",
+                            "method_signature": "public apply(Statement base, Timeout timeout)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public apply(Statement base, Timeout timeout)": {
+                        "first": {
+                            "method_name": "apply",
+                            "method_signature": "public apply(Statement base, Timeout timeout)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.28617753782200406
+                    },
+                    "public testCount()": {
+                        "first": {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5327610346299846
+                    }
+                },
+                "voyage": {
+                    "public apply(Statement base, Timeout timeout)": {
+                        "first": {
+                            "method_name": "apply",
+                            "method_signature": "public apply(Statement base, Timeout timeout)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.11260147933779197
+                    },
+                    "public testCount()": {
+                        "first": {
+                            "method_name": "testCount",
+                            "method_signature": "public testCount()",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.5671209364429866
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public apply(Statement base, Timeout timeout)"
+                    ],
+                    "llm_response_time": 983
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public apply(Statement base, Timeout timeout)"
+                    ],
+                    "llm_response_time": 1
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public apply(Statement base, Timeout timeout)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public apply(Statement base, Timeout timeout)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public apply(Statement base, Timeout timeout)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public testCount()",
+                        "public apply(Statement base, Timeout timeout)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "apply": {
+                    "target_classes": [
+                        {
+                            "class_name": "Statement",
+                            "similarity_score": 0.17633640396464956
+                        },
+                        {
+                            "class_name": "Timeout",
+                            "similarity_score": 0.30960307333462006
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "Timeout",
+                        "Statement"
+                    ],
+                    "llm_response_time": 3530,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                },
+                "testCount": {
+                    "target_classes": [],
+                    "target_classes_sorted_by_llm": [],
+                    "llm_response_time": 0,
+                    "similarity_computation_time": 0,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.RunnerBuilder::runnerForClass2(Class<?>):Runner need move to org.junit.internal.builders.AnnotatedBuilder",
+        "class_name": "org.junit.runners.model.RunnerBuilder",
+        "telemetry": {
+            "id": "3109e426-a1f8-4e7a-9567-7b2413e01616",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 101,
+                "lineStart": 13,
+                "lineEnd": 113,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runners/model/RunnerBuilder.java",
+                "sourceCode": "/**\n * A RunnerBuilder is a strategy for constructing runners for classes. \n * \n * Only writers of custom runners should use <code>RunnerBuilder</code>s.  A custom runner class with a constructor taking\n * a <code>RunnerBuilder</code> parameter will be passed the instance of <code>RunnerBuilder</code> used to build that runner itself.  \n * For example,\n * imagine a custom runner that builds suites based on a list of classes in a text file:\n * \n * <pre>\n * \\@RunWith(TextFileSuite.class)\n * \\@SuiteSpecFile(\"mysuite.txt\")\n * class MySuite {}\n * </pre>\n * \n * The implementation of TextFileSuite might include:\n * \n * <pre>\n * public TextFileSuite(Class testClass, RunnerBuilder builder) {\n *   // ...\n *   for (String className : readClassNames())\n *     addRunner(builder.runnerForClass(Class.forName(className)));\n *   // ...\n * }\n * </pre>\n * \n * @see org.junit.runners.Suite\n */\npublic abstract class RunnerBuilder {\n\tprivate final Set<Class<?>> parents= new HashSet<Class<?>>();\n\n\t/**\n\t * Override to calculate the correct runner for a test class at runtime.\n\t * \n\t * @param testClass class to be run\n\t * @return a Runner\n\t * @throws Throwable if a runner cannot be constructed\n\t */\n\tpublic abstract Runner runnerForClass(Class<?> testClass) throws Throwable;\n\n\t/**\n\t * Always returns a runner, even if it is just one that prints an error instead of running tests.\n\t * @param testClass class to be run\n\t * @return a Runner\n\t */\n\tpublic Runner safeRunnerForClass(Class<?> testClass) {\n\t\ttry {\n\t\t\treturn runnerForClass(testClass);\n\t\t} catch (Throwable e) {\n\t\t\treturn new ErrorReportingRunner(testClass, e);\n\t\t}\n\t}\n\n\tClass<?> addParent(Class<?> parent) throws InitializationError {\n\t\tif (!parents.add(parent))\n\t\t\tthrow new InitializationError(String.format(\"class '%s' (possibly indirectly) contains itself as a SuiteClass\", parent.getName()));\n\t\treturn parent;\n\t}\n\n\tvoid removeParent(Class<?> klass) {\n\t\tparents.remove(klass);\n\t}\n\n\t/**\n\t * Constructs and returns a list of Runners, one for each child class in\n\t * {@code children}.  Care is taken to avoid infinite recursion:\n\t * this builder will throw an exception if it is requested for another\n\t * runner for {@code parent} before this call completes.\n\t */\n\tpublic List<Runner> runners(Class<?> parent, Class<?>[] children)\n\t\t\tthrows InitializationError {\n\t\taddParent(parent);\n\n\t\ttry {\n\t\t\treturn runners(children);\n\t\t} finally {\n\t\t\tremoveParent(parent);\n\t\t}\n\t}\n\t\n\tpublic List<Runner> runners(Class<?> parent, List<Class<?>> children)\n\t\t\tthrows InitializationError {\n\t\treturn runners(parent, children.toArray(new Class<?>[0]));\n\t}\n\t\n\tprivate List<Runner> runners(Class<?>[] children) {\n\t\tArrayList<Runner> runners= new ArrayList<Runner>();\n\t\tfor (Class<?> each : children) {\n\t\t\tRunner childRunner= safeRunnerForClass(each);\n\t\t\tif (childRunner != null)\n\t\t\t\trunners.add(childRunner);\n\t\t}\n\t\treturn runners;\n\t}\n\n\tpublic Runner runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass) throws Exception {\n\t\tRunWith annotation= testClass.getAnnotation(RunWith.class);\n\t\tif (annotation != null)\n\t\t\treturn annotatedBuilder.buildRunner(annotation.value(), testClass);\n\t\treturn null;\n\t}\n}",
+                "methodCount": 8
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 1,
+                "candidates": [
+                    {
+                        "lineStart": 106,
+                        "lineEnd": 111,
+                        "refactoringType": "MyMoveInstanceMethodRefactoring",
+                        "refactoringInfo": "Move method runnerForClass2 to class AnnotatedBuilder",
+                        "description": "Move method runnerForClass2 to org.junit.internal.builders.AnnotatedBuilder\nRationale: The method runnerForClass2(AnnotatedBuilder, Class<?>) is closely related to the functionality of the AnnotatedBuilder class, which is responsible for creating runners for annotated test classes. The current method is likely misaligned with its original class context, as it interacts directly with the AnnotatedBuilder instance to build a runner based on the RunWith annotation. By moving the method to AnnotatedBuilder, it enhances cohesion, as the method's purpose is to facilitate the creation of runners, which is the primary responsibility of the AnnotatedBuilder. This change will also improve readability and maintainability, as the method will reside within a class that encapsulates related functionality.",
+                        "couldCreateRefObject": true,
+                        "applied": false,
+                        "startedRefactoringFlow": false,
+                        "undone": false
+                    }
+                ]
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {
+                    "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)": {
+                        "first": {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.2724251031216776
+                    }
+                },
+                "voyage": {
+                    "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)": {
+                        "first": {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)",
+                            "target_class": "",
+                            "rationale": ""
+                        },
+                        "second": 0.6025503852535488
+                    }
+                }
+            },
+            "llmMethodPriority": {
+                "tf-idf": {
+                    "priority_method_names": [
+                        "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)"
+                    ],
+                    "llm_response_time": 1785
+                },
+                "tf-idf-5": {
+                    "priority_method_names": [
+                        "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "tf-df-3": {
+                    "priority_method_names": [
+                        "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage": {
+                    "priority_method_names": [
+                        "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-5": {
+                    "priority_method_names": [
+                        "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)"
+                    ],
+                    "llm_response_time": 0
+                },
+                "voyage-3": {
+                    "priority_method_names": [
+                        "public runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass)"
+                    ],
+                    "llm_response_time": 0
+                }
+            },
+            "targetClassMap": {
+                "runnerForClass2": {
+                    "target_classes": [
+                        {
+                            "class_name": "AnnotatedBuilder",
+                            "similarity_score": 0.45786854649563014
+                        }
+                    ],
+                    "target_classes_sorted_by_llm": [
+                        "AnnotatedBuilder"
+                    ],
+                    "llm_response_time": 8543,
+                    "similarity_computation_time": 1,
+                    "similarity_metric": "cosine"
+                }
+            },
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.manipulation.Filter::filterWith2(Filter):Request need move to org.junit.runner.Request",
+        "class_name": "org.junit.runner.manipulation.Filter",
+        "telemetry": {
+            "id": "b75e30c9-6768-4f4a-b1b4-d24c901dd64e",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 120,
+                "lineStart": 7,
+                "lineEnd": 126,
+                "bodyLineStart": 7,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/manipulation/Filter.java",
+                "sourceCode": "/**\n * The canonical case of filtering is when you want to run a single test method in a class. Rather\n * than introduce runner API just for that one case, JUnit provides a general filtering mechanism.\n * If you want to filter the tests to be run, extend <code>Filter</code> and apply an instance of\n * your filter to the {@link org.junit.runner.Request} before running it (see \n * {@link org.junit.runner.JUnitCore#run(Request)}. Alternatively, apply a <code>Filter</code> to \n * a {@link org.junit.runner.Runner} before running tests (for example, in conjunction with \n * {@link org.junit.runner.RunWith}.\n */\npublic abstract class Filter {\n\t/**\n\t * A null <code>Filter</code> that passes all tests through.\n\t */\n\tpublic static Filter ALL= new Filter() {\n\t\t@Override\n\t\tpublic boolean shouldRun(Description description) {\n\t\t\treturn true;\n\t\t}\n\n\t\t@Override\n\t\tpublic String describe() {\n\t\t\treturn \"all tests\";\n\t\t}\n\t\t\n\t\t@Override\n\t\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\t\t// do nothing\n\t\t}\n\n\t\t@Override\n\t\tpublic Filter intersect(Filter second) {\n\t\t\treturn second;\n\t\t}\n\t};\n\t\n\t/**\n\t * Returns a {@code Filter} that only runs the single method described by\n\t * {@code desiredDescription}\n\t */\n\tpublic static Filter matchMethodDescription(final Description desiredDescription) {\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\tif (description.isTest())\n\t\t\t\t\treturn desiredDescription.equals(description);\n\t\t\t\t\n\t\t\t\t// explicitly check if any children want to run\n\t\t\t\tfor (Description each : description.getChildren())\n\t\t\t\t\tif (shouldRun(each))\n\t\t\t\t\t\treturn true;\n\t\t\t\treturn false;\t\t\t\t\t\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn String.format(\"Method %s\", desiredDescription.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * @param description the description of the test to be run\n\t * @return <code>true</code> if the test should be run\n\t */\n\tpublic abstract boolean shouldRun(Description description);\n\n\t/**\n\t * Returns a textual description of this Filter\n\t * @return a textual description of this Filter\n\t */\n\tpublic abstract String describe();\n\n\t/**\n\t * Invoke with a {@link org.junit.runner.Runner} to cause all tests it intends to run\n\t * to first be checked with the filter. Only those that pass the filter will be run.\n\t * @param child the runner to be filtered by the receiver\n\t * @throws NoTestsRemainException if the receiver removes all tests\n\t */\n\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\tif (!(child instanceof Filterable))\n\t\t\treturn;\n\t\tFilterable filterable= (Filterable) child;\n\t\tfilterable.filter(this);\n\t}\n\n\t/**\n\t * Returns a new Filter that accepts the intersection of the tests accepted\n\t * by this Filter and {@code second}\n\t */\n\tpublic Filter intersect(final Filter second) {\n\t\tif (second == this || second == ALL) {\n\t\t\treturn this;\n\t\t}\n\t\tfinal Filter first= this;\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\treturn first.shouldRun(description)\n\t\t\t\t\t\t&& second.shouldRun(description);\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn first.describe() + \" and \" + second.describe();\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * Returns a Request that only contains those tests that should run when\n\t * <code>filter</code> is applied\n\t * @param request TODO\n\t * @return the filtered Request\n\t */\n\tpublic Request filterWith2(Request request) {\n\t\treturn new FilterRequest(request, this);\n\t}\n}",
+                "methodCount": 14
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": -1,
+                    "suggested_move_methods": [],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": -2,
+                    "suggested_move_methods": [],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {
+                "tf-idf": {},
+                "voyage": {}
+            },
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    }
+]
