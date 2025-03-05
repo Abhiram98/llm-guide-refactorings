@@ -116,7 +116,10 @@ def compute_recall():
         'result_mvnforum_large.json',
         'result_mvnforum_small.json',
         'result_tapestry_large.json',
-        'result_tapestry_small.json'
+        'result_tapestry_small.json',
+        'result_jfreechart_large.json',
+        'result_jfreechart_small.json',
+        'result_jgroups_large.json'
     ]
 
     hmove_results_path = mm_analyser.data_folder.joinpath('synthetic_corpus_comparison/hmove/output')

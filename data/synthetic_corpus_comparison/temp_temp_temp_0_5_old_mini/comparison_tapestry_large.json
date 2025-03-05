@@ -1,0 +1,632 @@
+[
+    {
+        "oracle": "method org.apache.tapestry5.ioc.internal.util.IdAllocator::copyMethod2(TransformMethodSignature, int, String):void need move org.apache.tapestry5.internal.services.InternalClassTransformationImpl",
+        "class_name": "org.apache.tapestry5.ioc.internal.util.IdAllocator",
+        "telemetry": {
+            "id": "f81bf2bb-31c1-4571-ac4f-1c9503bec95f",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 201,
+                "lineStart": 31,
+                "lineEnd": 231,
+                "bodyLineStart": 31,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/util/IdAllocator.java",
+                "sourceCode": "/**\n * Used to \"uniquify\" names within a given context. A base name is passed in, and the return value is the base name, or\n * the base name extended with a suffix to make it unique.\n * <p/>\n * This class is not threadsafe.\n */\n\npublic final class IdAllocator\n{\n    private static final String SEPARATOR = \"_\";\n\n    /**\n     * Map from allocated id to a generator for names associated with the allocated id.\n     */\n    private final Map<String, NameGenerator> generatorMap;\n\n    private final String namespace;\n\n    /**\n     * Generates unique names with a particular prefix.\n     */\n    private static class NameGenerator implements Cloneable\n    {\n        private final String baseId;\n\n        private int index;\n\n        NameGenerator(String baseId)\n        {\n            this.baseId = baseId + SEPARATOR;\n        }\n\n        public String nextId()\n        {\n            return baseId + index++;\n        }\n\n        /**\n         * Clones this instance, returning an equivalent but seperate copy.\n         */\n        @SuppressWarnings({ \"CloneDoesntDeclareCloneNotSupportedException\" })\n        @Override\n        public NameGenerator clone()\n        {\n            try\n            {\n                return (NameGenerator) super.clone();\n            }\n            catch (CloneNotSupportedException ex)\n            {\n                // Unreachable!\n                throw new RuntimeException(ex);\n            }\n        }\n    }\n\n    /**\n     * Creates a new allocator with no namespace.\n     */\n    public IdAllocator()\n    {\n        this(\"\");\n    }\n\n    /**\n     * Creates a new allocator with the provided namespace.\n     */\n    public IdAllocator(String namespace)\n    {\n        this(namespace, new HashMap<String, NameGenerator>());\n    }\n\n    private IdAllocator(String namespace, Map<String, NameGenerator> generatorMap)\n    {\n        this.namespace = namespace;\n        this.generatorMap = generatorMap;\n    }\n\n    /**\n     * Returns a list of all allocated ids, sorted alphabetically.\n     */\n    public List<String> getAllocatedIds()\n    {\n        return InternalUtils.sortedKeys(generatorMap);\n    }\n\n    /**\n     * Creates a clone of this IdAllocator instance, copying the allocator's namespace and key map.\n     */\n    @SuppressWarnings({ \"CloneDoesntCallSuperClone\" })\n    @Override\n    public IdAllocator clone()\n    {\n        // Copying the generatorMap is tricky; multiple keys will point to the same NameGenerator\n        // instance. We need to clone the NameGenerators, then build a new map around the clones.\n\n        IdentityHashMap<NameGenerator, NameGenerator> transformMap = new IdentityHashMap<NameGenerator, NameGenerator>();\n\n        for (NameGenerator original : generatorMap.values())\n        {\n            NameGenerator copy = original.clone();\n\n            transformMap.put(original, copy);\n        }\n\n        Map<String, NameGenerator> mapCopy = CollectionFactory.newMap();\n\n        for (String key : generatorMap.keySet())\n        {\n            NameGenerator original = generatorMap.get(key);\n            NameGenerator copy = transformMap.get(original);\n\n            mapCopy.put(key, copy);\n        }\n\n        return new IdAllocator(namespace, mapCopy);\n    }\n\n    /**\n     * Allocates the id. Repeated calls for the same name will return \"name\", \"name_0\", \"name_1\", etc.\n     */\n\n    public String allocateId(String name)\n    {\n        String key = name + namespace;\n\n        NameGenerator g = generatorMap.get(key);\n        String result;\n\n        if (g == null)\n        {\n            g = new NameGenerator(key);\n            result = key;\n        }\n        else result = g.nextId();\n\n        // Handle the degenerate case, where a base name of the form \"foo_0\" has been\n        // requested. Skip over any duplicates thus formed.\n\n        while (generatorMap.containsKey(result)) result = g.nextId();\n\n        generatorMap.put(result, g);\n\n        return result;\n    }\n\n    /**\n     * Checks to see if a given name has been allocated.\n     */\n    public boolean isAllocated(String name)\n    {\n        return generatorMap.containsKey(name);\n    }\n\n    /**\n     * Clears the allocator, resetting it to freshly allocated state.\n     */\n\n    public void clear()\n    {\n        generatorMap.clear();\n    }\n\n\tpublic void copyMethod2(InternalClassTransformationImpl internalClassTransformationImpl, TransformMethodSignature sourceMethod, int modifiers, String newMethodName)\n\t{\n\t    internalClassTransformationImpl.failIfFrozen();\n\t\n\t    CtClass returnType = internalClassTransformationImpl.findCtClass(sourceMethod.getReturnType());\n\t    CtClass[] parameters = internalClassTransformationImpl.buildCtClassList(sourceMethod.getParameterTypes());\n\t    CtClass[] exceptions = internalClassTransformationImpl.buildCtClassList(sourceMethod.getExceptionTypes());\n\t    CtMethod source = internalClassTransformationImpl.findMethod(sourceMethod);\n\t\n\t    try\n\t    {\n\t        CtMethod method = new CtMethod(returnType, newMethodName, parameters, internalClassTransformationImpl.ctClass);\n\t\n\t        method.setModifiers(modifiers);\n\t\n\t        method.setExceptionTypes(exceptions);\n\t\n\t        method.setBody(source, null);\n\t\n\t        internalClassTransformationImpl.ctClass.addMethod(method);\n\t    }\n\t    catch (CannotCompileException ex)\n\t    {\n\t        throw new RuntimeException(String.format(\"Error copying method %s to new method %s().\",\n\t                                                 sourceMethod,\n\t                                                 newMethodName), ex);\n\t    }\n\t    catch (NotFoundException ex)\n\t    {\n\t        throw new RuntimeException(ex);\n\t    }\n\t\n\t    // The new method is *not* considered an added method, so field references inside the method\n\t    // will be transformed.\n\t\n\t    internalClassTransformationImpl.formatter.format(\"\\n%s renamed to %s\\n\\n\", sourceMethod, newMethodName);\n\t}\n}",
+                "methodCount": 12
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "copyMethod2",
+                            "method_signature": "public void copyMethod2(InternalClassTransformationImpl internalClassTransformationImpl, TransformMethodSignature sourceMethod, int modifiers, String newMethodName)",
+                            "target_class": "MethodCopier",
+                            "rationale": "The copyMethod2() function appears to be responsible for copying methods from one class to another, which is a distinct concern from the IdAllocator class. Moving it to a dedicated MethodCopier class would adhere to the Single Responsibility Principle."
+                        }
+                    ],
+                    "llm_response_time": 2144
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "copyMethod2",
+                            "method_signature": "public void copyMethod2(InternalClassTransformationImpl internalClassTransformationImpl, TransformMethodSignature sourceMethod, int modifiers, String newMethodName)",
+                            "target_class": "MethodTransformer",
+                            "rationale": "The copyMethod2 method appears to be related to transforming and copying methods, which does not align with the primary responsibility of the IdAllocator class. Moving it to a dedicated MethodTransformer class would enhance the single responsibility principle."
+                        }
+                    ],
+                    "llm_response_time": 1843
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "copyMethod2",
+                            "method_signature": "public void copyMethod2(InternalClassTransformationImpl internalClassTransformationImpl, TransformMethodSignature sourceMethod, int modifiers, String newMethodName)",
+                            "target_class": "MethodCopier",
+                            "rationale": "The copyMethod2() function is focused on copying methods from one class to another, which is a distinct responsibility that does not align with the IdAllocator's purpose of generating unique IDs. Moving it to a dedicated MethodCopier class would enhance separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1918
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.ioc.internal.services.RegistryShutdownHubImpl::findServiceIdsForInterface(Class):List<String> need move org.apache.tapestry5.ioc.internal.RegistryImpl",
+        "class_name": "org.apache.tapestry5.ioc.internal.services.RegistryShutdownHubImpl",
+        "telemetry": {
+            "id": "52147f5c-97d6-4161-9b55-8c820cde163b",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 61,
+                "lineStart": 31,
+                "lineEnd": 91,
+                "bodyLineStart": 31,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/internal/services/RegistryShutdownHubImpl.java",
+                "sourceCode": "public class RegistryShutdownHubImpl implements RegistryShutdownHub\n{\n    private final OneShotLock lock = new OneShotLock();\n\n    private final Logger logger;\n\n    private final List<RegistryShutdownListener> listeners = newThreadSafeList();\n\n    public RegistryShutdownHubImpl(Logger logger)\n    {\n        this.logger = logger;\n    }\n\n    public void addRegistryShutdownListener(RegistryShutdownListener listener)\n    {\n        lock.check();\n\n        listeners.add(listener);\n    }\n\n    /**\n     * Fires the {@link RegistryShutdownListener#registryDidShutdown()} method on each listener. At the end, all the\n     * listeners are discarded.\n     */\n    public void fireRegistryDidShutdown()\n    {\n        lock.lock();\n\n        for (RegistryShutdownListener l : listeners)\n        {\n            try\n            {\n                l.registryDidShutdown();\n            }\n            catch (Exception ex)\n            {\n                logger.error(ServiceMessages.shutdownListenerError(l, ex), ex);\n            }\n        }\n\n        listeners.clear();\n    }\n\n\tpublic List<String> findServiceIdsForInterface(RegistryImpl registryImpl, Class serviceInterface)\n\t{\n\t    List<String> result = CollectionFactory.newList();\n\t\n\t    for (Module module : registryImpl.moduleToServiceDefs.keySet())\n\t        result.addAll(module.findServiceIdsForInterface(serviceInterface));\n\t\n\t    for (Map.Entry<String, Object> entry : registryImpl.builtinServices.entrySet())\n\t    {\n\t        if (serviceInterface.isInstance(entry.getValue())) result.add(entry.getKey());\n\t    }\n\t\n\t    Collections.sort(result);\n\t\n\t    return result;\n\t}\n\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "findServiceIdsForInterface",
+                            "method_signature": "public List<String> findServiceIdsForInterface(RegistryImpl registryImpl, Class serviceInterface)",
+                            "target_class": "RegistryImpl",
+                            "rationale": "The findServiceIdsForInterface method operates directly on the RegistryImpl instance and is primarily concerned with the services defined within that registry. It would be more appropriate for this method to reside in the RegistryImpl class."
+                        }
+                    ],
+                    "llm_response_time": 1393
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "findServiceIdsForInterface",
+                            "method_signature": "public List<String> findServiceIdsForInterface(RegistryImpl registryImpl, Class serviceInterface)",
+                            "target_class": "RegistryImpl",
+                            "rationale": "The method findServiceIdsForInterface interacts directly with the RegistryImpl class and operates on its data structures. It would be more appropriate for this method to reside within the RegistryImpl class to maintain cohesion and encapsulation."
+                        }
+                    ],
+                    "llm_response_time": 1232
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "findServiceIdsForInterface",
+                            "method_signature": "public List<String> findServiceIdsForInterface(RegistryImpl registryImpl, Class serviceInterface)",
+                            "target_class": "RegistryImpl",
+                            "rationale": "The method findServiceIdsForInterface operates directly on the RegistryImpl instance and deals with its internal data structures, making it more appropriate for it to reside within the RegistryImpl class."
+                        }
+                    ],
+                    "llm_response_time": 1129
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.corelib.data.InsertPosition::addFormInjector(String, Link, InsertPosition, String):void need move org.apache.tapestry5.internal.services.ClientBehaviorSupportImpl",
+        "class_name": "org.apache.tapestry5.corelib.data.InsertPosition",
+        "telemetry": {
+            "id": "dece3259-daaa-4515-8491-d22f69f0f4aa",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 29,
+                "lineStart": 21,
+                "lineEnd": 49,
+                "bodyLineStart": 21,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/data/InsertPosition.java",
+                "sourceCode": "public enum InsertPosition\n{\n    /**\n     * Insert the new content above (i.e., before) the insertion position.\n     */\n    ABOVE,\n\n    /**\n     * Insert the new context below (i.e., after) the insertion position.\n     */\n    BELOW;\n\n\tpublic void addFormInjector2(String clientId, Link link, ClientBehaviorSupportImpl clientBehaviorSupportImpl, String showFunctionName)\n\t{\n\t    JSONObject spec = new JSONObject();\n\t    spec.put(\"element\", clientId);\n\t\n\t    spec.put(\"url\", link.toAbsoluteURI());\n\t\n\t    if (this == InsertPosition.BELOW)\n\t        spec.put(\"below\", true);\n\t\n\t    clientBehaviorSupportImpl.addFunction(spec, \"show\", showFunctionName);\n\t\n\t    // Always has at least two properties.\n\t\n\t    clientBehaviorSupportImpl.renderSupport.addInit(\"formInjector\", spec);\n\t}\n}",
+                "methodCount": 1
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFormInjector2",
+                            "method_signature": "public void addFormInjector2(String clientId, Link link, ClientBehaviorSupportImpl clientBehaviorSupportImpl, String showFunctionName)",
+                            "target_class": "FormInjector",
+                            "rationale": "The addFormInjector2 method is responsible for adding form injection logic, which is not related to the enumeration of InsertPosition. Moving it to a dedicated FormInjector class would improve separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1715
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFormInjector2",
+                            "method_signature": "public void addFormInjector2(String clientId, Link link, ClientBehaviorSupportImpl clientBehaviorSupportImpl, String showFunctionName)",
+                            "target_class": "FormInjector",
+                            "rationale": "The addFormInjector2() method deals with injecting form behavior and rendering support, which is not directly related to the purpose of the InsertPosition enum. It should be moved to a dedicated class that handles form injection logic."
+                        }
+                    ],
+                    "llm_response_time": 8755
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFormInjector2",
+                            "method_signature": "public void addFormInjector2(String clientId, Link link, ClientBehaviorSupportImpl clientBehaviorSupportImpl, String showFunctionName)",
+                            "target_class": "FormInjector",
+                            "rationale": "The addFormInjector2 method is responsible for creating a JSON specification and interacting with ClientBehaviorSupportImpl, which is unrelated to the purpose of the InsertPosition enum. Moving it to a dedicated FormInjector class would enhance separation of concerns and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1938
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.corelib.internal.ComponentActionSink::afterRender(MarkupWriter):void need move org.apache.tapestry5.corelib.components.FormFragment",
+        "class_name": "org.apache.tapestry5.corelib.internal.ComponentActionSink",
+        "telemetry": {
+            "id": "f53fc60d-80e8-45a4-a052-e854ec02374c",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 73,
+                "lineStart": 31,
+                "lineEnd": 103,
+                "bodyLineStart": 31,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/internal/ComponentActionSink.java",
+                "sourceCode": "/**\n * Used to collection component actions, with the ultimate goal being the creation of a MIME-encoded string of the\n * serialization of those actions.\n */\npublic class ComponentActionSink\n{\n    private final Logger logger;\n\n    private final ObjectOutputStream stream;\n\n    private final ClientDataSink sink;\n\n    public ComponentActionSink(Logger logger, ClientDataEncoder encoder)\n    {\n        this.logger = logger;\n\n        sink = encoder.createSink();\n\n        stream = sink.getObjectOutputStream();\n    }\n\n    public <T> void store(T component, ComponentAction<T> action)\n    {\n        Component castComponent = Defense.cast(component, Component.class, \"component\");\n        Defense.notNull(action, \"action\");\n\n        String completeId = castComponent.getComponentResources().getCompleteId();\n\n        logger.debug(\"Storing action: {} {}\", completeId, action);\n\n        try\n        {\n            // Writing the complete id is not very efficient, but the GZip filter\n            // should help out there.\n            stream.writeUTF(completeId);\n            stream.writeObject(action);\n        }\n        catch (IOException ex)\n        {\n            throw new RuntimeException(InternalMessages.componentActionNotSerializable(completeId, ex), ex);\n        }\n    }\n\n\n    public String getClientData()\n    {\n        return sink.getClientData();\n    }\n\n\t/**\n\t * Closes the &lt;div&gt; tag and pops off the {@link org.apache.tapestry5.services.FormSupport} environmental\n\t * override.\n\t *\n\t * @param formFragment TODO\n\t * @param writer\n\t */\n\tpublic void afterRender(FormFragment formFragment, MarkupWriter writer)\n\t{\n\t    formFragment.hiddenFieldPositioner.getElement().attributes(\n\t            \"type\", \"hidden\",\n\t\n\t            \"name\", Form.FORM_DATA,\n\t\n\t            \"id\", formFragment.clientId + \":hidden\",\n\t\n\t            \"value\", getClientData()\n\t    );\n\t\n\t    writer.end(); // div\n\t\n\t    formFragment.environment.pop(FormSupport.class);\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "afterRender",
+                            "method_signature": "public void afterRender(FormFragment formFragment, MarkupWriter writer)",
+                            "target_class": "FormRenderer",
+                            "rationale": "The afterRender method deals with rendering a form fragment and manipulating markup, which is more aligned with rendering concerns. Moving it to a dedicated FormRenderer class would enhance separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1249
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "afterRender",
+                            "method_signature": "public void afterRender(FormFragment formFragment, MarkupWriter writer)",
+                            "target_class": "FormRenderer",
+                            "rationale": "The afterRender method is responsible for rendering the form fragment and dealing with the markup, which aligns more closely with rendering responsibilities. Moving it to a FormRenderer class would better encapsulate rendering logic."
+                        }
+                    ],
+                    "llm_response_time": 1546
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "afterRender",
+                            "method_signature": "public void afterRender(FormFragment formFragment, MarkupWriter writer)",
+                            "target_class": "FormFragment",
+                            "rationale": "The afterRender method is responsible for manipulating the FormFragment and writing markup, which aligns more closely with the responsibilities of the FormFragment class. Moving this method would adhere to the Single Responsibility Principle."
+                        }
+                    ],
+                    "llm_response_time": 1231
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.internal.parser.AttributeToken::newAttributeElement(ComponentResources, AttributeToken):RenderCommand need move org.apache.tapestry5.internal.services.PageElementFactoryImpl",
+        "class_name": "org.apache.tapestry5.internal.parser.AttributeToken",
+        "telemetry": {
+            "id": "9c5b8a8f-5417-4dc5-809b-5963dca511c4",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 78,
+                "lineStart": 25,
+                "lineEnd": 102,
+                "bodyLineStart": 25,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/AttributeToken.java",
+                "sourceCode": "/**\n * Stores an attribute/value pair (as part of an XML element).\n */\npublic class AttributeToken extends TemplateToken\n{\n    private final String namespaceURI;\n\n    private final String name;\n\n    private final String value;\n\n    public AttributeToken(String namespaceURI, String name, String value, Location location)\n    {\n        super(TokenType.ATTRIBUTE, location);\n\n        this.namespaceURI = namespaceURI;\n        this.name = name;\n        this.value = value;\n    }\n\n    /**\n     * Returns local name for the attribute.\n     */\n    public String getName()\n    {\n        return name;\n    }\n\n    /**\n     * Returns the value for the attribute.\n     */\n    public String getValue()\n    {\n        return value;\n    }\n\n    /**\n     * Returns the namespace URI containing the attribute, or the empty string for the default namespace.\n     */\n    public String getNamespaceURI()\n    {\n        return namespaceURI;\n    }\n\n    @Override\n    public String toString()\n    {\n        StringBuilder builder = new StringBuilder(\"Attribute[\");\n\n        if (namespaceURI.length() > 0) builder.append(namespaceURI).append(\" \");\n\n        builder.append(name).append(\"=\").append(value).append(\"]\");\n\n        return builder.toString();\n    }\n\n\tpublic RenderCommand newAttributeElement2(ComponentResources componentResources, PageElementFactoryImpl pageElementFactoryImpl)\n\t{\n\t    final StringProvider provider = pageElementFactoryImpl.parseAttributeExpansionExpression(getValue(), componentResources,\n\t                                                                      getLocation());\n\t\n\t    final String namespace = getNamespaceURI();\n\t    final String name = getName();\n\t\n\t    return new RenderCommand()\n\t    {\n\t        public void render(MarkupWriter writer, RenderQueue queue)\n\t        {\n\t            writer.attributeNS(namespace, name, provider.provideString());\n\t        }\n\t\n\t        public String toString()\n\t        {\n\t            return String.format(\"AttributeNS[%s %s \\\"%s\\\"]\", namespace, name, getValue());\n\t        }\n\t    };\n\t}\n}",
+                "methodCount": 8
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "newAttributeElement2",
+                            "method_signature": "public RenderCommand newAttributeElement2(ComponentResources componentResources, PageElementFactoryImpl pageElementFactoryImpl)",
+                            "target_class": "RenderCommandFactory",
+                            "rationale": "The newAttributeElement2 method is responsible for creating a new RenderCommand, which is more aligned with the responsibilities of a factory class. Moving it to a dedicated RenderCommandFactory class would enhance the separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1659
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "newAttributeElement2",
+                            "method_signature": "public RenderCommand newAttributeElement2(ComponentResources componentResources, PageElementFactoryImpl pageElementFactoryImpl)",
+                            "target_class": "RenderCommandFactory",
+                            "rationale": "The newAttributeElement2 method is responsible for creating a RenderCommand, which is a rendering operation. This logic is better suited in a factory class that handles the creation of rendering commands, separating concerns and improving maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1609
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "newAttributeElement2",
+                            "method_signature": "public RenderCommand newAttributeElement2(ComponentResources componentResources, PageElementFactoryImpl pageElementFactoryImpl)",
+                            "target_class": "RenderCommandFactory",
+                            "rationale": "The method newAttributeElement2 is responsible for creating a RenderCommand, which is more aligned with a factory pattern. Moving it to a separate RenderCommandFactory class would enhance separation of concerns and improve maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1817
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.internal.services.ComponentResultProcessorWrapper::fireValidateFormEvent(EventContext, ComponentResultProcessorWrapper):void need move org.apache.tapestry5.corelib.components.Form",
+        "class_name": "org.apache.tapestry5.internal.services.ComponentResultProcessorWrapper",
+        "telemetry": {
+            "id": "41ae469f-90d1-42da-9f78-2f1a2cf43d36",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 66,
+                "lineStart": 27,
+                "lineEnd": 92,
+                "bodyLineStart": 27,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentResultProcessorWrapper.java",
+                "sourceCode": "/**\n * A wrapper around {@link ComponentEventResultProcessor} that encapsulates capturing the exception.\n */\npublic class ComponentResultProcessorWrapper implements ComponentEventCallback\n{\n    private boolean aborted;\n\n    private IOException exception;\n\n    private final ComponentEventResultProcessor processor;\n\n    public ComponentResultProcessorWrapper(ComponentEventResultProcessor processor)\n    {\n        this.processor = processor;\n    }\n\n    public boolean handleResult(Object result)\n    {\n        try\n        {\n            processor.processResultValue(result);\n        }\n        catch (IOException ex)\n        {\n            exception = ex;\n        }\n\n        aborted = true;\n\n        return true;\n    }\n\n    /**\n     * Returns true if {@link org.apache.tapestry5.ComponentEventCallback#handleResult(Object)} was invoked, false\n     * otherwise.\n     *\n     * @return true if the event was aborted\n     * @throws IOException if {@link ComponentEventResultProcessor#processResultValue(Object)} threw an IOException\n     */\n    public boolean isAborted() throws IOException\n    {\n        if (exception != null) throw exception;\n\n        return aborted;\n    }\n\n\tpublic void fireValidateFormEvent(EventContext context, Form form)\n\t{\n\t    try\n\t    {\n\t        form.resources.triggerContextEvent(EventConstants.VALIDATE_FORM, context, this);\n\t    }\n\t    catch (RuntimeException ex)\n\t    {\n\t        ValidationException ve = ExceptionUtils.findCause(ex, ValidationException.class);\n\t\n\t        if (ve != null)\n\t        {\n\t            form.recordError(ve.getMessage());\n\t            return;\n\t        }\n\t\n\t        throw ex;\n\t    }\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "fireValidateFormEvent",
+                            "method_signature": "public void fireValidateFormEvent(EventContext context, Form form)",
+                            "target_class": "Form",
+                            "rationale": "The fireValidateFormEvent method is directly interacting with the Form class and is handling form validation logic, which is more appropriately placed within the Form class itself."
+                        }
+                    ],
+                    "llm_response_time": 1410
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "fireValidateFormEvent",
+                            "method_signature": "public void fireValidateFormEvent(EventContext context, Form form)",
+                            "target_class": "Form",
+                            "rationale": "The fireValidateFormEvent method is closely related to the Form class as it directly interacts with form validation and error recording. It would be more appropriate for this method to reside within the Form class."
+                        }
+                    ],
+                    "llm_response_time": 2677
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "fireValidateFormEvent",
+                            "method_signature": "public void fireValidateFormEvent(EventContext context, Form form)",
+                            "target_class": "Form",
+                            "rationale": "The fireValidateFormEvent method directly manipulates the Form object and handles validation-related logic, making it more suitable to reside within the Form class."
+                        }
+                    ],
+                    "llm_response_time": 1619
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.FieldFocusPriority::autofocus2(FieldFocusPriority, String):void need move org.apache.tapestry5.internal.services.RenderSupportImpl",
+        "class_name": "org.apache.tapestry5.FieldFocusPriority",
+        "telemetry": {
+            "id": "5abdec0b-14f1-4f59-b3e6-6196deaa49ee",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 42,
+                "lineStart": 20,
+                "lineEnd": 61,
+                "bodyLineStart": 20,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/FieldFocusPriority.java",
+                "sourceCode": "/**\n * Used to determine which field on a page should receive focus, based on its status.\n *\n * @see #MISSING()\n */\npublic enum FieldFocusPriority\n{\n    /**\n     * An optional field, the lowest priority.\n     */\n    OPTIONAL,\n\n    /**\n     * A field whose input is required, which takes higher priority than optional.\n     */\n    REQUIRED,\n\n    /**\n     * A field that contains a validation error, the highest priority.\n     */\n    IN_ERROR,\n\n    /**\n     * Used to allow field focus to be manually overridden; this would be selected in user code and is higher priorty\n     * than {@link #IN_ERROR}.\n     *\n     * @since 5.1.0.4\n     */\n    OVERRIDE;\n\n\tpublic void autofocus2(RenderSupportImpl renderSupportImpl, String fieldId)\n\t{\n\t    Defense.notNull(this, \"priority\");\n\t    Defense.notBlank(fieldId, \"fieldId\");\n\t\n\t    if (renderSupportImpl.focusFieldId == null || compareTo(renderSupportImpl.focusPriority) > 0)\n\t    {\n\t        renderSupportImpl.focusPriority = this;\n\t        renderSupportImpl.focusFieldId = fieldId;\n\t    }\n\t}\n}",
+                "methodCount": 1
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "autofocus2",
+                            "method_signature": "public void autofocus2(RenderSupportImpl renderSupportImpl, String fieldId)",
+                            "target_class": "RenderSupportImpl",
+                            "rationale": "The autofocus2 method manipulates the focus state of a RenderSupportImpl instance, making it more appropriate for this functionality to reside within the RenderSupportImpl class."
+                        }
+                    ],
+                    "llm_response_time": 1476
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "autofocus2",
+                            "method_signature": "public void autofocus2(RenderSupportImpl renderSupportImpl, String fieldId)",
+                            "target_class": "RenderSupportImpl",
+                            "rationale": "The autofocus2 method manipulates the state of RenderSupportImpl and is closely tied to its functionality. It should be moved to the RenderSupportImpl class to maintain cohesion and improve separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1869
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "autofocus2",
+                            "method_signature": "public void autofocus2(RenderSupportImpl renderSupportImpl, String fieldId)",
+                            "target_class": "RenderSupportImpl",
+                            "rationale": "The autofocus2 method operates directly on the RenderSupportImpl instance, managing its focus properties. It is more appropriate for this method to reside within the RenderSupportImpl class, as it pertains to the rendering logic rather than the enumeration of field focus priorities."
+                        }
+                    ],
+                    "llm_response_time": 1892
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.services.ComponentEventRequestParameters::handle2(ComponentEventRequestParameters):void need move org.apache.tapestry5.internal.services.AjaxComponentEventRequestHandler",
+        "class_name": "org.apache.tapestry5.services.ComponentEventRequestParameters",
+        "telemetry": {
+            "id": "111a0cc9-8b55-49aa-812a-547a206446e6",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 186,
+                "lineStart": 34,
+                "lineEnd": 219,
+                "bodyLineStart": 34,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/ComponentEventRequestParameters.java",
+                "sourceCode": "/**\n * Encapsulates all the information that may be provided in a component event request URL.\n */\npublic final class ComponentEventRequestParameters\n{\n    private final String activePageName, containingPageName, nestedComponentId, eventType;\n    private final EventContext pageActivationContext, eventContext;\n\n    public ComponentEventRequestParameters(String activePageName, String containingPageName, String nestedComponentId,\n                                           String eventType, EventContext pageActivationContext,\n                                           EventContext eventContext)\n    {\n        Defense.notBlank(activePageName, \"activePageName\");\n        Defense.notBlank(containingPageName, \"containingPageName\");\n        Defense.notNull(nestedComponentId, \"nestedComponentId\");\n        Defense.notBlank(eventType, \"eventType\");\n        Defense.notNull(pageActivationContext, \"pageActivationContext\");\n        Defense.notNull(eventContext, \"eventContext\");\n\n        this.activePageName = activePageName;\n        this.containingPageName = containingPageName;\n        this.nestedComponentId = nestedComponentId;\n        this.eventType = eventType;\n        this.pageActivationContext = pageActivationContext;\n        this.eventContext = eventContext;\n    }\n\n    @Override\n    public String toString()\n    {\n        return String.format(\"ComponentEventParameters[page=%s component=%s:%s event=%s]\",\n                             activePageName,\n                             containingPageName, nestedComponentId,\n                             eventType);\n    }\n\n    // Implements equals() as a convienience for testing.\n\n    public boolean equals(Object o)\n    {\n        if (this == o) return true;\n        if (o == null || getClass() != o.getClass()) return false;\n\n        ComponentEventRequestParameters that = (ComponentEventRequestParameters) o;\n\n        if (!activePageName.equals(that.activePageName)) return false;\n        if (!containingPageName.equals(that.containingPageName)) return false;\n        if (!eventType.equals(that.eventType)) return false;\n        if (!nestedComponentId.equals(that.nestedComponentId)) return false;\n\n        if (!TapestryInternalUtils.isEqual(eventContext, that.eventContext)) return false;\n\n        return TapestryInternalUtils.isEqual(pageActivationContext, that.pageActivationContext);\n    }\n\n\n    /**\n     * The name of the active page which rendered the link.  This is usually, but not always, the page which contains\n     * the component.\n     */\n    public String getActivePageName()\n    {\n        return activePageName;\n    }\n\n    /**\n     * The name of the page containing the component that was triggered. Usually this is the same as the active page,\n     * but because of {@link org.apache.tapestry5.Block} and similar constructs, a component from other than the active\n     * page may be rendered with the active page.\n     */\n    public String getContainingPageName()\n    {\n        return containingPageName;\n    }\n\n    /**\n     * The path from the containing page down to the component in question. This may be the empty string if the action\n     * request is routed directly to the page rather than a component.\n     */\n    public String getNestedComponentId()\n    {\n        return nestedComponentId;\n    }\n\n    /**\n     * The type of event.  When not specified in the URL, a default type of \"action\" ({@link\n     * org.apache.tapestry5.EventConstants#ACTION}) is provided.\n     */\n    public String getEventType()\n    {\n        return eventType;\n    }\n\n    /**\n     * The activation context for the <em>active page</em>, possibly empty (but not null).\n     *\n     * @see org.apache.tapestry5.ComponentResourcesCommon#triggerContextEvent(String, org.apache.tapestry5.EventContext,\n     *      org.apache.tapestry5.ComponentEventCallback)\n     */\n    public EventContext getPageActivationContext()\n    {\n        return pageActivationContext;\n    }\n\n    /**\n     * The event context information passed in the URL.  Possibly empty (not not null).\n     *\n     * @see org.apache.tapestry5.ComponentResourcesCommon#triggerContextEvent(String, org.apache.tapestry5.EventContext,\n     *      org.apache.tapestry5.ComponentEventCallback)\n     */\n    public EventContext getEventContext()\n    {\n        return eventContext;\n    }\n\n\tpublic void handle2(final AjaxComponentEventRequestHandler ajaxComponentEventRequestHandler) throws IOException\n\t{\n\t    Page activePage = ajaxComponentEventRequestHandler.cache.get(getActivePageName());\n\t\n\t    final Holder<Boolean> resultProcessorInvoked = Holder.create();\n\t    resultProcessorInvoked.put(false);\n\t\n\t    ComponentEventResultProcessor interceptor = new ComponentEventResultProcessor()\n\t    {\n\t        public void processResultValue(Object value) throws IOException\n\t        {\n\t            resultProcessorInvoked.put(true);\n\t\n\t            ajaxComponentEventRequestHandler.resultProcessor.processResultValue(value);\n\t        }\n\t    };\n\t\n\t    ComponentResultProcessorWrapper callback = new ComponentResultProcessorWrapper(interceptor);\n\t\n\t    activePage.getRootElement().triggerContextEvent(EventConstants.ACTIVATE,\n\t                                                    getPageActivationContext(), callback);\n\t\n\t\n\t    if (callback.isAborted()) return;\n\t\n\t    // If we end up doing a partial render, the page render queue service needs to know the\n\t    // page that will be rendered (for logging purposes, if nothing else).\n\t\n\t    ajaxComponentEventRequestHandler.queue.setRenderingPage(activePage);\n\t\n\t    ContentType contentType = ajaxComponentEventRequestHandler.pageContentTypeAnalyzer.findContentType(activePage);\n\t\n\t    ajaxComponentEventRequestHandler.request.setAttribute(InternalConstants.CONTENT_TYPE_ATTRIBUTE_NAME, contentType);\n\t\n\t    Page containerPage = ajaxComponentEventRequestHandler.cache.get(getContainingPageName());\n\t\n\t    ComponentPageElement element = containerPage.getComponentElementByNestedId(getNestedComponentId());\n\t\n\t    // In many cases, the triggered element is a Form that needs to be able to\n\t    // pass its event handler return values to the correct result processor.\n\t    // This is certainly the case for forms.\n\t\n\t    ajaxComponentEventRequestHandler.environment.push(ComponentEventResultProcessor.class, interceptor);\n\t\n\t    boolean handled = element.triggerContextEvent(getEventType(), getEventContext(),\n\t                                                  callback);\n\t\n\t    if (!handled)\n\t        throw new TapestryException(ServicesMessages.eventNotHandled(element, getEventType()), element,\n\t                                    null);\n\t\n\t    ajaxComponentEventRequestHandler.environment.pop(ComponentEventResultProcessor.class);\n\t\n\t    if (ajaxComponentEventRequestHandler.queue.isPartialRenderInitialized())\n\t    {\n\t        ajaxComponentEventRequestHandler.partialRenderer.renderPartialPageMarkup();\n\t        return;\n\t    }\n\t\n\t    // If  some other form of return value that's not a partial page render was send through to the\n\t    // Ajax ComponentEventResultProcessor, then there's nothing more to do.\n\t\n\t    if (resultProcessorInvoked.get()) return;\n\t\n\t    // Send an empty JSON reply if no value was returned from the component event handler method.\n\t\n\t    JSONObject reply = new JSONObject();\n\t\n\t    ajaxComponentEventRequestHandler.resultProcessor.processResultValue(reply);\n\t}\n}",
+                "methodCount": 11
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handle2",
+                            "method_signature": "public void handle2(final AjaxComponentEventRequestHandler ajaxComponentEventRequestHandler) throws IOException",
+                            "target_class": "AjaxComponentEventRequestHandler",
+                            "rationale": "The handle2 method directly manipulates the ajaxComponentEventRequestHandler and its properties, making it more appropriate to be part of the AjaxComponentEventRequestHandler class."
+                        }
+                    ],
+                    "llm_response_time": 1581
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handle2",
+                            "method_signature": "public void handle2(final AjaxComponentEventRequestHandler ajaxComponentEventRequestHandler) throws IOException",
+                            "target_class": "AjaxComponentEventRequestHandler",
+                            "rationale": "The handle2 method interacts closely with the AjaxComponentEventRequestHandler and manipulates its state, making it more suitable as a method within that class."
+                        }
+                    ],
+                    "llm_response_time": 1772
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "handle2",
+                            "method_signature": "public void handle2(final AjaxComponentEventRequestHandler ajaxComponentEventRequestHandler) throws IOException",
+                            "target_class": "AjaxComponentEventRequestHandler",
+                            "rationale": "The handle2 method directly interacts with the AjaxComponentEventRequestHandler and performs operations related to handling AJAX events, making it more suitable to be part of that class."
+                        }
+                    ],
+                    "llm_response_time": 1602
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.services.PageRenderRequestParameters::createPageRenderLink2(PageRenderRequestParameters):Link need move org.apache.tapestry5.internal.services.ComponentEventLinkEncoderImpl",
+        "class_name": "org.apache.tapestry5.services.PageRenderRequestParameters",
+        "telemetry": {
+            "id": "f0e9960f-22de-497e-a576-d4ba104cebb6",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 78,
+                "lineStart": 24,
+                "lineEnd": 101,
+                "bodyLineStart": 24,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/PageRenderRequestParameters.java",
+                "sourceCode": "/**\n * Used with {@link org.apache.tapestry5.services.PageRenderRequestHandler} and {@link\n * org.apache.tapestry5.services.PageRenderRequestFilter} to define the logical page name and activation context for the\n * request.\n */\npublic class PageRenderRequestParameters\n{\n    private final String logicalPageName;\n\n    private final EventContext activationContext;\n\n    public PageRenderRequestParameters(String logicalPageName, EventContext activationContext)\n    {\n        Defense.notNull(logicalPageName, \"logicalPageName\");\n        Defense.notNull(activationContext, \"activationContext\");\n\n        this.logicalPageName = logicalPageName;\n        this.activationContext = activationContext;\n    }\n\n    public String getLogicalPageName()\n    {\n        return logicalPageName;\n    }\n\n    public EventContext getActivationContext()\n    {\n        return activationContext;\n    }\n\n    @Override\n    public boolean equals(Object obj)\n    {\n        if (this == obj) return true;\n\n        if (obj == null || getClass() != obj.getClass()) return false;\n\n        PageRenderRequestParameters other = (PageRenderRequestParameters) obj;\n\n        return logicalPageName.equals(other.logicalPageName) &&\n                TapestryInternalUtils.isEqual(activationContext, other.activationContext);\n    }\n\n\n    @Override\n    public String toString()\n    {\n        return String.format(\"PageRenderRequestParameters[%s]\", logicalPageName);\n    }\n\n\tpublic Link createPageRenderLink2(ComponentEventLinkEncoderImpl componentEventLinkEncoderImpl)\n\t{\n\t    StringBuilder builder = new StringBuilder(ComponentEventLinkEncoderImpl.BUFFER_SIZE);\n\t\n\t    // Build up the absolute URI.\n\t\n\t    String activePageName = getLogicalPageName();\n\t\n\t    String baseURL = componentEventLinkEncoderImpl.requestSecurityManager.getBaseURL(activePageName);\n\t\n\t    if (baseURL != null)\n\t        builder.append(baseURL);\n\t\n\t    builder.append(componentEventLinkEncoderImpl.request.getContextPath());\n\t\n\t    componentEventLinkEncoderImpl.encodeLocale(builder);\n\t\n\t    builder.append(ComponentEventLinkEncoderImpl.SLASH);\n\t\n\t    String encodedPageName = componentEventLinkEncoderImpl.encodePageName(activePageName);\n\t\n\t    builder.append(encodedPageName);\n\t\n\t    componentEventLinkEncoderImpl.appendContext(encodedPageName.length() > 0, getActivationContext(), builder);\n\t\n\t    return new LinkImpl(builder.toString(), baseURL == null, false, componentEventLinkEncoderImpl.response, componentEventLinkEncoderImpl.optimizer);\n\t}\n}",
+                "methodCount": 6
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "createPageRenderLink2",
+                            "method_signature": "public Link createPageRenderLink2(ComponentEventLinkEncoderImpl componentEventLinkEncoderImpl)",
+                            "target_class": "ComponentEventLinkEncoderImpl",
+                            "rationale": "The createPageRenderLink2() method is tightly coupled with the ComponentEventLinkEncoderImpl class, as it relies on its methods and properties to construct a link. Moving it to ComponentEventLinkEncoderImpl would enhance cohesion and keep related functionality together."
+                        }
+                    ],
+                    "llm_response_time": 5571
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "createPageRenderLink2",
+                            "method_signature": "public Link createPageRenderLink2(ComponentEventLinkEncoderImpl componentEventLinkEncoderImpl)",
+                            "target_class": "ComponentEventLinkEncoderImpl",
+                            "rationale": "The createPageRenderLink2 method is tightly coupled with the ComponentEventLinkEncoderImpl class and uses its methods and properties. Moving this method to ComponentEventLinkEncoderImpl would enhance cohesiveness and improve the separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1413
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "createPageRenderLink2",
+                            "method_signature": "public Link createPageRenderLink2(ComponentEventLinkEncoderImpl componentEventLinkEncoderImpl)",
+                            "target_class": "ComponentEventLinkEncoderImpl",
+                            "rationale": "The createPageRenderLink2 method is heavily dependent on the ComponentEventLinkEncoderImpl class, which suggests that it would be more appropriate for it to reside within that class to maintain a clearer separation of responsibilities."
+                        }
+                    ],
+                    "llm_response_time": 1397
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.internal.parser.ExtensionPointToken::queueOverrideTokensForExtensionPoint(ExtensionPointToken, Stack<TemplateToken>, List<ComponentTemplate>):void need move org.apache.tapestry5.internal.pageload.PageLoaderImpl",
+        "class_name": "org.apache.tapestry5.internal.parser.ExtensionPointToken",
+        "telemetry": {
+            "id": "6e955588-719b-4c88-a6a0-c56eec7b1e57",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 47,
+                "lineStart": 24,
+                "lineEnd": 70,
+                "bodyLineStart": 24,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/large/big/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/parser/ExtensionPointToken.java",
+                "sourceCode": "/**\n * A token that represents the replacement of a portion of the template with the content of an extension point, or an\n * override of that extension point.\n *\n * @see org.apache.tapestry5.internal.parser.ComponentTemplate#getExtensionPointTokens(String)\n * @since 5.1.0.1\n */\npublic class ExtensionPointToken extends TemplateToken\n{\n    private final String extentionPointId;\n\n    public ExtensionPointToken(String extentionPointId, Location location)\n    {\n        super(TokenType.EXTENSION_POINT, location);\n        this.extentionPointId = extentionPointId;\n    }\n\n    public String getExtentionPointId()\n    {\n        return extentionPointId;\n    }\n\n\tpublic void queueOverrideTokensForExtensionPoint(PageLoaderImpl pageLoaderImpl, Stack<TemplateToken> queue, List<ComponentTemplate> overrideSearch)\n\t{\n\t    String extentionPointId = getExtentionPointId();\n\t\n\t    // Work up from the component, through its base classes, towards the last non-extension template.\n\t\n\t    for (ComponentTemplate t : overrideSearch)\n\t    {\n\t        List<TemplateToken> tokens = t.getExtensionPointTokens(extentionPointId);\n\t\n\t        if (tokens != null)\n\t        {\n\t            pageLoaderImpl.pushAll(queue, tokens);\n\t            return;\n\t        }\n\t    }\n\t\n\t    // Sanity check: since an extension point defines its own default, it's going to be hard to\n\t    // not find an override, somewhere, for it.\n\t\n\t    throw new TapestryException(\n\t            String.format(\"Could not find an override for extension point '%s'.\", extentionPointId),\n\t            getLocation(), null);\n\t}\n}",
+                "methodCount": 3
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "queueOverrideTokensForExtensionPoint",
+                            "method_signature": "public void queueOverrideTokensForExtensionPoint(PageLoaderImpl pageLoaderImpl, Stack<TemplateToken> queue, List<ComponentTemplate> overrideSearch)",
+                            "target_class": "PageLoaderImpl",
+                            "rationale": "The method queueOverrideTokensForExtensionPoint is closely related to the PageLoaderImpl, as it uses its instance to push tokens onto a queue. Moving this method to PageLoaderImpl would better encapsulate the functionality related to loading and managing tokens."
+                        }
+                    ],
+                    "llm_response_time": 3990
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "queueOverrideTokensForExtensionPoint",
+                            "method_signature": "public void queueOverrideTokensForExtensionPoint(PageLoaderImpl pageLoaderImpl, Stack<TemplateToken> queue, List<ComponentTemplate> overrideSearch)",
+                            "target_class": "PageLoaderImpl",
+                            "rationale": "The method queueOverrideTokensForExtensionPoint() operates on the PageLoaderImpl context and involves loading tokens and managing queues, which aligns more closely with the responsibilities of the PageLoaderImpl class."
+                        }
+                    ],
+                    "llm_response_time": 1786
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "queueOverrideTokensForExtensionPoint",
+                            "method_signature": "public void queueOverrideTokensForExtensionPoint(PageLoaderImpl pageLoaderImpl, Stack<TemplateToken> queue, List<ComponentTemplate> overrideSearch)",
+                            "target_class": "PageLoaderImpl",
+                            "rationale": "The method queueOverrideTokensForExtensionPoint() interacts directly with PageLoaderImpl and manages the queuing of tokens, which suggests it belongs in PageLoaderImpl for better cohesion and separation of responsibilities."
+                        }
+                    ],
+                    "llm_response_time": 1677
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    }
+]

@@ -75,18 +75,24 @@ def chunk_data():
                     with open(hmove_input_folder
                                       .joinpath('chunked')
                                       .joinpath(f"{filename_}-{file_counter}.json"), "w") as f:
-                        json.dump(hmove_input_data, f, indent=4)
+                        json.dump(hmove_input_data_new, f, indent=4)
 
                     hmove_input_data_new = defaultdict(list) # reset the data.
 
-        # with open(hmove_input_folder.joinpath('chunked').joinpath(filename), "w") as f:
-        #     json.dump(hmove_input_data, f, indent=4)
+        if len(hmove_input_data_new):
+            # Saving last chunk
+            file_counter += 1
+            filename_ = filename.split('.json')[0]
+            with open(hmove_input_folder
+                              .joinpath('chunked')
+                              .joinpath(f"{filename_}-{file_counter}.json"), "w") as f:
+                json.dump(hmove_input_data_new, f, indent=4)
 
     print("Completed chunking the data.")
 
 
 def downsample_synthetic():
-    MAX_SIZE = 1000
+    MAX_SIZE = 500
 
     print("downsampling synthetic data")
     hmove_input_folder = mm_analyser.data_folder.joinpath('synthetic_corpus_comparison/hmove/input')
@@ -121,7 +127,7 @@ def downsample_synthetic():
                 other_inputs = [i for i in
                                         hmove_input_data[oracle_key] if
                                         i['method_information']['method_name'] not in [oracle.method_name, oracle.alias_method_name]]
-                remaining_count = 500 - len(oracle_method_inputs)
+                remaining_count = MAX_SIZE - len(oracle_method_inputs)
 
                 hmove_input_data[oracle_key] = oracle_method_inputs + other_inputs[:remaining_count]
 
@@ -132,5 +138,5 @@ def downsample_synthetic():
 
 if __name__ == '__main__':
     # downsample()
-    # chunk_data()
-    downsample_synthetic()
+    chunk_data()
+    # downsample_synthetic()

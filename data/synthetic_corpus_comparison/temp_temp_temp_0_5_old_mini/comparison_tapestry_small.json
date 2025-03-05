@@ -1,0 +1,650 @@
+[
+    {
+        "oracle": "method org.apache.tapestry5.corelib.mixins.RenderDisabled::defaultModel():SelectModel need move org.apache.tapestry5.corelib.components.Select",
+        "class_name": "org.apache.tapestry5.corelib.mixins.RenderDisabled",
+        "telemetry": {
+            "id": "7f097402-adf2-40dd-8dfe-97581e0f3116",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 28,
+                "lineStart": 25,
+                "lineEnd": 52,
+                "bodyLineStart": 25,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/mixins/RenderDisabled.java",
+                "sourceCode": "/**\n * Renders an \"disabled\" attribute if the containing {@link Field#isDisabled() is disabled}.\n */\n@MixinAfter\npublic class RenderDisabled\n{\n    @InjectContainer\n    private Field field;\n\n    void beginRender(MarkupWriter writer)\n    {\n        if (field.isDisabled())\n            writer.attributes(\"disabled\", \"disabled\");\n    }\n\n\t@SuppressWarnings(\"unchecked\")\n\tSelectModel defaultModel(Select select)\n\t{\n\t    Class valueType = select.resources.getBoundType(\"value\");\n\t\n\t    if (valueType == null) return null;\n\t\n\t    if (Enum.class.isAssignableFrom(valueType))\n\t        return new EnumSelectModel(valueType, select.resources.getContainerMessages());\n\t\n\t    return null;\n\t}\n}",
+                "methodCount": 2
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "defaultModel",
+                            "method_signature": "SelectModel defaultModel(Select select)",
+                            "target_class": "Select",
+                            "rationale": "The defaultModel method is closely related to the Select class, as it deals with its resources and bound types. Moving it to the Select class would enhance cohesion and make it easier to manage related functionality."
+                        }
+                    ],
+                    "llm_response_time": 1481
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "defaultModel",
+                            "method_signature": "SelectModel defaultModel(Select select)",
+                            "target_class": "Select",
+                            "rationale": "The defaultModel() method is specifically related to creating a model based on the Select component. It should be moved to the Select class where it can directly operate on its own data and context."
+                        }
+                    ],
+                    "llm_response_time": 1804
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "defaultModel",
+                            "method_signature": "SelectModel defaultModel(Select select)",
+                            "target_class": "Select",
+                            "rationale": "The defaultModel() method operates on a Select object and is directly related to its functionality. It should be moved to the Select class to maintain cohesive design."
+                        }
+                    ],
+                    "llm_response_time": 1001
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.internal.services.ComponentRequestHandlerTerminator::buildComponentRequestHandler(List<ComponentRequestFilter>, ComponentRequestHandlerTerminator, Logger):ComponentRequestHandler need move org.apache.tapestry5.services.TapestryModule",
+        "class_name": "org.apache.tapestry5.internal.services.ComponentRequestHandlerTerminator",
+        "telemetry": {
+            "id": "e2d9afd9-df5c-4c97-892d-b60b0b399222",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 43,
+                "lineStart": 24,
+                "lineEnd": 66,
+                "bodyLineStart": 24,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/internal/services/ComponentRequestHandlerTerminator.java",
+                "sourceCode": "/**\n * Terminator for the {@link org.apache.tapestry5.services.ComponentRequestHandler} pipeline, that feeds out into the\n * {@link org.apache.tapestry5.services.ComponentEventRequestHandler} and {@link org.apache.tapestry5.services.PageRenderRequestHandler}\n * pipelines.\n *\n * @sicne 5.1.0.0\n */\npublic class ComponentRequestHandlerTerminator implements ComponentRequestHandler\n{\n    private final ComponentEventRequestHandler componentEventRequestHandler;\n\n    private final PageRenderRequestHandler pageRenderRequestHandler;\n\n    public ComponentRequestHandlerTerminator(@Traditional ComponentEventRequestHandler componentEventRequestHandler,\n                                             PageRenderRequestHandler pageRenderRequestHandler)\n    {\n        this.componentEventRequestHandler = componentEventRequestHandler;\n        this.pageRenderRequestHandler = pageRenderRequestHandler;\n    }\n\n    public void handleComponentEvent(ComponentEventRequestParameters parameters) throws IOException\n    {\n        componentEventRequestHandler.handle(parameters);\n    }\n\n    public void handlePageRender(PageRenderRequestParameters parameters) throws IOException\n    {\n        pageRenderRequestHandler.handle(parameters);\n    }\n\n\t/**\n\t * @param configuration TODO\n\t * @param tapestryModule TODO\n\t * @param logger TODO\n\t * @since 5.1.0.0\n\t */\n\tpublic ComponentRequestHandler buildComponentRequestHandler(\n\t        List<ComponentRequestFilter> configuration, TapestryModule tapestryModule, Logger logger)\n\t{\n\t    return tapestryModule.pipelineBuilder.build(logger, ComponentRequestHandler.class, ComponentRequestFilter.class,\n\t                                 configuration, this);\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "buildComponentRequestHandler",
+                            "method_signature": "public ComponentRequestHandler buildComponentRequestHandler(List<ComponentRequestFilter> configuration, TapestryModule tapestryModule, Logger logger)",
+                            "target_class": "TapestryModule",
+                            "rationale": "The buildComponentRequestHandler method is responsible for constructing a ComponentRequestHandler and is closely tied to the TapestryModule. Moving it to TapestryModule would make it more cohesive and align it with its purpose of handling module-related configurations."
+                        }
+                    ],
+                    "llm_response_time": 3797
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "buildComponentRequestHandler",
+                            "method_signature": "public ComponentRequestHandler buildComponentRequestHandler(List<ComponentRequestFilter> configuration, TapestryModule tapestryModule, Logger logger)",
+                            "target_class": "TapestryModule",
+                            "rationale": "The buildComponentRequestHandler method is responsible for constructing a ComponentRequestHandler using the TapestryModule, which suggests that it belongs in the TapestryModule class where the pipeline building logic is more relevant."
+                        }
+                    ],
+                    "llm_response_time": 2520
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "buildComponentRequestHandler",
+                            "method_signature": "public ComponentRequestHandler buildComponentRequestHandler(List<ComponentRequestFilter> configuration, TapestryModule tapestryModule, Logger logger)",
+                            "target_class": "TapestryModule",
+                            "rationale": "The buildComponentRequestHandler method is responsible for constructing a ComponentRequestHandler and is closely related to the TapestryModule. Moving it to TapestryModule would enhance cohesion and better encapsulate the logic related to the creation of request handlers."
+                        }
+                    ],
+                    "llm_response_time": 1571
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.integration.app1.data.SubscribeData::onActionFromClear():void need move org.apache.tapestry5.integration.app1.pages.FormFragmentDemo",
+        "class_name": "org.apache.tapestry5.integration.app1.data.SubscribeData",
+        "telemetry": {
+            "id": "204499c3-c6a9-4ea7-a57d-22de795e8d71",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 43,
+                "lineStart": 20,
+                "lineEnd": 62,
+                "bodyLineStart": 20,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/test/java/org/apache/tapestry5/integration/app1/data/SubscribeData.java",
+                "sourceCode": "public class SubscribeData\n{\n    private String name, email, code;\n\n    @Validate(\"required\")\n    public String getName()\n    {\n        return name;\n    }\n\n    public void setName(String name)\n    {\n        this.name = name;\n    }\n\n    // Only really required if visible!\n    @Validate(\"required\")\n    public String getEmail()\n    {\n        return email;\n    }\n\n    public void setEmail(String email)\n    {\n        this.email = email;\n    }\n\n    @Validate(\"required\")\n    public String getCode()\n    {\n        return code;\n    }\n\n    public void setCode(String code)\n    {\n        this.code = code;\n    }\n\n\tpublic void onActionFromClear(FormFragmentDemo formFragmentDemo)\n\t{\n\t    formFragmentDemo.form.clearErrors();\n\t}\n}",
+                "methodCount": 7
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "onActionFromClear",
+                            "method_signature": "public void onActionFromClear(FormFragmentDemo formFragmentDemo)",
+                            "target_class": "FormFragmentDemo",
+                            "rationale": "The onActionFromClear method interacts directly with the FormFragmentDemo class to clear errors, making it more suitable to reside within that class."
+                        }
+                    ],
+                    "llm_response_time": 1169
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "onActionFromClear",
+                            "method_signature": "public void onActionFromClear(FormFragmentDemo formFragmentDemo)",
+                            "target_class": "FormFragmentDemo",
+                            "rationale": "The onActionFromClear method is related to the FormFragmentDemo class, as it interacts directly with its form. Moving it there would encapsulate the functionality more appropriately."
+                        }
+                    ],
+                    "llm_response_time": 1342
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "onActionFromClear",
+                            "method_signature": "public void onActionFromClear(FormFragmentDemo formFragmentDemo)",
+                            "target_class": "FormFragmentDemo",
+                            "rationale": "The onActionFromClear() method directly interacts with the FormFragmentDemo class to clear errors, making it more appropriate for it to reside within the FormFragmentDemo class."
+                        }
+                    ],
+                    "llm_response_time": 1295
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.services.BeanBlockContribution::toBlock(BeanBlockContribution):Block need move org.apache.tapestry5.internal.services.BeanBlockOverrideSourceImpl",
+        "class_name": "org.apache.tapestry5.services.BeanBlockContribution",
+        "telemetry": {
+            "id": "4d8786bc-2eed-44a1-b6b5-c958280c9de0",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 70,
+                "lineStart": 24,
+                "lineEnd": 93,
+                "bodyLineStart": 24,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/services/BeanBlockContribution.java",
+                "sourceCode": "/**\n * A contribution to the {@link BeanBlockSource} service, defining a page name and block id (within the page) that can\n * edit or display a particular type of property.\n */\npublic final class BeanBlockContribution\n{\n    private final String dataType;\n\n    private final String pageName;\n\n    private final String blockId;\n\n    private final boolean edit;\n\n    public BeanBlockContribution(String dataType, String pageName, String blockId, boolean edit)\n    {\n        notBlank(dataType, \"datatype\");\n        notBlank(pageName, \"pageName\");\n        notBlank(blockId, \"blockId\");\n\n        this.dataType = dataType;\n        this.pageName = pageName;\n        this.blockId = blockId;\n        this.edit = edit;\n    }\n\n    /**\n     * The type of data for which the indicated block will provide an editor or displayer for.\n     */\n    public String getDataType()\n    {\n        return dataType;\n    }\n\n    /**\n     * The id of the block within the page.\n     */\n    public String getBlockId()\n    {\n        return blockId;\n    }\n\n    /**\n     * If true, then the block provides an editor for the property, consisting of a {@link Label} and some field\n     * component (or set of field components). If false, the block is used to display the value of the property, usually\n     * by applying some kind of formatting to the raw value.\n     */\n    public boolean isEdit()\n    {\n        return edit;\n    }\n\n    /**\n     * The logical name of the page containing the block.\n     */\n    public String getPageName()\n    {\n        return pageName;\n    }\n\n\tpublic Block toBlock(BeanBlockOverrideSourceImpl beanBlockOverrideSourceImpl)\n\t{\n\t    if (this == null) return null;\n\t\n\t    Page page = beanBlockOverrideSourceImpl.pageCache.get(getPageName());\n\t\n\t    return page.getRootElement().getBlock(getBlockId());\n\t}\n\n}",
+                "methodCount": 6
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "toBlock",
+                            "method_signature": "public Block toBlock(BeanBlockOverrideSourceImpl beanBlockOverrideSourceImpl)",
+                            "target_class": "Page",
+                            "rationale": "The toBlock() method is heavily dependent on the Page class and its structure. It would be more appropriate for this method to reside within the Page class, as it directly interacts with the Page's elements."
+                        }
+                    ],
+                    "llm_response_time": 1676
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "toBlock",
+                            "method_signature": "public Block toBlock(BeanBlockOverrideSourceImpl beanBlockOverrideSourceImpl)",
+                            "target_class": "Page",
+                            "rationale": "The toBlock() method is closely related to the Page class as it retrieves a block from a page. Moving it to the Page class would better encapsulate the behavior related to page and block management."
+                        }
+                    ],
+                    "llm_response_time": 1230
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "toBlock",
+                            "method_signature": "public Block toBlock(BeanBlockOverrideSourceImpl beanBlockOverrideSourceImpl)",
+                            "target_class": "Page",
+                            "rationale": "The toBlock method interacts closely with the Page class, specifically retrieving a Block from a Page. It would be more appropriate for this method to reside in the Page class, encapsulating the logic related to block retrieval."
+                        }
+                    ],
+                    "llm_response_time": 1345
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.corelib.data.BlankOption::setBlankOption(BlankOption, String):void need move org.apache.tapestry5.corelib.components.Select",
+        "class_name": "org.apache.tapestry5.corelib.data.BlankOption",
+        "telemetry": {
+            "id": "128e8f2f-e6d9-4e07-9bf9-305ba382ff16",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 28,
+                "lineStart": 19,
+                "lineEnd": 46,
+                "bodyLineStart": 19,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/data/BlankOption.java",
+                "sourceCode": "/**\n * Used with the {@link org.apache.tapestry5.corelib.components.Select} component to control whether an initial blank\n * option is supplied.  Determines the optionality of the undelrying property from the Select's {@linkplain\n * org.apache.tapestry5.FieldValidator#isRequired() validate parameter}\n */\npublic enum BlankOption\n{\n    /**\n     * Always include the blank option, even if the underlying property is required.\n     */\n    ALWAYS,\n\n    /**\n     * Never include the blank option, even if the underlying property is optional.\n     */\n    NEVER,\n\n    /**\n     * The default: include the blank option if the underlying property is optional.\n     */\n    AUTO;\n\n\tpublic void setBlankOption(Select select, String label)\n\t{\n\t    select.blankOption = this;\n\t    select.blankLabel = label;\n\t}\n}",
+                "methodCount": 1
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "setBlankOption",
+                            "method_signature": "public void setBlankOption(Select select, String label)",
+                            "target_class": "Select",
+                            "rationale": "The setBlankOption method modifies the properties of the Select class directly, making it more appropriate for this method to reside within the Select class itself."
+                        }
+                    ],
+                    "llm_response_time": 1583
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "setBlankOption",
+                            "method_signature": "public void setBlankOption(Select select, String label)",
+                            "target_class": "Select",
+                            "rationale": "The setBlankOption method directly manipulates the Select component's properties, making it more appropriate for it to reside within the Select class."
+                        }
+                    ],
+                    "llm_response_time": 1461
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "setBlankOption",
+                            "method_signature": "public void setBlankOption(Select select, String label)",
+                            "target_class": "Select",
+                            "rationale": "The setBlankOption() method manipulates the properties of the Select class, making it more appropriate for this method to reside within the Select class itself."
+                        }
+                    ],
+                    "llm_response_time": 1450
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.corelib.components.Checkbox::getTextFieldTranslator():FieldTranslator need move org.apache.tapestry5.corelib.pages.PropertyEditBlocks",
+        "class_name": "org.apache.tapestry5.corelib.components.Checkbox",
+        "telemetry": {
+            "id": "4cdd71b3-e09a-4307-b3c1-20d776acd053",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 68,
+                "lineStart": 28,
+                "lineEnd": 95,
+                "bodyLineStart": 28,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/components/Checkbox.java",
+                "sourceCode": "/**\n * A Checkbox component is simply a &lt;input type=\"checkbox\"&gt;.\n */\npublic class Checkbox extends AbstractField\n{\n    /**\n     * The value to be read or updated. If not bound, the Checkbox will attempt to edit a property of its container\n     * whose name matches the component's id.\n     */\n    @Parameter(required = true, autoconnect = true)\n    private boolean value;\n\n    @Inject\n    private Request request;\n\n    @SuppressWarnings(\"unused\")\n    @Mixin\n    private RenderDisabled renderDisabled;\n\n    @Inject\n    private ComponentResources resources;\n\n    @Environmental\n    private ValidationTracker tracker;\n\n    @BeginRender\n    void begin(MarkupWriter writer)\n    {\n        String asSubmitted = tracker.getInput(this);\n\n        boolean checked = asSubmitted != null ? Boolean.parseBoolean(asSubmitted) : value;\n\n        writer.element(\"input\", \"type\", \"checkbox\",\n\n                       \"name\", getControlName(),\n\n                       \"id\", getClientId(),\n\n                       \"checked\", checked ? \"checked\" : null);\n\n        resources.renderInformalParameters(writer);\n\n        decorateInsideField();\n    }\n\n    @AfterRender\n    void after(MarkupWriter writer)\n    {\n        writer.end(); // input\n    }\n\n    @Override\n    protected void processSubmission(String elementName)\n    {\n        String postedValue = request.getParameter(elementName);\n\n        // record as \"true\" or \"false\"\n\n        tracker.recordInput(this, Boolean.toString(postedValue != null));\n\n        value = postedValue != null;\n    }\n\n\tpublic FieldTranslator getTextFieldTranslator(PropertyEditBlocks propertyEditBlocks)\n\t{\n\t    return propertyEditBlocks.context.getTranslator(propertyEditBlocks.textField);\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getTextFieldTranslator",
+                            "method_signature": "public FieldTranslator getTextFieldTranslator(PropertyEditBlocks propertyEditBlocks)",
+                            "target_class": "FieldTranslatorProvider",
+                            "rationale": "The getTextFieldTranslator method is responsible for obtaining a FieldTranslator, which is not directly related to the Checkbox component's functionality. Moving it to a dedicated class like FieldTranslatorProvider would improve separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1762
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getTextFieldTranslator",
+                            "method_signature": "public FieldTranslator getTextFieldTranslator(PropertyEditBlocks propertyEditBlocks)",
+                            "target_class": "FieldTranslatorProvider",
+                            "rationale": "The getTextFieldTranslator method is responsible for obtaining a FieldTranslator, which is more aligned with the responsibilities of a class dedicated to providing translation services for fields, rather than a UI component like Checkbox."
+                        }
+                    ],
+                    "llm_response_time": 1521
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getTextFieldTranslator",
+                            "method_signature": "public FieldTranslator getTextFieldTranslator(PropertyEditBlocks propertyEditBlocks)",
+                            "target_class": "FieldTranslatorProvider",
+                            "rationale": "The getTextFieldTranslator() method appears to be related to translating fields and should be moved to a dedicated class that handles field translations, improving separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1424
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.ioc.services.MethodSignature::failIfNotFrozen():void need move org.apache.tapestry5.internal.services.InternalClassTransformationImpl",
+        "class_name": "org.apache.tapestry5.ioc.services.MethodSignature",
+        "telemetry": {
+            "id": "371b7a32-a17f-4b81-bb0c-9becb3e7c963",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 256,
+                "lineStart": 24,
+                "lineEnd": 279,
+                "bodyLineStart": 24,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-ioc/src/main/java/org/apache/tapestry5/ioc/services/MethodSignature.java",
+                "sourceCode": "/**\n * A representation of a {@link java.lang.reflect.Method}, identifying the name, return type, parameter types and\n * exception types. Actual Method objects are tied to a particular class, and don't compare well with other otherwise\n * identical Methods from other classes or interface; MethodSignatures are distinct from classes and compare well.\n * <p/>\n * Because the intended purpose is to compare methods from interfaces (which are always public and abstract) we don't\n * bother to actually track the modifiers. In addition, at this time, MethodSignature <em>does not distinguish between\n * instance and static methods</em>.\n * <p/>\n * This version of MethodSignature works with <em>loaded</em> classes, and it usually used in the context of {@link\n * org.apache.tapestry5.ioc.services.ClassFab} to create new classes and subclasses.\n */\npublic class MethodSignature\n{\n    private int hashCode = -1;\n\n    private final Class returnType;\n\n    private final String name;\n\n    private final Class[] parameterTypes;\n\n    private final Class[] exceptionTypes;\n\n    public MethodSignature(Class returnType, String name, Class[] parameterTypes, Class[] exceptionTypes)\n    {\n        this.returnType = Defense.notNull(returnType, \"returnType\");\n        this.name = Defense.notBlank(name, \"name\");\n\n        // Can be null!\n        this.parameterTypes = parameterTypes;\n        this.exceptionTypes = exceptionTypes;\n    }\n\n    public MethodSignature(Method m)\n    {\n        this(m.getReturnType(), m.getName(), m.getParameterTypes(), m.getExceptionTypes());\n    }\n\n    /**\n     * Returns the exceptions for this method. Caution: do not modify the returned array. May return null.\n     */\n    public Class[] getExceptionTypes()\n    {\n        return exceptionTypes;\n    }\n\n    public String getName()\n    {\n        return name;\n    }\n\n    /**\n     * Returns the parameter types for this method. May return null. Caution: do not modify the returned array.\n     */\n    public Class[] getParameterTypes()\n    {\n        return parameterTypes;\n    }\n\n    public Class getReturnType()\n    {\n        return returnType;\n    }\n\n    @Override\n    public int hashCode()\n    {\n        if (hashCode == -1)\n        {\n\n            hashCode = returnType.hashCode();\n\n            hashCode = 31 * hashCode + name.hashCode();\n\n            int count = InternalUtils.size(parameterTypes);\n\n            for (int i = 0; i < count; i++)\n                hashCode = 31 * hashCode + parameterTypes[i].hashCode();\n\n            count = InternalUtils.size(exceptionTypes);\n\n            for (int i = 0; i < count; i++)\n                hashCode = 31 * hashCode + exceptionTypes[i].hashCode();\n        }\n\n        return hashCode;\n    }\n\n    /**\n     * Returns true if the other object is an instance of MethodSignature with <em>identical</em> values for return\n     * type, name, parameter types and exception types.\n     *\n     * @see #isOverridingSignatureOf(MethodSignature)\n     */\n    @Override\n    public boolean equals(Object o)\n    {\n        if (o == null || !(o instanceof MethodSignature)) return false;\n\n        MethodSignature ms = (MethodSignature) o;\n\n        if (returnType != ms.returnType) return false;\n\n        if (!name.equals(ms.name)) return false;\n\n        if (mismatch(parameterTypes, ms.parameterTypes)) return false;\n\n        return !mismatch(exceptionTypes, ms.exceptionTypes);\n    }\n\n    private boolean mismatch(Class[] a1, Class[] a2)\n    {\n        int a1Count = InternalUtils.size(a1);\n        int a2Count = InternalUtils.size(a2);\n\n        if (a1Count != a2Count) return true;\n\n        // Hm. What if order is important (for exceptions)? We're really saying here that they\n        // were derived from the name Method.\n\n        for (int i = 0; i < a1Count; i++)\n        {\n            if (a1[i] != a2[i]) return true;\n        }\n\n        return false;\n    }\n\n    @Override\n    public String toString()\n    {\n        StringBuilder buffer = new StringBuilder();\n\n        buffer.append(ClassFabUtils.toJavaClassName(returnType));\n        buffer.append(\" \");\n        buffer.append(name);\n        buffer.append(\"(\");\n\n        for (int i = 0; i < InternalUtils.size(parameterTypes); i++)\n        {\n            if (i > 0) buffer.append(\", \");\n\n            buffer.append(ClassFabUtils.toJavaClassName(parameterTypes[i]));\n        }\n\n        buffer.append(\")\");\n\n        int _exceptionCount = InternalUtils.size(exceptionTypes);\n        String _exceptionNames[] = new String[_exceptionCount];\n        for (int i = 0; i < _exceptionCount; i++)\n        {\n            _exceptionNames[i] = exceptionTypes[i].getName();\n        }\n\n        Arrays.sort(_exceptionNames);\n\n        for (int i = 0; i < _exceptionCount; i++)\n        {\n            if (i == 0) buffer.append(\" throws \");\n            else buffer.append(\", \");\n\n            buffer.append(_exceptionNames[i]);\n        }\n\n        return buffer.toString();\n    }\n\n    /**\n     * Returns a string consisting of the name of the method and its parameter types. This is similar to {@link\n     * #toString()}, but omits the return type and information about thrown exceptions. A unique id is used by {@link\n     * MethodIterator} to identify overlapping methods (methods with the same name and parameter types but with\n     * different thrown exceptions).\n     *\n     * @see #isOverridingSignatureOf(MethodSignature)\n     */\n    public String getUniqueId()\n    {\n        StringBuilder buffer = new StringBuilder(name);\n        buffer.append(\"(\");\n\n        for (int i = 0; i < InternalUtils.size(parameterTypes); i++)\n        {\n            if (i > 0) buffer.append(\",\");\n\n            buffer.append(ClassFabUtils.toJavaClassName(parameterTypes[i]));\n        }\n\n        buffer.append(\")\");\n\n        return buffer.toString();\n    }\n\n    /**\n     * Returns true if this signature has the same return type, name and parameters types as the method signature passed\n     * in, and this signature's exceptions \"trump\" (are the same as, or super-implementations of, all exceptions thrown\n     * by the other method signature).\n     */\n\n    public boolean isOverridingSignatureOf(MethodSignature ms)\n    {\n        if (returnType != ms.returnType) return false;\n\n        if (!name.equals(ms.name)) return false;\n\n        if (mismatch(parameterTypes, ms.parameterTypes)) return false;\n\n        return exceptionsEncompass(ms.exceptionTypes);\n    }\n\n    /**\n     * The nuts and bolts of checking that another method signature's exceptions are a subset of this signature's.\n     */\n\n    @SuppressWarnings(\"unchecked\")\n    private boolean exceptionsEncompass(Class[] otherExceptions)\n    {\n        int ourCount = InternalUtils.size(exceptionTypes);\n        int otherCount = InternalUtils.size(otherExceptions);\n\n        // If we have no exceptions, then ours encompass theirs only if they\n        // have no exceptions, either.\n\n        if (ourCount == 0) return otherCount == 0;\n\n        boolean[] matched = new boolean[otherCount];\n        int unmatched = otherCount;\n\n        for (int i = 0; i < ourCount && unmatched > 0; i++)\n        {\n            for (int j = 0; j < otherCount; j++)\n            {\n                // Ignore exceptions that have already been matched\n\n                if (matched[j]) continue;\n\n                // When one of our exceptions is a super-class of one of their exceptions,\n                // then their exceptions is matched.\n\n                if (exceptionTypes[i].isAssignableFrom(otherExceptions[j]))\n                {\n                    matched[j] = true;\n                    unmatched--;\n                }\n            }\n        }\n\n        return unmatched == 0;\n    }\n\n\tpublic void failIfNotFrozen(InternalClassTransformationImpl internalClassTransformationImpl)\n\t{\n\t    if (!internalClassTransformationImpl.frozen) throw new IllegalStateException(\n\t            \"The ClassTransformation instance (for \" + internalClassTransformationImpl.ctClass.getName() + \") has not yet completed all transformations.\");\n\t}\n}",
+                "methodCount": 14
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "failIfNotFrozen",
+                            "method_signature": "public void failIfNotFrozen(InternalClassTransformationImpl internalClassTransformationImpl)",
+                            "target_class": "InternalClassTransformationImpl",
+                            "rationale": "The failIfNotFrozen method is directly related to the state of the InternalClassTransformationImpl instance, and it would be more appropriate to encapsulate this behavior within that class."
+                        }
+                    ],
+                    "llm_response_time": 6435
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "failIfNotFrozen",
+                            "method_signature": "public void failIfNotFrozen(InternalClassTransformationImpl internalClassTransformationImpl)",
+                            "target_class": "InternalClassTransformationImpl",
+                            "rationale": "The method failIfNotFrozen() directly interacts with the InternalClassTransformationImpl class and checks its state, making it more appropriate for this method to reside within the InternalClassTransformationImpl class."
+                        }
+                    ],
+                    "llm_response_time": 1626
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "failIfNotFrozen",
+                            "method_signature": "public void failIfNotFrozen(InternalClassTransformationImpl internalClassTransformationImpl)",
+                            "target_class": "InternalClassTransformationImpl",
+                            "rationale": "The method failIfNotFrozen() directly interacts with the InternalClassTransformationImpl class, making it more appropriate to move it there for better cohesion and separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1601
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.integration.app1.data.Track::getTracks():Set<Track> need move org.apache.tapestry5.integration.app1.pages.GridSetDemo",
+        "class_name": "org.apache.tapestry5.integration.app1.data.Track",
+        "telemetry": {
+            "id": "09e84722-44a9-4c04-82dd-f870063dad93",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 91,
+                "lineStart": 23,
+                "lineEnd": 113,
+                "bodyLineStart": 23,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/test/java/org/apache/tapestry5/integration/app1/data/Track.java",
+                "sourceCode": "/**\n * One track from a music library.\n */\npublic class Track implements SimpleTrack\n{\n    private Long id;\n\n    private String album, artist, genre, title;\n\n    private int playCount, rating;\n\n    @NonVisual\n    public Long getId()\n    {\n        return id;\n    }\n\n    public void setId(Long id)\n    {\n        this.id = id;\n    }\n\n    public String getTitle()\n    {\n        return title;\n    }\n\n    public String getAlbum()\n    {\n        return album;\n    }\n\n    public String getArtist()\n    {\n        return artist;\n    }\n\n    public String getGenre()\n    {\n        return genre;\n    }\n\n    public int getPlayCount()\n    {\n        return playCount;\n    }\n\n    /**\n     * Rating as a value between 0 and 100.\n     */\n    public int getRating()\n    {\n        return rating;\n    }\n\n    public void setAlbum(String album)\n    {\n        this.album = album;\n    }\n\n    public void setArtist(String artist)\n    {\n        this.artist = artist;\n    }\n\n    public void setGenre(String genre)\n    {\n        this.genre = genre;\n    }\n\n    public void setPlayCount(int playCount)\n    {\n        this.playCount = playCount;\n    }\n\n    public void setRating(int rating)\n    {\n        this.rating = rating;\n    }\n\n    public void setTitle(String title)\n    {\n        this.title = title;\n    }\n\n\tpublic Set<Track> getTracks(GridSetDemo gridSetDemo)\n\t{\n\t    return CollectionFactory.newSet(gridSetDemo.library.getTracks());\n\t}\n\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getTracks",
+                            "method_signature": "public Set<Track> getTracks(GridSetDemo gridSetDemo)",
+                            "target_class": "Library",
+                            "rationale": "The getTracks() method is concerned with retrieving tracks from a library, which is more aligned with the responsibilities of a Library class rather than a Track class."
+                        }
+                    ],
+                    "llm_response_time": 1475
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getTracks",
+                            "method_signature": "public Set<Track> getTracks(GridSetDemo gridSetDemo)",
+                            "target_class": "Library",
+                            "rationale": "The getTracks method interacts with the library to retrieve tracks, making it more suitable for the Library class, which should manage collections of tracks."
+                        }
+                    ],
+                    "llm_response_time": 1210
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getTracks",
+                            "method_signature": "public Set<Track> getTracks(GridSetDemo gridSetDemo)",
+                            "target_class": "MusicLibrary",
+                            "rationale": "The getTracks() method is responsible for retrieving tracks from a music library, which is a functionality that logically belongs to a MusicLibrary class rather than a Track class."
+                        }
+                    ],
+                    "llm_response_time": 1205
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.example.testapp.services.SpringStatusProvider::onSuccess():void need move org.example.testapp.pages.Start",
+        "class_name": "org.example.testapp.services.SpringStatusProvider",
+        "telemetry": {
+            "id": "529d8200-d826-4926-942a-52aa7b89230a",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 27,
+                "lineStart": 23,
+                "lineEnd": 49,
+                "bodyLineStart": 23,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-spring/src/test/java/org/example/testapp/services/SpringStatusProvider.java",
+                "sourceCode": "public class SpringStatusProvider\n{\n    private final Context context;\n    private final Upcase upcase;\n\n    /**\n     * Just wanted to get code coverage for using @InjectService here.\n     */\n    @Autowired\n    public SpringStatusProvider(@InjectService(\"Context\") Context context, Upcase upcase)\n    {\n        this.context = context;\n        this.upcase = upcase;\n    }\n\n    public String getStatus()\n    {\n        return upcase.toUpperCase(String.format(\"Spring version %s: %s\",\n                                                SpringVersion.getVersion(),\n                                                context.getAttribute(\"status-message\")));\n    }\n\n\tpublic void onSuccess(Start start)\n\t{\n\t    start.input = start.upcaseBean.toUpperCase(start.input);\n\t}\n}",
+                "methodCount": 3
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "onSuccess",
+                            "method_signature": "public void onSuccess(Start start)",
+                            "target_class": "Start",
+                            "rationale": "The onSuccess method operates directly on the Start object and modifies its input. It would be more appropriate for this method to be part of the Start class, which could encapsulate the behavior related to the start process."
+                        }
+                    ],
+                    "llm_response_time": 1506
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "onSuccess",
+                            "method_signature": "public void onSuccess(Start start)",
+                            "target_class": "Start",
+                            "rationale": "The onSuccess method operates directly on the Start object and manipulates its properties, suggesting that it belongs more appropriately within the Start class."
+                        }
+                    ],
+                    "llm_response_time": 1471
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "onSuccess",
+                            "method_signature": "public void onSuccess(Start start)",
+                            "target_class": "Start",
+                            "rationale": "The onSuccess() method operates directly on the Start class's input and uses its properties, making it more appropriate for it to reside within the Start class."
+                        }
+                    ],
+                    "llm_response_time": 1511
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "oracle": "method org.apache.tapestry5.corelib.components.BeanEditor::onActionFromClear():void need move org.apache.tapestry5.integration.app1.pages.BeanEditorBeanEditContext",
+        "class_name": "org.apache.tapestry5.corelib.components.BeanEditor",
+        "telemetry": {
+            "id": "77d1642c-39e7-4789-b1e2-f6392cf0474f",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 210,
+                "lineStart": 38,
+                "lineEnd": 247,
+                "bodyLineStart": 38,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/tapestry/small/small/tapestry-5.1.0.5/tapestry-core/src/main/java/org/apache/tapestry5/corelib/components/BeanEditor.java",
+                "sourceCode": "/**\n * A component that generates a user interface for editing the properties of a bean. This is the central component of\n * the {@link BeanEditForm}, and utilizes a {@link PropertyEditor} for much of its functionality. This component places\n * a {@link BeanEditContext} into the environment.\n */\n@SupportsInformalParameters\npublic class BeanEditor\n{\n    public static class Prepare implements ComponentAction<BeanEditor>\n    {\n        private static final long serialVersionUID = 6273600092955522585L;\n\n        public void execute(BeanEditor component)\n        {\n            component.doPrepare();\n        }\n\n        @Override\n        public String toString()\n        {\n            return \"BeanEditor.Prepare\";\n        }\n    }\n\n    static class CleanupEnvironment implements ComponentAction<BeanEditor>\n    {\n        private static final long serialVersionUID = 6867226962459227016L;\n\n        public void execute(BeanEditor component)\n        {\n            component.cleanupEnvironment();\n        }\n\n        @Override\n        public String toString()\n        {\n            return \"BeanEditor.CleanupEnvironment\";\n        }\n    }\n\n    private static final ComponentAction<BeanEditor> CLEANUP_ENVIRONMENT = new CleanupEnvironment();\n\n    /**\n     * The object to be edited by the BeanEditor. This will be read when the component renders and updated when the form\n     * for the component is submitted. Typically, the container will listen for a \"prepare\" event, in order to ensure\n     * that a non-null value is ready to be read or updated.\n     */\n    @Parameter(autoconnect = true)\n    private Object object;\n\n    /**\n     * A comma-separated list of property names to be retained from the {@link org.apache.tapestry5.beaneditor.BeanModel}.\n     * Only these properties will be retained, and the properties will also be reordered. The names are\n     * case-insensitive.\n     */\n    @Parameter(defaultPrefix = BindingConstants.LITERAL)\n    private String include;\n\n    /**\n     * A comma-separated list of property names to be removed from the {@link org.apache.tapestry5.beaneditor.BeanModel}.\n     * The names are case-insensitive.\n     */\n    @Parameter(defaultPrefix = BindingConstants.LITERAL)\n    private String exclude;\n\n    /**\n     * A comma-separated list of property names indicating the order in which the properties should be presented. The\n     * names are case insensitive. Any properties not indicated in the list will be appended to the end of the display\n     * order.\n     */\n    @Parameter(defaultPrefix = BindingConstants.LITERAL)\n    private String reorder;\n\n    /**\n     * A comma-separated list of property names to be added to the {@link org.apache.tapestry5.beaneditor.BeanModel}.\n     */\n    @Parameter(defaultPrefix = BindingConstants.LITERAL)\n    private String add;\n\n\n    /**\n     * The model that identifies the parameters to be edited, their order, and every other aspect. If not specified, a\n     * default bean model will be created from the type of the object bound to the object parameter.\n     */\n    @Parameter\n    @Property(write = false)\n    private BeanModel model;\n\n    /**\n     * Where to search for local overrides of property editing blocks as block parameters. Further, the container of the\n     * overrides is used as the source for overridden validation messages. This is normally the BeanEditor component\n     * itself, but when the component is used within a BeanEditForm, it will be the BeanEditForm's resources that will\n     * be searched.\n     */\n    @Parameter(value = \"this\", allowNull = false)\n    @Property(write = false)\n    private PropertyOverrides overrides;\n\n    @Inject\n    private BeanModelSource modelSource;\n\n    @Inject\n    private ComponentResources resources;\n\n    @Inject\n    private Environment environment;\n\n    @Environmental\n    private FormSupport formSupport;\n\n    // Value that change with each change to the current property:\n\n    @Property\n    private String propertyName;\n\n    /**\n     * To support nested BeanEditors, we need to cache the object value inside {@link #doPrepare()}. See TAPESTRY-2460.\n     */\n    private Object cachedObject;\n\n    // Needed for testing as well\n\n    public Object getObject()\n    {\n        return cachedObject;\n    }\n\n    void setupRender()\n    {\n        formSupport.storeAndExecute(this, new Prepare());\n    }\n\n    void cleanupRender()\n    {\n        formSupport.storeAndExecute(this, CLEANUP_ENVIRONMENT);\n    }\n\n    /**\n     * Used to initialize the model if necessary, to instantiate the object being edited if necessary, and to push the\n     * BeanEditContext into the environment.\n     */\n    void doPrepare()\n    {\n        if (model == null)\n        {\n            Class type = resources.getBoundType(\"object\");\n            model = modelSource.createEditModel(type, overrides.getOverrideMessages());\n        }\n\n        BeanModelUtils.modify(model, add, include, exclude, reorder);\n\n        // The only problem here is that if the bound property is backed by a persistent field, it\n        // is assigned (and stored to the session, and propagated around the cluster) first,\n        // before values are assigned.\n\n        if (object == null)\n        {\n            try\n            {\n                object = model.newInstance();\n            }\n            catch (Exception ex)\n            {\n                String message = InternalMessages.failureInstantiatingObject(model.getBeanType(),\n                                                                             resources.getCompleteId(),\n                                                                             ex);\n                throw new TapestryException(message, resources.getLocation(), ex);\n            }\n        }\n\n        BeanEditContext context = new BeanEditContext()\n        {\n            public Class<?> getBeanClass()\n            {\n                return model.getBeanType();\n            }\n\n            public <T extends Annotation> T getAnnotation(Class<T> type)\n            {\n                return getBeanClass().getAnnotation(type);\n            }\n        };\n\n\n        cachedObject = object;\n\n        environment.push(BeanEditContext.class, context);\n    }\n\n    void cleanupEnvironment()\n    {\n        environment.pop(BeanEditContext.class);\n    }\n\n    // For testing\n    void inject(ComponentResources resources, PropertyOverrides overrides, BeanModelSource source,\n                Environment environment)\n    {\n        this.resources = resources;\n        this.overrides = overrides;\n        this.environment = environment;\n        modelSource = source;\n    }\n\n\tpublic void onActionFromClear(BeanEditorBeanEditContext beanEditorBeanEditContext)\n\t{\n\t    beanEditorBeanEditContext.data = null;\n\t    beanEditorBeanEditContext.form.clearErrors();\n\t}\n}",
+                "methodCount": 13
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "doPrepare",
+                            "method_signature": "void doPrepare()",
+                            "target_class": "BeanModel",
+                            "rationale": "The method doPrepare() is responsible for initializing the model and modifying it based on parameters. It would be more appropriate for this logic to be encapsulated within the BeanModel class, as it directly relates to the model's state management."
+                        },
+                        {
+                            "method_name": "cleanupEnvironment",
+                            "method_signature": "void cleanupEnvironment()",
+                            "target_class": "BeanEditContext",
+                            "rationale": "The cleanupEnvironment() method handles the context of the BeanEdit, which is directly related to the BeanEditContext. Moving it there would help in separating the concerns and maintaining a cleaner structure."
+                        }
+                    ],
+                    "llm_response_time": 5629
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "doPrepare",
+                            "method_signature": "void doPrepare()",
+                            "target_class": "BeanModel",
+                            "rationale": "The method doPrepare() is responsible for initializing and modifying the BeanModel, which suggests that it should belong to the BeanModel class to encapsulate all related operations."
+                        },
+                        {
+                            "method_name": "cleanupEnvironment",
+                            "method_signature": "void cleanupEnvironment()",
+                            "target_class": "Environment",
+                            "rationale": "The cleanupEnvironment() method directly interacts with the Environment class. It would be more appropriate to move this method to the Environment class to centralize environment-related cleanup functionality."
+                        }
+                    ],
+                    "llm_response_time": 3679
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "doPrepare",
+                            "method_signature": "void doPrepare()",
+                            "target_class": "BeanModel",
+                            "rationale": "The doPrepare() method initializes the model and modifies it based on parameters. It would be more appropriate for this logic to reside within the BeanModel class, which is responsible for defining the structure and behavior of the bean being edited."
+                        },
+                        {
+                            "method_name": "cleanupEnvironment",
+                            "method_signature": "void cleanupEnvironment()",
+                            "target_class": "BeanEditContext",
+                            "rationale": "The cleanupEnvironment() method is focused on managing the BeanEditContext in the environment. This functionality could be better encapsulated within the BeanEditContext class, which is responsible for managing the context of bean editing."
+                        }
+                    ],
+                    "llm_response_time": 2830
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    }
+]

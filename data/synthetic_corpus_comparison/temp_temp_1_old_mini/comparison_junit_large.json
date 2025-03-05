@@ -1,0 +1,1172 @@
+[
+    {
+        "oracle": "method org.junit.runner.Result::printFailures(Result):void need move to org.junit.internal.TextListener",
+        "class_name": "org.junit.runner.Result",
+        "telemetry": {
+            "id": "9a16d110-3b52-431e-93ca-944f2f862059",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 122,
+                "lineStart": 13,
+                "lineEnd": 134,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+                "sourceCode": "/**\n * A <code>Result</code> collects and summarizes information from running multiple\n * tests. Since tests are expected to run correctly, successful tests are only noted in\n * the count of tests that ran.\n */\npublic class Result implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\tprivate AtomicInteger fCount = new AtomicInteger();\n\tprivate AtomicInteger fIgnoreCount= new AtomicInteger();\n\tprivate final List<Failure> fFailures= Collections.synchronizedList(new ArrayList<Failure>());\n\tprivate long fRunTime= 0;\n\tprivate long fStartTime;\n\n\t/**\n\t * @return the number of tests run\n\t */\n\tpublic int getRunCount() {\n\t\treturn fCount.get();\n\t}\n\n\t/**\n\t * @return the number of tests that failed during the run\n\t */\n\tpublic int getFailureCount() {\n\t\treturn fFailures.size();\n\t}\n\n\t/**\n\t * @return the number of milliseconds it took to run the entire suite to run\n\t */\n\tpublic long getRunTime() {\n\t\treturn fRunTime;\n\t}\n\n\t/**\n\t * @return the {@link Failure}s describing tests that failed and the problems they encountered\n\t */\n\tpublic List<Failure> getFailures() {\n\t\treturn fFailures;\n\t}\n\n\t/**\n\t * @return the number of tests ignored during the run\n\t */\n\tpublic int getIgnoreCount() {\n\t\treturn fIgnoreCount.get();\n\t}\n\n\t/**\n\t * @return <code>true</code> if all tests succeeded\n\t */\n\tpublic boolean wasSuccessful() {\n\t\treturn getFailureCount() == 0;\n\t}\n\n\tprivate class Listener extends RunListener {\n\t\t@Override\n\t\tpublic void testRunStarted(Description description) throws Exception {\n\t\t\tfStartTime= System.currentTimeMillis();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testRunFinished(Result result) throws Exception {\n\t\t\tlong endTime= System.currentTimeMillis();\n\t\t\tfRunTime+= endTime - fStartTime;\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFinished(Description description) throws Exception {\n\t\t\tfCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFailure(Failure failure) throws Exception {\n\t\t\tfFailures.add(failure);\n\t\t}\n\n\t\t@Override\n\t\tpublic void testIgnored(Description description) throws Exception {\n\t\t\tfIgnoreCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testAssumptionFailure(Failure failure) {\n\t\t\t// do nothing: same as passing (for 4.5; may change in 4.6)\n\t\t}\n\t}\n\n\t/**\n\t * Internal use only.\n\t */\n\tpublic RunListener createListener() {\n\t\treturn new Listener();\n\t}\n\n\tpublic void printFailures(TextListener textListener) {\n\t\tList<Failure> failures= getFailures();\n\t\tif (failures.size() == 0)\n\t\t\treturn;\n\t\tif (failures.size() == 1)\n\t\t\ttextListener.getWriter().println(\"There was \" + failures.size() + \" failure:\");\n\t\telse\n\t\t\ttextListener.getWriter().println(\"There were \" + failures.size() + \" failures:\");\n\t\tint i= 1;\n\t\tfor (Failure each : failures)\n\t\t\ttextListener.printFailure(each, \"\" + i++);\n\t}\n\n\tpublic void printFooter(TextListener textListener) {\n\t\tif (wasSuccessful()) {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().print(\"OK\");\n\t\t\ttextListener.getWriter().println(\" (\" + getRunCount() + \" test\" + (getRunCount() == 1 ? \"\" : \"s\") + \")\");\n\t\n\t\t} else {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().println(\"FAILURES!!!\");\n\t\t\ttextListener.getWriter().println(\"Tests run: \" + getRunCount() + \",  Failures: \" + getFailureCount());\n\t\t}\n\t\ttextListener.getWriter().println();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "The printFailures method is responsible for reporting and formatting failure messages, which aligns with the responsibilities of a separate TestReporter class."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "The printFooter method also deals with reporting the result of the test run; moving it to a TestReporter class would help encapsulate the reporting logic."
+                        }
+                    ],
+                    "llm_response_time": 2776
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "printFailures() involves formatting and displaying test failure information, which is better suited in a separate class dedicated to reporting or logging test results."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "Similar to printFailures(), printFooter() is responsible for the final reporting to the listener and should be moved to a dedicated class for better separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 2881
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TestResultFormatter",
+                            "rationale": "The printFailures method handles output formatting for test failures, which suggests it could be better organized in a dedicated class focused on formatting test results."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TestResultFormatter",
+                            "rationale": "The printFooter method manages the final output of test results, which is also related to output formatting and should be grouped with printFailures in a dedicated formatting class."
+                        }
+                    ],
+                    "llm_response_time": 2650
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "ReportGenerator",
+                            "rationale": "The printFailures() method is responsible for formatting and displaying failure reports. This functionality is better suited in a dedicated ReportGenerator class, which would handle all reporting and output responsibilities."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "ReportGenerator",
+                            "rationale": "Similar to printFailures(), the printFooter() method deals with generating footer information related to the test results. This should also be part of a dedicated ReportGenerator class for better separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 3377
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TextListener",
+                            "rationale": "The printFailures method involves printing logic that is specific to the TextListener. Moving it to the TextListener would adhere to the Single Responsibility Principle and keep printing logic within the class responsible for output."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TextListener",
+                            "rationale": "The printFooter method also contains printing logic specific to the TextListener. This method should be moved to keep the output formatting responsibilities confined to the TextListener class."
+                        }
+                    ],
+                    "llm_response_time": 3172
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method junit.framework.TestResult::printFooter(TestResult):void need move to junit.textui.ResultPrinter",
+        "class_name": "junit.framework.TestResult",
+        "telemetry": {
+            "id": "f3525a3c-52dd-453d-9a95-4f818e00ed7c",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 177,
+                "lineStart": 10,
+                "lineEnd": 186,
+                "bodyLineStart": 10,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/junit/framework/TestResult.java",
+                "sourceCode": "/**\n * A <code>TestResult</code> collects the results of executing\n * a test case. It is an instance of the Collecting Parameter pattern.\n * The test framework distinguishes between <i>failures</i> and <i>errors</i>.\n * A failure is anticipated and checked for with assertions. Errors are\n * unanticipated problems like an {@link ArrayIndexOutOfBoundsException}.\n *\n * @see Test\n */\npublic class TestResult extends Object {\n\tprotected List<TestFailure> fFailures;\n\tprotected List<TestFailure> fErrors;\n\tprotected List<TestListener> fListeners;\n\tprotected int fRunTests;\n\tprivate boolean fStop;\n\t\n\tpublic TestResult() {\n\t\tfFailures= new ArrayList<TestFailure>();\n\t\tfErrors= new ArrayList<TestFailure>();\n\t\tfListeners= new ArrayList<TestListener>();\n\t\tfRunTests= 0;\n\t\tfStop= false;\n\t}\n\t/**\n\t * Adds an error to the list of errors. The passed in exception\n\t * caused the error.\n\t */\n\tpublic synchronized void addError(Test test, Throwable t) {\n\t\tfErrors.add(new TestFailure(test, t));\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.addError(test, t);\n\t}\n\t/**\n\t * Adds a failure to the list of failures. The passed in exception\n\t * caused the failure.\n\t */\n\tpublic synchronized void addFailure(Test test, AssertionFailedError t) {\n\t\tfFailures.add(new TestFailure(test, t));\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.addFailure(test, t);\n\t}\n\t/**\n\t * Registers a TestListener\n\t */\n\tpublic synchronized void addListener(TestListener listener) {\n\t\tfListeners.add(listener);\n\t}\n\t/**\n\t * Unregisters a TestListener\n\t */\n\tpublic synchronized void removeListener(TestListener listener) {\n\t\tfListeners.remove(listener);\n\t}\n\t/**\n\t * Returns a copy of the listeners.\n\t */\n\tprivate synchronized List<TestListener> cloneListeners() {\n\t\tList<TestListener> result= new ArrayList<TestListener>();\n\t\tresult.addAll(fListeners);\n\t\treturn result;\n\t}\n\t/**\n\t * Informs the result that a test was completed.\n\t */\n\tpublic void endTest(Test test) {\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.endTest(test);\n\t}\n\t/**\n\t * Gets the number of detected errors.\n\t */\n\tpublic synchronized int errorCount() {\n\t\treturn fErrors.size();\n\t}\n\t/**\n\t * Returns an Enumeration for the errors\n\t */\n\tpublic synchronized Enumeration<TestFailure> errors() {\n\t\treturn Collections.enumeration(fErrors);\n\t}\n\t\n\n\t/**\n\t * Gets the number of detected failures.\n\t */\n\tpublic synchronized int failureCount() {\n\t\treturn fFailures.size();\n\t}\n\t/**\n\t * Returns an Enumeration for the failures\n\t */\n\tpublic synchronized Enumeration<TestFailure> failures() {\n\t\treturn Collections.enumeration(fFailures);\n\t}\n\t\n\t/**\n\t * Runs a TestCase.\n\t */\n\tprotected void run(final TestCase test) {\n\t\tstartTest(test);\n\t\tProtectable p= new Protectable() {\n\t\t\tpublic void protect() throws Throwable {\n\t\t\t\ttest.runBare();\n\t\t\t}\n\t\t};\n\t\trunProtected(test, p);\n\n\t\tendTest(test);\n\t}\n\t/**\n\t * Gets the number of run tests.\n\t */\n\tpublic synchronized int runCount() {\n\t\treturn fRunTests;\n\t}\n\t/**\n\t * Runs a TestCase.\n\t */\n\tpublic void runProtected(final Test test, Protectable p) {\n\t\ttry {\n\t\t\tp.protect();\n\t\t} \n\t\tcatch (AssertionFailedError e) {\n\t\t\taddFailure(test, e);\n\t\t}\n\t\tcatch (ThreadDeath e) { // don't catch ThreadDeath by accident\n\t\t\tthrow e;\n\t\t}\n\t\tcatch (Throwable e) {\n\t\t\taddError(test, e);\n\t\t}\n\t}\n\t/**\n\t * Checks whether the test run should stop\n\t */\n\tpublic synchronized boolean shouldStop() {\n\t\treturn fStop;\n\t}\n\t/**\n\t * Informs the result that a test will be started.\n\t */\n\tpublic void startTest(Test test) {\n\t\tfinal int count= test.countTestCases();\n\t\tsynchronized(this) {\n\t\t\tfRunTests+= count;\n\t\t}\n\t\tfor (TestListener each : cloneListeners())\n\t\t\teach.startTest(test);\n\t}\n\t/**\n\t * Marks that the test run should stop.\n\t */\n\tpublic synchronized void stop() {\n\t\tfStop= true;\n\t}\n\t/**\n\t * Returns whether the entire test was successful or not.\n\t */\n\tpublic synchronized boolean wasSuccessful() {\n\t\treturn failureCount() == 0 && errorCount() == 0;\n\t}\n\tpublic void printFooter(ResultPrinter resultPrinter) {\n\t\tif (wasSuccessful()) {\n\t\t\tresultPrinter.getWriter().println();\n\t\t\tresultPrinter.getWriter().print(\"OK\");\n\t\t\tresultPrinter.getWriter().println (\" (\" + runCount() + \" test\" + (runCount() == 1 ? \"\": \"s\") + \")\");\n\t\n\t\t} else {\n\t\t\tresultPrinter.getWriter().println();\n\t\t\tresultPrinter.getWriter().println(\"FAILURES!!!\");\n\t\t\tresultPrinter.getWriter().println(\"Tests run: \"+runCount()+ \n\t\t\t\t         \",  Failures: \"+failureCount()+\n\t\t\t\t         \",  Errors: \"+errorCount());\n\t\t}\n\t    resultPrinter.getWriter().println();\n\t}\n}",
+                "methodCount": 20
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addError",
+                            "method_signature": "public synchronized void addError(Test test, Throwable t)",
+                            "target_class": "TestListener",
+                            "rationale": "The method addError() not only adds errors to the TestResult but also calls corresponding methods on each listener. It would be beneficial to move this method to TestListener, where error handling for listeners is more contextually appropriate."
+                        },
+                        {
+                            "method_name": "addFailure",
+                            "method_signature": "public synchronized void addFailure(Test test, AssertionFailedError t)",
+                            "target_class": "TestListener",
+                            "rationale": "This method also manages the addition of failures and interacts with listeners. Moving it to TestListener makes the error reporting more cohesive and keeps the concern of reporting errors within the listener management."
+                        },
+                        {
+                            "method_name": "cloneListeners",
+                            "method_signature": "private synchronized List<TestListener> cloneListeners()",
+                            "target_class": "TestListener",
+                            "rationale": "The purpose of this method is to create a clone of listener objects, which aligns more with the functionality of a TestListener class than with TestResult, thereby promoting better encapsulation."
+                        },
+                        {
+                            "method_name": "startTest",
+                            "method_signature": "public void startTest(Test test)",
+                            "target_class": "TestListener",
+                            "rationale": "The startTest method notifies listeners of the beginning of a test. This action is more aligned with the responsibilities of TestListener, where actions related to starting tests can be handled centrally."
+                        },
+                        {
+                            "method_name": "endTest",
+                            "method_signature": "public void endTest(Test test)",
+                            "target_class": "TestListener",
+                            "rationale": "Similar to startTest, endTest functionality is about notifying listeners at the end of a test and should therefore reside within TestListener, making it easier to manage listener-related actions."
+                        }
+                    ],
+                    "llm_response_time": 7793
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "ResultPrinter",
+                            "rationale": "The printFooter method handles the printing of results and formatting, which is clearly the responsibility of the ResultPrinter class. Moving it would adhere to the single responsibility principle."
+                        }
+                    ],
+                    "llm_response_time": 2134
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "ResultPrinter",
+                            "rationale": "The printFooter() method directly interacts with the ResultPrinter, suggesting that it may belong in that class instead of TestResult."
+                        },
+                        {
+                            "method_name": "cloneListeners",
+                            "method_signature": "private synchronized List<TestListener> cloneListeners()",
+                            "target_class": "TestListener",
+                            "rationale": "The cloneListeners() method is primarily concerned with managing and duplicating TestListener instances, which makes it more relevant to the TestListener class."
+                        }
+                    ],
+                    "llm_response_time": 2951
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addError",
+                            "method_signature": "public synchronized void addError(Test test, Throwable t)",
+                            "target_class": "TestListener",
+                            "rationale": "The method addError() handles error logging through listeners. Moving it to TestListener may provide better encapsulation as listener behavior can be tailored based on the context of the error."
+                        },
+                        {
+                            "method_name": "addFailure",
+                            "method_signature": "public synchronized void addFailure(Test test, AssertionFailedError t)",
+                            "target_class": "TestListener",
+                            "rationale": "Similarly to addError(), addFailure() involves notifying listeners of failures. This functionality belongs in the TestListener class as it focuses on handling test outcomes."
+                        },
+                        {
+                            "method_name": "cloneListeners",
+                            "method_signature": "private synchronized List<TestListener> cloneListeners()",
+                            "target_class": "TestListener",
+                            "rationale": "The cloneListeners() method is primarily concerned with the management of TestListener instances. Moving it to TestListener would centralize listener-related functionality."
+                        },
+                        {
+                            "method_name": "startTest",
+                            "method_signature": "public void startTest(Test test)",
+                            "target_class": "TestListener",
+                            "rationale": "The startTest() method is responsible for notifying listeners that a test has started. This logically belongs to the TestListener class, which is designed to respond to such events."
+                        },
+                        {
+                            "method_name": "endTest",
+                            "method_signature": "public void endTest(Test test)",
+                            "target_class": "TestListener",
+                            "rationale": "Similar to startTest(), the endTest() method notifies listeners about the completion of tests. Moving this method to TestListener aligns with its purpose of handling test notifications."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "ResultPrinter",
+                            "rationale": "The printFooter() method formats output based on results. It should reside in a dedicated ResultPrinter class, which would manage all printing-related functionality."
+                        }
+                    ],
+                    "llm_response_time": 6346
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(ResultPrinter resultPrinter)",
+                            "target_class": "ResultPrinter",
+                            "rationale": "The printFooter method is primarily responsible for formatting output related to test results. Moving it to the ResultPrinter class will adhere to the Single Responsibility Principle by delegating the output formatting responsibility to the appropriate class."
+                        },
+                        {
+                            "method_name": "addListener",
+                            "method_signature": "public synchronized void addListener(TestListener listener)",
+                            "target_class": "TestListener",
+                            "rationale": "The method manages the registration of listeners for test events. It is appropriate to move this method to the TestListener class to encapsulate the functionality related to listener management."
+                        },
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public synchronized void removeListener(TestListener listener)",
+                            "target_class": "TestListener",
+                            "rationale": "Similar to addListener, this method is concerned with unregistering listeners for test events and should be moved to the TestListener class to better organize related operations."
+                        },
+                        {
+                            "method_name": "cloneListeners",
+                            "method_signature": "private synchronized List<TestListener> cloneListeners()",
+                            "target_class": "TestListener",
+                            "rationale": "This method creates a copy of the listener list, which is an operation closely related to listener management. Moving it to the TestListener class enhances cohesion and keeps listener-related operations together."
+                        }
+                    ],
+                    "llm_response_time": 7038
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.Statement::apply(Statement, FrameworkMethod, Object):Statement need move to org.junit.rules.TestWatchman",
+        "class_name": "org.junit.runners.model.Statement",
+        "telemetry": {
+            "id": "4718fe84-6880-4cfe-b979-4faacf6e2742",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 50,
+                "lineStart": 11,
+                "lineEnd": 60,
+                "bodyLineStart": 11,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+                "sourceCode": "/**\n * Represents one or more actions to be taken at runtime in the course\n * of running a JUnit test suite.\n */\npublic abstract class Statement {\n\t/**\n\t * Run the action, throwing a {@code Throwable} if anything goes wrong.\n\t */\n\tpublic abstract void evaluate() throws Throwable;\n\n\tpublic Statement apply(final TestWatchman testWatchman, final FrameworkMethod method, Object target) {\n\t\treturn new Statement() {\n\t\t\t@Override\n\t\t\tpublic void evaluate() throws Throwable {\n\t\t\t\ttestWatchman.starting(method);\n\t\t\t\ttry {\n\t\t\t\t\tevaluate();\n\t\t\t\t\ttestWatchman.succeeded(method);\n\t\t\t\t} catch (AssumptionViolatedException e) {\n\t\t\t\t\tthrow e;\n\t\t\t\t} catch (Throwable t) {\n\t\t\t\t\ttestWatchman.failed(t, method);\n\t\t\t\t\tthrow t;\n\t\t\t\t} finally {\n\t\t\t\t\ttestWatchman.finished(method);\n\t\t\t\t}\n\t\t\t}\n\t\t};\n\t}\n\n\tpublic void evaluate2(ExpectException expectException) throws Exception {\n\t\tboolean complete = false;\n\t\ttry {\n\t\t\tevaluate();\n\t\t\tcomplete = true;\n\t\t} catch (AssumptionViolatedException e) {\n\t\t\tthrow e;\n\t\t} catch (Throwable e) {\n\t\t\tif (!expectException.fExpected.isAssignableFrom(e.getClass())) {\n\t\t\t\tString message= \"Unexpected exception, expected<\"\n\t\t\t\t\t\t\t+ expectException.fExpected.getName() + \"> but was<\"\n\t\t\t\t\t\t\t+ e.getClass().getName() + \">\";\n\t\t\t\tthrow new Exception(message, e);\n\t\t\t}\n\t\t}\n\t\tif (complete)\n\t\t\tthrow new AssertionError(\"Expected exception: \"\n\t\t\t\t\t+ expectException.fExpected.getName());\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "ExceptionHandler",
+                            "rationale": "The evaluate2() method is focused on handling exceptions, which might be better encapsulated in a dedicated ExceptionHandler class to separate concerns and improve clarity."
+                        }
+                    ],
+                    "llm_response_time": 1422
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "ExceptionEvaluator",
+                            "rationale": "The evaluate2 method contains specific logic for handling exceptions, which may be better suited to a dedicated class responsible for evaluating exceptions during tests."
+                        }
+                    ],
+                    "llm_response_time": 1887
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "ExpectException",
+                            "rationale": "The evaluate2 method closely interacts with the ExpectException type, making it a suitable candidate for relocation to the ExpectException class, as it could enhance encapsulation and cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1540
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "TestWatcher",
+                            "rationale": "The evaluate2() method appears to be focused on handling exceptions and expectations, which aligns closely with the responsibilities of a TestWatcher class. Moving it there would enhance separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1538
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "TestWatchman",
+                            "rationale": "The evaluate2() method handles exceptions and manages the flow of execution in relation to the TestWatchman, making it more appropriate for this logic to reside in the TestWatchman class."
+                        }
+                    ],
+                    "llm_response_time": 2485
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.experimental.theories.ParameterSignature::addFields(ParameterSignature, List<PotentialAssignment>):void need move to org.junit.experimental.theories.internal.AllMembersSupplier",
+        "class_name": "org.junit.experimental.theories.ParameterSignature",
+        "telemetry": {
+            "id": "c75e3cf6-d6c2-4784-8b94-1acbff399ea9",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 94,
+                "lineStart": 17,
+                "lineEnd": 110,
+                "bodyLineStart": 17,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/experimental/theories/ParameterSignature.java",
+                "sourceCode": "public class ParameterSignature {\n\tpublic static ArrayList<ParameterSignature> signatures(Method method) {\n\t\treturn signatures(method.getParameterTypes(), method\n\t\t\t\t.getParameterAnnotations());\n\t}\n\n\tpublic static List<ParameterSignature> signatures(Constructor<?> constructor) {\n\t\treturn signatures(constructor.getParameterTypes(), constructor\n\t\t\t\t.getParameterAnnotations());\n\t}\n\n\tprivate static ArrayList<ParameterSignature> signatures(\n\t\t\tClass<?>[] parameterTypes, Annotation[][] parameterAnnotations) {\n\t\tArrayList<ParameterSignature> sigs= new ArrayList<ParameterSignature>();\n\t\tfor (int i= 0; i < parameterTypes.length; i++) {\n\t\t\tsigs.add(new ParameterSignature(parameterTypes[i],\n\t\t\t\t\tparameterAnnotations[i]));\n\t\t}\n\t\treturn sigs;\n\t}\n\n\tprivate final Class<?> type;\n\n\tprivate final Annotation[] annotations;\n\n\tprivate ParameterSignature(Class<?> type, Annotation[] annotations) {\n\t\tthis.type= type;\n\t\tthis.annotations= annotations;\n\t}\n\n\tpublic boolean canAcceptType(Class<?> candidate) {\n\t\treturn type.isAssignableFrom(candidate);\n\t}\n\n\tpublic Class<?> getType() {\n\t\treturn type;\n\t}\n\n\tpublic List<Annotation> getAnnotations() {\n\t\treturn Arrays.asList(annotations);\n\t}\n\n\tpublic boolean canAcceptArrayType(Class<?> type) {\n\t\treturn type.isArray() && canAcceptType(type.getComponentType());\n\t}\n\n\tpublic boolean hasAnnotation(Class<? extends Annotation> type) {\n\t\treturn getAnnotation(type) != null;\n\t}\n\n\tpublic <T extends Annotation> T findDeepAnnotation(Class<T> annotationType) {\n\t\tAnnotation[] annotations2= annotations;\n\t\treturn findDeepAnnotation(annotations2, annotationType, 3);\n\t}\n\n\tprivate <T extends Annotation> T findDeepAnnotation(\n\t\t\tAnnotation[] annotations, Class<T> annotationType, int depth) {\n\t\tif (depth == 0)\n\t\t\treturn null;\n\t\tfor (Annotation each : annotations) {\n\t\t\tif (annotationType.isInstance(each))\n\t\t\t\treturn annotationType.cast(each);\n\t\t\tAnnotation candidate= findDeepAnnotation(each.annotationType()\n\t\t\t\t\t.getAnnotations(), annotationType, depth - 1);\n\t\t\tif (candidate != null)\n\t\t\t\treturn annotationType.cast(candidate);\n\t\t}\n\n\t\treturn null;\n\t}\n\n\tpublic <T extends Annotation> T getAnnotation(Class<T> annotationType) {\n\t\tfor (Annotation each : getAnnotations())\n\t\t\tif (annotationType.isInstance(each))\n\t\t\t\treturn annotationType.cast(each);\n\t\treturn null;\n\t}\n\n\tpublic void addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list) {\n\t\tfor (final Field field : allMembersSupplier.fClass.getJavaClass().getFields()) {\n\t\t\tif (Modifier.isStatic(field.getModifiers())) {\n\t\t\t\tClass<?> type= field.getType();\n\t\t\t\tif (canAcceptArrayType(type)\n\t\t\t\t\t\t&& field.getAnnotation(DataPoints.class) != null) {\n\t\t\t\t\tallMembersSupplier.addArrayValues(field.getName(), list, allMembersSupplier.getStaticFieldValue(field));\n\t\t\t\t} else if (canAcceptType(type)\n\t\t\t\t\t\t&& field.getAnnotation(DataPoint.class) != null) {\n\t\t\t\t\tlist.add(PotentialAssignment\n\t\t\t\t\t\t\t.forValue(field.getName(), allMembersSupplier.getStaticFieldValue(field)));\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+                "methodCount": 13
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFields",
+                            "method_signature": "public void addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "AllMembersSupplier",
+                            "rationale": "The addFields() method is closely related to the AllMembersSupplier class, as it manipulates fields obtained from it. Moving this method there would enhance cohesion and keep related functionality together."
+                        }
+                    ],
+                    "llm_response_time": 5390
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFields",
+                            "method_signature": "public void addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "AllMembersSupplier",
+                            "rationale": "The addFields method operates on fields within the AllMembersSupplier class and utilizes methods from AllMembersSupplier. It would be more appropriate to move this method to the AllMembersSupplier class where it can directly interact with its fields."
+                        }
+                    ],
+                    "llm_response_time": 1989
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFields",
+                            "method_signature": "public void addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "AllMembersSupplier",
+                            "rationale": "The addFields method is performing operations on fields provided by the AllMembersSupplier instance, making it more appropriate to be a method of the AllMembersSupplier class."
+                        }
+                    ],
+                    "llm_response_time": 1959
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFields",
+                            "method_signature": "public void addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "AllMembersSupplier",
+                            "rationale": "The addFields method operates directly on the AllMembersSupplier and its fields, making it more contextually appropriate for this logic to reside within the AllMembersSupplier class."
+                        }
+                    ],
+                    "llm_response_time": 1395
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFields",
+                            "method_signature": "public void addFields(AllMembersSupplier allMembersSupplier, List<PotentialAssignment> list)",
+                            "target_class": "AllMembersSupplier",
+                            "rationale": "The addFields method is heavily reliant on the AllMembersSupplier class for its functionality. Moving it there would adhere to the Single Responsibility Principle and enhance cohesion within the AllMembersSupplier class."
+                        }
+                    ],
+                    "llm_response_time": 1954
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Description::runBefores():void need move to org.junit.internal.runners.ClassRoadie",
+        "class_name": "org.junit.runner.Description",
+        "telemetry": {
+            "id": "e9945f1e-53de-4fd1-bec4-1edd6ddaf83a",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 249,
+                "lineStart": 17,
+                "lineEnd": 265,
+                "bodyLineStart": 17,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Description.java",
+                "sourceCode": "/**\n * <p>A <code>Description</code> describes a test which is to be run or has been run. <code>Descriptions</code> \n * can be atomic (a single test) or compound (containing children tests). <code>Descriptions</code> are used\n * to provide feedback about the tests that are about to run (for example, the tree view\n * visible in many IDEs) or tests that have been run (for example, the failures view).</p>\n * \n * <p><code>Descriptions</code> are implemented as a single class rather than a Composite because\n * they are entirely informational. They contain no logic aside from counting their tests.</p>\n * \n * <p>In the past, we used the raw {@link junit.framework.TestCase}s and {@link junit.framework.TestSuite}s\n * to display the tree of tests. This was no longer viable in JUnit 4 because atomic tests no longer have \n * a superclass below {@link Object}. We needed a way to pass a class and name together. Description \n * emerged from this.</p>\n * \n * @see org.junit.runner.Request\n * @see org.junit.runner.Runner\n */\npublic class Description implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\n\t/**\n\t * Create a <code>Description</code> named <code>name</code>.\n\t * Generally, you will add children to this <code>Description</code>.\n\t * @param name the name of the <code>Description</code> \n\t * @param annotations \n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createSuiteDescription(String name, Annotation... annotations) {\n\t\tif (name.length() == 0)\n\t\t\tthrow new IllegalArgumentException(\"name must have non-zero length\");\n\t\treturn new Description(name, annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @param annotations meta-data about the test, for downstream interpreters\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name, Annotation... annotations) {\n\t\treturn new Description(String.format(\"%s(%s)\", name, clazz.getName()), annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.  \n\t * (This remains for binary compatibility with clients of JUnit 4.3)\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name) {\n\t\treturn createTestDescription(clazz, name, new Annotation[0]);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> named after <code>testClass</code>\n\t * @param testClass A {@link Class} containing tests \n\t * @return a <code>Description</code> of <code>testClass</code>\n\t */\n\tpublic static Description createSuiteDescription(Class<?> testClass) {\n\t\treturn new Description(testClass.getName(), testClass.getAnnotations());\n\t}\n\t\n\t/**\n\t * Describes a Runner which runs no tests\n\t */\n\tpublic static final Description EMPTY= new Description(\"No Tests\");\n\t\n\t/**\n\t * Describes a step in the test-running mechanism that goes so wrong no\n\t * other description can be used (for example, an exception thrown from a Runner's\n\t * constructor\n\t */\n\tpublic static final Description TEST_MECHANISM= new Description(\"Test mechanism\");\n\t\n\tprivate final ArrayList<Description> fChildren= new ArrayList<Description>();\n\tprivate final String fDisplayName;\n\t\n\tprivate final Annotation[] fAnnotations;\n\t\n\tprivate Description(final String displayName, Annotation... annotations) {\n\t\tfDisplayName= displayName;\n\t\tfAnnotations= annotations;\n\t}\n\n\t/**\n\t * @return a user-understandable label\n\t */\n\tpublic String getDisplayName() {\n\t\treturn fDisplayName;\n\t}\n\n\t/**\n\t * Add <code>Description</code> as a child of the receiver.\n\t * @param description the soon-to-be child.\n\t */\n\tpublic void addChild(Description description) {\n\t\tgetChildren().add(description);\n\t}\n\n\t/**\n\t * @return the receiver's children, if any\n\t */\n\tpublic ArrayList<Description> getChildren() {\n\t\treturn fChildren;\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is a suite\n\t */\n\tpublic boolean isSuite() {\n\t\treturn !isTest();\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is an atomic test\n\t */\n\tpublic boolean isTest() {\n\t\treturn getChildren().isEmpty();\n\t}\n\n\t/**\n\t * @return the total number of atomic tests in the receiver\n\t */\n\tpublic int testCount() {\n\t\tif (isTest())\n\t\t\treturn 1;\n\t\tint result= 0;\n\t\tfor (Description child : getChildren())\n\t\t\tresult+= child.testCount();\n\t\treturn result;\n\t}\n\n\t@Override\n\tpublic int hashCode() {\n\t\treturn getDisplayName().hashCode();\n\t}\n\n\t@Override\n\tpublic boolean equals(Object obj) {\n\t\tif (!(obj instanceof Description))\n\t\t\treturn false;\n\t\tDescription d = (Description) obj;\n\t\treturn getDisplayName().equals(d.getDisplayName());\n\t}\n\t\n\t@Override\n\tpublic String toString() {\n\t\treturn getDisplayName();\n\t}\n\n\t/**\n\t * @return true if this is a description of a Runner that runs no tests\n\t */\n\tpublic boolean isEmpty() {\n\t\treturn equals(EMPTY);\n\t}\n\n\t/**\n\t * @return a copy of this description, with no children (on the assumption that some of the\n\t * children will be added back)\n\t */\n\tpublic Description childlessCopy() {\n\t\treturn new Description(fDisplayName, fAnnotations);\n\t}\n\n\t/**\n\t * @return the annotation of type annotationType that is attached to this description node, \n\t * or null if none exists\n\t */\n\tpublic <T extends Annotation> T getAnnotation(Class<T> annotationType) {\n\t\tfor (Annotation each : fAnnotations)\n\t\t\tif (each.annotationType().equals(annotationType))\n\t\t\t\treturn annotationType.cast(each);\n\t\treturn null;\n\t}\n\n\t/**\n\t * @return all of the annotations attached to this description node\n\t */\n\tpublic Collection<Annotation> getAnnotations() {\n\t\treturn Arrays.asList(fAnnotations);\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the class of the test instance.\n\t */\n\tpublic Class<?> getTestClass() {\n\t\tString name= getClassName();\n\t\tif (name == null)\n\t\t\treturn null;\n\t\ttry {\n\t\t\treturn Class.forName(name);\n\t\t} catch (ClassNotFoundException e) {\n\t\t\treturn null;\n\t\t}\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the class of the test instance\n\t */\n\tpublic String getClassName() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\treturn matcher.matches()\n\t\t\t? matcher.group(2)\n\t\t\t: toString();\n\t}\n\t\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the method (or null if not)\n\t */\n\tpublic String getMethodName() {\n\t\treturn parseMethod();\n\t}\n\n\tprivate String parseMethod() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\tif (matcher.matches())\n\t\t\treturn matcher.group(1);\n\t\treturn null;\n\t}\n\n\tprivate Matcher methodStringMatcher() {\n\t\treturn Pattern.compile(\"(.*)\\\\((.*)\\\\)\").matcher(toString());\n\t}\n\n\tpublic void runBefores(ClassRoadie classRoadie) throws FailedBefore {\n\t\ttry {\n\t\t\ttry {\n\t\t\t\tList<Method> befores= classRoadie.fTestClass.getBefores();\n\t\t\t\tfor (Method before : befores)\n\t\t\t\t\tbefore.invoke(null);\n\t\t\t} catch (InvocationTargetException e) {\n\t\t\t\tthrow e.getTargetException();\n\t\t\t}\n\t\t} catch (org.junit.internal.AssumptionViolatedException e) {\n\t\t\tthrow new FailedBefore();\n\t\t} catch (Throwable e) {\n\t\t\tclassRoadie.addFailure(e);\n\t\t\tthrow new FailedBefore();\n\t\t}\n\t}\n}",
+                "methodCount": 24
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runBefores",
+                            "method_signature": "public void runBefores(ClassRoadie classRoadie) throws FailedBefore",
+                            "target_class": "TestRunner",
+                            "rationale": "The runBefores() method is responsible for executing before-test methods and should be moved to a TestRunner class that is better suited to manage the test execution lifecycle."
+                        },
+                        {
+                            "method_name": "childlessCopy",
+                            "method_signature": "public Description childlessCopy()",
+                            "target_class": "DescriptionFactory",
+                            "rationale": "Creating a copy of a Description without children would be more appropriately handled in a separate factory class, enhancing separation of concerns."
+                        },
+                        {
+                            "method_name": "getTestClass",
+                            "method_signature": "public Class<?> getTestClass()",
+                            "target_class": "TestDescriptor",
+                            "rationale": "The method's focus on obtaining the associated test class indicates it should be part of a TestDescriptor class that encapsulates details about the test."
+                        },
+                        {
+                            "method_name": "getClassName",
+                            "method_signature": "public String getClassName()",
+                            "target_class": "TestDescriptor",
+                            "rationale": "Similar to getTestClass, getClassName() is related to obtaining information about the test context, which is better suited in a dedicated TestDescriptor class."
+                        },
+                        {
+                            "method_name": "getMethodName",
+                            "method_signature": "public String getMethodName()",
+                            "target_class": "TestDescriptor",
+                            "rationale": "The getMethodName() method, which retrieves information about the method being tested, should belong to a TestDescriptor class that holds details about test methods."
+                        }
+                    ],
+                    "llm_response_time": 6614
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runBefores",
+                            "method_signature": "public void runBefores(ClassRoadie classRoadie) throws FailedBefore",
+                            "target_class": "TestRunner",
+                            "rationale": "The runBefores() method is responsible for executing setup methods before tests, and it aligns more closely with test execution logic which could be encapsulated in a TestRunner class."
+                        },
+                        {
+                            "method_name": "getTestClass",
+                            "method_signature": "public Class<?> getTestClass()",
+                            "target_class": "TestMetadata",
+                            "rationale": "The getTestClass() method retrieves the class of the test instance, which is related to the metadata of tests rather than the Description of test cases, making it a better fit for a TestMetadata class."
+                        },
+                        {
+                            "method_name": "getAnnotations",
+                            "method_signature": "public Collection<Annotation> getAnnotations()",
+                            "target_class": "TestAnnotations",
+                            "rationale": "The getAnnotations() method retrieves the annotations attached to the description node, which should be handled by a dedicated TestAnnotations class that deals with test meta-information."
+                        }
+                    ],
+                    "llm_response_time": 5891
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getTestClass",
+                            "method_signature": "public Class<?> getTestClass()",
+                            "target_class": "TestRunner",
+                            "rationale": "The method getTestClass() is focused on retrieving the test class information, which is more related to the responsibility of a TestRunner class that manages the execution of tests."
+                        },
+                        {
+                            "method_name": "runBefores",
+                            "method_signature": "public void runBefores(ClassRoadie classRoadie) throws FailedBefore",
+                            "target_class": "TestExecutor",
+                            "rationale": "The runBefores() method pertains to executing setup methods before tests, making it a more fitting candidate for a TestExecutor class which would handle the execution lifecycle of tests."
+                        },
+                        {
+                            "method_name": "getMethodName",
+                            "method_signature": "public String getMethodName()",
+                            "target_class": "TestMethodDescriptor",
+                            "rationale": "The getMethodName() method deals specifically with obtaining the method name of a test, which could be better encapsulated within a TestMethodDescriptor class that focuses on describing individual test methods."
+                        },
+                        {
+                            "method_name": "getClassName",
+                            "method_signature": "public String getClassName()",
+                            "target_class": "TestMethodDescriptor",
+                            "rationale": "Similar to getMethodName(), getClassName() is related to retrieving class information for a test method, and thus can be moved to a TestMethodDescriptor class for clarity and separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 5390
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runBefores",
+                            "method_signature": "public void runBefores(ClassRoadie classRoadie) throws FailedBefore",
+                            "target_class": "TestRunner",
+                            "rationale": "The method runBefores() is responsible for executing setup methods (befores) before running tests, which is more related to the test execution logic rather than the description of tests. Hence, it should be moved to a TestRunner class."
+                        },
+                        {
+                            "method_name": "getTestClass",
+                            "method_signature": "public Class<?> getTestClass()",
+                            "target_class": "TestUtils",
+                            "rationale": "The method getTestClass() is focused on retrieving the test class from the description, which would be more appropriate in a utility class like TestUtils that handles operations related to test classes."
+                        },
+                        {
+                            "method_name": "getClassName",
+                            "method_signature": "public String getClassName()",
+                            "target_class": "TestUtils",
+                            "rationale": "Similarly, getClassName() is related to analyzing method invocation strings to extract class names, which fits better in a utility class like TestUtils rather than as part of Description."
+                        },
+                        {
+                            "method_name": "getMethodName",
+                            "method_signature": "public String getMethodName()",
+                            "target_class": "TestUtils",
+                            "rationale": "getMethodName() performs string parsing to derive the method name, which is more of a utility function and should be part of a utility class like TestUtils."
+                        }
+                    ],
+                    "llm_response_time": 5241
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runBefores",
+                            "method_signature": "public void runBefores(ClassRoadie classRoadie) throws FailedBefore",
+                            "target_class": "TestRunner",
+                            "rationale": "The 'runBefores' method handles the execution of setup methods before running tests, which is more aligned with the responsibilities of a test runner rather than a description of the tests."
+                        },
+                        {
+                            "method_name": "getTestClass",
+                            "method_signature": "public Class<?> getTestClass()",
+                            "target_class": "TestManager",
+                            "rationale": "The method retrieves the class of the test instance, which is related to the management of tests rather than simply describing them, suggesting it belongs in a class that manages test instances."
+                        },
+                        {
+                            "method_name": "getMethodName",
+                            "method_signature": "public String getMethodName()",
+                            "target_class": "TestMethodResolver",
+                            "rationale": "The method parses and provides the method name related to the test, indicating that it pertains to resolving test methods, which is better suited for a dedicated resolver class."
+                        }
+                    ],
+                    "llm_response_time": 3854
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.Statement::evaluate():void need move to org.junit.internal.runners.statements.ExpectException",
+        "class_name": "org.junit.runners.model.Statement",
+        "telemetry": {
+            "id": "4117cf59-aba6-4766-8cb9-979ec04ed9a3",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 50,
+                "lineStart": 11,
+                "lineEnd": 60,
+                "bodyLineStart": 11,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runners/model/Statement.java",
+                "sourceCode": "/**\n * Represents one or more actions to be taken at runtime in the course\n * of running a JUnit test suite.\n */\npublic abstract class Statement {\n\t/**\n\t * Run the action, throwing a {@code Throwable} if anything goes wrong.\n\t */\n\tpublic abstract void evaluate() throws Throwable;\n\n\tpublic Statement apply(final TestWatchman testWatchman, final FrameworkMethod method, Object target) {\n\t\treturn new Statement() {\n\t\t\t@Override\n\t\t\tpublic void evaluate() throws Throwable {\n\t\t\t\ttestWatchman.starting(method);\n\t\t\t\ttry {\n\t\t\t\t\tevaluate();\n\t\t\t\t\ttestWatchman.succeeded(method);\n\t\t\t\t} catch (AssumptionViolatedException e) {\n\t\t\t\t\tthrow e;\n\t\t\t\t} catch (Throwable t) {\n\t\t\t\t\ttestWatchman.failed(t, method);\n\t\t\t\t\tthrow t;\n\t\t\t\t} finally {\n\t\t\t\t\ttestWatchman.finished(method);\n\t\t\t\t}\n\t\t\t}\n\t\t};\n\t}\n\n\tpublic void evaluate2(ExpectException expectException) throws Exception {\n\t\tboolean complete = false;\n\t\ttry {\n\t\t\tevaluate();\n\t\t\tcomplete = true;\n\t\t} catch (AssumptionViolatedException e) {\n\t\t\tthrow e;\n\t\t} catch (Throwable e) {\n\t\t\tif (!expectException.fExpected.isAssignableFrom(e.getClass())) {\n\t\t\t\tString message= \"Unexpected exception, expected<\"\n\t\t\t\t\t\t\t+ expectException.fExpected.getName() + \"> but was<\"\n\t\t\t\t\t\t\t+ e.getClass().getName() + \">\";\n\t\t\t\tthrow new Exception(message, e);\n\t\t\t}\n\t\t}\n\t\tif (complete)\n\t\t\tthrow new AssertionError(\"Expected exception: \"\n\t\t\t\t\t+ expectException.fExpected.getName());\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "ExceptionHandler",
+                            "rationale": "The evaluate2() method is focused on handling exceptions, which might be better encapsulated in a dedicated ExceptionHandler class to separate concerns and improve clarity."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "ExceptionEvaluator",
+                            "rationale": "The evaluate2 method contains specific logic for handling exceptions, which may be better suited to a dedicated class responsible for evaluating exceptions during tests."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "ExpectException",
+                            "rationale": "The evaluate2 method closely interacts with the ExpectException type, making it a suitable candidate for relocation to the ExpectException class, as it could enhance encapsulation and cohesion."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "TestWatcher",
+                            "rationale": "The evaluate2() method appears to be focused on handling exceptions and expectations, which aligns closely with the responsibilities of a TestWatcher class. Moving it there would enhance separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "evaluate2",
+                            "method_signature": "public void evaluate2(ExpectException expectException) throws Exception",
+                            "target_class": "TestWatchman",
+                            "rationale": "The evaluate2() method handles exceptions and manages the flow of execution in relation to the TestWatchman, making it more appropriate for this logic to reside in the TestWatchman class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.notification.RunNotifier::runTestMethod():void need move to org.junit.internal.runners.MethodRoadie",
+        "class_name": "org.junit.runner.notification.RunNotifier",
+        "telemetry": {
+            "id": "31490ad9-9437-496d-bf85-c0a44e62ea03",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 176,
+                "lineStart": 14,
+                "lineEnd": 189,
+                "bodyLineStart": 14,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+                "sourceCode": "/**\n * If you write custom runners, you may need to notify JUnit of your progress running tests.\n * Do this by invoking the <code>RunNotifier</code> passed to your implementation of\n * {@link org.junit.runner.Runner#run(RunNotifier)}. Future evolution of this class is likely to \n * move {@link #fireTestRunStarted(Description)} and {@link #fireTestRunFinished(Result)}\n * to a separate class since they should only be called once per run.\n */\npublic class RunNotifier {\n\tprivate final List<RunListener> fListeners= \n\t\tCollections.synchronizedList(new ArrayList<RunListener>());\n\tprivate boolean fPleaseStop= false;\n\t\n\t/** Internal use only\n\t */\n\tpublic void addListener(RunListener listener) {\n\t\tfListeners.add(listener);\n\t}\n\n\t/** Internal use only\n\t */\n\tpublic void removeListener(RunListener listener) {\n\t\tfListeners.remove(listener);\n    }\n\n\tprivate abstract class SafeNotifier {\n\t\tvoid run() {\n\t\t\tsynchronized (fListeners) {\n\t\t\t\tfor (Iterator<RunListener> all= fListeners.iterator(); all.hasNext();)\n\t\t\t\t\ttry {\n\t\t\t\t\t\tnotifyListener(all.next());\n\t\t\t\t\t} catch (Exception e) {\n\t\t\t\t\t\tall.remove(); // Remove the offending listener first to avoid an infinite loop\n\t\t\t\t\t\tfireTestFailure(new Failure(Description.TEST_MECHANISM, e));\n\t\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\n\t\tabstract protected void notifyListener(RunListener each) throws Exception;\n\t}\n\t\n\t/**\n\t * Do not invoke. \n\t */\n\tpublic void fireTestRunStarted(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Do not invoke.\n\t */\n\tpublic void fireTestRunFinished(final Result result) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunFinished(result);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Invoke to tell listeners that an atomic test is about to start.\n\t * @param description the description of the atomic test (generally a class and method name)\n\t * @throws StoppedByUserException thrown if a user has requested that the test run stop\n\t */\n\tpublic void fireTestStarted(final Description description) throws StoppedByUserException {\n\t\tif (fPleaseStop)\n\t\t\tthrow new StoppedByUserException();\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test failed.\n\t * @param failure the description of the test that failed and the exception thrown\n\t */\n\tpublic void fireTestFailure(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test flagged that it assumed\n\t * something false.\n\t * \n\t * @param failure\n\t *            the description of the test that failed and the\n\t *            {@link AssumptionViolatedException} thrown\n\t */\n\tpublic void fireTestAssumptionFailed(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testAssumptionFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test was ignored.\n\t * @param description the description of the ignored test\n\t */\n\tpublic void fireTestIgnored(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testIgnored(description);\n\t\t\t}\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test finished. Always invoke \n\t * {@link #fireTestFinished(Description)} if you invoke {@link #fireTestStarted(Description)} \n\t * as listeners are likely to expect them to come in pairs.\n\t * @param description the description of the test that finished\n\t */\n\tpublic void fireTestFinished(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFinished(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Ask that the tests run stop before starting the next test. Phrased politely because\n\t * the test currently running will not be interrupted. It seems a little odd to put this\n\t * functionality here, but the <code>RunNotifier</code> is the only object guaranteed \n\t * to be shared amongst the many runners involved.\n\t */\n\tpublic void pleaseStop() {\n\t\tfPleaseStop= true;\n\t}\n\n\t/**\n\t * Internal use only. The Result's listener must be first.\n\t */\n\tpublic void addFirstListener(RunListener listener) {\n\t\tfListeners.add(0, listener);\n\t}\n\n\tpublic void runTestMethod(MethodRoadie methodRoadie) {\n\t\ttry {\n\t\t\tmethodRoadie.fTestMethod.invoke(methodRoadie.fTest);\n\t\t\tif (methodRoadie.fTestMethod.expectsException())\n\t\t\t\tmethodRoadie.addFailure(new AssertionError(\"Expected exception: \" + methodRoadie.fTestMethod.getExpectedException().getName()));\n\t\t} catch (InvocationTargetException e) {\n\t\t\tThrowable actual= e.getTargetException();\n\t\t\tif (actual instanceof AssumptionViolatedException)\n\t\t\t\treturn;\n\t\t\telse if (!methodRoadie.fTestMethod.expectsException())\n\t\t\t\tmethodRoadie.addFailure(actual);\n\t\t\telse if (methodRoadie.fTestMethod.isUnexpected(actual)) {\n\t\t\t\tString message= \"Unexpected exception, expected<\" + methodRoadie.fTestMethod.getExpectedException().getName() + \"> but was<\"\n\t\t\t\t\t+ actual.getClass().getName() + \">\";\n\t\t\t\tmethodRoadie.addFailure(new Exception(message, actual));\n\t\t\t}\n\t\t} catch (Throwable e) {\n\t\t\tmethodRoadie.addFailure(e);\n\t\t}\n\t}\n}",
+                "methodCount": 21
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public void runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "TestRunner",
+                            "rationale": "The runTestMethod method is primarily responsible for executing a test method defined by MethodRoadie. Moving it to a TestRunner class would separate the test execution logic from the notification logic, adhering to the Single Responsibility Principle."
+                        }
+                    ],
+                    "llm_response_time": 1615
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addListener",
+                            "method_signature": "public void addListener(RunListener listener)",
+                            "target_class": "RunListenerRegistry",
+                            "rationale": "The method manages the registration of listeners, which could be better organized within a dedicated class for handling listener registration and notifications."
+                        },
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(RunListener listener)",
+                            "target_class": "RunListenerRegistry",
+                            "rationale": "The method manages the deregistration of listeners. It would enhance clarity and organization by moving it to a class focused solely on managing listeners."
+                        },
+                        {
+                            "method_name": "addFirstListener",
+                            "method_signature": "public void addFirstListener(RunListener listener)",
+                            "target_class": "RunListenerRegistry",
+                            "rationale": "This method alters the order of listener registration. It should also be moved to a class dedicated to handling listener management to keep the responsibilities of RunNotifier focused on test notifications."
+                        },
+                        {
+                            "method_name": "pleaseStop",
+                            "method_signature": "public void pleaseStop()",
+                            "target_class": "TestRunnerController",
+                            "rationale": "The method deals with controlling the flow of test executions. It should belong to a class responsible for managing the state of test execution rather than the notification mechanism."
+                        }
+                    ],
+                    "llm_response_time": 3741
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public void runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "TestRunner",
+                            "rationale": "The runTestMethod() function focuses on executing a test and handling exceptions specifically related to the test being run, which makes it more relevant to a TestRunner class responsible for managing test executions."
+                        }
+                    ],
+                    "llm_response_time": 1454
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public void runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "TestExecutor",
+                            "rationale": "The runTestMethod() function appears to be focused on executing a test method and handling its results, which is more aligned with test execution and management responsibilities, thus a separate TestExecutor class would be appropriate."
+                        }
+                    ],
+                    "llm_response_time": 1831
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runTestMethod",
+                            "method_signature": "public void runTestMethod(MethodRoadie methodRoadie)",
+                            "target_class": "TestRunner",
+                            "rationale": "The runTestMethod() is responsible for executing tests and handling their results. This functionality should belong to a dedicated TestRunner class that coordinates test execution and management."
+                        }
+                    ],
+                    "llm_response_time": 1626
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.manipulation.Filter::filter2(Filter):void need move to org.junit.internal.runners.JUnit38ClassRunner",
+        "class_name": "org.junit.runner.manipulation.Filter",
+        "telemetry": {
+            "id": "314de5a0-18b1-45d3-90b6-ddefb6e57f39",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 138,
+                "lineStart": 14,
+                "lineEnd": 151,
+                "bodyLineStart": 14,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+                "sourceCode": "/**\n * The canonical case of filtering is when you want to run a single test method in a class. Rather\n * than introduce runner API just for that one case, JUnit provides a general filtering mechanism.\n * If you want to filter the tests to be run, extend <code>Filter</code> and apply an instance of\n * your filter to the {@link org.junit.runner.Request} before running it (see \n * {@link org.junit.runner.JUnitCore#run(Request)}. Alternatively, apply a <code>Filter</code> to \n * a {@link org.junit.runner.Runner} before running tests (for example, in conjunction with \n * {@link org.junit.runner.RunWith}.\n */\npublic abstract class Filter {\n\t/**\n\t * A null <code>Filter</code> that passes all tests through.\n\t */\n\tpublic static Filter ALL= new Filter() {\n\t\t@Override\n\t\tpublic boolean shouldRun(Description description) {\n\t\t\treturn true;\n\t\t}\n\n\t\t@Override\n\t\tpublic String describe() {\n\t\t\treturn \"all tests\";\n\t\t}\n\t\t\n\t\t@Override\n\t\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\t\t// do nothing\n\t\t}\n\n\t\t@Override\n\t\tpublic Filter intersect(Filter second) {\n\t\t\treturn second;\n\t\t}\n\t};\n\t\n\t/**\n\t * Returns a {@code Filter} that only runs the single method described by\n\t * {@code desiredDescription}\n\t */\n\tpublic static Filter matchMethodDescription(final Description desiredDescription) {\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\tif (description.isTest())\n\t\t\t\t\treturn desiredDescription.equals(description);\n\t\t\t\t\n\t\t\t\t// explicitly check if any children want to run\n\t\t\t\tfor (Description each : description.getChildren())\n\t\t\t\t\tif (shouldRun(each))\n\t\t\t\t\t\treturn true;\n\t\t\t\treturn false;\t\t\t\t\t\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn String.format(\"Method %s\", desiredDescription.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * @param description the description of the test to be run\n\t * @return <code>true</code> if the test should be run\n\t */\n\tpublic abstract boolean shouldRun(Description description);\n\n\t/**\n\t * Returns a textual description of this Filter\n\t * @return a textual description of this Filter\n\t */\n\tpublic abstract String describe();\n\n\t/**\n\t * Invoke with a {@link org.junit.runner.Runner} to cause all tests it intends to run\n\t * to first be checked with the filter. Only those that pass the filter will be run.\n\t * @param child the runner to be filtered by the receiver\n\t * @throws NoTestsRemainException if the receiver removes all tests\n\t */\n\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\tif (!(child instanceof Filterable))\n\t\t\treturn;\n\t\tFilterable filterable= (Filterable) child;\n\t\tfilterable.filter(this);\n\t}\n\n\t/**\n\t * Returns a new Filter that accepts the intersection of the tests accepted\n\t * by this Filter and {@code second}\n\t */\n\tpublic Filter intersect(final Filter second) {\n\t\tif (second == this || second == ALL) {\n\t\t\treturn this;\n\t\t}\n\t\tfinal Filter first= this;\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\treturn first.shouldRun(description)\n\t\t\t\t\t\t&& second.shouldRun(description);\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn first.describe() + \" and \" + second.describe();\n\t\t\t}\n\t\t};\n\t}\n\n\n\tpublic void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException {\n\t\tif (jUnit38ClassRunner.getTest() instanceof Filterable) {\n\t\t\tFilterable adapter= (Filterable) jUnit38ClassRunner.getTest();\n\t\t\tadapter.filter(this);\n\t\t} else if (jUnit38ClassRunner.getTest() instanceof TestSuite) {\n\t\t\tTestSuite suite= (TestSuite) jUnit38ClassRunner.getTest();\n\t\t\tTestSuite filtered= new TestSuite(suite.getName());\n\t\t\tint n= suite.testCount();\n\t\t\tfor (int i= 0; i < n; i++) {\n\t\t\t\tTest test= suite.testAt(i);\n\t\t\t\tif (shouldRun(JUnit38ClassRunner.makeDescription(test)))\n\t\t\t\t\tfiltered.addTest(test);\n\t\t\t}\n\t\t\tjUnit38ClassRunner.setTest(filtered);\n\t\t}\n\t}\n\n\n\tpublic void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException {\n\t\tfor (Iterator<Method> iter= jUnit4ClassRunner.fTestMethods.iterator(); iter.hasNext();) {\n\t\t\tMethod method= iter.next();\n\t\t\tif (!shouldRun(jUnit4ClassRunner.methodDescription(method)))\n\t\t\t\titer.remove();\n\t\t}\n\t\tif (jUnit4ClassRunner.fTestMethods.isEmpty())\n\t\t\tthrow new NoTestsRemainException();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method operates specifically on JUnit38ClassRunner and processes filtering logic related to it, so it should be moved to enhance the cohesion of the JUnit38ClassRunner class."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method is tightly coupled with the JUnit4ClassRunner and deals with filtering test methods within it, thus it should be relocated to improve the class's encapsulation and responsibility clarification."
+                        }
+                    ],
+                    "llm_response_time": 2490
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method specifically deals with filtering tests related to the JUnit38ClassRunner and should be moved there to adhere to the Single Responsibility Principle."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method is focused on filtering tests in relation to the JUnit4ClassRunner and should be moved to that class for better encapsulation and organization of filtering logic."
+                        }
+                    ],
+                    "llm_response_time": 3011
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method directly interacts with JUnit38ClassRunner and processes its test cases, making it appropriate to move to the JUnit38ClassRunner for better cohesion."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method focuses on filtering tests related to JUnit4ClassRunner, hence moving it to JUnit4ClassRunner would enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 2695
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method directly interacts with the JUnit38ClassRunner and manipulates its internal state, making it more appropriate to reside within that class."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method specifically works on the filtering process of JUnit4ClassRunner's test methods, indicating it should be part of that class."
+                        }
+                    ],
+                    "llm_response_time": 2237
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method is designed to operate specifically on an instance of JUnit38ClassRunner, which means it is more appropriate to move this functionality directly into that class."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method is explicitly intended to work with JUnit4ClassRunner instances, suggesting that it should be hosted in the JUnit4ClassRunner class for better cohesion and clarity."
+                        }
+                    ],
+                    "llm_response_time": 2254
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.manipulation.Filter::filter3(Filter):void need move to org.junit.internal.runners.JUnit4ClassRunner",
+        "class_name": "org.junit.runner.manipulation.Filter",
+        "telemetry": {
+            "id": "e8543936-ae29-411b-bfdc-f0c66b27131e",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 138,
+                "lineStart": 14,
+                "lineEnd": 151,
+                "bodyLineStart": 14,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/manipulation/Filter.java",
+                "sourceCode": "/**\n * The canonical case of filtering is when you want to run a single test method in a class. Rather\n * than introduce runner API just for that one case, JUnit provides a general filtering mechanism.\n * If you want to filter the tests to be run, extend <code>Filter</code> and apply an instance of\n * your filter to the {@link org.junit.runner.Request} before running it (see \n * {@link org.junit.runner.JUnitCore#run(Request)}. Alternatively, apply a <code>Filter</code> to \n * a {@link org.junit.runner.Runner} before running tests (for example, in conjunction with \n * {@link org.junit.runner.RunWith}.\n */\npublic abstract class Filter {\n\t/**\n\t * A null <code>Filter</code> that passes all tests through.\n\t */\n\tpublic static Filter ALL= new Filter() {\n\t\t@Override\n\t\tpublic boolean shouldRun(Description description) {\n\t\t\treturn true;\n\t\t}\n\n\t\t@Override\n\t\tpublic String describe() {\n\t\t\treturn \"all tests\";\n\t\t}\n\t\t\n\t\t@Override\n\t\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\t\t// do nothing\n\t\t}\n\n\t\t@Override\n\t\tpublic Filter intersect(Filter second) {\n\t\t\treturn second;\n\t\t}\n\t};\n\t\n\t/**\n\t * Returns a {@code Filter} that only runs the single method described by\n\t * {@code desiredDescription}\n\t */\n\tpublic static Filter matchMethodDescription(final Description desiredDescription) {\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\tif (description.isTest())\n\t\t\t\t\treturn desiredDescription.equals(description);\n\t\t\t\t\n\t\t\t\t// explicitly check if any children want to run\n\t\t\t\tfor (Description each : description.getChildren())\n\t\t\t\t\tif (shouldRun(each))\n\t\t\t\t\t\treturn true;\n\t\t\t\treturn false;\t\t\t\t\t\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn String.format(\"Method %s\", desiredDescription.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * @param description the description of the test to be run\n\t * @return <code>true</code> if the test should be run\n\t */\n\tpublic abstract boolean shouldRun(Description description);\n\n\t/**\n\t * Returns a textual description of this Filter\n\t * @return a textual description of this Filter\n\t */\n\tpublic abstract String describe();\n\n\t/**\n\t * Invoke with a {@link org.junit.runner.Runner} to cause all tests it intends to run\n\t * to first be checked with the filter. Only those that pass the filter will be run.\n\t * @param child the runner to be filtered by the receiver\n\t * @throws NoTestsRemainException if the receiver removes all tests\n\t */\n\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\tif (!(child instanceof Filterable))\n\t\t\treturn;\n\t\tFilterable filterable= (Filterable) child;\n\t\tfilterable.filter(this);\n\t}\n\n\t/**\n\t * Returns a new Filter that accepts the intersection of the tests accepted\n\t * by this Filter and {@code second}\n\t */\n\tpublic Filter intersect(final Filter second) {\n\t\tif (second == this || second == ALL) {\n\t\t\treturn this;\n\t\t}\n\t\tfinal Filter first= this;\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\treturn first.shouldRun(description)\n\t\t\t\t\t\t&& second.shouldRun(description);\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn first.describe() + \" and \" + second.describe();\n\t\t\t}\n\t\t};\n\t}\n\n\n\tpublic void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException {\n\t\tif (jUnit38ClassRunner.getTest() instanceof Filterable) {\n\t\t\tFilterable adapter= (Filterable) jUnit38ClassRunner.getTest();\n\t\t\tadapter.filter(this);\n\t\t} else if (jUnit38ClassRunner.getTest() instanceof TestSuite) {\n\t\t\tTestSuite suite= (TestSuite) jUnit38ClassRunner.getTest();\n\t\t\tTestSuite filtered= new TestSuite(suite.getName());\n\t\t\tint n= suite.testCount();\n\t\t\tfor (int i= 0; i < n; i++) {\n\t\t\t\tTest test= suite.testAt(i);\n\t\t\t\tif (shouldRun(JUnit38ClassRunner.makeDescription(test)))\n\t\t\t\t\tfiltered.addTest(test);\n\t\t\t}\n\t\t\tjUnit38ClassRunner.setTest(filtered);\n\t\t}\n\t}\n\n\n\tpublic void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException {\n\t\tfor (Iterator<Method> iter= jUnit4ClassRunner.fTestMethods.iterator(); iter.hasNext();) {\n\t\t\tMethod method= iter.next();\n\t\t\tif (!shouldRun(jUnit4ClassRunner.methodDescription(method)))\n\t\t\t\titer.remove();\n\t\t}\n\t\tif (jUnit4ClassRunner.fTestMethods.isEmpty())\n\t\t\tthrow new NoTestsRemainException();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method operates specifically on JUnit38ClassRunner and processes filtering logic related to it, so it should be moved to enhance the cohesion of the JUnit38ClassRunner class."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method is tightly coupled with the JUnit4ClassRunner and deals with filtering test methods within it, thus it should be relocated to improve the class's encapsulation and responsibility clarification."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method specifically deals with filtering tests related to the JUnit38ClassRunner and should be moved there to adhere to the Single Responsibility Principle."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method is focused on filtering tests in relation to the JUnit4ClassRunner and should be moved to that class for better encapsulation and organization of filtering logic."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method directly interacts with JUnit38ClassRunner and processes its test cases, making it appropriate to move to the JUnit38ClassRunner for better cohesion."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method focuses on filtering tests related to JUnit4ClassRunner, hence moving it to JUnit4ClassRunner would enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method directly interacts with the JUnit38ClassRunner and manipulates its internal state, making it more appropriate to reside within that class."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method specifically works on the filtering process of JUnit4ClassRunner's test methods, indicating it should be part of that class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filter2",
+                            "method_signature": "public void filter2(JUnit38ClassRunner jUnit38ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit38ClassRunner",
+                            "rationale": "The filter2 method is designed to operate specifically on an instance of JUnit38ClassRunner, which means it is more appropriate to move this functionality directly into that class."
+                        },
+                        {
+                            "method_name": "filter3",
+                            "method_signature": "public void filter3(JUnit4ClassRunner jUnit4ClassRunner) throws NoTestsRemainException",
+                            "target_class": "JUnit4ClassRunner",
+                            "rationale": "The filter3 method is explicitly intended to work with JUnit4ClassRunner instances, suggesting that it should be hosted in the JUnit4ClassRunner class for better cohesion and clarity."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Result::printFooter(Result):void need move to org.junit.internal.TextListener",
+        "class_name": "org.junit.runner.Result",
+        "telemetry": {
+            "id": "2f41a6fc-f099-4da9-816c-d9cd4ddce532",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 122,
+                "lineStart": 13,
+                "lineEnd": 134,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/large/big/junit-4.10/org/junit/runner/Result.java",
+                "sourceCode": "/**\n * A <code>Result</code> collects and summarizes information from running multiple\n * tests. Since tests are expected to run correctly, successful tests are only noted in\n * the count of tests that ran.\n */\npublic class Result implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\tprivate AtomicInteger fCount = new AtomicInteger();\n\tprivate AtomicInteger fIgnoreCount= new AtomicInteger();\n\tprivate final List<Failure> fFailures= Collections.synchronizedList(new ArrayList<Failure>());\n\tprivate long fRunTime= 0;\n\tprivate long fStartTime;\n\n\t/**\n\t * @return the number of tests run\n\t */\n\tpublic int getRunCount() {\n\t\treturn fCount.get();\n\t}\n\n\t/**\n\t * @return the number of tests that failed during the run\n\t */\n\tpublic int getFailureCount() {\n\t\treturn fFailures.size();\n\t}\n\n\t/**\n\t * @return the number of milliseconds it took to run the entire suite to run\n\t */\n\tpublic long getRunTime() {\n\t\treturn fRunTime;\n\t}\n\n\t/**\n\t * @return the {@link Failure}s describing tests that failed and the problems they encountered\n\t */\n\tpublic List<Failure> getFailures() {\n\t\treturn fFailures;\n\t}\n\n\t/**\n\t * @return the number of tests ignored during the run\n\t */\n\tpublic int getIgnoreCount() {\n\t\treturn fIgnoreCount.get();\n\t}\n\n\t/**\n\t * @return <code>true</code> if all tests succeeded\n\t */\n\tpublic boolean wasSuccessful() {\n\t\treturn getFailureCount() == 0;\n\t}\n\n\tprivate class Listener extends RunListener {\n\t\t@Override\n\t\tpublic void testRunStarted(Description description) throws Exception {\n\t\t\tfStartTime= System.currentTimeMillis();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testRunFinished(Result result) throws Exception {\n\t\t\tlong endTime= System.currentTimeMillis();\n\t\t\tfRunTime+= endTime - fStartTime;\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFinished(Description description) throws Exception {\n\t\t\tfCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testFailure(Failure failure) throws Exception {\n\t\t\tfFailures.add(failure);\n\t\t}\n\n\t\t@Override\n\t\tpublic void testIgnored(Description description) throws Exception {\n\t\t\tfIgnoreCount.getAndIncrement();\n\t\t}\n\n\t\t@Override\n\t\tpublic void testAssumptionFailure(Failure failure) {\n\t\t\t// do nothing: same as passing (for 4.5; may change in 4.6)\n\t\t}\n\t}\n\n\t/**\n\t * Internal use only.\n\t */\n\tpublic RunListener createListener() {\n\t\treturn new Listener();\n\t}\n\n\tpublic void printFailures(TextListener textListener) {\n\t\tList<Failure> failures= getFailures();\n\t\tif (failures.size() == 0)\n\t\t\treturn;\n\t\tif (failures.size() == 1)\n\t\t\ttextListener.getWriter().println(\"There was \" + failures.size() + \" failure:\");\n\t\telse\n\t\t\ttextListener.getWriter().println(\"There were \" + failures.size() + \" failures:\");\n\t\tint i= 1;\n\t\tfor (Failure each : failures)\n\t\t\ttextListener.printFailure(each, \"\" + i++);\n\t}\n\n\tpublic void printFooter(TextListener textListener) {\n\t\tif (wasSuccessful()) {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().print(\"OK\");\n\t\t\ttextListener.getWriter().println(\" (\" + getRunCount() + \" test\" + (getRunCount() == 1 ? \"\" : \"s\") + \")\");\n\t\n\t\t} else {\n\t\t\ttextListener.getWriter().println();\n\t\t\ttextListener.getWriter().println(\"FAILURES!!!\");\n\t\t\ttextListener.getWriter().println(\"Tests run: \" + getRunCount() + \",  Failures: \" + getFailureCount());\n\t\t}\n\t\ttextListener.getWriter().println();\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "The printFailures method is responsible for reporting and formatting failure messages, which aligns with the responsibilities of a separate TestReporter class."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "The printFooter method also deals with reporting the result of the test run; moving it to a TestReporter class would help encapsulate the reporting logic."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "printFailures() involves formatting and displaying test failure information, which is better suited in a separate class dedicated to reporting or logging test results."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TestReporter",
+                            "rationale": "Similar to printFailures(), printFooter() is responsible for the final reporting to the listener and should be moved to a dedicated class for better separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TestResultFormatter",
+                            "rationale": "The printFailures method handles output formatting for test failures, which suggests it could be better organized in a dedicated class focused on formatting test results."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TestResultFormatter",
+                            "rationale": "The printFooter method manages the final output of test results, which is also related to output formatting and should be grouped with printFailures in a dedicated formatting class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "ReportGenerator",
+                            "rationale": "The printFailures() method is responsible for formatting and displaying failure reports. This functionality is better suited in a dedicated ReportGenerator class, which would handle all reporting and output responsibilities."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "ReportGenerator",
+                            "rationale": "Similar to printFailures(), the printFooter() method deals with generating footer information related to the test results. This should also be part of a dedicated ReportGenerator class for better separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "printFailures",
+                            "method_signature": "public void printFailures(TextListener textListener)",
+                            "target_class": "TextListener",
+                            "rationale": "The printFailures method involves printing logic that is specific to the TextListener. Moving it to the TextListener would adhere to the Single Responsibility Principle and keep printing logic within the class responsible for output."
+                        },
+                        {
+                            "method_name": "printFooter",
+                            "method_signature": "public void printFooter(TextListener textListener)",
+                            "target_class": "TextListener",
+                            "rationale": "The printFooter method also contains printing logic specific to the TextListener. This method should be moved to keep the output formatting responsibilities confined to the TextListener class."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 1.0
+        }
+    }
+]
