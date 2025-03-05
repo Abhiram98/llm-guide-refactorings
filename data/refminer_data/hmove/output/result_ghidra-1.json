@@ -1,0 +1,319 @@
+{
+  "805": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-07-32\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 7.875401\nSubprocess output: Parent path as string: output_2025-03-04_18-07-32\nFile created successfully: output_2025-03-04_18-07-32\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-07-32\\source\\DecompilerActionContext.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-07-32\\source\\DeletePrototypeOverrideAction.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.8008370442486035\nfinal_result: True\nWe recommend to move the method starting at line 42 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.8008370442486035,
+      "final_decision": true,
+      "execution_time": 18.98922896385193,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Decompiler\\src\\main\\java\\ghidra\\app\\plugin\\core\\decompile\\actions\\DeletePrototypeOverrideAction.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Decompiler\\src\\main\\java\\ghidra\\app\\plugin\\core\\decompile\\DecompilerActionContext.java",
+        "start_line": 42,
+        "method_name": "isEnabledForDecompilerContext",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-07-52\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 7.828105\nSubprocess output: Parent path as string: output_2025-03-04_18-07-52\nFile created successfully: output_2025-03-04_18-07-52\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-07-52\\source\\DecompilerActionContext.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-07-52\\source\\DeletePrototypeOverrideAction.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.8008370442486035\nfinal_result: True\nWe recommend to move the method starting at line 53 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.8008370442486035,
+      "final_decision": true,
+      "execution_time": 18.734447240829468,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Decompiler\\src\\main\\java\\ghidra\\app\\plugin\\core\\decompile\\actions\\DeletePrototypeOverrideAction.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Decompiler\\src\\main\\java\\ghidra\\app\\plugin\\core\\decompile\\DecompilerActionContext.java",
+        "start_line": 53,
+        "method_name": "decompilerActionPerformed",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-08-10\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 11.703598\nSubprocess output: Parent path as string: output_2025-03-04_18-08-10\nFile created successfully: output_2025-03-04_18-08-10\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-08-10\\source\\DataTypeSymbol.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-08-10\\source\\DeletePrototypeOverrideAction.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999998807907104\nfinal_result: True\nWe recommend to move the method starting at line 71 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999998807907104,
+      "final_decision": true,
+      "execution_time": 22.548546314239502,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Decompiler\\src\\main\\java\\ghidra\\app\\plugin\\core\\decompile\\actions\\DeletePrototypeOverrideAction.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\SoftwareModeling\\src\\main\\java\\ghidra\\program\\model\\pcode\\DataTypeSymbol.java",
+        "start_line": 71,
+        "method_name": "cleanupUnusedOverride",
+        "return_type": "void"
+      }
+    }
+  ],
+  "844": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-08-36\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 57.970296\nSubprocess output: Parent path as string: output_2025-03-04_18-08-36\nFile created successfully: output_2025-03-04_18-08-36\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-08-36\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-08-36\\source\\FrontEndPlugin.java\n... collecting  relations ...\n17\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.49923681477395504\nfinal_result: False\nThe method starting at line 41 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.49923681477395504,
+      "final_decision": false,
+      "execution_time": 85.77269864082336,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\FrontEndPlugin.java",
+        "start_line": 41,
+        "method_name": "isSameLocalProject",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-10-02\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 13.015791\nSubprocess output: Parent path as string: output_2025-03-04_18-10-02\nFile created successfully: output_2025-03-04_18-10-02\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-10-02\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-10-02\\source\\ProjectLocator.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.22827520966529846\nfinal_result: False\nThe method starting at line 41 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.22827520966529846,
+      "final_decision": false,
+      "execution_time": 24.486895084381104,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\model\\ProjectLocator.java",
+        "start_line": 41,
+        "method_name": "isSameLocalProject",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-10-27\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 55.860460\nSubprocess output: Parent path as string: output_2025-03-04_18-10-27\nFile created successfully: output_2025-03-04_18-10-27\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-10-27\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-10-27\\source\\FrontEndPlugin.java\n... collecting  relations ...\n15\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.49923681477395504\nfinal_result: False\nThe method starting at line 59 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.49923681477395504,
+      "final_decision": false,
+      "execution_time": 81.01426482200623,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\FrontEndPlugin.java",
+        "start_line": 59,
+        "method_name": "processResult",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-11-48\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 246.690117\nSubprocess output: Parent path as string: output_2025-03-04_18-11-48\nFile created successfully: output_2025-03-04_18-11-48\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-11-48\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-11-48\\source\\DomainFile.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.7490857569791842\nfinal_result: True\nWe recommend to move the method starting at line 59 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.7490857569791842,
+      "final_decision": true,
+      "execution_time": 257.5261561870575,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\model\\DomainFile.java",
+        "start_line": 59,
+        "method_name": "processResult",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-16-06\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 25.078169\nSubprocess output: Parent path as string: output_2025-03-04_18-16-06\nFile created successfully: output_2025-03-04_18-16-06\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-16-06\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-16-06\\source\\TaskMonitor.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.7495178724639118\nfinal_result: True\nWe recommend to move the method starting at line 59 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.7495178724639118,
+      "final_decision": true,
+      "execution_time": 36.1072301864624,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Utility\\src\\main\\java\\ghidra\\util\\task\\TaskMonitor.java",
+        "start_line": 59,
+        "method_name": "processResult",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-16-42\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 55.906595\nSubprocess output: Parent path as string: output_2025-03-04_18-16-42\nFile created successfully: output_2025-03-04_18-16-42\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-16-42\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-16-42\\source\\FrontEndPlugin.java\n... collecting  relations ...\n14\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.49923681477395504\nfinal_result: False\nThe method starting at line 94 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.49923681477395504,
+      "final_decision": false,
+      "execution_time": 80.68366432189941,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\FrontEndPlugin.java",
+        "start_line": 94,
+        "method_name": "showInViewedProject",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-18-03\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 55.843994\nSubprocess output: Parent path as string: output_2025-03-04_18-18-03\nFile created successfully: output_2025-03-04_18-18-03\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-18-03\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-18-03\\source\\FrontEndPlugin.java\n... collecting  relations ...\n15\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.49923681477395504\nfinal_result: False\nThe method starting at line 124 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.49923681477395504,
+      "final_decision": false,
+      "execution_time": 80.95791292190552,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\FrontEndPlugin.java",
+        "start_line": 124,
+        "method_name": "processResult",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-19-24\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 148.047294\nSubprocess output: Parent path as string: output_2025-03-04_18-19-24\nFile created successfully: output_2025-03-04_18-19-24\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-19-24\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-19-24\\source\\DomainFolder.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.24210753508668859\nfinal_result: False\nThe method starting at line 124 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.24210753508668859,
+      "final_decision": false,
+      "execution_time": 158.72157788276672,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\model\\DomainFolder.java",
+        "start_line": 124,
+        "method_name": "processResult",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-03\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 26.390699\nSubprocess output: Parent path as string: output_2025-03-04_18-22-03\nFile created successfully: output_2025-03-04_18-22-03\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-03\\source\\AcceptUrlContentTask.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-03\\source\\TaskMonitor.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6313945050351322\nfinal_result: True\nWe recommend to move the method starting at line 124 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6313945050351322,
+      "final_decision": true,
+      "execution_time": 37.30847501754761,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Project\\src\\main\\java\\ghidra\\framework\\main\\AcceptUrlContentTask.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\Utility\\src\\main\\java\\ghidra\\util\\task\\TaskMonitor.java",
+        "start_line": 124,
+        "method_name": "processResult",
+        "return_type": "void"
+      }
+    }
+  ],
+  "845": [
+    {
+      "success": false,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the source file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-41\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 4.046956\nSubprocess output: Parent path as string: output_2025-03-04_18-22-41\nFile created successfully: output_2025-03-04_18-22-41\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-41\\source\\RenameAction.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-41\\source\\SymbolTreeActionContext.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\n",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\new_main.py\", line 126, in <module>\n    execute_code_hmove(args)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\new_main.py\", line 74, in execute_code_hmove\n    result = main(folder_name, embss[0], model_names[0])\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\train_new.py\", line 81, in main\n    result = test_epoch(model, test_loader, device)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\train_new.py\", line 31, in test_epoch\n    output = model(features, g, hg)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1739, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1750, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\models.py\", line 61, in forward\n    hg1 = dhg.Hypergraph(len(hg.v), hg.e[0][:-1])\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\hypergraphs\\hypergraph.py\", line 48, in __init__\n    self.add_hyperedges(e_list, e_weight, merge_op=merge_op)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\hypergraphs\\hypergraph.py\", line 336, in add_hyperedges\n    e_list = self._format_e_list(e_list)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\base.py\", line 494, in _format_e_list\n    if type(e_list[0]) in (int, float):\nIndexError: list index out of range\n",
+      "return_code": 1,
+      "error": "Command '['python', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\hmove-\\\\hmoveTool\\\\new_main.py', 'HMove', '--move_file', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\projects\\\\ghidra\\\\Ghidra\\\\Features\\\\Base\\\\src\\\\main\\\\java\\\\ghidra\\\\app\\\\plugin\\\\core\\\\symboltree\\\\actions\\\\RenameAction.java', '--start_line', '32', '--moveto_file', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\projects\\\\ghidra\\\\Ghidra\\\\Features\\\\Base\\\\src\\\\main\\\\java\\\\ghidra\\\\app\\\\plugin\\\\core\\\\symboltree\\\\SymbolTreeActionContext.java']' returned non-zero exit status 1.",
+      "probability": null,
+      "final_decision": null,
+      "execution_time": 14.501460313796997,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Base\\src\\main\\java\\ghidra\\app\\plugin\\core\\symboltree\\actions\\RenameAction.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Base\\src\\main\\java\\ghidra\\app\\plugin\\core\\symboltree\\SymbolTreeActionContext.java",
+        "start_line": 32,
+        "method_name": "isEnabledForContext",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": false,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the source file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-56\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 3.796842\nSubprocess output: Parent path as string: output_2025-03-04_18-22-56\nFile created successfully: output_2025-03-04_18-22-56\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-56\\source\\RenameAction.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-22-56\\source\\SymbolTreeActionContext.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\n",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\new_main.py\", line 126, in <module>\n    execute_code_hmove(args)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\new_main.py\", line 74, in execute_code_hmove\n    result = main(folder_name, embss[0], model_names[0])\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\train_new.py\", line 81, in main\n    result = test_epoch(model, test_loader, device)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\train_new.py\", line 31, in test_epoch\n    output = model(features, g, hg)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1739, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1750, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\models.py\", line 61, in forward\n    hg1 = dhg.Hypergraph(len(hg.v), hg.e[0][:-1])\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\hypergraphs\\hypergraph.py\", line 48, in __init__\n    self.add_hyperedges(e_list, e_weight, merge_op=merge_op)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\hypergraphs\\hypergraph.py\", line 336, in add_hyperedges\n    e_list = self._format_e_list(e_list)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\base.py\", line 494, in _format_e_list\n    if type(e_list[0]) in (int, float):\nIndexError: list index out of range\n",
+      "return_code": 1,
+      "error": "Command '['python', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\hmove-\\\\hmoveTool\\\\new_main.py', 'HMove', '--move_file', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\projects\\\\ghidra\\\\Ghidra\\\\Features\\\\Base\\\\src\\\\main\\\\java\\\\ghidra\\\\app\\\\plugin\\\\core\\\\symboltree\\\\actions\\\\RenameAction.java', '--start_line', '37', '--moveto_file', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\projects\\\\ghidra\\\\Ghidra\\\\Features\\\\Base\\\\src\\\\main\\\\java\\\\ghidra\\\\app\\\\plugin\\\\core\\\\symboltree\\\\SymbolTreeActionContext.java']' returned non-zero exit status 1.",
+      "probability": null,
+      "final_decision": null,
+      "execution_time": 14.176409244537354,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Base\\src\\main\\java\\ghidra\\app\\plugin\\core\\symboltree\\actions\\RenameAction.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Base\\src\\main\\java\\ghidra\\app\\plugin\\core\\symboltree\\SymbolTreeActionContext.java",
+        "start_line": 37,
+        "method_name": "getSelectedNode",
+        "return_type": "SymbolTreeNode"
+      }
+    },
+    {
+      "success": false,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the source file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-23-11\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 3.922007\nSubprocess output: Parent path as string: output_2025-03-04_18-23-11\nFile created successfully: output_2025-03-04_18-23-11\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-23-11\\source\\RenameAction.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-23-11\\source\\SymbolTreeActionContext.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\n",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\new_main.py\", line 126, in <module>\n    execute_code_hmove(args)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\new_main.py\", line 74, in execute_code_hmove\n    result = main(folder_name, embss[0], model_names[0])\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\train_new.py\", line 81, in main\n    result = test_epoch(model, test_loader, device)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\train_new.py\", line 31, in test_epoch\n    output = model(features, g, hg)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1739, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\torch\\nn\\modules\\module.py\", line 1750, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\models.py\", line 61, in forward\n    hg1 = dhg.Hypergraph(len(hg.v), hg.e[0][:-1])\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\hypergraphs\\hypergraph.py\", line 48, in __init__\n    self.add_hyperedges(e_list, e_weight, merge_op=merge_op)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\hypergraphs\\hypergraph.py\", line 336, in add_hyperedges\n    e_list = self._format_e_list(e_list)\n  File \"C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\base.py\", line 494, in _format_e_list\n    if type(e_list[0]) in (int, float):\nIndexError: list index out of range\n",
+      "return_code": 1,
+      "error": "Command '['python', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\hmove-\\\\hmoveTool\\\\new_main.py', 'HMove', '--move_file', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\projects\\\\ghidra\\\\Ghidra\\\\Features\\\\Base\\\\src\\\\main\\\\java\\\\ghidra\\\\app\\\\plugin\\\\core\\\\symboltree\\\\actions\\\\RenameAction.java', '--start_line', '48', '--moveto_file', 'C:\\\\Users\\\\abhiram\\\\Desktop\\\\HMOVE_SETUP\\\\projects\\\\ghidra\\\\Ghidra\\\\Features\\\\Base\\\\src\\\\main\\\\java\\\\ghidra\\\\app\\\\plugin\\\\core\\\\symboltree\\\\SymbolTreeActionContext.java']' returned non-zero exit status 1.",
+      "probability": null,
+      "final_decision": null,
+      "execution_time": 14.276372909545898,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Base\\src\\main\\java\\ghidra\\app\\plugin\\core\\symboltree\\actions\\RenameAction.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Base\\src\\main\\java\\ghidra\\app\\plugin\\core\\symboltree\\SymbolTreeActionContext.java",
+        "start_line": 48,
+        "method_name": "actionPerformed",
+        "return_type": "void"
+      }
+    }
+  ],
+  "858": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-23-26\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 95.284801\nSubprocess output: Parent path as string: output_2025-03-04_18-23-26\nFile created successfully: output_2025-03-04_18-23-26\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-23-26\\source\\MicrosoftDemangler.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-23-26\\source\\Program.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9375080466270447\nfinal_result: True\nWe recommend to move the method starting at line 34 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9375080466270447,
+      "final_decision": true,
+      "execution_time": 106.17261409759521,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\MicrosoftDemangler\\src\\main\\java\\ghidra\\app\\util\\demangler\\microsoft\\MicrosoftDemangler.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Framework\\SoftwareModeling\\src\\main\\java\\ghidra\\program\\model\\listing\\Program.java",
+        "start_line": 34,
+        "method_name": "canDemangle",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-12\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 5.906519\nSubprocess output: Parent path as string: output_2025-03-04_18-25-12\nFile created successfully: output_2025-03-04_18-25-12\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-12\\source\\DemanglerOptions.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-12\\source\\MicrosoftDemangler.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.2016770084267705\nfinal_result: False\nThe method starting at line 54 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.2016770084267705,
+      "final_decision": false,
+      "execution_time": 16.368520975112915,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\MicrosoftDemangler\\src\\main\\java\\ghidra\\app\\util\\demangler\\microsoft\\MicrosoftDemangler.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\Base\\src\\main\\java\\ghidra\\app\\util\\demangler\\DemanglerOptions.java",
+        "start_line": 54,
+        "method_name": "demangle",
+        "return_type": "DemangledObject"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-29\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 3.406381\nSubprocess output: Parent path as string: output_2025-03-04_18-25-29\nFile created successfully: output_2025-03-04_18-25-29\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-29\\source\\MDMangGhidra.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-29\\source\\MicrosoftDemangler.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999829530715942\nfinal_result: True\nWe recommend to move the method starting at line 85 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999829530715942,
+      "final_decision": true,
+      "execution_time": 13.937544345855713,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\MicrosoftDemangler\\src\\main\\java\\ghidra\\app\\util\\demangler\\microsoft\\MicrosoftDemangler.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\MicrosoftDmang\\src\\main\\java\\mdemangler\\MDMangGhidra.java",
+        "start_line": 85,
+        "method_name": "demangle",
+        "return_type": "void"
+      }
+    }
+  ],
+  "859": [
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-43\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 3.171996\nSubprocess output: Parent path as string: output_2025-03-04_18-25-43\nFile created successfully: output_2025-03-04_18-25-43\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-43\\source\\MDMangExtraTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-04_18-25-43\\source\\MDMangGhidra.java\n... collecting  relations ...\n1\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.7968120087353814\nfinal_result: True\nWe recommend to move the method starting at line 62 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.7968120087353814,
+      "final_decision": true,
+      "execution_time": 13.753793716430664,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\MicrosoftDmang\\src\\test\\java\\mdemangler\\MDMangExtraTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\ghidra\\Ghidra\\Features\\MicrosoftDmang\\src\\main\\java\\mdemangler\\MDMangGhidra.java",
+        "start_line": 62,
+        "method_name": "demangle",
+        "return_type": "MDParsableItem"
+      }
+    }
+  ]
+}
