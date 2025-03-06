@@ -1,0 +1,912 @@
+[
+    {
+        "repository": "https://github.com/redisson/redisson.git",
+        "sha1": "2b6f2fda792b3551fa801fd4f59923a6b49ef226",
+        "url": "https://github.com/redisson/redisson/commit/2b6f2fda792b3551fa801fd4f59923a6b49ef226",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public tryRunListener() : void extracted from protected onMessage(value RedissonLockEntry, message Long) : void in class org.redisson.pubsub.LockPubSub & moved to class org.redisson.RedissonLockEntry",
+            "leftSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 41,
+                    "endLine": 61,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "protected onMessage(value RedissonLockEntry, message Long) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 46,
+                    "endLine": 46,
+                    "startColumn": 17,
+                    "endColumn": 41,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 45,
+                    "endLine": 47,
+                    "startColumn": 13,
+                    "endColumn": 14,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 45,
+                    "endLine": 47,
+                    "startColumn": 44,
+                    "endColumn": 14,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 65,
+                    "endLine": 70,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public tryRunListener() : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 68,
+                    "endLine": 68,
+                    "startColumn": 13,
+                    "endColumn": 37,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 67,
+                    "endLine": 69,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 67,
+                    "endLine": 69,
+                    "startColumn": 40,
+                    "endColumn": 10,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 41,
+                    "endLine": 52,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "protected onMessage(value RedissonLockEntry, message Long) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 44,
+                    "endLine": 44,
+                    "startColumn": 13,
+                    "endColumn": 35,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "value.tryRunListener()"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 66,
+                    "endLine": 66,
+                    "startColumn": 9,
+                    "endColumn": 55,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 724,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "ef3a0201449b1bf69828c10a3dbe86f680e4d36f",
+            "newBranchName": "extract-tryRunListener-onMessage-c06826f-1"
+        },
+        "telemetry": {
+            "id": "612cbc03-55b4-4553-8df9-e14b2d785a74",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 46,
+                "lineStart": 22,
+                "lineEnd": 67,
+                "bodyLineStart": 22,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/redisson/redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                "sourceCode": "/**\n * \n * @author Nikita Koksharov\n *\n */\npublic class LockPubSub extends PublishSubscribe<RedissonLockEntry> {\n\n    public static final Long UNLOCK_MESSAGE = 0L;\n    public static final Long READ_UNLOCK_MESSAGE = 1L;\n\n    public LockPubSub(PublishSubscribeService service) {\n        super(service);\n    }\n    \n    @Override\n    protected RedissonLockEntry createEntry(CompletableFuture<RedissonLockEntry> newPromise) {\n        return new RedissonLockEntry(newPromise);\n    }\n\n    @Override\n    protected void onMessage(RedissonLockEntry value, Long message) {\n        if (message.equals(UNLOCK_MESSAGE)) {\n            tryRunListener(value);\n\n            value.getLatch().release();\n        } else if (message.equals(READ_UNLOCK_MESSAGE)) {\n            while (true) {\n                Runnable runnableToExecute = value.getListeners().poll();\n                if (runnableToExecute == null) {\n                    break;\n                }\n                runnableToExecute.run();\n            }\n\n            value.getLatch().release(value.getLatch().getQueueLength());\n        }\n    }\n\n    private void tryRunListener(RedissonLockEntry value) {\n        Runnable runnableToExecute = value.getListeners().poll();\n        if (runnableToExecute != null) {\n            runnableToExecute.run();\n        }\n    }\n\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener method operates directly on the RedissonLockEntry's listeners, which suggests that it belongs in the RedissonLockEntry class where it can encapsulate its own behavior related to managing listeners."
+                        }
+                    ],
+                    "llm_response_time": 2044
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The method tryRunListener() operates directly on the RedissonLockEntry instance and is primarily concerned with executing listeners associated with it. It would be more cohesive and appropriate for this method to belong to the RedissonLockEntry class, where it can manage its own listeners."
+                        }
+                    ],
+                    "llm_response_time": 1430
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener method operates directly on the RedissonLockEntry instance and manages its listeners. Moving it to the RedissonLockEntry class would encapsulate this behavior within the class that represents the state and behavior of lock entries."
+                        }
+                    ],
+                    "llm_response_time": 1845
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener method operates directly on the listeners of the RedissonLockEntry instance. Moving it to the RedissonLockEntry class would encapsulate the logic related to its listeners within the entry itself, promoting better cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1390
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener() method operates directly on the RedissonLockEntry instance and is primarily concerned with its listeners. Moving it to the RedissonLockEntry class would encapsulate the listener management logic within that class."
+                        }
+                    ],
+                    "llm_response_time": 5046
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "repository": "https://github.com/redisson/redisson.git",
+        "sha1": "2b6f2fda792b3551fa801fd4f59923a6b49ef226",
+        "url": "https://github.com/redisson/redisson/commit/2b6f2fda792b3551fa801fd4f59923a6b49ef226",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public tryRunListener() : void extracted from protected onMessage(value RedissonLockEntry, message Long) : void in class org.redisson.pubsub.SemaphorePubSub & moved to class org.redisson.RedissonLockEntry",
+            "leftSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+                    "startLine": 38,
+                    "endLine": 46,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "protected onMessage(value RedissonLockEntry, message Long) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+                    "startLine": 42,
+                    "endLine": 42,
+                    "startColumn": 13,
+                    "endColumn": 37,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+                    "startLine": 41,
+                    "endLine": 43,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+                    "startLine": 41,
+                    "endLine": 43,
+                    "startColumn": 40,
+                    "endColumn": 10,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 65,
+                    "endLine": 70,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public tryRunListener() : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 68,
+                    "endLine": 68,
+                    "startColumn": 13,
+                    "endColumn": 37,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 67,
+                    "endLine": 69,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 67,
+                    "endLine": 69,
+                    "startColumn": 40,
+                    "endColumn": 10,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+                    "startLine": 38,
+                    "endLine": 43,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "protected onMessage(value RedissonLockEntry, message Long) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+                    "startLine": 40,
+                    "endLine": 40,
+                    "startColumn": 9,
+                    "endColumn": 31,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "value.tryRunListener()"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 66,
+                    "endLine": 66,
+                    "startColumn": 9,
+                    "endColumn": 55,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 725,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "8e28ae33a9ea7d2218e5ef4c8d55bd833d7195ce",
+            "newBranchName": "extract-tryRunListener-onMessage-c06826f"
+        },
+        "telemetry": {
+            "id": "c71344d4-8d2f-4a71-a287-bc17ede10e35",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 31,
+                "lineStart": 22,
+                "lineEnd": 52,
+                "bodyLineStart": 22,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/redisson/redisson/src/main/java/org/redisson/pubsub/SemaphorePubSub.java",
+                "sourceCode": "/**\n * \n * @author Nikita Koksharov\n *\n */\npublic class SemaphorePubSub extends PublishSubscribe<RedissonLockEntry> {\n\n    public SemaphorePubSub(PublishSubscribeService service) {\n        super(service);\n    }\n\n    @Override\n    protected RedissonLockEntry createEntry(CompletableFuture<RedissonLockEntry> newPromise) {\n        return new RedissonLockEntry(newPromise);\n    }\n\n    @Override\n    protected void onMessage(RedissonLockEntry value, Long message) {\n        tryRunListener(value);\n\n        value.getLatch().release(Math.min(value.acquired(), message.intValue()));\n    }\n\n    private void tryRunListener(RedissonLockEntry value) {\n        Runnable runnableToExecute = value.getListeners().poll();\n        if (runnableToExecute != null) {\n            runnableToExecute.run();\n        }\n    }\n\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener method operates directly on the RedissonLockEntry instance and handles its listeners. It would be more appropriate for this method to reside within the RedissonLockEntry class, encapsulating the behavior related to its listeners."
+                        }
+                    ],
+                    "llm_response_time": 1777
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener method operates directly on the RedissonLockEntry instance and manages its listeners, making it more suitable to be part of the RedissonLockEntry class."
+                        }
+                    ],
+                    "llm_response_time": 1639
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener method operates directly on the listeners of RedissonLockEntry, making it more appropriate for this method to reside within the RedissonLockEntry class."
+                        }
+                    ],
+                    "llm_response_time": 1831
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The tryRunListener method operates directly on the RedissonLockEntry instance and is responsible for executing listeners associated with it. Moving this method to the RedissonLockEntry class would encapsulate the behavior related to the entry and enhance cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1538
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunListener",
+                            "method_signature": "private void tryRunListener(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The method tryRunListener() operates directly on the RedissonLockEntry instance and deals specifically with its listeners, making it more suitable to belong within the RedissonLockEntry class."
+                        }
+                    ],
+                    "llm_response_time": 1567
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "repository": "https://github.com/redisson/redisson.git",
+        "sha1": "2b6f2fda792b3551fa801fd4f59923a6b49ef226",
+        "url": "https://github.com/redisson/redisson/commit/2b6f2fda792b3551fa801fd4f59923a6b49ef226",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public tryRunAllListeners() : void extracted from protected onMessage(value RedissonLockEntry, message Long) : void in class org.redisson.pubsub.LockPubSub & moved to class org.redisson.RedissonLockEntry",
+            "leftSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 41,
+                    "endLine": 61,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "protected onMessage(value RedissonLockEntry, message Long) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 54,
+                    "endLine": 54,
+                    "startColumn": 21,
+                    "endColumn": 27,
+                    "codeElementType": "BREAK_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 56,
+                    "endLine": 56,
+                    "startColumn": 17,
+                    "endColumn": 41,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 53,
+                    "endLine": 55,
+                    "startColumn": 17,
+                    "endColumn": 18,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 51,
+                    "endLine": 57,
+                    "startColumn": 13,
+                    "endColumn": 14,
+                    "codeElementType": "WHILE_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 53,
+                    "endLine": 55,
+                    "startColumn": 48,
+                    "endColumn": 18,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 51,
+                    "endLine": 57,
+                    "startColumn": 26,
+                    "endColumn": 14,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 72,
+                    "endLine": 80,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public tryRunAllListeners() : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 76,
+                    "endLine": 76,
+                    "startColumn": 17,
+                    "endColumn": 23,
+                    "codeElementType": "BREAK_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 78,
+                    "endLine": 78,
+                    "startColumn": 13,
+                    "endColumn": 37,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 75,
+                    "endLine": 77,
+                    "startColumn": 13,
+                    "endColumn": 14,
+                    "codeElementType": "IF_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 73,
+                    "endLine": 79,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "WHILE_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 75,
+                    "endLine": 77,
+                    "startColumn": 44,
+                    "endColumn": 14,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 73,
+                    "endLine": 79,
+                    "startColumn": 22,
+                    "endColumn": 10,
+                    "codeElementType": "BLOCK",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 41,
+                    "endLine": 52,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "protected onMessage(value RedissonLockEntry, message Long) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                    "startLine": 48,
+                    "endLine": 48,
+                    "startColumn": 13,
+                    "endColumn": 39,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "value.tryRunAllListeners()"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/RedissonLockEntry.java",
+                    "startLine": 74,
+                    "endLine": 74,
+                    "startColumn": 13,
+                    "endColumn": 59,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 726,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "5e33b0e50cad12401c96815c7d8116fab8fb8260",
+            "newBranchName": "extract-tryRunAllListeners-onMessage-c06826f"
+        },
+        "telemetry": {
+            "id": "08f92b4c-98e6-4000-982b-9382c0b5b10f",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 46,
+                "lineStart": 22,
+                "lineEnd": 67,
+                "bodyLineStart": 22,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/redisson/redisson/src/main/java/org/redisson/pubsub/LockPubSub.java",
+                "sourceCode": "/**\n * \n * @author Nikita Koksharov\n *\n */\npublic class LockPubSub extends PublishSubscribe<RedissonLockEntry> {\n\n    public static final Long UNLOCK_MESSAGE = 0L;\n    public static final Long READ_UNLOCK_MESSAGE = 1L;\n\n    public LockPubSub(PublishSubscribeService service) {\n        super(service);\n    }\n    \n    @Override\n    protected RedissonLockEntry createEntry(CompletableFuture<RedissonLockEntry> newPromise) {\n        return new RedissonLockEntry(newPromise);\n    }\n\n    @Override\n    protected void onMessage(RedissonLockEntry value, Long message) {\n        if (message.equals(UNLOCK_MESSAGE)) {\n            Runnable runnableToExecute = value.getListeners().poll();\n            if (runnableToExecute != null) {\n                runnableToExecute.run();\n            }\n\n            value.getLatch().release();\n        } else if (message.equals(READ_UNLOCK_MESSAGE)) {\n            tryRunAllListeners(value);\n\n            value.getLatch().release(value.getLatch().getQueueLength());\n        }\n    }\n\n    private void tryRunAllListeners(RedissonLockEntry value) {\n        while (true) {\n            Runnable runnableToExecute = value.getListeners().poll();\n            if (runnableToExecute == null) {\n                break;\n            }\n            runnableToExecute.run();\n        }\n    }\n\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunAllListeners",
+                            "method_signature": "private void tryRunAllListeners(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The method tryRunAllListeners() operates directly on the listeners of RedissonLockEntry, making it more appropriate for it to reside within the RedissonLockEntry class, where it can manage its own listeners more effectively."
+                        }
+                    ],
+                    "llm_response_time": 2239
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunAllListeners",
+                            "method_signature": "private void tryRunAllListeners(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The method tryRunAllListeners() operates directly on the listeners of RedissonLockEntry, making it more appropriate for it to reside within the RedissonLockEntry class, which would encapsulate the behavior related to its listeners."
+                        }
+                    ],
+                    "llm_response_time": 5199
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunAllListeners",
+                            "method_signature": "private void tryRunAllListeners(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The method tryRunAllListeners() operates directly on the listeners of the RedissonLockEntry, which indicates that it is more appropriate for this functionality to reside within the RedissonLockEntry class itself."
+                        }
+                    ],
+                    "llm_response_time": 1780
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunAllListeners",
+                            "method_signature": "private void tryRunAllListeners(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The method tryRunAllListeners() operates directly on the listeners of the RedissonLockEntry object and is closely related to the behavior of RedissonLockEntry. Moving it to RedissonLockEntry would encapsulate the listener execution behavior within the class that holds the listeners."
+                        }
+                    ],
+                    "llm_response_time": 1917
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "tryRunAllListeners",
+                            "method_signature": "private void tryRunAllListeners(RedissonLockEntry value)",
+                            "target_class": "RedissonLockEntry",
+                            "rationale": "The method tryRunAllListeners() operates directly on the listeners of the RedissonLockEntry and is primarily concerned with managing those listeners. Moving it to the RedissonLockEntry class would encapsulate the logic related to its listeners within that class."
+                        }
+                    ],
+                    "llm_response_time": 1801
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "repository": "https://github.com/redisson/redisson.git",
+        "sha1": "5ade3f228d1c35de2e76b0425362893efc52938a",
+        "url": "https://github.com/redisson/redisson/commit/5ade3f228d1c35de2e76b0425362893efc52938a",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public isShuttingDown(e Throwable) : boolean extracted from private resubscribe(func Supplier<CompletionStage<V>>, consumer Consumer<V>) : void in class org.redisson.ElementsSubscribeService & moved to class org.redisson.connection.ServiceManager",
+            "leftSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+                    "startLine": 72,
+                    "endLine": 97,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private resubscribe(func Supplier<CompletionStage<V>>, consumer Consumer<V>) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+                    "startLine": 84,
+                    "endLine": 84,
+                    "startColumn": 21,
+                    "endColumn": 70,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/connection/ServiceManager.java",
+                    "startLine": 278,
+                    "endLine": 281,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public isShuttingDown(e Throwable) : boolean"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/connection/ServiceManager.java",
+                    "startLine": 279,
+                    "endLine": 280,
+                    "startColumn": 9,
+                    "endColumn": 74,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+                    "startLine": 72,
+                    "endLine": 97,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private resubscribe(func Supplier<CompletionStage<V>>, consumer Consumer<V>) : void"
+                },
+                {
+                    "filePath": "redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+                    "startLine": 84,
+                    "endLine": 84,
+                    "startColumn": 21,
+                    "endColumn": 53,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "serviceManager.isShuttingDown(e)"
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 730,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "0ae39288f12c6aad4caca8bfd9f59a7f3edf4e79",
+            "newBranchName": "extract-isShuttingDown-resubscribe-0e93e86"
+        },
+        "telemetry": {
+            "id": "298a065c-fc70-45c1-a973-8f029cb27a0d",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 101,
+                "lineStart": 31,
+                "lineEnd": 131,
+                "bodyLineStart": 31,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/redisson/redisson/src/main/java/org/redisson/ElementsSubscribeService.java",
+                "sourceCode": "/**\n * @author Nikita Koksharov\n */\npublic class ElementsSubscribeService {\n\n    private static final Logger log = LoggerFactory.getLogger(ElementsSubscribeService.class);\n    private final Map<Integer, CompletableFuture<?>> subscribeListeners = new ConcurrentHashMap<>();\n    private final ServiceManager serviceManager;\n\n    public ElementsSubscribeService(ServiceManager serviceManager) {\n        this.serviceManager = serviceManager;\n    }\n\n    public <V> int subscribeOnElements(Supplier<CompletionStage<V>> func, Function<V, CompletionStage<Void>> consumer) {\n        int id = System.identityHashCode(consumer);\n        CompletableFuture<?> currentFuture = subscribeListeners.putIfAbsent(id, CompletableFuture.completedFuture(null));\n        if (currentFuture != null) {\n            throw new IllegalArgumentException(\"Consumer object with listener id \" + id + \" already registered\");\n        }\n        resubscribe(func, consumer);\n        return id;\n    }\n\n    @Deprecated\n    public <V> int subscribeOnElements(Supplier<CompletionStage<V>> func, Consumer<V> consumer) {\n        int id = System.identityHashCode(consumer);\n        CompletableFuture<?> currentFuture = subscribeListeners.putIfAbsent(id, CompletableFuture.completedFuture(null));\n        if (currentFuture != null) {\n            throw new IllegalArgumentException(\"Consumer object with listener id \" + id + \" already registered\");\n        }\n        resubscribe(func, consumer);\n        return id;\n    }\n\n    public void unsubscribe(int listenerId) {\n        CompletableFuture<?> f = subscribeListeners.remove(listenerId);\n        if (f != null) {\n            f.cancel(false);\n        }\n    }\n\n    @Deprecated\n    private <V> void resubscribe(Supplier<CompletionStage<V>> func, Consumer<V> consumer) {\n        int listenerId = System.identityHashCode(consumer);\n        CompletionStage<V> f = (CompletionStage<V>) subscribeListeners.computeIfPresent(listenerId, (k, v) -> {\n            return func.get().toCompletableFuture();\n        });\n        if (f == null) {\n            return;\n        }\n\n        f.whenComplete((r, e) -> {\n            if (e != null) {\n                if (isShuttingDown(e)) {\n                    return;\n                }\n\n                serviceManager.newTimeout(t -> {\n                    resubscribe(func, consumer);\n                }, 1, TimeUnit.SECONDS);\n                return;\n            }\n\n            consumer.accept(r);\n            resubscribe(func, consumer);\n        });\n    }\n\n    private <V> void resubscribe(Supplier<CompletionStage<V>> func, Function<V, CompletionStage<Void>> consumer) {\n        int listenerId = System.identityHashCode(consumer);\n        CompletionStage<V> f = (CompletionStage<V>) subscribeListeners.computeIfPresent(listenerId, (k, v) -> {\n            return func.get().toCompletableFuture();\n        });\n        if (f == null) {\n            return;\n        }\n\n        f.thenCompose(consumer).whenComplete((r, ex) -> {\n            if (ex != null) {\n                if (isShuttingDown(ex)) {\n                    return;\n                }\n\n                log.error(ex.getMessage(), ex);\n                serviceManager.newTimeout(t -> {\n                    resubscribe(func, consumer);\n                }, 1, TimeUnit.SECONDS);\n                return;\n            }\n\n            resubscribe(func, consumer);\n        });\n    }\n\n    private boolean isShuttingDown(Throwable ex) {\n        return ex instanceof RedissonShutdownException\n                || ex.getCause() instanceof RedissonShutdownException;\n    }\n\n\n}",
+                "methodCount": 7
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isShuttingDown",
+                            "method_signature": "private boolean isShuttingDown(Throwable ex)",
+                            "target_class": "ShutdownManager",
+                            "rationale": "The method isShuttingDown() is specifically checking for shutdown-related exceptions, which is more relevant to a class that manages application shutdowns and lifecycle events."
+                        },
+                        {
+                            "method_name": "unsubscribe",
+                            "method_signature": "public void unsubscribe(int listenerId)",
+                            "target_class": "SubscriptionManager",
+                            "rationale": "The unsubscribe() method deals with managing subscriptions and listeners, which would be better suited to a dedicated SubscriptionManager class."
+                        }
+                    ],
+                    "llm_response_time": 2195
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isShuttingDown",
+                            "method_signature": "private boolean isShuttingDown(Throwable ex)",
+                            "target_class": "ShutdownManager",
+                            "rationale": "The isShuttingDown method is specifically checking for shutdown exceptions, which relates more to the state of the application rather than the subscription logic. Moving it to a dedicated ShutdownManager class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "subscribeOnElements",
+                            "method_signature": "public <V> int subscribeOnElements(Supplier<CompletionStage<V>> func, Consumer<V> consumer)",
+                            "target_class": "SubscriptionManager",
+                            "rationale": "The subscribeOnElements method, especially the deprecated version, is handling subscription logic. Moving this method to a dedicated SubscriptionManager class would enhance clarity and maintainability."
+                        },
+                        {
+                            "method_name": "resubscribe",
+                            "method_signature": "private <V> void resubscribe(Supplier<CompletionStage<V>> func, Consumer<V> consumer)",
+                            "target_class": "SubscriptionManager",
+                            "rationale": "The resubscribe method is part of the subscription handling process. It should be moved to a SubscriptionManager class to better encapsulate subscription-related functionality."
+                        },
+                        {
+                            "method_name": "resubscribe",
+                            "method_signature": "private <V> void resubscribe(Supplier<CompletionStage<V>> func, Function<V, CompletionStage<Void>> consumer)",
+                            "target_class": "SubscriptionManager",
+                            "rationale": "This overloaded version of resubscribe also pertains to the subscription mechanism and should be moved to the SubscriptionManager class for better organization."
+                        }
+                    ],
+                    "llm_response_time": 6964
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "resubscribe",
+                            "method_signature": "private <V> void resubscribe(Supplier<CompletionStage<V>> func, Consumer<V> consumer)",
+                            "target_class": "ConsumerSubscriptionManager",
+                            "rationale": "The method 'resubscribe' with a Consumer parameter is responsible for handling subscription logic that is closely tied to consumer behavior. Moving it to a dedicated class like ConsumerSubscriptionManager will help separate concerns and improve maintainability."
+                        },
+                        {
+                            "method_name": "resubscribe",
+                            "method_signature": "private <V> void resubscribe(Supplier<CompletionStage<V>> func, Function<V, CompletionStage<Void>> consumer)",
+                            "target_class": "FunctionSubscriptionManager",
+                            "rationale": "The method 'resubscribe' with a Function parameter deals with subscription logic specific to function consumers. Moving it to a dedicated class like FunctionSubscriptionManager will enhance clarity and organization of the code."
+                        }
+                    ],
+                    "llm_response_time": 3364
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isShuttingDown",
+                            "method_signature": "private boolean isShuttingDown(Throwable ex)",
+                            "target_class": "ShutdownManager",
+                            "rationale": "The isShuttingDown method checks if the system is shutting down based on the exception type. It would be more appropriate in a dedicated ShutdownManager class that handles shutdown logic."
+                        },
+                        {
+                            "method_name": "unsubscribe",
+                            "method_signature": "public void unsubscribe(int listenerId)",
+                            "target_class": "SubscriptionManager",
+                            "rationale": "The unsubscribe method is responsible for managing listener subscriptions. A dedicated SubscriptionManager class would better encapsulate subscription-related operations."
+                        }
+                    ],
+                    "llm_response_time": 3321
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "isShuttingDown",
+                            "method_signature": "private boolean isShuttingDown(Throwable ex)",
+                            "target_class": "ShutdownManager",
+                            "rationale": "The method isShuttingDown() deals specifically with shutdown exceptions, which is more relevant to a class that manages application shutdown states or processes."
+                        },
+                        {
+                            "method_name": "resubscribe",
+                            "method_signature": "private <V> void resubscribe(Supplier<CompletionStage<V>> func, Consumer<V> consumer)",
+                            "target_class": "SubscriptionManager",
+                            "rationale": "The method resubscribe() is focused on handling subscription logic and should be moved to a dedicated class that manages subscriptions, improving separation of concerns."
+                        },
+                        {
+                            "method_name": "resubscribe",
+                            "method_signature": "private <V> void resubscribe(Supplier<CompletionStage<V>> func, Function<V, CompletionStage<Void>> consumer)",
+                            "target_class": "SubscriptionManager",
+                            "rationale": "Similar to the previous resubscribe method, this one also deals with subscription logic and should be moved to the SubscriptionManager class for better organization."
+                        }
+                    ],
+                    "llm_response_time": 3835
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    }
+]

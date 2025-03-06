@@ -1,0 +1,1047 @@
+[
+    {
+        "repository": "https://github.com/SeleniumHQ/selenium.git",
+        "sha1": "4ecc1033caa9995427c25d36befb70b8faae96d7",
+        "url": "https://github.com/SeleniumHQ/selenium/commit/4ecc1033caa9995427c25d36befb70b8faae96d7",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public hasBrowserPath() : boolean extracted from private generateExecutor(service ChromeDriverService, options ChromeOptions, clientConfig ClientConfig) : ChromeDriverCommandExecutor in class org.openqa.selenium.chrome.ChromeDriver & moved to class org.openqa.selenium.remote.service.DriverFinder",
+            "leftSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/chrome/ChromeDriver.java",
+                    "startLine": 94,
+                    "endLine": 105,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private generateExecutor(service ChromeDriverService, options ChromeOptions, clientConfig ClientConfig) : ChromeDriverCommandExecutor"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/chrome/ChromeDriver.java",
+                    "startLine": 101,
+                    "endLine": 101,
+                    "startColumn": 9,
+                    "endColumn": 78,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 88,
+                    "endLine": 91,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public hasBrowserPath() : boolean"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 90,
+                    "endLine": 90,
+                    "startColumn": 5,
+                    "endColumn": 58,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/chrome/ChromeDriver.java",
+                    "startLine": 93,
+                    "endLine": 105,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private generateExecutor(service ChromeDriverService, options ChromeOptions, clientConfig ClientConfig) : ChromeDriverCommandExecutor"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/chrome/ChromeDriver.java",
+                    "startLine": 100,
+                    "endLine": 100,
+                    "startColumn": 9,
+                    "endColumn": 32,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "finder.hasBrowserPath()"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 89,
+                    "endLine": 89,
+                    "startColumn": 5,
+                    "endColumn": 50,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 794,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "5eed004f7162425dafacacfa1ff8486068b75ac3",
+            "newBranchName": "inline-hasBrowserPath-4ecc1033ca"
+        },
+        "telemetry": {
+            "id": "aa085bc3-5585-4b7d-9c8d-db6783ec6603",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 94,
+                "lineStart": 36,
+                "lineEnd": 129,
+                "bodyLineStart": 36,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/selenium/java/src/org/openqa/selenium/chrome/ChromeDriver.java",
+                "sourceCode": "/**\n * A {@link WebDriver} implementation that controls a Chrome browser running on the local machine.\n * It requires a <code>chromedriver</code> executable to be available in PATH.\n *\n * @see <a href=\"https://sites.google.com/chromium.org/driver/\">chromedriver</a>\n */\npublic class ChromeDriver extends ChromiumDriver {\n\n  /**\n   * Creates a new ChromeDriver using the {@link ChromeDriverService#createDefaultService default}\n   * server configuration.\n   *\n   * @see #ChromeDriver(ChromeDriverService, ChromeOptions)\n   */\n  public ChromeDriver() {\n    this(ChromeDriverService.createDefaultService(), new ChromeOptions());\n  }\n\n  /**\n   * Creates a new ChromeDriver instance. The {@code service} will be started along with the driver,\n   * and shutdown upon calling {@link #quit()}.\n   *\n   * @param service The service to use.\n   * @see RemoteWebDriver#RemoteWebDriver(org.openqa.selenium.remote.CommandExecutor, Capabilities)\n   */\n  public ChromeDriver(ChromeDriverService service) {\n    this(service, new ChromeOptions());\n  }\n\n  /**\n   * Creates a new ChromeDriver instance with the specified options.\n   *\n   * @param options The options to use.\n   * @see #ChromeDriver(ChromeDriverService, ChromeOptions)\n   */\n  public ChromeDriver(ChromeOptions options) {\n    this(ChromeDriverService.createDefaultService(), options);\n  }\n\n  /**\n   * Creates a new ChromeDriver instance with the specified options. The {@code service} will be\n   * started along with the driver, and shutdown upon calling {@link #quit()}.\n   *\n   * @param service The service to use.\n   * @param options The options required from ChromeDriver.\n   */\n  public ChromeDriver(ChromeDriverService service, ChromeOptions options) {\n    this(service, options, ClientConfig.defaultConfig());\n  }\n\n  public ChromeDriver(\n      ChromeDriverService service, ChromeOptions options, ClientConfig clientConfig) {\n    super(generateExecutor(service, options, clientConfig), options, ChromeOptions.CAPABILITY);\n    casting = new AddHasCasting().getImplementation(getCapabilities(), getExecuteMethod());\n    cdp = new AddHasCdp().getImplementation(getCapabilities(), getExecuteMethod());\n  }\n\n  private static ChromeDriverCommandExecutor generateExecutor(\n      ChromeDriverService service, ChromeOptions options, ClientConfig clientConfig) {\n    Require.nonNull(\"Driver service\", service);\n    Require.nonNull(\"Driver options\", options);\n    Require.nonNull(\"Driver clientConfig\", clientConfig);\n    DriverFinder finder = new DriverFinder(service, options);\n    service.setExecutable(finder.getDriverPath());\n    if (new ChromeDriver().hasBrowserPath(finder)) {\n      options.setBinary(finder.getBrowserPath());\n      options.setCapability(\"browserVersion\", (Object) null);\n    }\n    return new ChromeDriverCommandExecutor(service, clientConfig);\n  }\n\n  private boolean hasBrowserPath(DriverFinder finder) {\n    String browserPath = finder.getResult().getBrowserPath();\n    return browserPath != null && !browserPath.isEmpty();\n  }\n\n  @Beta\n  public static RemoteWebDriverBuilder builder() {\n    return RemoteWebDriver.builder().oneOf(new ChromeOptions());\n  }\n\n  private static class ChromeDriverCommandExecutor extends ChromiumDriverCommandExecutor {\n    public ChromeDriverCommandExecutor(DriverService service, ClientConfig clientConfig) {\n      super(service, getExtraCommands(), clientConfig);\n    }\n\n    private static Map<String, CommandInfo> getExtraCommands() {\n      return Stream.of(\n              new AddHasCasting().getAdditionalCommands(), new AddHasCdp().getAdditionalCommands())\n          .flatMap((m) -> m.entrySet().stream())\n          .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));\n    }\n  }\n}",
+                "methodCount": 10
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static ChromeDriverCommandExecutor generateExecutor(ChromeDriverService service, ChromeOptions options, ClientConfig clientConfig)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The generateExecutor method is primarily responsible for finding the driver path and configuring the ChromeDriver, which aligns more closely with the responsibilities of the DriverFinder class."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The hasBrowserPath method checks if a valid browser path is available, which is directly related to the functionality of the DriverFinder class. Moving it there would enhance cohesion."
+                        }
+                    ],
+                    "llm_response_time": 2273
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static ChromeDriverCommandExecutor generateExecutor(ChromeDriverService service, ChromeOptions options, ClientConfig clientConfig)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The method generates an executor based on the driver service and options, which aligns more with the responsibilities of the DriverFinder class. It can be refactored to improve separation of concerns."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "This method checks for the browser path, which is a responsibility that fits better within the DriverFinder class. Moving it would enhance cohesion."
+                        },
+                        {
+                            "method_name": "getExtraCommands",
+                            "method_signature": "private static Map<String, CommandInfo> getExtraCommands()",
+                            "target_class": "CommandInfoProvider",
+                            "rationale": "The method is responsible for retrieving extra commands, which could be better organized within a dedicated class for command information management."
+                        }
+                    ],
+                    "llm_response_time": 3458
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static ChromeDriverCommandExecutor generateExecutor(ChromeDriverService service, ChromeOptions options, ClientConfig clientConfig)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The method generateExecutor() primarily deals with finding the driver path and setting the executable, which is closely related to the functionality of the DriverFinder class. Moving it there would adhere to the Single Responsibility Principle."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The method hasBrowserPath() checks if a valid browser path exists, which is a core responsibility of the DriverFinder class. This would help in keeping the ChromeDriver class focused on browser driver management."
+                        },
+                        {
+                            "method_name": "getExtraCommands",
+                            "method_signature": "private static Map<String, CommandInfo> getExtraCommands()",
+                            "target_class": "ChromeDriverCommandExecutor",
+                            "rationale": "The method getExtraCommands() is specific to the command execution logic of the ChromeDriverCommandExecutor. Moving it there would enhance the cohesion of that class."
+                        }
+                    ],
+                    "llm_response_time": 3535
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static ChromeDriverCommandExecutor generateExecutor(ChromeDriverService service, ChromeOptions options, ClientConfig clientConfig)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The method generateExecutor primarily deals with finding the driver and setting up the service, which aligns more closely with the responsibilities of the DriverFinder class."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The method hasBrowserPath checks if a browser path exists, which is a responsibility that fits better within the DriverFinder class."
+                        }
+                    ],
+                    "llm_response_time": 2155
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static ChromeDriverCommandExecutor generateExecutor(ChromeDriverService service, ChromeOptions options, ClientConfig clientConfig)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The method generateExecutor creates a DriverFinder instance and uses it to find the driver path and browser path. It is more related to the functionality of locating drivers, so it should be moved to the DriverFinder class."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The hasBrowserPath method directly checks if the browser path is available using the DriverFinder instance. This functionality is more appropriate within the DriverFinder class."
+                        },
+                        {
+                            "method_name": "getExtraCommands",
+                            "method_signature": "private static Map<String, CommandInfo> getExtraCommands()",
+                            "target_class": "CommandProvider",
+                            "rationale": "The getExtraCommands method is responsible for retrieving additional commands, which is a responsibility that could be better represented in a dedicated CommandProvider class."
+                        }
+                    ],
+                    "llm_response_time": 3528
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "repository": "https://github.com/SeleniumHQ/selenium.git",
+        "sha1": "4ecc1033caa9995427c25d36befb70b8faae96d7",
+        "url": "https://github.com/SeleniumHQ/selenium/commit/4ecc1033caa9995427c25d36befb70b8faae96d7",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public hasBrowserPath() : boolean extracted from private generateExecutor(service EdgeDriverService, options EdgeOptions, clientConfig ClientConfig) : EdgeDriverCommandExecutor in class org.openqa.selenium.edge.EdgeDriver & moved to class org.openqa.selenium.remote.service.DriverFinder",
+            "leftSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/edge/EdgeDriver.java",
+                    "startLine": 66,
+                    "endLine": 77,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private generateExecutor(service EdgeDriverService, options EdgeOptions, clientConfig ClientConfig) : EdgeDriverCommandExecutor"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/edge/EdgeDriver.java",
+                    "startLine": 73,
+                    "endLine": 73,
+                    "startColumn": 9,
+                    "endColumn": 78,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 88,
+                    "endLine": 91,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public hasBrowserPath() : boolean"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 90,
+                    "endLine": 90,
+                    "startColumn": 5,
+                    "endColumn": 58,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/edge/EdgeDriver.java",
+                    "startLine": 65,
+                    "endLine": 77,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private generateExecutor(service EdgeDriverService, options EdgeOptions, clientConfig ClientConfig) : EdgeDriverCommandExecutor"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/edge/EdgeDriver.java",
+                    "startLine": 72,
+                    "endLine": 72,
+                    "startColumn": 9,
+                    "endColumn": 32,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "finder.hasBrowserPath()"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 89,
+                    "endLine": 89,
+                    "startColumn": 5,
+                    "endColumn": 50,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 795,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "5eed004f7162425dafacacfa1ff8486068b75ac3",
+            "newBranchName": "inline-hasBrowserPath-4ecc1033ca"
+        },
+        "telemetry": {
+            "id": "78d033dc-2933-463b-a8ab-e7c9f0c9d071",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 68,
+                "lineStart": 34,
+                "lineEnd": 101,
+                "bodyLineStart": 34,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/selenium/java/src/org/openqa/selenium/edge/EdgeDriver.java",
+                "sourceCode": "/**\n * A {@link WebDriver} implementation that controls an Edge browser running on the local machine. It\n * requires an <code>edgedriver</code> executable to be available in PATH.\n *\n * @see <a href=\"https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/\">Microsoft\n *     WebDriver</a>\n */\npublic class EdgeDriver extends ChromiumDriver {\n\n  public EdgeDriver() {\n    this(new EdgeOptions());\n  }\n\n  public EdgeDriver(EdgeOptions options) {\n    this(new EdgeDriverService.Builder().build(), options);\n  }\n\n  public EdgeDriver(EdgeDriverService service) {\n    this(service, new EdgeOptions());\n  }\n\n  public EdgeDriver(EdgeDriverService service, EdgeOptions options) {\n    this(service, options, ClientConfig.defaultConfig());\n  }\n\n  public EdgeDriver(EdgeDriverService service, EdgeOptions options, ClientConfig clientConfig) {\n    super(generateExecutor(service, options, clientConfig), options, EdgeOptions.CAPABILITY);\n    casting = new AddHasCasting().getImplementation(getCapabilities(), getExecuteMethod());\n    cdp = new AddHasCdp().getImplementation(getCapabilities(), getExecuteMethod());\n  }\n\n  private static EdgeDriverCommandExecutor generateExecutor(\n      EdgeDriverService service, EdgeOptions options, ClientConfig clientConfig) {\n    Require.nonNull(\"Driver service\", service);\n    Require.nonNull(\"Driver options\", options);\n    Require.nonNull(\"Driver clientConfig\", clientConfig);\n    DriverFinder finder = new DriverFinder(service, options);\n    service.setExecutable(finder.getDriverPath());\n    if (new EdgeDriver().hasBrowserPath(finder)) {\n      options.setBinary(finder.getBrowserPath());\n      options.setCapability(\"browserVersion\", (Object) null);\n    }\n    return new EdgeDriverCommandExecutor(service, clientConfig);\n  }\n\n  private boolean hasBrowserPath(DriverFinder finder) {\n    String browserPath = finder.getResult().getBrowserPath();\n    return browserPath != null && !browserPath.isEmpty();\n  }\n\n  @Beta\n  public static RemoteWebDriverBuilder builder() {\n    return RemoteWebDriver.builder().oneOf(new EdgeOptions());\n  }\n\n  private static class EdgeDriverCommandExecutor extends ChromiumDriverCommandExecutor {\n    public EdgeDriverCommandExecutor(DriverService service, ClientConfig clientConfig) {\n      super(service, getExtraCommands(), clientConfig);\n    }\n\n    private static Map<String, CommandInfo> getExtraCommands() {\n      return Stream.of(\n              new AddHasCasting().getAdditionalCommands(), new AddHasCdp().getAdditionalCommands())\n          .flatMap((m) -> m.entrySet().stream())\n          .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));\n    }\n  }\n}",
+                "methodCount": 10
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The hasBrowserPath method checks for the browser path using the DriverFinder instance. It would be more cohesive for this method to belong to the DriverFinder class, as it directly relates to its responsibility of finding driver paths."
+                        },
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static EdgeDriverCommandExecutor generateExecutor(EdgeDriverService service, EdgeOptions options, ClientConfig clientConfig)",
+                            "target_class": "EdgeDriverService",
+                            "rationale": "The generateExecutor method is responsible for creating an EdgeDriverCommandExecutor and utilizes the EdgeDriverService. This method aligns more with the responsibilities of the EdgeDriverService class."
+                        },
+                        {
+                            "method_name": "getExtraCommands",
+                            "method_signature": "private static Map<String, CommandInfo> getExtraCommands()",
+                            "target_class": "EdgeDriverCommandExecutor",
+                            "rationale": "The getExtraCommands method is closely related to the EdgeDriverCommandExecutor's functionality and should be encapsulated within that class to enhance cohesion."
+                        }
+                    ],
+                    "llm_response_time": 3300
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static EdgeDriverCommandExecutor generateExecutor(EdgeDriverService service, EdgeOptions options, ClientConfig clientConfig)",
+                            "target_class": "EdgeDriverService",
+                            "rationale": "The method generateExecutor is responsible for creating an EdgeDriverCommandExecutor and interacts closely with EdgeDriverService and EdgeOptions, making it a better fit within the EdgeDriverService class."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The hasBrowserPath method checks if the browser path exists using a DriverFinder instance, which indicates that it may belong in the DriverFinder class, enhancing the separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 2416
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static EdgeDriverCommandExecutor generateExecutor(EdgeDriverService service, EdgeOptions options, ClientConfig clientConfig)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The generateExecutor method is responsible for finding the driver path and configuring the driver, which aligns more closely with the responsibilities of the DriverFinder class."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The hasBrowserPath method checks if a browser path exists, which is a responsibility that should logically belong to the DriverFinder class, as it deals with locating drivers."
+                        }
+                    ],
+                    "llm_response_time": 2654
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static EdgeDriverCommandExecutor generateExecutor(EdgeDriverService service, EdgeOptions options, ClientConfig clientConfig)",
+                            "target_class": "EdgeDriverService",
+                            "rationale": "The method generateExecutor() is primarily concerned with setting up the EdgeDriverService and its configurations. Moving it to the EdgeDriverService class would better encapsulate the functionality related to driver management."
+                        },
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The hasBrowserPath() method is focused on checking the existence of a browser path, which is directly related to the DriverFinder's responsibility. It should be moved to the DriverFinder class to enhance cohesion."
+                        }
+                    ],
+                    "llm_response_time": 2870
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "hasBrowserPath",
+                            "method_signature": "private boolean hasBrowserPath(DriverFinder finder)",
+                            "target_class": "DriverFinder",
+                            "rationale": "The hasBrowserPath method checks if a browser path exists based on the DriverFinder instance, suggesting it is more relevant to the DriverFinder class."
+                        },
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static EdgeDriverCommandExecutor generateExecutor(EdgeDriverService service, EdgeOptions options, ClientConfig clientConfig)",
+                            "target_class": "EdgeDriverService",
+                            "rationale": "The generateExecutor method creates an EdgeDriverCommandExecutor based on the EdgeDriverService and its options, indicating that it may belong in the EdgeDriverService class."
+                        }
+                    ],
+                    "llm_response_time": 2623
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "repository": "https://github.com/SeleniumHQ/selenium.git",
+        "sha1": "4ecc1033caa9995427c25d36befb70b8faae96d7",
+        "url": "https://github.com/SeleniumHQ/selenium/commit/4ecc1033caa9995427c25d36befb70b8faae96d7",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public hasBrowserPath() : boolean extracted from private generateExecutor(service FirefoxDriverService, options FirefoxOptions, clientConfig ClientConfig) : FirefoxDriverCommandExecutor in class org.openqa.selenium.firefox.FirefoxDriver & moved to class org.openqa.selenium.remote.service.DriverFinder",
+            "leftSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxDriver.java",
+                    "startLine": 136,
+                    "endLine": 147,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "private generateExecutor(service FirefoxDriverService, options FirefoxOptions, clientConfig ClientConfig) : FirefoxDriverCommandExecutor"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxDriver.java",
+                    "startLine": 143,
+                    "endLine": 143,
+                    "startColumn": 9,
+                    "endColumn": 78,
+                    "codeElementType": "IF_STATEMENT_CONDITION",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 88,
+                    "endLine": 91,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public hasBrowserPath() : boolean"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 90,
+                    "endLine": 90,
+                    "startColumn": 5,
+                    "endColumn": 58,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxDriver.java",
+                    "startLine": 135,
+                    "endLine": 147,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "private generateExecutor(service FirefoxDriverService, options FirefoxOptions, clientConfig ClientConfig) : FirefoxDriverCommandExecutor"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxDriver.java",
+                    "startLine": 142,
+                    "endLine": 142,
+                    "startColumn": 9,
+                    "endColumn": 32,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "finder.hasBrowserPath()"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/remote/service/DriverFinder.java",
+                    "startLine": 89,
+                    "endLine": 89,
+                    "startColumn": 5,
+                    "endColumn": 50,
+                    "codeElementType": "VARIABLE_DECLARATION_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 796,
+        "extraction_results": {
+            "success": true,
+            "newCommitHash": "5eed004f7162425dafacacfa1ff8486068b75ac3",
+            "newBranchName": "inline-hasBrowserPath-4ecc1033ca"
+        },
+        "telemetry": {
+            "id": "e214e8f8-e931-4ba4-be50-52f75038e335",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 369,
+                "lineStart": 65,
+                "lineEnd": 433,
+                "bodyLineStart": 65,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/selenium/java/src/org/openqa/selenium/firefox/FirefoxDriver.java",
+                "sourceCode": "/**\n * An implementation of the {#link WebDriver} interface that drives Firefox.\n *\n * <p>The best way to construct a {@code FirefoxDriver} with various options is to make use of the\n * {@link FirefoxOptions}, like so:\n *\n * <pre>\n * FirefoxOptions options = new FirefoxOptions()\n *     .addPreference(\"browser.startup.page\", 1)\n *     .addPreference(\"browser.startup.homepage\", \"https://www.google.co.uk\")\n *     .setAcceptInsecureCerts(true)\n *     .setHeadless(true);\n * WebDriver driver = new FirefoxDriver(options);\n * </pre>\n */\npublic class FirefoxDriver extends RemoteWebDriver\n    implements WebStorage, HasExtensions, HasFullPageScreenshot, HasContext, HasDevTools, HasBiDi {\n\n  private static final Logger LOG = Logger.getLogger(FirefoxDriver.class.getName());\n  private final Capabilities capabilities;\n  private final RemoteWebStorage webStorage;\n  private final HasExtensions extensions;\n  private final HasFullPageScreenshot fullPageScreenshot;\n  private final HasContext context;\n  private final Optional<URI> cdpUri;\n  private final Optional<URI> biDiUri;\n  private Connection connection;\n  private DevTools devTools;\n  private final Optional<BiDi> biDi;\n\n  /**\n   * Creates a new FirefoxDriver using the {@link GeckoDriverService#createDefaultService)} server\n   * configuration.\n   *\n   * @see #FirefoxDriver(FirefoxDriverService, FirefoxOptions)\n   */\n  public FirefoxDriver() {\n    this(new FirefoxOptions());\n  }\n\n  /**\n   * Creates a new FirefoxDriver instance with the specified options.\n   *\n   * @param options The options to use.\n   * @see #FirefoxDriver(FirefoxDriverService, FirefoxOptions)\n   */\n  public FirefoxDriver(FirefoxOptions options) {\n    this(GeckoDriverService.createDefaultService(), options);\n  }\n\n  /**\n   * Creates a new FirefoxDriver instance. The {@code service} will be started along with the\n   * driver, and shutdown upon calling {@link #quit()}.\n   *\n   * @param service The service to use.\n   * @see RemoteWebDriver#RemoteWebDriver(org.openqa.selenium.remote.CommandExecutor, Capabilities)\n   */\n  public FirefoxDriver(FirefoxDriverService service) {\n    this(service, new FirefoxOptions());\n  }\n\n  public FirefoxDriver(FirefoxDriverService service, FirefoxOptions options) {\n    this(service, options, ClientConfig.defaultConfig());\n  }\n\n  public FirefoxDriver(\n      FirefoxDriverService service, FirefoxOptions options, ClientConfig clientConfig) {\n    this(generateExecutor(service, options, clientConfig), options);\n  }\n\n  private static FirefoxDriverCommandExecutor generateExecutor(\n      FirefoxDriverService service, FirefoxOptions options, ClientConfig clientConfig) {\n    Require.nonNull(\"Driver service\", service);\n    Require.nonNull(\"Driver options\", options);\n    Require.nonNull(\"Driver clientConfig\", clientConfig);\n    DriverFinder finder = new DriverFinder(service, options);\n    service.setExecutable(finder.getDriverPath());\n    if (new FirefoxDriver().hasBrowserPath(finder)) {\n      options.setBinary(finder.getBrowserPath());\n      options.setCapability(\"browserVersion\", (Object) null);\n    }\n    return new FirefoxDriverCommandExecutor(service, clientConfig);\n  }\n\n  private boolean hasBrowserPath(DriverFinder finder) {\n    String browserPath = finder.getResult().getBrowserPath();\n    return browserPath != null && !browserPath.isEmpty();\n  }\n\n  private FirefoxDriver(FirefoxDriverCommandExecutor executor, FirefoxOptions options) {\n    this(executor, options, ClientConfig.defaultConfig());\n  }\n\n  private FirefoxDriver(\n      FirefoxDriverCommandExecutor executor, FirefoxOptions options, ClientConfig clientConfig) {\n    super(executor, checkCapabilitiesAndProxy(options));\n    webStorage = new RemoteWebStorage(getExecuteMethod());\n    extensions = new AddHasExtensions().getImplementation(getCapabilities(), getExecuteMethod());\n    fullPageScreenshot =\n        new AddHasFullPageScreenshot().getImplementation(getCapabilities(), getExecuteMethod());\n    context = new AddHasContext().getImplementation(getCapabilities(), getExecuteMethod());\n\n    Capabilities capabilities = super.getCapabilities();\n    HttpClient.Factory factory = HttpClient.Factory.createDefault();\n\n    Optional<URI> reportedUri =\n        CdpEndpointFinder.getReportedUri(\"moz:debuggerAddress\", capabilities);\n    Optional<HttpClient> client =\n        reportedUri.map(uri -> CdpEndpointFinder.getHttpClient(factory, uri));\n    Optional<URI> cdpUri;\n\n    try {\n      cdpUri = client.flatMap(httpClient -> CdpEndpointFinder.getCdpEndPoint(httpClient));\n    } catch (Exception e) {\n      try {\n        client.ifPresent(HttpClient::close);\n      } catch (Exception ex) {\n        e.addSuppressed(ex);\n      }\n      throw e;\n    }\n\n    try {\n      client.ifPresent(HttpClient::close);\n    } catch (Exception e) {\n      LOG.log(\n          Level.FINE,\n          \"failed to close the http client used to check the reported CDP endpoint: \"\n              + reportedUri.get(),\n          e);\n    }\n\n    Optional<String> webSocketUrl =\n        Optional.ofNullable((String) capabilities.getCapability(\"webSocketUrl\"));\n\n    this.biDiUri =\n        webSocketUrl.map(\n            uri -> {\n              try {\n                return new URI(uri);\n              } catch (URISyntaxException e) {\n                LOG.warning(e.getMessage());\n              }\n              return null;\n            });\n\n    this.biDi = createBiDi(biDiUri);\n\n    this.cdpUri = cdpUri;\n    this.capabilities =\n        cdpUri\n            .map(\n                uri ->\n                    new ImmutableCapabilities(\n                        new PersistentCapabilities(capabilities)\n                            .setCapability(\"se:cdp\", uri.toString())\n                            .setCapability(\"se:cdpVersion\", \"85.0\")))\n            .orElse(new ImmutableCapabilities(capabilities));\n  }\n\n  @Beta\n  public static RemoteWebDriverBuilder builder() {\n    return RemoteWebDriver.builder().oneOf(new FirefoxOptions());\n  }\n\n  /** Check capabilities and proxy if it is set */\n  private static Capabilities checkCapabilitiesAndProxy(Capabilities capabilities) {\n    if (capabilities == null) {\n      return new ImmutableCapabilities();\n    }\n\n    MutableCapabilities caps = new MutableCapabilities(capabilities);\n\n    // Ensure that the proxy is in a state fit to be sent to the extension\n    Proxy proxy = Proxy.extractFrom(capabilities);\n    if (proxy != null) {\n      caps.setCapability(PROXY, proxy);\n    }\n\n    return caps;\n  }\n\n  @Override\n  public Capabilities getCapabilities() {\n    return capabilities;\n  }\n\n  @Override\n  public void setFileDetector(FileDetector detector) {\n    throw new WebDriverException(\n        \"Setting the file detector only works on remote webdriver instances obtained \"\n            + \"via RemoteWebDriver\");\n  }\n\n  @Override\n  @Deprecated\n  public LocalStorage getLocalStorage() {\n    return webStorage.getLocalStorage();\n  }\n\n  @Override\n  @Deprecated\n  public SessionStorage getSessionStorage() {\n    return webStorage.getSessionStorage();\n  }\n\n  @Override\n  public String installExtension(Path path) {\n    Require.nonNull(\"Path\", path);\n    return extensions.installExtension(path);\n  }\n\n  @Override\n  public String installExtension(Path path, Boolean temporary) {\n    Require.nonNull(\"Path\", path);\n    Require.nonNull(\"Temporary\", temporary);\n    return extensions.installExtension(path, temporary);\n  }\n\n  @Override\n  public void uninstallExtension(String extensionId) {\n    Require.nonNull(\"Extension ID\", extensionId);\n    extensions.uninstallExtension(extensionId);\n  }\n\n  /**\n   * Capture the full page screenshot and store it in the specified location.\n   *\n   * @param <X> Return type for getFullPageScreenshotAs.\n   * @param outputType target type, @see OutputType\n   * @return Object in which is stored information about the screenshot.\n   * @throws WebDriverException on failure.\n   */\n  @Override\n  public <X> X getFullPageScreenshotAs(OutputType<X> outputType) throws WebDriverException {\n    Require.nonNull(\"OutputType\", outputType);\n\n    return fullPageScreenshot.getFullPageScreenshotAs(outputType);\n  }\n\n  @Override\n  public FirefoxCommandContext getContext() {\n    return context.getContext();\n  }\n\n  @Override\n  public void setContext(FirefoxCommandContext commandContext) {\n    Require.nonNull(\"Firefox Command Context\", commandContext);\n    context.setContext(commandContext);\n  }\n\n  /**\n   * @deprecated Use W3C-compliant BiDi protocol. Use {{@link #maybeGetBiDi()}}\n   */\n  @Deprecated\n  @Override\n  public Optional<DevTools> maybeGetDevTools() {\n    if (devTools != null) {\n      return Optional.of(devTools);\n    }\n\n    if (!cdpUri.isPresent()) {\n      return Optional.empty();\n    }\n\n    URI wsUri =\n        cdpUri.orElseThrow(\n            () ->\n                new DevToolsException(\n                    \"This version of Firefox or geckodriver does not support CDP\"));\n    HttpClient.Factory clientFactory = HttpClient.Factory.createDefault();\n\n    ClientConfig wsConfig = ClientConfig.defaultConfig().baseUri(wsUri);\n    HttpClient wsClient = clientFactory.createClient(wsConfig);\n\n    connection = new Connection(wsClient, wsUri.toString());\n    CdpInfo cdpInfo = new CdpVersionFinder().match(\"85.0\").orElseGet(NoOpCdpInfo::new);\n    devTools = new DevTools(cdpInfo::getDomains, connection);\n\n    return Optional.of(devTools);\n  }\n\n  /**\n   * @deprecated Use W3C-compliant BiDi protocol. Use {{@link #getBiDi()}}\n   */\n  @Deprecated\n  @Override\n  public DevTools getDevTools() {\n    if (!cdpUri.isPresent()) {\n      throw new DevToolsException(\"This version of Firefox or geckodriver does not support CDP\");\n    }\n\n    return maybeGetDevTools()\n        .orElseThrow(() -> new DevToolsException(\"Unable to initialize CDP connection\"));\n  }\n\n  private Optional<BiDi> createBiDi(Optional<URI> biDiUri) {\n    if (!biDiUri.isPresent()) {\n      return Optional.empty();\n    }\n\n    URI wsUri =\n        biDiUri.orElseThrow(\n            () ->\n                new BiDiException(\"This version of Firefox or geckodriver does not support BiDi\"));\n\n    HttpClient.Factory clientFactory = HttpClient.Factory.createDefault();\n    ClientConfig wsConfig = ClientConfig.defaultConfig().baseUri(wsUri);\n    HttpClient wsClient = clientFactory.createClient(wsConfig);\n\n    org.openqa.selenium.bidi.Connection biDiConnection =\n        new org.openqa.selenium.bidi.Connection(wsClient, wsUri.toString());\n\n    return Optional.of(new BiDi(biDiConnection));\n  }\n\n  @Override\n  public Optional<BiDi> maybeGetBiDi() {\n    return biDi;\n  }\n\n  @Override\n  public BiDi getBiDi() {\n    if (!biDiUri.isPresent()) {\n      throw new BiDiException(\"This version of Firefox or geckodriver does not support Bidi\");\n    }\n\n    return maybeGetBiDi()\n        .orElseThrow(() -> new BiDiException(\"Unable to initialize Bidi connection\"));\n  }\n\n  @Override\n  public void quit() {\n    super.quit();\n  }\n\n  public static final class SystemProperty {\n\n    /** System property that defines the location of the Firefox executable file. */\n    public static final String BROWSER_BINARY = \"webdriver.firefox.bin\";\n\n    /**\n     * System property that defines the profile that should be used as a template. When the driver\n     * starts, it will make a copy of the profile it is using, rather than using that profile\n     * directly.\n     */\n    public static final String BROWSER_PROFILE = \"webdriver.firefox.profile\";\n  }\n\n  private static class FirefoxDriverCommandExecutor extends DriverCommandExecutor {\n\n    public FirefoxDriverCommandExecutor(DriverService service) {\n      this(service, ClientConfig.defaultConfig());\n    }\n\n    public FirefoxDriverCommandExecutor(DriverService service, ClientConfig clientConfig) {\n      super(service, getExtraCommands(), clientConfig);\n    }\n\n    private static Map<String, CommandInfo> getExtraCommands() {\n      return Stream.of(\n              new AddHasContext().getAdditionalCommands(),\n              new AddHasExtensions().getAdditionalCommands(),\n              new AddHasFullPageScreenshot<>().getAdditionalCommands())\n          .flatMap((m) -> m.entrySet().stream())\n          .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));\n    }\n  }\n}",
+                "methodCount": 30
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getFullPageScreenshotAs",
+                            "method_signature": "public <X> X getFullPageScreenshotAs(OutputType<X> outputType) throws WebDriverException",
+                            "target_class": "HasFullPageScreenshot",
+                            "rationale": "The method getFullPageScreenshotAs is directly related to the functionality of taking full-page screenshots, which logically belongs to the HasFullPageScreenshot interface. Moving it will enhance the separation of concerns."
+                        },
+                        {
+                            "method_name": "installExtension",
+                            "method_signature": "public String installExtension(Path path)",
+                            "target_class": "HasExtensions",
+                            "rationale": "The installExtension method is specifically related to managing browser extensions, which is the responsibility of the HasExtensions interface. Moving it will improve the class's focus on driving the browser."
+                        },
+                        {
+                            "method_name": "uninstallExtension",
+                            "method_signature": "public void uninstallExtension(String extensionId)",
+                            "target_class": "HasExtensions",
+                            "rationale": "The uninstallExtension method deals with extension management, which is the domain of the HasExtensions interface. Moving it will maintain a cleaner design."
+                        },
+                        {
+                            "method_name": "getLocalStorage",
+                            "method_signature": "public LocalStorage getLocalStorage()",
+                            "target_class": "WebStorage",
+                            "rationale": "The getLocalStorage method pertains to web storage capabilities, which should be handled by the WebStorage interface. Moving it will help encapsulate related functionality."
+                        },
+                        {
+                            "method_name": "getSessionStorage",
+                            "method_signature": "public SessionStorage getSessionStorage()",
+                            "target_class": "WebStorage",
+                            "rationale": "The getSessionStorage method is also related to web storage, which aligns with the responsibilities of the WebStorage interface. Moving it will improve code organization."
+                        },
+                        {
+                            "method_name": "maybeGetBiDi",
+                            "method_signature": "public Optional<BiDi> maybeGetBiDi()",
+                            "target_class": "BiDi",
+                            "rationale": "The maybeGetBiDi method is associated with the BiDi protocol, which should be managed by a dedicated BiDi class. Moving it will clarify the responsibilities of each class."
+                        },
+                        {
+                            "method_name": "getBiDi",
+                            "method_signature": "public BiDi getBiDi()",
+                            "target_class": "BiDi",
+                            "rationale": "The getBiDi method is also related to the BiDi protocol and should be part of a dedicated BiDi class. This move will enhance the separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 11099
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static FirefoxDriverCommandExecutor generateExecutor(FirefoxDriverService service, FirefoxOptions options, ClientConfig clientConfig)",
+                            "target_class": "FirefoxDriverCommandExecutor",
+                            "rationale": "This method is responsible for creating an instance of FirefoxDriverCommandExecutor, which logically belongs to the FirefoxDriverCommandExecutor class."
+                        },
+                        {
+                            "method_name": "checkCapabilitiesAndProxy",
+                            "method_signature": "private static Capabilities checkCapabilitiesAndProxy(Capabilities capabilities)",
+                            "target_class": "CapabilitiesUtil",
+                            "rationale": "This method checks and modifies capabilities and proxy settings, which could be more appropriately placed in a utility class focused on capabilities management."
+                        },
+                        {
+                            "method_name": "createBiDi",
+                            "method_signature": "private Optional<BiDi> createBiDi(Optional<URI> biDiUri)",
+                            "target_class": "BiDiFactory",
+                            "rationale": "This method is responsible for creating a BiDi instance based on the provided URI, making it suitable for a dedicated factory class that handles BiDi creation."
+                        }
+                    ],
+                    "llm_response_time": 3996
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "createBiDi",
+                            "method_signature": "private Optional<BiDi> createBiDi(Optional<URI> biDiUri)",
+                            "target_class": "BiDiManager",
+                            "rationale": "The createBiDi() method is responsible for creating a BiDi connection, which is a specific functionality related to the BiDi protocol. Moving it to a dedicated BiDiManager class would improve separation of concerns and enhance code maintainability."
+                        },
+                        {
+                            "method_name": "getBiDi",
+                            "method_signature": "public BiDi getBiDi()",
+                            "target_class": "BiDiManager",
+                            "rationale": "The getBiDi() method retrieves the BiDi connection, which is a specific concern related to BiDi functionality. Moving it to a BiDiManager class would encapsulate all BiDi-related logic and improve code organization."
+                        },
+                        {
+                            "method_name": "maybeGetBiDi",
+                            "method_signature": "public Optional<BiDi> maybeGetBiDi()",
+                            "target_class": "BiDiManager",
+                            "rationale": "The maybeGetBiDi() method checks for the existence of a BiDi connection, which is closely related to BiDi management. Moving it to a BiDiManager class would help centralize all BiDi-related operations."
+                        },
+                        {
+                            "method_name": "getDevTools",
+                            "method_signature": "public DevTools getDevTools()",
+                            "target_class": "DevToolsManager",
+                            "rationale": "The getDevTools() method is responsible for retrieving the DevTools instance, which is a specific functionality related to developer tools. Moving it to a DevToolsManager class would improve separation of concerns and clarity."
+                        },
+                        {
+                            "method_name": "maybeGetDevTools",
+                            "method_signature": "public Optional<DevTools> maybeGetDevTools()",
+                            "target_class": "DevToolsManager",
+                            "rationale": "The maybeGetDevTools() method checks for the existence of a DevTools connection, which is a specific concern related to managing developer tools. Moving it to a DevToolsManager class would enhance code organization."
+                        }
+                    ],
+                    "llm_response_time": 7289
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "checkCapabilitiesAndProxy",
+                            "method_signature": "private static Capabilities checkCapabilitiesAndProxy(Capabilities capabilities)",
+                            "target_class": "CapabilitiesUtil",
+                            "rationale": "This method is focused on validating and managing capabilities, which can be abstracted into a separate utility class for better separation of concerns."
+                        },
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static FirefoxDriverCommandExecutor generateExecutor(FirefoxDriverService service, FirefoxOptions options, ClientConfig clientConfig)",
+                            "target_class": "FirefoxDriverExecutorFactory",
+                            "rationale": "The method is responsible for creating an executor for the FirefoxDriver, which can be encapsulated in a dedicated factory class to enhance code organization."
+                        },
+                        {
+                            "method_name": "createBiDi",
+                            "method_signature": "private Optional<BiDi> createBiDi(Optional<URI> biDiUri)",
+                            "target_class": "BiDiConnectionFactory",
+                            "rationale": "This method handles the creation of a BiDi connection, which should be managed by a dedicated factory class to improve modularity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 5159
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "generateExecutor",
+                            "method_signature": "private static FirefoxDriverCommandExecutor generateExecutor(FirefoxDriverService service, FirefoxOptions options, ClientConfig clientConfig)",
+                            "target_class": "FirefoxDriverCommandExecutor",
+                            "rationale": "The method generateExecutor() is responsible for creating an instance of FirefoxDriverCommandExecutor, which indicates it is closely related to the command executor's functionality and should be moved there."
+                        },
+                        {
+                            "method_name": "checkCapabilitiesAndProxy",
+                            "method_signature": "private static Capabilities checkCapabilitiesAndProxy(Capabilities capabilities)",
+                            "target_class": "CapabilitiesUtils",
+                            "rationale": "The method checkCapabilitiesAndProxy() deals with validating and modifying capabilities, which would be better suited in a utility class dedicated to handling capabilities."
+                        },
+                        {
+                            "method_name": "createBiDi",
+                            "method_signature": "private Optional<BiDi> createBiDi(Optional<URI> biDiUri)",
+                            "target_class": "BiDiUtils",
+                            "rationale": "The method createBiDi() is focused on creating a BiDi connection, which is a specific utility operation that could be encapsulated within a dedicated utility class for BiDi operations."
+                        }
+                    ],
+                    "llm_response_time": 7732
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "repository": "https://github.com/SeleniumHQ/selenium.git",
+        "sha1": "98c6eb062092c03d1f1079f09e2ec22cf1b24b78",
+        "url": "https://github.com/SeleniumHQ/selenium/commit/98c6eb062092c03d1f1079f09e2ec22cf1b24b78",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public enableBiDi() : FirefoxOptions extracted from package shouldNotCloseBiDiSessionIfOneWindowIsClosed() : void in class org.openqa.selenium.bidi.BiDiSessionCleanUpTest & moved to class org.openqa.selenium.firefox.FirefoxOptions",
+            "leftSideLocations": [
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 35,
+                    "endLine": 61,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "package shouldNotCloseBiDiSessionIfOneWindowIsClosed() : void"
+                },
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 39,
+                    "endLine": 39,
+                    "startColumn": 5,
+                    "endColumn": 49,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxOptions.java",
+                    "startLine": 297,
+                    "endLine": 300,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public enableBiDi() : FirefoxOptions"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxOptions.java",
+                    "startLine": 298,
+                    "endLine": 298,
+                    "startColumn": 5,
+                    "endColumn": 41,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 35,
+                    "endLine": 61,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "package shouldNotCloseBiDiSessionIfOneWindowIsClosed() : void"
+                },
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 39,
+                    "endLine": 39,
+                    "startColumn": 5,
+                    "endColumn": 25,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "options.enableBiDi()"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxOptions.java",
+                    "startLine": 299,
+                    "endLine": 299,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 797,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-enableBiDi-98c6eb0620",
+            "newCommitHash": "88e68a489e0c2d92862ce1f7489972acc885477b"
+        },
+        "telemetry": {
+            "id": "3e57810d-fac3-4a57-8269-10e9d16b370e",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 63,
+                "lineStart": 31,
+                "lineEnd": 93,
+                "bodyLineStart": 31,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/selenium/java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                "sourceCode": "class BiDiSessionCleanUpTest {\n\n  private FirefoxDriver driver;\n\n  @Test\n  void shouldNotCloseBiDiSessionIfOneWindowIsClosed() {\n    FirefoxOptions options = (FirefoxOptions) Browser.FIREFOX.getCapabilities();\n    // Enable BiDi\n    enableBiDi(options);\n\n    driver = new FirefoxDriver(options);\n\n    BiDi biDi = driver.getBiDi();\n\n    BiDiSessionStatus status =\n        biDi.send(new Command<>(\"session.status\", Collections.emptyMap(), BiDiSessionStatus.class));\n    assertThat(status).isNotNull();\n    assertThat(status.getMessage()).isEqualTo(\"Session already started\");\n\n    driver.switchTo().newWindow(WindowType.WINDOW);\n    driver.switchTo().newWindow(WindowType.TAB);\n    driver.switchTo().newWindow(WindowType.TAB);\n\n    driver.close();\n\n    BiDiSessionStatus statusAfterClosing =\n        biDi.send(new Command<>(\"session.status\", Collections.emptyMap(), BiDiSessionStatus.class));\n    assertThat(statusAfterClosing).isNotNull();\n    assertThat(status.getMessage()).isEqualTo(\"Session already started\");\n    driver.quit();\n  }\n\n  @Test\n  void shouldCloseBiDiSessionIfLastWindowIsClosed() {\n    FirefoxOptions options = (FirefoxOptions) Browser.FIREFOX.getCapabilities();\n    // Enable BiDi\n    enableBiDi(options);\n\n    driver = new FirefoxDriver(options);\n\n    BiDi biDi = driver.getBiDi();\n\n    BiDiSessionStatus status =\n        biDi.send(new Command<>(\"session.status\", Collections.emptyMap(), BiDiSessionStatus.class));\n    assertThat(status).isNotNull();\n    assertThat(status.getMessage()).isEqualTo(\"Session already started\");\n\n    driver.close();\n\n    // Closing the last top-level browsing context, closes the WebDriver and BiDi session\n    assertThatExceptionOfType(WebDriverException.class)\n        .isThrownBy(\n            () ->\n                biDi.send(\n                    new Command<>(\n                        \"session.status\", Collections.emptyMap(), BiDiSessionStatus.class)));\n  }\n\n  private FirefoxOptions enableBiDi(FirefoxOptions options) {\n    options.setCapability(\"webSocketUrl\", true);\n    return options;\n  }\n}",
+                "methodCount": 3
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiUtils",
+                            "rationale": "The enableBiDi method is a utility function that configures FirefoxOptions for BiDi support. Moving it to a separate utility class (e.g., BiDiUtils) would improve code organization and reusability."
+                        }
+                    ],
+                    "llm_response_time": 2760
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring BiDi options, which is more related to managing BiDi sessions rather than being part of the test class. Moving it to a dedicated BiDiSessionManager class would promote better separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 2749
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring the BiDi capabilities of the FirefoxOptions, which could be better organized in a dedicated class that manages BiDi sessions."
+                        }
+                    ],
+                    "llm_response_time": 1597
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring the BiDi capabilities, which is more relevant to session management rather than the test class. Moving it to a dedicated BiDiSessionManager class would improve separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1765
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring BiDi settings, which is not directly related to the test case functionality. It should be moved to a dedicated class that manages BiDi session configurations."
+                        }
+                    ],
+                    "llm_response_time": 1538
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    },
+    {
+        "repository": "https://github.com/SeleniumHQ/selenium.git",
+        "sha1": "98c6eb062092c03d1f1079f09e2ec22cf1b24b78",
+        "url": "https://github.com/SeleniumHQ/selenium/commit/98c6eb062092c03d1f1079f09e2ec22cf1b24b78",
+        "move_method_refactoring": {
+            "type": "Extract And Move Method",
+            "description": "Extract And Move Method public enableBiDi() : FirefoxOptions extracted from package shouldCloseBiDiSessionIfLastWindowIsClosed() : void in class org.openqa.selenium.bidi.BiDiSessionCleanUpTest & moved to class org.openqa.selenium.firefox.FirefoxOptions",
+            "leftSideLocations": [
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 63,
+                    "endLine": 87,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration before extraction",
+                    "codeElement": "package shouldCloseBiDiSessionIfLastWindowIsClosed() : void"
+                },
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 67,
+                    "endLine": 67,
+                    "startColumn": 5,
+                    "endColumn": 49,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code from source method declaration",
+                    "codeElement": null
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxOptions.java",
+                    "startLine": 297,
+                    "endLine": 300,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "extracted method declaration",
+                    "codeElement": "public enableBiDi() : FirefoxOptions"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxOptions.java",
+                    "startLine": 298,
+                    "endLine": 298,
+                    "startColumn": 5,
+                    "endColumn": 41,
+                    "codeElementType": "EXPRESSION_STATEMENT",
+                    "description": "extracted code to extracted method declaration",
+                    "codeElement": null
+                },
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 63,
+                    "endLine": 87,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "source method declaration after extraction",
+                    "codeElement": "package shouldCloseBiDiSessionIfLastWindowIsClosed() : void"
+                },
+                {
+                    "filePath": "java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                    "startLine": 67,
+                    "endLine": 67,
+                    "startColumn": 5,
+                    "endColumn": 25,
+                    "codeElementType": "METHOD_INVOCATION",
+                    "description": "extracted method invocation",
+                    "codeElement": "options.enableBiDi()"
+                },
+                {
+                    "filePath": "java/src/org/openqa/selenium/firefox/FirefoxOptions.java",
+                    "startLine": 299,
+                    "endLine": 299,
+                    "startColumn": 5,
+                    "endColumn": 17,
+                    "codeElementType": "RETURN_STATEMENT",
+                    "description": "added statement in extracted method declaration",
+                    "codeElement": null
+                }
+            ],
+            "isStatic": false
+        },
+        "ref_id": 798,
+        "extraction_results": {
+            "success": true,
+            "newBranchName": "move-enableBiDi-98c6eb0620",
+            "newCommitHash": "88e68a489e0c2d92862ce1f7489972acc885477b"
+        },
+        "telemetry": {
+            "id": "3e57810d-fac3-4a57-8269-10e9d16b370e",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 63,
+                "lineStart": 31,
+                "lineEnd": 93,
+                "bodyLineStart": 31,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/evaluation_projects/selenium/java/test/org/openqa/selenium/bidi/BiDiSessionCleanUpTest.java",
+                "sourceCode": "class BiDiSessionCleanUpTest {\n\n  private FirefoxDriver driver;\n\n  @Test\n  void shouldNotCloseBiDiSessionIfOneWindowIsClosed() {\n    FirefoxOptions options = (FirefoxOptions) Browser.FIREFOX.getCapabilities();\n    // Enable BiDi\n    enableBiDi(options);\n\n    driver = new FirefoxDriver(options);\n\n    BiDi biDi = driver.getBiDi();\n\n    BiDiSessionStatus status =\n        biDi.send(new Command<>(\"session.status\", Collections.emptyMap(), BiDiSessionStatus.class));\n    assertThat(status).isNotNull();\n    assertThat(status.getMessage()).isEqualTo(\"Session already started\");\n\n    driver.switchTo().newWindow(WindowType.WINDOW);\n    driver.switchTo().newWindow(WindowType.TAB);\n    driver.switchTo().newWindow(WindowType.TAB);\n\n    driver.close();\n\n    BiDiSessionStatus statusAfterClosing =\n        biDi.send(new Command<>(\"session.status\", Collections.emptyMap(), BiDiSessionStatus.class));\n    assertThat(statusAfterClosing).isNotNull();\n    assertThat(status.getMessage()).isEqualTo(\"Session already started\");\n    driver.quit();\n  }\n\n  @Test\n  void shouldCloseBiDiSessionIfLastWindowIsClosed() {\n    FirefoxOptions options = (FirefoxOptions) Browser.FIREFOX.getCapabilities();\n    // Enable BiDi\n    enableBiDi(options);\n\n    driver = new FirefoxDriver(options);\n\n    BiDi biDi = driver.getBiDi();\n\n    BiDiSessionStatus status =\n        biDi.send(new Command<>(\"session.status\", Collections.emptyMap(), BiDiSessionStatus.class));\n    assertThat(status).isNotNull();\n    assertThat(status.getMessage()).isEqualTo(\"Session already started\");\n\n    driver.close();\n\n    // Closing the last top-level browsing context, closes the WebDriver and BiDi session\n    assertThatExceptionOfType(WebDriverException.class)\n        .isThrownBy(\n            () ->\n                biDi.send(\n                    new Command<>(\n                        \"session.status\", Collections.emptyMap(), BiDiSessionStatus.class)));\n  }\n\n  private FirefoxOptions enableBiDi(FirefoxOptions options) {\n    options.setCapability(\"webSocketUrl\", true);\n    return options;\n  }\n}",
+                "methodCount": 3
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiUtils",
+                            "rationale": "The enableBiDi method is a utility function that configures FirefoxOptions for BiDi support. Moving it to a separate utility class (e.g., BiDiUtils) would improve code organization and reusability."
+                        }
+                    ],
+                    "llm_response_time": 2760
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring BiDi options, which is more related to managing BiDi sessions rather than being part of the test class. Moving it to a dedicated BiDiSessionManager class would promote better separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 2749
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring the BiDi capabilities of the FirefoxOptions, which could be better organized in a dedicated class that manages BiDi sessions."
+                        }
+                    ],
+                    "llm_response_time": 1597
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring the BiDi capabilities, which is more relevant to session management rather than the test class. Moving it to a dedicated BiDiSessionManager class would improve separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1765
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "enableBiDi",
+                            "method_signature": "private FirefoxOptions enableBiDi(FirefoxOptions options)",
+                            "target_class": "BiDiSessionManager",
+                            "rationale": "The enableBiDi method is responsible for configuring BiDi settings, which is not directly related to the test case functionality. It should be moved to a dedicated class that manages BiDi session configurations."
+                        }
+                    ],
+                    "llm_response_time": 1538
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.5
+        }
+    }
+]
