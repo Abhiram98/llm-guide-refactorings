@@ -1,0 +1,1244 @@
+[
+    {
+        "oracle": "method org.junit.runner.notification.RunNotifier::addFailure(Throwable):void need move to org.junit.internal.runners.ClassRoadie",
+        "class_name": "org.junit.runner.notification.RunNotifier",
+        "telemetry": {
+            "id": "34cba739-a9b9-437d-951d-a2a5d70deeac",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 159,
+                "lineStart": 13,
+                "lineEnd": 171,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/notification/RunNotifier.java",
+                "sourceCode": "/**\n * If you write custom runners, you may need to notify JUnit of your progress running tests.\n * Do this by invoking the <code>RunNotifier</code> passed to your implementation of\n * {@link org.junit.runner.Runner#run(RunNotifier)}. Future evolution of this class is likely to \n * move {@link #fireTestRunStarted(Description)} and {@link #fireTestRunFinished(Result)}\n * to a separate class since they should only be called once per run.\n */\npublic class RunNotifier {\n\tprivate final List<RunListener> fListeners= \n\t\tCollections.synchronizedList(new ArrayList<RunListener>());\n\tprivate boolean fPleaseStop= false;\n\t\n\t/** Internal use only\n\t */\n\tpublic void addListener(RunListener listener) {\n\t\tfListeners.add(listener);\n\t}\n\n\t/** Internal use only\n\t */\n\tpublic void removeListener(RunListener listener) {\n\t\tfListeners.remove(listener);\n    }\n\n\tprivate abstract class SafeNotifier {\n\t\tvoid run() {\n\t\t\tsynchronized (fListeners) {\n\t\t\t\tfor (Iterator<RunListener> all= fListeners.iterator(); all.hasNext();)\n\t\t\t\t\ttry {\n\t\t\t\t\t\tnotifyListener(all.next());\n\t\t\t\t\t} catch (Exception e) {\n\t\t\t\t\t\tall.remove(); // Remove the offending listener first to avoid an infinite loop\n\t\t\t\t\t\tfireTestFailure(new Failure(Description.TEST_MECHANISM, e));\n\t\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\n\t\tabstract protected void notifyListener(RunListener each) throws Exception;\n\t}\n\t\n\t/**\n\t * Do not invoke. \n\t */\n\tpublic void fireTestRunStarted(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Do not invoke.\n\t */\n\tpublic void fireTestRunFinished(final Result result) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testRunFinished(result);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Invoke to tell listeners that an atomic test is about to start.\n\t * @param description the description of the atomic test (generally a class and method name)\n\t * @throws StoppedByUserException thrown if a user has requested that the test run stop\n\t */\n\tpublic void fireTestStarted(final Description description) throws StoppedByUserException {\n\t\tif (fPleaseStop)\n\t\t\tthrow new StoppedByUserException();\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testStarted(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test failed.\n\t * @param failure the description of the test that failed and the exception thrown\n\t */\n\tpublic void fireTestFailure(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test flagged that it assumed\n\t * something false.\n\t * \n\t * @param failure\n\t *            the description of the test that failed and the\n\t *            {@link AssumptionViolatedException} thrown\n\t */\n\tpublic void fireTestAssumptionFailed(final Failure failure) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testAssumptionFailure(failure);\n\t\t\t};\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test was ignored.\n\t * @param description the description of the ignored test\n\t */\n\tpublic void fireTestIgnored(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testIgnored(description);\n\t\t\t}\n\t\t}.run();\n\t}\n\n\t/**\n\t * Invoke to tell listeners that an atomic test finished. Always invoke \n\t * {@link #fireTestFinished(Description)} if you invoke {@link #fireTestStarted(Description)} \n\t * as listeners are likely to expect them to come in pairs.\n\t * @param description the description of the test that finished\n\t */\n\tpublic void fireTestFinished(final Description description) {\n\t\tnew SafeNotifier() {\n\t\t\t@Override\n\t\t\tprotected void notifyListener(RunListener each) throws Exception {\n\t\t\t\teach.testFinished(description);\n\t\t\t};\n\t\t}.run();\n\t}\n\t\n\t/**\n\t * Ask that the tests run stop before starting the next test. Phrased politely because\n\t * the test currently running will not be interrupted. It seems a little odd to put this\n\t * functionality here, but the <code>RunNotifier</code> is the only object guaranteed \n\t * to be shared amongst the many runners involved.\n\t */\n\tpublic void pleaseStop() {\n\t\tfPleaseStop= true;\n\t}\n\n\t/**\n\t * Internal use only. The Result's listener must be first.\n\t */\n\tpublic void addFirstListener(RunListener listener) {\n\t\tfListeners.add(0, listener);\n\t}\n\n\tpublic void addFailure(ClassRoadie classRoadie, Throwable targetException) {\n\t\tfireTestFailure(new Failure(classRoadie.fDescription, targetException));\n\t}\n}",
+                "methodCount": 21
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addListener",
+                            "method_signature": "public void addListener(RunListener listener)",
+                            "target_class": "RunListenerManager",
+                            "rationale": "The method addListener() is responsible for managing listeners, which is a separate concern from notifying them of test events. Moving it to a dedicated RunListenerManager class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(RunListener listener)",
+                            "target_class": "RunListenerManager",
+                            "rationale": "Similar to addListener(), the removeListener() method deals with listener management. It should be moved to a RunListenerManager class to enhance code organization."
+                        },
+                        {
+                            "method_name": "addFirstListener",
+                            "method_signature": "public void addFirstListener(RunListener listener)",
+                            "target_class": "RunListenerManager",
+                            "rationale": "The addFirstListener() method also pertains to listener management. Moving it to a RunListenerManager class would help encapsulate all listener-related operations."
+                        },
+                        {
+                            "method_name": "pleaseStop",
+                            "method_signature": "public void pleaseStop()",
+                            "target_class": "TestExecutionController",
+                            "rationale": "The pleaseStop() method is related to controlling the execution of tests rather than notifying listeners. It should be moved to a TestExecutionController class to better reflect its purpose."
+                        },
+                        {
+                            "method_name": "fireTestRunStarted",
+                            "method_signature": "public void fireTestRunStarted(final Description description)",
+                            "target_class": "TestEventNotifier",
+                            "rationale": "The fireTestRunStarted() method is responsible for notifying listeners about the start of a test run. It should be moved to a TestEventNotifier class to centralize all test event notifications."
+                        },
+                        {
+                            "method_name": "fireTestRunFinished",
+                            "method_signature": "public void fireTestRunFinished(final Result result)",
+                            "target_class": "TestEventNotifier",
+                            "rationale": "Similar to fireTestRunStarted(), the fireTestRunFinished() method is also about notifying listeners of test run completion. It should be moved to a TestEventNotifier class for better organization."
+                        },
+                        {
+                            "method_name": "fireTestStarted",
+                            "method_signature": "public void fireTestStarted(final Description description) throws StoppedByUserException",
+                            "target_class": "TestEventNotifier",
+                            "rationale": "The fireTestStarted() method is focused on notifying listeners when a test starts. It should be moved to a TestEventNotifier class to consolidate all test-related notifications."
+                        },
+                        {
+                            "method_name": "fireTestFinished",
+                            "method_signature": "public void fireTestFinished(final Description description)",
+                            "target_class": "TestEventNotifier",
+                            "rationale": "The fireTestFinished() method is responsible for notifying listeners when a test finishes. It should be moved to a TestEventNotifier class to maintain a clear structure for event notifications."
+                        },
+                        {
+                            "method_name": "fireTestFailure",
+                            "method_signature": "public void fireTestFailure(final Failure failure)",
+                            "target_class": "TestEventNotifier",
+                            "rationale": "The fireTestFailure() method is about notifying listeners of a test failure. It should be moved to a TestEventNotifier class to keep all test event notifications in one place."
+                        },
+                        {
+                            "method_name": "fireTestAssumptionFailed",
+                            "method_signature": "public void fireTestAssumptionFailed(final Failure failure)",
+                            "target_class": "TestEventNotifier",
+                            "rationale": "The fireTestAssumptionFailed() method notifies listeners when a test assumption fails. It should be moved to a TestEventNotifier class to centralize all notification methods."
+                        },
+                        {
+                            "method_name": "fireTestIgnored",
+                            "method_signature": "public void fireTestIgnored(final Description description)",
+                            "target_class": "TestEventNotifier",
+                            "rationale": "The fireTestIgnored() method is responsible for notifying listeners when a test is ignored. It should be moved to a TestEventNotifier class to keep all notification logic together."
+                        }
+                    ],
+                    "llm_response_time": 10448
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "fireTestRunStarted",
+                            "method_signature": "public void fireTestRunStarted(final Description description)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestRunStarted() is responsible for notifying listeners that a test run has started, which is a higher-level operation that should be managed by a TestRunner class that orchestrates the overall test execution process."
+                        },
+                        {
+                            "method_name": "fireTestRunFinished",
+                            "method_signature": "public void fireTestRunFinished(final Result result)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestRunFinished() indicates the completion of a test run, which is a responsibility that aligns more closely with a TestRunner class that manages the lifecycle of test executions."
+                        },
+                        {
+                            "method_name": "fireTestStarted",
+                            "method_signature": "public void fireTestStarted(final Description description) throws StoppedByUserException",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestStarted() is a notification for the start of an atomic test, which should be handled by a TestRunner class that coordinates the execution of individual tests."
+                        },
+                        {
+                            "method_name": "fireTestFinished",
+                            "method_signature": "public void fireTestFinished(final Description description)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestFinished() notifies listeners that an atomic test has finished, which is a responsibility that should be managed by a TestRunner class overseeing test execution."
+                        },
+                        {
+                            "method_name": "fireTestFailure",
+                            "method_signature": "public void fireTestFailure(final Failure failure)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestFailure() indicates that a test has failed, which is a higher-level concern that should be managed by a TestRunner class that handles the overall test execution and reporting."
+                        },
+                        {
+                            "method_name": "fireTestAssumptionFailed",
+                            "method_signature": "public void fireTestAssumptionFailed(final Failure failure)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestAssumptionFailed() is related to the outcome of a test and should be managed by a TestRunner class that oversees the execution and results of tests."
+                        },
+                        {
+                            "method_name": "fireTestIgnored",
+                            "method_signature": "public void fireTestIgnored(final Description description)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestIgnored() notifies listeners that a test was ignored, which is a responsibility that aligns with a TestRunner class managing test execution."
+                        }
+                    ],
+                    "llm_response_time": 6338
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addListener",
+                            "method_signature": "public void addListener(RunListener listener)",
+                            "target_class": "RunListenerManager",
+                            "rationale": "The method addListener() is responsible for managing listeners, which is a separate concern from notifying them of test events. Moving it to a dedicated RunListenerManager class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(RunListener listener)",
+                            "target_class": "RunListenerManager",
+                            "rationale": "Similar to addListener(), the removeListener() method deals with listener management. It should be moved to a RunListenerManager class to enhance code organization."
+                        },
+                        {
+                            "method_name": "addFirstListener",
+                            "method_signature": "public void addFirstListener(RunListener listener)",
+                            "target_class": "RunListenerManager",
+                            "rationale": "The addFirstListener() method also pertains to listener management. Moving it to a RunListenerManager class would help encapsulate all listener-related operations."
+                        },
+                        {
+                            "method_name": "pleaseStop",
+                            "method_signature": "public void pleaseStop()",
+                            "target_class": "TestExecutionController",
+                            "rationale": "The pleaseStop() method is related to controlling the execution of tests rather than notifying listeners. It should be moved to a TestExecutionController class to better reflect its purpose."
+                        },
+                        {
+                            "method_name": "addFailure",
+                            "method_signature": "public void addFailure(ClassRoadie classRoadie, Throwable targetException)",
+                            "target_class": "TestResultManager",
+                            "rationale": "The addFailure() method is responsible for handling test failures, which is a distinct responsibility. Moving it to a TestResultManager class would improve clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 4628
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "fireTestRunStarted",
+                            "method_signature": "public void fireTestRunStarted(final Description description)",
+                            "target_class": "TestRunManager",
+                            "rationale": "This method is responsible for notifying the start of a test run, which is a higher-level operation that could be better managed in a dedicated TestRunManager class."
+                        },
+                        {
+                            "method_name": "fireTestRunFinished",
+                            "method_signature": "public void fireTestRunFinished(final Result result)",
+                            "target_class": "TestRunManager",
+                            "rationale": "Similar to fireTestRunStarted, this method deals with the completion of a test run and should be handled by a dedicated TestRunManager class for better separation of concerns."
+                        },
+                        {
+                            "method_name": "fireTestStarted",
+                            "method_signature": "public void fireTestStarted(final Description description) throws StoppedByUserException",
+                            "target_class": "TestEventManager",
+                            "rationale": "This method is responsible for notifying listeners that a test has started, which aligns with the responsibilities of a TestEventManager class."
+                        },
+                        {
+                            "method_name": "fireTestFinished",
+                            "method_signature": "public void fireTestFinished(final Description description)",
+                            "target_class": "TestEventManager",
+                            "rationale": "This method notifies listeners that a test has finished, which is a responsibility that should be managed by a TestEventManager class."
+                        },
+                        {
+                            "method_name": "fireTestFailure",
+                            "method_signature": "public void fireTestFailure(final Failure failure)",
+                            "target_class": "TestEventManager",
+                            "rationale": "This method handles the notification of a test failure, which is a specific event that should be managed by a TestEventManager class."
+                        },
+                        {
+                            "method_name": "fireTestAssumptionFailed",
+                            "method_signature": "public void fireTestAssumptionFailed(final Failure failure)",
+                            "target_class": "TestEventManager",
+                            "rationale": "This method deals with notifying listeners about assumption failures, which is a specific event that should be managed by a TestEventManager class."
+                        },
+                        {
+                            "method_name": "fireTestIgnored",
+                            "method_signature": "public void fireTestIgnored(final Description description)",
+                            "target_class": "TestEventManager",
+                            "rationale": "This method notifies listeners that a test was ignored, which is a specific event that should be managed by a TestEventManager class."
+                        }
+                    ],
+                    "llm_response_time": 6027
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "fireTestRunStarted",
+                            "method_signature": "public void fireTestRunStarted(final Description description)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestRunStarted() is responsible for notifying listeners when a test run starts, which is a higher-level operation that should be managed by a TestRunner class that orchestrates the test execution process."
+                        },
+                        {
+                            "method_name": "fireTestRunFinished",
+                            "method_signature": "public void fireTestRunFinished(final Result result)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestRunFinished() is responsible for notifying listeners when a test run finishes, which aligns with the responsibilities of a TestRunner class that manages the lifecycle of test runs."
+                        },
+                        {
+                            "method_name": "fireTestStarted",
+                            "method_signature": "public void fireTestStarted(final Description description) throws StoppedByUserException",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestStarted() is responsible for notifying listeners when an atomic test starts, which is a part of the test execution lifecycle that should be managed by a TestRunner class."
+                        },
+                        {
+                            "method_name": "fireTestFinished",
+                            "method_signature": "public void fireTestFinished(final Description description)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestFinished() is responsible for notifying listeners when an atomic test finishes, which is a part of the test execution lifecycle that should be managed by a TestRunner class."
+                        },
+                        {
+                            "method_name": "fireTestFailure",
+                            "method_signature": "public void fireTestFailure(final Failure failure)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestFailure() is responsible for notifying listeners when a test fails, which is a part of the test execution lifecycle that should be managed by a TestRunner class."
+                        },
+                        {
+                            "method_name": "fireTestAssumptionFailed",
+                            "method_signature": "public void fireTestAssumptionFailed(final Failure failure)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestAssumptionFailed() is responsible for notifying listeners when a test assumption fails, which is a part of the test execution lifecycle that should be managed by a TestRunner class."
+                        },
+                        {
+                            "method_name": "fireTestIgnored",
+                            "method_signature": "public void fireTestIgnored(final Description description)",
+                            "target_class": "TestRunner",
+                            "rationale": "fireTestIgnored() is responsible for notifying listeners when a test is ignored, which is a part of the test execution lifecycle that should be managed by a TestRunner class."
+                        }
+                    ],
+                    "llm_response_time": 6086
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.TestClass::getArgumentStrings(boolean):Object[] need move to org.junit.experimental.theories.internal.Assignments",
+        "class_name": "org.junit.runners.model.TestClass",
+        "telemetry": {
+            "id": "64f8bbaa-f251-42d4-b1c9-e8b413cdc26f",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 156,
+                "lineStart": 20,
+                "lineEnd": 175,
+                "bodyLineStart": 20,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runners/model/TestClass.java",
+                "sourceCode": "/**\n * Wraps a class to be run, providing method validation and annotation searching\n */\npublic class TestClass {\n\tprivate final Class<?> fClass;\n\n\tprivate Map<Class<?>, List<FrameworkMethod>> fMethodsForAnnotations= new HashMap<Class<?>, List<FrameworkMethod>>();\n\n\tprivate Map<Class<?>, List<FrameworkField>> fFieldsForAnnotations= new HashMap<Class<?>, List<FrameworkField>>();\n\n\t/**\n\t * Creates a {@code TestClass} wrapping {@code klass}. Each time this\n\t * constructor executes, the class is scanned for annotations, which can be\n\t * an expensive process (we hope in future JDK's it will not be.) Therefore,\n\t * try to share instances of {@code TestClass} where possible.\n\t */\n\tpublic TestClass(Class<?> klass) {\n\t\tfClass= klass;\n\t\tif (klass != null && klass.getConstructors().length > 1)\n\t\t\tthrow new IllegalArgumentException(\n\t\t\t\t\t\"Test class can only have one constructor\");\n\n\t\tfor (Class<?> eachClass : getSuperClasses(fClass)) {\n\t\t\tfor (Method eachMethod : eachClass.getDeclaredMethods())\n\t\t\t\taddToAnnotationLists(new FrameworkMethod(eachMethod),\n\t\t\t\t\t\tfMethodsForAnnotations);\n\t\t\tfor (Field eachField : eachClass.getDeclaredFields())\n\t\t\t\taddToAnnotationLists(new FrameworkField(eachField),\n\t\t\t\t\t\tfFieldsForAnnotations);\n\t\t}\n\t}\n\n\tprivate <T extends FrameworkMember<T>> void addToAnnotationLists(T member,\n\t\t\tMap<Class<?>, List<T>> map) {\n\t\tfor (Annotation each : member.getAnnotations()) {\n\t\t\tClass<? extends Annotation> type= each.annotationType();\n\t\t\tList<T> members= getAnnotatedMembers(map, type);\n\t\t\tif (member.isShadowedBy(members))\n\t\t\t\treturn;\n\t\t\tif (runsTopToBottom(type))\n\t\t\t\tmembers.add(0, member);\n\t\t\telse\n\t\t\t\tmembers.add(member);\n\t\t}\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden methods in this class and\n\t * its superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkMethod> getAnnotatedMethods(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fMethodsForAnnotations, annotationClass);\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden fields in this class and its\n\t * superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkField> getAnnotatedFields(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fFieldsForAnnotations, annotationClass);\n\t}\n\n\tprivate <T> List<T> getAnnotatedMembers(Map<Class<?>, List<T>> map,\n\t\t\tClass<? extends Annotation> type) {\n\t\tif (!map.containsKey(type))\n\t\t\tmap.put(type, new ArrayList<T>());\n\t\treturn map.get(type);\n\t}\n\n\tprivate boolean runsTopToBottom(Class<? extends Annotation> annotation) {\n\t\treturn annotation.equals(Before.class)\n\t\t\t\t|| annotation.equals(BeforeClass.class);\n\t}\n\n\tprivate List<Class<?>> getSuperClasses(Class<?> testClass) {\n\t\tArrayList<Class<?>> results= new ArrayList<Class<?>>();\n\t\tClass<?> current= testClass;\n\t\twhile (current != null) {\n\t\t\tresults.add(current);\n\t\t\tcurrent= current.getSuperclass();\n\t\t}\n\t\treturn results;\n\t}\n\n\t/**\n\t * Returns the underlying Java class.\n\t */\n\tpublic Class<?> getJavaClass() {\n\t\treturn fClass;\n\t}\n\n\t/**\n\t * Returns the class's name.\n\t */\n\tpublic String getName() {\n\t\tif (fClass == null)\n\t\t\treturn \"null\";\n\t\treturn fClass.getName();\n\t}\n\n\t/**\n\t * Returns the only public constructor in the class, or throws an {@code\n\t * AssertionError} if there are more or less than one.\n\t */\n\n\tpublic Constructor<?> getOnlyConstructor() {\n\t\tConstructor<?>[] constructors= fClass.getConstructors();\n\t\tAssert.assertEquals(1, constructors.length);\n\t\treturn constructors[0];\n\t}\n\n\t/**\n\t * Returns the annotations on this class\n\t */\n\tpublic Annotation[] getAnnotations() {\n\t\tif (fClass == null)\n\t\t\treturn new Annotation[0];\n\t\treturn fClass.getAnnotations();\n\t}\n\n\tpublic <T> List<T> getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass) {\n\t\tList<T> results= new ArrayList<T>();\n\t\tfor (FrameworkField each : getAnnotatedFields(annotationClass)) {\n\t\t\ttry {\n\t\t\t\tObject fieldValue= each.get(test);\n\t\t\t\tif (valueClass.isInstance(fieldValue))\n\t\t\t\t\tresults.add(valueClass.cast(fieldValue));\n\t\t\t} catch (IllegalAccessException e) {\n\t\t\t\tthrow new RuntimeException(\n\t\t\t\t\t\t\"How did getFields return a field we couldn't access?\", e);\n\t\t\t}\n\t\t}\n\t\treturn results;\n\t}\n\n\tpublic boolean isANonStaticInnerClass() {\n\t\treturn fClass.isMemberClass() && !isStatic(fClass.getModifiers());\n\t}\n\n\tpublic Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\tObject[] values= new Object[assignments.fAssigned.size()];\n\t\tfor (int i= 0; i < values.length; i++) {\n\t\t\tvalues[i]= assignments.fAssigned.get(i).getDescription();\n\t\t}\n\t\treturn values;\n\t}\n\n\tpublic Object[] getAllArguments(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\treturn assignments.getActualValues(0, assignments.fAssigned.size(), nullsOk);\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 3519
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 3888
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 3335
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 3622
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with utility functions for argument handling. Moving it to a class like ArgumentUtils would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to better encapsulate argument-related functionality."
+                        }
+                    ],
+                    "llm_response_time": 2680
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Runner::run2(TestResult):void need move to junit.framework.JUnit4TestAdapter",
+        "class_name": "org.junit.runner.Runner",
+        "telemetry": {
+            "id": "ede34f23-8bb8-49c2-b34b-cfc9be76ba7a",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 40,
+                "lineStart": 8,
+                "lineEnd": 47,
+                "bodyLineStart": 8,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/Runner.java",
+                "sourceCode": "/**\n * A <code>Runner</code> runs tests and notifies a {@link org.junit.runner.notification.RunNotifier}\n * of significant events as it does so. You will need to subclass <code>Runner</code>\n * when using {@link org.junit.runner.RunWith} to invoke a custom runner. When creating\n * a custom runner, in addition to implementing the abstract methods here you must\n * also provide a constructor that takes as an argument the {@link Class} containing\n * the tests.\n * <p/>\n * The default runner implementation guarantees that the instances of the test case\n * class will be constructed immediately before running the test and that the runner\n * will retain no reference to the test case instances, generally making them \n * available for garbage collection.\n * \n * @see org.junit.runner.Description\n * @see org.junit.runner.RunWith\n */\npublic abstract class Runner implements Describable {\n\t/* (non-Javadoc)\n\t * @see org.junit.runner.Describable#getDescription()\n\t */\n\tpublic abstract Description getDescription();\n\n\t/**\n\t * Run the tests for this runner.\n\t * @param notifier will be notified of events while tests are being run--tests being \n\t * started, finishing, and failing\n\t */\n\tpublic abstract void run(RunNotifier notifier);\n\t\n\t/**\n\t * @return the number of tests to be run by the receiver\n\t */\n\tpublic int testCount() {\n\t\treturn getDescription().testCount();\n\t}\n\n\tpublic void run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result) {\n\t\trun(jUnit4TestAdapter.fCache.getNotifier(result, jUnit4TestAdapter));\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "run2",
+                            "method_signature": "public void run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "JUnit4TestAdapter",
+                            "rationale": "The run2 method is specifically designed to work with JUnit4TestAdapter and should be moved there to maintain better cohesion and encapsulation."
+                        }
+                    ],
+                    "llm_response_time": 1186
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "run2",
+                            "method_signature": "public void run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "JUnit4TestAdapter",
+                            "rationale": "The run2 method is specifically designed to work with JUnit4TestAdapter and is not a core responsibility of the Runner class. It should be moved to the JUnit4TestAdapter class to maintain better cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1502
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "run2",
+                            "method_signature": "public void run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "JUnit4TestAdapter",
+                            "rationale": "The run2 method is specifically designed to work with JUnit4TestAdapter and is not a core responsibility of the Runner class. Moving it to JUnit4TestAdapter would better encapsulate its functionality."
+                        }
+                    ],
+                    "llm_response_time": 1883
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "run2",
+                            "method_signature": "public void run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "JUnit4TestAdapter",
+                            "rationale": "The run2 method is specifically designed to work with JUnit4TestAdapter and is not a core responsibility of the Runner class. Moving it to JUnit4TestAdapter would better encapsulate its functionality."
+                        }
+                    ],
+                    "llm_response_time": 1425
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "run2",
+                            "method_signature": "public void run2(JUnit4TestAdapter jUnit4TestAdapter, TestResult result)",
+                            "target_class": "JUnit4TestAdapter",
+                            "rationale": "The run2 method is specifically designed to work with JUnit4TestAdapter and should be moved there to maintain cohesion and encapsulate the behavior related to JUnit4 test execution."
+                        }
+                    ],
+                    "llm_response_time": 1425
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method junit.framework.AssertionFailedError::addFailure2(Test, AssertionFailedError):void need move to junit.textui.ResultPrinter",
+        "class_name": "junit.framework.AssertionFailedError",
+        "telemetry": {
+            "id": "b2f00a2f-6b24-4cc2-8013-677b2c5b5c80",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 27,
+                "lineStart": 5,
+                "lineEnd": 31,
+                "bodyLineStart": 5,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/junit/framework/AssertionFailedError.java",
+                "sourceCode": "/**\n * Thrown when an assertion failed.\n */\npublic class AssertionFailedError extends AssertionError {\n\n\tprivate static final long serialVersionUID= 1L;\n\n\tpublic AssertionFailedError() {\n\t}\n\n\tpublic AssertionFailedError(String message) {\n\t\tsuper(defaultString(message));\n\t}\n\n\tprivate static String defaultString(String message) {\n\t\treturn message == null ? \"\" : message;\n\t}\n\n\t/**\n\t * @param test TODO\n\t * @param resultPrinter TODO\n\t * @see junit.framework.TestListener#addFailure(Test, AssertionFailedError)\n\t */\n\tpublic void addFailure2(Test test, ResultPrinter resultPrinter) {\n\t\tresultPrinter.getWriter().print(\"F\");\n\t}\n}",
+                "methodCount": 4
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure2",
+                            "method_signature": "public void addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "TestListener",
+                            "rationale": "The addFailure2 method is related to handling test failures and should be moved to a class that is responsible for managing test results, such as TestListener."
+                        }
+                    ],
+                    "llm_response_time": 1278
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure2",
+                            "method_signature": "public void addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "TestListener",
+                            "rationale": "The addFailure2 method is related to handling test failures and should be moved to a class that deals with test results, such as TestListener, to maintain better cohesion and separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 2047
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure2",
+                            "method_signature": "public void addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "TestListener",
+                            "rationale": "The addFailure2 method is related to handling test failures and should be moved to a class that deals with test results, such as TestListener, to maintain better cohesion and separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1110
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure2",
+                            "method_signature": "public void addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "TestListener",
+                            "rationale": "The addFailure2 method is related to handling test failures and should be moved to a class that is responsible for managing test results, such as TestListener."
+                        }
+                    ],
+                    "llm_response_time": 1392
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "addFailure2",
+                            "method_signature": "public void addFailure2(Test test, ResultPrinter resultPrinter)",
+                            "target_class": "TestListener",
+                            "rationale": "The addFailure2 method is related to handling test results and should be moved to a class that deals with test listeners, such as TestListener, to maintain better cohesion and separation of concerns."
+                        }
+                    ],
+                    "llm_response_time": 1193
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.TestClass::getAllArguments(boolean):Object[] need move to org.junit.experimental.theories.internal.Assignments",
+        "class_name": "org.junit.runners.model.TestClass",
+        "telemetry": {
+            "id": "bc9ffb8c-7446-4f7d-9e7f-06b8cb9f7982",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 156,
+                "lineStart": 20,
+                "lineEnd": 175,
+                "bodyLineStart": 20,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runners/model/TestClass.java",
+                "sourceCode": "/**\n * Wraps a class to be run, providing method validation and annotation searching\n */\npublic class TestClass {\n\tprivate final Class<?> fClass;\n\n\tprivate Map<Class<?>, List<FrameworkMethod>> fMethodsForAnnotations= new HashMap<Class<?>, List<FrameworkMethod>>();\n\n\tprivate Map<Class<?>, List<FrameworkField>> fFieldsForAnnotations= new HashMap<Class<?>, List<FrameworkField>>();\n\n\t/**\n\t * Creates a {@code TestClass} wrapping {@code klass}. Each time this\n\t * constructor executes, the class is scanned for annotations, which can be\n\t * an expensive process (we hope in future JDK's it will not be.) Therefore,\n\t * try to share instances of {@code TestClass} where possible.\n\t */\n\tpublic TestClass(Class<?> klass) {\n\t\tfClass= klass;\n\t\tif (klass != null && klass.getConstructors().length > 1)\n\t\t\tthrow new IllegalArgumentException(\n\t\t\t\t\t\"Test class can only have one constructor\");\n\n\t\tfor (Class<?> eachClass : getSuperClasses(fClass)) {\n\t\t\tfor (Method eachMethod : eachClass.getDeclaredMethods())\n\t\t\t\taddToAnnotationLists(new FrameworkMethod(eachMethod),\n\t\t\t\t\t\tfMethodsForAnnotations);\n\t\t\tfor (Field eachField : eachClass.getDeclaredFields())\n\t\t\t\taddToAnnotationLists(new FrameworkField(eachField),\n\t\t\t\t\t\tfFieldsForAnnotations);\n\t\t}\n\t}\n\n\tprivate <T extends FrameworkMember<T>> void addToAnnotationLists(T member,\n\t\t\tMap<Class<?>, List<T>> map) {\n\t\tfor (Annotation each : member.getAnnotations()) {\n\t\t\tClass<? extends Annotation> type= each.annotationType();\n\t\t\tList<T> members= getAnnotatedMembers(map, type);\n\t\t\tif (member.isShadowedBy(members))\n\t\t\t\treturn;\n\t\t\tif (runsTopToBottom(type))\n\t\t\t\tmembers.add(0, member);\n\t\t\telse\n\t\t\t\tmembers.add(member);\n\t\t}\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden methods in this class and\n\t * its superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkMethod> getAnnotatedMethods(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fMethodsForAnnotations, annotationClass);\n\t}\n\n\t/**\n\t * Returns, efficiently, all the non-overridden fields in this class and its\n\t * superclasses that are annotated with {@code annotationClass}.\n\t */\n\tpublic List<FrameworkField> getAnnotatedFields(\n\t\t\tClass<? extends Annotation> annotationClass) {\n\t\treturn getAnnotatedMembers(fFieldsForAnnotations, annotationClass);\n\t}\n\n\tprivate <T> List<T> getAnnotatedMembers(Map<Class<?>, List<T>> map,\n\t\t\tClass<? extends Annotation> type) {\n\t\tif (!map.containsKey(type))\n\t\t\tmap.put(type, new ArrayList<T>());\n\t\treturn map.get(type);\n\t}\n\n\tprivate boolean runsTopToBottom(Class<? extends Annotation> annotation) {\n\t\treturn annotation.equals(Before.class)\n\t\t\t\t|| annotation.equals(BeforeClass.class);\n\t}\n\n\tprivate List<Class<?>> getSuperClasses(Class<?> testClass) {\n\t\tArrayList<Class<?>> results= new ArrayList<Class<?>>();\n\t\tClass<?> current= testClass;\n\t\twhile (current != null) {\n\t\t\tresults.add(current);\n\t\t\tcurrent= current.getSuperclass();\n\t\t}\n\t\treturn results;\n\t}\n\n\t/**\n\t * Returns the underlying Java class.\n\t */\n\tpublic Class<?> getJavaClass() {\n\t\treturn fClass;\n\t}\n\n\t/**\n\t * Returns the class's name.\n\t */\n\tpublic String getName() {\n\t\tif (fClass == null)\n\t\t\treturn \"null\";\n\t\treturn fClass.getName();\n\t}\n\n\t/**\n\t * Returns the only public constructor in the class, or throws an {@code\n\t * AssertionError} if there are more or less than one.\n\t */\n\n\tpublic Constructor<?> getOnlyConstructor() {\n\t\tConstructor<?>[] constructors= fClass.getConstructors();\n\t\tAssert.assertEquals(1, constructors.length);\n\t\treturn constructors[0];\n\t}\n\n\t/**\n\t * Returns the annotations on this class\n\t */\n\tpublic Annotation[] getAnnotations() {\n\t\tif (fClass == null)\n\t\t\treturn new Annotation[0];\n\t\treturn fClass.getAnnotations();\n\t}\n\n\tpublic <T> List<T> getAnnotatedFieldValues(Object test,\n\t\t\tClass<? extends Annotation> annotationClass, Class<T> valueClass) {\n\t\tList<T> results= new ArrayList<T>();\n\t\tfor (FrameworkField each : getAnnotatedFields(annotationClass)) {\n\t\t\ttry {\n\t\t\t\tObject fieldValue= each.get(test);\n\t\t\t\tif (valueClass.isInstance(fieldValue))\n\t\t\t\t\tresults.add(valueClass.cast(fieldValue));\n\t\t\t} catch (IllegalAccessException e) {\n\t\t\t\tthrow new RuntimeException(\n\t\t\t\t\t\t\"How did getFields return a field we couldn't access?\", e);\n\t\t\t}\n\t\t}\n\t\treturn results;\n\t}\n\n\tpublic boolean isANonStaticInnerClass() {\n\t\treturn fClass.isMemberClass() && !isStatic(fClass.getModifiers());\n\t}\n\n\tpublic Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\tObject[] values= new Object[assignments.fAssigned.size()];\n\t\tfor (int i= 0; i < values.length; i++) {\n\t\t\tvalues[i]= assignments.fAssigned.get(i).getDescription();\n\t\t}\n\t\treturn values;\n\t}\n\n\tpublic Object[] getAllArguments(Assignments assignments, boolean nullsOk)\n\t\t\tthrows CouldNotGenerateValueException {\n\t\treturn assignments.getActualValues(0, assignments.fAssigned.size(), nullsOk);\n\t}\n}",
+                "methodCount": 15
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with argument handling. Moving it to a dedicated ArgumentUtils class would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to enhance clarity and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 0
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "getAnnotatedFieldValues",
+                            "method_signature": "public <T> List<T> getAnnotatedFieldValues(Object test, Class<? extends Annotation> annotationClass, Class<T> valueClass)",
+                            "target_class": "FieldUtils",
+                            "rationale": "The method getAnnotatedFieldValues is primarily concerned with retrieving values from fields based on annotations. It would be more appropriate to move this method to a utility class like FieldUtils that handles field-related operations."
+                        },
+                        {
+                            "method_name": "getArgumentStrings",
+                            "method_signature": "public Object[] getArgumentStrings(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "The method getArgumentStrings deals with converting assignments to argument strings, which is more aligned with utility functions for argument handling. Moving it to a class like ArgumentUtils would improve separation of concerns."
+                        },
+                        {
+                            "method_name": "getAllArguments",
+                            "method_signature": "public Object[] getAllArguments(Assignments assignments, boolean nullsOk)",
+                            "target_class": "ArgumentUtils",
+                            "rationale": "Similar to getArgumentStrings, the getAllArguments method is focused on retrieving argument values from assignments. It should be moved to ArgumentUtils to better encapsulate argument-related functionality."
+                        }
+                    ],
+                    "llm_response_time": 0
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Request::sortRequest(Request):Request need move to org.junit.experimental.max.MaxCore",
+        "class_name": "org.junit.runner.Request",
+        "telemetry": {
+            "id": "f85e3065-0a01-4cce-8119-8acc94a444da",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 151,
+                "lineStart": 15,
+                "lineEnd": 165,
+                "bodyLineStart": 15,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/Request.java",
+                "sourceCode": "/**\n * <p>A <code>Request</code> is an abstract description of tests to be run. Older versions of \n * JUnit did not need such a concept--tests to be run were described either by classes containing\n * tests or a tree of {@link  org.junit.Test}s. However, we want to support filtering and sorting,\n * so we need a more abstract specification than the tests themselves and a richer\n * specification than just the classes.</p>\n * \n * <p>The flow when JUnit runs tests is that a <code>Request</code> specifies some tests to be run ->\n * a {@link org.junit.runner.Runner} is created for each class implied by the <code>Request</code> -> \n * the {@link org.junit.runner.Runner} returns a detailed {@link org.junit.runner.Description} \n * which is a tree structure of the tests to be run.</p>\n */\npublic abstract class Request {\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run a single test.\n\t * This is done by filtering out all other tests. This method is used to support rerunning\n\t * single tests.\n\t * @param clazz the class of the test\n\t * @param methodName the name of the test\n\t * @return a <code>Request</code> that will cause a single test be run\n\t */\n\tpublic static Request method(Class<?> clazz, String methodName) {\n\t\tDescription method= Description.createTestDescription(clazz, methodName);\n\t\treturn Request.aClass(clazz).filterWith(method);\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a class. The odd name is necessary because <code>class</code> is a reserved word.\n\t * @param clazz the class containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the class to be run\n\t */\n\tpublic static Request aClass(Class<?> clazz) {\n\t\treturn new ClassRequest(clazz);\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a class. If the class has a suite() method, it will be ignored.\n\t * @param clazz the class containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the class to be run\n\t */\n\tpublic static Request classWithoutSuiteMethod(Class<?> clazz) {\n\t\treturn new ClassRequest(clazz, false);\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a set of classes.\n\t * @param computer Helps construct Runners from classes\n\t * @param classes the classes containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the classes to be run\n\t */\n\tpublic static Request classes(Computer computer, Class<?>... classes) {\n\t\ttry {\n\t\t\tAllDefaultPossibilitiesBuilder builder= new AllDefaultPossibilitiesBuilder(true);\n\t\t\tRunner suite= computer.getSuite(builder, classes);\n\t\t\treturn runner(suite);\n\t\t} catch (InitializationError e) {\n\t\t\tthrow new RuntimeException(\n\t\t\t\t\t\"Bug in saff's brain: Suite constructor, called as above, should always complete\");\n\t\t}\n\t}\n\n\t/**\n\t * Create a <code>Request</code> that, when processed, will run all the tests\n\t * in a set of classes with the default <code>Computer</code>.\n\t * @param classes the classes containing the tests\n\t * @return a <code>Request</code> that will cause all tests in the classes to be run\n\t */\n\tpublic static Request classes(Class<?>... classes) {\n\t\treturn classes(JUnitCore.defaultComputer(), classes);\n\t}\n\t\n\n\t/**\n\t * Not used within JUnit.  Clients should simply instantiate ErrorReportingRunner themselves\n\t */\n\t@Deprecated\t\n\tpublic static Request errorReport(Class<?> klass, Throwable cause) {\n\t\treturn runner(new ErrorReportingRunner(klass, cause));\n\t}\n\n\t/**\n\t * @param runner the runner to return\n\t * @return a <code>Request</code> that will run the given runner when invoked\n\t */\n\tpublic static Request runner(final Runner runner) {\n\t\treturn new Request(){\n\t\t\t@Override\n\t\t\tpublic Runner getRunner() {\n\t\t\t\treturn runner;\n\t\t\t}\t\t\n\t\t};\n\t}\n\n\t/**\n\t * Returns a {@link Runner} for this Request\n\t * @return corresponding {@link Runner} for this Request\n\t */\n\tpublic abstract Runner getRunner();\n\n\t/**\n\t * Returns a Request that only runs contains tests whose {@link Description}\n\t * equals <code>desiredDescription</code>\n\t * @param desiredDescription {@link Description} of those tests that should be run\n\t * @return the filtered Request\n\t */\n\tpublic Request filterWith(final Description desiredDescription) {\n\t\treturn Filter.matchMethodDescription(desiredDescription).filterWith2(this);\n\t}\n\n\t/**\n\t * Returns a Request whose Tests can be run in a certain order, defined by \n\t * <code>comparator</code>\n\t * \n\t * For example, here is code to run a test suite in alphabetical order:\n\t * \n\t * <pre>\n\tprivate static Comparator<Description> forward() {\n\t\treturn new Comparator<Description>() {\n\t\t\tpublic int compare(Description o1, Description o2) {\n\t\t\t\treturn o1.getDisplayName().compareTo(o2.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\t\n\tpublic static main() {\n\t\tnew JUnitCore().run(Request.aClass(AllTests.class).sortWith(forward()));\n\t}\n\t * </pre>\n\t * \n\t * @param comparator definition of the order of the tests in this Request\n\t * @return a Request with ordered Tests\n\t */\n\tpublic Request sortWith(Comparator<Description> comparator) {\n\t\treturn new SortingRequest(this, comparator);\n\t}\n\n\t/**\n\t * @param maxCore TODO\n\t * @return a new Request, which contains all of the same tests, but in a new order.\n\t */\n\tpublic Request sortRequest(MaxCore maxCore) {\n\t\tif (this instanceof SortingRequest) // We'll pay big karma points for this\n\t\t\treturn this;\n\t\tList<Description> leaves= maxCore.findLeaves(this);\n\t\tCollections.sort(leaves, maxCore.fHistory.testComparator());\n\t\treturn maxCore.constructLeafRequest(leaves);\n\t}\n}",
+                "methodCount": 12
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith",
+                            "method_signature": "public Request filterWith(final Description desiredDescription)",
+                            "target_class": "Filter",
+                            "rationale": "The filterWith method is primarily concerned with filtering based on a Description, which aligns more closely with the responsibilities of the Filter class."
+                        },
+                        {
+                            "method_name": "sortWith",
+                            "method_signature": "public Request sortWith(Comparator<Description> comparator)",
+                            "target_class": "SortingRequest",
+                            "rationale": "The sortWith method is responsible for sorting tests, which is a core functionality of the SortingRequest class. Moving it there would enhance cohesion."
+                        },
+                        {
+                            "method_name": "sortRequest",
+                            "method_signature": "public Request sortRequest(MaxCore maxCore)",
+                            "target_class": "MaxCore",
+                            "rationale": "The sortRequest method interacts with MaxCore to find and sort leaves, making it more appropriate for it to reside within the MaxCore class."
+                        }
+                    ],
+                    "llm_response_time": 2367
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith",
+                            "method_signature": "public Request filterWith(final Description desiredDescription)",
+                            "target_class": "Filter",
+                            "rationale": "The filterWith method is primarily concerned with filtering based on a Description, which aligns more closely with the responsibilities of the Filter class."
+                        },
+                        {
+                            "method_name": "sortWith",
+                            "method_signature": "public Request sortWith(Comparator<Description> comparator)",
+                            "target_class": "SortingRequest",
+                            "rationale": "The sortWith method creates a new SortingRequest, which indicates that sorting functionality should be encapsulated within the SortingRequest class."
+                        },
+                        {
+                            "method_name": "sortRequest",
+                            "method_signature": "public Request sortRequest(MaxCore maxCore)",
+                            "target_class": "MaxCore",
+                            "rationale": "The sortRequest method interacts directly with MaxCore to find and sort leaves, suggesting that it should be part of the MaxCore class to maintain cohesion."
+                        }
+                    ],
+                    "llm_response_time": 2337
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith",
+                            "method_signature": "public Request filterWith(final Description desiredDescription)",
+                            "target_class": "Filter",
+                            "rationale": "The filterWith method is primarily concerned with filtering based on a Description, which aligns more closely with the responsibilities of the Filter class."
+                        },
+                        {
+                            "method_name": "sortWith",
+                            "method_signature": "public Request sortWith(Comparator<Description> comparator)",
+                            "target_class": "SortingRequest",
+                            "rationale": "The sortWith method is responsible for sorting tests, which is a core functionality of the SortingRequest class. Moving it there would enhance cohesion."
+                        },
+                        {
+                            "method_name": "sortRequest",
+                            "method_signature": "public Request sortRequest(MaxCore maxCore)",
+                            "target_class": "MaxCore",
+                            "rationale": "The sortRequest method interacts with MaxCore to find and sort leaves, making it more appropriate for it to reside within the MaxCore class."
+                        }
+                    ],
+                    "llm_response_time": 2933
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith",
+                            "method_signature": "public Request filterWith(final Description desiredDescription)",
+                            "target_class": "Filter",
+                            "rationale": "The filterWith method is primarily concerned with filtering based on a Description, which aligns more closely with the responsibilities of the Filter class."
+                        },
+                        {
+                            "method_name": "sortWith",
+                            "method_signature": "public Request sortWith(Comparator<Description> comparator)",
+                            "target_class": "SortingRequest",
+                            "rationale": "The sortWith method is responsible for sorting tests, which is a core functionality of the SortingRequest class. Moving it there would enhance cohesion."
+                        },
+                        {
+                            "method_name": "sortRequest",
+                            "method_signature": "public Request sortRequest(MaxCore maxCore)",
+                            "target_class": "MaxCore",
+                            "rationale": "The sortRequest method interacts with MaxCore to find and sort leaves, making it more appropriate for it to reside within the MaxCore class."
+                        }
+                    ],
+                    "llm_response_time": 2498
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith",
+                            "method_signature": "public Request filterWith(final Description desiredDescription)",
+                            "target_class": "Filter",
+                            "rationale": "The filterWith method is primarily concerned with filtering based on a Description, which aligns more closely with the responsibilities of the Filter class."
+                        },
+                        {
+                            "method_name": "sortWith",
+                            "method_signature": "public Request sortWith(Comparator<Description> comparator)",
+                            "target_class": "SortingRequest",
+                            "rationale": "The sortWith method is responsible for sorting tests, which is a core functionality of the SortingRequest class. Moving it there would enhance cohesion."
+                        },
+                        {
+                            "method_name": "sortRequest",
+                            "method_signature": "public Request sortRequest(MaxCore maxCore)",
+                            "target_class": "MaxCore",
+                            "rationale": "The sortRequest method interacts with MaxCore to find and sort leaves, making it more appropriate for it to reside within the MaxCore class."
+                        }
+                    ],
+                    "llm_response_time": 2342
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.notification.RunListener::removeListener(RunListener):void need move to org.junit.runner.JUnitCore",
+        "class_name": "org.junit.runner.notification.RunListener",
+        "telemetry": {
+            "id": "39bbc24b-28e3-45e2-89b7-0051ef78c58f",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 93,
+                "lineStart": 8,
+                "lineEnd": 100,
+                "bodyLineStart": 8,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/notification/RunListener.java",
+                "sourceCode": "/**\n * <p>If you need to respond to the events during a test run, extend <code>RunListener</code>\n * and override the appropriate methods. If a listener throws an exception while processing a \n * test event, it will be removed for the remainder of the test run.</p>\n * \n * <p>For example, suppose you have a <code>Cowbell</code>\n * class that you want to make a noise whenever a test fails. You could write:\n * <pre>\n * public class RingingListener extends RunListener {\n *    public void testFailure(Failure failure) {\n *       Cowbell.ring();\n *    }\n * }\n * </pre>\n * </p>\n * \n * <p>To invoke your listener, you need to run your tests through <code>JUnitCore</code>.\n * <pre>\n * public void main(String... args) {\n *    JUnitCore core= new JUnitCore();\n *    core.addListener(new RingingListener());\n *    core.run(MyTestClass.class);\n * }\n * </pre>\n * </p>\n * @see org.junit.runner.JUnitCore\n */\npublic class RunListener {\n\n\t/**\n\t * Called before any tests have been run.\n\t * @param description describes the tests to be run\n\t */\n\tpublic void testRunStarted(Description description) throws Exception {\n\t}\n\t\n\t/**\n\t * Called when all tests have finished\n\t * @param result the summary of the test run, including all the tests that failed\n\t */\n\tpublic void testRunFinished(Result result) throws Exception {\n\t}\n\t\n\t/**\n\t * Called when an atomic test is about to be started.\n\t * @param description the description of the test that is about to be run \n\t * (generally a class and method name)\n\t */\n\tpublic void testStarted(Description description) throws Exception {\n\t}\n\n\t/**\n\t * Called when an atomic test has finished, whether the test succeeds or fails.\n\t * @param description the description of the test that just ran\n\t */\n\tpublic void testFinished(Description description) throws Exception {\n\t}\n\n\t/** \n\t * Called when an atomic test fails.\n\t * @param failure describes the test that failed and the exception that was thrown\n\t */\n\tpublic void testFailure(Failure failure) throws Exception {\n\t}\n\n\t/**\n\t * Called when an atomic test flags that it assumes a condition that is\n\t * false\n\t * \n\t * @param failure\n\t *            describes the test that failed and the\n\t *            {@link AssumptionViolatedException} that was thrown\n\t */\n\tpublic void testAssumptionFailure(Failure failure) {\n\t}\n\n\t/**\n\t * Called when a test will not be run, generally because a test method is annotated \n\t * with {@link org.junit.Ignore}.\n\t * \n\t * @param description describes the test that will not be run\n\t */\n\tpublic void testIgnored(Description description) throws Exception {\n\t}\n\n\t/**\n\t * Remove a listener.\n\t * @param jUnitCore TODO\n\t */\n\tpublic void removeListener(JUnitCore jUnitCore) {\n\t\tjUnitCore.fNotifier.removeListener(this);\n\t}\n}",
+                "methodCount": 8
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(JUnitCore jUnitCore)",
+                            "target_class": "JUnitCore",
+                            "rationale": "The removeListener method directly interacts with the JUnitCore class to remove a listener, making it more appropriate for this functionality to reside within the JUnitCore class."
+                        }
+                    ],
+                    "llm_response_time": 1253
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(JUnitCore jUnitCore)",
+                            "target_class": "JUnitCore",
+                            "rationale": "The removeListener method directly interacts with the JUnitCore instance to remove itself as a listener. It is more appropriate for this functionality to reside within the JUnitCore class, which manages listeners."
+                        }
+                    ],
+                    "llm_response_time": 1202
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(JUnitCore jUnitCore)",
+                            "target_class": "JUnitCore",
+                            "rationale": "The removeListener method directly interacts with the JUnitCore instance to remove itself as a listener. It is more appropriate for this functionality to reside within the JUnitCore class, which manages listeners."
+                        }
+                    ],
+                    "llm_response_time": 1303
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(JUnitCore jUnitCore)",
+                            "target_class": "JUnitCore",
+                            "rationale": "The removeListener method directly interacts with the JUnitCore class to remove the listener, making it more appropriate for this functionality to reside within the JUnitCore class."
+                        }
+                    ],
+                    "llm_response_time": 1650
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "removeListener",
+                            "method_signature": "public void removeListener(JUnitCore jUnitCore)",
+                            "target_class": "JUnitCore",
+                            "rationale": "The removeListener method directly interacts with the JUnitCore instance to remove itself as a listener. It would be more appropriate for this method to reside in the JUnitCore class, which manages listeners."
+                        }
+                    ],
+                    "llm_response_time": 1416
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.Description::apply(Statement, Description):Statement need move to org.junit.rules.Timeout",
+        "class_name": "org.junit.runner.Description",
+        "telemetry": {
+            "id": "b6a181a1-8874-4862-aaf6-5fd75f4f864b",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 236,
+                "lineStart": 15,
+                "lineEnd": 250,
+                "bodyLineStart": 15,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/Description.java",
+                "sourceCode": "/**\n * <p>A <code>Description</code> describes a test which is to be run or has been run. <code>Descriptions</code> \n * can be atomic (a single test) or compound (containing children tests). <code>Descriptions</code> are used\n * to provide feedback about the tests that are about to run (for example, the tree view\n * visible in many IDEs) or tests that have been run (for example, the failures view).</p>\n * \n * <p><code>Descriptions</code> are implemented as a single class rather than a Composite because\n * they are entirely informational. They contain no logic aside from counting their tests.</p>\n * \n * <p>In the past, we used the raw {@link junit.framework.TestCase}s and {@link junit.framework.TestSuite}s\n * to display the tree of tests. This was no longer viable in JUnit 4 because atomic tests no longer have \n * a superclass below {@link Object}. We needed a way to pass a class and name together. Description \n * emerged from this.</p>\n * \n * @see org.junit.runner.Request\n * @see org.junit.runner.Runner\n */\npublic class Description implements Serializable {\n\tprivate static final long serialVersionUID = 1L;\n\n\t/**\n\t * Create a <code>Description</code> named <code>name</code>.\n\t * Generally, you will add children to this <code>Description</code>.\n\t * @param name the name of the <code>Description</code> \n\t * @param annotations \n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createSuiteDescription(String name, Annotation... annotations) {\n\t\tif (name.length() == 0)\n\t\t\tthrow new IllegalArgumentException(\"name must have non-zero length\");\n\t\treturn new Description(name, annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @param annotations meta-data about the test, for downstream interpreters\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name, Annotation... annotations) {\n\t\treturn new Description(String.format(\"%s(%s)\", name, clazz.getName()), annotations);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> of a single test named <code>name</code> in the class <code>clazz</code>.\n\t * Generally, this will be a leaf <code>Description</code>.  \n\t * (This remains for binary compatibility with clients of JUnit 4.3)\n\t * @param clazz the class of the test\n\t * @param name the name of the test (a method name for test annotated with {@link org.junit.Test})\n\t * @return a <code>Description</code> named <code>name</code>\n\t */\n\tpublic static Description createTestDescription(Class<?> clazz, String name) {\n\t\treturn createTestDescription(clazz, name, new Annotation[0]);\n\t}\n\n\t/**\n\t * Create a <code>Description</code> named after <code>testClass</code>\n\t * @param testClass A {@link Class} containing tests \n\t * @return a <code>Description</code> of <code>testClass</code>\n\t */\n\tpublic static Description createSuiteDescription(Class<?> testClass) {\n\t\treturn new Description(testClass.getName(), testClass.getAnnotations());\n\t}\n\t\n\t/**\n\t * Describes a Runner which runs no tests\n\t */\n\tpublic static final Description EMPTY= new Description(\"No Tests\");\n\t\n\t/**\n\t * Describes a step in the test-running mechanism that goes so wrong no\n\t * other description can be used (for example, an exception thrown from a Runner's\n\t * constructor\n\t */\n\tpublic static final Description TEST_MECHANISM= new Description(\"Test mechanism\");\n\t\n\tprivate final ArrayList<Description> fChildren= new ArrayList<Description>();\n\tprivate final String fDisplayName;\n\t\n\tprivate final Annotation[] fAnnotations;\n\t\n\tprivate Description(final String displayName, Annotation... annotations) {\n\t\tfDisplayName= displayName;\n\t\tfAnnotations= annotations;\n\t}\n\n\t/**\n\t * @return a user-understandable label\n\t */\n\tpublic String getDisplayName() {\n\t\treturn fDisplayName;\n\t}\n\n\t/**\n\t * Add <code>Description</code> as a child of the receiver.\n\t * @param description the soon-to-be child.\n\t */\n\tpublic void addChild(Description description) {\n\t\tgetChildren().add(description);\n\t}\n\n\t/**\n\t * @return the receiver's children, if any\n\t */\n\tpublic ArrayList<Description> getChildren() {\n\t\treturn fChildren;\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is a suite\n\t */\n\tpublic boolean isSuite() {\n\t\treturn !isTest();\n\t}\n\n\t/**\n\t * @return <code>true</code> if the receiver is an atomic test\n\t */\n\tpublic boolean isTest() {\n\t\treturn getChildren().isEmpty();\n\t}\n\n\t/**\n\t * @return the total number of atomic tests in the receiver\n\t */\n\tpublic int testCount() {\n\t\tif (isTest())\n\t\t\treturn 1;\n\t\tint result= 0;\n\t\tfor (Description child : getChildren())\n\t\t\tresult+= child.testCount();\n\t\treturn result;\n\t}\n\n\t@Override\n\tpublic int hashCode() {\n\t\treturn getDisplayName().hashCode();\n\t}\n\n\t@Override\n\tpublic boolean equals(Object obj) {\n\t\tif (!(obj instanceof Description))\n\t\t\treturn false;\n\t\tDescription d = (Description) obj;\n\t\treturn getDisplayName().equals(d.getDisplayName());\n\t}\n\t\n\t@Override\n\tpublic String toString() {\n\t\treturn getDisplayName();\n\t}\n\n\t/**\n\t * @return true if this is a description of a Runner that runs no tests\n\t */\n\tpublic boolean isEmpty() {\n\t\treturn equals(EMPTY);\n\t}\n\n\t/**\n\t * @return a copy of this description, with no children (on the assumption that some of the\n\t * children will be added back)\n\t */\n\tpublic Description childlessCopy() {\n\t\treturn new Description(fDisplayName, fAnnotations);\n\t}\n\n\t/**\n\t * @return the annotation of type annotationType that is attached to this description node, \n\t * or null if none exists\n\t */\n\tpublic <T extends Annotation> T getAnnotation(Class<T> annotationType) {\n\t\tfor (Annotation each : fAnnotations)\n\t\t\tif (each.annotationType().equals(annotationType))\n\t\t\t\treturn annotationType.cast(each);\n\t\treturn null;\n\t}\n\n\t/**\n\t * @return all of the annotations attached to this description node\n\t */\n\tpublic Collection<Annotation> getAnnotations() {\n\t\treturn Arrays.asList(fAnnotations);\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the class of the test instance.\n\t */\n\tpublic Class<?> getTestClass() {\n\t\tString name= getClassName();\n\t\tif (name == null)\n\t\t\treturn null;\n\t\ttry {\n\t\t\treturn Class.forName(name);\n\t\t} catch (ClassNotFoundException e) {\n\t\t\treturn null;\n\t\t}\n\t}\n\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the class of the test instance\n\t */\n\tpublic String getClassName() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\treturn matcher.matches()\n\t\t\t? matcher.group(2)\n\t\t\t: toString();\n\t}\n\t\n\t/**\n\t * @return If this describes a method invocation, \n\t * the name of the method (or null if not)\n\t */\n\tpublic String getMethodName() {\n\t\treturn parseMethod();\n\t}\n\n\tprivate String parseMethod() {\n\t\tMatcher matcher= methodStringMatcher();\n\t\tif (matcher.matches())\n\t\t\treturn matcher.group(1);\n\t\treturn null;\n\t}\n\n\tprivate Matcher methodStringMatcher() {\n\t\treturn Pattern.compile(\"(.*)\\\\((.*)\\\\)\").matcher(toString());\n\t}\n\n\tpublic Statement apply(Statement base, Timeout timeout) {\n\t\treturn new FailOnTimeout(base, timeout.fMillis);\n\t}\n}",
+                "methodCount": 24
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "apply",
+                            "method_signature": "public Statement apply(Statement base, Timeout timeout)",
+                            "target_class": "Timeout",
+                            "rationale": "The apply method is closely related to the Timeout class, as it modifies the behavior of a Statement based on a Timeout instance. Moving it to the Timeout class would enhance cohesion and clarify the relationship between the two classes."
+                        }
+                    ],
+                    "llm_response_time": 1488
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "apply",
+                            "method_signature": "public Statement apply(Statement base, Timeout timeout)",
+                            "target_class": "Timeout",
+                            "rationale": "The apply method is closely related to the Timeout class, as it modifies the behavior of a Statement based on a Timeout. Moving it to the Timeout class would enhance cohesion and clarify the relationship between the two classes."
+                        }
+                    ],
+                    "llm_response_time": 1420
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "apply",
+                            "method_signature": "public Statement apply(Statement base, Timeout timeout)",
+                            "target_class": "Timeout",
+                            "rationale": "The apply method is responsible for applying a timeout to a statement, which is more relevant to the Timeout class. Moving it there would enhance cohesion and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1328
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "apply",
+                            "method_signature": "public Statement apply(Statement base, Timeout timeout)",
+                            "target_class": "Timeout",
+                            "rationale": "The apply method is closely related to the Timeout class, as it modifies the behavior of a Statement based on a Timeout. Moving it to the Timeout class would enhance cohesion and clarify the relationship between the two classes."
+                        }
+                    ],
+                    "llm_response_time": 1374
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "apply",
+                            "method_signature": "public Statement apply(Statement base, Timeout timeout)",
+                            "target_class": "Timeout",
+                            "rationale": "The apply method is responsible for applying a timeout to a statement, which is more relevant to the Timeout class. Moving it there would enhance cohesion and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1487
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runners.model.RunnerBuilder::runnerForClass2(Class<?>):Runner need move to org.junit.internal.builders.AnnotatedBuilder",
+        "class_name": "org.junit.runners.model.RunnerBuilder",
+        "telemetry": {
+            "id": "8896d383-52cd-45d7-8be4-0d4d864d2b7b",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 101,
+                "lineStart": 13,
+                "lineEnd": 113,
+                "bodyLineStart": 13,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runners/model/RunnerBuilder.java",
+                "sourceCode": "/**\n * A RunnerBuilder is a strategy for constructing runners for classes. \n * \n * Only writers of custom runners should use <code>RunnerBuilder</code>s.  A custom runner class with a constructor taking\n * a <code>RunnerBuilder</code> parameter will be passed the instance of <code>RunnerBuilder</code> used to build that runner itself.  \n * For example,\n * imagine a custom runner that builds suites based on a list of classes in a text file:\n * \n * <pre>\n * \\@RunWith(TextFileSuite.class)\n * \\@SuiteSpecFile(\"mysuite.txt\")\n * class MySuite {}\n * </pre>\n * \n * The implementation of TextFileSuite might include:\n * \n * <pre>\n * public TextFileSuite(Class testClass, RunnerBuilder builder) {\n *   // ...\n *   for (String className : readClassNames())\n *     addRunner(builder.runnerForClass(Class.forName(className)));\n *   // ...\n * }\n * </pre>\n * \n * @see org.junit.runners.Suite\n */\npublic abstract class RunnerBuilder {\n\tprivate final Set<Class<?>> parents= new HashSet<Class<?>>();\n\n\t/**\n\t * Override to calculate the correct runner for a test class at runtime.\n\t * \n\t * @param testClass class to be run\n\t * @return a Runner\n\t * @throws Throwable if a runner cannot be constructed\n\t */\n\tpublic abstract Runner runnerForClass(Class<?> testClass) throws Throwable;\n\n\t/**\n\t * Always returns a runner, even if it is just one that prints an error instead of running tests.\n\t * @param testClass class to be run\n\t * @return a Runner\n\t */\n\tpublic Runner safeRunnerForClass(Class<?> testClass) {\n\t\ttry {\n\t\t\treturn runnerForClass(testClass);\n\t\t} catch (Throwable e) {\n\t\t\treturn new ErrorReportingRunner(testClass, e);\n\t\t}\n\t}\n\n\tClass<?> addParent(Class<?> parent) throws InitializationError {\n\t\tif (!parents.add(parent))\n\t\t\tthrow new InitializationError(String.format(\"class '%s' (possibly indirectly) contains itself as a SuiteClass\", parent.getName()));\n\t\treturn parent;\n\t}\n\n\tvoid removeParent(Class<?> klass) {\n\t\tparents.remove(klass);\n\t}\n\n\t/**\n\t * Constructs and returns a list of Runners, one for each child class in\n\t * {@code children}.  Care is taken to avoid infinite recursion:\n\t * this builder will throw an exception if it is requested for another\n\t * runner for {@code parent} before this call completes.\n\t */\n\tpublic List<Runner> runners(Class<?> parent, Class<?>[] children)\n\t\t\tthrows InitializationError {\n\t\taddParent(parent);\n\n\t\ttry {\n\t\t\treturn runners(children);\n\t\t} finally {\n\t\t\tremoveParent(parent);\n\t\t}\n\t}\n\t\n\tpublic List<Runner> runners(Class<?> parent, List<Class<?>> children)\n\t\t\tthrows InitializationError {\n\t\treturn runners(parent, children.toArray(new Class<?>[0]));\n\t}\n\t\n\tprivate List<Runner> runners(Class<?>[] children) {\n\t\tArrayList<Runner> runners= new ArrayList<Runner>();\n\t\tfor (Class<?> each : children) {\n\t\t\tRunner childRunner= safeRunnerForClass(each);\n\t\t\tif (childRunner != null)\n\t\t\t\trunners.add(childRunner);\n\t\t}\n\t\treturn runners;\n\t}\n\n\tpublic Runner runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass) throws Exception {\n\t\tRunWith annotation= testClass.getAnnotation(RunWith.class);\n\t\tif (annotation != null)\n\t\t\treturn annotatedBuilder.buildRunner(annotation.value(), testClass);\n\t\treturn null;\n\t}\n}",
+                "methodCount": 8
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public Runner runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass) throws Exception",
+                            "target_class": "AnnotatedBuilder",
+                            "rationale": "The method runnerForClass2 is primarily concerned with building a runner based on the RunWith annotation, which is directly related to the AnnotatedBuilder. Moving this method to AnnotatedBuilder would enhance cohesion and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1764
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public Runner runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass) throws Exception",
+                            "target_class": "AnnotatedBuilder",
+                            "rationale": "The method runnerForClass2 is closely related to the functionality of the AnnotatedBuilder class, as it uses an instance of AnnotatedBuilder to build a runner based on the @RunWith annotation. Moving it to AnnotatedBuilder would enhance cohesion."
+                        }
+                    ],
+                    "llm_response_time": 1746
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public Runner runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass) throws Exception",
+                            "target_class": "AnnotatedBuilder",
+                            "rationale": "The method runnerForClass2 is primarily concerned with building a runner based on the RunWith annotation, which is directly related to the AnnotatedBuilder. Moving it to AnnotatedBuilder would enhance cohesion and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1351
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public Runner runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass) throws Exception",
+                            "target_class": "AnnotatedBuilder",
+                            "rationale": "The method runnerForClass2 is primarily concerned with building a runner based on the RunWith annotation, which is directly related to the AnnotatedBuilder. Moving it to AnnotatedBuilder would enhance cohesion and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1533
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "runnerForClass2",
+                            "method_signature": "public Runner runnerForClass2(AnnotatedBuilder annotatedBuilder, Class<?> testClass) throws Exception",
+                            "target_class": "AnnotatedBuilder",
+                            "rationale": "The method runnerForClass2 is closely related to the AnnotatedBuilder class, as it uses an instance of AnnotatedBuilder to build a runner based on the @RunWith annotation. Moving it to AnnotatedBuilder would enhance cohesion and maintainability."
+                        }
+                    ],
+                    "llm_response_time": 1806
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    },
+    {
+        "oracle": "method org.junit.runner.manipulation.Filter::filterWith2(Filter):Request need move to org.junit.runner.Request",
+        "class_name": "org.junit.runner.manipulation.Filter",
+        "telemetry": {
+            "id": "7be2a991-f379-400a-a3c2-42d1032264ed",
+            "hostFunctionTelemetryData": {
+                "hostFunctionSize": 120,
+                "lineStart": 7,
+                "lineEnd": 126,
+                "bodyLineStart": 7,
+                "language": "java",
+                "filePath": "/Users/abhiram/Documents/TBE/jmove/dataset-tse/junit/small/small/junit-4.10/org/junit/runner/manipulation/Filter.java",
+                "sourceCode": "/**\n * The canonical case of filtering is when you want to run a single test method in a class. Rather\n * than introduce runner API just for that one case, JUnit provides a general filtering mechanism.\n * If you want to filter the tests to be run, extend <code>Filter</code> and apply an instance of\n * your filter to the {@link org.junit.runner.Request} before running it (see \n * {@link org.junit.runner.JUnitCore#run(Request)}. Alternatively, apply a <code>Filter</code> to \n * a {@link org.junit.runner.Runner} before running tests (for example, in conjunction with \n * {@link org.junit.runner.RunWith}.\n */\npublic abstract class Filter {\n\t/**\n\t * A null <code>Filter</code> that passes all tests through.\n\t */\n\tpublic static Filter ALL= new Filter() {\n\t\t@Override\n\t\tpublic boolean shouldRun(Description description) {\n\t\t\treturn true;\n\t\t}\n\n\t\t@Override\n\t\tpublic String describe() {\n\t\t\treturn \"all tests\";\n\t\t}\n\t\t\n\t\t@Override\n\t\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\t\t// do nothing\n\t\t}\n\n\t\t@Override\n\t\tpublic Filter intersect(Filter second) {\n\t\t\treturn second;\n\t\t}\n\t};\n\t\n\t/**\n\t * Returns a {@code Filter} that only runs the single method described by\n\t * {@code desiredDescription}\n\t */\n\tpublic static Filter matchMethodDescription(final Description desiredDescription) {\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\tif (description.isTest())\n\t\t\t\t\treturn desiredDescription.equals(description);\n\t\t\t\t\n\t\t\t\t// explicitly check if any children want to run\n\t\t\t\tfor (Description each : description.getChildren())\n\t\t\t\t\tif (shouldRun(each))\n\t\t\t\t\t\treturn true;\n\t\t\t\treturn false;\t\t\t\t\t\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn String.format(\"Method %s\", desiredDescription.getDisplayName());\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * @param description the description of the test to be run\n\t * @return <code>true</code> if the test should be run\n\t */\n\tpublic abstract boolean shouldRun(Description description);\n\n\t/**\n\t * Returns a textual description of this Filter\n\t * @return a textual description of this Filter\n\t */\n\tpublic abstract String describe();\n\n\t/**\n\t * Invoke with a {@link org.junit.runner.Runner} to cause all tests it intends to run\n\t * to first be checked with the filter. Only those that pass the filter will be run.\n\t * @param child the runner to be filtered by the receiver\n\t * @throws NoTestsRemainException if the receiver removes all tests\n\t */\n\tpublic void apply(Object child) throws NoTestsRemainException {\n\t\tif (!(child instanceof Filterable))\n\t\t\treturn;\n\t\tFilterable filterable= (Filterable) child;\n\t\tfilterable.filter(this);\n\t}\n\n\t/**\n\t * Returns a new Filter that accepts the intersection of the tests accepted\n\t * by this Filter and {@code second}\n\t */\n\tpublic Filter intersect(final Filter second) {\n\t\tif (second == this || second == ALL) {\n\t\t\treturn this;\n\t\t}\n\t\tfinal Filter first= this;\n\t\treturn new Filter() {\n\t\t\t@Override\n\t\t\tpublic boolean shouldRun(Description description) {\n\t\t\t\treturn first.shouldRun(description)\n\t\t\t\t\t\t&& second.shouldRun(description);\n\t\t\t}\n\n\t\t\t@Override\n\t\t\tpublic String describe() {\n\t\t\t\treturn first.describe() + \" and \" + second.describe();\n\t\t\t}\n\t\t};\n\t}\n\n\n\t/**\n\t * Returns a Request that only contains those tests that should run when\n\t * <code>filter</code> is applied\n\t * @param request TODO\n\t * @return the filtered Request\n\t */\n\tpublic Request filterWith2(Request request) {\n\t\treturn new FilterRequest(request, this);\n\t}\n}",
+                "methodCount": 14
+            },
+            "candidatesTelemetryData": {
+                "numberOfSuggestions": 0,
+                "candidates": []
+            },
+            "iterationData": [
+                {
+                    "iteration_num": 1,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith2",
+                            "method_signature": "public Request filterWith2(Request request)",
+                            "target_class": "Request",
+                            "rationale": "The filterWith2 method is responsible for creating a filtered Request based on the current Filter. It would be more appropriate for this method to reside in the Request class, as it directly manipulates Request objects."
+                        }
+                    ],
+                    "llm_response_time": 1770
+                },
+                {
+                    "iteration_num": 2,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith2",
+                            "method_signature": "public Request filterWith2(Request request)",
+                            "target_class": "Request",
+                            "rationale": "The filterWith2 method is responsible for creating a filtered Request based on the current Filter. It would be more appropriate for this method to reside in the Request class, as it directly manipulates Request objects."
+                        }
+                    ],
+                    "llm_response_time": 1223
+                },
+                {
+                    "iteration_num": 3,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith2",
+                            "method_signature": "public Request filterWith2(Request request)",
+                            "target_class": "Request",
+                            "rationale": "The filterWith2 method is responsible for creating a filtered Request based on the current Filter. It would be more appropriate for this method to reside in the Request class, as it directly manipulates Request objects."
+                        }
+                    ],
+                    "llm_response_time": 1430
+                },
+                {
+                    "iteration_num": 4,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith2",
+                            "method_signature": "public Request filterWith2(Request request)",
+                            "target_class": "Request",
+                            "rationale": "The filterWith2 method is responsible for creating a filtered Request based on the current Filter. It would be more appropriate for this method to reside in the Request class, as it directly manipulates Request objects."
+                        }
+                    ],
+                    "llm_response_time": 1232
+                },
+                {
+                    "iteration_num": 5,
+                    "suggested_move_methods": [
+                        {
+                            "method_name": "filterWith2",
+                            "method_signature": "public Request filterWith2(Request request)",
+                            "target_class": "Request",
+                            "rationale": "The filterWith2 method is responsible for creating a filtered Request based on the current Filter. It would be more appropriate for this method to reside in the Request class, as it directly manipulates Request objects."
+                        }
+                    ],
+                    "llm_response_time": 1263
+                }
+            ],
+            "methodCompatibilityScores": {},
+            "llmMethodPriority": {},
+            "targetClassMap": {},
+            "llmTemperature": 0.0
+        }
+    }
+]
