@@ -1,0 +1,808 @@
+{
+
+  "607": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-47-58\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 204.427476\nSubprocess output: Parent path as string: output_2025-03-06_08-47-58\nFile created successfully: output_2025-03-06_08-47-58\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-47-58\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-47-58\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n101\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 2486 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 316.50858664512634,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 2486,
+        "method_name": "testCleanupExpiredOffsetsGroupDoesNotExist",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-53-15\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 164.207192\nSubprocess output: Parent path as string: output_2025-03-06_08-53-15\nFile created successfully: output_2025-03-06_08-53-15\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-53-15\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-53-15\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n102\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.10234054207103327\nfinal_result: False\nThe method starting at line 2498 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.10234054207103327,
+      "final_decision": false,
+      "execution_time": 277.5862395763397,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 2498,
+        "method_name": "testCleanupExpiredOffsetsEmptyOffsetExpirationCondition",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-57-53\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 170.975146\nSubprocess output: Parent path as string: output_2025-03-06_08-57-53\nFile created successfully: output_2025-03-06_08-57-53\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-57-53\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_08-57-53\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n68\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.2892482653260231\nfinal_result: False\nThe method starting at line 2498 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.2892482653260231,
+      "final_decision": false,
+      "execution_time": 250.91137146949768,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 2498,
+        "method_name": "testCleanupExpiredOffsetsEmptyOffsetExpirationCondition",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-02-04\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 170.754876\nSubprocess output: Parent path as string: output_2025-03-06_09-02-04\nFile created successfully: output_2025-03-06_09-02-04\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-02-04\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-02-04\\source\\SnapshotRegistry.java\n... collecting  relations ...\n77\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.3115974323009141\nfinal_result: False\nThe method starting at line 2498 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.3115974323009141,
+      "final_decision": false,
+      "execution_time": 259.3858292102814,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 2498,
+        "method_name": "testCleanupExpiredOffsetsEmptyOffsetExpirationCondition",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-06-23\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 173.693609\nSubprocess output: Parent path as string: output_2025-03-06_09-06-23\nFile created successfully: output_2025-03-06_09-06-23\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-06-23\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-06-23\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n100\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 2498 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 285.53713393211365,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 2498,
+        "method_name": "testCleanupExpiredOffsetsEmptyOffsetExpirationCondition",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-11-10\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 384.527352\nSubprocess output: Parent path as string: output_2025-03-06_09-11-10\nFile created successfully: output_2025-03-06_09-11-10\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-11-10\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-11-10\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n558\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 2498 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 955.1476612091064,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 2498,
+        "method_name": "testCleanupExpiredOffsetsEmptyOffsetExpirationCondition",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-27-04\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 197.286919\nSubprocess output: Parent path as string: output_2025-03-06_09-27-04\nFile created successfully: output_2025-03-06_09-27-04\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-27-04\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-27-04\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n103\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 2498 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 312.14631509780884,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 2498,
+        "method_name": "testCleanupExpiredOffsetsEmptyOffsetExpirationCondition",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-32-16\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 164.911401\nSubprocess output: Parent path as string: output_2025-03-06_09-32-16\nFile created successfully: output_2025-03-06_09-32-16\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-32-16\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-32-16\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n75\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11783186346292496\nfinal_result: False\nThe method starting at line 2517 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11783186346292496,
+      "final_decision": false,
+      "execution_time": 251.1918888092041,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 2517,
+        "method_name": "testCleanupExpiredOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-36-27\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 167.488685\nSubprocess output: Parent path as string: output_2025-03-06_09-36-27\nFile created successfully: output_2025-03-06_09-36-27\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-36-27\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-36-27\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n87\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.29697615653276443\nfinal_result: False\nThe method starting at line 2517 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.29697615653276443,
+      "final_decision": false,
+      "execution_time": 265.9106466770172,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 2517,
+        "method_name": "testCleanupExpiredOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-40-53\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 167.302877\nSubprocess output: Parent path as string: output_2025-03-06_09-40-53\nFile created successfully: output_2025-03-06_09-40-53\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-40-53\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-40-53\\source\\SnapshotRegistry.java\n... collecting  relations ...\n76\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.3201771960448241\nfinal_result: False\nThe method starting at line 2517 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.3201771960448241,
+      "final_decision": false,
+      "execution_time": 255.0790069103241,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 2517,
+        "method_name": "testCleanupExpiredOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-45-09\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 175.942548\nSubprocess output: Parent path as string: output_2025-03-06_09-45-09\nFile created successfully: output_2025-03-06_09-45-09\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-45-09\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-45-09\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n77\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 2517 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 264.68294382095337,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 2517,
+        "method_name": "testCleanupExpiredOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-49-34\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 398.995752\nSubprocess output: Parent path as string: output_2025-03-06_09-49-34\nFile created successfully: output_2025-03-06_09-49-34\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-49-34\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_09-49-34\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n627\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 2517 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 1037.6546409130096,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 2517,
+        "method_name": "testCleanupExpiredOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-06-51\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 200.254932\nSubprocess output: Parent path as string: output_2025-03-06_10-06-51\nFile created successfully: output_2025-03-06_10-06-51\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-06-51\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-06-51\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n128\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 2517 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 339.73291754722595,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 2517,
+        "method_name": "testCleanupExpiredOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-12-31\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 159.333449\nSubprocess output: Parent path as string: output_2025-03-06_10-12-31\nFile created successfully: output_2025-03-06_10-12-31\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-12-31\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-12-31\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n74\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.1173819400719367\nfinal_result: False\nThe method starting at line 2578 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.1173819400719367,
+      "final_decision": false,
+      "execution_time": 244.71380257606506,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 2578,
+        "method_name": "testCleanupExpiredOffsetsWithPendingTransactionalOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-16-36\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 160.317884\nSubprocess output: Parent path as string: output_2025-03-06_10-16-36\nFile created successfully: output_2025-03-06_10-16-36\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-16-36\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-16-36\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n67\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.2938695065677166\nfinal_result: False\nThe method starting at line 2578 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.2938695065677166,
+      "final_decision": false,
+      "execution_time": 238.58835077285767,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 2578,
+        "method_name": "testCleanupExpiredOffsetsWithPendingTransactionalOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-20-34\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 163.395731\nSubprocess output: Parent path as string: output_2025-03-06_10-20-34\nFile created successfully: output_2025-03-06_10-20-34\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-20-34\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-20-34\\source\\SnapshotRegistry.java\n... collecting  relations ...\n79\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.31676343041908694\nfinal_result: False\nThe method starting at line 2578 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.31676343041908694,
+      "final_decision": false,
+      "execution_time": 253.12173104286194,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 2578,
+        "method_name": "testCleanupExpiredOffsetsWithPendingTransactionalOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-24-48\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 178.448742\nSubprocess output: Parent path as string: output_2025-03-06_10-24-48\nFile created successfully: output_2025-03-06_10-24-48\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-24-48\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-24-48\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n76\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 2578 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 265.8734493255615,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 2578,
+        "method_name": "testCleanupExpiredOffsetsWithPendingTransactionalOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-29-14\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 394.996657\nSubprocess output: Parent path as string: output_2025-03-06_10-29-14\nFile created successfully: output_2025-03-06_10-29-14\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-29-14\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-29-14\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n601\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 2578 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 1007.7108588218689,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 2578,
+        "method_name": "testCleanupExpiredOffsetsWithPendingTransactionalOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-46-02\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 198.396618\nSubprocess output: Parent path as string: output_2025-03-06_10-46-02\nFile created successfully: output_2025-03-06_10-46-02\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-46-02\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-46-02\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n102\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 2578 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 311.8636636734009,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 2578,
+        "method_name": "testCleanupExpiredOffsetsWithPendingTransactionalOffsets",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-51-14\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 158.270419\nSubprocess output: Parent path as string: output_2025-03-06_10-51-14\nFile created successfully: output_2025-03-06_10-51-14\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-51-14\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-51-14\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n85\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.13397668302059174\nfinal_result: False\nThe method starting at line 2605 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.13397668302059174,
+      "final_decision": false,
+      "execution_time": 254.41025829315186,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 2605,
+        "method_name": "mkOffsetPartitionResponse",
+        "return_type": "OffsetFetchResponseData.OffsetFetchResponsePartitions"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-55-28\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 158.520822\nSubprocess output: Parent path as string: output_2025-03-06_10-55-28\nFile created successfully: output_2025-03-06_10-55-28\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-55-28\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-55-28\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n68\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9844897985458374\nfinal_result: True\nWe recommend to move the method starting at line 2605 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9844897985458374,
+      "final_decision": true,
+      "execution_time": 237.37738037109375,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 2605,
+        "method_name": "mkOffsetPartitionResponse",
+        "return_type": "OffsetFetchResponseData.OffsetFetchResponsePartitions"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-59-25\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 161.645153\nSubprocess output: Parent path as string: output_2025-03-06_10-59-25\nFile created successfully: output_2025-03-06_10-59-25\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-59-25\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_10-59-25\\source\\SnapshotRegistry.java\n... collecting  relations ...\n76\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6597061641514301\nfinal_result: True\nWe recommend to move the method starting at line 2605 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6597061641514301,
+      "final_decision": true,
+      "execution_time": 248.53764128684998,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 2605,
+        "method_name": "mkOffsetPartitionResponse",
+        "return_type": "OffsetFetchResponseData.OffsetFetchResponsePartitions"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-03-34\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 166.364478\nSubprocess output: Parent path as string: output_2025-03-06_11-03-34\nFile created successfully: output_2025-03-06_11-03-34\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-03-34\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-03-34\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n77\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 2605 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 254.26205563545227,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 2605,
+        "method_name": "mkOffsetPartitionResponse",
+        "return_type": "OffsetFetchResponseData.OffsetFetchResponsePartitions"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-07-49\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 379.339319\nSubprocess output: Parent path as string: output_2025-03-06_11-07-49\nFile created successfully: output_2025-03-06_11-07-49\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-07-49\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-07-49\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n620\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 2605 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 1011.7557153701782,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 2605,
+        "method_name": "mkOffsetPartitionResponse",
+        "return_type": "OffsetFetchResponseData.OffsetFetchResponsePartitions"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-24-41\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 199.490967\nSubprocess output: Parent path as string: output_2025-03-06_11-24-41\nFile created successfully: output_2025-03-06_11-24-41\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-24-41\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-24-41\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n130\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 2605 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 340.86677646636963,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 2605,
+        "method_name": "mkOffsetPartitionResponse",
+        "return_type": "OffsetFetchResponseData.OffsetFetchResponsePartitions"
+      }
+    }
+  ],
+  "608": [
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-30-22\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 177.896561\nSubprocess output: Parent path as string: output_2025-03-06_11-30-22\nFile created successfully: output_2025-03-06_11-30-22\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-30-22\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-30-22\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n83\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.399135947227478\nfinal_result: False\nThe method starting at line 520 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.399135947227478,
+      "final_decision": false,
+      "execution_time": 272.4027373790741,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 520,
+        "method_name": "idempotentCreateSnapshot",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-34-54\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 169.942069\nSubprocess output: Parent path as string: output_2025-03-06_11-34-54\nFile created successfully: output_2025-03-06_11-34-54\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-34-54\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-34-54\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n68\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9964132905006409\nfinal_result: True\nWe recommend to move the method starting at line 520 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9964132905006409,
+      "final_decision": true,
+      "execution_time": 249.28532314300537,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 520,
+        "method_name": "idempotentCreateSnapshot",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-39-04\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 173.240582\nSubprocess output: Parent path as string: output_2025-03-06_11-39-04\nFile created successfully: output_2025-03-06_11-39-04\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-39-04\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-39-04\\source\\SnapshotRegistry.java\n... collecting  relations ...\n97\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.3833191702142358\nfinal_result: False\nThe method starting at line 520 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.3833191702142358,
+      "final_decision": false,
+      "execution_time": 281.5008990764618,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 520,
+        "method_name": "idempotentCreateSnapshot",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-43-45\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 169.473552\nSubprocess output: Parent path as string: output_2025-03-06_11-43-45\nFile created successfully: output_2025-03-06_11-43-45\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-43-45\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-43-45\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n77\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 520 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 257.44517183303833,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 520,
+        "method_name": "idempotentCreateSnapshot",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-48-03\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 383.370495\nSubprocess output: Parent path as string: output_2025-03-06_11-48-03\nFile created successfully: output_2025-03-06_11-48-03\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-48-03\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_11-48-03\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n540\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 520 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 935.5555477142334,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 520,
+        "method_name": "idempotentCreateSnapshot",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-03-38\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 196.850050\nSubprocess output: Parent path as string: output_2025-03-06_12-03-38\nFile created successfully: output_2025-03-06_12-03-38\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-03-38\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-03-38\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n102\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 520 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 310.0476484298706,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 520,
+        "method_name": "idempotentCreateSnapshot",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-08-48\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 158.926215\nSubprocess output: Parent path as string: output_2025-03-06_12-08-48\nFile created successfully: output_2025-03-06_12-08-48\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-08-48\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-08-48\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n97\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.2502741813659668\nfinal_result: False\nThe method starting at line 108 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.2502741813659668,
+      "final_decision": false,
+      "execution_time": 266.92859864234924,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 108,
+        "method_name": "withOffsetMetadataMaxSize",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-13-15\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 159.693154\nSubprocess output: Parent path as string: output_2025-03-06_12-13-15\nFile created successfully: output_2025-03-06_12-13-15\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-13-15\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-13-15\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n66\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9922778606414795\nfinal_result: True\nWe recommend to move the method starting at line 108 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9922778606414795,
+      "final_decision": true,
+      "execution_time": 237.42857336997986,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 108,
+        "method_name": "withOffsetMetadataMaxSize",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-17-13\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 163.676610\nSubprocess output: Parent path as string: output_2025-03-06_12-17-13\nFile created successfully: output_2025-03-06_12-17-13\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-17-13\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-17-13\\source\\SnapshotRegistry.java\n... collecting  relations ...\n76\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.13296027667820454\nfinal_result: False\nThe method starting at line 108 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.13296027667820454,
+      "final_decision": false,
+      "execution_time": 250.38946175575256,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 108,
+        "method_name": "withOffsetMetadataMaxSize",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-21-23\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 169.318010\nSubprocess output: Parent path as string: output_2025-03-06_12-21-23\nFile created successfully: output_2025-03-06_12-21-23\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-21-23\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-21-23\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n85\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 108 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 265.20841574668884,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 108,
+        "method_name": "withOffsetMetadataMaxSize",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-25-49\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 384.777035\nSubprocess output: Parent path as string: output_2025-03-06_12-25-49\nFile created successfully: output_2025-03-06_12-25-49\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-25-49\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-25-49\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n532\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 108 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 929.2865726947784,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 108,
+        "method_name": "withOffsetMetadataMaxSize",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-41-18\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 200.849570\nSubprocess output: Parent path as string: output_2025-03-06_12-41-18\nFile created successfully: output_2025-03-06_12-41-18\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-41-18\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-41-18\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n101\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 108 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 313.51745772361755,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 108,
+        "method_name": "withOffsetMetadataMaxSize",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-46-32\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 160.083400\nSubprocess output: Parent path as string: output_2025-03-06_12-46-32\nFile created successfully: output_2025-03-06_12-46-32\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-46-32\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-46-32\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n74\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.446515716612339\nfinal_result: False\nThe method starting at line 113 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.446515716612339,
+      "final_decision": false,
+      "execution_time": 245.51797795295715,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 113,
+        "method_name": "withOffsetsRetentionMinutes",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-50-37\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 166.145674\nSubprocess output: Parent path as string: output_2025-03-06_12-50-37\nFile created successfully: output_2025-03-06_12-50-37\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-50-37\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-50-37\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n67\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6599215269088745\nfinal_result: True\nWe recommend to move the method starting at line 113 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6599215269088745,
+      "final_decision": true,
+      "execution_time": 244.19054579734802,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 113,
+        "method_name": "withOffsetsRetentionMinutes",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-54-42\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 162.333295\nSubprocess output: Parent path as string: output_2025-03-06_12-54-42\nFile created successfully: output_2025-03-06_12-54-42\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-54-42\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-54-42\\source\\SnapshotRegistry.java\n... collecting  relations ...\n97\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.20230143854860216\nfinal_result: False\nThe method starting at line 113 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.20230143854860216,
+      "final_decision": false,
+      "execution_time": 270.9402093887329,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 113,
+        "method_name": "withOffsetsRetentionMinutes",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-59-13\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 168.411001\nSubprocess output: Parent path as string: output_2025-03-06_12-59-13\nFile created successfully: output_2025-03-06_12-59-13\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-59-13\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_12-59-13\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n76\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 113 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 256.06455516815186,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 113,
+        "method_name": "withOffsetsRetentionMinutes",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-03-29\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 381.793931\nSubprocess output: Parent path as string: output_2025-03-06_13-03-29\nFile created successfully: output_2025-03-06_13-03-29\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-03-29\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-03-29\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n627\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 113 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 1020.6297347545624,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 113,
+        "method_name": "withOffsetsRetentionMinutes",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-20-30\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 200.178380\nSubprocess output: Parent path as string: output_2025-03-06_13-20-30\nFile created successfully: output_2025-03-06_13-20-30\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-20-30\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-20-30\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n103\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 113 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 314.6452133655548,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 113,
+        "method_name": "withOffsetsRetentionMinutes",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-25-44\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 159.582618\nSubprocess output: Parent path as string: output_2025-03-06_13-25-44\nFile created successfully: output_2025-03-06_13-25-44\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-25-44\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-25-44\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n74\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.1630440540611744\nfinal_result: False\nThe method starting at line 118 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.1630440540611744,
+      "final_decision": false,
+      "execution_time": 244.99033403396606,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 118,
+        "method_name": "withGroupMetadataManager",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-29-50\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 162.114768\nSubprocess output: Parent path as string: output_2025-03-06_13-29-50\nFile created successfully: output_2025-03-06_13-29-50\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-29-50\\source\\MockCoordinatorTimer.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-29-50\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n67\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.7932441234588623\nfinal_result: True\nWe recommend to move the method starting at line 118 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.7932441234588623,
+      "final_decision": true,
+      "execution_time": 240.26166796684265,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\MockCoordinatorTimer.java",
+        "start_line": 118,
+        "method_name": "withGroupMetadataManager",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-33-50\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 163.957650\nSubprocess output: Parent path as string: output_2025-03-06_13-33-50\nFile created successfully: output_2025-03-06_13-33-50\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-33-50\\source\\OffsetMetadataManagerTest.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-33-50\\source\\SnapshotRegistry.java\n... collecting  relations ...\n76\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.39881825796328485\nfinal_result: False\nThe method starting at line 118 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.39881825796328485,
+      "final_decision": false,
+      "execution_time": 250.93575310707092,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\server-common\\src\\main\\java\\org\\apache\\kafka\\timeline\\SnapshotRegistry.java",
+        "start_line": 118,
+        "method_name": "withGroupMetadataManager",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-38-01\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 169.318215\nSubprocess output: Parent path as string: output_2025-03-06_13-38-01\nFile created successfully: output_2025-03-06_13-38-01\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-38-01\\source\\GroupCoordinatorMetricsShard.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-38-01\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n99\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11340608611014975\nfinal_result: False\nThe method starting at line 118 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11340608611014975,
+      "final_decision": false,
+      "execution_time": 279.0574400424957,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\metrics\\GroupCoordinatorMetricsShard.java",
+        "start_line": 118,
+        "method_name": "withGroupMetadataManager",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-42-41\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 386.121053\nSubprocess output: Parent path as string: output_2025-03-06_13-42-41\nFile created successfully: output_2025-03-06_13-42-41\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-42-41\\source\\GroupMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-42-41\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n558\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5241530047586638\nfinal_result: True\nWe recommend to move the method starting at line 118 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5241530047586638,
+      "final_decision": true,
+      "execution_time": 956.577029466629,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\GroupMetadataManager.java",
+        "start_line": 118,
+        "method_name": "withGroupMetadataManager",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-58-37\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 197.412191\nSubprocess output: Parent path as string: output_2025-03-06_13-58-37\nFile created successfully: output_2025-03-06_13-58-37\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-58-37\\source\\OffsetMetadataManager.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_13-58-37\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n101\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6336826881597935\nfinal_result: True\nWe recommend to move the method starting at line 118 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6336826881597935,
+      "final_decision": true,
+      "execution_time": 310.2441473007202,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\main\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManager.java",
+        "start_line": 118,
+        "method_name": "withGroupMetadataManager",
+        "return_type": "Builder"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_14-03-47\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 160.958363\nSubprocess output: Parent path as string: output_2025-03-06_14-03-47\nFile created successfully: output_2025-03-06_14-03-47\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_14-03-47\\source\\MockTime.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-06_14-03-47\\source\\OffsetMetadataManagerTest.java\n... collecting  relations ...\n75\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.1338928701244413\nfinal_result: False\nThe method starting at line 123 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.1338928701244413,
+      "final_decision": false,
+      "execution_time": 246.65653085708618,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\group-coordinator\\src\\test\\java\\org\\apache\\kafka\\coordinator\\group\\OffsetMetadataManagerTest.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\kafka\\clients\\src\\test\\java\\org\\apache\\kafka\\common\\utils\\MockTime.java",
+        "start_line": 123,
+        "method_name": "build",
+        "return_type": "OffsetMetadataManagerTestContext"
+      }
+    }
+  ]
+
+}

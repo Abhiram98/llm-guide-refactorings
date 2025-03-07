@@ -10,9 +10,14 @@ from collections import defaultdict
 def compute_recall(oracle: rw_oracle.RealWorldInstanceOraclePoint, hmove_output) -> hmove_acc.HMoveRecall:
     recall = hmove_acc.HMoveRecall(recall_m_index=-1, recall_c_index=-1, recall_mc_index=-1)
 
-    valid_suggestions = [i for i in hmove_output if
-                         i['probability'] is not None
-                         and i['probability'] > 0.5
+    succesful_execution = [i for i in hmove_output if
+                         i['probability'] is not None]
+
+    if len(succesful_execution) < len(hmove_output) or len(succesful_execution)==0:
+        raise Exception(f"HMove did not succesfully run on this data point: {oracle.ref_id}")
+
+    valid_suggestions = [i for i in succesful_execution if
+                         i['probability'] > 0.5
                          ]
     hmove_recommendations_sorted = sorted(valid_suggestions, key=lambda x: x['probability'])
 
@@ -127,7 +132,10 @@ def compute():
         assert len(oracle_matches) == 1
         oracle = oracle_matches[0]
 
-        recalls[ref_id_int] = compute_recall(oracle, hmove_output_data[ref_id])
+        try:
+            recalls[ref_id_int] = compute_recall(oracle, hmove_output_data[ref_id])
+        except:
+            print(f"HMove failed to execute on {ref_id_int}")
 
         # compute recall.
 

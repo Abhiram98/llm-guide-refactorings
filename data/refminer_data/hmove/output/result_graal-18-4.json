@@ -1,0 +1,808 @@
+{
+  
+  "495": [
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-43-48\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.234542\nSubprocess output: Parent path as string: output_2025-03-05_19-43-48\nFile created successfully: output_2025-03-05_19-43-48\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-43-48\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-43-48\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5606389045715332\nfinal_result: True\nWe recommend to move the method starting at line 313 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5606389045715332,
+      "final_decision": true,
+      "execution_time": 30.703440189361572,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 313,
+        "method_name": "node",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-44-19\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 23.593998\nSubprocess output: Parent path as string: output_2025-03-05_19-44-19\nFile created successfully: output_2025-03-05_19-44-19\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-44-19\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-44-19\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 313 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 40.53284168243408,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 313,
+        "method_name": "node",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-44-59\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.578287\nSubprocess output: Parent path as string: output_2025-03-05_19-44-59\nFile created successfully: output_2025-03-05_19-44-59\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-44-59\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-44-59\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9583790898323059\nfinal_result: True\nWe recommend to move the method starting at line 318 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9583790898323059,
+      "final_decision": true,
+      "execution_time": 30.87531542778015,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 318,
+        "method_name": "nodeClass",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-45-30\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 24.297006\nSubprocess output: Parent path as string: output_2025-03-05_19-45-30\nFile created successfully: output_2025-03-05_19-45-30\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-45-30\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-45-30\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 318 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 41.30103802680969,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 318,
+        "method_name": "nodeClass",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-46-12\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.375168\nSubprocess output: Parent path as string: output_2025-03-05_19-46-12\nFile created successfully: output_2025-03-05_19-46-12\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-46-12\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-46-12\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.8829687833786011\nfinal_result: True\nWe recommend to move the method starting at line 323 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.8829687833786011,
+      "final_decision": true,
+      "execution_time": 30.812846899032593,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 323,
+        "method_name": "classForNode",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-46-43\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 23.187763\nSubprocess output: Parent path as string: output_2025-03-05_19-46-43\nFile created successfully: output_2025-03-05_19-46-43\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-46-43\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-46-43\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 323 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 40.143672466278076,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 323,
+        "method_name": "classForNode",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-47-23\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.390499\nSubprocess output: Parent path as string: output_2025-03-05_19-47-23\nFile created successfully: output_2025-03-05_19-47-23\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-47-23\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-47-23\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9580310583114624\nfinal_result: True\nWe recommend to move the method starting at line 328 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9580310583114624,
+      "final_decision": true,
+      "execution_time": 30.859720945358276,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 328,
+        "method_name": "nameTemplate",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-47-54\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 24.015893\nSubprocess output: Parent path as string: output_2025-03-05_19-47-54\nFile created successfully: output_2025-03-05_19-47-54\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-47-54\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-47-54\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 328 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 40.86333632469177,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 328,
+        "method_name": "nameTemplate",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-48-35\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.890816\nSubprocess output: Parent path as string: output_2025-03-05_19-48-35\nFile created successfully: output_2025-03-05_19-48-35\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-48-35\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-48-35\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9946046471595764\nfinal_result: True\nWe recommend to move the method starting at line 333 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9946046471595764,
+      "final_decision": true,
+      "execution_time": 31.159006118774414,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 333,
+        "method_name": "nodeClassType",
+        "return_type": "Object"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-49-07\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 23.312697\nSubprocess output: Parent path as string: output_2025-03-05_19-49-07\nFile created successfully: output_2025-03-05_19-49-07\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-49-07\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-49-07\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 333 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 40.005117416381836,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 333,
+        "method_name": "nodeClassType",
+        "return_type": "Object"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-49-47\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.234545\nSubprocess output: Parent path as string: output_2025-03-05_19-49-47\nFile created successfully: output_2025-03-05_19-49-47\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-49-47\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-49-47\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9523295164108276\nfinal_result: True\nWe recommend to move the method starting at line 338 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9523295164108276,
+      "final_decision": true,
+      "execution_time": 30.68782663345337,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 338,
+        "method_name": "portInputs",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-50-18\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 24.187671\nSubprocess output: Parent path as string: output_2025-03-05_19-50-18\nFile created successfully: output_2025-03-05_19-50-18\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-50-18\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-50-18\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 338 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 41.77194786071777,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 338,
+        "method_name": "portInputs",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-51-00\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.531421\nSubprocess output: Parent path as string: output_2025-03-05_19-51-00\nFile created successfully: output_2025-03-05_19-51-00\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-51-00\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-51-00\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.7966065406799316\nfinal_result: True\nWe recommend to move the method starting at line 343 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.7966065406799316,
+      "final_decision": true,
+      "execution_time": 30.975398778915405,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 343,
+        "method_name": "portOutputs",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-51-31\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 24.390892\nSubprocess output: Parent path as string: output_2025-03-05_19-51-31\nFile created successfully: output_2025-03-05_19-51-31\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-51-31\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-51-31\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 343 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 41.17041826248169,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 343,
+        "method_name": "portOutputs",
+        "return_type": "Void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-52-12\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.843879\nSubprocess output: Parent path as string: output_2025-03-05_19-52-12\nFile created successfully: output_2025-03-05_19-52-12\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-52-12\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-52-12\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9683709144592285\nfinal_result: True\nWe recommend to move the method starting at line 348 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9683709144592285,
+      "final_decision": true,
+      "execution_time": 31.079742193222046,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 348,
+        "method_name": "portSize",
+        "return_type": "int"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-52-44\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 24.734544\nSubprocess output: Parent path as string: output_2025-03-05_19-52-44\nFile created successfully: output_2025-03-05_19-52-44\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-52-44\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-52-44\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 348 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 41.84187054634094,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 348,
+        "method_name": "portSize",
+        "return_type": "int"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-53-26\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.234550\nSubprocess output: Parent path as string: output_2025-03-05_19-53-26\nFile created successfully: output_2025-03-05_19-53-26\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-53-26\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-53-26\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.3407018780708313\nfinal_result: False\nThe method starting at line 353 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.3407018780708313,
+      "final_decision": false,
+      "execution_time": 31.29849600791931,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 353,
+        "method_name": "edgeDirect",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-53-57\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 23.750212\nSubprocess output: Parent path as string: output_2025-03-05_19-53-57\nFile created successfully: output_2025-03-05_19-53-57\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-53-57\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-53-57\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 353 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 40.75551104545593,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 353,
+        "method_name": "edgeDirect",
+        "return_type": "boolean"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-54-38\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.609554\nSubprocess output: Parent path as string: output_2025-03-05_19-54-38\nFile created successfully: output_2025-03-05_19-54-38\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-54-38\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-54-38\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9554755091667175\nfinal_result: True\nWe recommend to move the method starting at line 358 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9554755091667175,
+      "final_decision": true,
+      "execution_time": 31.02681255340576,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 358,
+        "method_name": "edgeName",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-55-09\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 23.797113\nSubprocess output: Parent path as string: output_2025-03-05_19-55-09\nFile created successfully: output_2025-03-05_19-55-09\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-55-09\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-55-09\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 358 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 41.01684260368347,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 358,
+        "method_name": "edgeName",
+        "return_type": "String"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-55-51\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.812659\nSubprocess output: Parent path as string: output_2025-03-05_19-55-51\nFile created successfully: output_2025-03-05_19-55-51\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-55-51\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-55-51\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9588220119476318\nfinal_result: True\nWe recommend to move the method starting at line 363 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9588220119476318,
+      "final_decision": true,
+      "execution_time": 31.734710931777954,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 363,
+        "method_name": "edgeType",
+        "return_type": "Object"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-56-22\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 24.281502\nSubprocess output: Parent path as string: output_2025-03-05_19-56-22\nFile created successfully: output_2025-03-05_19-56-22\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-56-22\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-56-22\\source\\JsonBuilder.java\n... collecting  relations ...\n6\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 363 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 41.15690732002258,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 363,
+        "method_name": "edgeType",
+        "return_type": "Object"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-57-04\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 16.703295\nSubprocess output: Parent path as string: output_2025-03-05_19-57-04\nFile created successfully: output_2025-03-05_19-57-04\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-57-04\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-57-04\\source\\JsonWriter.java\n... collecting  relations ...\n3\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.6422919631004333\nfinal_result: True\nWe recommend to move the method starting at line 368 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.6422919631004333,
+      "final_decision": true,
+      "execution_time": 31.03271508216858,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonWriter.java",
+        "start_line": 368,
+        "method_name": "edgeNodes",
+        "return_type": "Collection<? extends Void>"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-57-35\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 24.328309\nSubprocess output: Parent path as string: output_2025-03-05_19-57-35\nFile created successfully: output_2025-03-05_19-57-35\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-57-35\\source\\DashboardDumpFeature.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-57-35\\source\\JsonBuilder.java\n... collecting  relations ...\n7\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.5318570765666664\nfinal_result: True\nWe recommend to move the method starting at line 368 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.5318570765666664,
+      "final_decision": true,
+      "execution_time": 42.90205192565918,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\dashboard\\DashboardDumpFeature.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\compiler\\src\\jdk.graal.compiler\\src\\jdk\\graal\\compiler\\util\\json\\JsonBuilder.java",
+        "start_line": 368,
+        "method_name": "edgeNodes",
+        "return_type": "Collection<? extends Void>"
+      }
+    }
+  ],
+  "497": [
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-58-19\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 59.922509\nSubprocess output: Parent path as string: output_2025-03-05_19-58-19\nFile created successfully: output_2025-03-05_19-58-19\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-58-19\\source\\AnalysisMetaAccess.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-58-19\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9849029183387756\nfinal_result: True\nWe recommend to move the method starting at line 260 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9849029183387756,
+      "final_decision": true,
+      "execution_time": 92.56902933120728,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisMetaAccess.java",
+        "start_line": 260,
+        "method_name": "registerAsUnsafeAllocated",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-59-52\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 59.859979\nSubprocess output: Parent path as string: output_2025-03-05_19-59-52\nFile created successfully: output_2025-03-05_19-59-52\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-59-52\\source\\AnalysisUniverse.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_19-59-52\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n22\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9859781861305237\nfinal_result: True\nWe recommend to move the method starting at line 260 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9859781861305237,
+      "final_decision": true,
+      "execution_time": 93.4394462108612,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisUniverse.java",
+        "start_line": 260,
+        "method_name": "registerAsUnsafeAllocated",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-01-25\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 59.750546\nSubprocess output: Parent path as string: output_2025-03-05_20-01-25\nFile created successfully: output_2025-03-05_20-01-25\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-01-25\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-01-25\\source\\SubstrateAnnotationExtractor.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9888683557510376\nfinal_result: True\nWe recommend to move the method starting at line 260 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9888683557510376,
+      "final_decision": true,
+      "execution_time": 92.35395932197571,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\SubstrateAnnotationExtractor.java",
+        "start_line": 260,
+        "method_name": "registerAsUnsafeAllocated",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-02-58\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 91.344771\nSubprocess output: Parent path as string: output_2025-03-05_20-02-58\nFile created successfully: output_2025-03-05_20-02-58\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-02-58\\source\\FeatureImpl.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-02-58\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n92\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.260625353216823\nfinal_result: False\nThe method starting at line 260 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.260625353216823,
+      "final_decision": false,
+      "execution_time": 194.9524486064911,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\FeatureImpl.java",
+        "start_line": 260,
+        "method_name": "registerAsUnsafeAllocated",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-06-13\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 67.610124\nSubprocess output: Parent path as string: output_2025-03-05_20-06-13\nFile created successfully: output_2025-03-05_20-06-13\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-06-13\\source\\AnnotationValue.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-06-13\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999998807907104\nfinal_result: True\nWe recommend to move the method starting at line 260 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999998807907104,
+      "final_decision": true,
+      "execution_time": 100.11081743240356,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\AnnotationValue.java",
+        "start_line": 260,
+        "method_name": "registerAsUnsafeAllocated",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-07-53\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 66.203852\nSubprocess output: Parent path as string: output_2025-03-05_20-07-53\nFile created successfully: output_2025-03-05_20-07-53\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-07-53\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-07-53\\source\\TypeAnnotationValue.java\n... collecting  relations ...\n25\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 1.0\nfinal_result: True\nWe recommend to move the method starting at line 260 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 1.0,
+      "final_decision": true,
+      "execution_time": 102.53235960006714,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\TypeAnnotationValue.java",
+        "start_line": 260,
+        "method_name": "registerAsUnsafeAllocated",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-09-36\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 60.547437\nSubprocess output: Parent path as string: output_2025-03-05_20-09-36\nFile created successfully: output_2025-03-05_20-09-36\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-09-36\\source\\AnalysisType.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-09-36\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n31\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9700073599815369\nfinal_result: True\nWe recommend to move the method starting at line 260 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9700073599815369,
+      "final_decision": true,
+      "execution_time": 102.83148217201233,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisType.java",
+        "start_line": 260,
+        "method_name": "registerAsUnsafeAllocated",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-11-19\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 58.031857\nSubprocess output: Parent path as string: output_2025-03-05_20-11-19\nFile created successfully: output_2025-03-05_20-11-19\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-11-19\\source\\AnalysisMetaAccess.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-11-19\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9882985353469849\nfinal_result: True\nWe recommend to move the method starting at line 160 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9882985353469849,
+      "final_decision": true,
+      "execution_time": 91.26658535003662,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisMetaAccess.java",
+        "start_line": 160,
+        "method_name": "duringSetup",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-12-51\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 63.375653\nSubprocess output: Parent path as string: output_2025-03-05_20-12-51\nFile created successfully: output_2025-03-05_20-12-51\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-12-51\\source\\AnalysisUniverse.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-12-51\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n22\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9878100156784058\nfinal_result: True\nWe recommend to move the method starting at line 160 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9878100156784058,
+      "final_decision": true,
+      "execution_time": 97.33333563804626,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisUniverse.java",
+        "start_line": 160,
+        "method_name": "duringSetup",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-14-28\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 58.625599\nSubprocess output: Parent path as string: output_2025-03-05_20-14-28\nFile created successfully: output_2025-03-05_20-14-28\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-14-28\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-14-28\\source\\SubstrateAnnotationExtractor.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9907259941101074\nfinal_result: True\nWe recommend to move the method starting at line 160 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9907259941101074,
+      "final_decision": true,
+      "execution_time": 91.38249897956848,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\SubstrateAnnotationExtractor.java",
+        "start_line": 160,
+        "method_name": "duringSetup",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-16-00\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 90.610072\nSubprocess output: Parent path as string: output_2025-03-05_20-16-00\nFile created successfully: output_2025-03-05_20-16-00\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-16-00\\source\\FeatureImpl.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-16-00\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n91\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11861771599597548\nfinal_result: False\nThe method starting at line 160 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11861771599597548,
+      "final_decision": false,
+      "execution_time": 193.50261902809143,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\FeatureImpl.java",
+        "start_line": 160,
+        "method_name": "duringSetup",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-19-13\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 64.703783\nSubprocess output: Parent path as string: output_2025-03-05_20-19-13\nFile created successfully: output_2025-03-05_20-19-13\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-19-13\\source\\AnnotationValue.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-19-13\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999998807907104\nfinal_result: True\nWe recommend to move the method starting at line 160 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999998807907104,
+      "final_decision": true,
+      "execution_time": 97.00244617462158,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\AnnotationValue.java",
+        "start_line": 160,
+        "method_name": "duringSetup",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-20-50\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 67.891308\nSubprocess output: Parent path as string: output_2025-03-05_20-20-50\nFile created successfully: output_2025-03-05_20-20-50\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-20-50\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-20-50\\source\\TypeAnnotationValue.java\n... collecting  relations ...\n25\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 1.0\nfinal_result: True\nWe recommend to move the method starting at line 160 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 1.0,
+      "final_decision": true,
+      "execution_time": 104.1501886844635,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\TypeAnnotationValue.java",
+        "start_line": 160,
+        "method_name": "duringSetup",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-22-34\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 58.313253\nSubprocess output: Parent path as string: output_2025-03-05_20-22-34\nFile created successfully: output_2025-03-05_20-22-34\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-22-34\\source\\AnalysisMetaAccess.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-22-34\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9917123317718506\nfinal_result: True\nWe recommend to move the method starting at line 169 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9917123317718506,
+      "final_decision": true,
+      "execution_time": 90.34440612792969,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisMetaAccess.java",
+        "start_line": 169,
+        "method_name": "beforeAnalysis",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-24-05\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 60.344323\nSubprocess output: Parent path as string: output_2025-03-05_20-24-05\nFile created successfully: output_2025-03-05_20-24-05\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-24-05\\source\\AnalysisUniverse.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-24-05\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n22\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9922266006469727\nfinal_result: True\nWe recommend to move the method starting at line 169 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9922266006469727,
+      "final_decision": true,
+      "execution_time": 93.53932189941406,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisUniverse.java",
+        "start_line": 169,
+        "method_name": "beforeAnalysis",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-25-39\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 60.594395\nSubprocess output: Parent path as string: output_2025-03-05_20-25-39\nFile created successfully: output_2025-03-05_20-25-39\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-25-39\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-25-39\\source\\SubstrateAnnotationExtractor.java\n... collecting  relations ...\n22\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9933613538742065\nfinal_result: True\nWe recommend to move the method starting at line 169 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9933613538742065,
+      "final_decision": true,
+      "execution_time": 94.29062747955322,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\SubstrateAnnotationExtractor.java",
+        "start_line": 169,
+        "method_name": "beforeAnalysis",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-27-14\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 91.500909\nSubprocess output: Parent path as string: output_2025-03-05_20-27-14\nFile created successfully: output_2025-03-05_20-27-14\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-27-14\\source\\FeatureImpl.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-27-14\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n109\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.11861771599597548\nfinal_result: False\nThe method starting at line 169 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.11861771599597548,
+      "final_decision": false,
+      "execution_time": 212.39173531532288,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\FeatureImpl.java",
+        "start_line": 169,
+        "method_name": "beforeAnalysis",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-30-46\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 67.235005\nSubprocess output: Parent path as string: output_2025-03-05_20-30-46\nFile created successfully: output_2025-03-05_20-30-46\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-30-46\\source\\AnnotationValue.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-30-46\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999998807907104\nfinal_result: True\nWe recommend to move the method starting at line 169 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999998807907104,
+      "final_decision": true,
+      "execution_time": 100.2390673160553,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\AnnotationValue.java",
+        "start_line": 169,
+        "method_name": "beforeAnalysis",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-32-26\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 68.219440\nSubprocess output: Parent path as string: output_2025-03-05_20-32-26\nFile created successfully: output_2025-03-05_20-32-26\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-32-26\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-32-26\\source\\TypeAnnotationValue.java\n... collecting  relations ...\n25\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 1.0\nfinal_result: True\nWe recommend to move the method starting at line 169 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 1.0,
+      "final_decision": true,
+      "execution_time": 105.17420530319214,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\TypeAnnotationValue.java",
+        "start_line": 169,
+        "method_name": "beforeAnalysis",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-34-12\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 60.063145\nSubprocess output: Parent path as string: output_2025-03-05_20-34-12\nFile created successfully: output_2025-03-05_20-34-12\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-34-12\\source\\AnalysisMetaAccess.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-34-12\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9991156458854675\nfinal_result: True\nWe recommend to move the method starting at line 173 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9991156458854675,
+      "final_decision": true,
+      "execution_time": 92.45654392242432,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisMetaAccess.java",
+        "start_line": 173,
+        "method_name": "runConditionalInAnalysisTask",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-35-45\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 60.000622\nSubprocess output: Parent path as string: output_2025-03-05_20-35-45\nFile created successfully: output_2025-03-05_20-35-45\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-35-45\\source\\AnalysisUniverse.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-35-45\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n22\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9989026784896851\nfinal_result: True\nWe recommend to move the method starting at line 173 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9989026784896851,
+      "final_decision": true,
+      "execution_time": 93.98096632957458,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.graal.pointsto\\src\\com\\oracle\\graal\\pointsto\\meta\\AnalysisUniverse.java",
+        "start_line": 173,
+        "method_name": "runConditionalInAnalysisTask",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "A syntax error occurred while parsing Java code: \nAn unknown error occurred while reading the target file: not enough values to unpack (expected 4, got 3)\nIntermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-37-19\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 59.906835\nSubprocess output: Parent path as string: output_2025-03-05_20-37-19\nFile created successfully: output_2025-03-05_20-37-19\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-37-19\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-37-19\\source\\SubstrateAnnotationExtractor.java\n... collecting  relations ...\n21\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.999184787273407\nfinal_result: True\nWe recommend to move the method starting at line 173 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.999184787273407,
+      "final_decision": true,
+      "execution_time": 92.78989458084106,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\SubstrateAnnotationExtractor.java",
+        "start_line": 173,
+        "method_name": "runConditionalInAnalysisTask",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-38-52\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 92.485418\nSubprocess output: Parent path as string: output_2025-03-05_20-38-52\nFile created successfully: output_2025-03-05_20-38-52\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-38-52\\source\\FeatureImpl.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-38-52\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n90\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.413137967728418\nfinal_result: False\nThe method starting at line 173 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.413137967728418,
+      "final_decision": false,
+      "execution_time": 195.09695315361023,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\FeatureImpl.java",
+        "start_line": 173,
+        "method_name": "runConditionalInAnalysisTask",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-42-07\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 67.344474\nSubprocess output: Parent path as string: output_2025-03-05_20-42-07\nFile created successfully: output_2025-03-05_20-42-07\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-42-07\\source\\AnnotationValue.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-42-07\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n26\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.9999998807907104\nfinal_result: True\nWe recommend to move the method starting at line 173 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.9999998807907104,
+      "final_decision": true,
+      "execution_time": 106.3496675491333,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\AnnotationValue.java",
+        "start_line": 173,
+        "method_name": "runConditionalInAnalysisTask",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-43-54\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 69.938256\nSubprocess output: Parent path as string: output_2025-03-05_20-43-54\nFile created successfully: output_2025-03-05_20-43-54\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-43-54\\source\\ReflectionDataBuilder.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-43-54\\source\\TypeAnnotationValue.java\n... collecting  relations ...\n25\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 1.0\nfinal_result: True\nWe recommend to move the method starting at line 173 in the source class to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 1.0,
+      "final_decision": true,
+      "execution_time": 107.74253916740417,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\annotation\\TypeAnnotationValue.java",
+        "start_line": 173,
+        "method_name": "runConditionalInAnalysisTask",
+        "return_type": "void"
+      }
+    },
+    {
+      "success": true,
+      "stdout": "Intermediate files will be stored in C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-45-41\n----------------------------------------------------------------------------\nStart To Load Pretrain Model ... ...\nFinish Loading Pretrain Model ! !\n----------------------------------------------------------------------------\nThe operation is complete. All java files have been copied successfully.\nexecution time: 64.141225\nSubprocess output: Parent path as string: output_2025-03-05_20-45-41\nFile created successfully: output_2025-03-05_20-45-41\\relation.csv\n... initializing  environment ...\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-45-41\\source\\ConfigurationCondition.java\nFind Java File: C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\hmove-\\hmoveTool\\output_2025-03-05_20-45-41\\source\\ReflectionDataBuilder.java\n... collecting  relations ...\n27\nFinish!\n\nsubprocess-err: \nSubprocess finished successfully\nSubprocess completed, continuing main program execution.\n----------------------------------------------------------------------------\nPobability: 0.3050030907616019\nfinal_result: False\nThe method starting at line 173 in the source class is not recommended to move to the target class.\n",
+      "stderr": "C:\\ProgramData\\anaconda3\\envs\\hmove\\lib\\site-packages\\dhg\\structure\\graphs\\graph.py:633: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\SparseCsrTensorImpl.cpp:55.)\n  self.cache[\"L_GCN\"] = _tmp_g.D_v_neg_1_2.mm(_tmp_g.A).mm(_tmp_g.D_v_neg_1_2).clone().coalesce()\n",
+      "return_code": 0,
+      "probability": 0.3050030907616019,
+      "final_decision": false,
+      "execution_time": 102.97806668281555,
+      "method_info": {
+        "source_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\substratevm\\src\\com.oracle.svm.hosted\\src\\com\\oracle\\svm\\hosted\\reflect\\ReflectionDataBuilder.java",
+        "target_path": "C:\\Users\\abhiram\\Desktop\\HMOVE_SETUP\\projects\\graal\\sdk\\src\\org.graalvm.nativeimage\\src\\org\\graalvm\\nativeimage\\impl\\ConfigurationCondition.java",
+        "start_line": 173,
+        "method_name": "runConditionalInAnalysisTask",
+        "return_type": "void"
+      }
+    }
+  ]
+
+}
