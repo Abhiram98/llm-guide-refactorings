@@ -8,6 +8,7 @@ import com.github.javaparser.ast.expr.VariableDeclarationExpr
 import com.github.javaparser.ast.visitor.VoidVisitorWithDefaults
 import com.github.javaparser.resolution.TypeSolver
 import com.github.javaparser.symbolsolver.JavaSymbolSolver
+import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.JavaParserTypeSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver
@@ -170,17 +171,20 @@ class JavaParsingUtils {
             val matchedEnums = parsedResult.findAll(EnumDeclaration::class.java).filter { it.fullyQualifiedName.get()==className }
             val matchedRecords = parsedResult.findAll(RecordDeclaration::class.java).filter { it.fullyQualifiedName.get()==className }
             if (matchedClasses.isEmpty() && matchedEnums.isEmpty() && matchedRecords.isEmpty()) throw Exception("class not found.")
+            val parserFacade = JavaParserFacade.get(typeSolver)
             return matchedClasses.union(matchedEnums).union(matchedRecords)
                 .map {
                     it.fields.map {
                         val qualifiedName = try{
+
+//                            val fieldType = parserFacade.convertToUsage(it.elementType)
                             val fieldType = it.elementType.resolve()
                             if (fieldType.isReferenceType)
                                 fieldType.asReferenceType().qualifiedName
                             else
                                 it.elementType.asString()
                         } catch (e: Exception) {
-                            print("Failed to resolve type for -> ${it.elementType.asString()}")
+                            println("Failed to resolve type for -> ${it.elementType.asString()}")
                             it.elementType.asString()
                         }
                         ClassField(it.variables[0].nameAsString, qualifiedName, it.toString())

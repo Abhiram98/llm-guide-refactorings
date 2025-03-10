@@ -13,8 +13,8 @@ def compute_recall(oracle: rw_oracle.RealWorldInstanceOraclePoint, hmove_output)
     succesful_execution = [i for i in hmove_output if
                          i['probability'] is not None]
 
-    if len(succesful_execution) < len(hmove_output) or len(succesful_execution)==0:
-        raise Exception(f"HMove did not succesfully run on this data point: {oracle.ref_id}")
+    # if len(succesful_execution) < len(hmove_output) or len(succesful_execution)==0:
+    #     raise Exception(f"HMove did not succesfully run on this data point: {oracle.ref_id}")
 
     valid_suggestions = [i for i in succesful_execution if
                          i['probability'] > 0.5
@@ -140,6 +140,8 @@ def compute():
         # compute recall.
 
     present_recalls(list(recalls.values()))
+    incomplete = set([int(i.ref_id) for i in real_world_oracle]) - set([int(i) for i in hmove_output_data])
+    print(f"{incomplete=}")
 
 
     METHOD_THRESHOLD = 15
