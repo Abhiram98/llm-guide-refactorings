@@ -65,6 +65,7 @@ class VoyageAiEmbeddingModelIT {
         return CosineSimilarity.between(embedding1, embedding2)
     }
 }
+
 class CodeBertScore {
     data class CodeBertRequest(val text1: String, val text2: String)
     data class CodeBertResponse(val score: Double)
@@ -149,7 +150,7 @@ class CodeBertScore {
 
         fun computeCodeBertScore(text1: String, text2: String): Double {
             // Parse the URL to get host and port
-            val urlString = "https://438b-141-142-254-176.ngrok-free.app/compute_codebertscore"
+            val urlString = "https://ea35a1ed3236f01b38a7f9ea473404cb.serveo.net/compute_codebertscore"
 
             val client = createHttpClient()
             val requestData = CodeBertRequest(text1, text2)

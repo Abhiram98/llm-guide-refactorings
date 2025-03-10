@@ -110,7 +110,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                 .filter { it.body!!.statements.any { statement -> statement !is PsiComment } } // filter out methods with a body that only contains comments
                 .map { MoveMethodSuggestion(it.name, getSignatureString(it), "", "", it) }
         }
-        val methodCompatibilitySuggestionsWithSore = getMethodCompatibility(bruteForceSuggestions, functionPsiElement as PsiClass)
+        val methodCompatibilitySuggestionsWithSore = runReadAction { getMethodCompatibility(bruteForceSuggestions, functionPsiElement as PsiClass) }
         val methodCompatibilitySuggestions = methodCompatibilitySuggestionsWithSore.map { it.first }
         addMethodCompatibilityData(methodCompatibilitySuggestionsWithSore)
         logMethods(bruteForceSuggestions, -1, 0)
@@ -118,7 +118,8 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
 //        telemetryDataManager.setRefactoringObjects(emptyList())
 //        sendTelemetryData()
         log2fileAndViewer("*** Combining responses from iterations ***", logger)
-//        sendTelemetryData()
+
+
         val priority = getSuggestionPriority(methodCompatibilitySuggestions, project)
 
         if (priority != null){
@@ -131,6 +132,9 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
             }
 //            sendTelemetryData()
         }
+//        else{
+//            sendTelemetryData()
+//        }
 
         if (methodCompatibilitySuggestions.isEmpty()) {
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
@@ -146,6 +150,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
             sendTelemetryData()
         } else {
             createRefactoringObjectsAndShowSuggestions(
+                priority?.subList(0, min(SUGGESTIONS4USER, priority.size)) ?:
                 methodCompatibilitySuggestions.subList(
                     0,
                     min(SUGGESTIONS4USER, methodCompatibilitySuggestions.size)
@@ -364,6 +369,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
 
                 val methodText = suggestion.psiMethod.body?.text ?: ""                
                 val similarity = PsiUtils.computeCosineSimilarity(methodText, classTextWithoutMethod)
+//                val codeBertScore = CodeBertScore.computeCodeBertScore(methodText, classTextWithoutMethod)
 //                val voyageAiEmbeddingModelIT = VoyageAiEmbeddingModelIT()
 //                val voyageSimilarity = voyageAiEmbeddingModelIT.computeVoyageAiCosineSimilarity(methodText, classTextWithoutMethod, VoyageAiEmbeddingModelName.VOYAGE_3_LITE)
                 Pair(suggestion, similarity)

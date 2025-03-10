@@ -2,6 +2,8 @@ import json
 import MoveMethodValidator
 from collections import defaultdict
 import os
+import pandas as pd
+from mm_analyser import data_folder
 
 def myindex(list, ele):
     try:
@@ -13,18 +15,17 @@ def myindex(list, ele):
 plugin_outfiles = [
     'vue_pro_res.json',
     'elastic_res.json',
-    'dbeaver_res.json',
     'flink_res.json',
     'kafka_res.json',
     'spring_framework_res.json',
     'halo_res.json',
-    'redisson_res.json',
     'springboot_res.json'
 ]
 
 combined_output = []
+df = pd.read_csv(f'{data_folder}/refminer_data/static_moves.csv')
 for file_name in plugin_outfiles:
-    with open(f'../../../../data/refminer_data/mm-assist/{file_name}') as f:
+    with open(f'/Users/fraolbatole/Documents/GitHub/llm-guide-refactorings/data/refminer_data/mm-assist-26-13:38/{file_name}') as f:
         data = json.load(f)
     combined_output += data
 combined_output = [i for i in combined_output
@@ -32,7 +33,7 @@ combined_output = [i for i in combined_output
                    and i['move_method_refactoring']['isStatic']
                    ]
 
-fetruth_dir = "/Users/abhiram/Documents/TBE/RefactoringAgentProject/llm-guide-refactorings/data/refminer_data/feTruth"
+fetruth_dir = "/Users/fraolbatole/Downloads/feTruth-large"
 fetruth_files = [i for i in os.listdir(fetruth_dir) if i.endswith(".json")]
 fe_data = {}
 for fe in fetruth_files:
@@ -51,6 +52,7 @@ for evaluation_data in combined_output:
     oracle_key = (mm_obj.left_file_path, evaluation_data['sha1'])
     # unique_oracle_files.append(oracle_key)
     oracle_group_by_file[oracle_key].append(mm_obj)
+    evaluation_data['method_count'] = evaluation_data['telemetry'].get('methodCount', None)
 
 fe_hits = []
 for evaluation_data in combined_output:
@@ -62,6 +64,7 @@ for evaluation_data in combined_output:
     oracle_key = (mm_obj.left_file_path, evaluation_data['sha1'])
     # if len(oracle_group_by_file[oracle_key])>3:
     #     continue
+    evaluation_data['method_count'] = evaluation_data['telemetry'].get('methodCount', None)
 
     telemetry = evaluation_data['telemetry']
 
@@ -91,7 +94,29 @@ for evaluation_data in combined_output:
                          i['source_method'] == fe_method]
     evaluation_data['recall_method_class_position'] = myindex(fe_target_classes, target_class)
 
+
 combined_output = [i for i in combined_output if 'recall_method_position' in i]
+
+df_mm_assist = pd.DataFrame(combined_output)
+# print(df_mm_assist.head())
+df_mm_assist['description'] = df_mm_assist['move_method_refactoring'].apply(lambda x: x['description'])
+df_mm_assist['description-url'] = df_mm_assist['description'] + df_mm_assist['url']
+df['description-url'] = df['description'] + df['url']
+df_merged = pd.merge(df, df_mm_assist, on='description-url')
+selected_columns = ['url_x', 'description_x', 'same_package', 'source_class_inner',
+                    'target_class_inner', 'source_file_is_test', 'target_file_is_test',
+                    'source_class_static', 'target_class_static', 'source_class_exists',
+                    'target_class_exists', 'repository', 'sha1', 'method_count']
+df_selected = df_merged[selected_columns]
+df_selected = df_selected.rename(columns={"vanilla_recall_method_class_position": "vanilla_recall_class_position", "recall_method_class_position": "recall_class_position"})
+df_selected.to_csv(f"{data_folder}/refminer_data/feTruth-small-res", index=False)
+df_filtered = df_merged[df_merged['target_class_exists'] == True]
+
+# Recreate combined_output from the filtered DataFrame
+combined_output = df_filtered.to_dict('records')
+# combined_output = [i for i in combined_output if i.get('method_count', 0) > 0 and i.get('method_count', 0) < 15]
+combined_output = [i for i in combined_output if i.get('method_count', 0) >= 15]
+
 recall_method_and_class_1 = len(
     [i for i in combined_output if i['recall_method_position'] == 0 and i['recall_method_class_position'] == 0]) / len(
     combined_output)

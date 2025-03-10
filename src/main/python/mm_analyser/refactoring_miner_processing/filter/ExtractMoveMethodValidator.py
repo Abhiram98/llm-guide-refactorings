@@ -4,10 +4,10 @@ import pathlib
 import json
 import functools
 
-import refactoring_miner_processing.filter.RminerValidator as rv
-import refactoring_miner_processing.filter.MoveMethodRef as mm
-import refactoring_miner_processing.MethodSignature as MethodSignature
-import refactoring_miner_processing.MethodInvocation as mi
+import mm_analyser.refactoring_miner_processing.filter.RminerValidator as rv
+import mm_analyser.refactoring_miner_processing.filter.MoveMethodRef as mm
+import mm_analyser.refactoring_miner_processing.MethodSignature as MethodSignature
+import mm_analyser.refactoring_miner_processing.MethodInvocation as mi
 
 
 class ExtractedRange:

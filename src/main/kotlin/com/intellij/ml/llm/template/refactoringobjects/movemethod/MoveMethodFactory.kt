@@ -153,7 +153,7 @@ class MoveMethodFactory {
                 ?.addPotentialTargetClassesOrdered(
                     methodToMove.name,
                     runReadAction{ targetPivotsWithSimilarity.map { it.first.psiClass.name to it.second } },
-                    "voyage",
+                    "tfidf",
                     similarityComputationTime)
 
             val pivotsSortedByLLM =

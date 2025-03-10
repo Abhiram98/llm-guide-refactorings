@@ -347,7 +347,7 @@ class PsiUtils {
 
             // Define weights for each criterion
             val STATIC_RATIO_WEIGHT = 0.0
-            val PACKAGE_PROXIMITY_WEIGHT = 3.0
+            val PACKAGE_PROXIMITY_WEIGHT = 2.0
             val UTILITY_CLASS_WEIGHT = 1.0 // Higher weight to give more importance to utility classes
 
             // Source package name for package proximity calculation
@@ -369,7 +369,8 @@ class PsiUtils {
 //                val classMethods = psiClass.methods
 //                // Calculate the static to instance method ratio
 //                val staticMethods = classMethods.count { isMethodStatic(it) }
-//                val staticRatio = staticMethods.toDouble() / classMethods.size
+                val staticMethods = runReadAction { psiClass.methods.count { it.hasModifierProperty(PsiModifier.STATIC) } }
+                val staticRatio = staticMethods.toDouble() / psiClass.methods.size
 
                 // Calculate package proximity
                 val targetPackageName = runReadAction {  (psiClass.containingFile as? PsiJavaFile)?.packageName ?: "" }
@@ -380,7 +381,7 @@ class PsiUtils {
 
                 // Combine weights: Static ratio, package proximity, and utility class bonus
                 val combinedWeight = (PACKAGE_PROXIMITY_WEIGHT * packageProximity) +
-                        utilityBonus
+                        utilityBonus + (STATIC_RATIO_WEIGHT * staticRatio)
 
                 // Store the class and its combined weight
                Pair(psiClass, combinedWeight)
@@ -472,7 +473,7 @@ class PsiUtils {
                                 !psiClass.isEnum &&
                                 !psiClass.isInterface &&
                                 !psiClass.isDeprecated &&
-                                !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
+//                                !psiClass.hasModifierProperty(PsiModifier.ABSTRACT) &&
                                 !psiClass.isAnnotationType) {
                                 classList.add(psiClass)
                             }

@@ -4,8 +4,8 @@ import os
 import json
 
 import mm_analyser.refactoring_miner_processing.MethodSignature as MethodSignature
-import refactoring_miner_processing.filter.RminerValidator as rm
-import refactoring_miner_processing.filter.MoveMethodRef as MoveMethodRef
+import mm_analyser.refactoring_miner_processing.filter.RminerValidator as rm
+import mm_analyser.refactoring_miner_processing.filter.MoveMethodRef as MoveMethodRef
 
 
 class Field:
