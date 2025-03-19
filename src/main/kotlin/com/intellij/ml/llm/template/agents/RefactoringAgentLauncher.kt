@@ -12,7 +12,6 @@ import ai.grazie.model.llm.profile.LLMProfileID
 import ai.grazie.utils.annotations.ExperimentalAPI
 import com.intellij.codeInsight.unwrap.ScopeHighlighter
 import com.intellij.ml.llm.template.LLMBundle
-import com.intellij.ml.llm.template.intentions.ApplySuggestRefactoringIntention
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
@@ -22,7 +21,8 @@ import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.ui.CompletedRefactoringsPanel
 import com.intellij.ml.llm.template.utils.CodeTransformer
 import com.intellij.ml.llm.template.utils.EFNotification
-import com.intellij.ml.llm.template.utils.addLineNumbersToCodeSnippet
+import com.intellij.ml.llm.template.utils.FileUtils
+import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
@@ -30,18 +30,20 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.JBPopupListener
 import com.intellij.openapi.ui.popup.LightweightWindowEvent
-import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
+import com.intellij.refactoring.suggested.startOffset
 import com.intellij.ui.awt.RelativePoint
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
+import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.awt.Point
 import java.awt.Rectangle
 import java.util.concurrent.atomic.AtomicReference
 import javax.swing.SwingUtilities
+import kotlin.io.path.Path
 
 
 class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
@@ -169,14 +171,26 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
 
             tool(RefactoringTools.ReplaceFile.NAME){
                 args ->
-                println("replacing file")
-                "Replaced the contents of the file" // TODO: actually modify the contents
+                println("replacing file contents")
+                val params = Json.decodeFromString<RefactoringTools.ReplaceFile.CallParams>(args.toString())
+                FileUtils.replaceFileContents(
+                    Path(file.virtualFile.path),
+                    params.newContent
+                )
+                "Replaced the contents of the file"
             }
 
             tool(RefactoringTools.ReplaceMethod.NAME){
                     args ->
-                    println("replacing method")
-                    "Replaced the contents of the method" // TODO: actually modify the contents
+                    val params =
+                        Json.decodeFromString<RefactoringTools.ReplaceMethod.CallParams>(args.toString())
+                    val methodPsi = PsiUtils.getMethodNameFromClass(file, params.methodName)!!
+                    FileUtils.replaceFileContentsInRange(
+                        Path(file.virtualFile.path),
+                        methodPsi.startOffset, methodPsi.endOffset,
+                        params.newContent
+                    )
+                    "Replaced the contents of the method"
             }
         }
 

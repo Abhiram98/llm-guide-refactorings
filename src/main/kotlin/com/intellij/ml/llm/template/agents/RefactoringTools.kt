@@ -4,6 +4,8 @@ package com.intellij.ml.llm.template.agents
 import ai.grazie.code.agents.core.tools.model.ToolDescriptor
 import ai.grazie.code.agents.core.tools.model.ToolParameterDescriptor
 import ai.grazie.code.agents.core.tools.model.ToolParameterType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 object RefactoringTools {
 
@@ -56,8 +58,16 @@ object RefactoringTools {
 
         object Params {
             const val filePath = "file_path"
-            const val newContents = "new_contents"
+            const val newContent = "new_content"
         }
+
+        @Serializable
+        data class CallParams(
+            @SerialName(Params.filePath)
+            val filePath: String,
+            @SerialName(Params.newContent)
+            val newContent: String
+        )
     }
 
     object ReplaceMethod {
@@ -68,6 +78,16 @@ object RefactoringTools {
             const val methodName = "method_name"
             const val newContent = "new_content"
         }
+
+        @Serializable
+        data class CallParams(
+            @SerialName(Params.filePath)
+            val filePath: String,
+            @SerialName(Params.methodName)
+            val methodName: String,
+            @SerialName(Params.newContent)
+            val newContent: String
+        )
     }
 
     internal val toolsList = listOf(
@@ -155,7 +175,7 @@ object RefactoringTools {
                     type = ToolParameterType.String,
                 ),
                 ToolParameterDescriptor(
-                    name = ReplaceFile.Params.newContents,
+                    name = ReplaceFile.Params.newContent,
                     description = "The replacement text to overwrite the original file contents with.",
                     type = ToolParameterType.String,
                 )
