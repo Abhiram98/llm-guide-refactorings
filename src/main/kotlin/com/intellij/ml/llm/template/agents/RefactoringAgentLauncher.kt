@@ -166,6 +166,18 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
             tool(RefactoringTools.RunTestClass.NAME){
                     args -> testSelector.runTests()
             }
+
+            tool(RefactoringTools.ReplaceFile.NAME){
+                args ->
+                println("replacing file")
+                "Replaced the contents of the file" // TODO: actually modify the contents
+            }
+
+            tool(RefactoringTools.ReplaceMethod.NAME){
+                    args ->
+                    println("replacing method")
+                    "Replaced the contents of the method" // TODO: actually modify the contents
+            }
         }
 
         /** 3. Provide agent configuration (including system prompt)

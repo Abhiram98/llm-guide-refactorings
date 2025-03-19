@@ -51,6 +51,25 @@ object RefactoringTools {
         }
     }
 
+    object ReplaceFile {
+        const val NAME = "replace_file_contents"
+
+        object Params {
+            const val filePath = "file_path"
+            const val newContents = "new_contents"
+        }
+    }
+
+    object ReplaceMethod {
+        const val NAME = "run_test_class"
+
+        object Params {
+            const val filePath = "file_path"
+            const val methodName = "method_name"
+            const val newContent = "new_content"
+        }
+    }
+
     internal val toolsList = listOf(
         ToolDescriptor(
             name = ExtractMethod.NAME,
@@ -123,8 +142,53 @@ object RefactoringTools {
             description = """Run the curated test-cases and report results.""".trimIndent(),
             requiredParameters = listOf(),
             optionalParameters = listOf(),
+        ),
+
+        ToolDescriptor(
+            name = ReplaceFile.NAME,
+            description = """Replace the entire contents of the chosen file with the newly provided contents,
+                 overwriting any existing data.""".trimIndent(),
+            requiredParameters = listOf(
+                ToolParameterDescriptor(
+                    name = ReplaceFile.Params.filePath,
+                    description = "The path to the file that will be updated.",
+                    type = ToolParameterType.String,
+                ),
+                ToolParameterDescriptor(
+                    name = ReplaceFile.Params.newContents,
+                    description = "The replacement text to overwrite the original file contents with.",
+                    type = ToolParameterType.String,
+                )
+            ),
+            optionalParameters = listOf(),
+        ),
+
+        ToolDescriptor(
+            name = ReplaceMethod.NAME,
+            description = """Replace the entire contents of the chosen method with the newly provided contents, overwriting 
+                any existing data.""".trimIndent(),
+            requiredParameters = listOf(
+                ToolParameterDescriptor(
+                    name = ReplaceMethod.Params.filePath,
+                    description = "The path to the file that will be updated.",
+                    type = ToolParameterType.String,
+                ),
+                ToolParameterDescriptor(
+                    name = ReplaceMethod.Params.methodName,
+                    description = "The name of the method that will be updated.",
+                    type = ToolParameterType.String,
+                ),
+                ToolParameterDescriptor(
+                    name = ReplaceMethod.Params.newContent,
+                    description = "The replacement text to overwrite the method's contents with.",
+                    type = ToolParameterType.String,
+                )
+            ),
+            optionalParameters = listOf(),
+        ),
+
+
+
+
         )
-
-
-    )
 }
