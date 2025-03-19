@@ -13,6 +13,7 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiMethod
+import com.intellij.psi.impl.search.JavaFilesSearchScope
 import com.intellij.psi.search.ProjectAndLibrariesScope
 import com.intellij.psi.search.SearchScope
 import com.intellij.psi.search.searches.ReferencesSearch
@@ -108,7 +109,7 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param project The project.
      */
     fun collectTestSamplesForCurrentFile(currentFile: VirtualFile, project: Project) {
-        val projectScope = ProjectAndLibrariesScope(project)
+        val projectScope = JavaFilesSearchScope(project)
         if (isJavaFileTypes(currentFile)) {
             val psiJavaFile = findJavaFileFromProject(currentFile, project)
             val psiClass = retrievePsiClass(psiJavaFile)
