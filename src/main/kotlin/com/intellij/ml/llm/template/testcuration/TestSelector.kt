@@ -25,7 +25,7 @@ import kotlin.io.path.Path
 /**
  * A selector for samples for the LLM.
  */
-class TestSelector(val limitTestCount: Int) {
+abstract class TestSelector(val limitTestCount: Int) {
     data class TestMethod(
         val testClass: PsiClass,
         val testMethod: PsiMethod
@@ -139,27 +139,20 @@ class TestSelector(val limitTestCount: Int) {
         testNames.removeAll( testNames.filter { !runTest(it) } ) // Remove all failing tests
     }
 
-    fun runTest(testMethod: TestMethod): Boolean{
-        // TODO: capture stdout and stderr in case test fails.
-        // TODO: Update logic for maven projects.
+    abstract fun runTest(testMethod: TestMethod): Boolean
 
-        val projectBasePath = testMethod.testClass.project.basePath!!
 
-        val subProject = testMethod.testClass.project.basePath + '/' +
-                testMethod.testClass.containingFile.virtualFile.path
-                    .removePrefix("$projectBasePath/")
-                    .split('/')[0]
-        val result = ProcessBuilder(
-            listOf(
-                "./gradlew", ":${subProject}:test",
-                "--tests", "\"${testMethod.testClass.qualifiedName}.${testMethod.testMethod.name}\"")
-        )
-        .directory(File(projectBasePath))
-            .redirectOutput(ProcessBuilder.Redirect.INHERIT)
-            .redirectError(ProcessBuilder.Redirect.INHERIT)
-            .start()
-            .waitFor(5, TimeUnit.MINUTES)
-        return result
+    protected fun executeProcess(command: List<String>, directory: File): Boolean {
+        return try {
+            ProcessBuilder(command)
+                .directory(directory)
+                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                .redirectError(ProcessBuilder.Redirect.INHERIT)
+                .start()
+                .waitFor(5, TimeUnit.MINUTES)
+        } catch (e: Exception) {
+            false
+        }
     }
 
     /**
@@ -297,5 +290,15 @@ class TestSelector(val limitTestCount: Int) {
     companion object {
         const val DEFAULT_TEST_NAME = "<html>provide manually</html>"
         const val DEFAULT_TEST_CODE = "// provide test method code here"
+
+
+        fun createSelector(limitTestCount: Int, project: Project): TestSelector {
+            val basePath = project.basePath ?: ""
+            return if (File(basePath, "pom.xml").exists()) {
+                MavenTestSelector(limitTestCount)
+            } else {
+                GradleTestSelector(limitTestCount)
+            }
+        }
     }
 }

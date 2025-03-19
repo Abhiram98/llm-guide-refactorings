@@ -47,7 +47,7 @@ import javax.swing.SwingUtilities
 class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
     object RefAgent: IdeFormerAgent.GrazieDefault("refactoring-agent")
 
-    val testSelector = TestSelector(10)
+    val testSelector = TestSelector.createSelector(10, project)
     val codeTransformer = CodeTransformer()
     val performedRefactorings = mutableListOf<AbstractRefactoring>()
     val telemetryDataManager = EFTelemetryDataManager()
