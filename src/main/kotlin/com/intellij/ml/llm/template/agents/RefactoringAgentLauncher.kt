@@ -44,6 +44,7 @@ import java.awt.Rectangle
 import java.util.concurrent.atomic.AtomicReference
 import javax.swing.SwingUtilities
 import kotlin.io.path.Path
+import kotlin.io.path.readText
 
 
 class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
@@ -173,11 +174,21 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                 args ->
                 println("replacing file contents")
                 val params = Json.decodeFromString<RefactoringTools.ReplaceFile.CallParams>(args.toString())
+                val oldContents = Path(file.virtualFile.path).readText()
                 FileUtils.replaceFileContents(
                     Path(file.virtualFile.path),
                     params.newContent
                 )
-                "Replaced the contents of the file"
+                val testReport = testSelector.runTests()
+                if (testReport!="success"){
+                    // roll back changes.
+                    FileUtils.replaceFileContents(
+                        Path(file.virtualFile.path),
+                        oldContents
+                    )
+                    "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
+                }else
+                    "success"
             }
 
             tool(RefactoringTools.ReplaceMethod.NAME){
@@ -185,12 +196,24 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     val params =
                         Json.decodeFromString<RefactoringTools.ReplaceMethod.CallParams>(args.toString())
                     val methodPsi = PsiUtils.getMethodNameFromClass(file, params.methodName)!!
+                    val oldContents = methodPsi.text
                     FileUtils.replaceFileContentsInRange(
                         Path(file.virtualFile.path),
                         methodPsi.startOffset, methodPsi.endOffset,
                         params.newContent
                     )
-                    "Replaced the contents of the method"
+                    val testReport = testSelector.runTests()
+                    if (testReport != "success"){
+                        // Tests failed. need to roll back edits.
+                        FileUtils.replaceFileContentsInRange(
+                            Path(file.virtualFile.path),
+                            methodPsi.startOffset, methodPsi.startOffset + params.newContent.length,
+                            oldContents
+                        )
+                        "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
+                    }else
+                        "success"
+
             }
         }
 

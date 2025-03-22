@@ -71,7 +71,7 @@ object RefactoringTools {
     }
 
     object ReplaceMethod {
-        const val NAME = "run_test_class"
+        const val NAME = "replace_method_contents"
 
         object Params {
             const val filePath = "file_path"

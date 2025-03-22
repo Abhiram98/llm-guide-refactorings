@@ -127,12 +127,15 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @return A report of the test run.
      **/
     fun runTests(): String{
+        var allPassing = true
         var report = ""
         for (testMethod in testNames){
             val status = runTest(testMethod)
+            allPassing = allPassing && status
             report += "${testMethod.testMethod.name}: $status\n"
         }
-
+        if (allPassing)
+            return "success"
         return report
     }
 
