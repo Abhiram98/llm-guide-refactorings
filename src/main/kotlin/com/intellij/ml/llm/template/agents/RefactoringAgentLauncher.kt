@@ -49,7 +49,7 @@ import kotlin.io.path.Path
 class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
     object RefAgent: IdeFormerAgent.GrazieDefault("refactoring-agent")
 
-    val testSelector = TestSelector.createSelector(10, project)
+    val testSelector = TestSelector.createSelector(1, project)
     val codeTransformer = CodeTransformer()
     val performedRefactorings = mutableListOf<AbstractRefactoring>()
     val telemetryDataManager = EFTelemetryDataManager()
@@ -81,7 +81,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     val params = Json.decodeFromString<RefactoringServer.ExtractMethodParams>(args.toString())
                     println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
 
-                    // Call IJ rename API here.
+                    // Calling IJ extract method API here.
                     val refObjs = ExtractMethodFactory.fromStartEndLine(
                         editor,
                         file,

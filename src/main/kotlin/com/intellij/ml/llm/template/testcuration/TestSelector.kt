@@ -248,6 +248,9 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param psiClass The PSI class object.
      */
     private fun processCandidateMethod(psiMethod: PsiMethod, imports: String, psiClass: PsiClass) {
+        if (testNames.size > limitTestCount)
+            return
+
         val annotations = psiMethod.annotations
         annotations.forEach { annotation ->
             if (annotation.qualifiedName == "org.junit.jupiter.api.Test" ||

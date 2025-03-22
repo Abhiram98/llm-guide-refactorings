@@ -55,12 +55,12 @@ dependencies {
 
     testImplementation("io.ktor:ktor-client-content-negotiation:3.0.3")
     testImplementation("io.ktor:ktor-server-test-host-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:3.0.3")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:3.0.3")
     testImplementation("com.jayway.jsonpath:json-path:2.9.0")
 
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-server-test-host-jvm:3.0.3")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.0")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.0")
 }
 
 plugins {

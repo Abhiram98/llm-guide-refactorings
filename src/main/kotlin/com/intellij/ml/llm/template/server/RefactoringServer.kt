@@ -39,7 +39,7 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
         @SerialName("new_name")
         val newName: String,
         @SerialName("line_num")
-        val lineNum: Int?
+        val lineNum: Int? = null
     )
 
     @Serializable
