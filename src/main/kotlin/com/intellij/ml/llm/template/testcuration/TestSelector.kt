@@ -14,14 +14,11 @@ import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.impl.search.JavaFilesSearchScope
-import com.intellij.psi.search.ProjectAndLibrariesScope
 import com.intellij.psi.search.SearchScope
 import com.intellij.psi.search.searches.ReferencesSearch
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.containers.stream
 import java.io.File
-import java.util.concurrent.TimeUnit
-import kotlin.io.path.Path
 
 /**
  * A selector for samples for the LLM.
@@ -30,6 +27,12 @@ abstract class TestSelector(val limitTestCount: Int) {
     data class TestMethod(
         val testClass: PsiClass,
         val testMethod: PsiMethod
+    ){}
+
+    data class ProcessStatus(
+        val returnCode: Int,
+        val stdOut: String,
+        val stdErr: String
     ){}
 
     private val testNames: MutableSet<TestMethod> = mutableSetOf()
@@ -131,8 +134,8 @@ abstract class TestSelector(val limitTestCount: Int) {
         var report = ""
         for (testMethod in testNames){
             val status = runTest(testMethod)
-            allPassing = allPassing && status
-            report += "${testMethod.testMethod.name}: $status\n"
+            allPassing = allPassing && (status.returnCode==0)
+            report += "${testMethod.testClass.qualifiedName}.${testMethod.testMethod.name}: ${status.stdErr}\n"
         }
         if (allPassing)
             return "success"
@@ -140,22 +143,24 @@ abstract class TestSelector(val limitTestCount: Int) {
     }
 
     fun runAndKeepPassingTests(){
-        testNames.removeAll( testNames.filter { !runTest(it) } ) // Remove all failing tests
+        testNames.removeAll(testNames.filter { runTest(it).returnCode!=0 }.toSet()) // Remove all failing tests
     }
 
-    abstract fun runTest(testMethod: TestMethod): Boolean
+    abstract fun runTest(testMethod: TestMethod): ProcessStatus
 
 
-    protected fun executeProcess(command: List<String>, directory: File): Boolean {
+    protected fun executeProcess(command: List<String>, directory: File): ProcessStatus {
         return try {
-            ProcessBuilder(command)
+            val process = ProcessBuilder(command)
                 .directory(directory)
-                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
-                .redirectError(ProcessBuilder.Redirect.INHERIT)
                 .start()
-                .waitFor(5, TimeUnit.MINUTES)
+            val result = process.waitFor()
+            val stdout = process.inputStream.bufferedReader().use { it.readText() }
+            val stderr = process.errorStream.bufferedReader().use { it.readText() }
+
+            ProcessStatus(result, stdout, stderr)
         } catch (e: Exception) {
-            false
+            ProcessStatus(-1, "failed to run the command", "")
         }
     }
 
@@ -208,7 +213,7 @@ abstract class TestSelector(val limitTestCount: Int) {
         val enclosingClass = enclosingMethod.containingClass
         val enclosingFile = (enclosingMethod.containingFile as PsiJavaFile)
         val imports = retrieveImportStatements(enclosingFile, enclosingClass!!)
-        processCandidateMethod(enclosingMethod, imports, psiClass)
+        processCandidateMethod(enclosingMethod, imports, enclosingClass)
     }
 
     /**

@@ -4,7 +4,7 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 class MavenTestSelector(limitTestCount: Int) : TestSelector(limitTestCount) {
-    override fun runTest(testMethod: TestMethod): Boolean {
+    override fun runTest(testMethod: TestMethod): ProcessStatus {
         val projectBasePath = testMethod.testClass.project.basePath!!
         return executeProcess(
             listOf(

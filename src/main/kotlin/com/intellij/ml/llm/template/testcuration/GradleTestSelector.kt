@@ -3,7 +3,7 @@ package com.intellij.ml.llm.template.testcuration
 import java.io.File
 
 class GradleTestSelector(limitTestCount: Int) : TestSelector(limitTestCount) {
-    override fun runTest(testMethod: TestMethod): Boolean {
+    override fun runTest(testMethod: TestMethod): ProcessStatus {
         val projectBasePath = testMethod.testClass.project.basePath!!
         val subProject = extractSubProject(testMethod, projectBasePath)
         return executeProcess(

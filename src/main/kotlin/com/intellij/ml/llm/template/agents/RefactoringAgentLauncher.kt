@@ -196,7 +196,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     val params =
                         Json.decodeFromString<RefactoringTools.ReplaceMethod.CallParams>(args.toString())
                     val methodPsi = PsiUtils.getMethodNameFromClass(file, params.methodName)!!
-                    val oldContents = methodPsi.text
+                    val oldContents = runReadAction{ methodPsi.text }
                     FileUtils.replaceFileContentsInRange(
                         Path(file.virtualFile.path),
                         methodPsi.startOffset, methodPsi.endOffset,
