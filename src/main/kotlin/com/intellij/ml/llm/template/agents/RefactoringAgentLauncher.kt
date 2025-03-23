@@ -14,6 +14,7 @@ import com.intellij.codeInsight.unwrap.ScopeHighlighter
 import com.intellij.ml.llm.template.LLMBundle
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.ml.llm.template.server.RefactoringServer
 import com.intellij.ml.llm.template.telemetry.*
@@ -25,6 +26,7 @@ import com.intellij.ml.llm.template.utils.FileUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
+import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
@@ -179,6 +181,9 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     Path(file.virtualFile.path),
                     params.newContent
                 )
+                // Run IJ linter
+                SwingUtilities.invokeAndWait { ReformatFile.doReformat(file, file.startOffset, file.endOffset) }
+
                 val testReport = testSelector.runTests()
                 if (testReport!="success"){
                     // roll back changes.
@@ -202,6 +207,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                         methodPsi.startOffset, methodPsi.endOffset,
                         params.newContent
                     )
+                    SwingUtilities.invokeAndWait { ReformatFile.doReformat(file, methodPsi.startOffset, methodPsi.endOffset) }
                     val testReport = testSelector.runTests()
                     if (testReport != "success"){
                         // Tests failed. need to roll back edits.
@@ -295,6 +301,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     agentConfig = agentConfig
                 ).run(sourceCode)
             } catch (e: Exception){
+                e.printStackTrace()
                 print("Something failed.")
             }
 
