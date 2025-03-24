@@ -77,6 +77,7 @@ object RefactoringTools {
             const val filePath = "file_path"
             const val methodName = "method_name"
             const val newContent = "new_content"
+            const val lineNum = "line_num"
         }
 
         @Serializable
@@ -86,7 +87,9 @@ object RefactoringTools {
             @SerialName(Params.methodName)
             val methodName: String,
             @SerialName(Params.newContent)
-            val newContent: String
+            val newContent: String,
+            @SerialName(Params.lineNum)
+            val lineNum: Int? = null
         )
     }
 
@@ -204,7 +207,13 @@ object RefactoringTools {
                     type = ToolParameterType.String,
                 )
             ),
-            optionalParameters = listOf(),
+            optionalParameters = listOf(
+                ToolParameterDescriptor(
+                    name = ReplaceMethod.Params.lineNum,
+                    description = "Line number to identify the method at",
+                    type = ToolParameterType.Integer
+                )
+            ),
         ),
 
 

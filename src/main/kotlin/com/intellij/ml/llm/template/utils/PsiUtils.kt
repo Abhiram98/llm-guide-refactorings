@@ -277,6 +277,22 @@ class PsiUtils {
             return match
         }
 
+        fun getAllMethodNameFromClass(outerClass: PsiElement?, methodName: String): List<PsiMethod> {
+            val match =  mutableListOf<PsiMethod>()
+            class MethodFinder: JavaRecursiveElementVisitor() {
+                override fun visitMethod(method: PsiMethod) {
+                    super.visitMethod(method)
+                    if (method.name == methodName)
+                        match.add(method)
+                }
+
+            }
+            if (outerClass != null) {
+                outerClass.accept(MethodFinder())
+            }
+            return match
+        }
+
         fun getQualifiedTypeInFile(psiFile: PsiFile, typeName: String): String?{
             var match: String? = null
             class TypeFinder: JavaRecursiveElementVisitor() {

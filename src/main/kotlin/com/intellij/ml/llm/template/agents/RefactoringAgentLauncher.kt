@@ -47,6 +47,7 @@ import java.util.concurrent.atomic.AtomicReference
 import javax.swing.SwingUtilities
 import kotlin.io.path.Path
 import kotlin.io.path.readText
+import kotlin.math.abs
 
 
 class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
@@ -200,7 +201,17 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     args ->
                     val params =
                         Json.decodeFromString<RefactoringTools.ReplaceMethod.CallParams>(args.toString())
-                    val methodPsi = PsiUtils.getMethodNameFromClass(file, params.methodName)!!
+                    val matches = PsiUtils.getAllMethodNameFromClass(file, params.methodName)!!
+
+
+                    if (matches.size == 0)
+                        return@tool "no method with that name was found."
+                    else if (matches.size > 1 && params.lineNum==null)
+                        return@tool "Too many methods (${matches.size}) have that name. " +
+                                "Please identify the method from it's line number."
+
+                    val methodPsi = matches.sortedBy { abs(it.startLine(editor.document) - params.lineNum!!) }.first()
+
                     val oldContents = runReadAction{ methodPsi.text }
                     FileUtils.replaceFileContentsInRange(
                         Path(file.virtualFile.path),
