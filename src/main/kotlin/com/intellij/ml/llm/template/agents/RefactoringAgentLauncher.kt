@@ -26,12 +26,13 @@ import com.intellij.ml.llm.template.utils.FileUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
-import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.JBPopupListener
 import com.intellij.openapi.ui.popup.LightweightWindowEvent
+import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.suggested.startOffset
 import com.intellij.ui.awt.RelativePoint
@@ -184,6 +185,10 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                 )
                 // Run IJ linter
                 SwingUtilities.invokeAndWait { ReformatFile.doReformat(file, file.startOffset, file.endOffset) }
+                Thread.sleep(5000) // wait for reformat to complete.
+                SwingUtilities.invokeAndWait {
+                    FileDocumentManager.getInstance().saveDocument(editor.document) // save changes to local filesystem
+                }
 
                 val testReport = testSelector.runTests()
                 if (testReport!="success"){
@@ -192,6 +197,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                         Path(file.virtualFile.path),
                         oldContents
                     )
+                    VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                     "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
                 }else
                     "success"
@@ -212,21 +218,32 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
 
                     val methodPsi = matches.sortedBy { abs(it.startLine(editor.document) - params.lineNum!!) }.first()
 
-                    val oldContents = runReadAction{ methodPsi.text }
+                    val oldContents = runReadAction{ editor.document.text }
                     FileUtils.replaceFileContentsInRange(
                         Path(file.virtualFile.path),
                         methodPsi.startOffset, methodPsi.endOffset,
                         params.newContent
                     )
-                    SwingUtilities.invokeAndWait { ReformatFile.doReformat(file, methodPsi.startOffset, methodPsi.endOffset) }
+                    VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                    SwingUtilities.invokeAndWait {
+                        ReformatFile.doReformat(
+                            file,
+                            methodPsi.startOffset,
+                            methodPsi.startOffset + params.newContent.length
+                        )
+                    }
+                    Thread.sleep(5000) // sleep five seconds to allow the reformatting to complete.
+                    SwingUtilities.invokeAndWait {
+                        FileDocumentManager.getInstance().saveDocument(editor.document) // save changes to local filesystem
+                    }
                     val testReport = testSelector.runTests()
                     if (testReport != "success"){
                         // Tests failed. need to roll back edits.
-                        FileUtils.replaceFileContentsInRange(
+                        FileUtils.replaceFileContents(
                             Path(file.virtualFile.path),
-                            methodPsi.startOffset, methodPsi.startOffset + params.newContent.length,
                             oldContents
                         )
+                        VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                         "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
                     }else
                         "success"
