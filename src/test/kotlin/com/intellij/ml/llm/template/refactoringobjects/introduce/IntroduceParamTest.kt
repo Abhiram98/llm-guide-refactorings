@@ -1,16 +1,10 @@
-package com.intellij.ml.llm.template.refactoringobjects.introduceparam
+package com.intellij.ml.llm.template.refactoringobjects.introduce
 
-import com.intellij.ml.llm.template.refactoringobjects.introduce.IntroduceParameter
 import com.intellij.ml.llm.template.utils.PsiUtils
-import com.intellij.psi.PsiDeclarationStatement
 import com.intellij.psi.PsiLiteralExpression
 import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiMethod
-import com.intellij.refactoring.actions.IntroduceFieldAction
-import com.intellij.refactoring.introduceParameter.IntroduceParameterProcessor
-import com.intellij.refactoring.introduceVariable.IntroduceVariableBase
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
-import it.unimi.dsi.fastutil.ints.IntList
 
 class IntroduceParamTest: LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
