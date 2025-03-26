@@ -9,6 +9,7 @@ import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiMethod
 import com.intellij.refactoring.actions.IntroduceFieldAction
 import com.intellij.refactoring.introduceField.IntroduceFieldHandler
+import com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesProcessor
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 import com.siyeh.ig.fixes.IntroduceVariableFix
 import org.jetbrains.kotlin.idea.intentions.IntroduceVariableIntention
@@ -121,7 +122,6 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
             string1 = "TWO!!";
             System.out.println(string1);
         }"""))
-        
 
 
     }
