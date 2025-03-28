@@ -41,7 +41,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
     companion object{
         var server : RefactoringServer? = null
-        fun getInstance(project: Project){
+        fun getInstance(project: Project): RefactoringServer{
            if (server == null) {
                server = RefactoringServer(project)
                server!!.start()
@@ -49,6 +49,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             else {
                server!!.project = project
            }
+            return server!!
         }
     }
 
