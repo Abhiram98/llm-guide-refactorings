@@ -7,9 +7,14 @@ import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVari
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiManager
 import com.jetbrains.rd.generator.nova.fail
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
@@ -28,9 +33,18 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.SerialName
+import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
 
-class RefactoringServer(val project: Project, var editor: Editor, var file: PsiFile) {
+class RefactoringServer(val project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
+
+
+    @Serializable
+    data class OpenFileParams(
+        @SerialName("rel_file_path")
+        val filePath: String
+    )
+
 
     @Serializable
     data class RenameParams(
@@ -75,6 +89,26 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
             get("/") {
                 call.respondText("Hello, world!", ContentType.Text.Html)
             }
+
+            post("/open-file"){
+                // open file and set the file and editor values
+                val params = call.receive<OpenFileParams>()
+                params.filePath
+                val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + params.filePath)
+                    ?: throw Exception("file not found")
+                invokeAndWait {
+                    editor = FileEditorManager.getInstance(project).openTextEditor(
+                        OpenFileDescriptor(
+                            project,
+                            vfile
+                        ),
+                        true // request focus to editor
+                    )!!
+                }
+                file = PsiManager.getInstance(project).findFile(vfile)!!
+                call.respond(HttpStatusCode.OK, message = "opened file!")
+            }
+
             post("/rename") {
                 println("got a request")
                 try {
@@ -83,7 +117,7 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
 
                     // Call IJ rename API here.
                     val renameObject = RenameVariableFactory.fromOldNewNameAll(
-                        project, editor, file, params.oldName, params.newName)
+                        project, editor!!, file!!, params.oldName, params.newName)
                     if (renameObject.isNotEmpty()) {
                         val refObj = if (renameObject.size > 1){
                             if (params.lineNum == null)
@@ -101,7 +135,7 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
                         }else {
                             renameObject[0]
                         }
-                        invokeAndWait { refObj.performRefactoring(project, editor, file) }
+                        invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) }
                         call.respond(HttpStatusCode.OK)
                     }
                     call.respond(HttpStatusCode.NotImplemented, message="Could not rename ${params.oldName}")
@@ -121,11 +155,11 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
                     println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
 
                     // Call IJ rename API here.
-                    val refObjs = ExtractMethodFactory.fromStartEndLine(editor, file, params.startLine, params.endLine, params.newName)
+                    val refObjs = ExtractMethodFactory.fromStartEndLine(editor!!, file!!, params.startLine, params.endLine, params.newName)
                     if (refObjs.isNotEmpty()) {
                         var failedException: Exception? = null
                         invokeAndWait{
-                            try{ refObjs[0].performRefactoring(project, editor, file) }
+                            try{ refObjs[0].performRefactoring(project, editor!!, file!!) }
                             catch(ex: Exception){
                                 failedException = ex
                             }
@@ -155,9 +189,9 @@ class RefactoringServer(val project: Project, var editor: Editor, var file: PsiF
                     val params = call.receive<MoveMethodParams>()
                     println("attempting to move ${params.methodName} -> ${params.targetClass}")
 
-                    val moveMethodObjects = MoveMethodFactory.createMoveMethodFromName(editor, file, project, params.methodName, params.targetClass)
+                    val moveMethodObjects = MoveMethodFactory.createMoveMethodFromName(editor!!, file!!, project, params.methodName, params.targetClass)
                     if (moveMethodObjects.isNotEmpty()){
-                        invokeAndWait{ moveMethodObjects[0].performRefactoring(project, editor, file) }
+                        invokeAndWait{ moveMethodObjects[0].performRefactoring(project, editor!!, file!!) }
                     }
 
                     call.respond(HttpStatusCode.NoContent)
