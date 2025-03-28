@@ -7,6 +7,8 @@ import com.intellij.openapi.startup.ProjectActivity
 class StartServerActivity: ProjectActivity {
     override suspend fun execute(project: Project) {
         print("Starting server")
-        RefactoringServer(project).start()
+        // create an instance of the refactoring server
+        // and point it to the right project.
+        RefactoringServer.getInstance(project)
     }
 }

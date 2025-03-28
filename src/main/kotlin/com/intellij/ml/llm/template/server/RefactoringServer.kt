@@ -36,8 +36,21 @@ import kotlinx.serialization.SerialName
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
 
-class RefactoringServer(val project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
+class RefactoringServer(var project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
 
+
+    companion object{
+        var server : RefactoringServer? = null
+        fun getInstance(project: Project){
+           if (server == null) {
+               server = RefactoringServer(project)
+               server!!.start()
+           }
+            else {
+               server!!.project = project
+           }
+        }
+    }
 
     @Serializable
     data class OpenFileParams(
