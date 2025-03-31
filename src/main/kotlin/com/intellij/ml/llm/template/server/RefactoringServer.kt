@@ -2,17 +2,26 @@ package com.intellij.ml.llm.template.server
 
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
+import com.intellij.ml.llm.template.agents.RefactoringTools
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.ml.llm.template.testcuration.TestSelector
+import com.intellij.ml.llm.template.utils.FileUtils
+import com.intellij.ml.llm.template.utils.PsiUtils
+import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
+import com.intellij.refactoring.suggested.startOffset
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
@@ -26,11 +35,19 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.json.Json
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
+import org.jetbrains.kotlin.psi.psiUtil.endOffset
+import org.jetbrains.kotlin.tools.projectWizard.plugins.buildSystem.gradle.GradlePlugin
 import java.nio.file.Path
+import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
+import kotlin.io.path.Path
+import kotlin.io.path.readText
+import kotlin.math.abs
 
 class RefactoringServer(var project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
-
+    var testSelector = TestSelector.createSelector(5, project)
     companion object{
         var server : RefactoringServer? = null
         fun getInstance(project: Project): RefactoringServer{
@@ -44,45 +61,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             return server!!
         }
     }
-
-    @Serializable
-    data class OpenFileParams(
-        @SerialName("rel_file_path")
-        val filePath: String
-    )
-    @Serializable
-    data class OpenProjectParams(
-        @SerialName("abs_project_path")
-        val projectPath: String
-    )
-
-
-    @Serializable
-    data class RenameParams(
-        @SerialName("old_name")
-        val oldName: String,
-        @SerialName("new_name")
-        val newName: String,
-        @SerialName("line_num")
-        val lineNum: Int? = null
-    )
-
-    @Serializable
-    data class ExtractMethodParams(
-        @SerialName("start_line")
-        val startLine: Int,
-        @SerialName("end_line")
-        val endLine: Int,
-        @SerialName("new_method_name")
-        val newName: String
-    )
-
-    @Serializable
-    data class MoveMethodParams(
-        val methodName: String,
-        val targetClass: String
-    )
-
 
 
     fun start(){
@@ -105,14 +83,29 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 call.respond(HttpStatusCode.OK, message = file!!.text)
             }
 
+            post("reload_project"){
+//                Gradle/Plugin()
+                TODO("force reload the project settings") // Useful after repo head.
+            }
+
+            post("waitforindex"){
+                TODO("wait for indexing to complete")
+            }
+
             post("run_test_class"){
                 print("running tests")
-                TODO("Actually run tests here.")
+                val testReport = testSelector.runTests()
+                call.respond(HttpStatusCode.OK, message = testReport)
             }
 
             post("curate_test_class"){
                 print("Curate tests here")
-                TODO("Curate tests.")
+                testSelector = TestSelector.createSelector(5, project)
+                runReadAction {
+                    testSelector.collectTestSamplesForCurrentFile(file!!.virtualFile, project)
+                    testSelector.runAndKeepPassingTests()
+                }
+                call.respond(HttpStatusCode.OK)
             }
 
 
@@ -126,9 +119,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         options = OpenProjectTask(forceOpenInNewFrame = true, projectToClose = project)
                     ) }!!
                 call.respond(HttpStatusCode.OK)
-            }
-
-            post("waitforindex"){
             }
 
             post("/open-file"){
@@ -242,11 +232,93 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     call.respond(HttpStatusCode.BadRequest)
                 }
             }
-            post("/edit-file") {
-                val fileName = call.receive<String>()
-                // TODO: find file name and change _file_ to point to the right file.
+
+            post(RefactoringTools.ReplaceFile.NAME){
+                try {
+                    val params = call.receive<RefactoringTools.ReplaceFile.CallParams>()
+                    println("attempting to replace file contents of ${params.filePath}")
+
+                    val oldContents = Path(file!!.virtualFile.path).readText()
+                    FileUtils.replaceFileContents(
+                        Path(file!!.virtualFile.path),
+                        params.newContent
+                    )
+                    // Run IJ linter
+                    SwingUtilities.invokeAndWait { ReformatFile.doReformat(file!!, file!!.startOffset, file!!.endOffset) }
+                    Thread.sleep(5000) // wait for reformat to complete.
+                    SwingUtilities.invokeAndWait {
+                        FileDocumentManager.getInstance().saveDocument(editor!!.document) // save changes to local filesystem
+                    }
+
+                    val testReport = testSelector.runTests()
+                    val message = revertIfTestsFailed(testReport, oldContents)
+                    call.respond(HttpStatusCode.NoContent, message = message)
+                } catch (ex: IllegalStateException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: JsonConvertException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
             }
+
+            post(RefactoringTools.ReplaceMethod.NAME){
+                try {
+                    val params =
+                        call.receive<RefactoringTools.ReplaceMethod.CallParams>()
+                    val matches = PsiUtils.getAllMethodNameFromClass(file, params.methodName)!!
+
+
+                    if (matches.size == 0)
+                        call.respond(HttpStatusCode.NotFound, message = "no method with that name was found.")
+                    else if (matches.size > 1 && params.lineNum==null)
+                        call.respond(HttpStatusCode.BadRequest,
+                            message = "Too many methods (${matches.size}) have that name. " +
+                                "Please identify the method from it's line number.")
+
+                    val methodPsi = matches.sortedBy { abs(it.startLine(editor!!.document) - params.lineNum!!) }.first()
+
+                    val oldContents = runReadAction{ editor!!.document.text }
+                    FileUtils.replaceFileContentsInRange(
+                        Path(file!!.virtualFile.path),
+                        methodPsi.startOffset, methodPsi.endOffset,
+                        params.newContent
+                    )
+                    VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                    SwingUtilities.invokeAndWait {
+                        ReformatFile.doReformat(
+                            file!!,
+                            methodPsi.startOffset,
+                            methodPsi.startOffset + params.newContent.length
+                        )
+                    }
+                    Thread.sleep(5000) // sleep five seconds to allow the reformatting to complete.
+                    SwingUtilities.invokeAndWait {
+                        FileDocumentManager.getInstance().saveDocument(editor!!.document) // save changes to local filesystem
+                    }
+                    val testReport = testSelector.runTests()
+                    val message = revertIfTestsFailed(testReport, oldContents)
+                    call.respond(HttpStatusCode.NoContent, message = message)
+                } catch (ex: IllegalStateException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: JsonConvertException) {
+                    call.respond(HttpStatusCode.BadRequest)
+                }
+            }
+
         }
+    }
+
+    private fun revertIfTestsFailed(testReport: String, oldContents: @NlsSafe String): String {
+        val message = if (testReport != "success") {
+            // Tests failed. need to roll back edits.
+            FileUtils.replaceFileContents(
+                Path(file!!.virtualFile.path),
+                oldContents
+            )
+            VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+            "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
+        } else
+            "success"
+        return message
     }
 
     fun stop(){
