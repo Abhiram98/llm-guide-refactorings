@@ -56,11 +56,7 @@ class RenameVariableFactory {
             oldName: String,
             newName: String,
         ): List<AbstractRefactoring> {
-            val functionPsi: PsiElement =
-                runReadAction {
-                    PsiUtils.getParentFunctionOrNull(editor, language = file.language)
-                        ?: file.getChildOfType<PsiClass>()
-                }!!
+            val functionPsi: PsiElement = file.getChildOfType<PsiClass>()!!
 
             return fromOldNewNameAll(project, editor, functionPsi, oldName, newName)
         }

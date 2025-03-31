@@ -1,21 +1,18 @@
 package com.intellij.ml.llm.template.server
 
-import com.google.gson.annotations.SerializedName
+import com.intellij.ide.impl.OpenProjectTask
+import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
-import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariable
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
-import com.intellij.openapi.application.invokeLater
+import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
-import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
-import com.jetbrains.rd.generator.nova.fail
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
 import io.ktor.server.application.*
@@ -25,19 +22,14 @@ import io.ktor.server.response.*
 import io.ktor.server.engine.*
 import io.ktor.server.request.*
 import kotlinx.serialization.Serializable
-import io.ktor.serialization.*
-import io.ktor.server.request.*
 import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.SerialName
-import javax.swing.SwingUtilities
+import java.nio.file.Path
 import javax.swing.SwingUtilities.invokeAndWait
 
 class RefactoringServer(var project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
-
 
     companion object{
         var server : RefactoringServer? = null
@@ -57,6 +49,11 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
     data class OpenFileParams(
         @SerialName("rel_file_path")
         val filePath: String
+    )
+    @Serializable
+    data class OpenProjectParams(
+        @SerialName("abs_project_path")
+        val projectPath: String
     )
 
 
@@ -102,6 +99,36 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
         routing {
             get("/") {
                 call.respondText("Hello, world!", ContentType.Text.Html)
+            }
+
+            get("/get_source_code"){
+                call.respond(HttpStatusCode.OK, message = file!!.text)
+            }
+
+            post("run_test_class"){
+                print("running tests")
+                TODO("Actually run tests here.")
+            }
+
+            post("curate_test_class"){
+                print("Curate tests here")
+                TODO("Curate tests.")
+            }
+
+
+            post("/open-project"){
+                val params = call.receive<OpenProjectParams>()
+                project = runBlocking {
+                    // TODO: close the existing project before opening the new one.
+                    ProjectUtil
+                    .openOrImportAsync(
+                        Path.of(params.projectPath),
+                        options = OpenProjectTask(forceOpenInNewFrame = true, projectToClose = project)
+                    ) }!!
+                call.respond(HttpStatusCode.OK)
+            }
+
+            post("waitforindex"){
             }
 
             post("/open-file"){
@@ -150,7 +177,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             renameObject[0]
                         }
                         invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) }
-                        call.respond(HttpStatusCode.OK)
+                        call.respond(HttpStatusCode.OK, message = "success")
                     }
                     call.respond(HttpStatusCode.NotImplemented, message="Could not rename ${params.oldName}")
                 } catch (ex: IllegalStateException) {
@@ -179,12 +206,12 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             }
                         }
                         if (failedException==null)
-                            call.respond(HttpStatusCode.OK)
+                            call.respond(HttpStatusCode.OK, message = "success")
                         else
                             call.respond(message = failedException!!.message.toString(), status = HttpStatusCode.BadRequest)
                     }
                     else{
-                        call.respond(HttpStatusCode.NoContent)
+                        call.respond(HttpStatusCode.NoContent, message = "couldn't create a refactoring object.")
                     }
 
 
