@@ -180,7 +180,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     call.respond(HttpStatusCode.BadRequest, message = ex.message.toString())
                 }
             }
-            post("/extract-method"){
+            post("/extract_method"){
                 try {
                     val params = call.receive<ExtractMethodParams>()
                     println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
@@ -201,15 +201,16 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             call.respond(message = failedException!!.message.toString(), status = HttpStatusCode.BadRequest)
                     }
                     else{
-                        call.respond(HttpStatusCode.NoContent, message = "couldn't create a refactoring object.")
+                        call.respond(HttpStatusCode.NoContent, message = "couldn't create a refactoring object. " +
+                                "Please check that you have not selected the entire body of a method")
                     }
 
 
                 } catch (ex: IllegalStateException) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, message = "invalid request body.")
                     ex.printStackTrace()
                 } catch (ex: JsonConvertException) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, message = "invalid request")
                     ex.printStackTrace()
                 } catch (ex: Exception){
                     call.respond(message = ex.message.toString(), status = HttpStatusCode.BadRequest)
@@ -223,13 +224,15 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     val moveMethodObjects = MoveMethodFactory.createMoveMethodFromName(editor!!, file!!, project, params.methodName, params.targetClass)
                     if (moveMethodObjects.isNotEmpty()){
                         invokeAndWait{ moveMethodObjects[0].performRefactoring(project, editor!!, file!!) }
+                        call.respond(HttpStatusCode.OK, message = "success")
                     }
-
-                    call.respond(HttpStatusCode.NoContent)
+                    else
+                        call.respond(HttpStatusCode.NoContent, message = "could not create a refactoring object. " +
+                                "Please check that you have not selected the entire body of a method")
                 } catch (ex: IllegalStateException) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, message = "invalid parameters.")
                 } catch (ex: JsonConvertException) {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.BadRequest, message = "invalid parameters.")
                 }
             }
 
