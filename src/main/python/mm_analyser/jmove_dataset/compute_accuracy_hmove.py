@@ -13,9 +13,16 @@ class HMoveRecall(BaseModel):
     recall_c_index: int = Field(description="index that the oracle-target-class was found at.")
     recall_mc_index: int = Field(description="index that the oracle was found at.")
 
+
+execution_times = []
+num_inputs = []
+
+
 def compute_recall_from_json(hmove_results_json) -> list[HMoveRecall]:
     recall_positions: list[HMoveRecall] = []
     incorrect_run = 0
+    global execution_times
+    global num_inputs
 
     for oracle_key in hmove_results_json:
         recall_ = HMoveRecall(recall_m_index=-1, recall_c_index=-1, recall_mc_index=-1)
@@ -44,6 +51,8 @@ def compute_recall_from_json(hmove_results_json) -> list[HMoveRecall]:
                              i['probability'] is not None
                              and i['probability'] > 0.5
                              ]
+        execution_times.append(sum([i['execution_time'] for i in hmove_results_json[oracle_key]]))
+        num_inputs.append(len(hmove_results_json[oracle_key]))
 
         # check if hmove ran correctly every time
 
@@ -98,6 +107,8 @@ def compute_recall_from_json(hmove_results_json) -> list[HMoveRecall]:
 
     print(f"{incorrect_run=}")
 
+
+
     return recall_positions
 
 
@@ -120,7 +131,13 @@ def compute_recall():
         'result_jfreechart_large.json',
         'result_jfreechart_small.json',
         'result_jgroups_large.json',
-        'result_jgroups_small.json'
+        'result_jgroups_small.json',
+        'result_jtopen_small.json',
+        'result_drjava_large-2.json',
+        'result_drjava_large.json',
+        'result_drjava_small.json',
+        'result_jtopen_large-2.json',
+        'result_jtopen_large.json',
     ]
 
     hmove_results_path = mm_analyser.data_folder.joinpath('synthetic_corpus_comparison/hmove/output')
@@ -138,6 +155,8 @@ def compute_recall():
     recall_3 = [i for i in recall_positions if -1 < i.recall_m_index <= 2]
     recall_inf = [i for i in recall_positions if i.recall_m_index > -1]
 
+    print(f"avg execution time = {sum(execution_times) / len(execution_times)}")
+    print(f"avg num_inputs = {sum(num_inputs) / len(num_inputs)}")
     print()
     print("-----results-----")
     print(f"{len(recall_positions)=}")

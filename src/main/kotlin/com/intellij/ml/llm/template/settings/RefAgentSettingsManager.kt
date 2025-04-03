@@ -129,8 +129,10 @@ class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
                     GPT_3_5_TURBO, getOpenAiKey(), state.llmSettings.temperature.toDouble())
             }
             "openai-gpt-4o-mini" -> {
+//                return getOpenAiModel(
+//                    OpenAiChatModelName.GPT_4_O_MINI.toString(), getOpenAiKey(), state.llmSettings.temperature.toDouble())
                 return getOpenAiModel(
-                    OpenAiChatModelName.GPT_4_O_MINI.toString(), getOpenAiKey(), state.llmSettings.temperature.toDouble())
+                    "gpt-4o-mini-2024-07-18", getOpenAiKey(), state.llmSettings.temperature.toDouble())
             }
             "ollama" -> {
                 return localOllamaMistral
@@ -157,7 +159,7 @@ class RefAgentSettings : BaseState() {
     var useOpenAi by property(true)
 
     @get:OptionTag("ai_model")
-    var aiModel = "grazie-gpt-4o"
+    var aiModel = "grazie-gpt-4o-mini"
 
     @get:OptionTag("use_local_llm")
     var useOllamaToCreateObj = false

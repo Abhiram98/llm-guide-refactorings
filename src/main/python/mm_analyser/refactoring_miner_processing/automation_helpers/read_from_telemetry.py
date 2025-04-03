@@ -2,13 +2,41 @@ import json
 from mm_analyser import data_folder, resources_folder
 from mm_analyser.env import TELEMETRY_FILE_PATH
 from mm_analyser.refactoring_miner_processing.automation_helpers.AutmationHelpers import MmHelper, EmmHelper
+import sys
+import os
 
-project_name = "ghidra"
+project_name = sys.argv[1]
 # helper = MmHelper(project_name)
+
+project_basepath_map = {
+        'vue_pro': 'ruoyi-vue-pro',
+        'flink': 'flink',
+        'halo': 'halo',
+        'elastic': 'elasticsearch',
+        'redisson': 'redisson',
+        'spring_framework': 'spring-framework',
+        'springboot': 'spring-boot',
+        'stirling': 'Stirling-PDF',
+        'selenium': 'selenium',
+        'ghidra': 'ghidra',
+        'dbeaver': 'dbeaver',
+        'kafka': 'kafka',
+        "graal": 'graal',
+        'dataease': 'dataease'
+}
+project_basepath_map = {v:k for k,v in project_basepath_map.items()}
+project_name = project_basepath_map[project_name]
 helper = EmmHelper()
+helper.outdir = sys.argv[2]
 refminer_filtered_file = f"{data_folder}/refminer_data/{helper.directory}/{project_name}_res.json"
+
+try:
+    os.makedirs(f"{data_folder}/refminer_data/{helper.outdir}")
+except FileExistsError:
+    pass
+
 mm_assist_outfile = f"{data_folder}/refminer_data/{helper.outdir}/{project_name}_res.json"
-with open(f"{data_folder}/plugin_input_files/classes_and_commits.json") as f:
+with open(f"{data_folder}/plugin_input_files/classes_and_commits-{sys.argv[1]}.json") as f:
     mm_assist_runs = json.load(f)
 
 with open(refminer_filtered_file) as f:

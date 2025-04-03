@@ -6,6 +6,7 @@ import mm_analyser
 import mm_analyser.hmove.compute_input_synthetic as hmove_computer
 import mm_analyser.refactoring_miner_processing.oracle as rw_oracle
 import mm_analyser.jmove_dataset.oracle as jmove_oracle
+import random
 
 def downsample():
     """If there are more than 500 combinations of input for a data-point, keep only 500 of them."""
@@ -50,9 +51,9 @@ def downsample():
 
 
 def chunk_data():
-    CHUNK_SIZE = 200
+    CHUNK_SIZE = 50
     print(f"Chunking hmove input into size of {CHUNK_SIZE}.")
-    hmove_input_folder = mm_analyser.data_folder.joinpath('refminer_data/hmove/input')
+    hmove_input_folder = mm_analyser.data_folder.joinpath('refminer_data/hmove/input/chunked')
     json_files = [i for i in os.listdir(hmove_input_folder) if i.endswith('.json')]
     real_world_oracle = rw_oracle.get_instance_oracle()
 
@@ -92,7 +93,7 @@ def chunk_data():
 
 
 def downsample_synthetic():
-    MAX_SIZE = 500
+    MAX_SIZE = 200
 
     print("downsampling synthetic data")
     hmove_input_folder = mm_analyser.data_folder.joinpath('synthetic_corpus_comparison/hmove/input')
@@ -129,7 +130,7 @@ def downsample_synthetic():
                                         i['method_information']['method_name'] not in [oracle.method_name, oracle.alias_method_name]]
                 remaining_count = MAX_SIZE - len(oracle_method_inputs)
 
-                hmove_input_data[oracle_key] = oracle_method_inputs + other_inputs[:remaining_count]
+                hmove_input_data[oracle_key] = oracle_method_inputs + random.sample(other_inputs, remaining_count)
 
                 with open(hmove_input_folder.joinpath(filename), "w") as f:
                     json.dump(hmove_input_data, f, indent=4)
@@ -137,6 +138,6 @@ def downsample_synthetic():
 
 
 if __name__ == '__main__':
-    # downsample()
-    chunk_data()
+    downsample()
+    # chunk_data()
     # downsample_synthetic()

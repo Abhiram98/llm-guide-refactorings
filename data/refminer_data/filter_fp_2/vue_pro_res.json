@@ -1,0 +1,376 @@
+[
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "3e91ac73c4fd1bcebe2c608675324d6cf2df5c5a",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/3e91ac73c4fd1bcebe2c608675324d6cf2df5c5a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private getAdminUserApi() : AdminUserApi from class cn.iocoder.yudao.module.crm.util.CrmQueryWrapperUtils to public getAdminUserApi() : AdminUserApi from class cn.iocoder.yudao.module.crm.util.CrmQueryWrapperUtils.SingletonManager",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/util/CrmQueryWrapperUtils.java",
+                    "startLine": 96,
+                    "endLine": 98,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private getAdminUserApi() : AdminUserApi"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/util/CrmQueryWrapperUtils.java",
+                    "startLine": 115,
+                    "endLine": 117,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public getAdminUserApi() : AdminUserApi"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "69503689912abe6e565fd71895bc0245bd72fc2c",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/69503689912abe6e565fd71895bc0245bd72fc2c",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private setUserInfo(logList List<OperateLogV2DO>, userList List<AdminUserDO>) : List<OperateLogV2RespDTO> from class cn.iocoder.yudao.module.system.api.logger.OperateLogApiImpl to private setUserInfo(logList List<OperateLogV2DO>, userList List<AdminUserDO>) : List<OperateLogV2RespDTO> from class cn.iocoder.yudao.module.system.convert.logger.OperateLogConvert",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-system/yudao-module-system-biz/src/main/java/cn/iocoder/yudao/module/system/api/logger/OperateLogApiImpl.java",
+                    "startLine": 63,
+                    "endLine": 70,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private setUserInfo(logList List<OperateLogV2DO>, userList List<AdminUserDO>) : List<OperateLogV2RespDTO>"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-system/yudao-module-system-biz/src/main/java/cn/iocoder/yudao/module/system/convert/logger/OperateLogConvert.java",
+                    "startLine": 38,
+                    "endLine": 45,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private setUserInfo(logList List<OperateLogV2DO>, userList List<AdminUserDO>) : List<OperateLogV2RespDTO>"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "bbba83ef61527b3bd0a094bb5381d6cce1558f61",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/bbba83ef61527b3bd0a094bb5381d6cce1558f61",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public buildSortingField(func Func1<T,?>) : SortingField from class cn.iocoder.yudao.framework.mybatis.core.util.MyBatisUtils to public buildSortingField(func Func1<T,?>) : SortingField from class cn.iocoder.yudao.framework.common.util.object.PageUtils",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-framework/yudao-spring-boot-starter-mybatis/src/main/java/cn/iocoder/yudao/framework/mybatis/core/util/MyBatisUtils.java",
+                    "startLine": 95,
+                    "endLine": 104,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public buildSortingField(func Func1<T,?>) : SortingField"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-framework/yudao-common/src/main/java/cn/iocoder/yudao/framework/common/util/object/PageUtils.java",
+                    "startLine": 27,
+                    "endLine": 36,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public buildSortingField(func Func1<T,?>) : SortingField"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "bbba83ef61527b3bd0a094bb5381d6cce1558f61",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/bbba83ef61527b3bd0a094bb5381d6cce1558f61",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public buildSortingField(func Func1<T,?>, order String) : SortingField from class cn.iocoder.yudao.framework.mybatis.core.util.MyBatisUtils to public buildSortingField(func Func1<T,?>, order String) : SortingField from class cn.iocoder.yudao.framework.common.util.object.PageUtils",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-framework/yudao-spring-boot-starter-mybatis/src/main/java/cn/iocoder/yudao/framework/mybatis/core/util/MyBatisUtils.java",
+                    "startLine": 106,
+                    "endLine": 120,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public buildSortingField(func Func1<T,?>, order String) : SortingField"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-framework/yudao-common/src/main/java/cn/iocoder/yudao/framework/common/util/object/PageUtils.java",
+                    "startLine": 38,
+                    "endLine": 51,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public buildSortingField(func Func1<T,?>, order String) : SortingField"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "bbba83ef61527b3bd0a094bb5381d6cce1558f61",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/bbba83ef61527b3bd0a094bb5381d6cce1558f61",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public buildDefaultSortingField(sortablePageParam SortablePageParam, func Func1<T,?>) : void from class cn.iocoder.yudao.framework.mybatis.core.util.MyBatisUtils to public buildDefaultSortingField(sortablePageParam SortablePageParam, func Func1<T,?>) : void from class cn.iocoder.yudao.framework.common.util.object.PageUtils",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-framework/yudao-spring-boot-starter-mybatis/src/main/java/cn/iocoder/yudao/framework/mybatis/core/util/MyBatisUtils.java",
+                    "startLine": 122,
+                    "endLine": 134,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public buildDefaultSortingField(sortablePageParam SortablePageParam, func Func1<T,?>) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-framework/yudao-common/src/main/java/cn/iocoder/yudao/framework/common/util/object/PageUtils.java",
+                    "startLine": 53,
+                    "endLine": 65,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public buildDefaultSortingField(sortablePageParam SortablePageParam, func Func1<T,?>) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "5622ba8acf82e0a9246317ede1b58c7119fe7fc7",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/5622ba8acf82e0a9246317ede1b58c7119fe7fc7",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public getTaskNameByTaskIds(taskIds Collection<String>) : Map<String,String> from class cn.iocoder.yudao.module.bpm.util.FlowableUtils to public getTaskNameByTaskIds(taskIds Collection<String>) : Map<String,String> from class cn.iocoder.yudao.module.bpm.service.task.BpmTaskServiceImpl",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-bpm/yudao-module-bpm-biz/src/main/java/cn/iocoder/yudao/module/bpm/util/FlowableUtils.java",
+                    "startLine": 92,
+                    "endLine": 103,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public getTaskNameByTaskIds(taskIds Collection<String>) : Map<String,String>"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-bpm/yudao-module-bpm-biz/src/main/java/cn/iocoder/yudao/module/bpm/service/task/BpmTaskServiceImpl.java",
+                    "startLine": 974,
+                    "endLine": 985,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public getTaskNameByTaskIds(taskIds Collection<String>) : Map<String,String>"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "d8b2da8eed232143f04f90c43472bf51fb9e4e02",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/d8b2da8eed232143f04f90c43472bf51fb9e4e02",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public hasPermission(bizType Integer, bizId Long, userId Long, levelEnum CrmPermissionLevelEnum) : boolean from class cn.iocoder.yudao.module.crm.framework.permission.core.util.CrmPermissionUtils to public hasPermission(bizType Integer, bizId Long, userId Long, levelEnum CrmPermissionLevelEnum) : boolean from class cn.iocoder.yudao.module.crm.service.permission.CrmPermissionServiceImpl",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/framework/permission/core/util/CrmPermissionUtils.java",
+                    "startLine": 34,
+                    "endLine": 47,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public hasPermission(bizType Integer, bizId Long, userId Long, levelEnum CrmPermissionLevelEnum) : boolean"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/service/permission/CrmPermissionServiceImpl.java",
+                    "startLine": 215,
+                    "endLine": 220,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public hasPermission(bizType Integer, bizId Long, userId Long, levelEnum CrmPermissionLevelEnum) : boolean"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "9caaa96e5b3678365d11f23b15861070f1d8f259",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/9caaa96e5b3678365d11f23b15861070f1d8f259",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public isEndResult(result Integer) : boolean from class cn.iocoder.yudao.module.crm.service.contract.listener.CrmContractResultListener to public isEndResult(result Integer) : boolean from class cn.iocoder.yudao.module.crm.service.contract.CrmContractServiceImpl",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/service/contract/listener/CrmContractResultListener.java",
+                    "startLine": 49,
+                    "endLine": 58,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public isEndResult(result Integer) : boolean"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-crm/yudao-module-crm-biz/src/main/java/cn/iocoder/yudao/module/crm/service/contract/CrmContractServiceImpl.java",
+                    "startLine": 302,
+                    "endLine": 311,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public isEndResult(result Integer) : boolean"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "528a321f0aa178b4b36b764075371ca1d3ada7e0",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/528a321f0aa178b4b36b764075371ca1d3ada7e0",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private parseCandidateStrategy(userTask FlowElement) : Integer from class cn.iocoder.yudao.module.bpm.framework.flowable.core.candidate.BpmTaskCandidateInvoker to public parseCandidateStrategy(userTask FlowElement) : Integer from class cn.iocoder.yudao.module.bpm.framework.flowable.core.util.BpmnModelUtils",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-bpm/yudao-module-bpm-biz/src/main/java/cn/iocoder/yudao/module/bpm/framework/flowable/core/candidate/BpmTaskCandidateInvoker.java",
+                    "startLine": 116,
+                    "endLine": 119,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private parseCandidateStrategy(userTask FlowElement) : Integer"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-bpm/yudao-module-bpm-biz/src/main/java/cn/iocoder/yudao/module/bpm/framework/flowable/core/util/BpmnModelUtils.java",
+                    "startLine": 19,
+                    "endLine": 22,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public parseCandidateStrategy(userTask FlowElement) : Integer"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "528a321f0aa178b4b36b764075371ca1d3ada7e0",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/528a321f0aa178b4b36b764075371ca1d3ada7e0",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private parseCandidateParam(userTask FlowElement) : String from class cn.iocoder.yudao.module.bpm.framework.flowable.core.candidate.BpmTaskCandidateInvoker to public parseCandidateParam(userTask FlowElement) : String from class cn.iocoder.yudao.module.bpm.framework.flowable.core.util.BpmnModelUtils",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-module-bpm/yudao-module-bpm-biz/src/main/java/cn/iocoder/yudao/module/bpm/framework/flowable/core/candidate/BpmTaskCandidateInvoker.java",
+                    "startLine": 121,
+                    "endLine": 124,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private parseCandidateParam(userTask FlowElement) : String"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-bpm/yudao-module-bpm-biz/src/main/java/cn/iocoder/yudao/module/bpm/framework/flowable/core/util/BpmnModelUtils.java",
+                    "startLine": 24,
+                    "endLine": 27,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public parseCandidateParam(userTask FlowElement) : String"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/YunaiV/ruoyi-vue-pro.git",
+        "sha1": "7f0485e872ca78e6b98e8bbfa1a9af39da475611",
+        "url": "https://github.com/YunaiV/ruoyi-vue-pro/commit/7f0485e872ca78e6b98e8bbfa1a9af39da475611",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public writeAttachment(response HttpServletResponse, filename String, content byte[]) : void from class cn.iocoder.yudao.framework.common.util.servlet.ServletUtils to public writeAttachment(response HttpServletResponse, filename String, content byte[]) : void from class cn.iocoder.yudao.module.infra.framework.file.core.utils.FileTypeUtils",
+            "leftSideLocations": [
+                {
+                    "filePath": "yudao-framework/yudao-common/src/main/java/cn/iocoder/yudao/framework/common/util/servlet/ServletUtils.java",
+                    "startLine": 38,
+                    "endLine": 51,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public writeAttachment(response HttpServletResponse, filename String, content byte[]) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "yudao-module-infra/yudao-module-infra-biz/src/main/java/cn/iocoder/yudao/module/infra/framework/file/core/utils/FileTypeUtils.java",
+                    "startLine": 54,
+                    "endLine": 74,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public writeAttachment(response HttpServletResponse, filename String, content byte[]) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    }
+]

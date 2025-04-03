@@ -1,4 +1,5 @@
 import json
+import numpy as np
 import mm_analyser
 import os
 import mm_analyser.refactoring_miner_processing.oracle as rw_oracle
@@ -6,19 +7,25 @@ import mm_analyser.jmove_dataset.compute_accuracy_hmove as hmove_acc
 
 from collections import defaultdict
 
+time_taken = []
+count_recommendations = []
 
 def compute_recall(oracle: rw_oracle.RealWorldInstanceOraclePoint, hmove_output) -> hmove_acc.HMoveRecall:
     recall = hmove_acc.HMoveRecall(recall_m_index=-1, recall_c_index=-1, recall_mc_index=-1)
+    global time_taken
+    time_taken.append(sum([i['execution_time'] for i in hmove_output]))
 
     succesful_execution = [i for i in hmove_output if
                          i['probability'] is not None]
 
-    # if len(succesful_execution) < len(hmove_output) or len(succesful_execution)==0:
-    #     raise Exception(f"HMove did not succesfully run on this data point: {oracle.ref_id}")
+    if len(succesful_execution) < len(hmove_output)//2 or len(succesful_execution)==0:
+        # Throw error when less that half the data point successfully executed
+        raise Exception(f"HMove did not succesfully run on this data point: {oracle.ref_id}")
 
     valid_suggestions = [i for i in succesful_execution if
                          i['probability'] > 0.5
                          ]
+    count_recommendations.append(len(valid_suggestions))
     hmove_recommendations_sorted = sorted(valid_suggestions, key=lambda x: x['probability'])
 
 
@@ -132,6 +139,9 @@ def compute():
         assert len(oracle_matches) == 1
         oracle = oracle_matches[0]
 
+        if ref_id == '94':
+            print("found motivating example")
+
         try:
             recalls[ref_id_int] = compute_recall(oracle, hmove_output_data[ref_id])
         except:
@@ -158,6 +168,9 @@ def compute():
     print("-----results for large classes-----")
     present_recalls([v for k, v in recalls.items() if k in big_class_ids])
 
+    global time_taken
+    print(f"{np.mean(time_taken)=}")
+    print(f"{np.mean(count_recommendations)=}")
 
 if __name__ == '__main__':
     compute()

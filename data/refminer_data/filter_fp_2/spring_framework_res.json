@@ -1,0 +1,716 @@
+[
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "1e49334209d1f14170f4b359de247636f0a4c933",
+        "url": "https://github.com/spring-projects/spring-framework/commit/1e49334209d1f14170f4b359de247636f0a4c933",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private getUriToLog(uri URI) : URI from class org.springframework.web.reactive.function.client.DefaultWebClient.DefaultResponseSpec to private getUriToLog(uri URI) : URI from class org.springframework.web.reactive.function.client.DefaultWebClient",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-webflux/src/main/java/org/springframework/web/reactive/function/client/DefaultWebClient.java",
+                    "startLine": 701,
+                    "endLine": 711,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private getUriToLog(uri URI) : URI"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-webflux/src/main/java/org/springframework/web/reactive/function/client/DefaultWebClient.java",
+                    "startLine": 198,
+                    "endLine": 208,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private getUriToLog(uri URI) : URI"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "url": "https://github.com/spring-projects/spring-framework/commit/6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public initializeRequestValuesBuilder() : HttpRequestValues.Builder from class org.springframework.web.service.invoker.HttpServiceMethod to public initializeRequestValuesBuilder() : HttpRequestValues.Builder from class org.springframework.web.service.invoker.HttpServiceMethod.HttpRequestValuesInitializer",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 155,
+                    "endLine": 170,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public initializeRequestValuesBuilder() : HttpRequestValues.Builder"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 161,
+                    "endLine": 176,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public initializeRequestValuesBuilder() : HttpRequestValues.Builder"
+                }
+            ],
+            "isStatic": false
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "url": "https://github.com/spring-projects/spring-framework/commit/6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public create(method Method, containingClass Class<?>, embeddedValueResolver StringValueResolver, requestValuesSupplier Supplier<HttpRequestValues.Builder>) : HttpRequestValuesInitializer from class org.springframework.web.service.invoker.HttpServiceMethod to public create(method Method, containingClass Class<?>, embeddedValueResolver StringValueResolver, requestValuesSupplier Supplier<HttpRequestValues.Builder>) : HttpRequestValuesInitializer from class org.springframework.web.service.invoker.HttpServiceMethod.HttpRequestValuesInitializer",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 173,
+                    "endLine": 192,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public create(method Method, containingClass Class<?>, embeddedValueResolver StringValueResolver, requestValuesSupplier Supplier<HttpRequestValues.Builder>) : HttpRequestValuesInitializer"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 179,
+                    "endLine": 208,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public create(method Method, containingClass Class<?>, embeddedValueResolver StringValueResolver, requestValuesSupplier Supplier<HttpRequestValues.Builder>) : HttpRequestValuesInitializer"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "url": "https://github.com/spring-projects/spring-framework/commit/6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private initHttpMethod(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : HttpMethod from class org.springframework.web.service.invoker.HttpServiceMethod to private initHttpMethod(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : HttpMethod from class org.springframework.web.service.invoker.HttpServiceMethod.HttpRequestValuesInitializer",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 194,
+                    "endLine": 207,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private initHttpMethod(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : HttpMethod"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 210,
+                    "endLine": 223,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private initHttpMethod(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : HttpMethod"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "url": "https://github.com/spring-projects/spring-framework/commit/6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private initUrl(typeAnnotation HttpExchange, methodAnnotation HttpExchange, embeddedValueResolver StringValueResolver) : String from class org.springframework.web.service.invoker.HttpServiceMethod to private initUrl(typeAnnotation HttpExchange, methodAnnotation HttpExchange, embeddedValueResolver StringValueResolver) : String from class org.springframework.web.service.invoker.HttpServiceMethod.HttpRequestValuesInitializer",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 209,
+                    "endLine": 234,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private initUrl(typeAnnotation HttpExchange, methodAnnotation HttpExchange, embeddedValueResolver StringValueResolver) : String"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 225,
+                    "endLine": 250,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private initUrl(typeAnnotation HttpExchange, methodAnnotation HttpExchange, embeddedValueResolver StringValueResolver) : String"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "url": "https://github.com/spring-projects/spring-framework/commit/6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private initContentType(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : MediaType from class org.springframework.web.service.invoker.HttpServiceMethod to private initContentType(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : MediaType from class org.springframework.web.service.invoker.HttpServiceMethod.HttpRequestValuesInitializer",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 236,
+                    "endLine": 249,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private initContentType(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : MediaType"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 252,
+                    "endLine": 265,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private initContentType(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : MediaType"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "url": "https://github.com/spring-projects/spring-framework/commit/6691ff207244ef46cdf18e16df17f3cd19c9ce2a",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private initAccept(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : List<MediaType> from class org.springframework.web.service.invoker.HttpServiceMethod to private initAccept(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : List<MediaType> from class org.springframework.web.service.invoker.HttpServiceMethod.HttpRequestValuesInitializer",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 251,
+                    "endLine": 264,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private initAccept(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : List<MediaType>"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-web/src/main/java/org/springframework/web/service/invoker/HttpServiceMethod.java",
+                    "startLine": 267,
+                    "endLine": 280,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private initAccept(typeAnnotation HttpExchange, methodAnnotation HttpExchange) : List<MediaType>"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "750cb739023a4ceb52e91ea66ce09f98638a8821",
+        "url": "https://github.com/spring-projects/spring-framework/commit/750cb739023a4ceb52e91ea66ce09f98638a8821",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private method(request ServerRequest) : HttpMethod from class org.springframework.web.reactive.function.server.RequestPredicates.HttpMethodPredicate to package method(request ServerRequest) : HttpMethod from class org.springframework.web.reactive.function.server.RequestPredicates.SingleHttpMethodPredicate",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-webflux/src/main/java/org/springframework/web/reactive/function/server/RequestPredicates.java",
+                    "startLine": 554,
+                    "endLine": 563,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private method(request ServerRequest) : HttpMethod"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-webflux/src/main/java/org/springframework/web/reactive/function/server/RequestPredicates.java",
+                    "startLine": 564,
+                    "endLine": 573,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "package method(request ServerRequest) : HttpMethod"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "750cb739023a4ceb52e91ea66ce09f98638a8821",
+        "url": "https://github.com/spring-projects/spring-framework/commit/750cb739023a4ceb52e91ea66ce09f98638a8821",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private method(request ServerRequest) : HttpMethod from class org.springframework.web.servlet.function.RequestPredicates.HttpMethodPredicate to package method(request ServerRequest) : HttpMethod from class org.springframework.web.servlet.function.RequestPredicates.SingleHttpMethodPredicate",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-webmvc/src/main/java/org/springframework/web/servlet/function/RequestPredicates.java",
+                    "startLine": 552,
+                    "endLine": 561,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private method(request ServerRequest) : HttpMethod"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-webmvc/src/main/java/org/springframework/web/servlet/function/RequestPredicates.java",
+                    "startLine": 562,
+                    "endLine": 571,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "package method(request ServerRequest) : HttpMethod"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "38c831f15fadef0f5ca4ecf032a5d4ccdb293e90",
+        "url": "https://github.com/spring-projects/spring-framework/commit/38c831f15fadef0f5ca4ecf032a5d4ccdb293e90",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public findPublicDeclaringClass(method Method) : Class<?> from class org.springframework.expression.spel.support.ReflectionHelper to public findPublicDeclaringClass(method Method) : Class<?> from class org.springframework.expression.spel.CodeFlow",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-expression/src/main/java/org/springframework/expression/spel/support/ReflectionHelper.java",
+                    "startLine": 502,
+                    "endLine": 539,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public findPublicDeclaringClass(method Method) : Class<?>"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-expression/src/main/java/org/springframework/expression/spel/CodeFlow.java",
+                    "startLine": 412,
+                    "endLine": 449,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public findPublicDeclaringClass(method Method) : Class<?>"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "38c831f15fadef0f5ca4ecf032a5d4ccdb293e90",
+        "url": "https://github.com/spring-projects/spring-framework/commit/38c831f15fadef0f5ca4ecf032a5d4ccdb293e90",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private findPublicDeclaringClass(declaringClass Class<?>, methodName String, parameterTypes Class<?>[]) : Class<?> from class org.springframework.expression.spel.support.ReflectionHelper to private findPublicDeclaringClass(declaringClass Class<?>, methodName String, parameterTypes Class<?>[]) : Class<?> from class org.springframework.expression.spel.CodeFlow",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-expression/src/main/java/org/springframework/expression/spel/support/ReflectionHelper.java",
+                    "startLine": 541,
+                    "endLine": 560,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private findPublicDeclaringClass(declaringClass Class<?>, methodName String, parameterTypes Class<?>[]) : Class<?>"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-expression/src/main/java/org/springframework/expression/spel/CodeFlow.java",
+                    "startLine": 451,
+                    "endLine": 470,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private findPublicDeclaringClass(declaringClass Class<?>, methodName String, parameterTypes Class<?>[]) : Class<?>"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "9202c0ad41300babd10cd1a63599b30a35e1ede8",
+        "url": "https://github.com/spring-projects/spring-framework/commit/9202c0ad41300babd10cd1a63599b30a35e1ede8",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method package compiledByAjc(clazz Class<?>) : boolean from class org.springframework.aop.aspectj.annotation.AbstractAspectJAdvisorFactory to private compiledByAjc(clazz Class<?>) : boolean from class org.springframework.aop.aspectj.annotation.AspectJAdvisorBeanRegistrationAotProcessor",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-aop/src/main/java/org/springframework/aop/aspectj/annotation/AbstractAspectJAdvisorFactory.java",
+                    "startLine": 86,
+                    "endLine": 100,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "package compiledByAjc(clazz Class<?>) : boolean"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-aop/src/main/java/org/springframework/aop/aspectj/annotation/AspectJAdvisorBeanRegistrationAotProcessor.java",
+                    "startLine": 57,
+                    "endLine": 64,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private compiledByAjc(clazz Class<?>) : boolean"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "0ac7e41bebd9624dcabedc8ed122fe0d530af565",
+        "url": "https://github.com/spring-projects/spring-framework/commit/0ac7e41bebd9624dcabedc8ed122fe0d530af565",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private compare(expectedJson String, actualJson String, compareFunction ThrowingBiFunction<String,String,JSONCompareResult>) : JsonComparison from class org.springframework.test.json.JsonAssert to public compare(expectedJson String, actualJson String) : JsonComparison from class org.springframework.test.json.JsonAssert.JsonAssertJsonComparator",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-test/src/main/java/org/springframework/test/json/JsonAssert.java",
+                    "startLine": 72,
+                    "endLine": 87,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private compare(expectedJson String, actualJson String, compareFunction ThrowingBiFunction<String,String,JSONCompareResult>) : JsonComparison"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-test/src/main/java/org/springframework/test/json/JsonAssert.java",
+                    "startLine": 81,
+                    "endLine": 100,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public compare(expectedJson String, actualJson String) : JsonComparison"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private assertPubliclyAccessible(method Method) : void from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private assertPubliclyAccessible(method Method) : void from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 711,
+                    "endLine": 714,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private assertPubliclyAccessible(method Method) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 870,
+                    "endLine": 873,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private assertPubliclyAccessible(method Method) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private assertNotPubliclyAccessible(method Method) : void from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private assertNotPubliclyAccessible(method Method) : void from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 716,
+                    "endLine": 720,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private assertNotPubliclyAccessible(method Method) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 875,
+                    "endLine": 879,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private assertNotPubliclyAccessible(method Method) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private assertPublic(member Member) : void from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private assertPublic(member Member) : void from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 722,
+                    "endLine": 724,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private assertPublic(member Member) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 881,
+                    "endLine": 883,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private assertPublic(member Member) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private assertPublic(clazz Class<?>) : void from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private assertPublic(clazz Class<?>) : void from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 726,
+                    "endLine": 728,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private assertPublic(clazz Class<?>) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 885,
+                    "endLine": 887,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private assertPublic(clazz Class<?>) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private assertNotPublic(member Member) : void from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private assertNotPublic(member Member) : void from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 730,
+                    "endLine": 732,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private assertNotPublic(member Member) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 889,
+                    "endLine": 891,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private assertNotPublic(member Member) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private assertNotPublic(clazz Class<?>) : void from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private assertNotPublic(clazz Class<?>) : void from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 734,
+                    "endLine": 736,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private assertNotPublic(clazz Class<?>) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 893,
+                    "endLine": 895,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private assertNotPublic(clazz Class<?>) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private isPublic(clazz Class<?>) : boolean from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private isPublic(clazz Class<?>) : boolean from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 738,
+                    "endLine": 740,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private isPublic(clazz Class<?>) : boolean"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 897,
+                    "endLine": 899,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private isPublic(clazz Class<?>) : boolean"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/spring-projects/spring-framework.git",
+        "sha1": "ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "url": "https://github.com/spring-projects/spring-framework/commit/ba774c6290cf5a91329ed68e1ea60d0904bedbb4",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method private isPublic(member Member) : boolean from class org.springframework.util.ClassUtilsTests.GetPubliclyAccessibleMethodTests to private isPublic(member Member) : boolean from class org.springframework.util.ClassUtilsTests",
+            "leftSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 742,
+                    "endLine": 744,
+                    "startColumn": 3,
+                    "endColumn": 4,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "private isPublic(member Member) : boolean"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "spring-core/src/test/java/org/springframework/util/ClassUtilsTests.java",
+                    "startLine": 901,
+                    "endLine": 903,
+                    "startColumn": 2,
+                    "endColumn": 3,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "private isPublic(member Member) : boolean"
+                }
+            ],
+            "isStatic": true
+        }
+    }
+]

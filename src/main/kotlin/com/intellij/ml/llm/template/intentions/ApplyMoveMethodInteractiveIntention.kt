@@ -35,6 +35,7 @@ import com.intellij.openapi.ui.popup.JBPopupListener
 import com.intellij.openapi.ui.popup.LightweightWindowEvent
 import com.intellij.psi.*
 import com.intellij.ui.awt.RelativePoint
+import com.intellij.warmup.util.importOrOpenProject
 import dev.langchain4j.data.message.ChatMessage
 import dev.langchain4j.model.voyageai.VoyageAiEmbeddingModelName
 import java.util.concurrent.atomic.AtomicReference
@@ -88,6 +89,8 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
     }
     private fun invokeMoveMethodPlugin(project: Project, promptIterator: Iterator<MutableList<ChatMessage>>, editor: Editor, file: PsiFile) {
 
+        val onlyVanilla = false;
+
         currentFile = file
         currentEditor = editor
         currentProject = project
@@ -95,7 +98,14 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
         MAX_ITERS = RefAgentSettingsManager.getInstance().getNumberOfIterations()
         llmChatModel = RefAgentSettingsManager.getInstance().createAndGetAiModel()!!
         logViewer.clear()
-        getVanillaLlmSuggestions(project, promptIterator) // get vanilla llm suggestions, just for ablation.
+
+        if (onlyVanilla){
+            getVanillaLlmSuggestions(project, promptIterator) // get vanilla llm suggestions, just for ablation.
+            telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
+            telemetryDataManager.setRefactoringObjects(emptyList())
+            sendTelemetryData()
+            return
+        }
 
         val allMethodsInClass: List<PsiMethod> = runReadAction { PsiUtils.getAllMethodsInClass(functionPsiElement as PsiClass) }
         val allClassNames = listOf((functionPsiElement as PsiClass).name!!)+ (functionPsiElement as PsiClass).allInnerClasses.map { it.name }.filterNotNull()
@@ -240,7 +250,8 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
     }
 
     private fun isSetter(it: PsiMethod) : Boolean {
-        return ((it.name.startsWith("set") && it.parameterList.parameters.size == 1)) || setSingleVariable(it)
+        return ((it.name.startsWith("set") && it.parameterList.parameters.size == 1))
+                || setSingleVariable(it)
     }
 
     private fun setSingleVariable(it: PsiMethod): Boolean {

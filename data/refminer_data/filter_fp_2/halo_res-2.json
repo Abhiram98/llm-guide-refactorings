@@ -1,0 +1,70 @@
+[
+    {
+        "repository": "https://github.com/halo-dev/halo.git",
+        "sha1": "0e17d53ede66c57b12f2dec4c92874c7e69ed9ef",
+        "url": "https://github.com/halo-dev/halo/commit/0e17d53ede66c57b12f2dec4c92874c7e69ed9ef",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method package identityFrom(owner Comment.CommentOwner) : UserIdentity from class run.halo.app.content.comment.CommentNotificationReasonPublisher to public identityFrom(owner Comment.CommentOwner) : UserIdentity from class run.halo.app.content.comment.ReplyNotificationSubscriptionHelper",
+            "leftSideLocations": [
+                {
+                    "filePath": "application/src/main/java/run/halo/app/content/comment/CommentNotificationReasonPublisher.java",
+                    "startLine": 227,
+                    "endLine": 232,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "package identityFrom(owner Comment.CommentOwner) : UserIdentity"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "application/src/main/java/run/halo/app/content/comment/ReplyNotificationSubscriptionHelper.java",
+                    "startLine": 67,
+                    "endLine": 72,
+                    "startColumn": 5,
+                    "endColumn": 6,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public identityFrom(owner Comment.CommentOwner) : UserIdentity"
+                }
+            ],
+            "isStatic": true
+        }
+    },
+    {
+        "repository": "https://github.com/halo-dev/halo.git",
+        "sha1": "f61f846a7f571f46e15930e4a0ce952a9c58932b",
+        "url": "https://github.com/halo-dev/halo/commit/f61f846a7f571f46e15930e4a0ce952a9c58932b",
+        "move_method_refactoring": {
+            "type": "Move Method",
+            "description": "Move Method public buildParameters(builder Builder) : void from class run.halo.app.core.extension.attachment.endpoint.AttachmentEndpoint.ISearchRequest to public buildParameters(builder Builder) : void from class run.halo.app.core.extension.attachment.endpoint.AttachmentEndpoint.SearchRequest",
+            "leftSideLocations": [
+                {
+                    "filePath": "application/src/main/java/run/halo/app/core/extension/attachment/endpoint/AttachmentEndpoint.java",
+                    "startLine": 188,
+                    "endLine": 220,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "original method declaration",
+                    "codeElement": "public buildParameters(builder Builder) : void"
+                }
+            ],
+            "rightSideLocations": [
+                {
+                    "filePath": "application/src/main/java/run/halo/app/core/extension/attachment/endpoint/AttachmentEndpoint.java",
+                    "startLine": 205,
+                    "endLine": 237,
+                    "startColumn": 9,
+                    "endColumn": 10,
+                    "codeElementType": "METHOD_DECLARATION",
+                    "description": "moved method declaration",
+                    "codeElement": "public buildParameters(builder Builder) : void"
+                }
+            ],
+            "isStatic": true
+        }
+    }
+]

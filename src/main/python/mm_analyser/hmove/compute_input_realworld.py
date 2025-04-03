@@ -10,13 +10,17 @@ from typing import Optional
 
 class HMovePreparerRW(hmove_in.HMovePreparer):
 
-    def __init__(self, project_directory_path: str, specific_projects: Optional[list[str]] = None, exclude_projects: Optional[list[str]]=None):
+    def __init__(self, project_directory_path: str,
+                 specific_projects: Optional[list[str]] = None,
+                 exclude_projects: Optional[list[str]]=None,
+                 ref_ids: Optional[list[int]]=None):
         self.exclude_projects = exclude_projects
         self.specific_project = specific_projects
         self.source_patterns = {
             'dbeaver': ['src'],
             'graal': ['src']
         }
+        self.ref_ids = ref_ids
         super().__init__(project_directory_path)
 
     def compute(self):
@@ -29,6 +33,10 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
             if (self.exclude_projects is not None
                     and oracle.project_name in self.exclude_projects):
                 print(f"Skipping {oracle.ref_id} because {oracle.project_name} in {self.exclude_projects}")
+                continue
+            if (self.ref_ids is not None
+                and oracle.ref_id not in self.ref_ids):
+                print(f"Skipping {oracle.ref_id} because it's not in {self.ref_ids}")
                 continue
 
             project_directory = self.project_directory_path.joinpath(oracle.project_name)
@@ -69,7 +77,7 @@ class HMovePreparerRW(hmove_in.HMovePreparer):
                         target_class_path = self.get_path_from_qualname(target_class, self.source_dirs)
                     except:
                         known_names = ['java.', 'javax.', 'boolean', 'int', 'T', 'long', 'double', 'short']
-                        if not any(k in target_class for k in known_names):
+                        if not any(target_class.startswith(k) for k in known_names):
                             print(f"Failed to find path of {target_class}")
                         # print(f"Failed to find path of {target_class}")
                         continue
@@ -93,4 +101,6 @@ if __name__ == '__main__':
     from mm_analyser.env import PROJECT_ALIAS_MAP, PROJECTS_BASE_PATH
 
     HMovePreparerRW(project_directory_path=PROJECTS_BASE_PATH,
-                    specific_projects=['selenium']).compute()
+                    specific_projects=['kafka'],
+                    ref_ids=[599, 615, 614]
+                    ).compute()

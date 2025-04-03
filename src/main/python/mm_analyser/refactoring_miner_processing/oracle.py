@@ -1,10 +1,14 @@
 import mm_analyser
 
+import git
 import os
 import json
+from pathlib import Path
 from pydantic import BaseModel, Field, computed_field
+import pandas as pd
 import mm_analyser.refactoring_miner_processing.filter.ExtractMoveMethodValidator as em_ref
-
+import mm_analyser.refactoring_miner_processing.filter.MoveMethodRef as mm_ref
+from mm_analyser.env import PROJECTS_BASE_PATH
 
 rminer_data_path = f"{mm_analyser.data_folder}/refminer_data/contains_a_mm"
 files = os.listdir(rminer_data_path)
@@ -39,6 +43,13 @@ class RealWorldInstanceOraclePoint(BaseModel):
     def method_name(self) -> str:
         return self.move_method_ref.right_signature.method_name
 
+
+class RealWorldStaticOraclePoint(RealWorldInstanceOraclePoint):
+    move_method_ref: mm_ref.MoveMethodRef = Field(description="the extract-move-method refactoring"
+                                                                 " object to be emulated")
+    ref_id: str = Field(description="refactoring id.")
+    head_commit_hash: str = Field(description="commit hash after move-method is complete")
+    prev_commit_hash: str = Field(description="commit hash before move-method is done")
 
 def get_instance_oracle() -> list[RealWorldInstanceOraclePoint]:
     plugin_outfiles = [
@@ -79,6 +90,42 @@ def get_instance_oracle() -> list[RealWorldInstanceOraclePoint]:
         for evaluation_data in combined_output
     ]
 
+def get_static_oracle() -> list[RealWorldStaticOraclePoint]:
+    static_oracle = pd.read_csv(mm_analyser.data_folder.joinpath('refminer_data/static_moves.csv').absolute())
+    oracle_descriptions = list(static_oracle['description_x'])
+    static_data_path = mm_analyser.data_folder.joinpath('refminer_data/filter_fp_2')
+    json_files = [i for i in os.listdir(static_data_path) if i.endswith('.json')]
+    oracle: list[RealWorldStaticOraclePoint] = []
+    descriptions_found = []
+
+    ref_id_counter = 1
+    for fname in json_files:
+        with open(static_data_path.joinpath(fname)) as f:
+            data = json.load(f)
+
+        for d in data:
+            if d['move_method_refactoring']['description'] in oracle_descriptions:
+                descriptions_found.append(d['move_method_refactoring']['description'])
+                # print("found one")
+                move_method = mm_ref.MoveMethodRef.create_from(d['move_method_refactoring'])
+                repo_url = d['repository']
+                project_name = repo_url.split('.git')[0].split('/')[-1]
+                repo = git.Repo(Path(PROJECTS_BASE_PATH).joinpath(project_name))
+                oracle.append(
+                    RealWorldStaticOraclePoint(
+                        move_method_ref=move_method,
+                        ref_id=f"static-{ref_id_counter}",
+                        project_git=d['repository'],
+                        prev_commit_hash=str(repo.commit(d['sha1']).parents[0]),
+                        head_commit_hash=d['sha1'],
+                        project_branch_name="unknown"
+                    )
+                )
+                ref_id_counter += 1
+    print(f"descriptions not found = {set(oracle_descriptions) - set(descriptions_found)})")
+    return oracle
+
+
 if __name__ == '__main__':
     oracle = get_instance_oracle()
     for i in oracle:
@@ -86,3 +133,6 @@ if __name__ == '__main__':
         print(i.move_method_ref.original_class)
         print("-"*20)
     print(oracle)
+
+    static_oracle = get_static_oracle()
+    print(f"{len(static_oracle)=}")
