@@ -264,6 +264,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     )
                     VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                     // Run IJ linter
+                    reloadFileIfNeeded()
                     SwingUtilities.invokeAndWait { ReformatFile.doReformat(file!!, file!!.startOffset, file!!.endOffset) }
                     Thread.sleep(5000) // wait for reformat to complete.
                     SwingUtilities.invokeAndWait {
@@ -272,7 +273,10 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     val testReport = testSelector.runTests()
                     val message = revertIfTestsFailed(testReport, oldContents)
-                    call.respond(HttpStatusCode.NoContent, message = message)
+                    if (message=="success")
+                        call.respond(HttpStatusCode.OK, message = message)
+                    else
+                        call.respond(HttpStatusCode.BadRequest, message = message)
                 } catch (ex: IllegalStateException) {
                     call.respond(HttpStatusCode.BadRequest)
                 } catch (ex: JsonConvertException) {
@@ -316,7 +320,10 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     }
                     val testReport = testSelector.runTests()
                     val message = revertIfTestsFailed(testReport, oldContents)
-                    call.respond(HttpStatusCode.NoContent, message = message)
+                    if (message=="success")
+                        call.respond(HttpStatusCode.OK, message = message)
+                    else
+                        call.respond(HttpStatusCode.BadRequest, message = message)
                 } catch (ex: IllegalStateException) {
                     call.respond(HttpStatusCode.BadRequest)
                 } catch (ex: JsonConvertException) {
@@ -325,6 +332,11 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
         }
+    }
+
+    private fun reloadFileIfNeeded() {
+        if (!file!!.isValid) // if the psi file got invalidated because of a rewrite, reload it's contents.
+            file = PsiManager.getInstance(project).findFile(file!!.virtualFile)!!
     }
 
     private fun revertIfTestsFailed(testReport: String, oldContents: @NlsSafe String): String {
