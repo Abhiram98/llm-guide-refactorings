@@ -308,7 +308,7 @@ fun openFile(filePath: String, project: Project): Pair<Editor, PsiFile> {
     return ret!!
 }
 
-fun openFileFromQualifiedName(qualifiedName: String, project: Project): Pair<Editor, PsiFile> {
+fun openFileFromQualifiedName(qualifiedName: String, project: Project, focus: Boolean): Pair<Editor, PsiFile> {
     var ret : Pair<Editor, PsiFile>? = null
     val clazz = PsiUtils.findClassFromQualifier(qualifiedName, project)
 
@@ -321,7 +321,7 @@ fun openFileFromQualifiedName(qualifiedName: String, project: Project): Pair<Edi
             project,
             vfile
         ),
-        false // request focus to editor
+        focus // request focus to editor
     )!!
     val psiFile = PsiManager.getInstance(project).findFile(vfile)!!
 

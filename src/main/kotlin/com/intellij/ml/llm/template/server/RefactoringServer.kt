@@ -10,26 +10,18 @@ import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVari
 import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.utils.FileUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
-import com.intellij.openapi.actionSystem.ActionManager
-import com.intellij.openapi.application.ApplicationManager
+import com.intellij.ml.llm.template.utils.openFile
+import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.externalSystem.importing.ImportSpecBuilder
-import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskId
-import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskNotificationListenerAdapter
-import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskType
-import com.intellij.openapi.externalSystem.service.execution.ProgressExecutionMode
-import com.intellij.openapi.externalSystem.service.notification.ExternalSystemProgressNotificationManager
-import com.intellij.openapi.externalSystem.service.project.manage.ProjectDataImportListener
-import com.intellij.openapi.externalSystem.util.ExternalSystemUtil
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
-import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
+import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.refactoring.suggested.startOffset
@@ -45,11 +37,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
-import org.jetbrains.kotlin.idea.configuration.GRADLE_SYSTEM_ID
-import org.jetbrains.kotlin.idea.framework.MAVEN_SYSTEM_ID
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import java.nio.file.Path
-import java.util.*
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
 import kotlin.io.path.Path
@@ -93,6 +82,13 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
             get("/get_source_code"){
                 call.respond(HttpStatusCode.OK, message = file!!.text)
+            }
+
+            get("/get_rel_file_path"){
+                call.respond(HttpStatusCode.OK,
+                    message = file!!.virtualFile.path
+                        .removePrefix(project.basePath.toString())
+                        .removePrefix("/"))
             }
 
             post("wait_for_reload"){
@@ -142,18 +138,116 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val params = call.receive<OpenFileParams>()
                 params.filePath
                 val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + params.filePath)
-                    ?: throw Exception("file not found")
+                if (vfile==null) {
+                    call.respond(HttpStatusCode.NotFound, message = "file not found.")
+                }
                 invokeAndWait {
                     editor = FileEditorManager.getInstance(project).openTextEditor(
                         OpenFileDescriptor(
                             project,
-                            vfile
+                            vfile!!
                         ),
                         true // request focus to editor
                     )!!
                 }
-                file = PsiManager.getInstance(project).findFile(vfile)!!
+                file = PsiManager.getInstance(project).findFile(vfile!!)!!
                 call.respond(HttpStatusCode.OK, message = "opened file!")
+            }
+
+            post("/try-open-file"){
+                // open file and set the file and editor values
+                val params = call.receive<OpenFileParams>()
+                val reqFileName = params.filePath.split("/").last()
+                if (reqFileName == file!!.name){
+                    call.respond(HttpStatusCode.OK, message = "file already open!")
+                }
+
+                val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + params.filePath)
+
+                if (vfile==null) {
+                    // try opening by qualified name.
+                    val qualName = params.filePath.removeSuffix(".java").replace("/", ".")
+                    var status = false
+                    invokeAndWait {
+                        try{
+                            openFileFromQualifiedName(qualName, project, true)
+                            status=true
+                        } catch (e: Exception){
+                            status=false
+                        }
+                    }
+                    if (status == true)
+                        call.respond(HttpStatusCode.OK, message = "opened file!")
+                    call.respond(HttpStatusCode.NotFound, message = "file not found.")
+                } else {
+                    invokeAndWait {
+                        editor = FileEditorManager.getInstance(project).openTextEditor(
+                            OpenFileDescriptor(
+                                project,
+                                vfile
+                            ),
+                            true // request focus to editor
+                        )!!
+                    }
+                    file = PsiManager.getInstance(project).findFile(vfile)!!
+                    call.respond(HttpStatusCode.OK, message = "opened file!")
+                }
+            }
+
+
+            post("/create-file"){
+                val params = call.receive<OpenFileParams>()
+
+                try{
+                    FileUtils.createFile(Path("${project.basePath}/${params.filePath}"))
+                    call.respond(HttpStatusCode.OK, message = "success!")
+                }
+                catch (e: FileAlreadyExistsException){
+                    call.respond(HttpStatusCode.OK, message = "File already exists!")
+                }
+                catch (e: Exception){
+                    call.respond(HttpStatusCode.BadRequest, message = "Couldn't create file: ${e.message}")
+                }
+            }
+
+            post("/try-create-file"){
+                val params = call.receive<OpenFileParams>()
+
+                try{ FileUtils.createFile(Path("${project.basePath}/${params.filePath}")) }
+                catch (e: Exception){
+                    print("Couldn't create file. trying to create from package.")
+
+                }
+
+
+                val moduleParts = params.filePath.split("/")
+                val fileName = moduleParts.last()
+                val packaggePsi = JavaPsiFacade.getInstance(project)
+                    .findPackage(moduleParts.subList(0, moduleParts.size-1).joinToString("."))
+                if (packaggePsi == null)
+                    call.respond(HttpStatusCode.BadRequest, message = "package not found")
+                else{
+                    val packageDir = packaggePsi.directories[0].virtualFile.path
+                    FileUtils.createFile(Path("$packageDir/$fileName"))
+
+                    val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(
+                        "$packageDir/$fileName"
+                    )
+                    if (vfile!=null) {
+                        invokeAndWait {
+                            editor = FileEditorManager.getInstance(project).openTextEditor(
+                                OpenFileDescriptor(
+                                    project,
+                                    vfile
+                                ),
+                                true // request focus to editor
+                            )!!
+                        }
+                        call.respond(HttpStatusCode.OK, message = "created file")
+                    }
+                    call.respond(HttpStatusCode.BadRequest, message = "couldn't create file.")
+
+                }
             }
 
             post("/rename") {

@@ -4,7 +4,6 @@ import com.intellij.ml.llm.template.LLMBundle
 import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.progress.BackgroundTaskQueue
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task
@@ -54,7 +53,7 @@ open class ApplyMoveMethodOnProjectIntention: ApplyMoveMethodInteractiveIntentio
                mutex.withLock {
                    invokeLaterFinished = false
                    invokeLater {
-                       val editorFilePair = openFileFromQualifiedName(filePath, project)
+                       val editorFilePair = openFileFromQualifiedName(filePath, project, false)
                        val newEditor = editorFilePair.first
                        val newFile = editorFilePair.second
 //                       val innerClass = (newFile as PsiJavaFileImpl).classes[0]
