@@ -25,6 +25,7 @@ import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.refactoring.suggested.startOffset
+import com.intellij.testFramework.closeProjectAsync
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -49,17 +50,23 @@ import kotlin.math.abs
 class RefactoringServer(var project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
     var testSelector = TestSelector.createSelector(5, project)
     val projectListener = ProjectListener()
+    val openProjectsMap = mutableMapOf<String, Project>()
+
+
     companion object{
         var server : RefactoringServer? = null
         fun getInstance(project: Project): RefactoringServer{
            if (server == null) {
                server = RefactoringServer(project)
-               server!!.start()
+               server!!.openProjectsMap[project.basePath!!] = project
+               server!!.projectListener.registerListeners(project)
+               server!!.start() // This is a long-running process, which doesn't return. So we must do the above things.
            }
             else {
                server!!.project = project
+               server!!.openProjectsMap[project.basePath!!] = project
+               server!!.projectListener.registerListeners(project)
            }
-            server!!.projectListener.registerListeners(project)
             return server!!
         }
     }
@@ -123,6 +130,14 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
             post("/open-project"){
                 val params = call.receive<OpenProjectParams>()
+                val openedProject = openProjectsMap.get(params.projectPath)
+                if (openedProject!=null && openedProject.isOpen) {
+                    project = openedProject
+                    ProjectUtil.focusProjectWindow(project, true)
+                    call.respond(HttpStatusCode.OK, message = "project was already open")
+                    return@post
+                }
+
                 project = runBlocking {
                     // TODO: close the existing project before opening the new one.
                     ProjectUtil
@@ -130,7 +145,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         Path.of(params.projectPath),
                         options = OpenProjectTask(forceOpenInNewFrame = true, projectToClose = project)
                     ) }!!
-                call.respond(HttpStatusCode.OK)
+
+                openProjectsMap[project.basePath!!] = project
+                call.respond(HttpStatusCode.OK, message = "opened project")
             }
 
             post("/open-file"){
@@ -140,17 +157,18 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + params.filePath)
                 if (vfile==null) {
                     call.respond(HttpStatusCode.NotFound, message = "file not found.")
+                    return@post
                 }
                 invokeAndWait {
                     editor = FileEditorManager.getInstance(project).openTextEditor(
                         OpenFileDescriptor(
                             project,
-                            vfile!!
+                            vfile
                         ),
                         true // request focus to editor
                     )!!
                 }
-                file = PsiManager.getInstance(project).findFile(vfile!!)!!
+                file = PsiManager.getInstance(project).findFile(vfile)!!
                 call.respond(HttpStatusCode.OK, message = "opened file!")
             }
 
@@ -160,6 +178,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val reqFileName = params.filePath.split("/").last()
                 if (reqFileName == file!!.name){
                     call.respond(HttpStatusCode.OK, message = "file already open!")
+                    return@post
                 }
 
                 val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + params.filePath)
@@ -176,8 +195,10 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             status=false
                         }
                     }
-                    if (status == true)
+                    if (status == true) {
                         call.respond(HttpStatusCode.OK, message = "opened file!")
+                        return@post
+                    }
                     call.respond(HttpStatusCode.NotFound, message = "file not found.")
                 } else {
                     invokeAndWait {
@@ -244,6 +265,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             )!!
                         }
                         call.respond(HttpStatusCode.OK, message = "created file")
+                        return@post
                     }
                     call.respond(HttpStatusCode.BadRequest, message = "couldn't create file.")
 
@@ -278,6 +300,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         }
                         invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) }
                         call.respond(HttpStatusCode.OK, message = "success")
+                        return@post
                     }
                     call.respond(HttpStatusCode.NotImplemented, message="Could not rename ${params.oldName}")
                 } catch (ex: IllegalStateException) {
