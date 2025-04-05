@@ -45,8 +45,14 @@ class ProjectListener {
 
     suspend fun waitForFinish(): Boolean{
         Thread.sleep(5000) // sleep for auto-reload to kick in.
-        val result = waitForCondition(600.seconds) { indexingCount==0 && importCount==0 && resolveCount==0 }
+        val result = waitForCondition(180.seconds) { indexingCount==0 && importCount==0 && resolveCount==0 }
         return result
+    }
+
+    fun reset(){
+        indexingCount = 0
+        importCount =0
+        resolveCount = 0
     }
 
 
@@ -55,13 +61,13 @@ class ProjectListener {
             ProjectDataImportListener.TOPIC,
             object : ProjectDataImportListener {
                 override fun onImportStarted(projectPath: String?) {
-                    print("import started")
+                    println("import started")
                     importCount += 1
                     super.onImportStarted(projectPath)
                 }
 
                 override fun onImportFinished(projectPath: String?) {
-                    print("Import finished.")
+                    println("Import finished.")
                     importCount -= 1
                     super.onImportFinished(projectPath)
                 }
@@ -75,6 +81,7 @@ class ProjectListener {
 
         notificationManager.addNotificationListener(object : ExternalSystemTaskNotificationListenerAdapter() {
             override fun onStart(id: ExternalSystemTaskId, workingDir: String?) {
+                println("Starting resolve.")
                 resolveCount += 1
 //                if (isResolveProjectTask(id)) {
 //                    resolveCount += 1
@@ -94,6 +101,7 @@ class ProjectListener {
 //            }
 
             override fun onEnd(id: ExternalSystemTaskId) {
+                println("Finished resolve.")
                 super.onEnd(id)
                 resolveCount -= 1
 //                resolveInProgress = false

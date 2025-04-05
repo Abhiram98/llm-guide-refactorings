@@ -17,6 +17,8 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
+import com.intellij.openapi.project.DumbAware
+import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.LocalFileSystem
@@ -96,6 +98,15 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     message = file!!.virtualFile.path
                         .removePrefix(project.basePath.toString())
                         .removePrefix("/"))
+            }
+
+            post("reset_waiting"){
+                val dumbService = DumbService.getInstance(project)
+                dumbService.runWhenSmart {
+                    projectListener.reset()
+                    println("reset complete!")
+                }
+                call.respond(HttpStatusCode.OK, message = "reset the project listener.")
             }
 
             post("wait_for_reload"){
