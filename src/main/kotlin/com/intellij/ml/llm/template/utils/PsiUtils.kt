@@ -16,7 +16,6 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiUtilBase
 import com.intellij.psi.util.childrenOfType
 import com.intellij.util.Processor
-import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.idea.base.util.projectScope
@@ -299,7 +298,7 @@ class PsiUtils {
             class NameFinder: JavaRecursiveElementVisitor() {
                 override fun visitElement(element: PsiElement) {
                     super.visitElement(element)
-                    if (element.namedUnwrappedElement?.name == nameToSearch)
+                    if ((element as? PsiNameIdentifierOwner)?.name == nameToSearch)
                         match.add(element)
                 }
 
