@@ -37,7 +37,8 @@ class ExtractInterfaceRefactoring(
         processor.run()
 
 
-        val rename1 = RefactoringFactory.getInstance(project).createRename(classToExtract.superClass!!, interfaceName)
+        val matchingInterface = classToExtract.interfaces.filter { it.name==originalName }.first()
+        val rename1 = RefactoringFactory.getInstance(project).createRename(matchingInterface, interfaceName)
         val usages = rename1?.findUsages()
         rename1?.doRefactoring(usages)
 
