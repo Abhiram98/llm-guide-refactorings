@@ -44,7 +44,7 @@ class ProjectListener {
     }
 
     suspend fun waitForFinish(): Boolean{
-        Thread.sleep(5000) // sleep for auto-reload to kick in.
+        Thread.sleep(10000) // sleep 10s for auto-reload to kick in.
         val result = waitForCondition(180.seconds) { indexingCount==0 && importCount==0 && resolveCount==0 }
         return result
     }

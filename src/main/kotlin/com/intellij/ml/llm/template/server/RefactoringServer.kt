@@ -1,8 +1,11 @@
 package com.intellij.ml.llm.template.server
 
+import ai.grazie.utils.emptyLinkedSet
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
+import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
+import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
@@ -13,6 +16,8 @@ import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.ml.llm.template.utils.openFile
 import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.runReadAction
+import com.intellij.openapi.application.runWriteAction
+import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
@@ -26,6 +31,7 @@ import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
+import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.refactoring.suggested.startOffset
 import com.intellij.testFramework.closeProjectAsync
 import io.ktor.http.*
@@ -378,6 +384,27 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 } catch (ex: JsonConvertException) {
                     call.respond(HttpStatusCode.BadRequest, message = "invalid parameters.")
                 }
+            }
+            post("extract-class"){
+                val params = call.receive<ExtractClassParams>()
+                val psiClass = (file as PsiJavaFileImpl).classes[0]
+
+                val refObj = if (params.extractInterface)
+                    ExtractInterfaceRefactoring.createFromMembers(psiClass, params.members, params.newName)
+                else{
+                    ExtractClassRefactoring.createFromMembers(psiClass, params.members, params.newName)
+                }
+
+                try{
+                    invokeAndWait {
+                            refObj.performRefactoring(project, editor!!, file!!)
+                    }
+                    call.respond(HttpStatusCode.OK, message = "success")
+                } catch (e: Exception){
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest, message = "failed to perform refactoring ${e.cause}. ${e.message}")
+                }
+
             }
 
             post(RefactoringTools.ReplaceFile.NAME){

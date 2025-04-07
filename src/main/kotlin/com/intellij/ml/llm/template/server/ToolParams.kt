@@ -40,3 +40,17 @@ data class MoveMethodParams(
     val methodName: String,
     val targetClass: String
 )
+
+@Serializable
+data class ExtractClassParams(
+
+    @SerialName("extract_interface")
+    val extractInterface: Boolean = false,
+
+    @SerialName("new_class_name")
+    val newName: String,
+//    @SerialName("")
+//    val newName: String,
+    @SerialName("members")
+    val members: List<String>
+)
