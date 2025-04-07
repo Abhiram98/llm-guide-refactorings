@@ -16,6 +16,7 @@ class ExtractInterfaceRefactoring(
     override val startLoc: Int,
     override val endLoc: Int,
     val interfaceName: String,
+    val subClassName: String,
     val classToExtract: PsiClass,
     val members: Array<MemberInfo>
 ) : AbstractRefactoring() {
@@ -23,6 +24,7 @@ class ExtractInterfaceRefactoring(
 
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         val originalName = classToExtract.name!!
+//        val tempName = if (interfaceName == originalName) interfaceName else "${interfaceName}Temp"
         val tempName = "${interfaceName}Temp"
 
         val processor = ExtractInterfaceProcessor(
@@ -42,7 +44,7 @@ class ExtractInterfaceRefactoring(
         val usages = rename1?.findUsages()
         rename1?.doRefactoring(usages)
 
-        val rename2 = RefactoringFactory.getInstance(project).createRename(classToExtract, originalName)
+        val rename2 = RefactoringFactory.getInstance(project).createRename(classToExtract, subClassName)
         val usages2 = rename2?.findUsages()
         rename2?.doRefactoring(usages2)
 
@@ -79,13 +81,16 @@ class ExtractInterfaceRefactoring(
         fun createFromMembers(
             psiClass: PsiClass,
             members: List<String>,
-            interaceName: String): ExtractInterfaceRefactoring{
+            interaceName: String,
+            subClassName: String
+        ): ExtractInterfaceRefactoring{
             val fields = psiClass.allFields.filter { it.name in members}
             val methods = psiClass.allMethods.filter { it.name in members }
 
             return ExtractInterfaceRefactoring(
                 1,1,
                 interaceName,
+                subClassName,
                 psiClass,
                 fields.map { MemberInfo(it) }
                     .union(methods.map { MemberInfo(it) })

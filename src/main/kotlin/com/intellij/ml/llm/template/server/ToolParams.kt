@@ -49,8 +49,10 @@ data class ExtractClassParams(
 
     @SerialName("new_class_name")
     val newName: String,
-//    @SerialName("")
-//    val newName: String,
+
+    @SerialName("sub_class_name")
+    val subClassName: String,
+
     @SerialName("members")
     val members: List<String>
 )

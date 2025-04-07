@@ -1,6 +1,5 @@
 package com.intellij.ml.llm.template.server
 
-import ai.grazie.utils.emptyLinkedSet
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
@@ -13,16 +12,12 @@ import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVari
 import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.utils.FileUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
-import com.intellij.ml.llm.template.utils.openFile
 import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.runReadAction
-import com.intellij.openapi.application.runWriteAction
-import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
-import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.NlsSafe
@@ -33,7 +28,6 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.refactoring.suggested.startOffset
-import com.intellij.testFramework.closeProjectAsync
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -390,9 +384,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val psiClass = (file as PsiJavaFileImpl).classes[0]
 
                 val refObj = if (params.extractInterface)
-                    ExtractInterfaceRefactoring.createFromMembers(psiClass, params.members, params.newName)
+                    ExtractInterfaceRefactoring.createFromMembers(psiClass, params.members, params.newName, params.subClassName)
                 else{
-                    ExtractClassRefactoring.createFromMembers(psiClass, params.members, params.newName)
+                    ExtractClassRefactoring.createFromMembers(psiClass, params.members, params.newName, params.subClassName)
                 }
 
                 try{

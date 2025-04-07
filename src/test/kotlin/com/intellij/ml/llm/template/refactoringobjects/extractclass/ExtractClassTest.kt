@@ -5,11 +5,6 @@ import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.psi.*
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.refactoring.extractInterface.ExtractInterfaceProcessor
-import com.intellij.refactoring.extractSuperclass.ExtractSuperClassProcessor
-import com.intellij.refactoring.extractclass.ExtractClassProcessor
-import com.intellij.refactoring.util.DocCommentPolicy
-import com.intellij.refactoring.util.classMembers.MemberInfo
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 
 class ExtractClassTest: LightPlatformCodeInsightTestCase() {
@@ -38,7 +33,11 @@ class ExtractClassTest: LightPlatformCodeInsightTestCase() {
 //        )
 //        processor.run()
 
-        val ref = ExtractInterfaceRefactoring.createFromMembers((file as PsiJavaFileImpl).classes[0], listOf("numMinus10"), "HelloWorldInterface")
+        val ref = ExtractInterfaceRefactoring.createFromMembers(
+            (file as PsiJavaFileImpl).classes[0],
+            listOf("numMinus10"),
+            "HelloWorldInterface",
+        )
         ref.performRefactoring(project, editor, file)
 
         println(file.text)

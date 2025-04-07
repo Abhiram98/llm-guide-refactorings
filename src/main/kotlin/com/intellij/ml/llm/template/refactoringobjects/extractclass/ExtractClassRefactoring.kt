@@ -1,7 +1,6 @@
 package com.intellij.ml.llm.template.refactoringobjects.extractclass
 
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
-import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
@@ -9,7 +8,6 @@ import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.extractSuperclass.ExtractSuperClassProcessor
-import com.intellij.refactoring.extractSuperclass.ExtractSuperClassUtil
 import com.intellij.refactoring.util.DocCommentPolicy
 import com.intellij.refactoring.util.classMembers.MemberInfo
 
@@ -17,6 +15,7 @@ class ExtractClassRefactoring(
     override val startLoc: Int,
     override val endLoc: Int,
     val superClassName: String,
+    val subClassName: String,
     val classToExtract: PsiClass,
     val members: Array<MemberInfo>
 
@@ -43,7 +42,7 @@ class ExtractClassRefactoring(
         val usages = rename1?.findUsages()
         rename1?.doRefactoring(usages)
 
-        val rename2 = RefactoringFactory.getInstance(project).createRename(classToExtract, originalName)
+        val rename2 = RefactoringFactory.getInstance(project).createRename(classToExtract, subClassName)
         val usages2 = rename2?.findUsages()
         rename2?.doRefactoring(usages2)
 
@@ -84,13 +83,16 @@ class ExtractClassRefactoring(
         fun createFromMembers(
             psiClass: PsiClass,
             members: List<String>,
-            interaceName: String): ExtractClassRefactoring{
+            interaceName: String,
+            subClassName: String
+        ): ExtractClassRefactoring{
             val fields = psiClass.allFields.filter { it.name in members}
             val methods = psiClass.allMethods.filter { it.name in members }
 
             return ExtractClassRefactoring(
                 1,1,
                 interaceName,
+                subClassName,
                 psiClass,
                 fields.map { MemberInfo(it) }
                     .union(methods.map { MemberInfo(it) })
