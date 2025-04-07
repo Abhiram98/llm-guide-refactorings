@@ -6,7 +6,6 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.intellij.psi.search.SearchScopeProvider
 import com.intellij.refactoring.RefactoringFactory
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
@@ -17,7 +16,8 @@ class RenameVariable(
     val oldName: String,
     val newName: String,
     var oldVarPsi: PsiElement,
-    val outerPsiElement: PsiElement
+    val outerPsiElement: PsiElement,
+    val searchComments: Boolean
 
 ): AbstractRefactoring() {
 
@@ -26,7 +26,7 @@ class RenameVariable(
         super.performRefactoring(project, editor, file)
 //        val varPsi = PsiUtils.getVariableFromPsi(file, oldName)
         val refactoringFactory = RefactoringFactory.getInstance(project)
-        val rename = refactoringFactory.createRename(oldVarPsi, newName, false, false)
+        val rename = refactoringFactory.createRename(oldVarPsi, newName, searchComments, false)
         val usages = rename?.findUsages()
         rename?.doRefactoring(usages)
 

@@ -12,7 +12,6 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
-import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.psi.psiUtil.getChildOfType
 import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
@@ -90,7 +89,9 @@ class RenameVariableFactory {
                     runReadAction{ varPsi.getLineNumber() },
                     runReadAction{ varPsi.getLineNumber() },
                     oldName, newName, varPsi,
-                    outerPsiElement)
+                    outerPsiElement,
+                    false
+                )
             return null
         }
 
@@ -99,12 +100,12 @@ class RenameVariableFactory {
                            outerPsiElement: PsiElement,
                            oldName:String,
                            newName: String): List<AbstractRefactoring>{
-            val varPsi = runReadAction { PsiUtils.getAllVariableFromPsi(outerPsiElement, oldName) }
+            val varPsi = runReadAction { PsiUtils.getAllElementsOfName(outerPsiElement, oldName) }
             return varPsi.map {
                 RenameVariable(
                     runReadAction{ editor.document.getLineNumber(it.startOffsetSkippingComments) },
                     runReadAction{ editor.document.getLineNumber(it.startOffsetSkippingComments) },
-                    oldName, newName, it, outerPsiElement
+                    oldName, newName, it, outerPsiElement, false
                 )
             }
         }
@@ -125,7 +126,9 @@ class RenameVariableFactory {
                     runReadAction{ varPsi.getLineNumber() },
                     runReadAction{ varPsi.getLineNumber() },
                     oldName, newName, varPsi,
-                    outerPsiElement)
+                    outerPsiElement,
+                    false
+                )
             return null
         }
 
@@ -136,7 +139,7 @@ class RenameVariableFactory {
                 return RenameVariable(
                     runReadAction{ methodPsi.getLineNumber() },
                     runReadAction{ methodPsi.getLineNumber() },
-                    methodName, newName, methodPsi, outerClass
+                    methodName, newName, methodPsi, outerClass, false
                 )
             }
             return null
@@ -150,7 +153,7 @@ class RenameVariableFactory {
                     return RenameVariable(
                         runReadAction{ methodPsi.getLineNumber() },
                         runReadAction{ methodPsi.getLineNumber() },
-                        oldParameter.name, newParameter.name, oldParamPsi, outerClass
+                        oldParameter.name, newParameter.name, oldParamPsi, outerClass, false
                     )
             }
             return null
