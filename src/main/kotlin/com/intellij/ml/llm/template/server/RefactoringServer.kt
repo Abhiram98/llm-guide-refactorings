@@ -1,5 +1,7 @@
 package com.intellij.ml.llm.template.server
 
+import com.intellij.analysis.AnalysisScope
+import com.intellij.codeInspection.actions.CodeInspectionAction
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
@@ -478,6 +480,19 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 } catch (ex: JsonConvertException) {
                     call.respond(HttpStatusCode.BadRequest)
                 }
+            }
+
+            post("run_code_inspection"){
+
+                class MyCodeInspectionAction(val project: Project, val scope: AnalysisScope): CodeInspectionAction(){
+                    fun doInspect(){
+                        super.runInspections(project, scope)
+//                        val view = super.myGlobalInspectionContext.view
+//                        view.tree.root // traverse tree and find problems.
+                    }
+                }
+                invokeAndWait{ MyCodeInspectionAction(project, AnalysisScope(file!!)).doInspect() }
+                // Read and return results.
             }
 
         }
