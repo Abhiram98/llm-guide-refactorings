@@ -37,6 +37,7 @@ class ExtractClassTest: LightPlatformCodeInsightTestCase() {
             (file as PsiJavaFileImpl).classes[0],
             listOf("numMinus10"),
             "HelloWorldInterface",
+            "HelloWorld"
         )
         ref.performRefactoring(project, editor, file)
 
