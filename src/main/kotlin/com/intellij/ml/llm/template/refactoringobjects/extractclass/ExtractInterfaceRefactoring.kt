@@ -52,17 +52,6 @@ class ExtractInterfaceRefactoring(
         val usages2 = rename2?.findUsages()
         rename2?.doRefactoring(usages2)
 
-        val memberNames = members.map { it.member.name }
-        // val push down members
-        PushDownRefactoring(1, 1, matchingInterface,
-            matchingInterface.allMethods.filter { it.name in memberNames }.map{
-                val m = MemberInfo(it)
-                m.isToAbstract=true
-                m
-            })
-            .performRefactoring(project, editor, file)
-
-
         super.performRefactoring(project, editor, file)
     }
 
@@ -106,8 +95,16 @@ class ExtractInterfaceRefactoring(
                 interaceName,
                 subClassName,
                 psiClass,
-                fields.map { MemberInfo(it) }
-                    .union(methods.map { MemberInfo(it) })
+                fields.map {
+                    val m = MemberInfo(it)
+                    m.isToAbstract=true
+                    m
+                }
+                    .union(methods.map {
+                        val m = MemberInfo(it)
+                        m.isToAbstract = true
+                        m
+                    })
                     .toTypedArray()
             )
         }

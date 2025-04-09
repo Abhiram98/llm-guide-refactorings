@@ -50,4 +50,25 @@ class PushDownRefactoring(
         TODO("Not yet implemented")
     }
 
+    companion object {
+        fun fromMembers(psiClass: PsiClass, members:List<String> , keepAbstract: Boolean): PushDownRefactoring{
+            val fields = psiClass.allFields.filter { it.name in members}
+            val methods = psiClass.allMethods.filter { it.name in members }
+            val refObj = PushDownRefactoring(
+                1, 1,
+                psiClass,
+                fields.map {
+                    val m = MemberInfo(it)
+                    m.isToAbstract = keepAbstract
+                    m
+                }
+                    .union(methods.map {
+                        val m = MemberInfo(it)
+                        m.isToAbstract = keepAbstract
+                        m
+                    }).toList())
+            return refObj
+        }
+    }
+
 }

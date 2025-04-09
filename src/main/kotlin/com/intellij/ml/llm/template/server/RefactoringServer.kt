@@ -409,12 +409,8 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val params = call.receive<PushDownParams>()
                 val psiClass = (file as PsiJavaFileImpl).classes[0]
 
-                val fields = psiClass.allFields.filter { it.name in params.members}
-                val methods = psiClass.allMethods.filter { it.name in params.members }
-                val refObj = PushDownRefactoring(
-                    1, 1,
-                    psiClass,
-                    fields.map { MemberInfo(it) }.union(methods.map { MemberInfo(it) }).toList())
+                val refObj = PushDownRefactoring.fromMembers(
+                    psiClass, params.members, params.keepAbstract)
 
                 try{
                     invokeAndWait {

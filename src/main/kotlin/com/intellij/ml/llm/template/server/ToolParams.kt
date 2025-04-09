@@ -62,5 +62,8 @@ data class ExtractClassParams(
 data class PushDownParams(
 
     @SerialName("members")
-    val members: List<String>
+    val members: List<String>,
+
+    @SerialName("keep_abstract")
+    val keepAbstract: Boolean = true
 )

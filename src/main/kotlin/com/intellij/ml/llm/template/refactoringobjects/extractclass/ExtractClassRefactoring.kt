@@ -94,8 +94,16 @@ class ExtractClassRefactoring(
                 interaceName,
                 subClassName,
                 psiClass,
-                fields.map { MemberInfo(it) }
-                    .union(methods.map { MemberInfo(it) })
+                fields.map {
+                    val m = MemberInfo(it)
+                    m.isToAbstract=true
+                    m
+                }
+                    .union(methods.map {
+                        val m = MemberInfo(it)
+                        m.isToAbstract = true
+                        m
+                    })
                     .toTypedArray()
             )
         }
