@@ -1,19 +1,14 @@
 package com.intellij.ml.llm.template.refactoringobjects.movemethod
 
-import com.intellij.ml.llm.template.refactoringobjects.movemethod.pushdown.MyPushDownProcessor
-import com.intellij.ml.llm.template.refactoringobjects.pullup.PullUpMethod
-import com.intellij.openapi.application.runWriteAction
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiComment
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.refactoring.memberPullUp.PullUpProcessor
-import com.intellij.refactoring.memberPushDown.PushDownProcessor
-import com.intellij.refactoring.move.moveMembers.MoveMembersProcessor
 import com.intellij.refactoring.util.DocCommentPolicy
 import com.intellij.refactoring.util.classMembers.MemberInfo
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 
-class PullUpMethodTest: LightPlatformCodeInsightTestCase() {
+class PullUpRefactoringTest: LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
 
     private val packageName = "com.intellij.ml.llm.template.testdata"

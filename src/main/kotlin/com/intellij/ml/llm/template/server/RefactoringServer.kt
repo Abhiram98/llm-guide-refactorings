@@ -9,6 +9,7 @@ import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClass
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.pullup.PullUpRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.pullup.PushDownRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
@@ -31,7 +32,6 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.refactoring.suggested.startOffset
-import com.intellij.refactoring.util.classMembers.MemberInfo
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -411,6 +411,33 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                 val refObj = PushDownRefactoring.fromMembers(
                     psiClass, params.members, params.keepAbstract)
+
+                try{
+                    invokeAndWait {
+                        refObj.performRefactoring(project, editor!!, file!!)
+                    }
+                    call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+                } catch (e: Exception){
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest, message = "failed to perform refactoring ${e.cause}. ${e.message}")
+                }
+
+            }
+
+            post("pull-up"){
+                val params = call.receive<PullUpParams>()
+                val psiClass = (file as PsiJavaFileImpl).classes[0]
+                val targetClasses = psiClass.interfaces.filter { it.name==params.superClass }.toMutableList()
+                targetClasses.add(psiClass.superClass)
+
+                if (targetClasses.isEmpty()){
+                    call.respond(HttpStatusCode.BadRequest, message = "No such super class/interface")
+                    return@post
+                }
+                val targetClass = targetClasses[0]
+
+                val refObj = PullUpRefactoring.fromMembers(
+                    psiClass, targetClass, params.members, params.makeAbstract)
 
                 try{
                     invokeAndWait {

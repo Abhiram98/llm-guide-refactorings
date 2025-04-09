@@ -67,3 +67,16 @@ data class PushDownParams(
     @SerialName("keep_abstract")
     val keepAbstract: Boolean = true
 )
+
+@Serializable
+data class PullUpParams(
+
+    @SerialName("super_class")
+    val superClass: String,
+
+    @SerialName("members")
+    val members: List<String>,
+
+    @SerialName("make_abstract")
+    val makeAbstract: Boolean = true
+)
