@@ -9,6 +9,7 @@ import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClass
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.pullup.PushDownRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.ml.llm.template.testcuration.TestSelector
@@ -30,6 +31,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.refactoring.suggested.startOffset
+import com.intellij.refactoring.util.classMembers.MemberInfo
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -55,7 +57,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
     var testSelector = TestSelector.createSelector(5, project)
     val projectListener = ProjectListener()
     val openProjectsMap = mutableMapOf<String, Project>()
-
+    val SUCCESS_MSG = "success"
 
     companion object{
         var server : RefactoringServer? = null
@@ -234,7 +236,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                 try{
                     FileUtils.createFile(Path("${project.basePath}/${params.filePath}"))
-                    call.respond(HttpStatusCode.OK, message = "success!")
+                    call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
                 }
                 catch (e: FileAlreadyExistsException){
                     call.respond(HttpStatusCode.OK, message = "File already exists!")
@@ -312,7 +314,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             renameObject[0]
                         }
                         invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) }
-                        call.respond(HttpStatusCode.OK, message = "success")
+                        call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
                         return@post
                     }
                     call.respond(HttpStatusCode.NotImplemented, message="Could not rename ${params.oldName}")
@@ -342,7 +344,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             }
                         }
                         if (failedException==null)
-                            call.respond(HttpStatusCode.OK, message = "success")
+                            call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
                         else
                             call.respond(message = failedException!!.message.toString(), status = HttpStatusCode.BadRequest)
                     }
@@ -370,7 +372,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     val moveMethodObjects = MoveMethodFactory.createMoveMethodFromName(editor!!, file!!, project, params.methodName, params.targetClass)
                     if (moveMethodObjects.isNotEmpty()){
                         invokeAndWait{ moveMethodObjects[0].performRefactoring(project, editor!!, file!!) }
-                        call.respond(HttpStatusCode.OK, message = "success")
+                        call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
                     }
                     else
                         call.respond(HttpStatusCode.NoContent, message = "could not create a refactoring object. " +
@@ -395,7 +397,30 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     invokeAndWait {
                             refObj.performRefactoring(project, editor!!, file!!)
                     }
-                    call.respond(HttpStatusCode.OK, message = "success")
+                    call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+                } catch (e: Exception){
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest, message = "failed to perform refactoring ${e.cause}. ${e.message}")
+                }
+
+            }
+
+            post("push-down"){
+                val params = call.receive<PushDownParams>()
+                val psiClass = (file as PsiJavaFileImpl).classes[0]
+
+                val fields = psiClass.allFields.filter { it.name in params.members}
+                val methods = psiClass.allMethods.filter { it.name in params.members }
+                val refObj = PushDownRefactoring(
+                    1, 1,
+                    psiClass,
+                    fields.map { MemberInfo(it) }.union(methods.map { MemberInfo(it) }).toList())
+
+                try{
+                    invokeAndWait {
+                        refObj.performRefactoring(project, editor!!, file!!)
+                    }
+                    call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
                 } catch (e: Exception){
                     e.printStackTrace()
                     call.respond(HttpStatusCode.BadRequest, message = "failed to perform refactoring ${e.cause}. ${e.message}")
@@ -424,7 +449,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     val testReport = testSelector.runTests()
                     val message = revertIfTestsFailed(testReport, oldContents)
-                    if (message=="success")
+                    if (message==SUCCESS_MSG)
                         call.respond(HttpStatusCode.OK, message = message)
                     else
                         call.respond(HttpStatusCode.BadRequest, message = message)
@@ -471,7 +496,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     }
                     val testReport = testSelector.runTests()
                     val message = revertIfTestsFailed(testReport, oldContents)
-                    if (message=="success")
+                    if (message==SUCCESS_MSG)
                         call.respond(HttpStatusCode.OK, message = message)
                     else
                         call.respond(HttpStatusCode.BadRequest, message = message)
@@ -504,7 +529,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
     }
 
     private fun revertIfTestsFailed(testReport: String, oldContents: @NlsSafe String): String {
-        val message = if (testReport != "success") {
+        val message = if (testReport != SUCCESS_MSG) {
             // Tests failed. need to roll back edits.
             FileUtils.replaceFileContents(
                 Path(file!!.virtualFile.path),
@@ -513,7 +538,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
             "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
         } else
-            "success"
+            SUCCESS_MSG
         return message
     }
 

@@ -32,7 +32,7 @@ class ExtractClassRefactoring(
             tempName,
             classToExtract,
             members,
-            true,
+            false,
             DocCommentPolicy<PsiComment>(DocCommentPolicy.ASIS)
         )
         processor.run()

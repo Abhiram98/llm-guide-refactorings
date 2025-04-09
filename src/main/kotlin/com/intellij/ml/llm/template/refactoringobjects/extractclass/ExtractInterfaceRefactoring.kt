@@ -2,13 +2,17 @@ package com.intellij.ml.llm.template.refactoringobjects.extractclass
 
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.MyRefactoringFactory
+import com.intellij.ml.llm.template.refactoringobjects.pullup.PushDownRefactoring
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.RefactoringFactory
+import com.intellij.refactoring.actions.ExtractInterfaceAction
+import com.intellij.refactoring.extractInterface.ExtractInterfaceHandler
 import com.intellij.refactoring.extractInterface.ExtractInterfaceProcessor
+import com.intellij.refactoring.memberPushDown.PushDownProcessor
 import com.intellij.refactoring.util.DocCommentPolicy
 import com.intellij.refactoring.util.classMembers.MemberInfo
 
@@ -29,7 +33,7 @@ class ExtractInterfaceRefactoring(
 
         val processor = ExtractInterfaceProcessor(
             project,
-            true,
+            false,
             file.containingDirectory,
             tempName,
             classToExtract,
@@ -47,6 +51,16 @@ class ExtractInterfaceRefactoring(
         val rename2 = RefactoringFactory.getInstance(project).createRename(classToExtract, subClassName)
         val usages2 = rename2?.findUsages()
         rename2?.doRefactoring(usages2)
+
+        val memberNames = members.map { it.member.name }
+        // val push down members
+        PushDownRefactoring(1, 1, matchingInterface,
+            matchingInterface.allMethods.filter { it.name in memberNames }.map{
+                val m = MemberInfo(it)
+                m.isToAbstract=true
+                m
+            })
+            .performRefactoring(project, editor, file)
 
 
         super.performRefactoring(project, editor, file)

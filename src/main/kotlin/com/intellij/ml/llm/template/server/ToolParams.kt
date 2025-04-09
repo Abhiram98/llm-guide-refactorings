@@ -56,3 +56,11 @@ data class ExtractClassParams(
     @SerialName("members")
     val members: List<String>
 )
+
+
+@Serializable
+data class PushDownParams(
+
+    @SerialName("members")
+    val members: List<String>
+)
