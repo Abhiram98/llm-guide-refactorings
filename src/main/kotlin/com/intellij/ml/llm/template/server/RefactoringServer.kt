@@ -1,10 +1,14 @@
 package com.intellij.ml.llm.template.server
 
 import com.intellij.analysis.AnalysisScope
+import com.intellij.codeInspection.ProblemDescriptorBase
+import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.codeInspection.actions.CodeInspectionAction
+import com.intellij.codeInspection.ex.GlobalInspectionContextImpl
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
+import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
@@ -32,6 +36,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.refactoring.suggested.startOffset
+import com.intellij.ui.tree.TreePathUtil
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -531,15 +536,12 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
             post("run_code_inspection"){
+                val inspection = IdeInspection(project, AnalysisScope(file!!), file!!)
+                invokeAndWait{ inspection.doInspect() }
 
-                class MyCodeInspectionAction(val project: Project, val scope: AnalysisScope): CodeInspectionAction(){
-                    fun doInspect(){
-                        super.runInspections(project, scope)
-//                        val view = super.myGlobalInspectionContext.view
 //                        view.tree.root // traverse tree and find problems.
-                    }
-                }
-                invokeAndWait{ MyCodeInspectionAction(project, AnalysisScope(file!!)).doInspect() }
+                inspection.waitForCompletion()
+                call.respond(HttpStatusCode.OK, message = inspection.problems.toString())
                 // Read and return results.
             }
 
