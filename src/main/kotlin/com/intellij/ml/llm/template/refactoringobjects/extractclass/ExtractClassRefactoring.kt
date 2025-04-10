@@ -83,15 +83,21 @@ class ExtractClassRefactoring(
         fun createFromMembers(
             psiClass: PsiClass,
             members: List<String>,
-            interaceName: String,
+            interfaceName: String,
             subClassName: String
         ): ExtractClassRefactoring{
+
+            if (psiClass.interfaces.filter { it.name == interfaceName }.isNotEmpty() || psiClass.superClass?.name==interfaceName){
+                throw Exception("$psiClass already implements the $interfaceName interface. " +
+                        "If you would like to move members into the interface, try performing a pull-up refactoring")
+            }
+
             val fields = psiClass.allFields.filter { it.name in members}
             val methods = psiClass.allMethods.filter { it.name in members }
 
             return ExtractClassRefactoring(
                 1,1,
-                interaceName,
+                interfaceName,
                 subClassName,
                 psiClass,
                 fields.map {

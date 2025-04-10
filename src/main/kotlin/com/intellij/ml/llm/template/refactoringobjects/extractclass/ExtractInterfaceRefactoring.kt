@@ -2,17 +2,13 @@ package com.intellij.ml.llm.template.refactoringobjects.extractclass
 
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.MyRefactoringFactory
-import com.intellij.ml.llm.template.refactoringobjects.pullup.PushDownRefactoring
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.RefactoringFactory
-import com.intellij.refactoring.actions.ExtractInterfaceAction
-import com.intellij.refactoring.extractInterface.ExtractInterfaceHandler
 import com.intellij.refactoring.extractInterface.ExtractInterfaceProcessor
-import com.intellij.refactoring.memberPushDown.PushDownProcessor
 import com.intellij.refactoring.util.DocCommentPolicy
 import com.intellij.refactoring.util.classMembers.MemberInfo
 
@@ -84,15 +80,24 @@ class ExtractInterfaceRefactoring(
         fun createFromMembers(
             psiClass: PsiClass,
             members: List<String>,
-            interaceName: String,
+            interfaceName: String,
             subClassName: String
         ): ExtractInterfaceRefactoring{
+
+            if (
+                psiClass.interfaces.filter { it.name == interfaceName }.isNotEmpty()
+                || psiClass.superClass?.name == interfaceName
+                ){
+                throw Exception("$psiClass already implements the $interfaceName interface. " +
+                        "If you would like to move members into the interface, try performing a pull-up refactoring")
+            }
+
             val fields = psiClass.allFields.filter { it.name in members}
             val methods = psiClass.allMethods.filter { it.name in members }
 
             return ExtractInterfaceRefactoring(
                 1,1,
-                interaceName,
+                interfaceName,
                 subClassName,
                 psiClass,
                 fields.map {

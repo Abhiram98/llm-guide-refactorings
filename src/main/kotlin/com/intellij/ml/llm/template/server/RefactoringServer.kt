@@ -392,12 +392,26 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val params = call.receive<ExtractClassParams>()
                 val psiClass = (file as PsiJavaFileImpl).classes[0]
 
-                val refObj = if (params.extractInterface)
-                    ExtractInterfaceRefactoring.createFromMembers(psiClass, params.members, params.newName, params.subClassName)
-                else{
-                    ExtractClassRefactoring.createFromMembers(psiClass, params.members, params.newName, params.subClassName)
+                val refObj = try{
+                    if (params.extractInterface)
+                        ExtractInterfaceRefactoring.createFromMembers(
+                            psiClass,
+                            params.members,
+                            params.newName,
+                            params.subClassName
+                        )
+                    else {
+                        ExtractClassRefactoring.createFromMembers(
+                            psiClass,
+                            params.members,
+                            params.newName,
+                            params.subClassName
+                        )
+                    }
+                } catch (e: Exception){
+                    call.respond(HttpStatusCode.BadRequest, message = e.message.toString())
+                    return@post
                 }
-
                 try{
                     invokeAndWait {
                             refObj.performRefactoring(project, editor!!, file!!)
@@ -539,7 +553,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val inspection = IdeInspection(project, AnalysisScope(file!!), file!!)
                 invokeAndWait{ inspection.doInspect() }
 
-//                        view.tree.root // traverse tree and find problems.
                 inspection.waitForCompletion()
                 call.respond(HttpStatusCode.OK, message = inspection.problems.toString())
                 // Read and return results.
