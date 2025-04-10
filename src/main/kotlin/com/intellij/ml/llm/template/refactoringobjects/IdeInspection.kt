@@ -36,14 +36,15 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
         val problemDescriptions = p.map { it.filter {
                 it2 ->
             val problem = it2 as? ProblemDescriptorBase
-            problem?.highlightType == ProblemHighlightType.ERROR || problem?.highlightType == ProblemHighlightType.GENERIC_ERROR
+//            problem?.highlightType == ProblemHighlightType.ERROR || problem?.highlightType == ProblemHighlightType.GENERIC_ERROR
+            problem!=null
         }.map {
                 it2 ->
             val problem = it2 as? ProblemDescriptorBase
             problem
         }.filterNotNull()
             .map {
-                    it2 -> "${it2.psiElement.text}: ${it2.toString()}"
+                    it2 -> "${it2.highlightType} on line ${it2.lineNumber}: ${it2.toString()}"
             }
         }.reduce { acc, strings -> acc + strings }
         problems.addAll(problemDescriptions)
