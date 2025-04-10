@@ -88,7 +88,7 @@ class ExtractInterfaceRefactoring(
                 psiClass.interfaces.filter { it.name == interfaceName }.isNotEmpty()
                 || psiClass.superClass?.name == interfaceName
                 ){
-                throw Exception("$psiClass already implements the $interfaceName interface. " +
+                throw Exception("${psiClass.name} already implements the $interfaceName interface. " +
                         "If you would like to move members into the interface, try performing a pull-up refactoring")
             }
 
