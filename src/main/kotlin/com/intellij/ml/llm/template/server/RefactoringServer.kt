@@ -558,6 +558,14 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 // Read and return results.
             }
 
+            post("save_all_changes"){
+                invokeAndWait{
+                    FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                }
+                Thread.sleep(2000)
+                call.respond(HttpStatusCode.OK, message = "success")
+            }
+
         }
     }
 
