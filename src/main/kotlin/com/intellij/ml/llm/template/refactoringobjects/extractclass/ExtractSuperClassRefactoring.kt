@@ -3,55 +3,56 @@ package com.intellij.ml.llm.template.refactoringobjects.extractclass
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
-import com.intellij.psi.*
-import com.intellij.refactoring.MoveDestination
-import com.intellij.refactoring.PackageWrapper
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiComment
+import com.intellij.psi.PsiFile
 import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.extractSuperclass.ExtractSuperClassProcessor
-import com.intellij.refactoring.extractclass.ExtractClassProcessor
-import com.intellij.refactoring.extractclass.ExtractEnumProcessor
-import com.intellij.refactoring.move.moveClassesOrPackages.MultipleRootsMoveDestination
 import com.intellij.refactoring.util.DocCommentPolicy
 import com.intellij.refactoring.util.classMembers.MemberInfo
 
-class ExtractClassRefactoring(
+class ExtractSuperClassRefactoring(
     override val startLoc: Int,
     override val endLoc: Int,
-    val className: String,
+    val superClassName: String,
+    val subClassName: String,
     val classToExtract: PsiClass,
-    val fields: List<PsiField>,
-    val methods: List<PsiMethod>
+    val members: Array<MemberInfo>
+
 ) : AbstractRefactoring() {
 
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         super.performRefactoring(project, editor, file)
-        val packageName = classToExtract.qualifiedName!!.removeSuffix(".${classToExtract.name}")
-//        val processor = ExtractClassProcessor(
-//            classToExtract,
-//            fields, methods,
-//            listOf(classToExtract),
-//            packageName,
-//            className
-//        )
 
-        val javaFile = classToExtract.containingFile as PsiJavaFile
-        val psiPackage = JavaPsiFacade.getInstance(project)
-            .findPackage(javaFile.packageName)!!
-
-        val processor = ExtractClassProcessor(
+        val tempName = "${superClassName}Temp"
+        val originalName = classToExtract.name!!
+        val processor = ExtractSuperClassProcessor(
+            project,
+            file.containingDirectory,
+            tempName,
             classToExtract,
-            fields,
-            methods,
-            emptyList(),
-            packageName,
-            MultipleRootsMoveDestination(PackageWrapper(psiPackage)),
-            className,
-            "EscalateVisible",
+            members,
             false,
-            emptyList(),
-            false
+            DocCommentPolicy<PsiComment>(DocCommentPolicy.ASIS)
         )
         processor.run()
+
+
+        val rename1 = RefactoringFactory.getInstance(project).createRename(classToExtract.superClass!!, superClassName)
+        val usages = rename1?.findUsages()
+        rename1?.doRefactoring(usages)
+
+        val rename2 = RefactoringFactory.getInstance(project).createRename(classToExtract, subClassName)
+        val usages2 = rename2?.findUsages()
+        rename2?.doRefactoring(usages2)
+
+//        val rename3 = RefactoringFactory.getInstance(project).createRename(classToExtract.superClass!!, superClassName)
+//        val usages3 = rename3?.findUsages()
+//        rename3?.doRefactoring(usages3)
+
+
+
+
     }
 
     override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
@@ -82,25 +83,34 @@ class ExtractClassRefactoring(
         fun createFromMembers(
             psiClass: PsiClass,
             members: List<String>,
-            className: String,
-//            subClassName: String
-        ): ExtractClassRefactoring{
+            interfaceName: String,
+            subClassName: String
+        ): ExtractSuperClassRefactoring{
 
-            if (psiClass.interfaces.filter { it.name == className }.isNotEmpty() || psiClass.superClass?.name==className){
-                throw Exception("${psiClass.name} already implements the $className interface. " +
+            if (psiClass.interfaces.filter { it.name == interfaceName }.isNotEmpty() || psiClass.superClass?.name==interfaceName){
+                throw Exception("${psiClass.name} already implements the $interfaceName interface. " +
                         "If you would like to move members into the interface, try performing a pull-up refactoring")
             }
-            // TODO: Search for class with the same name as `className`, in the same package.
 
             val fields = psiClass.allFields.filter { it.name in members}
             val methods = psiClass.allMethods.filter { it.name in members }
 
-            return ExtractClassRefactoring(
+            return ExtractSuperClassRefactoring(
                 1,1,
-                className,
+                interfaceName,
+                subClassName,
                 psiClass,
-                fields,
-                methods
+                fields.map {
+                    val m = MemberInfo(it)
+                    m.isToAbstract=true
+                    m
+                }
+                    .union(methods.map {
+                        val m = MemberInfo(it)
+                        m.isToAbstract = true
+                        m
+                    })
+                    .toTypedArray()
             )
         }
     }

@@ -1,15 +1,13 @@
 package com.intellij.ml.llm.template.server
 
 import com.intellij.analysis.AnalysisScope
-import com.intellij.codeInspection.ProblemDescriptorBase
-import com.intellij.codeInspection.ProblemHighlightType
-import com.intellij.codeInspection.actions.CodeInspectionAction
-import com.intellij.codeInspection.ex.GlobalInspectionContextImpl
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
 import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
+import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumRefactoring
+import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
@@ -19,6 +17,7 @@ import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.utils.FileUtils
+import com.intellij.ml.llm.template.utils.Parameter
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.runReadAction
@@ -34,9 +33,12 @@ import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
+import com.intellij.psi.PsiType
 import com.intellij.psi.impl.source.PsiJavaFileImpl
+import com.intellij.psi.search.GlobalSearchScope
+import com.intellij.refactoring.changeSignature.ChangeSignatureProcessor
+import com.intellij.refactoring.changeSignature.ParameterInfoImpl
 import com.intellij.refactoring.suggested.startOffset
-import com.intellij.ui.tree.TreePathUtil
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -301,28 +303,31 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     // Call IJ rename API here.
                     val renameObject = RenameVariableFactory.fromOldNewNameAll(
                         project, editor!!, file!!, params.oldName, params.newName)
-                    if (renameObject.isNotEmpty()) {
-                        val refObj = if (renameObject.size > 1){
+                        .filter {
                             if (params.lineNum == null)
-                                throw Exception("too many matching variables/field. " +
-                                        "Please choose a line number to identify the variable/field to be renamed.")
-                            val objs = renameObject.filter { it.startLoc + 1 == params.lineNum }
-                            if (objs.size > 1){
-                                throw Exception("too many matching variables/field. " +
-                                        "Please choose a line number to identify the variable/field to be renamed.")
-                            }else if (objs.isEmpty()){
-                                throw Exception("No matching variable/field at the given line number.")
-                            } else{
-                                objs[0]
-                            }
-                        }else {
-                            renameObject[0]
+                                true
+                            else
+                                it.startLoc + 1 == params.lineNum
                         }
-                        invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) }
-                        call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+                    if (renameObject.isEmpty()){
+                        val reverse = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, params.newName, params.oldName)
+                        if (reverse.isNotEmpty()){
+                            call.respond(HttpStatusCode.BadRequest, "The rename has already been performed. " +
+                                    "Variable ${params.newName} exists in this file. Variable ${params.oldName} does not exist.")
+                        }
+                        else if (params.lineNum != null){
+                            call.respond(HttpStatusCode.BadRequest, "No matching variable/field at the given line number.")
+                        }
+                        else{
+                            call.respond(
+                                HttpStatusCode.BadRequest, "Could not rename ${params.oldName}. " +
+                                        "If it is a member of another class, please navigate to that class before trigerring the rename."
+                            )
+                        }
                         return@post
                     }
-                    call.respond(HttpStatusCode.NotImplemented, message="Could not rename ${params.oldName}")
+                    invokeAndWait { renameObject.map { it.performRefactoring(project, editor!!, file!!) } }
+                    call.respond(HttpStatusCode.OK, message=SUCCESS_MSG)
                 } catch (ex: IllegalStateException) {
                     print("failed to refactor")
                     call.respond(HttpStatusCode.BadRequest)
@@ -393,20 +398,35 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val psiClass = (file as PsiJavaFileImpl).classes[0]
 
                 val refObj = try{
-                    if (params.extractInterface)
+                    if (params.extractionType == ExtractionType.INTERFACE)
                         ExtractInterfaceRefactoring.createFromMembers(
                             psiClass,
                             params.members,
                             params.newName,
                             params.subClassName
                         )
-                    else {
-                        ExtractClassRefactoring.createFromMembers(
+                    else if (params.extractionType == ExtractionType.SUPERCLASS){
+                        ExtractSuperClassRefactoring.createFromMembers(
                             psiClass,
                             params.members,
                             params.newName,
                             params.subClassName
                         )
+                    }
+                    else if (params.extractionType == ExtractionType.CLASS){
+                        ExtractClassRefactoring.createFromMembers(
+                            psiClass,
+                            params.members,
+                            params.newName
+                        )
+                    } else if (params.extractionType == ExtractionType.ENUM){
+                        ExtractEnumRefactoring.createFromMembers(
+                            psiClass,
+                            params.members,
+                            params.newName
+                        )
+                    }else{
+                        throw Exception("Unknown extraction type ${params.extractionType}")
                     }
                 } catch (e: Exception){
                     call.respond(HttpStatusCode.BadRequest, message = e.message.toString())
@@ -564,6 +584,32 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
                 Thread.sleep(2000)
                 call.respond(HttpStatusCode.OK, message = "success")
+            }
+
+            post("change_signature"){
+                val params = call.receive<ChangeSignatureParams>()
+                val processor = ChangeSignatureProcessor(project,
+                    PsiUtils.getMethodNameFromClass((file as PsiJavaFileImpl).classes[0], params.methodName)!!,
+                    false,
+                    params.newSignature.modifier,
+                    params.newSignature.methodName,
+                    PsiType.getTypeByName(params.newSignature.returnType, project, GlobalSearchScope.projectScope(project)),
+                    params.newSignature.paramsList.mapIndexed {
+                        index: Int, parameter: Parameter ->
+                        val t = PsiType.getTypeByName(parameter.type, project, GlobalSearchScope.projectScope(project))
+                        ParameterInfoImpl(index, parameter.name, t)
+                    }.toTypedArray()
+                )
+                invokeAndWait { processor.run() }
+                call.respond(HttpStatusCode.OK, SUCCESS_MSG)
+//                TypeMigrationProcessor()
+//                TypeMigrationRules()
+//                EncapsulateFieldsProcessor()
+
+            }
+
+            post("type_change"){
+
             }
 
         }

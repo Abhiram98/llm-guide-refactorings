@@ -16,6 +16,7 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiUtilBase
 import com.intellij.psi.util.childrenOfType
 import com.intellij.util.Processor
+import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.idea.base.util.projectScope
@@ -294,17 +295,25 @@ class PsiUtils {
         }
 
         fun getAllElementsOfName(outerClass: PsiElement?, nameToSearch: String): List<PsiElement> {
-            val match =  mutableListOf<PsiElement>()
+            val match =  mutableSetOf<PsiElement>()
             class NameFinder: JavaRecursiveElementVisitor() {
                 override fun visitElement(element: PsiElement) {
                     super.visitElement(element)
                     if ((element as? PsiNameIdentifierOwner)?.name == nameToSearch)
                         match.add(element)
+                    if ((element as? PsiReferenceExpression)!=null) {
+                        print("found reference.")
+                        if (element.namedUnwrappedElement?.name == nameToSearch){
+                            match.add((element as? PsiReferenceExpression)!!.namedUnwrappedElement!!)
+                        } else if (element.resolve()?.namedUnwrappedElement?.name == nameToSearch){
+                            match.add(element.resolve()!!)
+                        }
+                    }
                 }
 
             }
             outerClass?.accept(NameFinder())
-            return match
+            return match.toList()
         }
 
         fun getQualifiedTypeInFile(psiFile: PsiFile, typeName: String): String?{

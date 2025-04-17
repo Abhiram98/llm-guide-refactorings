@@ -403,27 +403,44 @@ class EFTelemetryDataManager {
             getAndSetAnonMethodName(methodToMove)
         }else {methodToMove}
 
+        updateTargetClassData(
+            anonIfMethodToMove,
+            anonIfTargetClassesWithSimilarity,
+            similarityComputationTime,
+            similarityMetric
+        )
+    }
+
+    private fun updateTargetClassData(
+        anonIfMethodToMove: String,
+        anonIfTargetClassesWithSimilarity: List<Pair<String?, Double>>,
+        similarityComputationTime: Long,
+        similarityMetric: String
+    ) {
         val targetClassData = currentTelemetryData.targetClassMap.get(
-            anonIfMethodToMove)
+            anonIfMethodToMove
+        )
         val updatedInfo = TargetClass4Method(
-            anonIfTargetClassesWithSimilarity.map { it.first.let { first ->
+            anonIfTargetClassesWithSimilarity.map {
+                it.first.let { first ->
                     if (first != null) {
                         TargetClass(first, it.second)
-                    }else {
+                    } else {
                         null
                     }
-                } }.filterNotNull(),
-                similarityComputationTime = similarityComputationTime,
-                similarityMetric = similarityMetric,
-                targetClassesSorted = null,
-                llmResponseTime = null,
-                explanation = null
-            )
-        if (targetClassData!=null){
+                }
+            }.filterNotNull(),
+            similarityComputationTime = similarityComputationTime,
+            similarityMetric = similarityMetric,
+            targetClassesSorted = null,
+            llmResponseTime = null,
+            explanation = null
+        )
+        if (targetClassData != null) {
             targetClassData.targetClasses = updatedInfo.targetClasses
             targetClassData.similarityMetric = updatedInfo.similarityMetric
             targetClassData.similarityComputationTime = updatedInfo.similarityComputationTime
-        }else{
+        } else {
             currentTelemetryData.targetClassMap.put(anonIfMethodToMove, updatedInfo)
         }
     }

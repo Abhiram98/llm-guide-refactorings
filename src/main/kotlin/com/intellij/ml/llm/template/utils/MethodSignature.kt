@@ -2,11 +2,29 @@ package com.intellij.ml.llm.template.utils
 
 import com.github.javaparser.ast.body.CallableDeclaration
 import com.github.javaparser.ast.type.Type
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.regex.Pattern
 
-data class Parameter(val name: String, val type: String)
 
-data class MethodSignature(val methodName: String, val paramsList: List<Parameter>, val returnType:String, val modifier: String){
+@Serializable
+data class Parameter(
+    @SerialName("param_name")
+    val name: String,
+    @SerialName("param_type")
+    val type: String){}
+
+
+@Serializable
+data class MethodSignature(
+    @SerialName("method_name")
+    val methodName: String,
+    @SerialName("parameters")
+    val paramsList: List<Parameter>,
+    @SerialName("return_type")
+    val returnType:String,
+    @SerialName("modifier")
+    val modifier: String){
     companion object{
         fun getMethodSignatureParts(methodSignature: String): MethodSignature? {
             val methodSignatureRegex = Pattern.compile("(\\w+) (\\w+)(\\(.*\\)) : ((\\w(<\\w+>)?)+)")

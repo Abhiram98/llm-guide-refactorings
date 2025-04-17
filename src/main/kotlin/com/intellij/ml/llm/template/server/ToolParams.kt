@@ -1,5 +1,6 @@
 package com.intellij.ml.llm.template.server
 
+import com.intellij.ml.llm.template.utils.MethodSignature
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -41,11 +42,25 @@ data class MoveMethodParams(
     val targetClass: String
 )
 
+
+@Serializable
+enum class ExtractionType(
+){
+    @SerialName("interface")
+    INTERFACE,
+    @SerialName("superclass")
+    SUPERCLASS,
+    @SerialName("class")
+    CLASS,
+    @SerialName("enum")
+    ENUM
+}
+
 @Serializable
 data class ExtractClassParams(
 
-    @SerialName("extract_interface")
-    val extractInterface: Boolean = false,
+    @SerialName("extraction_type")
+    val extractionType: ExtractionType = ExtractionType.CLASS, // class/enum/interface/superclass
 
     @SerialName("new_class_name")
     val newName: String,
@@ -79,4 +94,19 @@ data class PullUpParams(
 
     @SerialName("make_abstract")
     val makeAbstract: Boolean = true
+)
+
+
+
+@Serializable
+data class ChangeSignatureParams(
+
+    @SerialName("method_name")
+    val methodName: String,
+
+    @SerialName("method_line_num")
+    val lineNum: Int,
+
+    @SerialName("newSignature")
+    val newSignature: MethodSignature
 )
