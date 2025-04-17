@@ -48,7 +48,7 @@ enum class ExtractionType(
 ){
     @SerialName("interface")
     INTERFACE,
-    @SerialName("superclass")
+    @SerialName("super_class")
     SUPERCLASS,
     @SerialName("class")
     CLASS,
@@ -105,7 +105,7 @@ data class ChangeSignatureParams(
     val methodName: String,
 
     @SerialName("method_line_num")
-    val lineNum: Int,
+    val lineNum: Int? = null,
 
     @SerialName("newSignature")
     val newSignature: MethodSignature

@@ -12,7 +12,10 @@ data class Parameter(
     @SerialName("param_name")
     val name: String,
     @SerialName("param_type")
-    val type: String){}
+    val type: String,
+    @SerialName("default_value")
+    val defaultValue: String? = null
+){}
 
 
 @Serializable
@@ -22,7 +25,7 @@ data class MethodSignature(
     @SerialName("parameters")
     val paramsList: List<Parameter>,
     @SerialName("return_type")
-    val returnType:String,
+    val returnType:String?,
     @SerialName("modifier")
     val modifier: String){
     companion object{

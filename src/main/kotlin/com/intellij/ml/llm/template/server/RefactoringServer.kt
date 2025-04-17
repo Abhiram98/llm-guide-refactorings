@@ -5,6 +5,7 @@ import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
 import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
+import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
@@ -588,19 +589,8 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
             post("change_signature"){
                 val params = call.receive<ChangeSignatureParams>()
-                val processor = ChangeSignatureProcessor(project,
-                    PsiUtils.getMethodNameFromClass((file as PsiJavaFileImpl).classes[0], params.methodName)!!,
-                    false,
-                    params.newSignature.modifier,
-                    params.newSignature.methodName,
-                    PsiType.getTypeByName(params.newSignature.returnType, project, GlobalSearchScope.projectScope(project)),
-                    params.newSignature.paramsList.mapIndexed {
-                        index: Int, parameter: Parameter ->
-                        val t = PsiType.getTypeByName(parameter.type, project, GlobalSearchScope.projectScope(project))
-                        ParameterInfoImpl(index, parameter.name, t)
-                    }.toTypedArray()
-                )
-                invokeAndWait { processor.run() }
+                val refObj = ChangeSignatureRefactoring.createFromParams(project, editor!!, file!!, params)
+                invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) }
                 call.respond(HttpStatusCode.OK, SUCCESS_MSG)
 //                TypeMigrationProcessor()
 //                TypeMigrationRules()
