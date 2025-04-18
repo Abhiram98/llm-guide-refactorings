@@ -6,6 +6,7 @@ import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
 import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
+import com.intellij.ml.llm.template.refactoringobjects.change_signature.IntroduceParamObject
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
@@ -39,7 +40,9 @@ import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.refactoring.changeSignature.ChangeSignatureProcessor
 import com.intellij.refactoring.changeSignature.ParameterInfoImpl
+import com.intellij.refactoring.introduceParameterObject.IntroduceParameterObjectProcessor
 import com.intellij.refactoring.suggested.startOffset
+import com.jetbrains.rd.util.catch
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -588,14 +591,35 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
             post("change_signature"){
+                print("got change signature")
                 val params = call.receive<ChangeSignatureParams>()
-                val refObj = ChangeSignatureRefactoring.createFromParams(project, editor!!, file!!, params)
-                invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) }
+                val refObj = runReadAction {
+                    ChangeSignatureRefactoring.createFromParams(
+                        project,
+                        editor!!,
+                        file!!,
+                        params
+                    )
+                }
+                try{ invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) } }
+                catch (e: Exception) {
+                    call.respond(HttpStatusCode.BadRequest, message = e.toString())
+                    return@post
+                }
                 call.respond(HttpStatusCode.OK, SUCCESS_MSG)
-//                TypeMigrationProcessor()
-//                TypeMigrationRules()
-//                EncapsulateFieldsProcessor()
+            }
 
+            post("introduce_param_object"){
+                val params = call.receive<IntroduceParamObjectParams>()
+                val refObj = runReadAction{
+                    IntroduceParamObject.createFromParams(params, file!!, editor!!, project)
+                }
+                try{ invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) } }
+                catch (e: Exception) {
+                    call.respond(HttpStatusCode.BadRequest, message = e.toString())
+                    return@post
+                }
+                call.respond(HttpStatusCode.OK, SUCCESS_MSG)
             }
 
             post("type_change"){

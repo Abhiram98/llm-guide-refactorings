@@ -91,7 +91,10 @@ class ChangeSignatureRefactoring(
             val newReturnType = if (changeSignatureParams.newSignature.returnType==null){
                 methodToChange.returnType
             }
-            else if (methodToChange.returnType?.presentableText == changeSignatureParams.newSignature.returnType){
+            else if (
+                methodToChange.returnType?.presentableText == changeSignatureParams.newSignature.returnType ||
+                changeSignatureParams.newSignature.returnType.endsWith(methodToChange.returnType!!.presentableText)
+                ){
                 methodToChange.returnType
             }else{
                 PsiType.getTypeByName(changeSignatureParams.newSignature.returnType, project, GlobalSearchScope.projectScope(project))

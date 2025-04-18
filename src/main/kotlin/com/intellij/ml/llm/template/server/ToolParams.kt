@@ -107,6 +107,25 @@ data class ChangeSignatureParams(
     @SerialName("method_line_num")
     val lineNum: Int? = null,
 
-    @SerialName("newSignature")
+    @SerialName("new_signature")
     val newSignature: MethodSignature
+)
+
+
+@Serializable
+data class IntroduceParamObjectParams(
+
+    @SerialName("method_name")
+    val methodName: String,
+
+    @SerialName("method_line_num")
+    val lineNum: Int? = null,
+
+    @SerialName("parameter_names")
+    val paramNames: List<String>,
+
+    @SerialName("new_class_name")
+    val newClassName: String
+
+
 )

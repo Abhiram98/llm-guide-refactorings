@@ -1,0 +1,122 @@
+package com.intellij.ml.llm.template.refactoringobjects.change_signature
+
+import ai.grazie.client.common.logging.qualifiedName
+import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
+import com.intellij.ml.llm.template.server.IntroduceParamObjectParams
+import com.intellij.ml.llm.template.utils.PsiUtils
+import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.project.Project
+import com.intellij.psi.*
+import com.intellij.psi.impl.source.PsiJavaFileImpl
+import com.intellij.refactoring.PackageWrapper
+import com.intellij.refactoring.changeSignature.ParameterInfoImpl
+import com.intellij.refactoring.introduceParameterObject.IntroduceParameterObjectProcessor
+import com.intellij.refactoring.introduceparameterobject.JavaIntroduceParameterObjectClassDescriptor
+import com.intellij.refactoring.move.moveClassesOrPackages.MultipleRootsMoveDestination
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
+import org.jetbrains.kotlin.load.java.descriptors.JavaClassDescriptor
+import kotlin.math.abs
+
+class IntroduceParamObject(
+    override val startLoc: Int,
+    override val endLoc: Int,
+    val methodToChange: PsiMethod,
+    val newClassName: String,
+    val psiPackage: PsiPackage,
+    val paramsToAbstract: List<ParameterInfoImpl>
+
+
+) : AbstractRefactoring() {
+
+
+    override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
+        val processor =
+            IntroduceParameterObjectProcessor(
+                methodToChange,
+                JavaIntroduceParameterObjectClassDescriptor(
+                    newClassName,
+                    psiPackage.qualifiedName,
+                    MultipleRootsMoveDestination(PackageWrapper(psiPackage)),
+                    false,
+                    false,
+                    null,
+                    paramsToAbstract.toTypedArray(),
+                    methodToChange,
+                    true
+                ),
+                methodToChange.parameterList.parameters
+                    .mapIndexed {
+                        index: Int, psiParameter: PsiParameter -> ParameterInfoImpl(index, psiParameter.name, psiParameter.type)
+                    },
+                false
+            )
+        processor.run()
+    }
+
+    override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRefactoringPreview(): String {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStartOffset(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun getEndOffset(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReverseRefactoringObject(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+        TODO("Not yet implemented")
+    }
+
+    override fun recalibrateRefactoring(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+        TODO("Not yet implemented")
+    }
+
+
+    companion object{
+
+        fun createFromParams(params: IntroduceParamObjectParams, file: PsiFile, editor: Editor, project: Project): IntroduceParamObject {
+
+            val matchingMethods = PsiUtils.getAllMethodNameFromClass(
+                (file as PsiJavaFileImpl).classes[0],
+                params.methodName
+            )
+            if (matchingMethods.isEmpty())
+                throw Exception("No method in this class has the name ${params.methodName}.")
+
+            val methodsSorted = if (matchingMethods.size > 1
+                && params.lineNum!=null){
+                matchingMethods.sortedBy { abs(it.startLine(editor.document)-params.lineNum) }
+            }else{
+                matchingMethods
+            }
+
+            val methodToChange = matchingMethods[0]
+
+            val paramsToAbstract =
+                methodToChange.parameterList.parameters
+                    .filter { it.name in params.paramNames }
+                    .mapIndexed{
+                       index, param ->
+                        ParameterInfoImpl(index, param.name, param.type)
+                    }
+            val javaFile = file as PsiJavaFile
+            val psiPackage = JavaPsiFacade.getInstance(project)
+                .findPackage(javaFile.packageName)!!
+
+            return IntroduceParamObject(
+                1,1,
+                methodToChange,
+                params.newClassName,
+                psiPackage,
+                paramsToAbstract
+            )
+
+        }
+    }
+}
