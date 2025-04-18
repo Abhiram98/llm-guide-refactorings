@@ -15,6 +15,7 @@ import com.intellij.refactoring.introduceparameterobject.JavaIntroduceParameterO
 import com.intellij.refactoring.move.moveClassesOrPackages.MultipleRootsMoveDestination
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.load.java.descriptors.JavaClassDescriptor
+import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 import kotlin.math.abs
 
 class IntroduceParamObject(
@@ -30,6 +31,9 @@ class IntroduceParamObject(
 
 
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
+
+        val useExisting = psiPackage.classes.filter { it.name==newClassName }.isNotEmpty()
+
         val processor =
             IntroduceParameterObjectProcessor(
                 methodToChange,
@@ -37,7 +41,7 @@ class IntroduceParamObject(
                     newClassName,
                     psiPackage.qualifiedName,
                     MultipleRootsMoveDestination(PackageWrapper(psiPackage)),
-                    false,
+                    useExisting,
                     false,
                     null,
                     paramsToAbstract.toTypedArray(),
@@ -91,12 +95,12 @@ class IntroduceParamObject(
 
             val methodsSorted = if (matchingMethods.size > 1
                 && params.lineNum!=null){
-                matchingMethods.sortedBy { abs(it.startLine(editor.document)-params.lineNum) }
+                matchingMethods.sortedBy { abs(editor.document.getLineNumber(it.startOffsetSkippingComments)-params.lineNum) }
             }else{
                 matchingMethods
             }
 
-            val methodToChange = matchingMethods[0]
+            val methodToChange = methodsSorted[0]
 
             val paramsToAbstract =
                 methodToChange.parameterList.parameters

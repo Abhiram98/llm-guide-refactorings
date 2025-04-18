@@ -603,7 +603,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
                 try{ invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) } }
                 catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, message = e.toString())
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest,
+                        message = "failed to perform refactoring ${e.cause}. ${e.message}")
                     return@post
                 }
                 call.respond(HttpStatusCode.OK, SUCCESS_MSG)
@@ -616,7 +618,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
                 try{ invokeAndWait { refObj.performRefactoring(project, editor!!, file!!) } }
                 catch (e: Exception) {
-                    call.respond(HttpStatusCode.BadRequest, message = e.toString())
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest,
+                        message = "failed to perform refactoring ${e.cause}. ${e.message}")
                     return@post
                 }
                 call.respond(HttpStatusCode.OK, SUCCESS_MSG)

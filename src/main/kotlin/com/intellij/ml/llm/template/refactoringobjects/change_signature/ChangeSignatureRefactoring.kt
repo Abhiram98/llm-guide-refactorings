@@ -16,6 +16,7 @@ import com.intellij.refactoring.changeSignature.ChangeSignatureProcessor
 import com.intellij.refactoring.changeSignature.ParameterInfoImpl
 import com.jetbrains.rd.generator.nova.PredefinedType
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
+import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 import kotlin.math.abs
 
 class ChangeSignatureRefactoring(
@@ -77,12 +78,12 @@ class ChangeSignatureRefactoring(
 
             val methodsSorted = if (matchingMethods.size > 1
                 && changeSignatureParams.lineNum!=null){
-                matchingMethods.sortedBy { abs(it.startLine(editor.document)-changeSignatureParams.lineNum) }
+                matchingMethods.sortedBy { abs(editor.document.getLineNumber(it.startOffsetSkippingComments)-changeSignatureParams.lineNum) }
             }else{
                 matchingMethods
             }
 
-            val methodToChange = matchingMethods[0]
+            val methodToChange = methodsSorted[0]
             val newModifier = if (methodToChange.modifierList.hasModifierProperty(changeSignatureParams.newSignature.modifier)){
                 null
             }else{

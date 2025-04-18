@@ -3,6 +3,7 @@ package com.intellij.ml.llm.template.refactoringobjects.introduce
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.*
+import com.intellij.refactoring.introduceField.IntroduceConstantHandler
 import com.intellij.refactoring.introduceField.IntroduceFieldHandler
 
 class MyIntroduceFieldHandler(
