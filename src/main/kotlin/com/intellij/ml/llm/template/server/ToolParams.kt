@@ -38,7 +38,9 @@ data class ExtractMethodParams(
 
 @Serializable
 data class MoveMethodParams(
+    @SerialName("method_name")
     val methodName: String,
+    @SerialName("target_class")
     val targetClass: String
 )
 

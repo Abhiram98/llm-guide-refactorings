@@ -2,19 +2,30 @@ package com.intellij.ml.llm.template.refactoringobjects
 
 import com.intellij.analysis.AnalysisScope
 import com.intellij.codeHighlighting.HighlightDisplayLevel
+import com.intellij.codeInsight.daemon.impl.JavaReferenceImporter
 import com.intellij.codeInspection.ProblemDescriptorBase
 import com.intellij.codeInspection.actions.CodeInspectionAction
 import com.intellij.codeInspection.ex.GlobalInspectionContextImpl
 import com.intellij.codeInspection.ui.InspectionTreeNode
 import com.intellij.codeInspection.ui.ProblemDescriptionNode
+import com.intellij.ml.llm.template.utils.PsiUtils
+import com.intellij.openapi.application.runReadAction
+import com.intellij.openapi.application.runWriteAction
+import com.intellij.openapi.command.CommandProcessor
+import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.intellij.ui.tree.TreePathUtil
+import com.intellij.refactoring.suggested.startOffset
+import org.jetbrains.kotlin.asJava.namedUnwrappedElement
+import org.jetbrains.kotlin.idea.gradleTooling.get
+import javax.swing.SwingUtilities.invokeAndWait
 
-class IdeInspection(val project: Project, val scope: AnalysisScope, val file: PsiFile): CodeInspectionAction(){
+class IdeInspection(val project: Project, val scope: AnalysisScope, val file: PsiFile, val editor: Editor): CodeInspectionAction(){
 
     var myGlobalInspectionContext: GlobalInspectionContextImpl? = null
     val problems: MutableList<String> = mutableListOf()
+    val problemDescriptors: MutableList<ProblemDescriptionNode> = mutableListOf()
     fun doInspect(){
         super.runInspections(project, scope)
         // HACK to access private field. Ther should be a better way to do this.
@@ -35,18 +46,70 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
         }
 
         val root = myGlobalInspectionContext!!.view.tree.root
-        val errors = getAllProblemChildren(root)
-        val descriptions = errors.filter {
+        val errors = getAllProblemChildren(root).filter {
             val level = it.javaClass.getDeclaredField("myLevel")
             level.isAccessible = true
             (level.get(it) as HighlightDisplayLevel) == HighlightDisplayLevel.ERROR
-        }.map{
+        }
+        problemDescriptors.addAll(errors)
+        val descriptions = errors.map{
             val desc = (it.descriptor as? ProblemDescriptorBase)
-            "Error on line ${desc?.lineNumber}: ${it}"
+            "Error on line ${(desc?.lineNumber?.plus(1))?:0}: ${it}"
         }
         problems.addAll(descriptions)
 
         println("got the view!")
+    }
+
+    fun fixIssues(){
+        problems.removeIf { true } // remove all elements
+        problemDescriptors.map {
+            val descriptor = it.descriptor
+            if (descriptor!=null && descriptor.fixes?.isNotEmpty() ?: false){
+                invokeAndWait{
+                    CommandProcessor.getInstance().runUndoTransparentAction {
+                        descriptor.fixes!![0].applyFix(project, descriptor) // apply fix.
+                    }
+                }
+            }
+            else{
+                if ("Cannot resolve symbol" in it.toString()){
+                    // attempt to resolve import
+                    val typeName = it.toString()
+                        .split("Cannot resolve symbol ")
+                        .last()
+                        .removePrefix("'")
+                        .removeSuffix("'")
+                    val desc = (descriptor as? ProblemDescriptorBase)
+                    val vars = runReadAction{
+                        PsiUtils.getElementsOfTypeOnLine(
+                            file,
+                            editor,
+                            desc?.lineNumber?.plus(1) ?: 1,
+                            PsiElement::class.java
+                        )
+                            .filter { it.text == typeName }
+                    }
+                    if (vars.isNotEmpty()) {
+                        val importer = runReadAction{
+                            JavaReferenceImporter().computeAutoImportAtOffset(
+                                editor,
+                                file,
+                                vars[0].startOffset,
+                                false
+                            )
+                        }
+                        try{ invokeAndWait { println("Import status: " + importer.asBoolean) } }
+                        catch (e: Exception){
+                            print("import failed? not sure.")
+                        }
+                        return@map
+                    }
+                }
+                val desc = (it.descriptor as? ProblemDescriptorBase)
+                problems.add("Error on line ${desc?.lineNumber}: ${it}")
+            }
+        }
     }
 
     private fun getAllProblemChildren(root: InspectionTreeNode): List<ProblemDescriptionNode>{

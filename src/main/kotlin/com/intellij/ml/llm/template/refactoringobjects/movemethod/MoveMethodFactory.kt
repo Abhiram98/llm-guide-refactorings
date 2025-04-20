@@ -386,6 +386,7 @@ class MoveMethodFactory {
                 if (matchingClasses.isNotEmpty()){
                     return createStaticMove(methodToMove, editor, matchingClasses[0], autoRefactor = true)
                 }
+                throw Exception("Target class does not exist.")
             }else{
                 val variableOfType = PsiUtils.getVariableOfType(methodToMove, targetClassName)
                 if (variableOfType!=null){
@@ -394,8 +395,10 @@ class MoveMethodFactory {
                         return listOf(
                             createInstanceMethodObj(project, methodToMove, editor, variableOfType, classPsi)
                         )
-//                    return createMoveMethodRefactorings(variableOfType, project, methodToMove, editor)
                 }
+                throw Exception("no variable of type ${targetClassName} exists. " +
+                        "Consider extracting a field/parameter of the type ${targetClassName}, " +
+                        "before attempting to move the method.")
             }
 
             return listOf()

@@ -1,8 +1,14 @@
 package com.intellij.ml.llm.template.server
 
 import com.intellij.analysis.AnalysisScope
+import com.intellij.analysis.problemsView.FileProblem
+import com.intellij.analysis.problemsView.ProblemsCollector
+import com.intellij.analysis.problemsView.ProblemsListener
+import com.intellij.codeInsight.daemon.impl.quickfix.ImportClassFix
+import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
+import com.intellij.lang.annotation.ExternalAnnotator
 import com.intellij.ml.llm.template.agents.RefactoringTools
 import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
@@ -30,6 +36,7 @@ import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.NlsSafe
+import com.intellij.openapi.vcs.annotate.FileAnnotation
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.JavaPsiFacade
@@ -37,6 +44,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiType
 import com.intellij.psi.impl.source.PsiJavaFileImpl
+import com.intellij.psi.impl.source.codeStyle.ImportHelper
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.refactoring.changeSignature.ChangeSignatureProcessor
 import com.intellij.refactoring.changeSignature.ParameterInfoImpl
@@ -383,14 +391,30 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     val params = call.receive<MoveMethodParams>()
                     println("attempting to move ${params.methodName} -> ${params.targetClass}")
 
-                    val moveMethodObjects = MoveMethodFactory.createMoveMethodFromName(editor!!, file!!, project, params.methodName, params.targetClass)
+                    val moveMethodObjects = try{
+                         MoveMethodFactory.createMoveMethodFromName(
+                            editor!!,
+                            file!!,
+                            project,
+                            params.methodName,
+                            params.targetClass
+                        )
+                    } catch (e: Exception){
+                        call.respond(HttpStatusCode.BadRequest, message = "${e.cause}. ${e.message}")
+                        return@post
+                    }
                     if (moveMethodObjects.isNotEmpty()){
                         invokeAndWait{ moveMethodObjects[0].performRefactoring(project, editor!!, file!!) }
                         call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+                        return@post
                     }
-                    else
-                        call.respond(HttpStatusCode.NoContent, message = "could not create a refactoring object. " +
-                                "Please check that you have not selected the entire body of a method")
+                    else {
+                        call.respond(
+                            HttpStatusCode.NoContent,
+                            message = "could not create a refactoring object. Please check that the target class exists."
+                        )
+                        return@post
+                    }
                 } catch (ex: IllegalStateException) {
                     call.respond(HttpStatusCode.BadRequest, message = "invalid parameters.")
                 } catch (ex: JsonConvertException) {
@@ -574,10 +598,12 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
             post("run_code_inspection"){
-                val inspection = IdeInspection(project, AnalysisScope(file!!), file!!)
+                val inspection = IdeInspection(project, AnalysisScope(file!!), file!!, editor!!)
                 invokeAndWait{ inspection.doInspect() }
-
                 inspection.waitForCompletion()
+
+                inspection.fixIssues()
+
                 call.respond(HttpStatusCode.OK, message = inspection.problems.toString())
                 // Read and return results.
             }
