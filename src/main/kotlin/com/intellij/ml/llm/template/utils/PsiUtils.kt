@@ -9,9 +9,11 @@ import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.*
+import com.intellij.psi.impl.search.JavaFilesSearchScope
 import com.intellij.psi.impl.source.PsiClassReferenceType
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.searches.AllClassesSearch
+import com.intellij.psi.search.searches.ReferencesSearch
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiUtilBase
 import com.intellij.psi.util.childrenOfType
@@ -694,7 +696,7 @@ class PsiUtils {
             return visitedMethods.toList()
         }
 
-        fun getAllReferenceExpressions(methodPsi: PsiMethod): List<PsiReferenceExpression> {
+        fun getAllReferenceExpressions(psiElement: PsiElement): List<PsiReferenceExpression> {
 
             val visitedReferences = mutableSetOf<PsiReferenceExpression>()
             class ReferenceFinder: JavaRecursiveElementVisitor() {
@@ -705,8 +707,49 @@ class PsiUtils {
                 }
 
             }
-            methodPsi.accept(ReferenceFinder())
+            psiElement.accept(ReferenceFinder())
             return visitedReferences.toList()
+        }
+
+
+
+        fun getLinkedClasses(psiClass: PsiClass, project: Project): List<PsiClass>{
+            val linkedClasses = mutableListOf<PsiClass>()
+            psiClass.superClass?.let { linkedClasses.add(it) }
+            psiClass.interfaces.map { linkedClasses.add(it) }
+            psiClass.allFields.filter {
+                isInProject(it.type.canonicalText, project)
+            }.map {
+                findClassFromQualifier(it.type.canonicalText, project)?.let {
+                    it1 -> linkedClasses.add(it1)
+                }
+            }
+
+
+            val scope = GlobalSearchScope.projectScope(project)
+            psiClass.methods.map {
+                psiMethod ->
+                ReferencesSearch.search(psiMethod, scope).forEach {
+                    reference ->
+                    val javaFile = (reference.element.containingFile as? PsiJavaFile)
+                    if (javaFile!=null &&
+                        javaFile.classes.isNotEmpty() &&
+                        javaFile.classes[0] !in linkedClasses) {
+                        linkedClasses.add(javaFile.classes[0])
+                    }
+                }
+            }
+
+            getAllReferenceExpressions(psiClass)
+                .forEach {
+                    val javaFile = it.resolve()?.containingFile as? PsiJavaFile
+                    if (javaFile!=null &&
+                        javaFile.classes.isNotEmpty() &&
+                        javaFile.classes[0] !in linkedClasses) {
+                        linkedClasses.add(javaFile.classes[0])
+                    }
+                }
+            return linkedClasses
         }
 
     }

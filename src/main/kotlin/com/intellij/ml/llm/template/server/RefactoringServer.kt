@@ -1,5 +1,6 @@
 package com.intellij.ml.llm.template.server
 
+import com.google.gson.Gson
 import com.intellij.analysis.AnalysisScope
 import com.intellij.analysis.problemsView.FileProblem
 import com.intellij.analysis.problemsView.ProblemsCollector
@@ -42,6 +43,7 @@ import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiType
 import com.intellij.psi.impl.source.PsiJavaFileImpl
@@ -62,7 +64,9 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.util.Identity.encode
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import java.nio.file.Path
@@ -671,6 +675,15 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     return@post
                 }
                 call.respond(HttpStatusCode.OK, SUCCESS_MSG)
+            }
+
+            get("get_linked_files"){
+                val javaClass = (file as PsiJavaFile).classes[0]
+                val linkedClasses = runReadAction{ PsiUtils.getLinkedClasses(javaClass, project) }
+                val linkedFiles = linkedClasses.map {
+                    it.containingFile.virtualFile.path.removePrefix("${project.basePath}/")
+                }
+                call.respond(HttpStatusCode.OK, message = Gson().toJson(linkedFiles))
             }
 
 
