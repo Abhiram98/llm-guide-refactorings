@@ -18,6 +18,7 @@ import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumR
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.introduce.MyIntroduceFieldHandler
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.pullup.PullUpRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.pullup.PushDownRefactoring
@@ -655,6 +656,23 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             post("type_change"){
 
             }
+
+            post("extract_field"){
+
+                val params = call.receive<ExtractFieldParams>()
+                val refObj = runReadAction{
+                    MyIntroduceFieldHandler.fromVariable(params, project, editor!!, file!!)
+                }
+                try{ invokeAndWait { refObj() } }
+                catch (e: Exception) {
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest,
+                        message = "failed to perform refactoring ${e.cause}. ${e.message}")
+                    return@post
+                }
+                call.respond(HttpStatusCode.OK, SUCCESS_MSG)
+            }
+
 
         }
     }

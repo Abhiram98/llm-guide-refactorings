@@ -4,6 +4,7 @@ import com.intellij.codeInsight.intention.impl.IntroduceVariableIntentionAction
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.actionSystem.impl.SimpleDataContext
+import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiLiteralExpression
 import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiMethod
@@ -37,7 +38,8 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
         )
         assert(psiLiterals.isNotEmpty())
 
-        MyIntroduceFieldHandler(project, editor).variableToField(psiLocalVariables[0])
+        MyIntroduceFieldHandler(project, editor, psiLocalVariables[0],
+            containingClass = (file as PsiJavaFile).classes[0]).variableToField()
 
         println(file.text)
 

@@ -1,5 +1,6 @@
 package com.intellij.ml.llm.template.refactoringobjects
 
+import ai.grazie.utils.isCapitalized
 import com.intellij.analysis.AnalysisScope
 import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInsight.daemon.impl.JavaReferenceImporter
@@ -80,30 +81,33 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
                         .last()
                         .removePrefix("'")
                         .removeSuffix("'")
-                    val desc = (descriptor as? ProblemDescriptorBase)
-                    val vars = runReadAction{
-                        PsiUtils.getElementsOfTypeOnLine(
-                            file,
-                            editor,
-                            desc?.lineNumber?.plus(1) ?: 1,
-                            PsiElement::class.java
-                        )
-                            .filter { it.text == typeName }
-                    }
-                    if (vars.isNotEmpty()) {
-                        val importer = runReadAction{
-                            JavaReferenceImporter().computeAutoImportAtOffset(
-                                editor,
+                    if (typeName.isCapitalized()) {
+                        val desc = (descriptor as? ProblemDescriptorBase)
+                        val vars = runReadAction {
+                            PsiUtils.getElementsOfTypeOnLine(
                                 file,
-                                vars[0].startOffset,
-                                false
+                                editor,
+                                desc?.lineNumber?.plus(1) ?: 1,
+                                PsiElement::class.java
                             )
+                                .filter { it.text == typeName }
                         }
-                        try{ invokeAndWait { println("Import status: " + importer.asBoolean) } }
-                        catch (e: Exception){
-                            print("import failed? not sure.")
+                        if (vars.isNotEmpty()) {
+                            val importer = runReadAction {
+                                JavaReferenceImporter().computeAutoImportAtOffset(
+                                    editor,
+                                    file,
+                                    vars[0].startOffset,
+                                    false
+                                )
+                            }
+                            try {
+                                invokeAndWait { println("Import status: " + importer.asBoolean) }
+                            } catch (e: Exception) {
+                                print("import failed? not sure.")
+                            }
+                            return@map
                         }
-                        return@map
                     }
                 }
                 val desc = (it.descriptor as? ProblemDescriptorBase)

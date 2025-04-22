@@ -129,5 +129,18 @@ data class IntroduceParamObjectParams(
     @SerialName("new_class_name")
     val newClassName: String
 
+)
+
+@Serializable
+data class ExtractFieldParams(
+
+    @SerialName("new_field_name")
+    val newFieldName: String,
+
+    @SerialName("line_num")
+    val lineNum: Int? = null,
+
+    @SerialName("variable_name")
+    val variableName: String
 
 )
