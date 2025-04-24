@@ -19,6 +19,7 @@ import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumR
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.introduce.IntroduceFieldFromLiteral
 import com.intellij.ml.llm.template.refactoringobjects.introduce.MyIntroduceFieldHandler
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.pullup.PullUpRefactoring
@@ -668,6 +669,24 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     MyIntroduceFieldHandler.fromVariable(params, project, editor!!, file!!)
                 }
                 try{ invokeAndWait { refObj() } }
+                catch (e: Exception) {
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest,
+                        message = "failed to perform refactoring ${e.cause}. ${e.message}")
+                    return@post
+                }
+                call.respond(HttpStatusCode.OK, SUCCESS_MSG)
+            }
+            post("extract_field_from_literal"){
+
+                val params = call.receive<ExtractFieldFromLiteralParams>()
+
+                try{
+                    val refObj = runReadAction{
+                        IntroduceFieldFromLiteral.fromVariable(params, project, editor!!, file!!)
+                    }
+                    invokeAndWait { refObj() }
+                }
                 catch (e: Exception) {
                     e.printStackTrace()
                     call.respond(HttpStatusCode.BadRequest,

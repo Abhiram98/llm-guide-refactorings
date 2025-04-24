@@ -144,3 +144,17 @@ data class ExtractFieldParams(
     val variableName: String
 
 )
+
+@Serializable
+data class ExtractFieldFromLiteralParams(
+
+    @SerialName("new_field_name")
+    val newFieldName: String,
+
+    @SerialName("line_num")
+    val lineNum: Int? = null,
+
+    @SerialName("literal_value")
+    val literalValue: String
+
+)

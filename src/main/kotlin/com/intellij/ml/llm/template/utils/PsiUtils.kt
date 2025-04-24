@@ -9,8 +9,8 @@ import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.*
-import com.intellij.psi.impl.search.JavaFilesSearchScope
 import com.intellij.psi.impl.source.PsiClassReferenceType
+import com.intellij.psi.impl.source.PsiJavaCodeReferenceElementImpl
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.search.searches.AllClassesSearch
 import com.intellij.psi.search.searches.ReferencesSearch
@@ -310,6 +310,10 @@ class PsiUtils {
                         } else if (element.resolve()?.namedUnwrappedElement?.name == nameToSearch){
                             match.add(element.resolve()!!)
                         }
+                    }
+                    if ((element as? PsiJavaCodeReferenceElementImpl!=null)
+                        && (element as PsiJavaCodeReferenceElementImpl).resolve()?.namedUnwrappedElement?.name == nameToSearch){
+                        match.add((element as PsiJavaCodeReferenceElementImpl).resolve()!!)
                     }
                 }
 
@@ -750,6 +754,20 @@ class PsiUtils {
                     }
                 }
             return linkedClasses
+        }
+
+        fun getElementMatchingText(outerElement: PsiElement, matchingText: String): List<PsiElement> {
+            var foundElements: MutableSet<PsiElement> = mutableSetOf()
+            class TextFinder: JavaRecursiveElementVisitor() {
+                override fun visitElement(element: PsiElement) {
+                    super.visitElement(element)
+                    if (element.text == matchingText)
+                        foundElements.add(element)
+                }
+
+            }
+            outerElement.accept(TextFinder())
+            return foundElements.toList()
         }
 
     }
