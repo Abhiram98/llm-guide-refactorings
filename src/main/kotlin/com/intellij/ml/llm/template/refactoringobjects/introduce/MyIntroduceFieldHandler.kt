@@ -5,7 +5,6 @@ import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.*
-import com.intellij.refactoring.introduceField.IntroduceConstantHandler
 import com.intellij.refactoring.introduceField.IntroduceFieldHandler
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import kotlin.math.abs
@@ -15,7 +14,8 @@ class MyIntroduceFieldHandler(
     val editor: Editor,
     val localVariable: PsiLocalVariable,
     val containingClass: PsiClass,
-    val newName: String
+    val newName: String,
+    val makeStatic: Boolean
 ): IntroduceFieldHandler() {
 
 
@@ -38,8 +38,9 @@ class MyIntroduceFieldHandler(
         anchorElementIfAll: PsiElement?
     ): Settings {
         return Settings(newName, expr, occurrences, true,
-            false, false,
-            InitializationPlace.IN_CURRENT_METHOD, "private",
+            makeStatic, makeStatic, // make is both static and final
+            if (makeStatic) InitializationPlace.IN_FIELD_DECLARATION else InitializationPlace.IN_CURRENT_METHOD,
+            "private",
             localVariable,
             type,
             false,
@@ -100,7 +101,8 @@ class MyIntroduceFieldHandler(
                 MyIntroduceFieldHandler(project, editor,
                     containingClass = containingClass,
                     localVariable = varNamesSorted[0] as PsiLocalVariable,
-                    newName = params.newFieldName
+                    newName = params.newFieldName,
+                    makeStatic = params.makeStatic
                 ).variableToField()
                 true
             }

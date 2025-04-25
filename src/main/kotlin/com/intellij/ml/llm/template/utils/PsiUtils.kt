@@ -187,6 +187,12 @@ class PsiUtils {
                         foundVariables.add(method)
                 }
 
+                override fun visitParameter(parameter: PsiParameter) {
+                    super.visitParameter(parameter)
+                    if (parameter.name == variableName)
+                        foundVariables.add(parameter)
+                }
+
             }
             if (psiElement != null) {
                 psiElement.accept(VariableFinder())

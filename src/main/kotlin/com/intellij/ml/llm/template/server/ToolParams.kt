@@ -141,7 +141,10 @@ data class ExtractFieldParams(
     val lineNum: Int? = null,
 
     @SerialName("variable_name")
-    val variableName: String
+    val variableName: String,
+
+    @SerialName("make_static")
+    val makeStatic: Boolean
 
 )
 
@@ -155,6 +158,24 @@ data class ExtractFieldFromLiteralParams(
     val lineNum: Int? = null,
 
     @SerialName("literal_value")
-    val literalValue: String
+    val literalValue: String,
+
+    @SerialName("make_static")
+    val makeStatic: Boolean
+
+)
+
+
+@Serializable
+data class TypeChangeParams(
+
+    @SerialName("variable_name")
+    val variableName: String,
+
+    @SerialName("line_num")
+    val lineNum: Int? = null,
+
+    @SerialName("new_type")
+    val newType: String
 
 )

@@ -1,19 +1,11 @@
 package com.intellij.ml.llm.template.refactoringobjects.introduce
 
-import com.intellij.codeInsight.intention.impl.IntroduceVariableIntentionAction
 import com.intellij.ml.llm.template.utils.PsiUtils
-import com.intellij.openapi.actionSystem.DataContext
-import com.intellij.openapi.actionSystem.impl.SimpleDataContext
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiLiteralExpression
 import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiMethod
-import com.intellij.refactoring.actions.IntroduceFieldAction
-import com.intellij.refactoring.introduceField.IntroduceFieldHandler
-import com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesProcessor
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
-import com.siyeh.ig.fixes.IntroduceVariableFix
-import org.jetbrains.kotlin.idea.intentions.IntroduceVariableIntention
 
 class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"

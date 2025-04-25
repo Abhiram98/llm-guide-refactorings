@@ -14,6 +14,7 @@ import com.intellij.ml.llm.template.agents.RefactoringTools
 import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.IntroduceParamObject
+import com.intellij.ml.llm.template.refactoringobjects.change_signature.TypeChangeRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
@@ -659,7 +660,21 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
             post("type_change"){
+                val params = call.receive<TypeChangeParams>()
 
+                try{
+                    val refObj = runReadAction{
+                        TypeChangeRefactoring.createFromParams(params, project = project, editor = editor!!, file = file!!)
+                    }
+                    invokeAndWait { refObj.doChange() }
+                }
+                catch (e: Exception) {
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest,
+                        message = "failed to perform refactoring ${e.cause}. ${e.message}")
+                    return@post
+                }
+                call.respond(HttpStatusCode.OK, SUCCESS_MSG)
             }
 
             post("extract_field"){

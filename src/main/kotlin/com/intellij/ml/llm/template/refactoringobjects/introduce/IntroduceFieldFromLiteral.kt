@@ -14,7 +14,8 @@ class IntroduceFieldFromLiteral(
     val editor: Editor,
     val expression: PsiExpression,
     val containingClass: PsiClass,
-    val newName: String
+    val newName: String,
+    val makeStatic: Boolean
 ): IntroduceFieldHandler() {
 
 
@@ -38,9 +39,12 @@ class IntroduceFieldFromLiteral(
         anchorElement: PsiElement?,
         anchorElementIfAll: PsiElement?
     ): Settings {
+
+        val initPlace = if (makeStatic) InitializationPlace.IN_FIELD_DECLARATION else InitializationPlace.IN_CURRENT_METHOD
+
         return Settings(newName, expr, occurrences, true,
-            false, false,
-            InitializationPlace.IN_CURRENT_METHOD, "private",
+            makeStatic, makeStatic,
+            initPlace, "private",
             null,
             type,
             false,
@@ -73,7 +77,8 @@ class IntroduceFieldFromLiteral(
                 IntroduceFieldFromLiteral(project, editor,
                     containingClass = containingClass,
                     expression = varNamesSorted[0] as PsiExpression,
-                    newName = params.newFieldName
+                    newName = params.newFieldName,
+                    makeStatic = params.makeStatic
                 ).expressionToField()
                 true
             }
