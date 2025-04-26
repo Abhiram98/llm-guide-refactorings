@@ -374,7 +374,8 @@ class MoveMethodFactory {
             targetClassName: String,
             project: Project,
             editor: Editor,
-            file: PsiFile
+            file: PsiFile,
+            autoRefactor: Boolean
         ): List<AbstractRefactoring>{
 
             if (PsiUtils.isMethodStatic(methodToMove)) {
@@ -384,11 +385,13 @@ class MoveMethodFactory {
                     .map { it.qualifiedName }
                     .filterNotNull()
                 if (matchingClasses.isNotEmpty()){
-                    return createStaticMove(methodToMove, editor, matchingClasses[0], autoRefactor = true)
+                    return createStaticMove(methodToMove, editor, matchingClasses[0], autoRefactor = autoRefactor)
                 }
                 throw Exception("Target class does not exist.")
             }else{
-                val variableOfType = PsiUtils.getVariableOfType(methodToMove, targetClassName)
+                  val variableOfType = methodToMove.parameterList.parameters.filter { it.type.presentableText == targetClassName }
+                        .getOrNull(0)?: methodToMove.containingClass?.allFields?.filter { it.type.presentableText==targetClassName }?.getOrNull(0)
+
                 if (variableOfType!=null){
                     val classPsi = PsiUtils.findClassFromQualifier((variableOfType as PsiVariable).type.canonicalText, project)
                     if (classPsi!=null)
@@ -636,7 +639,8 @@ class MoveMethodFactory {
             file: PsiFile,
             project: Project,
             methodName: String,
-            targetClassName: String
+            targetClassName: String,
+            autoRefactor: Boolean
         ): List<AbstractRefactoring> {
             val outerClass: PsiElement? =
                 runReadAction {
@@ -645,7 +649,7 @@ class MoveMethodFactory {
             val methodToMove =
                 runReadAction { PsiUtils.getMethodNameFromClass(outerClass, methodName) } ?: return listOf()
             return tryMoveToClass(
-                methodToMove, targetClassName, project, editor, file
+                methodToMove, targetClassName, project, editor, file, autoRefactor
             )
         }
 

@@ -179,3 +179,13 @@ data class TypeChangeParams(
     val newType: String
 
 )
+
+@Serializable
+data class GetLinksParams(
+
+    @SerialName("method_name")
+    val methodName: String,
+
+    @SerialName("line_num")
+    val lineNum: Int
+)

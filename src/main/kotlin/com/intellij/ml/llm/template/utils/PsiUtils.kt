@@ -371,6 +371,13 @@ class PsiUtils {
                     if (expression.type?.canonicalText?.split(".")?.last()==typeName)
                         match = expression.resolve()
                 }
+
+                override fun visitField(field: PsiField) {
+                    super.visitField(field)
+                    if (field.type.canonicalText.split(".").last()==typeName)
+                        match = field
+                }
+
             }
             psiElement.accept(TypeFinder())
             return match
@@ -715,7 +722,6 @@ class PsiUtils {
                     if (expression.text.contains("."))
                         visitedReferences.add(expression)
                 }
-
             }
             psiElement.accept(ReferenceFinder())
             return visitedReferences.toList()
@@ -736,30 +742,92 @@ class PsiUtils {
             }
 
 
-            val scope = GlobalSearchScope.projectScope(project)
-            psiClass.methods.map {
-                psiMethod ->
-                ReferencesSearch.search(psiMethod, scope).forEach {
-                    reference ->
-                    val javaFile = (reference.element.containingFile as? PsiJavaFile)
-                    if (javaFile!=null &&
-                        javaFile.classes.isNotEmpty() &&
-                        javaFile.classes[0] !in linkedClasses) {
-                        linkedClasses.add(javaFile.classes[0])
+            psiClass.methods.forEach {
+                linkedClasses.addAll(
+                    getCallersCallees(project, it)
+                )
+            }
+            return linkedClasses
+        }
+
+        fun getLinkedClasses(psiMethod: PsiMethod, project: Project): List<PsiClass>{
+            val linkedClasses = mutableListOf<PsiClass>()
+            if (psiMethod.text.contains("@Override")){
+                print("found one")
+                // add the ovveriding class.
+                val containingClass = psiMethod.containingClass
+                if (containingClass!=null){
+                    val superClass = containingClass.superClass
+                    if (superClass!=null &&
+                        superClass.methods.filter { it.name==psiMethod.name }.isNotEmpty()){
+                        linkedClasses.add(superClass)
+                    }
+
+                    containingClass.interfaces.forEach {
+                        if (it.methods.filter { it2 -> it2.name==psiMethod.name }.isNotEmpty()){
+                            linkedClasses.add(it)
+                        }
                     }
                 }
             }
 
-            getAllReferenceExpressions(psiClass)
+
+            linkedClasses.addAll(
+                getCallersCallees(project, psiMethod)
+            )
+            return linkedClasses
+        }
+
+        private fun getCallersCallees(
+            project: Project,
+            psiMethod: PsiMethod
+        ): MutableList<PsiClass> {
+            val linkedClasses = mutableListOf<PsiClass>()
+            val scope = GlobalSearchScope.projectScope(project)
+            ReferencesSearch.search(psiMethod, scope).forEach { reference ->
+                val javaFile = (reference.element.containingFile as? PsiJavaFile)
+                if (javaFile != null &&
+                    javaFile.classes.isNotEmpty() &&
+                    javaFile.classes[0] !in linkedClasses
+                ) {
+                    linkedClasses.add(javaFile.classes[0])
+                }
+            }
+
+            getAllReferenceExpressions(psiMethod)
                 .forEach {
                     val javaFile = it.resolve()?.containingFile as? PsiJavaFile
-                    if (javaFile!=null &&
+                    if (javaFile != null &&
                         javaFile.classes.isNotEmpty() &&
-                        javaFile.classes[0] !in linkedClasses) {
+                        javaFile.classes[0] !in linkedClasses
+                    ) {
                         linkedClasses.add(javaFile.classes[0])
                     }
                 }
+
+            getAllTypes(psiMethod).forEach {
+                val javaClass = (it.firstChild as? PsiJavaCodeReferenceElement)?.resolve() as? PsiClass
+                if (javaClass != null &&
+                    javaClass !in linkedClasses
+                ) {
+                    linkedClasses.add(javaClass)
+                }
+            }
             return linkedClasses
+        }
+
+        private fun getAllTypes(psiElement: PsiElement): List<PsiTypeElement> {
+            val visitedReferences = mutableSetOf<PsiTypeElement>()
+            class ReferenceFinder: JavaRecursiveElementVisitor() {
+                override fun visitTypeElement(type: PsiTypeElement) {
+                    super.visitTypeElement(type)
+                    visitedReferences.add(type)
+                }
+
+            }
+            psiElement.accept(ReferenceFinder())
+            return visitedReferences.toList()
+
         }
 
         fun getElementMatchingText(outerElement: PsiElement, matchingText: String): List<PsiElement> {

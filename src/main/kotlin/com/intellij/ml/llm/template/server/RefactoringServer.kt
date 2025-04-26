@@ -2,14 +2,8 @@ package com.intellij.ml.llm.template.server
 
 import com.google.gson.Gson
 import com.intellij.analysis.AnalysisScope
-import com.intellij.analysis.problemsView.FileProblem
-import com.intellij.analysis.problemsView.ProblemsCollector
-import com.intellij.analysis.problemsView.ProblemsListener
-import com.intellij.codeInsight.daemon.impl.quickfix.ImportClassFix
-import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
-import com.intellij.lang.annotation.ExternalAnnotator
 import com.intellij.ml.llm.template.agents.RefactoringTools
 import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
@@ -29,7 +23,6 @@ import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.utils.FileUtils
-import com.intellij.ml.llm.template.utils.Parameter
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.runReadAction
@@ -40,22 +33,15 @@ import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.NlsSafe
-import com.intellij.openapi.vcs.annotate.FileAnnotation
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
-import com.intellij.psi.PsiType
 import com.intellij.psi.impl.source.PsiJavaFileImpl
-import com.intellij.psi.impl.source.codeStyle.ImportHelper
-import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.refactoring.changeSignature.ChangeSignatureProcessor
-import com.intellij.refactoring.changeSignature.ParameterInfoImpl
-import com.intellij.refactoring.introduceParameterObject.IntroduceParameterObjectProcessor
+import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
-import com.jetbrains.rd.util.catch
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -66,11 +52,8 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.util.Identity.encode
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
-import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import java.nio.file.Path
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
@@ -399,13 +382,16 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     println("attempting to move ${params.methodName} -> ${params.targetClass}")
 
                     val moveMethodObjects = try{
-                         MoveMethodFactory.createMoveMethodFromName(
-                            editor!!,
-                            file!!,
-                            project,
-                            params.methodName,
-                            params.targetClass
-                        )
+                        runReadAction{
+                            MoveMethodFactory.createMoveMethodFromName(
+                                editor!!,
+                                file!!,
+                                project,
+                                params.methodName,
+                                params.targetClass,
+                                true
+                            )
+                        }
                     } catch (e: Exception){
                         call.respond(HttpStatusCode.BadRequest, message = "${e.cause}. ${e.message}")
                         return@post
@@ -574,17 +560,30 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     val methodPsi = matches.sortedBy { abs(it.startLine(editor!!.document) - params.lineNum!!) }.first()
 
                     val oldContents = runReadAction{ editor!!.document.text }
+
+
+                    val regex = Regex("""\b([a-zA-Z_][a-zA-Z0-9_]*)\s*\(""")
+                    val matchResult = regex.find(params.newContent)?.groups?.get(1)?.value
+                    val startOffset =
+                        if (matchResult == null){
+                            methodPsi.body!!.startOffset
+                        }else{
+                            methodPsi.startOffset
+                        }
+                    val endOffset = if (matchResult == null) methodPsi.body!!.endOffset else methodPsi.endOffset
+
+
                     FileUtils.replaceFileContentsInRange(
                         Path(file!!.virtualFile.path),
-                        methodPsi.startOffset, methodPsi.endOffset,
+                        startOffset, endOffset,
                         params.newContent
                     )
                     VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                     SwingUtilities.invokeAndWait {
                         ReformatFile.doReformat(
                             file!!,
-                            methodPsi.startOffset,
-                            methodPsi.startOffset + params.newContent.length
+                            startOffset,
+                            startOffset + params.newContent.length
                         )
                     }
                     Thread.sleep(5000) // sleep five seconds to allow the reformatting to complete.
@@ -715,8 +714,19 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val javaClass = (file as PsiJavaFile).classes[0]
                 val linkedClasses = runReadAction{ PsiUtils.getLinkedClasses(javaClass, project) }
                 val linkedFiles = linkedClasses.map {
-                    it.containingFile.virtualFile.path.removePrefix("${project.basePath}/")
-                }
+                    it.containingFile.virtualFile?.path?.removePrefix("${project.basePath}/")
+                }.filterNotNull()
+                call.respond(HttpStatusCode.OK, message = Gson().toJson(linkedFiles))
+            }
+
+            post("get_links_from_method"){
+                val params = call.receive<GetLinksParams>()
+                val psiMethod = (file as PsiJavaFile).classes[0].methods.filter { it.name==params.methodName }.first()
+                val linkedClasses = runReadAction{ PsiUtils.getLinkedClasses(psiMethod, project) }
+                val linkedFiles = linkedClasses.map {
+                    it.containingFile.virtualFile?.path?.removePrefix("${project.basePath}/")
+                }.filterNotNull()
+                    .filter { it.endsWith(".java") }
                 call.respond(HttpStatusCode.OK, message = Gson().toJson(linkedFiles))
             }
 
