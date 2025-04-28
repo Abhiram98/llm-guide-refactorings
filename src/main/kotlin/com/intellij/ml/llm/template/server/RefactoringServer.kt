@@ -53,7 +53,11 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
+import org.jetbrains.kotlin.idea.base.psi.getLineNumber
+import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 import java.nio.file.Path
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
@@ -728,6 +732,48 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }.filterNotNull()
                     .filter { it.endsWith(".java") }
                 call.respond(HttpStatusCode.OK, message = Gson().toJson(linkedFiles))
+            }
+
+            post("get_linked_elements"){
+                val params = call.receive<GetLinksParams>()
+                val psiMethod = (file as PsiJavaFile).classes[0].methods.filter {
+                    editor!!.document.getLineNumber(it.startOffset) <= params.lineNum &&
+                            params.lineNum <= editor!!.document.getLineNumber(it.endOffset)
+                }.first()
+                val linkedElements = runReadAction{ PsiUtils.getLinkedElements(psiMethod, project) }
+                val linkedFiles = runReadAction{
+                    linkedElements.map {
+                        val path = it.containingFile.virtualFile?.path?.removePrefix("${project.basePath}/")
+                        if (path!=null)
+                            buildJsonObject {
+                                put("file_path", it.containingFile.virtualFile?.path?.removePrefix("${project.basePath}/"))
+                                put("line_num", it.getLineNumber() + 1)
+                            }
+                        else
+                            null
+                    }.filterNotNull()
+                }
+
+                call.respond(HttpStatusCode.OK, message = linkedFiles.toString())
+            }
+
+            post("find_replace"){
+                val params = call.receive<FindReplaceParams>()
+                if (params.replaceInComments){
+                    // TODO: Replace the string only in comments.
+                    print("TODO: Replace in comments.")
+                }
+                else {
+                    val oldContents = runReadAction { editor!!.document.text }
+                    val newContents = oldContents.replace(params.findText, params.replaceText)
+
+                    FileUtils.replaceFileContents(
+                        Path(file!!.virtualFile.path),
+                        newContents
+                    )
+                    VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                }
+                call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
             }
 
 

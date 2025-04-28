@@ -25,6 +25,7 @@ import org.jetbrains.kotlin.idea.base.util.projectScope
 import org.jetbrains.kotlin.j2k.accessModifier
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
+import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 import kotlin.math.sqrt
 
 
@@ -778,42 +779,58 @@ class PsiUtils {
             return linkedClasses
         }
 
+        fun getLinkedElements(psiMethod: PsiMethod, project: Project): List<PsiElement>{
+            psiMethod.startOffsetSkippingComments
+
+            val linkedMethods = mutableListOf<PsiElement>()
+            if (psiMethod.text.contains("@Override")){
+                print("found one")
+                // add the ovveriding class.
+                linkedMethods.addAll(
+                    psiMethod.findSuperMethods()
+                )
+            }
+
+            linkedMethods.addAll(
+                getCallerCalleeElements(project, psiMethod)
+            )
+            return linkedMethods
+        }
+
         private fun getCallersCallees(
             project: Project,
             psiMethod: PsiMethod
-        ): MutableList<PsiClass> {
-            val linkedClasses = mutableListOf<PsiClass>()
+        ): List<PsiClass> {
+            return getCallerCalleeElements(project, psiMethod).map {
+                (it.containingFile as PsiJavaFile).classes.first()
+            }
+        }
+
+        private fun getCallerCalleeElements(
+            project: Project,
+            psiMethod: PsiMethod
+        ): MutableList<PsiElement> {
+            val linkedElements = mutableListOf<PsiElement>()
             val scope = GlobalSearchScope.projectScope(project)
             ReferencesSearch.search(psiMethod, scope).forEach { reference ->
-                val javaFile = (reference.element.containingFile as? PsiJavaFile)
-                if (javaFile != null &&
-                    javaFile.classes.isNotEmpty() &&
-                    javaFile.classes[0] !in linkedClasses
-                ) {
-                    linkedClasses.add(javaFile.classes[0])
-                }
+                linkedElements.add(reference.element)
             }
 
             getAllReferenceExpressions(psiMethod)
-                .forEach {
-                    val javaFile = it.resolve()?.containingFile as? PsiJavaFile
-                    if (javaFile != null &&
-                        javaFile.classes.isNotEmpty() &&
-                        javaFile.classes[0] !in linkedClasses
-                    ) {
-                        linkedClasses.add(javaFile.classes[0])
-                    }
-                }
+                .map {
+                    it.resolve()
+                }.filterNotNull()
+                .map { linkedElements.add(it) }
 
             getAllTypes(psiMethod).forEach {
                 val javaClass = (it.firstChild as? PsiJavaCodeReferenceElement)?.resolve() as? PsiClass
                 if (javaClass != null &&
-                    javaClass !in linkedClasses
+                    javaClass !in linkedElements
                 ) {
-                    linkedClasses.add(javaClass)
+                    linkedElements.add(javaClass)
                 }
             }
-            return linkedClasses
+            return linkedElements
         }
 
         private fun getAllTypes(psiElement: PsiElement): List<PsiTypeElement> {

@@ -184,8 +184,21 @@ data class TypeChangeParams(
 data class GetLinksParams(
 
     @SerialName("method_name")
-    val methodName: String,
+    val methodName: String? = null,
 
     @SerialName("line_num")
     val lineNum: Int
+)
+
+@Serializable
+data class FindReplaceParams(
+
+    @SerialName("find_text")
+    val findText: String,
+
+    @SerialName("replace_text")
+    val replaceText: String,
+
+    @SerialName("replace_in_comments_only")
+    val replaceInComments: Boolean=true
 )
