@@ -16,7 +16,9 @@ import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
 import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
+import com.intellij.ml.llm.template.server.ExtractMethodParams
 import com.intellij.ml.llm.template.server.RefactoringServer
+import com.intellij.ml.llm.template.server.RenameParams
 import com.intellij.ml.llm.template.telemetry.*
 import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.ui.CompletedRefactoringsPanel
@@ -83,7 +85,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                 print("performing extract method.")
                 print("Args: $args")
                 try{
-                    val params = Json.decodeFromString<RefactoringServer.ExtractMethodParams>(args.toString())
+                    val params = Json.decodeFromString<ExtractMethodParams>(args.toString())
                     println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
 
                     // Calling IJ extract method API here.
@@ -120,7 +122,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
             tool(RefactoringTools.Rename.NAME){
                 args ->
                 try{
-                    val params = Json.decodeFromString<RefactoringServer.RenameParams>(args.toString())
+                    val params = Json.decodeFromString<RenameParams>(args.toString())
                     println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
 
                     // Call IJ rename API here.
@@ -183,6 +185,7 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     Path(file.virtualFile.path),
                     params.newContent
                 )
+                VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                 // Run IJ linter
                 SwingUtilities.invokeAndWait { ReformatFile.doReformat(file, file.startOffset, file.endOffset) }
                 Thread.sleep(5000) // wait for reformat to complete.
@@ -248,6 +251,13 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                     }else
                         "success"
 
+            }
+
+            tool(RefactoringTools.IntroduceParameterLiteral.NAME){
+                args ->
+                val params = Json.decodeFromString<RefactoringTools.IntroduceParameterLiteral.CallParams>(args.toString())
+//                IntroduceParameter(12, 12, params.parameterName, )
+                "success"
             }
         }
 

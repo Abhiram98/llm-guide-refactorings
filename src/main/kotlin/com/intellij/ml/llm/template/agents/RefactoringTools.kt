@@ -93,6 +93,52 @@ object RefactoringTools {
         )
     }
 
+    object IntroduceParameterLiteral{
+        const val NAME = "introduce_parameter_literal"
+        object Params {
+            const val methodName = "method_name"
+            const val methodLineNum = "method_line_num"
+            const val parameterName = "parameter_name"
+            const val literalValue = "literal_value"
+        }
+
+        @Serializable
+        data class CallParams(
+            @SerialName(IntroduceParameterLiteral.Params.methodName)
+            val methodName: String,
+            @SerialName(IntroduceParameterLiteral.Params.methodLineNum)
+            val methodLineNum: Int? = null,
+            @SerialName(IntroduceParameterLiteral.Params.parameterName)
+            val parameterName: String,
+            @SerialName(IntroduceParameterLiteral.Params.literalValue)
+            val literalValue: String,
+        )
+
+    }
+
+    object IntroduceParameterLocalVariable{
+        const val NAME = "introduce_parameter_variable"
+        object Params {
+            const val methodName = "method_name"
+            const val methodLineNum = "method_line_num"
+            const val parameterName = "parameter_name"
+            const val variableName = "variable_name"
+        }
+
+        @Serializable
+        data class CallParams(
+            @SerialName(Params.methodName)
+            val methodName: String,
+            @SerialName(Params.methodLineNum)
+            val methodLineNum: Int? = null,
+            @SerialName(Params.parameterName)
+            val parameterName: String,
+            @SerialName(Params.variableName)
+            val variableName: String,
+        )
+
+    }
+
     internal val toolsList = listOf(
         ToolDescriptor(
             name = ExtractMethod.NAME,
