@@ -95,6 +95,11 @@ class ExtractClassRefactoring(
             val fields = psiClass.allFields.filter { it.name in members}
             val methods = psiClass.allMethods.filter { it.name in members }
 
+            if (fields.isEmpty() && methods.isEmpty())
+                throw Exception("No fields/methods of the specified names were found. " +
+                        "If you are trying to extract a class from a method's parameters, " +
+                        "use the tool `introduce parameter object` instead")
+
             return ExtractClassRefactoring(
                 1,1,
                 className,

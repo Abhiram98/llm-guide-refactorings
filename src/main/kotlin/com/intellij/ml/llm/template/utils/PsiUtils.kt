@@ -1,5 +1,6 @@
 package com.intellij.ml.llm.template.utils
 
+import com.intellij.codeInsight.daemon.impl.JavaReferenceImporter
 import com.intellij.lang.Language
 import com.intellij.lang.java.JavaLanguage
 import com.intellij.openapi.application.runReadAction
@@ -22,6 +23,7 @@ import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.idea.base.util.projectScope
+import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachOverridingMethod
 import org.jetbrains.kotlin.j2k.accessModifier
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
@@ -582,6 +584,21 @@ class PsiUtils {
             return classList
         }
 
+        fun getClassesByName(project: Project, name: String): List<PsiClass>{
+            val classList : MutableList<PsiClass> = mutableListOf()
+            AllClassesSearch.search(MyGlobalSearchScope(project), project).allowParallelProcessing()
+                .forEach(
+                    Processor<PsiClass> {
+                            psiClass: PsiClass->
+                        if (psiClass.name==name){
+                            classList.add(psiClass)
+                        }
+                        true
+                    }
+                )
+            return classList
+        }
+
         fun fetchImportsInFile(file: PsiFile, project: Project): List<PsiClass> {
             return file.childrenOfType<PsiImportStatement>()
                 .map {
@@ -789,6 +806,10 @@ class PsiUtils {
                 linkedMethods.addAll(
                     psiMethod.findSuperMethods()
                 )
+            }
+
+            psiMethod.forEachOverridingMethod {
+                linkedMethods.add(it)
             }
 
             linkedMethods.addAll(

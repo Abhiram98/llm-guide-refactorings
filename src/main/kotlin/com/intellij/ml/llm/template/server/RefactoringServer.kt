@@ -36,6 +36,7 @@ import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.JavaPsiFacade
+import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
@@ -421,6 +422,12 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             post("extract-class"){
                 val params = call.receive<ExtractClassParams>()
                 val psiClass = (file as PsiJavaFileImpl).classes[0]
+                val clazz = PsiUtils.getClassesByName(project, params.newName)
+                if (clazz.isNotEmpty()){
+                    call.respond(HttpStatusCode.BadRequest, message = "Cannot perform refactoring because the class exists. " +
+                            "If you would like to use the class, consider using a type change refactoring. " +
+                            "If you would like to move members into the class, use a move refactoring.")
+                }
 
                 val refObj = try{
                     if (params.extractionType == ExtractionType.INTERFACE)
@@ -736,15 +743,28 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
             post("get_linked_elements"){
                 val params = call.receive<GetLinksParams>()
-                val psiMethod = (file as PsiJavaFile).classes[0].methods.filter {
+                val psiMethodList = (file as PsiJavaFile).classes[0].methods.filter {
                     editor!!.document.getLineNumber(it.startOffset) <= params.lineNum &&
                             params.lineNum <= editor!!.document.getLineNumber(it.endOffset)
-                }.first()
-                val linkedElements = runReadAction{ PsiUtils.getLinkedElements(psiMethod, project) }
+                }
+                val methodsToLink = if (psiMethodList.isEmpty()){
+                    // it was probably a field that was on the line.
+                    // using the constructors to reference other classes.
+                    (file as PsiJavaFile).classes[0].constructors.toList()
+                }else{
+                    psiMethodList
+                }
+
+                val linkedElements = mutableListOf<PsiElement>()
+                methodsToLink.forEach {
+                    psiMethod -> linkedElements.addAll(
+                     runReadAction{ PsiUtils.getLinkedElements(psiMethod, project) }
+                    )
+                }
                 val linkedFiles = runReadAction{
                     linkedElements.map {
                         val path = it.containingFile.virtualFile?.path?.removePrefix("${project.basePath}/")
-                        if (path!=null)
+                        if (path!=null && path.endsWith(".java"))
                             buildJsonObject {
                                 put("file_path", it.containingFile.virtualFile?.path?.removePrefix("${project.basePath}/"))
                                 put("line_num", it.getLineNumber() + 1)
@@ -774,6 +794,10 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                 }
                 call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+            }
+
+            post(""){
+
             }
 
 

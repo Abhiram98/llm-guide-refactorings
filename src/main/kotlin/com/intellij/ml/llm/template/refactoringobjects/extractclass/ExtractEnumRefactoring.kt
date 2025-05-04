@@ -88,6 +88,8 @@ class ExtractEnumRefactoring(
             // TODO: Search for class with the same name as `className`, in the same package.
 
             val fields = psiClass.allFields.filter { it.name in members}
+            if (fields.isEmpty())
+                throw Exception("No fields of the specified names were found")
 
             return ExtractEnumRefactoring(
                 1,1,
