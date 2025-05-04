@@ -200,5 +200,8 @@ data class FindReplaceParams(
     val replaceText: String,
 
     @SerialName("replace_in_comments_only")
-    val replaceInComments: Boolean=true
+    val replaceInComments: Boolean=true,
+
+    @SerialName("line_num")
+    val lineNum: Int?=null
 )

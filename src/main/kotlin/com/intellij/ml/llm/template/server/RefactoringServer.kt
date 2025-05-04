@@ -785,7 +785,19 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
                 else {
                     val oldContents = runReadAction { editor!!.document.text }
-                    val newContents = oldContents.replace(params.findText, params.replaceText)
+                    val newContents = if (params.lineNum!=null){
+                        oldContents.split("\n")
+                            .mapIndexed {
+                               index, s ->
+                                if (index+1==params.lineNum){
+                                    s.replace(params.findText, params.replaceText)
+                                }else{
+                                    s
+                                }
+                        }.joinToString("\n")
+                    }else {
+                        oldContents.replace(params.findText, params.replaceText)
+                    }
 
                     FileUtils.replaceFileContents(
                         Path(file!!.virtualFile.path),
