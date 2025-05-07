@@ -94,7 +94,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
                         .last()
                         .removePrefix("'")
                         .removeSuffix("'")
-                    if (typeName.isCapitalized()) {
+                    if (typeName[0].isUpperCase()) { // it's likely a class and we can try to import it.
                         val desc = (descriptor as? ProblemDescriptorBase)
                         val vars = runReadAction {
                             PsiUtils.getElementsOfTypeOnLine(
