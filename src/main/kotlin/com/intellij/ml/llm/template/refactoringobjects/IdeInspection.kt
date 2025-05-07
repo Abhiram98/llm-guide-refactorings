@@ -18,6 +18,8 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.suggested.startOffset
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.gradleTooling.get
 import javax.swing.SwingUtilities.invokeAndWait
@@ -25,8 +27,19 @@ import javax.swing.SwingUtilities.invokeAndWait
 class IdeInspection(val project: Project, val scope: AnalysisScope, val file: PsiFile, val editor: Editor): CodeInspectionAction(){
 
     var myGlobalInspectionContext: GlobalInspectionContextImpl? = null
-    val problems: MutableList<String> = mutableListOf()
+    val problems: MutableList<MyProblem> = mutableListOf()
     val problemDescriptors: MutableList<ProblemDescriptionNode> = mutableListOf()
+
+
+    @Serializable
+    data class MyProblem(
+
+        @SerialName("line_num")
+        val lineNum: Int,
+
+        @SerialName("problem")
+        val problem: String
+    ){}
     fun doInspect(){
         super.runInspections(project, scope)
         // HACK to access private field. Ther should be a better way to do this.
@@ -55,7 +68,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
         problemDescriptors.addAll(errors)
         val descriptions = errors.map{
             val desc = (it.descriptor as? ProblemDescriptorBase)
-            "Error on line ${(desc?.lineNumber?.plus(1))?:0}: ${it}"
+            MyProblem(desc?.lineNumber?.plus(1)?:0, it.toString())
         }
         problems.addAll(descriptions)
 
@@ -111,7 +124,8 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
                     }
                 }
                 val desc = (it.descriptor as? ProblemDescriptorBase)
-                problems.add("Error on line ${desc?.lineNumber}: ${it}")
+//                problems.add("Error on line ${desc?.lineNumber}: ${it}")
+                problems.add(MyProblem(desc?.lineNumber?:0, it.toString()))
             }
         }
     }
