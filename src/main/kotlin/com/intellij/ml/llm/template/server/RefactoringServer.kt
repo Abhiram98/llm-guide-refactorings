@@ -26,6 +26,8 @@ import com.intellij.ml.llm.template.utils.FileUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.runReadAction
+import com.intellij.openapi.application.runWriteAction
+import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
@@ -58,7 +60,6 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
-import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 import java.nio.file.Path
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
@@ -562,7 +563,8 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
 
                     if (matches.size == 0)
-                        call.respond(HttpStatusCode.NotFound, message = "no method with that name was found.")
+                        call.respond(HttpStatusCode.NotFound,
+                            message = "no method with the name `${params.methodName}` was found.")
                     else if (matches.size > 1 && params.lineNum==null)
                         call.respond(HttpStatusCode.BadRequest,
                             message = "Too many methods (${matches.size}) have that name. " +
@@ -619,9 +621,11 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 invokeAndWait{ inspection.doInspect() }
                 inspection.waitForCompletion()
 
-                inspection.fixIssues()
+//                inspection.fixIssues()
 
-                call.respond(HttpStatusCode.OK, message = inspection.problems.toString())
+                call.respond(HttpStatusCode.OK, message = Gson().toJson(inspection.problems).toString())
+                // [] -> no issues
+                // [{"line_num": <>, "problem": "<Error description>"}]
                 // Read and return results.
             }
 
@@ -779,33 +783,58 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
             post("find_replace"){
                 val params = call.receive<FindReplaceParams>()
+                var found = false
                 if (params.replaceInComments){
                     // TODO: Replace the string only in comments.
                     print("TODO: Replace in comments.")
                 }
                 else {
-                    val oldContents = runReadAction { editor!!.document.text }
-                    val newContents = if (params.lineNum!=null){
-                        oldContents.split("\n")
-                            .mapIndexed {
-                               index, s ->
-                                if (index+1==params.lineNum){
-                                    s.replace(params.findText, params.replaceText)
-                                }else{
-                                    s
-                                }
-                        }.joinToString("\n")
-                    }else {
-                        oldContents.replace(params.findText, params.replaceText)
+                    val matchingElements = runReadAction{
+                        PsiUtils
+                            .getElementMatchingTextNoWhiteSpace(file!!, params.findText)
                     }
 
-                    FileUtils.replaceFileContents(
-                        Path(file!!.virtualFile.path),
-                        newContents
-                    )
-                    VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                    if (matchingElements.isEmpty()){
+
+                        val status = FileUtils.textBasedFindReplace(params, editor!!, file!!)
+                        if (status) {
+                            VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                            call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+                            return@post
+                        }
+
+                        call.respond(HttpStatusCode.NotFound,
+                            message = "The search text was not found in the file. " +
+                                    "Did not replace any text")
+                        return@post
+                    }
+
+                    val elementsToReplace = if (params.lineNum!=null){
+                        matchingElements.filter { it.startLine(editor!!.document)+1==params.lineNum }
+                    }else{matchingElements}
+
+                    if (elementsToReplace.isEmpty()){
+                            call.respond(HttpStatusCode.NotFound,
+                                message = "The `find text` was not found on line number ${params.lineNum} ")
+                        return@post
+                    }
+
+                    elementsToReplace.forEach {
+                        WriteCommandAction.runWriteCommandAction(project) {
+                            val newElement = PsiUtils.createPsiElementFromText(params.replaceText, project)
+                            if (newElement!=null)
+                                it.replace(newElement)
+                            else{
+                                FileUtils.replaceFileContentsInRange(
+                                    Path(file!!.virtualFile.path), it.startOffset, it.endOffset, params.replaceText
+                                )
+                                VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                            }
+                        }
+                    }
+
                 }
-                call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+                    call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
             }
 
             post(""){
@@ -815,7 +844,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
         }
     }
-
     private fun reloadFileIfNeeded() {
         if (!file!!.isValid) // if the psi file got invalidated because of a rewrite, reload it's contents.
             file = PsiManager.getInstance(project).findFile(file!!.virtualFile)!!

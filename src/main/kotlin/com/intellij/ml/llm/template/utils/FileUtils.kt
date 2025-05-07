@@ -1,7 +1,12 @@
 package com.intellij.ml.llm.template.utils
 
+import com.intellij.ml.llm.template.server.FindReplaceParams
+import com.intellij.openapi.application.runReadAction
+import com.intellij.openapi.editor.Editor
+import com.intellij.psi.PsiFile
 import com.intellij.testFramework.utils.io.createFile
 import java.io.File
+import kotlin.io.path.Path
 
 class FileUtils {
     companion object{
@@ -17,6 +22,32 @@ class FileUtils {
 
         fun createFile(filePath: java.nio.file.Path){
             File(filePath.toString()).createNewFile()
+        }
+
+        fun textBasedFindReplace(params: FindReplaceParams, editor: Editor, file: PsiFile) : Boolean {
+            var found1 = false
+            val oldContents = runReadAction { editor.document.text }
+            val newContents = if (params.lineNum != null) {
+                oldContents.split("\n")
+                    .mapIndexed { index, s ->
+                        if (index + 1 == params.lineNum) {
+                            found1 = params.findText in s
+                            s.replace(params.findText, params.replaceText)
+                        } else {
+                            s
+                        }
+                    }.joinToString("\n")
+            } else {
+                found1 = params.findText in oldContents
+                oldContents.replace(params.findText, params.replaceText)
+            }
+
+            FileUtils.replaceFileContents(
+                Path(file.virtualFile.path),
+                newContents
+            )
+
+            return found1
         }
     }
 }

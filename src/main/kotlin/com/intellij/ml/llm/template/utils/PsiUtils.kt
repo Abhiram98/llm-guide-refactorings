@@ -882,6 +882,57 @@ class PsiUtils {
             return foundElements.toList()
         }
 
+        fun getElementMatchingTextNoWhiteSpace(outerElement: PsiElement, matchingText: String): List<PsiElement> {
+            var foundElements: MutableSet<PsiElement> = mutableSetOf()
+            val matchWithoutSpace = matchingText.replace("\\s".toRegex(), "")
+            class TextFinder: JavaRecursiveElementVisitor() {
+                override fun visitElement(element: PsiElement) {
+                    super.visitElement(element)
+                    if (element.text.replace("\\s".toRegex(), "") == matchWithoutSpace)
+                        foundElements.add(element)
+                }
+
+            }
+            outerElement.accept(TextFinder())
+            return foundElements.toList()
+        }
+
+        fun createPsiElementFromText(text:String, project: Project): PsiElement?{
+            val elementFactory = JavaPsiFacade.getElementFactory(project)
+            val newElement: PsiElement? = when {
+                looksLikeImportStatic(text) -> null
+
+                looksLikeImport(text) ->
+                    elementFactory.createImportStatementOnDemand(text.removePrefix("import ").removeSuffix(";").trim().split(" ").last())
+
+                looksLikeExpression(text) ->
+                    elementFactory.createExpressionFromText(text, null)
+
+                looksLikeStatement(text) ->
+                    elementFactory.createStatementFromText(text, null)
+
+                looksLikeMethod(text) ->
+                    elementFactory.createMethodFromText(text, null)
+
+                looksLikeField(text) ->
+                    elementFactory.createFieldFromText(text, null)
+
+                else -> null
+            }
+            return newElement
+        }
+        fun looksLikeImport(text: String): Boolean = text.trim().startsWith("import ")
+        fun looksLikeImportStatic(text: String): Boolean = text.trim().startsWith("import static")
+
+        fun looksLikeExpression(text: String): Boolean = !text.contains(";") && !text.contains("{") && !text.contains("class")
+
+        fun looksLikeStatement(text: String): Boolean = text.trim().endsWith(";")
+
+        fun looksLikeMethod(text: String): Boolean = text.contains("(") && text.contains(")") && text.contains("{")
+
+        fun looksLikeField(text: String): Boolean = text.trim().matches(Regex("""(public|private|protected)?\s*\w+\s+\w+\s*(=.*)?;"""))
+
+
     }
 
 
