@@ -45,6 +45,7 @@ import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
+import com.intellij.util.text.findTextRange
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.serialization.kotlinx.json.*
@@ -355,16 +356,19 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     val refObjs = ExtractMethodFactory.fromStartEndLine(editor!!, file!!, params.startLine, params.endLine, params.newName)
                     if (refObjs.isNotEmpty()) {
                         var failedException: Exception? = null
-                        invokeAndWait{
-                            try{ refObjs[0].performRefactoring(project, editor!!, file!!) }
-                            catch(ex: Exception){
-                                failedException = ex
-                            }
+//                        invokeAndWait{
+                        try{ refObjs[0].performRefactoring(project, editor!!, file!!) }
+                        catch(ex: Exception){
+                            failedException = ex
+                            ex.printStackTrace()
                         }
+//                        }
                         if (failedException==null)
                             call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
                         else
-                            call.respond(message = failedException!!.message.toString(), status = HttpStatusCode.BadRequest)
+                            call.respond(message = failedException!!.message.toString()+
+                                    " Make sure your selection is entirely within the body of the method",
+                                status = HttpStatusCode.BadRequest)
                     }
                     else{
                         call.respond(HttpStatusCode.NoContent, message = "couldn't create a refactoring object. " +
@@ -627,6 +631,15 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 // [] -> no issues
                 // [{"line_num": <>, "problem": "<Error description>"}]
                 // Read and return results.
+            }
+
+            post("import_symbol"){
+                val symbolName = call.receiveText()
+                val oldContents = Path(file!!.virtualFile.path).readText()
+                val textRange = oldContents.findTextRange(symbolName)
+                if (textRange!=null)
+                    IdeInspection.importFromRange(textRange, editor!!, file!!)
+
             }
 
             post("save_all_changes"){

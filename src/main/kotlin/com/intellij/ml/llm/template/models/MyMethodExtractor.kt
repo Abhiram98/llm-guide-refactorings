@@ -8,7 +8,9 @@ import com.intellij.java.refactoring.JavaRefactoringBundle
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.customextractors.MyInplaceMethodExtractor
 import com.intellij.openapi.application.ReadAction
 import com.intellij.openapi.application.WriteAction
+import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.command.CommandProcessor
+import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.colors.EditorColors
@@ -74,7 +76,7 @@ class MyMethodExtractor (private val functionNameProvider: FunctionNameProvider?
 
     fun findAndSelectExtractOption(editor: Editor, file: PsiFile, range: TextRange): CompletableFuture<ExtractOptions>? {
             if (!CommonRefactoringUtil.checkReadOnlyStatus(file.project, file)) return null
-            val elements = ExtractSelector().suggestElementsToExtract(file, range)
+            val elements = runReadAction{ ExtractSelector().suggestElementsToExtract(file, range) }
             if (elements.isEmpty()) {
                 throw ExtractException(RefactoringBundle.message("selected.block.should.represent.a.set.of.statements.or.an.expression"), file)
             }
@@ -95,14 +97,18 @@ class MyMethodExtractor (private val functionNameProvider: FunctionNameProvider?
     }
 
     private fun runInplaceExtract(editor: Editor, range: TextRange, options: ExtractOptions){
-        val project = options.project
-        val popupSettings = createInplaceSettingsPopup(options)
-        val guessedNames = suggestSafeMethodNames(options)
+        val project = runReadAction{ options.project }
+        val popupSettings = runReadAction{ createInplaceSettingsPopup(options) }
+        val guessedNames = runReadAction{ suggestSafeMethodNames(options) }
         val methodName = guessedNames.first()
         val suggestedNames = guessedNames.takeIf { it.size > 1 }.orEmpty()
-        executeRefactoringCommand(project) {
-            val inplaceExtractor = MyInplaceMethodExtractor(editor, range, options.targetClass, popupSettings, methodName)
-            inplaceExtractor.extractAndRunTemplate(LinkedHashSet(suggestedNames))
+        WriteCommandAction.runWriteCommandAction(project) {
+            executeRefactoringCommand(project) {
+                val inplaceExtractor = MyInplaceMethodExtractor(editor, range,
+                    runReadAction { options.targetClass }, popupSettings, methodName
+                )
+                inplaceExtractor.extractAndRunTemplate(LinkedHashSet(suggestedNames))
+            }
         }
     }
 
@@ -284,8 +290,9 @@ class MyMethodExtractor (private val functionNameProvider: FunctionNameProvider?
         }
 
         fun invokeOnElements(project: Project, editor: Editor?, file: PsiFile?, elements: Array<PsiElement>, functionNameProvider: FunctionNameProvider?) {
-            var selection = findEditorSelection(editor!!)
-            if (selection == null && elements.size == 1) selection = elements[0].textRange
+            var selection = runReadAction{ findEditorSelection(editor!!) }
+            if (selection == null && elements.size == 1) selection = runReadAction{ elements[0].textRange }
+
             if (selection != null) MyMethodExtractor(functionNameProvider).doExtract(file!!, selection)
         }
     }

@@ -15,6 +15,7 @@ import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.suggested.startOffset
@@ -139,5 +140,23 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
             problemNodes.addAll(getAllProblemChildren(c))
         }
         return problemNodes
+    }
+
+    companion object {
+        fun importFromRange(textRange: TextRange, editor: Editor, file: PsiFile) {
+            val importer = runReadAction {
+                JavaReferenceImporter().computeAutoImportAtOffset(
+                    editor,
+                    file,
+                    textRange.startOffset + 1,
+                    false
+                )
+            }
+            try {
+                invokeAndWait { println("Import status: " + importer.asBoolean) }
+            } catch (e: Exception) {
+                print("import failed? not sure.")
+            }
+        }
     }
 }

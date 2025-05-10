@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.idea.refactoring.introduce.extractFunction.ExtractKo
 import org.jetbrains.kotlin.idea.util.executeEnterHandler
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
+import javax.swing.SwingUtilities.invokeAndWait
 
 class ExtractMethod(
     override val startLoc: Int,
@@ -40,9 +41,9 @@ class ExtractMethod(
 
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         super.performRefactoring(project, editor, file)
-        editor.selectionModel.setSelection(this.getStartOffset(), this.getEndOffset())
+        invokeAndWait{ editor.selectionModel.setSelection(this.getStartOffset(), this.getEndOffset()) }
         invokeExtractFunction(newFuncName, project, editor, file)
-        reverseRefactoring = getReverseRefactoringObject(project, editor, file)
+        reverseRefactoring = runReadAction{ getReverseRefactoringObject(project, editor, file) }
     }
 
     override fun getStartOffset(): Int {
@@ -116,7 +117,8 @@ class ExtractMethod(
         when (file?.language) {
             JavaLanguage.INSTANCE -> {
                 MyMethodExtractor.invokeOnElements(
-                    project, editor, file, findSelectedPsiElements(editor, file), FunctionNameProvider(newFunctionName)
+                    project, editor, file,
+                    runReadAction{ findSelectedPsiElements(editor, file) }, FunctionNameProvider(newFunctionName)
                 )
             }
 
