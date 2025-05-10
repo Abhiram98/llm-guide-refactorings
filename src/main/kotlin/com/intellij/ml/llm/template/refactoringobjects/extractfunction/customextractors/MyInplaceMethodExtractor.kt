@@ -49,6 +49,8 @@ class MyInplaceMethodExtractor(private val editor: Editor,
     private fun createExtractor(): DuplicatesMethodExtractor {
         val elements = ExtractSelector().suggestElementsToExtract(file, range)
         val shouldBeStatic = popupProvider.makeStatic ?: false
+        DuplicatesMethodExtractor.changeSignatureDefault=true
+        DuplicatesMethodExtractor.replaceDuplicatesDefault=true
         return DuplicatesMethodExtractor.create(targetClass, elements, initialMethodName, shouldBeStatic)
     }
 
