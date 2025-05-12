@@ -1,6 +1,7 @@
 package com.intellij.ml.llm.template.refactoringobjects
 
 import ai.grazie.utils.isCapitalized
+import com.google.gson.annotations.SerializedName
 import com.intellij.analysis.AnalysisScope
 import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInsight.daemon.impl.JavaReferenceImporter
@@ -36,6 +37,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
     data class MyProblem(
 
         @SerialName("line_num")
+        @SerializedName("line_num")
         val lineNum: Int,
 
         @SerialName("problem")
@@ -53,12 +55,16 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
 //                        view.tree.root // traverse tree and find problems.
     }
     fun waitForCompletion(){
+        var sleepTime = 0
         Thread.sleep(5000)
         if (myGlobalInspectionContext == null)
             return
-        while(myGlobalInspectionContext!!.view == null){
+        while(myGlobalInspectionContext!!.view == null && sleepTime < 60){
             Thread.sleep(1000)
+            sleepTime += 1
         }
+        if (myGlobalInspectionContext!!.view == null)
+            return
 
         val root = myGlobalInspectionContext!!.view.tree.root
         val errors = getAllProblemChildren(root).filter {
