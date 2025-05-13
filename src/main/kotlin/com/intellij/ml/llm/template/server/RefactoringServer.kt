@@ -850,8 +850,11 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
             }
 
-            post(""){
-
+            get("reload_from_vfs"){
+                VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                reloadFileIfNeeded()
+                Thread.sleep(3000)
+                call.respond(HttpStatusCode.OK)
             }
 
 
