@@ -63,9 +63,10 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
             Thread.sleep(1000)
             sleepTime += 1
         }
-        if (myGlobalInspectionContext!!.view == null)
+        if (myGlobalInspectionContext!!.view == null) {
+            super.canceled()
             return
-
+        }
         val root = myGlobalInspectionContext!!.view.tree.root
         val errors = getAllProblemChildren(root).filter {
             val level = it.javaClass.getDeclaredField("myLevel")
