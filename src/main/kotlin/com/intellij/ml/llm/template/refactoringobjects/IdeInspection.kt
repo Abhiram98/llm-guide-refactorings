@@ -11,6 +11,7 @@ import com.intellij.codeInspection.ex.GlobalInspectionContextImpl
 import com.intellij.codeInspection.ui.InspectionTreeNode
 import com.intellij.codeInspection.ui.ProblemDescriptionNode
 import com.intellij.ml.llm.template.utils.PsiUtils
+import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.command.CommandProcessor
@@ -64,7 +65,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
             sleepTime += 1
         }
         if (myGlobalInspectionContext!!.view == null) {
-            super.canceled()
+            myGlobalInspectionContext!!.cleanup()
             return
         }
         val root = myGlobalInspectionContext!!.view.tree.root

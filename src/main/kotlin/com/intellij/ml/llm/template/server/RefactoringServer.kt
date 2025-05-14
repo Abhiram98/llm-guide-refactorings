@@ -428,10 +428,11 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val params = call.receive<ExtractClassParams>()
                 val psiClass = (file as PsiJavaFileImpl).classes[0]
                 val clazz = PsiUtils.getClassesByName(project, params.newName)
-                if (clazz.isNotEmpty()){
+                if (clazz.isNotEmpty() &&  params.subClassName==psiClass.name){
                     call.respond(HttpStatusCode.BadRequest, message = "Cannot perform refactoring because the class exists. " +
                             "If you would like to use the class, consider using a type change refactoring. " +
                             "If you would like to move members into the class, use a move refactoring.")
+                    return@post
                 }
 
                 val refObj = try{
