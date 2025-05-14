@@ -624,14 +624,14 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             post("run_code_inspection"){
                 val inspection = IdeInspection(project, AnalysisScope(file!!), file!!, editor!!)
                 invokeAndWait{ inspection.doInspect() }
-                inspection.waitForCompletion()
-
-//                inspection.fixIssues()
-
+                try{ inspection.waitForCompletion() }
+                catch (e: Exception){
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.InternalServerError, message = e.message.toString())
+                    return@post
+                }
                 call.respond(HttpStatusCode.OK, message = Gson().toJson(inspection.problems).toString())
-                // [] -> no issues
-                // [{"line_num": <>, "problem": "<Error description>"}]
-                // Read and return results.
+
             }
 
             post("import_symbol"){

@@ -66,7 +66,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
         }
         if (myGlobalInspectionContext!!.view == null) {
             myGlobalInspectionContext!!.cleanup()
-            return
+            throw Exception("Running code inspection failed.")
         }
         val root = myGlobalInspectionContext!!.view.tree.root
         val errors = getAllProblemChildren(root).filter {
