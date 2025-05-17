@@ -100,19 +100,34 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
         }.start(wait = true)
     }
 
+    fun Route.withLogging(block: suspend Route.() -> Unit) {
+        intercept(ApplicationCallPipeline.Plugins) { // Intercept the pipeline
+            val request = call.request
+            println("Incoming request: ${request.httpMethod.value} ${request.uri}")
+            proceed() // Continue with the pipeline and execute the route handler
+            println("Outgoing response: ${call.response.status()}")
+        }
+    }
+
+    val ReloadFilePlugin = createRouteScopedPlugin("ReloadFilePlugin") {
+        onCall {
+            reloadFileIfNeeded()
+        }
+    }
+
     fun Application.myApplicationModule() {
         install(ContentNegotiation) {
             json()
         }
         routing {
+            install(ReloadFilePlugin)
+
             get("/") {
                 call.respondText("Hello, world!", ContentType.Text.Html)
             }
-
             get("/get_source_code"){
                 call.respond(HttpStatusCode.OK, message = file!!.text)
             }
-
             get("/get_rel_file_path"){
                 call.respond(HttpStatusCode.OK,
                     message = file!!.virtualFile.path
@@ -308,7 +323,11 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 try {
                     val params = call.receive<RenameParams>()
                     println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
-
+                    if (params.oldName == params.newName){
+                        call.respond(HttpStatusCode.OK, message = "No rename was performed. " +
+                                "The old and new name in the request are the same.", )
+                        return@post
+                    }
                     // Call IJ rename API here.
                     val renameObject = RenameVariableFactory.fromOldNewNameAll(
                         project, editor!!, file!!, params.oldName, params.newName)
@@ -862,8 +881,15 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
         }
     }
     private fun reloadFileIfNeeded() {
-        if (!file!!.isValid) // if the psi file got invalidated because of a rewrite, reload it's contents.
-            file = PsiManager.getInstance(project).findFile(file!!.virtualFile)!!
+        try{
+            if (file == null)
+                return
+            else if (!file!!.isValid) // if the psi file got invalidated because of a rewrite, reload it's contents.
+                file = PsiManager.getInstance(project).findFile(file!!.virtualFile)!!
+        } catch (e: Exception){
+            e.printStackTrace()
+            println("Failed to reload file")
+        }
     }
 
     private fun revertIfTestsFailed(testReport: String, oldContents: @NlsSafe String): String {

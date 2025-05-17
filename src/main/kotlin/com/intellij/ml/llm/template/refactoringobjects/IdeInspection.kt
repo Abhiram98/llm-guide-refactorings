@@ -44,6 +44,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
         @SerialName("problem")
         val problem: String
     ){}
+
     fun doInspect(){
         super.runInspections(project, scope)
         // HACK to access private field. Ther should be a better way to do this.
@@ -60,7 +61,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
         Thread.sleep(5000)
         if (myGlobalInspectionContext == null)
             return
-        while(myGlobalInspectionContext!!.view == null && sleepTime < 60){
+        while(myGlobalInspectionContext!!.view == null && sleepTime < 20){
             Thread.sleep(1000)
             sleepTime += 1
         }
@@ -82,6 +83,7 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
         problems.addAll(descriptions)
 
         println("got the view!")
+//        myGlobalInspectionContext!!.close(true)
     }
 
     fun fixIssues(){
