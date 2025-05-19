@@ -354,7 +354,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         }
                         return@post
                     }
-                    invokeAndWait { renameObject.map { it.performRefactoring(project, editor!!, file!!) } }
+                    renameObject.map {
+                        it.performRefactoring(project, editor!!, file!!)
+                    }
                     call.respond(HttpStatusCode.OK, message=SUCCESS_MSG)
                 } catch (ex: IllegalStateException) {
                     print("failed to refactor")

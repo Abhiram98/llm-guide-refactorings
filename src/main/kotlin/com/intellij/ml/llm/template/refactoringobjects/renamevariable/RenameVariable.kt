@@ -2,11 +2,16 @@ package com.intellij.ml.llm.template.refactoringobjects.renamevariable
 
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.utils.PsiUtils
+import com.intellij.openapi.application.runReadAction
+import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.RefactoringFactory
+import com.intellij.refactoring.rename.RenameHandler
+import com.intellij.refactoring.rename.RenameProcessor
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
 
@@ -25,10 +30,17 @@ class RenameVariable(
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         super.performRefactoring(project, editor, file)
 //        val varPsi = PsiUtils.getVariableFromPsi(file, oldName)
-        val refactoringFactory = RefactoringFactory.getInstance(project)
-        val rename = refactoringFactory.createRename(oldVarPsi, newName, searchComments, false)
-        val usages = rename?.findUsages()
-        rename?.doRefactoring(usages)
+        val refactoringFactory = runReadAction{ RefactoringFactory.getInstance(project) }
+        val rename = runReadAction{ refactoringFactory.createRename(oldVarPsi, newName, searchComments, false) }
+        val usages = ProgressManager.getInstance().run {
+            runReadAction { rename?.findUsages() }
+        }
+        WriteCommandAction.runWriteCommandAction(project) {
+            rename?.doRefactoring(usages)
+        }
+
+//        val processor = RenameProcessor(project, oldVarPsi, newName, searchComments, false)
+//        processor.run()
 
         reverseRefactoring = getReverseRefactoringObject(project, editor, file)
     }

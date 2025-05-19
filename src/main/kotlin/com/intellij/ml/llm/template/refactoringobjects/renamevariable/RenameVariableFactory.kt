@@ -13,6 +13,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
+import org.jetbrains.kotlin.idea.hierarchy.overrides.isOverrideHierarchyElement
+import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachOverridingMethod
 import org.jetbrains.kotlin.psi.psiUtil.getChildOfType
 import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 
@@ -101,10 +103,30 @@ class RenameVariableFactory {
                            oldName:String,
                            newName: String): List<AbstractRefactoring>{
             val varPsi = runReadAction { PsiUtils.getAllElementsOfName(outerPsiElement, oldName) }
-            return varPsi.map {
+
+            val newElements = runReadAction{
+                varPsi
+                    .map {
+                        if (it is PsiMethod) {
+
+                            val superMethods = it.findSuperMethods()
+                            if (superMethods.isNotEmpty()) {
+                                superMethods.map { it2 ->
+                                    PsiUtils.findAllOverridingMethods(it2)
+                                }.flatten()
+                            } else {
+                                listOf(it)
+                            }
+                        } else {
+                            listOf(it)
+                        }
+                    }.flatten()
+            }
+
+            return newElements
+                .map {
                 RenameVariable(
-                    runReadAction{ editor.document.getLineNumber(it.startOffsetSkippingComments) },
-                    runReadAction{ editor.document.getLineNumber(it.startOffsetSkippingComments) },
+                    0,0,
                     oldName, newName, it, outerPsiElement, false
                 )
             }

@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.idea.base.util.projectScope
+import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachImplementation
 import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachOverridingMethod
 import org.jetbrains.kotlin.j2k.accessModifier
 import org.jetbrains.kotlin.psi.*
@@ -931,6 +932,15 @@ class PsiUtils {
         fun looksLikeMethod(text: String): Boolean = text.contains("(") && text.contains(")") && text.contains("{")
 
         fun looksLikeField(text: String): Boolean = text.trim().matches(Regex("""(public|private|protected)?\s*\w+\s+\w+\s*(=.*)?;"""))
+        fun findAllOverridingMethods(psiMethod: PsiMethod): List<PsiMethod> {
+            val overridingMethods = mutableListOf<PsiMethod>(psiMethod)
+            psiMethod.forEachOverridingMethod {
+                overridingMethods.add(it)
+                overridingMethods.addAll(findAllOverridingMethods(it))
+                true
+            }
+            return overridingMethods
+        }
 
 
     }

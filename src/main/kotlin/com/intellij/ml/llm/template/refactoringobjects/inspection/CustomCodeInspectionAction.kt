@@ -71,6 +71,10 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
         if (myGlobalInspectionContext!!.view==null){
             return // inspection found nothing
         }
+        if (!myGlobalInspectionContext!!.completed) {
+            myGlobalInspectionContext!!.cleanup()
+            return
+        }
 
         val root = myGlobalInspectionContext!!.view.tree.root
         val errors = getAllProblemChildren(root).filter {
@@ -84,6 +88,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
             IdeInspection.MyProblem(desc?.lineNumber?.plus(1) ?: 0, it.toString())
         }
         problems.addAll(descriptions)
+        myGlobalInspectionContext!!.cleanup()
     }
     private fun getAllProblemChildren(root: InspectionTreeNode): List<ProblemDescriptionNode>{
         val problemNodes = mutableListOf<ProblemDescriptionNode>()
