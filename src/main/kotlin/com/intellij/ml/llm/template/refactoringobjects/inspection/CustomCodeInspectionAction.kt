@@ -84,8 +84,6 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
             IdeInspection.MyProblem(desc?.lineNumber?.plus(1) ?: 0, it.toString())
         }
         problems.addAll(descriptions)
-        invokeAndWait{ myGlobalInspectionContext!!.close(true) }
-
     }
     private fun getAllProblemChildren(root: InspectionTreeNode): List<ProblemDescriptionNode>{
         val problemNodes = mutableListOf<ProblemDescriptionNode>()
