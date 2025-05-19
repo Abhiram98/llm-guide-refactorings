@@ -5,7 +5,7 @@ import com.intellij.analysis.AnalysisScope
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
-import com.intellij.ml.llm.template.refactoringobjects.IdeInspection
+import com.intellij.ml.llm.template.refactoringobjects.inspection.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.IntroduceParamObject
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.TypeChangeRefactoring
@@ -14,6 +14,7 @@ import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumR
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractInterfaceRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.ExtractMethodFactory
+import com.intellij.ml.llm.template.refactoringobjects.inspection.CustomCodeInspectionAction
 import com.intellij.ml.llm.template.refactoringobjects.introduce.IntroduceFieldFromLiteral
 import com.intellij.ml.llm.template.refactoringobjects.introduce.MyIntroduceFieldHandler
 import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFactory
@@ -26,7 +27,6 @@ import com.intellij.ml.llm.template.utils.FileUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
 import com.intellij.ml.llm.template.utils.openFileFromQualifiedName
 import com.intellij.openapi.application.runReadAction
-import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileDocumentManager
@@ -640,9 +640,22 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
             }
 
-            post("run_code_inspection"){
+            post("run_code_inspection_old"){
                 val inspection = IdeInspection(project, AnalysisScope(file!!), file!!, editor!!)
                 invokeAndWait{ inspection.doInspect() }
+                try{ inspection.waitForCompletion() }
+                catch (e: Exception){
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.InternalServerError, message = e.message.toString())
+                    return@post
+                }
+                call.respond(HttpStatusCode.OK, message = Gson().toJson(inspection.problems).toString())
+
+            }
+
+            post("run_code_inspection"){
+                val inspection = CustomCodeInspectionAction()
+                inspection.doAnalysis(project, AnalysisScope(file!!))
                 try{ inspection.waitForCompletion() }
                 catch (e: Exception){
                     e.printStackTrace()

@@ -1,6 +1,5 @@
-package com.intellij.ml.llm.template.refactoringobjects
+package com.intellij.ml.llm.template.refactoringobjects.inspection
 
-import ai.grazie.utils.isCapitalized
 import com.google.gson.annotations.SerializedName
 import com.intellij.analysis.AnalysisScope
 import com.intellij.codeHighlighting.HighlightDisplayLevel
@@ -11,9 +10,7 @@ import com.intellij.codeInspection.ex.GlobalInspectionContextImpl
 import com.intellij.codeInspection.ui.InspectionTreeNode
 import com.intellij.codeInspection.ui.ProblemDescriptionNode
 import com.intellij.ml.llm.template.utils.PsiUtils
-import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.application.runReadAction
-import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -23,8 +20,6 @@ import com.intellij.psi.PsiFile
 import com.intellij.refactoring.suggested.startOffset
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.jetbrains.kotlin.asJava.namedUnwrappedElement
-import org.jetbrains.kotlin.idea.gradleTooling.get
 import javax.swing.SwingUtilities.invokeAndWait
 
 class IdeInspection(val project: Project, val scope: AnalysisScope, val file: PsiFile, val editor: Editor): CodeInspectionAction(){
