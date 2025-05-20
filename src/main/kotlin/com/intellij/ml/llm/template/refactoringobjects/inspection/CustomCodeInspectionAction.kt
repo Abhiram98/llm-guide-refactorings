@@ -60,6 +60,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
             runInspections(project, scope)
         } catch (e: Exception){
             print("Failed to run inspections! ;/")
+            e.printStackTrace()
         }
     }
 
