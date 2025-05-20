@@ -657,7 +657,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
             post("run_code_inspection"){
                 val inspection = CustomCodeInspectionAction()
-                inspection.doAnalysis(project, AnalysisScope(file!!))
+                DumbService.getInstance(project).runWhenSmart{ inspection.doAnalysis(project, AnalysisScope(file!!)) }
                 try{ inspection.waitForCompletion() }
                 catch (e: Exception){
                     e.printStackTrace()

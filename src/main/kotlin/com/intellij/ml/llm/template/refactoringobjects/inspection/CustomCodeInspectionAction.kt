@@ -56,7 +56,11 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
     constructor(title: @DialogTitle String?, analysisNoun: @Nls String?) : super(title, analysisNoun)
 
     fun doAnalysis(project: Project, scope: AnalysisScope){
-        runInspections(project, scope)
+        try{
+            runInspections(project, scope)
+        } catch (e: Exception){
+            print("Failed to run inspections! ;/")
+        }
     }
 
     fun waitForCompletion(){
