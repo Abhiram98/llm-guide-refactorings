@@ -1,18 +1,25 @@
 package com.intellij.ml.llm.template.server
 
+import com.intellij.notification.Notification
+import com.intellij.notification.NotificationsManager
 import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskId
 import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskNotificationListenerAdapter
-import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskType
 import com.intellij.openapi.externalSystem.service.notification.ExternalSystemProgressNotificationManager
 import com.intellij.openapi.externalSystem.service.project.manage.ProjectDataImportListener
 import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
-import org.jetbrains.kotlin.idea.configuration.GRADLE_SYSTEM_ID
-import java.lang.Exception
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
+import com.intellij.openapi.ui.popup.util.PopupUtil
+import com.intellij.openapi.wm.ex.WindowManagerEx
 import kotlinx.coroutines.*
+import java.awt.AWTEvent
+import java.awt.Toolkit
+import java.awt.Window
+import java.awt.event.WindowEvent
+import java.util.*
+import javax.swing.SwingUtilities
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
+
 
 class ProjectListener {
 
@@ -20,11 +27,15 @@ class ProjectListener {
     var importCount = 0
     var resolveCount = 0
 
+    val badWindows: MutableMap<Window, Int> = mutableMapOf()
+
+
     fun registerListeners(project: Project){
 
         setupImportListener(project)
         setupResolveListener()
         setupIndexingListener(project)
+        registerAwtListener()
 
     }
 
@@ -129,6 +140,56 @@ class ProjectListener {
         }
 
         project.messageBus.connect().subscribe(DumbService.DUMB_MODE, IndexingLifecycleListener(project))
+    }
+
+    fun expireNotifications(project: Project){
+        val notificationsManager = NotificationsManager.getNotificationsManager()
+        val activeNotifications =
+            notificationsManager.getNotificationsOfType(Notification::class.java, project)
+        PopupUtil.getActiveComponent()
+        var windowManager = WindowManagerEx.getInstanceEx()
+        val window = windowManager.mostRecentFocusedWindow
+//        windowManager.
+        for (notification in activeNotifications)
+            notification.expire()
+    }
+
+    fun registerAwtListener(){
+        Toolkit.getDefaultToolkit().addAWTEventListener({ event ->
+            if (event.getID() === WindowEvent.WINDOW_OPENED) {
+                val window = (event as WindowEvent).window
+                print("opened window -> ${window.name}")
+                if (window.parent!=null)
+                    badWindows[window] = 0
+            }
+        }, AWTEvent.WINDOW_EVENT_MASK)
+
+        startWindowMonitor()
+    }
+
+    fun startWindowMonitor() {
+        val timer = Timer(true) // Daemon timer
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                val toRemove = mutableListOf<Window>()
+
+                for (window in badWindows.keys) {
+                    if (badWindows[window]!! < 1){
+                        badWindows[window] = badWindows[window]!! + 1
+                    }else if (window.isShowing) {
+                        println("Closing window -> ${window.name}")
+                        SwingUtilities.invokeLater {
+                            window.dispose()
+                        }
+                        toRemove.add(window)
+                    } else {
+                        toRemove.add(window) // Already closed
+                    }
+                }
+
+                toRemove.forEach { badWindows.remove(it) }
+            }
+        }, 0L, 30 * 1000L) // every 30 seconds
     }
 
 
