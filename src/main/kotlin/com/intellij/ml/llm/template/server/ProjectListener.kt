@@ -54,9 +54,9 @@ class ProjectListener {
         return false
     }
 
-    suspend fun waitForFinish(): Boolean{
-        Thread.sleep(10000) // sleep 10s for auto-reload to kick in.
-        val result = waitForCondition(180.seconds) { indexingCount==0 && importCount==0 && resolveCount==0 }
+    suspend fun waitForFinish(preSleep: Long, maxWaitDuration: Duration): Boolean{
+        Thread.sleep(preSleep) // sleep 10s for auto-reload to kick in.
+        val result = waitForCondition(maxWaitDuration) { indexingCount==0 && importCount==0 && resolveCount==0 }
         return result
     }
 

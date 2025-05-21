@@ -67,6 +67,7 @@ import javax.swing.SwingUtilities.invokeAndWait
 import kotlin.io.path.Path
 import kotlin.io.path.readText
 import kotlin.math.abs
+import kotlin.time.Duration.Companion.seconds
 
 
 class RefactoringServer(var project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
@@ -150,7 +151,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 // refresh files to load edits from git, or other.
                 VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
 
-                val response = runBlocking {  projectListener.waitForFinish() }
+                val response = runBlocking {  projectListener.waitForFinish(10000, 180.seconds) }
                 if (response)
                     call.respond(HttpStatusCode.OK, message = "Successfully waited for finish")
                 else
@@ -658,7 +659,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             post("run_code_inspection"){
                 val inspection = CustomCodeInspectionAction()
                 DumbService.getInstance(project).waitForSmartMode()
-                inspection.doAnalysis(project, AnalysisScope(file!!))
+                invokeAndWait{ inspection.doAnalysis(project, AnalysisScope(file!!)) }
                 try{ inspection.waitForCompletion() }
                 catch (e: Exception){
                     e.printStackTrace()

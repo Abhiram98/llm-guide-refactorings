@@ -121,7 +121,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
     ) {
         val runId = ++myRunId
         scope.setSearchInLibraries(false)
-        invokeAndWait{ FileDocumentManager.getInstance().saveAllDocuments() }
+        FileDocumentManager.getInstance().saveAllDocuments()
 
         val externalProfile = myExternalProfile
         val inspectionContext = getGlobalInspectionContext(project)
