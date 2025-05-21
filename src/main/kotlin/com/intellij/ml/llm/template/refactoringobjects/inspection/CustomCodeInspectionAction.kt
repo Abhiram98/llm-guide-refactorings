@@ -61,6 +61,9 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
         } catch (e: Exception){
             print("Failed to run inspections! ;/")
             e.printStackTrace()
+            myGlobalInspectionContext?.cleanup()
+            myGlobalInspectionContext?.completed=true
+            throw Exception("Failed to run code inspection - $e")
         }
     }
 
