@@ -68,6 +68,7 @@ import kotlin.io.path.Path
 import kotlin.io.path.readText
 import kotlin.math.abs
 import kotlin.time.Duration.Companion.seconds
+import javax.lang.model.SourceVersion
 
 
 class RefactoringServer(var project: Project, var editor: Editor? = null, var file: PsiFile? = null) {
@@ -324,6 +325,17 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 try {
                     val params = call.receive<RenameParams>()
                     println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
+
+                    if (!SourceVersion.isName(params.oldName)){
+                        call.respond(HttpStatusCode.BadRequest, message = "old name is not a valid identifier.")
+                        return@post
+                    }
+
+                    if (!SourceVersion.isName(params.newName)){
+                        call.respond(HttpStatusCode.BadRequest, message = "new name is not a valid identifier.")
+                        return@post
+                    }
+
                     if (params.oldName == params.newName){
                         call.respond(HttpStatusCode.OK, message = "No rename was performed. " +
                                 "The old and new name in the request are the same.", )
@@ -350,7 +362,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         else{
                             call.respond(
                                 HttpStatusCode.BadRequest, "Could not rename ${params.oldName}. " +
-                                        "If it is a member of another class, please navigate to that class before trigerring the rename."
+                                        "If the old_name is from an external library, it cannot be renamed."
                             )
                         }
                         return@post
@@ -657,13 +669,16 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
             post("run_code_inspection"){
+                val response = runBlocking {  projectListener.waitForFinish(1500, 30.seconds) }
                 val inspection = CustomCodeInspectionAction()
-                DumbService.getInstance(project).waitForSmartMode()
-                invokeAndWait{ inspection.doAnalysis(project, AnalysisScope(file!!)) }
-                try{ inspection.waitForCompletion() }
+                try {
+                    invokeAndWait { inspection.doAnalysis(project, AnalysisScope(file!!)) }
+                    inspection.waitForCompletion()
+                }
                 catch (e: Exception){
                     e.printStackTrace()
                     call.respond(HttpStatusCode.InternalServerError, message = e.message.toString())
+                    inspection.cleanup()
                     return@post
                 }
                 call.respond(HttpStatusCode.OK, message = Gson().toJson(inspection.problems).toString())

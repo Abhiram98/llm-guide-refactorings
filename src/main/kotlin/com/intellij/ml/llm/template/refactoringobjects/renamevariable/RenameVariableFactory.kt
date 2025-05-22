@@ -9,6 +9,7 @@ import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiCompiledElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
@@ -121,6 +122,9 @@ class RenameVariableFactory {
                             listOf(it)
                         }
                     }.flatten()
+                    .filter{
+                        it !is PsiCompiledElement
+                    }
             }
 
             return newElements

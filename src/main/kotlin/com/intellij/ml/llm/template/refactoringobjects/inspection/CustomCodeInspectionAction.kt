@@ -53,6 +53,10 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
         InspectionsBundle.messagePointer("inspection.action.noun").get()
     )
 
+    fun cleanup(){
+        myGlobalInspectionContext?.cleanup()
+    }
+
     constructor(title: @DialogTitle String?, analysisNoun: @Nls String?) : super(title, analysisNoun)
 
     fun doAnalysis(project: Project, scope: AnalysisScope){
@@ -124,7 +128,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
     ) {
         val runId = ++myRunId
         scope.setSearchInLibraries(false)
-        FileDocumentManager.getInstance().saveAllDocuments()
+//        FileDocumentManager.getInstance().saveAllDocuments()
 
         val externalProfile = myExternalProfile
         val inspectionContext = getGlobalInspectionContext(project)
@@ -139,7 +143,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
                 myExternalProfile = externalProfile
                 myGlobalInspectionContext = inspectionContext
 
-                FileDocumentManager.getInstance().saveAllDocuments()
+//                FileDocumentManager.getInstance().saveAllDocuments()
                 analyze(project, scope)
             })
         }
