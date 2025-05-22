@@ -13,6 +13,8 @@ import com.intellij.psi.PsiCompiledElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.idea.hierarchy.overrides.isOverrideHierarchyElement
 import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachOverridingMethod
@@ -130,7 +132,8 @@ class RenameVariableFactory {
             return newElements
                 .map {
                 RenameVariable(
-                    0,0,
+                    runReadAction{ it.startLine(it.containingFile.fileDocument) },
+                    runReadAction{ it.endLine(it.containingFile.fileDocument) },
                     oldName, newName, it, outerPsiElement, false
                 )
             }
