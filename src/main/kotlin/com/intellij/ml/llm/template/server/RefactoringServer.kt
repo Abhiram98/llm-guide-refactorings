@@ -59,6 +59,7 @@ import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import java.nio.file.Path
@@ -900,6 +901,37 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                 }
                     call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+            }
+
+            post("update_comment"){
+                val params = call.receive<FindReplaceParams>()
+                val comments = runReadAction{ PsiUtils.getAllComments(file!!) }
+                val matchingComments = comments.filter {
+                    it.startLine(editor!!.document) + 1 <= params.lineNum!! && params.lineNum <= it.endLine(editor!!.document)+1
+                }
+
+                if (matchingComments.isEmpty()) {
+                    call.respond(HttpStatusCode.NotFound, message = "No comment found on line ${params.lineNum}.")
+                    return@post
+                }
+                FileUtils.textBasedFindReplace(params, editor!!, file!!)
+                VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir) // works most of the time.
+                call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
+//                matchingComments.forEach {
+//                    val newComment = it.text.replace(params.findText, params.replaceText)
+//                    WriteCommandAction.runWriteCommandAction(project) {
+//                        val newElement = PsiUtils.createPsiElementFromText(newComment, project)
+//                        if (newElement!=null)
+//                            it.replace(newElement)
+//                        else{
+//                            FileUtils.replaceFileContentsInRange(
+//                                Path(file!!.virtualFile.path), it.startOffset, it.endOffset, newComment
+//                            )
+//                            VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+//                        }
+//                    }
+//                }
+
             }
 
             get("reload_from_vfs"){

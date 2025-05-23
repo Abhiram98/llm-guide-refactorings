@@ -1,6 +1,5 @@
 package com.intellij.ml.llm.template.utils
 
-import com.intellij.codeInsight.daemon.impl.JavaReferenceImporter
 import com.intellij.lang.Language
 import com.intellij.lang.java.JavaLanguage
 import com.intellij.openapi.application.runReadAction
@@ -23,7 +22,6 @@ import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.idea.base.util.projectScope
-import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachImplementation
 import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachOverridingMethod
 import org.jetbrains.kotlin.j2k.accessModifier
 import org.jetbrains.kotlin.psi.*
@@ -895,6 +893,18 @@ class PsiUtils {
 
             }
             outerElement.accept(TextFinder())
+            return foundElements.toList()
+        }
+
+        fun getAllComments(outerElement: PsiElement): List<PsiComment> {
+            var foundElements: MutableSet<PsiComment> = mutableSetOf()
+            class CommentFinder: JavaRecursiveElementVisitor() {
+                override fun visitComment(comment: PsiComment) {
+                    super.visitComment(comment)
+                    foundElements.add(comment)
+                }
+            }
+            outerElement.accept(CommentFinder())
             return foundElements.toList()
         }
 
