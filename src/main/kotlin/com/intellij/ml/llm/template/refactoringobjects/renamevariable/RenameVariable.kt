@@ -9,6 +9,7 @@ import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiMethod
 import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.rename.RenameHandler
 import com.intellij.refactoring.rename.RenameProcessor
@@ -26,12 +27,26 @@ class RenameVariable(
 
 ): AbstractRefactoring() {
 
+    val relatedRenames: MutableList<PsiElement> = mutableListOf()
+    init {
+        runReadAction{ relatedRenames.addAll(findRelatedElements(oldVarPsi)) }
+    }
+
 
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         super.performRefactoring(project, editor, file)
 //        val varPsi = PsiUtils.getVariableFromPsi(file, oldName)
-        val refactoringFactory = runReadAction{ RefactoringFactory.getInstance(project) }
-        val rename = runReadAction{ refactoringFactory.createRename(oldVarPsi, newName, searchComments, false) }
+        relatedRenames.forEach { doRename(it, project) }
+        doRename(oldVarPsi, project)
+        reverseRefactoring = getReverseRefactoringObject(project, editor, file)
+    }
+
+    private fun doRename(
+        psiElement: PsiElement,
+        project: Project,
+    ) {
+        val refactoringFactory = runReadAction { RefactoringFactory.getInstance(project) }
+        val rename = runReadAction { refactoringFactory.createRename(psiElement, newName, searchComments, false) }
         val usages = ProgressManager.getInstance().run {
             runReadAction { rename?.findUsages() }
         }
@@ -39,10 +54,10 @@ class RenameVariable(
             rename?.doRefactoring(usages)
         }
 
-//        val processor = RenameProcessor(project, oldVarPsi, newName, searchComments, false)
-//        processor.run()
+        //        val processor = RenameProcessor(project, oldVarPsi, newName, searchComments, false)
+        //        processor.run()
 
-        reverseRefactoring = getReverseRefactoringObject(project, editor, file)
+
     }
 
     override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
@@ -88,5 +103,24 @@ class RenameVariable(
             }
         }
         return null
+    }
+
+    companion object{
+        fun findRelatedElements(psiElement: PsiElement): List<PsiElement>{
+            if (psiElement is PsiMethod) {
+
+                return psiElement.findSuperMethods().toList()
+//                if (superMethods.isNotEmpty()) {
+////                    return superMethods.map { it2 ->
+////                        PsiUtils.findAllOverridingMethods(it2)
+////                    }.flatten()
+//
+//                } else {
+//                    return emptyList()
+//                }
+            } else {
+                return emptyList()
+            }
+        }
     }
 }

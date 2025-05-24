@@ -109,21 +109,6 @@ class RenameVariableFactory {
 
             val newElements = runReadAction{
                 varPsi
-                    .map {
-                        if (it is PsiMethod) {
-
-                            val superMethods = it.findSuperMethods()
-                            if (superMethods.isNotEmpty()) {
-                                superMethods.map { it2 ->
-                                    PsiUtils.findAllOverridingMethods(it2)
-                                }.flatten()
-                            } else {
-                                listOf(it)
-                            }
-                        } else {
-                            listOf(it)
-                        }
-                    }.flatten()
                     .filter{
                         it !is PsiCompiledElement
                     }
@@ -132,13 +117,12 @@ class RenameVariableFactory {
             return newElements
                 .map {
                 RenameVariable(
-                    runReadAction{ it.startLine(it.containingFile.fileDocument) },
-                    runReadAction{ it.endLine(it.containingFile.fileDocument) },
+                    runReadAction{ PsiUtils.getStartLine(it) },
+                    runReadAction{ PsiUtils.getEndLine(it) },
                     oldName, newName, it, outerPsiElement, false
                 )
             }
         }
-
 
 
         fun fromMethodOldNewName(

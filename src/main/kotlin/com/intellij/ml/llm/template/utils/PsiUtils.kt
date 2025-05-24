@@ -20,6 +20,8 @@ import com.intellij.psi.util.childrenOfType
 import com.intellij.util.Processor
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.KotlinLanguage
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.idea.base.util.projectScope
 import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachOverridingMethod
@@ -27,6 +29,7 @@ import org.jetbrains.kotlin.j2k.accessModifier
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
+import org.jetbrains.kotlin.psi.psiUtil.textRangeWithoutComments
 import kotlin.math.sqrt
 
 
@@ -950,6 +953,41 @@ class PsiUtils {
                 true
             }
             return overridingMethods
+        }
+
+        fun getEndLine(it: PsiElement) = it.endLine(it.containingFile.fileDocument)
+
+        fun getStartLine(it: PsiElement): Int{
+
+            if (it is PsiMethod){
+                var count = 0
+                val startingAnnotations = it.containingFile.fileDocument
+                    .getText(it.textRangeWithoutComments).split("\n")
+                    .map { it.startsWith("@") }
+                    .forEach {
+                        if (it)
+                            count += 1
+                        else
+                            return@forEach
+                    }
+
+                return it.containingFile.fileDocument.getLineNumber((it as PsiMethod).startOffsetSkippingComments) + count
+            }
+            else if (it is PsiClass){
+                var count = 0
+                val startingAnnotations = it.containingFile.fileDocument
+                    .getText(it.textRangeWithoutComments).split("\n")
+                    .map { it.startsWith("@") }
+                    .forEach {
+                        if (it)
+                            count += 1
+                        else
+                            return@forEach
+                    }
+                return it.containingFile.fileDocument.getLineNumber(it.startOffsetSkippingComments) + count
+            }else{
+                return it.startLine(it.containingFile.fileDocument)
+            }
         }
 
 
