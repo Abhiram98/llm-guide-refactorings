@@ -373,12 +373,15 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     }
                     call.respond(HttpStatusCode.OK, message=SUCCESS_MSG)
                 } catch (ex: IllegalStateException) {
+                    ex.printStackTrace()
                     print("failed to refactor")
                     call.respond(HttpStatusCode.BadRequest)
                 } catch (ex: JsonConvertException) {
+                    ex.printStackTrace()
                     print("failed")
                     call.respond(HttpStatusCode.BadRequest)
                 } catch (ex: Exception){
+                    ex.printStackTrace()
                     call.respond(HttpStatusCode.BadRequest, message = ex.message.toString())
                 }
             }

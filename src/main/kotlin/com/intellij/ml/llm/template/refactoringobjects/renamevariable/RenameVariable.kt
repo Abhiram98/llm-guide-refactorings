@@ -7,12 +7,16 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiCompiledElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
+import com.intellij.psi.PsiReferenceExpression
+import com.intellij.psi.impl.source.PsiJavaCodeReferenceElementImpl
 import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.rename.RenameHandler
 import com.intellij.refactoring.rename.RenameProcessor
+import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
 
@@ -37,7 +41,13 @@ class RenameVariable(
         super.performRefactoring(project, editor, file)
 //        val varPsi = PsiUtils.getVariableFromPsi(file, oldName)
         relatedRenames.forEach { doRename(it, project) }
-        doRename(oldVarPsi, project)
+
+        try{ doRename(oldVarPsi, project) }
+        catch (e: Exception){
+            print("Failed to rename inner element")
+            if (relatedRenames.isEmpty())
+                throw Exception("Failed to rename element")
+        }
         reverseRefactoring = getReverseRefactoringObject(project, editor, file)
     }
 
@@ -118,7 +128,25 @@ class RenameVariable(
 //                } else {
 //                    return emptyList()
 //                }
-            } else {
+            } else if ((psiElement as? PsiReferenceExpression)!=null) {
+                print("found reference.")
+//                val nameUnwrapped = psiElement.namedUnwrappedElement
+//                if (nameUnwrapped!=null && nameUnwrapped !is PsiCompiledElement)
+//                    return listOf(nameUnwrapped)
+
+                val resolvedElement = psiElement.resolve()
+                if (resolvedElement!=null && resolvedElement !is PsiCompiledElement){
+                    return listOf(resolvedElement)
+                }
+                return emptyList()
+            }
+            if ((psiElement as? PsiJavaCodeReferenceElementImpl !=null)) {
+                val resolvedElement = psiElement.resolve()
+                if (resolvedElement != null && resolvedElement !is PsiCompiledElement)
+                    return listOf(resolvedElement)
+                return emptyList()
+            }
+            else {
                 return emptyList()
             }
         }

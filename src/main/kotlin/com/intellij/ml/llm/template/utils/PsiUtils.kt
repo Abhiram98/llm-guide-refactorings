@@ -317,14 +317,17 @@ class PsiUtils {
                     if ((element as? PsiReferenceExpression)!=null) {
                         print("found reference.")
                         if (element.namedUnwrappedElement?.name == nameToSearch){
-                            match.add((element as? PsiReferenceExpression)!!.namedUnwrappedElement!!)
+//                            match.add((element as? PsiReferenceExpression)!!.namedUnwrappedElement!!)
+                            match.add(element)
                         } else if (element.resolve()?.namedUnwrappedElement?.name == nameToSearch){
-                            match.add(element.resolve()!!)
+//                            match.add(element.resolve()!!)
+                            match.add(element)
                         }
                     }
                     if ((element as? PsiJavaCodeReferenceElementImpl!=null)
                         && (element as PsiJavaCodeReferenceElementImpl).resolve()?.namedUnwrappedElement?.name == nameToSearch){
-                        match.add((element as PsiJavaCodeReferenceElementImpl).resolve()!!)
+//                        match.add((element as PsiJavaCodeReferenceElementImpl).resolve()!!)
+                        match.add(element)
                     }
                 }
 
