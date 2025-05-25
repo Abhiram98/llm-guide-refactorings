@@ -387,6 +387,13 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     renameObject.map {
                         it.performRefactoring(project, editor!!, file!!)
                     }
+                    try{
+                        invokeAndWait {
+                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                        }
+                    } catch (ex: Exception){
+                        println("Failed to save all documents :/")
+                    }
                     call.respond(HttpStatusCode.OK, message=SUCCESS_MSG)
                 } catch (ex: IllegalStateException) {
                     ex.printStackTrace()
@@ -399,6 +406,14 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 } catch (ex: Exception){
                     ex.printStackTrace()
                     call.respond(HttpStatusCode.BadRequest, message = ex.message.toString())
+                } finally {
+                    try{
+                        invokeAndWait {
+                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                        }
+                    } catch (ex: Exception){
+                        println("Failed to save all documents :/")
+                    }
                 }
             }
             post("/extract_method"){
@@ -934,7 +949,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     return@post
                 }
                 FileUtils.textBasedFindReplace(params, editor!!, file!!)
+                Thread.sleep(500) // sleep to allow file system changes to take effect
                 VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir) // works most of the time.
+                reloadFileIfNeeded()
                 call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
 //                matchingComments.forEach {
 //                    val newComment = it.text.replace(params.findText, params.replaceText)
