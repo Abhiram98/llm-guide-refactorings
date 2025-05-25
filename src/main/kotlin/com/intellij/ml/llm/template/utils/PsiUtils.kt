@@ -993,6 +993,21 @@ class PsiUtils {
             }
         }
 
+        fun isCodeElementType(it: PsiElement, elementType: String): Boolean {
+            val selectedType = when (elementType) {
+                "method" -> PsiMethod::class.java
+                "parameter" -> PsiParameter::class.java
+//                "class" -> PsiClass::class.java
+//                "field" -> PsiField::class.java
+//                "variable" -> PsiVariable::class.java
+
+                else -> null
+            }
+            if (selectedType==null)
+                return it !is PsiMethod && it !is PsiParameter
+            return selectedType.isInstance(it)
+        }
+
 
     }
 

@@ -23,7 +23,9 @@ data class RenameParams(
     @SerialName("new_name")
     val newName: String,
     @SerialName("line_num")
-    val lineNum: Int? = null
+    val lineNum: Int? = null,
+    @SerialName("code_element_type")
+    val codeElementType: String? = null
 )
 
 @Serializable

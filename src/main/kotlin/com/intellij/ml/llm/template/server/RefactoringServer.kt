@@ -21,6 +21,7 @@ import com.intellij.ml.llm.template.refactoringobjects.movemethod.MoveMethodFact
 import com.intellij.ml.llm.template.refactoringobjects.pullup.PullUpRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.pullup.PushDownRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
+import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariable
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
 import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.utils.FileUtils
@@ -38,10 +39,12 @@ import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.psi.JavaPsiFacade
+import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
+import com.intellij.psi.PsiMethod
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
@@ -343,13 +346,26 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         return@post
                     }
                     // Call IJ rename API here.
-                    val renameObject = RenameVariableFactory.fromOldNewNameAll(
+                    val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
                         project, editor!!, file!!, params.oldName, params.newName)
                         .filter {
                             if (params.lineNum == null)
                                 true
                             else
                                 it.startLoc + 1 == params.lineNum
+                        }
+                    val renameObject =
+                        if (renameObjectRaw.size<=1) {
+                            renameObjectRaw
+                        }
+                        else if (params.codeElementType!=null){
+                            renameObjectRaw.filter {
+                                PsiUtils.isCodeElementType(
+                                    (it as RenameVariable).oldVarPsi, params.codeElementType
+                                )
+                            }
+                        }else{
+                            renameObjectRaw
                         }
                     if (renameObject.isEmpty()){
                         val reverse = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, params.newName, params.oldName)
