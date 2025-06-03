@@ -11,13 +11,16 @@ import com.intellij.psi.PsiCompiledElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
+import com.intellij.psi.PsiParameter
 import com.intellij.psi.PsiReferenceExpression
 import com.intellij.psi.impl.source.PsiJavaCodeReferenceElementImpl
 import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.rename.RenameHandler
 import com.intellij.refactoring.rename.RenameProcessor
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
+import org.jetbrains.kotlin.idea.debugger.getContainingMethod
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
+import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
 
 class RenameVariable(
@@ -141,10 +144,20 @@ class RenameVariable(
                 }
                 return elements
             }
-            if ((psiElement as? PsiJavaCodeReferenceElementImpl !=null)) {
+            else if ((psiElement as? PsiJavaCodeReferenceElementImpl !=null)) {
                 val resolvedElement = psiElement.resolve()
                 if (resolvedElement != null && resolvedElement !is PsiCompiledElement)
                     return listOf(resolvedElement)
+                return emptyList()
+            }
+            else if (psiElement is PsiParameter){
+                // find super method's param and rename those.
+                val containingMethod = psiElement.getParentOfType<PsiMethod>(true)
+                if (containingMethod!=null){
+                    return containingMethod.findSuperMethods().map {
+                        it.parameterList.parameters.filter { param -> param.name == psiElement.name }
+                    }.flatten().reversed()
+                }
                 return emptyList()
             }
             else {
