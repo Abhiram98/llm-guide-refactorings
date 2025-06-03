@@ -962,35 +962,17 @@ class PsiUtils {
 
         fun getStartLine(it: PsiElement): Int{
 
-            if (it is PsiMethod){
-                var count = 0
-                val startingAnnotations = it.containingFile.fileDocument
-                    .getText(it.textRangeWithoutComments).split("\n")
-                    .map { it.startsWith("@") }
-                    .forEach {
-                        if (it)
-                            count += 1
-                        else
-                            return@forEach
-                    }
-
-                return it.containingFile.fileDocument.getLineNumber((it as PsiMethod).startOffsetSkippingComments) + count
-            }
-            else if (it is PsiClass){
-                var count = 0
-                val startingAnnotations = it.containingFile.fileDocument
-                    .getText(it.textRangeWithoutComments).split("\n")
-                    .map { it.startsWith("@") }
-                    .forEach {
-                        if (it)
-                            count += 1
-                        else
-                            return@forEach
-                    }
-                return it.containingFile.fileDocument.getLineNumber(it.startOffsetSkippingComments) + count
-            }else{
-                return it.startLine(it.containingFile.fileDocument)
-            }
+            var count = 0
+            val startingAnnotations = it.containingFile.fileDocument
+                .getText(it.textRangeWithoutComments).split("\n")
+                .map { it.startsWith("@") }
+                .forEach {
+                    if (it)
+                        count += 1
+                    else
+                        return@forEach
+                }
+            return it.containingFile.fileDocument.getLineNumber(it.startOffsetSkippingComments) + count
         }
 
         fun isCodeElementType(it: PsiElement, elementType: String): Boolean {
