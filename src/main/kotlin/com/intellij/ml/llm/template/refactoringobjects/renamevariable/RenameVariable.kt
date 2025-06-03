@@ -130,15 +130,16 @@ class RenameVariable(
 //                }
             } else if ((psiElement as? PsiReferenceExpression)!=null) {
                 print("found reference.")
+                val elements = mutableListOf<PsiElement>()
 //                val nameUnwrapped = psiElement.namedUnwrappedElement
 //                if (nameUnwrapped!=null && nameUnwrapped !is PsiCompiledElement)
-//                    return listOf(nameUnwrapped)
+//                    elements.add(nameUnwrapped)
 
                 val resolvedElement = psiElement.resolve()
-                if (resolvedElement!=null && resolvedElement !is PsiCompiledElement){
-                    return listOf(resolvedElement)
+                if (resolvedElement!=null && resolvedElement !is PsiCompiledElement) {
+                    elements.add(resolvedElement)
                 }
-                return emptyList()
+                return elements
             }
             if ((psiElement as? PsiJavaCodeReferenceElementImpl !=null)) {
                 val resolvedElement = psiElement.resolve()
