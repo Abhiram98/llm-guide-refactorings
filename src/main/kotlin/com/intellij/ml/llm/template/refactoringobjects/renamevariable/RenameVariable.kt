@@ -156,7 +156,10 @@ class RenameVariable(
                 if (containingMethod!=null){
                     return containingMethod.findSuperMethods().map {
                         it.parameterList.parameters.filter { param -> param.name == psiElement.name }
-                    }.flatten().reversed()
+                    }
+                        .flatten()
+                        .filter { it !is PsiCompiledElement }
+                        .reversed()
                 }
                 return emptyList()
             }
