@@ -17,6 +17,8 @@ import com.intellij.psi.impl.source.PsiJavaCodeReferenceElementImpl
 import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.rename.RenameHandler
 import com.intellij.refactoring.rename.RenameProcessor
+import com.intellij.usageView.UsageInfo
+import com.jetbrains.rd.util.catch
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.debugger.getContainingMethod
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
@@ -43,7 +45,12 @@ class RenameVariable(
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         super.performRefactoring(project, editor, file)
 //        val varPsi = PsiUtils.getVariableFromPsi(file, oldName)
-        relatedRenames.forEach { doRename(it, project) }
+        relatedRenames.forEach {
+            try{ doRename(it, project) }
+            catch(e: Exception){
+                print("failed to do one of the related renames : $it")
+            }
+        }
 
         try{ doRename(oldVarPsi, project) }
         catch (e: Exception){
@@ -122,15 +129,15 @@ class RenameVariable(
         fun findRelatedElements(psiElement: PsiElement): List<PsiElement>{
             if (psiElement is PsiMethod) {
 
-                return psiElement.findSuperMethods().toList()
-//                if (superMethods.isNotEmpty()) {
-////                    return superMethods.map { it2 ->
-////                        PsiUtils.findAllOverridingMethods(it2)
-////                    }.flatten()
-//
-//                } else {
-//                    return emptyList()
-//                }
+                val superMethods = psiElement.findSuperMethods().toList()
+                if (superMethods.isNotEmpty()) {
+                    return superMethods.map { it2 ->
+                        PsiUtils.findAllOverridingMethods(it2)
+                    }.flatten()
+
+                } else {
+                    return PsiUtils.findAllOverridingMethods(psiElement)
+                }
             } else if ((psiElement as? PsiReferenceExpression)!=null) {
                 print("found reference.")
                 val elements = mutableListOf<PsiElement>()
