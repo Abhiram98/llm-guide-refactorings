@@ -133,7 +133,7 @@ class RenameVariable(
                 if (superMethods.isNotEmpty()) {
                     return superMethods.map { it2 ->
                         PsiUtils.findAllOverridingMethods(it2)
-                    }.flatten()
+                    }.flatten().toSet().toList()
 
                 } else {
                     return PsiUtils.findAllOverridingMethods(psiElement)
@@ -161,7 +161,12 @@ class RenameVariable(
                 // find super method's param and rename those.
                 val containingMethod = psiElement.getParentOfType<PsiMethod>(true)
                 if (containingMethod!=null){
-                    return containingMethod.findSuperMethods().map {
+                    return containingMethod.findSuperMethods()
+                        .map{
+                            PsiUtils.findAllOverridingMethods(it)
+                        }.flatten()
+                        .toSet()
+                        .map {
                         it.parameterList.parameters.filter { param -> param.name == psiElement.name }
                     }
                         .flatten()
