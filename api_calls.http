@@ -1,0 +1,182 @@
+### Open Project
+POST http://localhost:8082/open-project
+Content-Type: application/json
+
+{
+  "abs_project_path": "/path/to/your/project"
+}
+
+### Open File (basic)
+POST http://localhost:8082/open-file
+Content-Type: application/json
+
+{
+  "rel_file_path": "flink-table/flink-table-api-java/src/main/java/org/apache/flink/table/catalog/DataTypeFactoryImpl.java"
+}
+
+### Open File (basic)
+POST http://localhost:8082/open-file
+Content-Type: application/json
+
+{
+  "rel_file_path": "flink-runtime-web/src/main/java/org/apache/flink/runtime/webmonitor/handlers/JarRunRequestBody.java"
+}
+
+### Try Open File (with fallback to qualified name)
+POST http://localhost:8082/try-open-file
+Content-Type: application/json
+
+{
+  "rel_file_path": "src/main/java/com/example/MyClass.java"
+}
+
+### Create New File
+POST http://localhost:8082/create-file
+Content-Type: application/json
+
+{
+  "rel_file_path": "src/main/java/com/example/NewClass.java"
+}
+
+### Try Create File (with package fallback)
+POST http://localhost:8082/try-create-file
+Content-Type: application/json
+
+{
+  "rel_file_path": "src/main/java/com/example/NewClass.java"
+}
+
+### Rename Variable/Field/Method
+POST http://localhost:8082/rename
+Content-Type: application/json
+
+{
+  "old_name": "createLatencyTrackingState",
+  "new_name": "createMetricsTrackingState",
+  "line_num": 94,
+  "code_element_type": "method"
+}
+
+### Rename Variable/Field/Method
+POST http://localhost:8082/rename
+Content-Type: application/json
+
+{
+  "old_name": "getRestoreMode",
+  "new_name": "getRecoveryClaimMode",
+  "line_num": 138,
+  "code_element_type": "method"
+}
+
+### Rename without line number (renames all occurrences)
+POST http://localhost:8082/rename
+Content-Type: application/json
+
+{
+  "old_name": "oldMethodName",
+  "new_name": "newMethodName"
+}
+
+### Rename with specific code element type
+POST http://localhost:8082/rename
+Content-Type: application/json
+
+{
+  "old_name": "oldFieldName",
+  "new_name": "newFieldName",
+  "line_num": 15,
+  "code_element_type": "field"
+}
+
+
+### Find and Replace Text
+POST http://localhost:8082/find_replace
+Content-Type: application/json
+
+{
+  "find_text": "oldText",
+  "replace_text": "newText",
+  "replace_in_comments_only": false,
+  "line_num": 42
+}
+
+### Find and Replace in Comments Only
+POST http://localhost:8082/find_replace
+Content-Type: application/json
+
+{
+  "find_text": "old comment text",
+  "replace_text": "new comment text",
+  "replace_in_comments_only": true
+}
+
+### Update Comment on Specific Line
+POST http://localhost:8082/update_comment
+Content-Type: application/json
+
+{
+  "find_text": "old comment",
+  "replace_text": "updated comment",
+  "line_num": 10
+}
+
+### Search for Symbol (Method, Field, or Class)
+POST http://localhost:8082/search_symbol
+Content-Type: application/json
+
+{
+  "symbol": "resolveQueryHint"
+}
+
+### Search for Keyword with Context (Like IntelliJ's "Search Everywhere" Text Tab)
+POST http://localhost:8082/search_keyword
+Content-Type: application/json
+
+{
+"symbol": "executionConfig"
+}
+
+### Search for Changed Part from Rename Pair
+POST http://localhost:8082/search_symbol_changed
+Content-Type: application/json
+
+{
+"old_name": "JoinHintResolverTest",
+"new_name": "QueryHintsResolverTest"
+}
+
+### Search for Changed Part from Rename Pair
+POST http://localhost:8082/search_symbol_changed
+Content-Type: application/json
+
+{
+  "old_name": "executionConfig",
+  "new_name": "serializerConfig"
+}
+
+### Search for Changed Part from Rename Pair
+POST http://localhost:8082/search_symbol_changed
+Content-Type: application/json
+
+{
+  "old_name": "getAsyncInflightRecordsLimit",
+  "new_name": "getAsyncStateTotalBufferSize"
+}
+
+### Search for Changed Part from Rename Pair
+POST http://localhost:8082/search_symbol_changed
+Content-Type: application/json
+
+{
+  "old_name": "testCreateMaterializedTableFailed",
+  "new_name": "testCreateMaterializedTableFailedInInContinuousMode"
+}
+
+### Search for Changed Part from Rename Pair
+POST http://localhost:8082/search_symbol_changed
+Content-Type: application/json
+
+{
+  "old_name": "testHasLeadershipWithLeadershipLostAndRevokeEventProcessed",
+  "new_name": "testHasLeadershipAsyncWithLeadershipLostAndRevokeEventProcessed"
+}

@@ -207,3 +207,17 @@ data class FindReplaceParams(
     @SerialName("line_num")
     val lineNum: Int?=null
 )
+
+@Serializable
+data class SymbolSearchParams(
+    @SerialName("symbol")
+    val symbol: String
+)
+
+@Serializable
+data class RenamePairParams(
+    @SerialName("old_name")
+    val oldName: String,
+    @SerialName("new_name")
+    val newName: String
+)

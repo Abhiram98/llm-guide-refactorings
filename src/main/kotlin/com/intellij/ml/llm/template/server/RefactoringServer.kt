@@ -38,14 +38,20 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.psi.JavaPsiFacade
-import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiJavaFile
-import com.intellij.psi.PsiManager
-import com.intellij.psi.PsiMethod
+import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.openapi.roots.ProjectRootManager
+import com.intellij.psi.*
 import com.intellij.psi.impl.source.PsiJavaFileImpl
+import com.intellij.psi.search.GlobalSearchScope
+import com.intellij.psi.search.searches.AllClassesSearch
+import com.intellij.psi.search.PsiSearchHelper
+import com.intellij.psi.search.UsageSearchContext
+import com.intellij.psi.search.searches.ReferencesSearch
+import com.intellij.psi.JavaRecursiveElementVisitor
+import com.intellij.psi.PsiLocalVariable
+import com.intellij.psi.PsiReferenceExpression
+import com.intellij.psi.PsiMethodCallExpression
+import com.intellij.util.Processor
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
 import com.intellij.util.text.findTextRange
@@ -62,6 +68,7 @@ import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import kotlinx.serialization.json.JsonObject
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
@@ -203,6 +210,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
             post("/open-file"){
+                println("got request to open a file")
                 // open file and set the file and editor values
                 val params = call.receive<OpenFileParams>()
                 params.filePath
@@ -226,6 +234,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
             post("/try-open-file"){
                 // open file and set the file and editor values
+                println("got request to try open a file")
                 val params = call.receive<OpenFileParams>()
                 val reqFileName = params.filePath.split("/").last()
                 if (reqFileName == file!!.name){
@@ -349,10 +358,17 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
                         project, editor!!, file!!, params.oldName, params.newName)
                         .filter {
-                            if (params.lineNum == null)
+                            if (params.lineNum == null) {
                                 true
-                            else
-                                it.startLoc + 1 == params.lineNum
+                            } else {
+                                if (params.codeElementType == "method"  || params.codeElementType == "parameter") {
+                                    // For methods, check if line number is within the method's range
+                                    params.lineNum >= it.startLoc && params.lineNum <= it.endLoc + 1
+                                } else {
+                                    // For other elements, check exact line match
+                                    it.startLoc + 1 == params.lineNum
+                                }
+                            }
                         }
                     val renameObject =
                         if (renameObjectRaw.size<=1) {
@@ -977,6 +993,280 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 call.respond(HttpStatusCode.OK)
             }
 
+            // post("search_symbol") {
+            //     val params = call.receive<SymbolSearchParams>()
+            //     val symbolName = params.symbol
+
+            //     val linkedFiles = runReadAction {
+            //         val results = mutableListOf<PsiElement>()
+
+            //         // Method 1: Use AllClassesSearch (for most classes)
+            //         val scope = GlobalSearchScope.allScope(project)
+            //         AllClassesSearch.search(scope, project).allowParallelProcessing()
+            //             .forEach(Processor<PsiClass> { psiClass ->
+            //                 searchInClass(psiClass, symbolName, results)
+            //                 true
+            //             })
+
+            //         // Method 2: Also search through all source roots to catch test files
+            //         val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
+            //         sourceRoots.forEach { sourceRoot ->
+            //             searchInDirectory(sourceRoot, symbolName, results)
+            //         }
+
+            //         println("Debug: Total results before mapping: ${results.size}")
+            //         results.forEachIndexed { index, element ->
+            //             val vFile = element.containingFile?.virtualFile
+            //             val path = vFile?.path?.removePrefix("${project.basePath}/") ?: "unknown"
+            //             val lineNum = element.textOffset.let { offset ->
+            //                 val doc = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
+            //                 doc?.getLineNumber(offset)?.plus(1) ?: -1
+            //             }
+            //             val elementName = when (element) {
+            //                 is PsiClass -> element.name ?: "unnamed"
+            //                 is PsiMethod -> element.name
+            //                 is PsiField -> element.name
+            //                 else -> "unknown"
+            //             }
+            //             println("Debug Result $index: $path:$lineNum (${element.javaClass.simpleName}: $elementName)")
+            //         }
+
+            //         // Map to JSON objects: { file_path, line_num }
+            //         val mappedResults = results.mapNotNull { element ->
+            //             val vFile = element.containingFile?.virtualFile ?: return@mapNotNull null
+            //             val path = vFile.path.removePrefix("${project.basePath}/")
+            //             val lineNum = element.textOffset.let { offset ->
+            //                 val doc = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
+            //                 doc?.getLineNumber(offset)?.plus(1) ?: -1
+            //             }
+            //             buildJsonObject {
+            //                 put("file_path", path)
+            //                 put("line_num", lineNum)
+            //             }
+            //         }.distinctBy { "${it["file_path"]}:${it["line_num"]}" }
+                    
+            //         println("Debug: Final results after mapping and deduplication: ${mappedResults.size}")
+            //         mappedResults
+            //     }
+
+            //     call.respond(HttpStatusCode.OK, linkedFiles)
+            // }
+
+            post("search_keyword") {
+                try {
+                    println("Debug: search_keyword endpoint called")
+                    val params = call.receive<SymbolSearchParams>()
+                    val keyword = params.symbol
+                    println("Debug: Received keyword: '$keyword'")
+
+                    val results = runReadAction {
+                        try {
+                            val foundOccurrences = mutableListOf<JsonObject>()
+                            
+                            // Use IntelliJ's text search functionality similar to "Search Everywhere"
+                            val searchScope = GlobalSearchScope.allScope(project)
+                            val searchHelper = PsiSearchHelper.getInstance(project)
+                            
+                            println("Debug: Searching for keyword '$keyword' across all Java files...")
+                            
+                            // Search for keyword occurrences in all contexts
+                            searchHelper.processElementsWithWord(
+                                { element, offsetInElement ->
+                                    try {
+                                        val file = element.containingFile?.virtualFile
+                                        if (file != null && file.extension == "java") {
+                                            val relativePath = file.path.removePrefix("${project.basePath}/")
+                                            val document = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
+                                            val lineNum = document?.getLineNumber(element.textOffset + offsetInElement)?.plus(1) ?: -1
+                                            
+                                            // Get the actual line content for context
+                                            val lineContent = try {
+                                                document?.let { doc ->
+                                                    if (lineNum > 0 && lineNum <= doc.lineCount) {
+                                                        val lineStartOffset = doc.getLineStartOffset(lineNum - 1)
+                                                        val lineEndOffset = doc.getLineEndOffset(lineNum - 1)
+                                                        doc.getText().substring(lineStartOffset, lineEndOffset).trim()
+                                                    } else ""
+                                                } ?: ""
+                                            } catch (e: Exception) {
+                                                println("Debug: Error getting line content: ${e.message}")
+                                                ""
+                                            }
+                                            
+                                            // Determine the type of occurrence
+                                            val occurrenceType = when {
+                                                lineContent.contains("import") && lineContent.contains(keyword) -> "import"
+                                                lineContent.contains("public") && lineContent.contains("class") -> "class_declaration"
+                                                lineContent.contains("public") && lineContent.contains("(") -> "method_declaration"
+                                                lineContent.contains("private") || lineContent.contains("protected") -> "field_or_method"
+                                                lineContent.startsWith("//") || lineContent.contains("/*") -> "comment"
+                                                lineContent.contains("\"") && lineContent.contains(keyword) -> "string_literal"
+                                                else -> "code_usage"
+                                            }
+                                            
+                                            foundOccurrences.add(buildJsonObject {
+                                                put("file_path", relativePath)
+                                                put("line_num", lineNum)
+                                                put("line_content", lineContent)
+                                                put("occurrence_type", occurrenceType)
+                                                put("is_test_file", file.path.contains("/test/"))
+                                            })
+                                            
+                                            if (file.path.contains("/test/")) {
+                                                println("Debug: Found '$keyword' in test file: $relativePath:$lineNum")
+                                            }
+                                        }
+                                    } catch (e: Exception) {
+                                        println("Debug: Error processing element: ${e.message}")
+                                    }
+                                    true
+                                },
+                                searchScope,
+                                keyword,
+                                UsageSearchContext.ANY,
+                                false // case-insensitive for broader search
+                            )
+                            
+                            println("Debug: Found ${foundOccurrences.size} occurrences of '$keyword'")
+                            
+                            // Get unique files only (first occurrence per file)
+                            foundOccurrences
+                                .distinctBy { it["file_path"].toString() }
+                                .sortedBy { it["file_path"].toString() }
+                        } catch (e: Exception) {
+                            println("Debug: Error in runReadAction: ${e.message}")
+                            e.printStackTrace()
+                            emptyList<JsonObject>()
+                        }
+                    }
+
+                    println("Debug: Returning ${results.size} results")
+                    call.respond(HttpStatusCode.OK, results)
+                } catch (e: Exception) {
+                    println("Debug: Error in search_keyword endpoint: ${e.message}")
+                    e.printStackTrace()
+                    call.respond(HttpStatusCode.InternalServerError, "Error: ${e.message}")
+                }
+            }
+
+            post("search_symbol") {
+                val params = call.receive<SymbolSearchParams>()
+                val symbolName = params.symbol
+                println("Debug: Searching for symbol: '$symbolName'")
+
+                val linkedFiles = runReadAction {
+                    val results = mutableListOf<PsiElement>()
+
+                    val scope = GlobalSearchScope.allScope(project)
+
+                    // Search all classes in the project
+                    println("Debug: Starting AllClassesSearch...")
+                    AllClassesSearch.search(scope, project).allowParallelProcessing()
+                            .forEach(Processor<PsiClass> { psiClass ->
+                                searchInClass(psiClass, symbolName, results)
+                                true
+                            })
+
+                    // Also walk source roots (to catch test files / special dirs)
+                    val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
+                    println("Debug: Found ${sourceRoots.size} source roots")
+                    sourceRoots.forEach { sourceRoot ->
+                        println("Debug: Searching source root: ${sourceRoot.path}")
+                        searchInDirectory(sourceRoot, symbolName, results)
+                    }
+
+                    println("Debug: Total results found: ${results.size}")
+                    results.forEachIndexed { index, element ->
+                        val vFile = element.containingFile?.virtualFile
+                        val path = vFile?.path?.removePrefix("${project.basePath}/") ?: "unknown"
+                        println("Debug Result $index: $path (${element.javaClass.simpleName})")
+                    }
+
+                    // Map results to JSON { file_path, line_num } - unique files only
+                    val mappedResults = results.mapNotNull { element ->
+                        val vFile = element.containingFile?.virtualFile ?: return@mapNotNull null
+                        val path = vFile.path.removePrefix("${project.basePath}/")
+                        val lineNum = element.textOffset.let { offset ->
+                            val doc = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
+                            doc?.getLineNumber(offset)?.plus(1) ?: -1
+                        }
+                        buildJsonObject {
+                            put("file_path", path)
+                            put("line_num", lineNum)
+                        }
+                    }.distinctBy { it["file_path"].toString() }
+
+                    println("Debug: Final unique files: ${mappedResults.size}")
+                    mappedResults
+                }
+
+                call.respond(HttpStatusCode.OK, linkedFiles)
+            }
+
+            post("search_symbol_changed") {
+                val params = call.receive<RenamePairParams>()
+                val oldName = params.oldName
+                val newName = params.newName
+                
+                // Extract the changed part from the rename pair
+                val changedPart = extractChangedPart(oldName, newName)
+                println("Debug: Rename pair: $oldName → $newName")
+                println("Debug: Extracted changed part: '$changedPart'")
+                
+                // Use the same logic as search_symbol but with the changed part
+                val linkedFiles = runReadAction {
+                    val results = mutableListOf<PsiElement>()
+
+                    val scope = GlobalSearchScope.allScope(project)
+
+                    // Search all classes in the project (with result limiting)
+                    val maxResults = 5000
+                    var resultCount = 0
+                    
+                    AllClassesSearch.search(scope, project).allowParallelProcessing()
+                            .forEach(Processor<PsiClass> { psiClass ->
+                                if (resultCount < maxResults) {
+                                    searchInClassContainsLimited(psiClass, changedPart, results, maxResults) { count ->
+                                        resultCount = count
+                                    }
+                                }
+                                true
+                            })
+
+                    // Also walk source roots (to catch test files / special dirs)
+                    if (resultCount < maxResults) {
+                        val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
+                        sourceRoots.forEach { sourceRoot ->
+                            if (resultCount < maxResults) {
+                                searchInDirectoryContainsLimited(sourceRoot, changedPart, results, maxResults) { count ->
+                                    resultCount = count
+                                }
+                            }
+                        }
+                    }
+                    
+                    println("Debug: Found $resultCount results (limited to $maxResults)")
+
+                    // 🔹 Map results to JSON { file_path, line_num } - unique files only
+                    val mappedResults = results.mapNotNull { element ->
+                        val vFile = element.containingFile?.virtualFile ?: return@mapNotNull null
+                        val path = vFile.path.removePrefix("${project.basePath}/")
+                        val lineNum = element.textOffset.let { offset ->
+                            val doc = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
+                            doc?.getLineNumber(offset)?.plus(1) ?: -1
+                        }
+                        buildJsonObject {
+                            put("file_path", path)
+                            put("line_num", lineNum)
+                        }
+                    }.distinctBy { it["file_path"].toString() }
+
+                    mappedResults
+                }
+
+                call.respond(HttpStatusCode.OK, linkedFiles)
+            }
+
 
         }
     }
@@ -1009,5 +1299,488 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
     fun stop(){
         println("Stopping refactoring server.")
     }
+
+//    private fun searchInClass(psiClass: PsiClass, symbolName: String, results: MutableList<PsiElement>) {
+//        // Check if the class itself matches
+//        if (psiClass.name == symbolName) {
+//            results.add(psiClass)
+//        }
+//
+//        // Check methods in this class
+//        psiClass.methods.forEach { method ->
+//            if (method.name == symbolName) {
+//                results.add(method)
+//            }
+//        }
+//
+//        // Check fields in this class
+//        psiClass.fields.forEach { field ->
+//            if (field.name == symbolName) {
+//                results.add(field)
+//            }
+//        }
+//    }
+
+    // private fun searchInDirectory(directory: VirtualFile, symbolName: String, results: MutableList<PsiElement>) {
+    //     try {
+    //         directory.children.forEach { child ->
+    //             if (child.isDirectory) {
+    //                 searchInDirectory(child, symbolName, results)
+    //             } else if (child.extension == "java") {
+    //                 val psiFile = PsiManager.getInstance(project).findFile(child)
+    //                 if (psiFile is PsiJavaFile) {
+    //                     psiFile.classes.forEach { psiClass ->
+    //                         searchInClass(psiClass, symbolName, results)
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     } catch (e: Exception) {
+    //         // Ignore errors for individual files/directories
+    //     }
+    // }
+    
+        private fun searchInClass(
+        psiClass: PsiClass,
+        symbolName: String,
+        results: MutableList<PsiElement>
+    ) {
+        val project = psiClass.project
+        val scope = GlobalSearchScope.allScope(project)
+
+
+
+        // Class declaration + usages (case-insensitive)
+        if (psiClass.name?.equals(symbolName, ignoreCase = true) == true) {
+            results.add(psiClass)
+            ReferencesSearch.search(psiClass, scope).allowParallelProcessing()
+                .forEach(Processor<PsiReference> { ref ->
+                    results.add(ref.element)
+                    true
+                })
+        }
+
+        // Method declaration + usages (case-insensitive)
+        psiClass.methods.forEach { method ->
+            if (method.name?.equals(symbolName, ignoreCase = true) == true) {
+                results.add(method)
+                ReferencesSearch.search(method, scope).allowParallelProcessing()
+                    .forEach(Processor<PsiReference> { ref ->
+                        results.add(ref.element)
+                        true
+                    })
+            }
+            
+            // Search for local variables and method calls within this method
+            searchInMethod(method, symbolName, results)
+        }
+
+        // Field declaration + usages (case-insensitive)
+        psiClass.fields.forEach { field ->
+            if (field.name?.equals(symbolName, ignoreCase = true) == true) {
+                results.add(field)
+                ReferencesSearch.search(field, scope).allowParallelProcessing()
+                    .forEach(Processor<PsiReference> { ref ->
+                        results.add(ref.element)
+                        true
+                    })
+            }
+        }
+    }
+    
+    private fun extractChangedPart(oldName: String, newName: String): String {
+        println("Debug: Comparing '$oldName' → '$newName'")
+        
+        // Find the longest common prefix
+        val commonPrefix = findCommonPrefix(oldName, newName)
+        println("Debug: Common prefix: '$commonPrefix'")
+        
+        // Find the longest common suffix
+        val commonSuffix = findCommonSuffix(oldName, newName)
+        println("Debug: Common suffix: '$commonSuffix'")
+        
+        // Extract the changed part (what's between prefix and suffix in old name)
+        val changedPart = if (commonPrefix.length + commonSuffix.length < oldName.length) {
+            val start = commonPrefix.length
+            val end = oldName.length - commonSuffix.length
+            oldName.substring(start, end)
+        } else {
+            // If no clear pattern, return the entire old name
+            oldName
+        }
+        
+        // If the changed part is too short or common, use a more specific part
+        val finalChangedPart = if (changedPart.length < 6 || isCommonWord(changedPart)) {
+            // Use a longer, more specific part
+            if (commonSuffix.isNotEmpty()) {
+                // Include part of the suffix to make it more specific
+                val specificPart = changedPart + commonSuffix.take(3)
+                println("Debug: Using more specific part: '$specificPart' (original was too common)")
+                specificPart
+            } else {
+                // If no suffix, use the entire old name
+                println("Debug: Using entire old name: '$oldName' (changed part was too common)")
+                oldName
+            }
+        } else {
+            changedPart
+        }
+        
+        println("Debug: Final changed part: '$finalChangedPart'")
+        return finalChangedPart.lowercase() // Return lowercase for case-insensitive search
+    }
+
+    private fun isCommonWord(word: String): Boolean {
+        val commonWords = setOf(
+                "execution", "config", "user", "data", "test", "manager", "service",
+                "util", "helper", "factory", "builder", "handler", "processor",
+                "controller", "repository", "entity", "model", "view", "form",
+                "request", "response", "client", "server", "api", "impl"
+        )
+        return commonWords.contains(word.lowercase())
+    }
+    
+    private fun findCommonPrefix(str1: String, str2: String): String {
+        val minLength = minOf(str1.length, str2.length)
+        for (i in 0 until minLength) {
+            if (str1[i] != str2[i]) {
+                return str1.substring(0, i)
+            }
+        }
+        return str1.substring(0, minLength)
+    }
+    
+    private fun findCommonSuffix(str1: String, str2: String): String {
+        val minLength = minOf(str1.length, str2.length)
+        for (i in 1..minLength) {
+            if (str1[str1.length - i] != str2[str2.length - i]) {
+                return str1.substring(str1.length - i + 1)
+            }
+        }
+        return str1.substring(str1.length - minLength)
+    }
+    
+    private fun searchInClassContains(
+        psiClass: PsiClass,
+        changedPart: String,
+        results: MutableList<PsiElement>
+    ) {
+        val project = psiClass.project
+        val scope = GlobalSearchScope.allScope(project)
+
+        // Class declaration + usages (contains matching)
+        if (psiClass.name?.contains(changedPart, ignoreCase = true) == true) {
+            results.add(psiClass)
+            ReferencesSearch.search(psiClass, scope).allowParallelProcessing()
+                .forEach(Processor<PsiReference> { ref ->
+                    results.add(ref.element)
+                    true
+                })
+        }
+
+        // Method declaration + usages (contains matching)
+        psiClass.methods.forEach { method ->
+            if (method.name.contains(changedPart, ignoreCase = true)) {
+                results.add(method)
+                ReferencesSearch.search(method, scope).allowParallelProcessing()
+                    .forEach(Processor<PsiReference> { ref ->
+                        results.add(ref.element)
+                        true
+                    })
+            }
+            
+            // Search for local variables and method calls within this method (contains matching)
+            searchInMethodContains(method, changedPart, results)
+        }
+
+        // Field declaration + usages (contains matching)
+        psiClass.fields.forEach { field ->
+            if (field.name.contains(changedPart, ignoreCase = true)) {
+                results.add(field)
+                ReferencesSearch.search(field, scope).allowParallelProcessing()
+                    .forEach(Processor<PsiReference> { ref ->
+                        results.add(ref.element)
+                        true
+                    })
+            }
+        }
+    }
+    
+    private fun searchInMethodContains(
+        method: PsiMethod,
+        changedPart: String,
+        results: MutableList<PsiElement>
+    ) {
+        try {
+            // Use JavaRecursiveElementVisitor to traverse all elements in the method
+            method.accept(object : JavaRecursiveElementVisitor() {
+                override fun visitLocalVariable(localVariable: PsiLocalVariable) {
+                    super.visitLocalVariable(localVariable)
+                    if (localVariable.name?.contains(changedPart, ignoreCase = true) == true) {
+                        results.add(localVariable)
+                    }
+                }
+                
+                override fun visitReferenceExpression(referenceExpression: PsiReferenceExpression) {
+                    super.visitReferenceExpression(referenceExpression)
+                    if (referenceExpression.referenceName?.contains(changedPart, ignoreCase = true) == true) {
+                        results.add(referenceExpression)
+                    }
+                }
+                
+                override fun visitMethodCallExpression(methodCall: PsiMethodCallExpression) {
+                    super.visitMethodCallExpression(methodCall)
+                    if (methodCall.methodExpression.referenceName?.contains(changedPart, ignoreCase = true) == true) {
+                        results.add(methodCall)
+                    }
+                }
+            })
+        } catch (e: Exception) {
+            // Ignore errors for individual method processing
+            println("Debug: Error searching in method ${method.name}: ${e.message}")
+        }
+    }
+    
+    private fun searchInDirectoryContains(
+        directory: VirtualFile,
+        changedPart: String,
+        results: MutableList<PsiElement>
+    ) {
+        try {
+            directory.children.forEach { child ->
+                if (child.isDirectory) {
+                    searchInDirectoryContains(child, changedPart, results)
+                } else if (child.extension == "java") {
+                    val psiFile = PsiManager.getInstance(project).findFile(child)
+                    if (psiFile is PsiJavaFile) {
+                        psiFile.classes.forEach { psiClass ->
+                            searchInClassContains(psiClass, changedPart, results)
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            // Ignore errors for individual files/directories
+            println("Debug: Error searching directory ${directory.path}: ${e.message}")
+        }
+    }
+    
+    private fun searchInClassContainsLimited(
+        psiClass: PsiClass,
+        changedPart: String,
+        results: MutableList<PsiElement>,
+        maxResults: Int,
+        resultCountSetter: (Int) -> Unit
+    ) {
+        val project = psiClass.project
+        val scope = GlobalSearchScope.allScope(project)
+        var currentCount = results.size
+
+        // Class declaration + usages (contains matching)
+        if (currentCount < maxResults && psiClass.name?.contains(changedPart, ignoreCase = true) == true) {
+            results.add(psiClass)
+            currentCount++
+            resultCountSetter(currentCount)
+            
+            if (currentCount < maxResults) {
+                ReferencesSearch.search(psiClass, scope).allowParallelProcessing()
+                    .forEach(Processor<PsiReference> { ref ->
+                        if (currentCount < maxResults) {
+                            results.add(ref.element)
+                            currentCount++
+                            resultCountSetter(currentCount)
+                        }
+                        currentCount < maxResults
+                    })
+            }
+        }
+
+        // Method declaration + usages (contains matching)
+        psiClass.methods.forEach { method ->
+            if (currentCount >= maxResults) return@forEach
+            
+            if (method.name.contains(changedPart, ignoreCase = true)) {
+                results.add(method)
+                currentCount++
+                resultCountSetter(currentCount)
+                
+                if (currentCount < maxResults) {
+                    ReferencesSearch.search(method, scope).allowParallelProcessing()
+                        .forEach(Processor<PsiReference> { ref ->
+                            if (currentCount < maxResults) {
+                                results.add(ref.element)
+                                currentCount++
+                                resultCountSetter(currentCount)
+                            }
+                            currentCount < maxResults
+                        })
+                }
+            }
+            
+            // Search for local variables and method calls within this method (contains matching)
+            if (currentCount < maxResults) {
+                searchInMethodContainsLimited(method, changedPart, results, maxResults, resultCountSetter)
+                currentCount = results.size
+            }
+        }
+
+        // Field declaration + usages (contains matching)
+        psiClass.fields.forEach { field ->
+            if (currentCount >= maxResults) return@forEach
+            
+            if (field.name.contains(changedPart, ignoreCase = true)) {
+                results.add(field)
+                currentCount++
+                resultCountSetter(currentCount)
+                
+                if (currentCount < maxResults) {
+                    ReferencesSearch.search(field, scope).allowParallelProcessing()
+                        .forEach(Processor<PsiReference> { ref ->
+                            if (currentCount < maxResults) {
+                                results.add(ref.element)
+                                currentCount++
+                                resultCountSetter(currentCount)
+                            }
+                            currentCount < maxResults
+                        })
+                }
+            }
+        }
+    }
+    
+    private fun searchInMethodContainsLimited(
+        method: PsiMethod,
+        changedPart: String,
+        results: MutableList<PsiElement>,
+        maxResults: Int,
+        resultCountSetter: (Int) -> Unit
+    ) {
+        try {
+            var currentCount = results.size
+            // Use JavaRecursiveElementVisitor to traverse all elements in the method
+            method.accept(object : JavaRecursiveElementVisitor() {
+                override fun visitLocalVariable(localVariable: PsiLocalVariable) {
+                    super.visitLocalVariable(localVariable)
+                    if (currentCount < maxResults && localVariable.name?.contains(changedPart, ignoreCase = true) == true) {
+                        results.add(localVariable)
+                        currentCount++
+                        resultCountSetter(currentCount)
+                    }
+                }
+                
+                override fun visitReferenceExpression(referenceExpression: PsiReferenceExpression) {
+                    super.visitReferenceExpression(referenceExpression)
+                    if (currentCount < maxResults && referenceExpression.referenceName?.contains(changedPart, ignoreCase = true) == true) {
+                        results.add(referenceExpression)
+                        currentCount++
+                        resultCountSetter(currentCount)
+                    }
+                }
+                
+                override fun visitMethodCallExpression(methodCall: PsiMethodCallExpression) {
+                    super.visitMethodCallExpression(methodCall)
+                    if (currentCount < maxResults && methodCall.methodExpression.referenceName?.contains(changedPart, ignoreCase = true) == true) {
+                        results.add(methodCall)
+                        currentCount++
+                        resultCountSetter(currentCount)
+                    }
+                }
+            })
+        } catch (e: Exception) {
+            // Ignore errors for individual method processing
+            println("Debug: Error searching in method ${method.name}: ${e.message}")
+        }
+    }
+    
+    private fun searchInDirectoryContainsLimited(
+        directory: VirtualFile,
+        changedPart: String,
+        results: MutableList<PsiElement>,
+        maxResults: Int,
+        resultCountSetter: (Int) -> Unit
+    ) {
+        try {
+            directory.children.forEach { child ->
+                if (results.size >= maxResults) return@forEach
+                
+                if (child.isDirectory) {
+                    searchInDirectoryContainsLimited(child, changedPart, results, maxResults, resultCountSetter)
+                } else if (child.extension == "java") {
+                    val psiFile = PsiManager.getInstance(project).findFile(child)
+                    if (psiFile is PsiJavaFile) {
+                        psiFile.classes.forEach { psiClass ->
+                            if (results.size < maxResults) {
+                                searchInClassContainsLimited(psiClass, changedPart, results, maxResults, resultCountSetter)
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            // Ignore errors for individual files/directories
+            println("Debug: Error searching directory ${directory.path}: ${e.message}")
+        }
+    }
+    
+    private fun searchInMethod(
+        method: PsiMethod,
+        symbolName: String,
+        results: MutableList<PsiElement>
+    ) {
+        try {
+            // Use JavaRecursiveElementVisitor to traverse all elements in the method
+            method.accept(object : JavaRecursiveElementVisitor() {
+                override fun visitLocalVariable(localVariable: PsiLocalVariable) {
+                    super.visitLocalVariable(localVariable)
+                    if (localVariable.name?.equals(symbolName, ignoreCase = true) == true) {
+                        results.add(localVariable)
+                    }
+                }
+                
+                override fun visitReferenceExpression(referenceExpression: PsiReferenceExpression) {
+                    super.visitReferenceExpression(referenceExpression)
+                    if (referenceExpression.referenceName?.equals(symbolName, ignoreCase = true) == true) {
+                        results.add(referenceExpression)
+                    }
+                }
+                
+                override fun visitMethodCallExpression(methodCall: PsiMethodCallExpression) {
+                    super.visitMethodCallExpression(methodCall)
+                    if (methodCall.methodExpression.referenceName?.equals(symbolName, ignoreCase = true) == true) {
+                        results.add(methodCall)
+                    }
+                }
+            })
+        } catch (e: Exception) {
+            // Ignore errors for individual method processing
+            println("Debug: Error searching in method ${method.name}: ${e.message}")
+        }
+    }
+    
+    
+    private fun searchInDirectory(
+        directory: VirtualFile,
+        symbolName: String,
+        results: MutableList<PsiElement>
+    ) {
+        try {
+            directory.children.forEach { child ->
+                if (child.isDirectory) {
+                    searchInDirectory(child, symbolName, results)
+                } else if (child.extension == "java") {
+                    val psiFile = PsiManager.getInstance(project).findFile(child)
+                    if (psiFile is PsiJavaFile) {
+                        psiFile.classes.forEach { psiClass ->
+                            searchInClass(psiClass, symbolName, results)
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            // Ignore errors for individual files/directories
+            println("Debug: Error searching directory ${directory.path}: ${e.message}")
+        }
+    }
+     
 
 }

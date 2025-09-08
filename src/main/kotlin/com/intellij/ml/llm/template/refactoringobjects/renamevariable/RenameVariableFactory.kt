@@ -113,15 +113,14 @@ class RenameVariableFactory {
                         it !is PsiCompiledElement
                     }
             }
-
             return newElements
-                .map {
-                RenameVariable(
-                    runReadAction{ PsiUtils.getStartLine(it) },
-                    runReadAction{ PsiUtils.getEndLine(it) },
-                    oldName, newName, it, outerPsiElement, false
-                )
-            }
+                    .map {
+                        RenameVariable(
+                                runReadAction{ PsiUtils.getStartLine(it) },
+                                runReadAction{ PsiUtils.getEndLine(it) },
+                                oldName, newName, it, outerPsiElement, false
+                        )
+                    }
         }
 
 
