@@ -88,10 +88,12 @@ print(f"{total_screens=}")
 print(f"{positive_rating_count=}")
 print(f"{rated_screens_count=}")
 print(f"{positive_rating_count/rated_screens_count=}")
+print("average suggestions per screen: ", total_candidates/total_screens)
 
 print("--- why no suggestions? ---")
 
 no_suggestions_telemetry = [i for i in all_user_data if len(i["candidatesTelemetryData"]["candidates"])==0]
+at_least_one_suggestion = [i for i in all_user_data if len(i["candidatesTelemetryData"]["candidates"])>0]
 critique_rejected = 0
 no_target_class = 0
 no_suggetions = 0
@@ -115,3 +117,4 @@ print(f"{no_target_class=}")
 print(f"{critique_rejected=}")
 print(f"{no_suggetions=}")
 print(f"{len(no_suggestions_telemetry)=}")
+print(f"{len(at_least_one_suggestion)=}")
