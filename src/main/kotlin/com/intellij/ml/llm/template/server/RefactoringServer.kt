@@ -433,7 +433,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     if (renameObjectRaw.size==1) {
                         call.respond(HttpStatusCode.OK,
-                            RenameParams(params.oldName, params.newName, renameObjectRaw[0].startLoc)
+                            RenameParams(params.oldName, params.newName, renameObjectRaw[0].startLoc+1, params.codeElementType)
                         )
                         return@post
                     }
@@ -469,13 +469,13 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         }
                     if (renameObject.size == 1){
                         call.respond(HttpStatusCode.OK,
-                            RenameParams(params.oldName, params.newName, renameObject[0].startLoc, params.codeElementType)
+                            RenameParams(params.oldName, params.newName, renameObject[0].startLoc+1, params.codeElementType)
                         )
                         return@post
                     }
                     else if (params.lineNum!=null){
                         val bestMatch = renameObject.sortedBy { abs(it.startLoc - params.lineNum) }[0]
-                        val newParams = RenameParams(params.oldName, params.newName, lineNum = bestMatch.startLoc, codeElementType = params.codeElementType)
+                        val newParams = RenameParams(params.oldName, params.newName, lineNum = bestMatch.startLoc+1, codeElementType = params.codeElementType)
                         call.respond(HttpStatusCode.OK, newParams)
                         return@post
                     }
