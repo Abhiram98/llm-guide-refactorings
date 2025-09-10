@@ -5,6 +5,7 @@ import com.intellij.analysis.AnalysisScope
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
+import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.inspection.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.IntroduceParamObject
@@ -333,7 +334,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
             }
 
-            post("/rename") {
+            post("/rename-old") {
                 println("got a request")
                 try {
                     val params = call.receive<RenameParams>()
@@ -343,29 +344,30 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     // Call IJ rename API here.
                     val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
                         project, editor!!, file!!, params.oldName, params.newName)
-                        .filter {
-                            if (params.lineNum == null) {
-                                true
-                            } else {
-                                if (params.codeElementType == "method"  || params.codeElementType == "parameter") {
-                                    // For methods, check if line number is within the method's range
-                                    params.lineNum >= it.startLoc && params.lineNum <= it.endLoc + 1
-                                } else {
-                                    // For other elements, check exact line match
-                                    it.startLoc + 1 == params.lineNum
-                                }
-                            }
-                        }
+//                        .filter {
+//                            if (params.lineNum == null) {
+//                                true
+//                            } else {
+//                                if (params.codeElementType == "method"  || params.codeElementType == "parameter") {
+//                                    // For methods, check if line number is within the method's range
+//                                    params.lineNum >= it.startLoc && params.lineNum <= it.endLoc + 1
+//                                } else {
+//                                    // For other elements, check exact line match
+//                                    it.startLoc + 1 == params.lineNum
+//                                }
+//                            }
+//                        }
                     val renameObject =
                         if (renameObjectRaw.size<=1) {
                             renameObjectRaw
                         }
                         else if (params.codeElementType!=null){
-                            renameObjectRaw.filter {
+                            val filtered = renameObjectRaw.filter {
                                 PsiUtils.isCodeElementType(
                                     (it as RenameVariable).oldVarPsi, params.codeElementType
                                 )
                             }
+                            filtered.ifEmpty { renameObjectRaw }
                         }else{
                             renameObjectRaw
                         }
@@ -420,6 +422,67 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
 
 
+            post("/rename") {
+                println("got a request")
+                try {
+                    val params = call.receive<RenameParams>()
+                    println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
+
+                    if (sanityChecks(params)) return@post
+
+                    val renameObject = getRenameObjects(params)
+
+
+                    if (renameObject==null){
+                        val reverse = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, params.newName, params.oldName)
+                        if (reverse.isNotEmpty()){
+                            call.respond(HttpStatusCode.BadRequest, "The rename has already been performed. " +
+                                    "Variable ${params.newName} exists in this file. Variable ${params.oldName} does not exist.")
+                        }
+                        else if (params.lineNum != null){
+                            call.respond(HttpStatusCode.BadRequest, "No matching variable/field at the given line number.")
+                        }
+                        else{
+                            call.respond(
+                                HttpStatusCode.BadRequest, "Could not rename ${params.oldName}. " +
+                                        "If the old_name is from an external library, it cannot be renamed."
+                            )
+                        }
+                        return@post
+                    }
+
+                    renameObject.performRefactoring(project, editor!!, file!!)
+                    try{
+                        invokeAndWait {
+                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                        }
+                    } catch (ex: Exception){
+                        println("Failed to save all documents :/")
+                    }
+                    call.respond(HttpStatusCode.OK, message=SUCCESS_MSG)
+                } catch (ex: IllegalStateException) {
+                    ex.printStackTrace()
+                    print("failed to refactor")
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: JsonConvertException) {
+                    ex.printStackTrace()
+                    print("failed")
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: Exception){
+                    ex.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest, message = ex.message.toString())
+                } finally {
+                    try{
+                        invokeAndWait {
+                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                        }
+                    } catch (ex: Exception){
+                        println("Failed to save all documents :/")
+                    }
+                }
+            }
+
+
             post("/form-rename-object") {
                 println("got a request")
                 try {
@@ -428,16 +491,8 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     if (sanityChecks(params)) return@post
                     // Call IJ rename API here.
-                    val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
-                        project, editor!!, file!!, params.oldName, params.newName)
-
-                    if (renameObjectRaw.size==1) {
-                        call.respond(HttpStatusCode.OK,
-                            RenameParams(params.oldName, params.newName, renameObjectRaw[0].startLoc+1, params.codeElementType)
-                        )
-                        return@post
-                    }
-                    else if (renameObjectRaw.isEmpty()){
+                    val renameObject = getRenameObjects(params)
+                    if (renameObject==null){
                         val reverse = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, params.newName, params.oldName)
                         if (reverse.isNotEmpty()){
                             call.respond(HttpStatusCode.BadRequest, "The rename has already been performed. " +
@@ -456,30 +511,12 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     }
 
                     // There is at least one valid rename object. Find the best match and return it
-                    val renameObject =
-                        if (params.codeElementType!=null){
-                            val filtered = renameObjectRaw.filter {
-                                PsiUtils.isCodeElementType(
-                                    (it as RenameVariable).oldVarPsi, params.codeElementType
-                                )
-                            }
-                            filtered.ifEmpty { renameObjectRaw }
-                        }else{
-                            renameObjectRaw
-                        }
-                    if (renameObject.size == 1){
-                        call.respond(HttpStatusCode.OK,
-                            RenameParams(params.oldName, params.newName, renameObject[0].startLoc+1, params.codeElementType)
-                        )
-                        return@post
-                    }
-                    else if (params.lineNum!=null){
-                        val bestMatch = renameObject.sortedBy { abs(it.startLoc - params.lineNum) }[0]
-                        val newParams = RenameParams(params.oldName, params.newName, lineNum = bestMatch.startLoc+1, codeElementType = params.codeElementType)
-                        call.respond(HttpStatusCode.OK, newParams)
-                        return@post
-                    }
-                    call.respond(HttpStatusCode.BadRequest, message = "Couldn't form a refactoring object.")
+                    call.respond(HttpStatusCode.BadRequest, RenameParams(
+                        params.oldName,
+                        params.newName,
+                        renameObject.startLoc,
+                        params.codeElementType // todo: fetch the code element type from the rename object.
+                    ))
 
 
                 } catch (ex: IllegalStateException) {
@@ -1334,6 +1371,44 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
 
         }
+    }
+
+    private fun getRenameObjects(params: RenameParams): AbstractRefactoring? {
+        val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
+            project, editor!!, file!!, params.oldName, params.newName
+        )
+        if (renameObjectRaw.size==1)
+            return renameObjectRaw[0]
+        if (renameObjectRaw.isEmpty())
+            return null
+
+        // filter by element type
+        val elementsToInspect = if (params.codeElementType!=null) {
+            val filtered = renameObjectRaw.filter {
+                PsiUtils.isCodeElementType(
+                    (it as RenameVariable).oldVarPsi, params.codeElementType
+                )
+            }
+            if (filtered.size==1)
+                return filtered[0]
+            filtered.ifEmpty {
+                renameObjectRaw
+            }
+        } else{renameObjectRaw}
+
+        // filter by line number.
+        if(params.lineNum!=null){
+            val filtered = elementsToInspect.filter { it.startLoc == params.lineNum }
+            return if(filtered.size==1) {
+                filtered[0]
+            } else {
+                // return the best match
+                elementsToInspect.sortedBy { abs(it.startLoc-params.lineNum) }[0]
+            }
+        }
+
+        // return the first one because we have no line number
+        return elementsToInspect[0]
     }
 
     private suspend fun RoutingContext.sanityChecks(params: RenameParams): Boolean {
