@@ -339,21 +339,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     val params = call.receive<RenameParams>()
                     println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
 
-                    if (!SourceVersion.isName(params.oldName)){
-                        call.respond(HttpStatusCode.BadRequest, message = "old name is not a valid identifier.")
-                        return@post
-                    }
-
-                    if (!SourceVersion.isName(params.newName)){
-                        call.respond(HttpStatusCode.BadRequest, message = "new name is not a valid identifier.")
-                        return@post
-                    }
-
-                    if (params.oldName == params.newName){
-                        call.respond(HttpStatusCode.OK, message = "No rename was performed. " +
-                                "The old and new name in the request are the same.", )
-                        return@post
-                    }
+                    if (sanityChecks(params)) return@post
                     // Call IJ rename API here.
                     val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
                         project, editor!!, file!!, params.oldName, params.newName)
@@ -1270,6 +1256,29 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
         }
     }
+
+    private suspend fun RoutingContext.sanityChecks(params: RenameParams): Boolean {
+        if (!SourceVersion.isName(params.oldName)) {
+            call.respond(HttpStatusCode.BadRequest, message = "old name is not a valid identifier.")
+            return true
+        }
+
+        if (!SourceVersion.isName(params.newName)) {
+            call.respond(HttpStatusCode.BadRequest, message = "new name is not a valid identifier.")
+            return true
+        }
+
+        if (params.oldName == params.newName) {
+            call.respond(
+                HttpStatusCode.OK,
+                message = "No rename was performed. " +
+                        "The old and new name in the request are the same.",
+            )
+            return true
+        }
+        return false
+    }
+
     private fun reloadFileIfNeeded() {
         try{
             if (file == null)
