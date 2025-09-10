@@ -430,24 +430,11 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     if (sanityChecks(params)) return@post
 
-                    val renameObject = getRenameObjects(params)
+                    val renameObject = formRenameObject(params)
 
 
                     if (renameObject==null){
-                        val reverse = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, params.newName, params.oldName)
-                        if (reverse.isNotEmpty()){
-                            call.respond(HttpStatusCode.BadRequest, "The rename has already been performed. " +
-                                    "Variable ${params.newName} exists in this file. Variable ${params.oldName} does not exist.")
-                        }
-                        else if (params.lineNum != null){
-                            call.respond(HttpStatusCode.BadRequest, "No matching variable/field at the given line number.")
-                        }
-                        else{
-                            call.respond(
-                                HttpStatusCode.BadRequest, "Could not rename ${params.oldName}. " +
-                                        "If the old_name is from an external library, it cannot be renamed."
-                            )
-                        }
+                        responseToRenameWithMessage(params)
                         return@post
                     }
 
@@ -491,22 +478,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     if (sanityChecks(params)) return@post
                     // Call IJ rename API here.
-                    val renameObject = getRenameObjects(params)
+                    val renameObject = formRenameObject(params)
                     if (renameObject==null){
-                        val reverse = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, params.newName, params.oldName)
-                        if (reverse.isNotEmpty()){
-                            call.respond(HttpStatusCode.BadRequest, "The rename has already been performed. " +
-                                    "Variable ${params.newName} exists in this file. Variable ${params.oldName} does not exist.")
-                        }
-                        else if (params.lineNum != null){
-                            call.respond(HttpStatusCode.BadRequest, "No matching variable/field at the given line number.")
-                        }
-                        else{
-                            call.respond(
-                                HttpStatusCode.BadRequest, "Could not rename ${params.oldName}. " +
-                                        "If the old_name is from an external library, it cannot be renamed."
-                            )
-                        }
+                        responseToRenameWithMessage(params)
                         return@post
                     }
 
@@ -1373,7 +1347,25 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
         }
     }
 
-    private fun getRenameObjects(params: RenameParams): AbstractRefactoring? {
+    private suspend fun RoutingContext.responseToRenameWithMessage(params: RenameParams): Boolean {
+        val reverse = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, params.newName, params.oldName)
+        if (reverse.isNotEmpty()) {
+            call.respond(
+                HttpStatusCode.BadRequest, "The rename has already been performed. " +
+                        "Variable ${params.newName} exists in this file. Variable ${params.oldName} does not exist."
+            )
+        } else if (params.lineNum != null) {
+            call.respond(HttpStatusCode.BadRequest, "No matching variable/field at the given line number.")
+        } else {
+            call.respond(
+                HttpStatusCode.BadRequest, "Could not rename ${params.oldName}. " +
+                        "If the old_name is from an external library, it cannot be renamed."
+            )
+        }
+        return true
+    }
+
+    private fun formRenameObject(params: RenameParams): AbstractRefactoring? {
         val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
             project, editor!!, file!!, params.oldName, params.newName
         )
