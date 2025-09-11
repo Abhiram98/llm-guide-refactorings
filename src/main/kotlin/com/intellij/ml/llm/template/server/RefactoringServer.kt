@@ -485,11 +485,13 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     }
 
                     // There is at least one valid rename object. Find the best match and return it
-                    call.respond(HttpStatusCode.BadRequest, RenameParams(
+                    call.respond(HttpStatusCode.OK, RenameParams(
                         params.oldName,
                         params.newName,
                         renameObject.startLoc,
-                        params.codeElementType // todo: fetch the code element type from the rename object.
+                        params.codeElementType, // todo: fetch the code element type from the rename object.
+                        startLineComments = editor?.let {
+                            (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1) }
                     ))
 
 
@@ -1374,6 +1376,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
         if (renameObjectRaw.isEmpty())
             return null
 
+        // there are multiple elements which match that name in the file, need to find the right one.
         // filter by element type
         val elementsToInspect = if (params.codeElementType!=null) {
             val filtered = renameObjectRaw.filter {

@@ -20,6 +20,8 @@ import com.intellij.refactoring.rename.RenameProcessor
 import com.intellij.usageView.UsageInfo
 import com.jetbrains.rd.util.catch
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
+import org.jetbrains.kotlin.idea.codeinsight.utils.findExistingEditor
 import org.jetbrains.kotlin.idea.debugger.getContainingMethod
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
@@ -39,6 +41,10 @@ class RenameVariable(
     val relatedRenames: MutableList<PsiElement> = mutableListOf()
     init {
         runReadAction{ relatedRenames.addAll(findRelatedElements(oldVarPsi)) }
+    }
+
+    fun startLineWithComments(editor: Editor): Int{
+        return oldVarPsi.startLine(editor.document)
     }
 
 
