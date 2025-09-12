@@ -27,7 +27,11 @@ data class RenameParams(
     @SerialName("code_element_type")
     val codeElementType: String? = null,
     @SerialName("start_line_comments")
-    val startLineComments: Int? = null
+    val startLineComments: Int? = null,
+    @SerialName("resolved_file_path")
+    val resolvedFilePath: String? = null,
+    @SerialName("resolved_start_line")
+    val resolvedStartLine: Int? = null
 )
 
 @Serializable

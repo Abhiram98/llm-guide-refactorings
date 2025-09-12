@@ -491,7 +491,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         renameObject.startLoc,
                         params.codeElementType, // todo: fetch the code element type from the rename object.
                         startLineComments = editor?.let {
-                            (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1) }
+                            (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1) },
+                        resolvedFilePath = (renameObject as? RenameVariable)?.getResolvedFilePath()?.removePrefix("${project.basePath}/"),
+                        resolvedStartLine = (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1),
                     ))
 
 

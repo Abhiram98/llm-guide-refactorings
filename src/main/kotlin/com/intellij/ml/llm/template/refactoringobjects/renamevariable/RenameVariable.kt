@@ -47,6 +47,34 @@ class RenameVariable(
         return oldVarPsi.startLine(editor.document)
     }
 
+    fun getResolvedStartLine(): Int? {
+        if ((oldVarPsi as? PsiReferenceExpression)!=null) {
+            print("found reference.")
+            val refElement = (oldVarPsi as PsiReferenceExpression).resolve()?.namedUnwrappedElement
+            return refElement?.containingFile?.fileDocument?.let { refElement.startLine(it) }
+        }
+        if ((oldVarPsi as? PsiJavaCodeReferenceElementImpl!=null)){
+            val refElement = (oldVarPsi as PsiJavaCodeReferenceElementImpl).resolve()?.namedUnwrappedElement
+            return refElement?.containingFile?.fileDocument?.let { refElement.startLine(it) }
+        }
+        return null
+    }
+
+    fun getResolvedFilePath(): String? {
+        if ((oldVarPsi as? PsiReferenceExpression)!=null) {
+            print("found reference.")
+            val refElement = (oldVarPsi as PsiReferenceExpression).resolve()?.namedUnwrappedElement
+            refElement?.containingFile?.fileDocument?.let { refElement.startLine(it) }
+            return refElement?.containingFile?.virtualFile?.path
+        }
+        if ((oldVarPsi as? PsiJavaCodeReferenceElementImpl!=null)){
+            val refElement = (oldVarPsi as PsiJavaCodeReferenceElementImpl).resolve()?.namedUnwrappedElement
+            return refElement?.containingFile?.virtualFile?.path
+        }
+
+        return null
+    }
+
 
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         super.performRefactoring(project, editor, file)
