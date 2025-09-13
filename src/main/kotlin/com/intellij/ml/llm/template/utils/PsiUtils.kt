@@ -964,9 +964,9 @@ class PsiUtils {
         fun getStartLine(it: PsiElement): Int{
 
             var count = 0
-            val startingAnnotations = it.containingFile.fileDocument
+            it.containingFile.fileDocument
                 .getText(it.textRangeWithoutComments).split("\n")
-                .map { it.startsWith("@") }
+                .map { it.trimStart().startsWith("@") }
                 .forEach {
                     if (it)
                         count += 1
