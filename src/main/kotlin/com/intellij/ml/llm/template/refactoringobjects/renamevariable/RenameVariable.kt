@@ -47,6 +47,18 @@ class RenameVariable(
         return oldVarPsi.startLine(editor.document)
     }
 
+    fun getResolvedElement(): PsiElement?{
+        if ((oldVarPsi as? PsiReferenceExpression)!=null) {
+            val refElement = (oldVarPsi as PsiReferenceExpression).resolve()?.namedUnwrappedElement
+            return refElement
+        }
+        if ((oldVarPsi as? PsiJavaCodeReferenceElementImpl!=null)){
+            val refElement = (oldVarPsi as PsiJavaCodeReferenceElementImpl).resolve()?.namedUnwrappedElement
+            return refElement
+        }
+        return null
+    }
+
     fun getResolvedStartLine(): Int? {
         if ((oldVarPsi as? PsiReferenceExpression)!=null) {
             print("found reference.")

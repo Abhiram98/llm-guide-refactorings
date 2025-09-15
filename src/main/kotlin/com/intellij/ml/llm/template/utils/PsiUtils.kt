@@ -991,6 +991,21 @@ class PsiUtils {
             return selectedType.isInstance(it)
         }
 
+        fun getElementTypeStr(it: PsiElement): String?{
+            if (it is PsiMethod){
+                return "method"
+            } else if (it is PsiClass){
+                return "class"
+            } else if (it is PsiField){
+                return "field"
+            } else if (it is PsiParameter){
+                return "parameter"
+            } else if (it is PsiVariable){
+                return "variable"
+            }
+            return null
+        }
+
 
     }
 

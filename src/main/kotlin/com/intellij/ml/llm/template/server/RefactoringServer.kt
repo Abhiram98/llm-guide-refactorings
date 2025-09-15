@@ -512,6 +512,59 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                 }
             }
+
+            post("/form-rename-object-all") {
+                println("got a request")
+                try {
+                    val params = call.receive<RenameParams>()
+                    println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
+
+                    if (sanityChecks(params)) return@post
+                    // Call IJ rename API here.
+                    val allRenameObjects = RenameVariableFactory.fromOldNewNameAll(
+                        project, editor!!, file!!, params.oldName, params.newName
+                    )
+                    if (allRenameObjects.size==0){
+                        responseToRenameWithMessage(params)
+                        return@post
+                    }
+
+                    // There is at least one valid rename object. Return all matches.
+                    call.respond(HttpStatusCode.OK, allRenameObjects.map {
+                        renameObject ->
+                            val rv = renameObject as RenameVariable
+                            RenameParams(
+                                params.oldName,
+                                params.newName,
+                                renameObject.startLoc,
+                                PsiUtils.getElementTypeStr(rv.oldVarPsi)?: rv.getResolvedElement()
+                                    ?.let { PsiUtils.getElementTypeStr(it) },
+                                startLineComments = editor?.let {
+                                    (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1)
+                                },
+                                resolvedFilePath = (renameObject as? RenameVariable)?.getResolvedFilePath()
+                                    ?.removePrefix("${project.basePath}/"),
+                                resolvedStartLine = (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1),
+                            )
+                        }.toList()
+                    )
+
+
+                } catch (ex: IllegalStateException) {
+                    ex.printStackTrace()
+                    print("failed to refactor")
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: JsonConvertException) {
+                    ex.printStackTrace()
+                    print("failed")
+                    call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: Exception){
+                    ex.printStackTrace()
+                    call.respond(HttpStatusCode.BadRequest, message = ex.message.toString())
+                } finally {
+
+                }
+            }
             post("/extract_method"){
                 try {
                     val params = call.receive<ExtractMethodParams>()
