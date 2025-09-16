@@ -171,6 +171,32 @@ class RenameVariableFactory {
             return null
         }
 
+        fun fromOldNewNameAllMatching(
+            project: Project,
+            editor: Editor,
+            file: PsiFile,
+            oldName: String,
+            newName: String
+        ): List<RenameVariable> {
+            val outerPsiElement: PsiElement = file.getChildOfType<PsiClass>()!!
+            val varPsi = runReadAction { PsiUtils.getAllElementsWithNameMatching(outerPsiElement, oldName) }
+
+            val newElements = runReadAction{
+                varPsi
+                    .filter{
+                        it !is PsiCompiledElement
+                    }
+            }
+            return newElements
+                .map {
+                    RenameVariable(
+                        runReadAction{ PsiUtils.getStartLine(it) },
+                        runReadAction{ PsiUtils.getEndLine(it) },
+                        oldName, newName, it, outerPsiElement, false
+                    )
+                }
+        }
+
     }
 
 

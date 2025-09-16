@@ -67,9 +67,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
-import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.*
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
@@ -1340,7 +1338,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val symbolName = params.symbol
                 println("Debug: Searching for symbol: '$symbolName'")
 
-                val linkedFiles = runReadAction {
+                val (fileHits, totalHits) = runReadAction {
                     val results = mutableListOf<PsiElement>()
 
                     val scope = GlobalSearchScope.allScope(project)
@@ -1348,10 +1346,10 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     // Search all classes in the project
                     println("Debug: Starting AllClassesSearch...")
                     AllClassesSearch.search(scope, project).allowParallelProcessing()
-                            .forEach(Processor<PsiClass> { psiClass ->
-                                searchInClass(psiClass, symbolName, results)
-                                true
-                            })
+                        .forEach(Processor<PsiClass> { psiClass ->
+                            searchInClass(psiClass, symbolName, results)
+                            true
+                        })
 
                     // Also walk source roots (to catch test files / special dirs)
                     val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
@@ -1362,32 +1360,38 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     }
 
                     println("Debug: Total results found: ${results.size}")
-                    results.forEachIndexed { index, element ->
-                        val vFile = element.containingFile?.virtualFile
-                        val path = vFile?.path?.removePrefix("${project.basePath}/") ?: "unknown"
-                        println("Debug Result $index: $path (${element.javaClass.simpleName})")
+
+                    // Group results by file and collect line numbers
+                    val grouped = results.groupBy { element ->
+                        element.containingFile?.virtualFile?.path?.removePrefix("${project.basePath}/") ?: "unknown"
                     }
 
-                    // Map results to JSON { file_path, line_num } - unique files only
-                    val mappedResults = results.mapNotNull { element ->
-                        val vFile = element.containingFile?.virtualFile ?: return@mapNotNull null
-                        val path = vFile.path.removePrefix("${project.basePath}/")
-                        val lineNum = element.textOffset.let { offset ->
+                    val fileHits = grouped.map { (path, elements) ->
+                        val lineNumbers = elements.map { element ->
+                            val offset = element.textOffset
                             val doc = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
                             doc?.getLineNumber(offset)?.plus(1) ?: -1
-                        }
+                        }.sorted()
+
                         buildJsonObject {
                             put("file_path", path)
-                            put("line_num", lineNum)
+                            put("hit_count", elements.size)
+                            put("line_nums", buildJsonArray { lineNumbers.forEach { add(it) } })
                         }
-                    }.distinctBy { it["file_path"].toString() }
+                    }
 
-                    println("Debug: Final unique files: ${mappedResults.size}")
-                    mappedResults
+                    fileHits to results.size
                 }
 
-                call.respond(HttpStatusCode.OK, linkedFiles)
+                // Respond with overall and per-file counts
+                val response = buildJsonObject {
+                    put("hit_count", totalHits)
+                    put("files", JsonArray(fileHits))
+                }
+
+                call.respond(HttpStatusCode.OK, response)
             }
+
 
             post("search_symbol_changed") {
                 val params = call.receive<RenamePairParams>()
@@ -1613,8 +1617,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
     ) {
         val project = psiClass.project
         val scope = GlobalSearchScope.allScope(project)
-
-
 
         // Class declaration + usages (case-insensitive)
         if (psiClass.name?.equals(symbolName, ignoreCase = true) == true) {
