@@ -337,6 +337,36 @@ class PsiUtils {
             return match.toList()
         }
 
+        fun getAllElementsWithNameMatching(outerClass: PsiElement?, nameToSearch: String): List<PsiElement> {
+            val match =  mutableSetOf<PsiElement>()
+            class NameFinder: JavaRecursiveElementVisitor() {
+                override fun visitElement(element: PsiElement) {
+                    super.visitElement(element)
+                    if ((element as? PsiNameIdentifierOwner)?.name?.contains(nameToSearch)?:false)
+                        match.add(element)
+                    if ((element as? PsiReferenceExpression)!=null) {
+                        print("found reference.")
+//                        if (element.namedUnwrappedElement?.name == nameToSearch){
+////                            match.add((element as? PsiReferenceExpression)!!.namedUnwrappedElement!!)
+//                            match.add(element)
+//                        } else
+                        if (element.resolve()?.namedUnwrappedElement?.name?.contains(nameToSearch)?:false){
+//                            match.add(element.resolve()!!)
+                            match.add(element)
+                        }
+                    }
+                    if ((element as? PsiJavaCodeReferenceElementImpl!=null)
+                        && (element as PsiJavaCodeReferenceElementImpl).resolve()?.namedUnwrappedElement?.name?.contains(nameToSearch)?:false){
+//                        match.add((element as PsiJavaCodeReferenceElementImpl).resolve()!!)
+                        match.add(element)
+                    }
+                }
+
+            }
+            outerClass?.accept(NameFinder())
+            return match.toList()
+        }
+
         fun getQualifiedTypeInFile(psiFile: PsiFile, typeName: String): String?{
             var match: String? = null
             class TypeFinder: JavaRecursiveElementVisitor() {
@@ -1005,7 +1035,6 @@ class PsiUtils {
             }
             return null
         }
-
 
     }
 
