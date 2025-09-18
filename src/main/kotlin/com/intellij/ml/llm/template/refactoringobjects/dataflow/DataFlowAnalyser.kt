@@ -1,82 +1,19 @@
 package com.intellij.ml.llm.template.refactoringobjects.dataflow
 
 import com.intellij.analysis.AnalysisScope
+import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
-import com.intellij.slicer.DuplicateMap
-import com.intellij.slicer.LanguageSlicing
-import com.intellij.slicer.SliceAnalysisParams
-import com.intellij.slicer.SliceRootNode
-import org.jetbrains.kotlin.idea.base.util.projectScope
+import com.intellij.slicer.*
 
-class DataFlowAnalyser(val psiElement: PsiElement, val project: Project) {
+class DataFlowAnalyser(val psiElement: PsiElement, val project: Project, val dataFlowTo: Boolean) {
 
-    val files = mutableListOf<String>()
-
-
-//    val dfaRunner = StandardDataFlowRunner(project)
-//    class Listener : JavaDfaListener {
-//        override fun beforeAssignment(
-//            source: DfaValue,
-//            dest: DfaValue,
-//            state: DfaMemoryState,
-//            anchor: DfaAnchor?
-//        ) {
-//            super.beforeAssignment(source, dest, state, anchor)
-//        }
-//
-//        override fun beforeValueReturn(
-//            value: DfaValue,
-//            expression: PsiExpression?,
-//            context: PsiElement,
-//            state: DfaMemoryState
-//        ) {
-//            super.beforeValueReturn(value, expression, context, state)
-//        }
-//
-//        override fun beforeInstanceInitializerEnd(state: DfaMemoryState?) {
-//            super.beforeInstanceInitializerEnd(state)
-//        }
-//
-//        override fun beforeExpressionPush(
-//            value: DfaValue,
-//            expression: PsiExpression,
-//            state: DfaMemoryState
-//        ) {
-//            super.beforeExpressionPush(value, expression, state)
-//        }
-//
-//        override fun beforeMethodReferenceArgumentPush(
-//            value: DfaValue,
-//            expression: PsiMethodReferenceExpression,
-//            state: DfaMemoryState
-//        ) {
-//            super.beforeMethodReferenceArgumentPush(value, expression, state)
-//        }
-//
-//        override fun beforePush(
-//            args: Array<out DfaValue>,
-//            value: DfaValue,
-//            anchor: DfaAnchor,
-//            state: DfaMemoryState
-//        ) {
-//            super.beforePush(args, value, anchor, state)
-//        }
-//
-//        override fun onCondition(
-//            problem: UnsatisfiedConditionProblem,
-//            value: DfaValue,
-//            failed: ThreeState,
-//            state: DfaMemoryState
-//        ) {
-//            super.onCondition(problem, value, failed, state)
-//        }
-//    }
+    val files = mutableSetOf<String>()
 
     fun analyse(): List<String>{
         val params = SliceAnalysisParams()
-        params.dataFlowToThis = false
+        params.dataFlowToThis = dataFlowTo
         // todo: set the scope to global.
         params.scope = AnalysisScope(project)
         val rootNode = SliceRootNode(
@@ -86,10 +23,16 @@ class DataFlowAnalyser(val psiElement: PsiElement, val project: Project) {
                     psiElement, params
                 )
         )
+        runReadAction{ rootNode.children.forEach { recurse(it) } }
+
+        return files.toList()
+    }
+
+    private fun processChildren(sliceUsage: SliceUsage) {
         ProgressManager.getInstance()
             .runProcessWithProgressSynchronously(
                 kotlinx.coroutines.Runnable {
-                    rootNode.rootUsage.processChildren {
+                    sliceUsage.processChildren {
                         files.add(it.file.path)
                         true
                     }
@@ -98,12 +41,21 @@ class DataFlowAnalyser(val psiElement: PsiElement, val project: Project) {
                 true,
                 project
             )
-        val children = rootNode.children
-        children.forEach {
-            it.element
-        }
+    }
 
-        return files
+    private fun recurse(usage: SliceNode){
+        val sliceUsage = usage.element?.value
+
+        if (sliceUsage!=null) {
+            if (!sliceUsage.file.path.contains(project.basePath.toString())) {
+                print("returning becuase the usage path was not in the project.")
+                return
+            }
+            files.add(sliceUsage.path)
+            usage.getChildren().forEach {
+                recurse(it)
+            }
+        }
     }
 
 

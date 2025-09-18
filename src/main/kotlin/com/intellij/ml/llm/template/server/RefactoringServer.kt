@@ -2,12 +2,6 @@ package com.intellij.ml.llm.template.server
 
 import com.google.gson.Gson
 import com.intellij.analysis.AnalysisScope
-import com.intellij.codeInspection.dataFlow.*
-import com.intellij.codeInspection.dataFlow.java.JavaDfaListener
-import com.intellij.codeInspection.dataFlow.lang.DfaAnchor
-import com.intellij.codeInspection.dataFlow.lang.UnsatisfiedConditionProblem
-import com.intellij.codeInspection.dataFlow.memory.DfaMemoryState
-import com.intellij.codeInspection.dataFlow.value.DfaValue
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
@@ -62,7 +56,6 @@ import com.intellij.psi.PsiMethodCallExpression
 import com.intellij.util.Processor
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
-import com.intellij.util.ThreeState
 import com.intellij.util.text.findTextRange
 import io.ktor.http.*
 import io.ktor.serialization.*
@@ -79,7 +72,6 @@ import kotlinx.serialization.json.*
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
-import org.jetbrains.kotlin.types.expressions.DataFlowAnalyzer
 import java.nio.file.Path
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
@@ -1398,14 +1390,19 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 print("trying to do data flow")
                 val params = call.receive<RenameParams>()
                 println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
-                val renameObjs = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, oldName = params.oldName, newName = params.newName)
-
-                val files = mutableListOf<String>()
-                renameObjs.forEach {
-                    files.addAll(
-                        DataFlowAnalyser((it as RenameVariable).oldVarPsi, project).analyse()
-                    )
+                val renameObj = formRenameObject(params)
+                if (renameObj==null){
+                    call.respond(HttpStatusCode.BadRequest)
+                    return@post
                 }
+
+                val files = mutableSetOf<String>()
+                files.addAll(
+                    DataFlowAnalyser((renameObj as RenameVariable).oldVarPsi, project, false).analyse()
+                )
+                files.addAll(
+                    DataFlowAnalyser((renameObj as RenameVariable).oldVarPsi, project, true).analyse()
+                )
                 call.respond(HttpStatusCode.OK, buildJsonArray { files.forEach { add(it) } })
 
             }
