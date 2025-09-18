@@ -1403,7 +1403,10 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 files.addAll(
                     DataFlowAnalyser((renameObj as RenameVariable).oldVarPsi, project, true).analyse()
                 )
-                call.respond(HttpStatusCode.OK, buildJsonArray { files.forEach { add(it) } })
+                call.respond(HttpStatusCode.OK,
+                    buildJsonArray {
+                        files.forEach { add(it.removePrefix(project.basePath.toString()).removePrefix("/"))
+                        } })
 
             }
 
