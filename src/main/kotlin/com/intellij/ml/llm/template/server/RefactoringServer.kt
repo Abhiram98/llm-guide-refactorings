@@ -2,6 +2,12 @@ package com.intellij.ml.llm.template.server
 
 import com.google.gson.Gson
 import com.intellij.analysis.AnalysisScope
+import com.intellij.codeInspection.dataFlow.*
+import com.intellij.codeInspection.dataFlow.java.JavaDfaListener
+import com.intellij.codeInspection.dataFlow.lang.DfaAnchor
+import com.intellij.codeInspection.dataFlow.lang.UnsatisfiedConditionProblem
+import com.intellij.codeInspection.dataFlow.memory.DfaMemoryState
+import com.intellij.codeInspection.dataFlow.value.DfaValue
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import com.intellij.ml.llm.template.agents.RefactoringTools
@@ -10,6 +16,7 @@ import com.intellij.ml.llm.template.refactoringobjects.inspection.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.IntroduceParamObject
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.TypeChangeRefactoring
+import com.intellij.ml.llm.template.refactoringobjects.dataflow.DataFlowAnalyser
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractSuperClassRefactoring
@@ -55,6 +62,7 @@ import com.intellij.psi.PsiMethodCallExpression
 import com.intellij.util.Processor
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
+import com.intellij.util.ThreeState
 import com.intellij.util.text.findTextRange
 import io.ktor.http.*
 import io.ktor.serialization.*
@@ -71,6 +79,7 @@ import kotlinx.serialization.json.*
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
+import org.jetbrains.kotlin.types.expressions.DataFlowAnalyzer
 import java.nio.file.Path
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
@@ -1153,20 +1162,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir) // works most of the time.
                 reloadFileIfNeeded()
                 call.respond(HttpStatusCode.OK, message = SUCCESS_MSG)
-//                matchingComments.forEach {
-//                    val newComment = it.text.replace(params.findText, params.replaceText)
-//                    WriteCommandAction.runWriteCommandAction(project) {
-//                        val newElement = PsiUtils.createPsiElementFromText(newComment, project)
-//                        if (newElement!=null)
-//                            it.replace(newElement)
-//                        else{
-//                            FileUtils.replaceFileContentsInRange(
-//                                Path(file!!.virtualFile.path), it.startOffset, it.endOffset, newComment
-//                            )
-//                            VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
-//                        }
-//                    }
-//                }
 
             }
 
@@ -1177,64 +1172,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 call.respond(HttpStatusCode.OK)
             }
 
-            // post("search_symbol") {
-            //     val params = call.receive<SymbolSearchParams>()
-            //     val symbolName = params.symbol
-
-            //     val linkedFiles = runReadAction {
-            //         val results = mutableListOf<PsiElement>()
-
-            //         // Method 1: Use AllClassesSearch (for most classes)
-            //         val scope = GlobalSearchScope.allScope(project)
-            //         AllClassesSearch.search(scope, project).allowParallelProcessing()
-            //             .forEach(Processor<PsiClass> { psiClass ->
-            //                 searchInClass(psiClass, symbolName, results)
-            //                 true
-            //             })
-
-            //         // Method 2: Also search through all source roots to catch test files
-            //         val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
-            //         sourceRoots.forEach { sourceRoot ->
-            //             searchInDirectory(sourceRoot, symbolName, results)
-            //         }
-
-            //         println("Debug: Total results before mapping: ${results.size}")
-            //         results.forEachIndexed { index, element ->
-            //             val vFile = element.containingFile?.virtualFile
-            //             val path = vFile?.path?.removePrefix("${project.basePath}/") ?: "unknown"
-            //             val lineNum = element.textOffset.let { offset ->
-            //                 val doc = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
-            //                 doc?.getLineNumber(offset)?.plus(1) ?: -1
-            //             }
-            //             val elementName = when (element) {
-            //                 is PsiClass -> element.name ?: "unnamed"
-            //                 is PsiMethod -> element.name
-            //                 is PsiField -> element.name
-            //                 else -> "unknown"
-            //             }
-            //             println("Debug Result $index: $path:$lineNum (${element.javaClass.simpleName}: $elementName)")
-            //         }
-
-            //         // Map to JSON objects: { file_path, line_num }
-            //         val mappedResults = results.mapNotNull { element ->
-            //             val vFile = element.containingFile?.virtualFile ?: return@mapNotNull null
-            //             val path = vFile.path.removePrefix("${project.basePath}/")
-            //             val lineNum = element.textOffset.let { offset ->
-            //                 val doc = PsiDocumentManager.getInstance(project).getDocument(element.containingFile)
-            //                 doc?.getLineNumber(offset)?.plus(1) ?: -1
-            //             }
-            //             buildJsonObject {
-            //                 put("file_path", path)
-            //                 put("line_num", lineNum)
-            //             }
-            //         }.distinctBy { "${it["file_path"]}:${it["line_num"]}" }
-                    
-            //         println("Debug: Final results after mapping and deduplication: ${mappedResults.size}")
-            //         mappedResults
-            //     }
-
-            //     call.respond(HttpStatusCode.OK, linkedFiles)
-            // }
 
             post("search_keyword") {
                 try {
@@ -1455,6 +1392,22 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
 
                 call.respond(HttpStatusCode.OK, linkedFiles)
+            }
+
+            post("/data-flow"){
+                print("trying to do data flow")
+                val params = call.receive<RenameParams>()
+                println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
+                val renameObjs = RenameVariableFactory.fromOldNewNameAll(project, editor!!, file!!, oldName = params.oldName, newName = params.newName)
+
+                val files = mutableListOf<String>()
+                renameObjs.forEach {
+                    files.addAll(
+                        DataFlowAnalyser((it as RenameVariable).oldVarPsi, project).analyse()
+                    )
+                }
+                call.respond(HttpStatusCode.OK, buildJsonArray { files.forEach { add(it) } })
+
             }
 
 
