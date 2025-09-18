@@ -43,18 +43,25 @@ class DataFlowAnalyser(val psiElement: PsiElement, val project: Project, val dat
             )
     }
 
-    private fun recurse(usage: SliceNode){
-        val sliceUsage = usage.element?.value
+    private fun recurse(usage: SliceNode, pathFiles: MutableSet<String> = mutableSetOf(), depth: Int = 0){
+//        if (depth >= 15) return
 
-        if (sliceUsage!=null) {
-            if (!sliceUsage.file.path.contains(project.basePath.toString())) {
-                print("returning becuase the usage path was not in the project.")
-                return
-            }
-            files.add(sliceUsage.path)
-            usage.getChildren().forEach {
-                recurse(it)
-            }
+        val sliceUsage = usage.element?.value?: return
+
+        val filePath = sliceUsage.file.path
+        if (!filePath.contains(project.basePath.toString())) {
+            print("returning because the usage path was not in the project.")
+            return
+        }
+
+        val newPathFiles = pathFiles.toMutableSet()
+        newPathFiles.add(filePath)
+        files.add(filePath)
+
+        if (newPathFiles.size >= 3) return
+
+        usage.getChildren().forEach {
+            recurse(it, newPathFiles, depth+1)
         }
     }
 
