@@ -10,6 +10,7 @@ import com.intellij.ml.llm.template.refactoringobjects.inspection.IdeInspection
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.ChangeSignatureRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.IntroduceParamObject
 import com.intellij.ml.llm.template.refactoringobjects.change_signature.TypeChangeRefactoring
+import com.intellij.ml.llm.template.refactoringobjects.dataflow.ClassReferenceFinder
 import com.intellij.ml.llm.template.refactoringobjects.dataflow.DataFlowAnalyser
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractClassRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractclass.ExtractEnumRefactoring
@@ -1395,17 +1396,30 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     call.respond(HttpStatusCode.BadRequest)
                     return@post
                 }
+                val renameVar = (renameObj as RenameVariable)
+                val oldClass = if (renameVar.getResolvedElement() is PsiClass){
+                    renameVar.getResolvedElement() as PsiClass
+                } else if (renameVar.oldVarPsi is PsiClass){
+                    renameVar.oldVarPsi as PsiClass
+                } else{
+                    null
+                }
 
-                val files = mutableSetOf<String>()
-                files.addAll(
-                    DataFlowAnalyser((renameObj as RenameVariable).oldVarPsi, project, false).analyse()
-                )
-                files.addAll(
-                    DataFlowAnalyser((renameObj as RenameVariable).oldVarPsi, project, true).analyse()
-                )
+                val result = if (oldClass!=null){
+                    ClassReferenceFinder(oldClass, project).find()
+                } else {
+                    val files = mutableSetOf<String>()
+                    files.addAll(
+                        DataFlowAnalyser(renameVar.oldVarPsi, project, false).analyse()
+                    )
+                    files.addAll(
+                        DataFlowAnalyser(renameVar.oldVarPsi, project, true).analyse()
+                    )
+                    files.toList()
+                }
                 call.respond(HttpStatusCode.OK,
                     buildJsonArray {
-                        files.forEach { add(it.removePrefix(project.basePath.toString()).removePrefix("/"))
+                        result.forEach { add(it.removePrefix(project.basePath.toString()).removePrefix("/"))
                         } })
 
             }
