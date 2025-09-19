@@ -54,6 +54,7 @@ import com.intellij.psi.JavaRecursiveElementVisitor
 import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiReferenceExpression
 import com.intellij.psi.PsiMethodCallExpression
+import com.intellij.psi.search.GlobalSearchScopesCore.DirectoryScope
 import com.intellij.util.Processor
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
@@ -1271,7 +1272,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val (fileHits, totalHits) = runReadAction {
                     val results = mutableListOf<PsiElement>()
 
-                    val scope = GlobalSearchScope.allScope(project)
+                    val scope = DirectoryScope(project, file!!.containingDirectory.parentDirectory!!.virtualFile, true)
 
                     // Search all classes in the project
                     println("Debug: Starting AllClassesSearch...")
@@ -1282,12 +1283,12 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                         })
 
                     // Also walk source roots (to catch test files / special dirs)
-                    val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
-                    println("Debug: Found ${sourceRoots.size} source roots")
-                    sourceRoots.forEach { sourceRoot ->
-                        println("Debug: Searching source root: ${sourceRoot.path}")
-                        searchInDirectory(sourceRoot, symbolName, results)
-                    }
+//                    val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
+//                    println("Debug: Found ${sourceRoots.size} source roots")
+//                    sourceRoots.forEach { sourceRoot ->
+//                        println("Debug: Searching source root: ${sourceRoot.path}")
+//                        searchInDirectory(sourceRoot, symbolName, results)
+//                    }
 
                     println("Debug: Total results found: ${results.size}")
 
