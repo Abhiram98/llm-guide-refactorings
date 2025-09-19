@@ -2,49 +2,71 @@ package com.intellij.ml.llm.template.refactoringobjects.dataflow
 
 import com.intellij.analysis.AnalysisScope
 import com.intellij.openapi.application.runReadAction
+import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
+import com.intellij.openapi.progress.Task
+import com.intellij.openapi.progress.impl.BackgroundableProcessIndicator
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.slicer.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class DataFlowAnalyser(val psiElement: PsiElement, val project: Project, val dataFlowTo: Boolean) {
 
     val files = mutableSetOf<String>()
 
+    private val TIME_LIMIT_MS = 30_000L // 30 seconds
+    private var startTime: Long = 0
+
     fun analyse(): List<String>{
         val params = SliceAnalysisParams()
         params.dataFlowToThis = dataFlowTo
-        // todo: set the scope to global.
         params.scope = AnalysisScope(project)
-        val rootNode = SliceRootNode(
-            project, DuplicateMap(),
-            LanguageSlicing.getProvider(psiElement)
-                .createRootUsage(
-                    psiElement, params
-                )
-        )
-        runReadAction{ rootNode.children.forEach { recurse(it) } }
+        val rootNode = runReadAction{
+            SliceRootNode(
+                project, DuplicateMap(),
+                LanguageSlicing.getProvider(psiElement)
+                    .createRootUsage(
+                        psiElement, params
+                    )
+            )
+        }
+        startTime = System.currentTimeMillis()
+        val latch = java.util.concurrent.CountDownLatch(1)
 
+        val task = object : Task.Backgroundable(
+            project, "Data flow analysis"
+        ) {
+            override fun run(indicator: ProgressIndicator) {
+                runReadAction{ rootNode.children.forEach { recurse(it) } }
+            }
+
+            override fun onFinished() {
+                print("Data flow analysis complete.")
+                latch.countDown()
+                super.onFinished()
+            }
+
+            override fun onCancel() {
+                print("Data flow analysis was cancelled.")
+                super.onCancel()
+            }
+        }
+
+        val scheduler = Executors.newSingleThreadScheduledExecutor()
+        val indicator = BackgroundableProcessIndicator(task)
+        scheduler.schedule({
+            indicator.cancel()
+        }, TIME_LIMIT_MS, TimeUnit.MILLISECONDS)
+        ProgressManager.getInstance().runProcessWithProgressAsynchronously(task, indicator)
+        latch.await()
+
+        scheduler.shutdown()
         return files.toList()
     }
-
-    private fun processChildren(sliceUsage: SliceUsage) {
-        ProgressManager.getInstance()
-            .runProcessWithProgressSynchronously(
-                kotlinx.coroutines.Runnable {
-                    sliceUsage.processChildren {
-                        files.add(it.file.path)
-                        true
-                    }
-                },
-                "Server: Data Flow Analysis",
-                true,
-                project
-            )
-    }
-
     private fun recurse(usage: SliceNode, pathFiles: MutableSet<String> = mutableSetOf(), depth: Int = 0){
-//        if (depth >= 15) return
+        if (depth >= 15) return
 
         val sliceUsage = usage.element?.value?: return
 
