@@ -12,7 +12,9 @@ class ClassReferenceFinder(val psiClass: PsiClass, val project: Project) {
 
         ReferencesSearch.search(psiClass, scope).allowParallelProcessing()
             .forEach {
-                files.add(it.element.containingFile.virtualFile.path)
+                files.add(it.element.containingFile.virtualFile.path
+                    .removePrefix(project.basePath.toString()).removePrefix("/")
+                )
             }
         return files.toList()
     }

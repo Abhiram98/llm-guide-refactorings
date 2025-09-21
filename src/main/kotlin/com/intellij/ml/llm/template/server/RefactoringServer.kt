@@ -1407,9 +1407,13 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
 
                 val result = if (oldClass!=null){
-                    ClassReferenceFinder(oldClass, project).find()
+                    ClassReferenceFinder(oldClass, project)
+                        .find()
+                        .map {
+                            DataFlowAnalyser.DataFlowAnalysisResult(file = it, depth = 1)
+                        }
                 } else {
-                    val files = mutableSetOf<String>()
+                    val files = mutableSetOf<DataFlowAnalyser.DataFlowAnalysisResult>()
                     files.addAll(
                         DataFlowAnalyser(renameVar.oldVarPsi, project, false).analyse()
                     )
@@ -1418,10 +1422,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                     )
                     files.toList()
                 }
-                call.respond(HttpStatusCode.OK,
-                    buildJsonArray {
-                        result.forEach { add(it.removePrefix(project.basePath.toString()).removePrefix("/"))
-                        } })
+                call.respond(HttpStatusCode.OK, result)
 
             }
 

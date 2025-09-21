@@ -9,17 +9,28 @@ import com.intellij.openapi.progress.impl.BackgroundableProcessIndicator
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.slicer.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class DataFlowAnalyser(val psiElement: PsiElement, val project: Project, val dataFlowTo: Boolean) {
 
-    val files = mutableSetOf<String>()
+    @Serializable
+    data class DataFlowAnalysisResult(
+        @SerialName("file_path")
+        val file: String,
+        @SerialName("depth")
+        val depth: Int
+    )
+
+
+    val results = mutableSetOf<DataFlowAnalysisResult>()
 
     private val TIME_LIMIT_MS = 30_000L // 30 seconds
     private var startTime: Long = 0
 
-    fun analyse(): List<String>{
+    fun analyse(): List<DataFlowAnalysisResult>{
         val params = SliceAnalysisParams()
         params.dataFlowToThis = dataFlowTo
         params.scope = AnalysisScope(project)
@@ -63,7 +74,7 @@ class DataFlowAnalyser(val psiElement: PsiElement, val project: Project, val dat
         latch.await()
 
         scheduler.shutdown()
-        return files.toList()
+        return results.toList()
     }
     private fun recurse(usage: SliceNode, pathFiles: MutableSet<String> = mutableSetOf(), depth: Int = 0){
         if (depth >= 15) return
@@ -78,7 +89,9 @@ class DataFlowAnalyser(val psiElement: PsiElement, val project: Project, val dat
 
         val newPathFiles = pathFiles.toMutableSet()
         newPathFiles.add(filePath)
-        files.add(filePath)
+        results.add(DataFlowAnalysisResult(
+            file = filePath.removePrefix(project.basePath.toString()).removePrefix("/"),
+            depth = depth))
 
         if (newPathFiles.size >= 3) return
 
