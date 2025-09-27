@@ -15,6 +15,18 @@ data class OpenProjectParams(
     val projectPath: String
 )
 
+@Serializable
+data class SnippetFinderParams(
+    @SerialName("name")
+    val name: String,
+    @SerialName("line_num")
+    val lineNum: Int? = null,
+    @SerialName("code_element_type")
+    val codeElementType: String? = null,
+    @SerialName("file_path")
+    val filePath: String? = null,
+)
+
 
 @Serializable
 data class RenameParams(

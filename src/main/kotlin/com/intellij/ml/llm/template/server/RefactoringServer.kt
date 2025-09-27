@@ -26,6 +26,7 @@ import com.intellij.ml.llm.template.refactoringobjects.pullup.PushDownRefactorin
 import com.intellij.ml.llm.template.refactoringobjects.reformat.ReformatFile
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariable
 import com.intellij.ml.llm.template.refactoringobjects.renamevariable.RenameVariableFactory
+import com.intellij.ml.llm.template.refactoringobjects.snippet.SnippetFinder
 import com.intellij.ml.llm.template.testcuration.TestSelector
 import com.intellij.ml.llm.template.utils.FileUtils
 import com.intellij.ml.llm.template.utils.PsiUtils
@@ -142,6 +143,39 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             }
             get("/get_source_code"){
                 call.respond(HttpStatusCode.OK, message = file!!.text)
+            }
+
+            post("/get_source_code_snippet"){
+                val params = call.receive<SnippetFinderParams>()
+                val matchedFile = if (params.filePath !=null) {
+                    val foundVfile =
+                        LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + params.filePath)!!
+                    PsiManager.getInstance(project).findFile(foundVfile)!!
+                }else{
+                    file!!
+                }
+
+                if (params.codeElementType == "file"){
+                    call.respond(HttpStatusCode.OK, message=matchedFile.text)
+                    return@post
+                }
+
+                val match = formRenameObject(
+                    RenameParams(oldName = params.name, newName = params.name+"X", lineNum = params.lineNum, codeElementType = params.codeElementType),
+                    useFile = matchedFile
+                )
+                if (match!=null){
+
+                    call.respond(HttpStatusCode.OK,
+                        message = SnippetFinder(
+                            file=matchedFile,
+                            psiElement=(match as RenameVariable).getResolvedElement()?:match.oldVarPsi
+                        ).getSnippet()
+                    )
+                    return@post
+                }
+                call.respond(HttpStatusCode.BadRequest)
+
             }
             get("/get_rel_file_path"){
                 call.respond(HttpStatusCode.OK,
