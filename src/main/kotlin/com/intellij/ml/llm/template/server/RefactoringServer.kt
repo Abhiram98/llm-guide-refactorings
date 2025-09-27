@@ -75,6 +75,7 @@ import kotlinx.serialization.json.*
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
+import org.jetbrains.kotlin.idea.core.util.toPsiDirectory
 import java.nio.file.Path
 import javax.swing.SwingUtilities
 import javax.swing.SwingUtilities.invokeAndWait
@@ -1305,8 +1306,19 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                 val (fileHits, totalHits) = runReadAction {
                     val results = mutableListOf<PsiElement>()
-
+                    val searchDir = file!!.containingDirectory.parentDirectory!!
+                    val complementaryDir: PsiDirectory? = if ("test/" in searchDir.virtualFile.path){
+                        val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(searchDir.virtualFile.path.replace("test/", "main/"))
+                        vfile?.toPsiDirectory(project)
+                    } else if ("main/" in searchDir.virtualFile.path){
+                        val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(searchDir.virtualFile.path.replace("main/", "test/"))
+                        vfile?.toPsiDirectory(project)
+                    }else{
+                        null
+                    }
                     val scope = DirectoryScope(project, file!!.containingDirectory.parentDirectory!!.virtualFile, true)
+
+                    file!!.containingDirectory.parentDirectory!!.virtualFile
 
                     // Search all classes in the project
                     println("Debug: Starting AllClassesSearch...")
@@ -1316,13 +1328,14 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                             true
                         })
 
-                    // Also walk source roots (to catch test files / special dirs)
-//                    val sourceRoots = ProjectRootManager.getInstance(project).contentSourceRoots
-//                    println("Debug: Found ${sourceRoots.size} source roots")
-//                    sourceRoots.forEach { sourceRoot ->
-//                        println("Debug: Searching source root: ${sourceRoot.path}")
-//                        searchInDirectory(sourceRoot, symbolName, results)
-//                    }
+                    if (complementaryDir!=null){
+                        val complementaryScope = DirectoryScope(project, complementaryDir.virtualFile, true)
+                        AllClassesSearch.search(complementaryScope, project).allowParallelProcessing()
+                            .forEach(Processor<PsiClass> { psiClass ->
+                                searchInClass(psiClass, symbolName, results)
+                                true
+                            })
+                    }
 
                     println("Debug: Total results found: ${results.size}")
 
@@ -1482,9 +1495,9 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
         return true
     }
 
-    private fun formRenameObject(params: RenameParams): AbstractRefactoring? {
+    private fun formRenameObject(params: RenameParams, useFile:PsiFile?=null): AbstractRefactoring? {
         val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
-            project, editor!!, file!!, params.oldName, params.newName
+            project, editor!!, useFile?:file!!, params.oldName, params.newName
         )
         if (renameObjectRaw.size==1)
             return renameObjectRaw[0]
