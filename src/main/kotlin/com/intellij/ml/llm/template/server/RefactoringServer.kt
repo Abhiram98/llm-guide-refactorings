@@ -229,7 +229,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 val openedProject = openProjectsMap.get(params.projectPath)
                 if (openedProject!=null && openedProject.isOpen) {
                     project = openedProject
-                    ProjectUtil.focusProjectWindow(project, true)
+//                    ProjectUtil.focusProjectWindow(project, false)
                     call.respond(HttpStatusCode.OK, message = "project was already open")
                     return@post
                 }
