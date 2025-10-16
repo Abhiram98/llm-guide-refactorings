@@ -1306,7 +1306,16 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                 val (fileHits, totalHits) = runReadAction {
                     val results = mutableListOf<PsiElement>()
-                    val searchDir = file!!.containingDirectory.parentDirectory!!
+                    val searchDirParent = file!!.containingDirectory.parentDirectory!!
+                    val searchDir = if (params.parentCount > 1){
+                        var newSearchDir = searchDirParent
+                        for (count in 1 .. params.parentCount){
+                            newSearchDir = newSearchDir.parentDirectory?:newSearchDir
+                        }
+                        newSearchDir
+                    }else{
+                        searchDirParent
+                    }
                     val complementaryDir: PsiDirectory? = if ("test/" in searchDir.virtualFile.path){
                         val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(searchDir.virtualFile.path.replace("test/", "main/"))
                         vfile?.toPsiDirectory(project)

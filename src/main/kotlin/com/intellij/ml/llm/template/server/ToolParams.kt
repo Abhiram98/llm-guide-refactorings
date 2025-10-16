@@ -229,7 +229,10 @@ data class FindReplaceParams(
 @Serializable
 data class SymbolSearchParams(
     @SerialName("symbol")
-    val symbol: String
+    val symbol: String,
+
+    @SerialName("parent_count")
+    val parentCount: Int = 2
 )
 
 @Serializable
