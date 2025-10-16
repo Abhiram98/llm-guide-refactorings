@@ -35,6 +35,7 @@ class ProjectListener {
         setupImportListener(project)
         setupResolveListener()
         setupIndexingListener(project)
+        // comment line below to stop auto closing popups.
         registerAwtListener()
 
     }
