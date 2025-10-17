@@ -1,1 +1,1 @@
-rootProject.name = "LLM Integration Plugin Template"
+rootProject.name = "ijserver"

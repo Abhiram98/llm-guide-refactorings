@@ -4,7 +4,44 @@ import org.jetbrains.changelog.markdownToHTML
 
 fun properties(key: String) = project.findProperty(key).toString()
 
+
+plugins {
+    id("java")
+    id("org.jetbrains.changelog") version "2.0.0"
+    id("org.jetbrains.kotlin.jvm") version "2.1.20"
+    id("org.jetbrains.intellij.platform") version "2.9.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
+    application
+}
+
+application {
+    mainClass = "com.intellij.ml.llm.template.cli.CLIKt"
+}
+
+
+
+group = properties("pluginGroup")
+version = properties("pluginVersion")
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://packages.jetbrains.team/maven/p/grazi/grazie-platform-public")
+    }
+    intellijPlatform {
+        defaultRepositories()
+    }
+}
+
+// Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 dependencies {
+    intellijPlatform {
+        create(properties("platformType"), properties("platformVersion"))
+        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
+
+        // Add plugin dependencies for compilation here, example:
+        // bundledPlugin("com.intellij.java")
+    }
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mongodb:mongodb-driver-sync:4.9.0") // added this line for MongoDB driver
@@ -27,7 +64,7 @@ dependencies {
 //    implementation("org.testcontainers:testcontainers:1.19.1")
     implementation("dev.langchain4j:langchain4j-voyage-ai:0.35.0")
 
-    implementation("org.eclipse.jgit:org.eclipse.jgit:6.4.0.202211300538-r")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:7.2.1.202505142326-r")
     implementation("com.github.javaparser:javaparser-symbol-solver-core:3.26.2")
 
     implementation("org.jetbrains.kotlinx:kotlinx-cli:0.3.6")
@@ -60,88 +97,59 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-server-test-host-jvm:3.0.3")
-//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.0")
 }
 
-plugins {
-    id("java")
-    id("org.jetbrains.changelog") version "2.0.0"
-    id("org.jetbrains.intellij") version "1.12.0"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
-    kotlin("jvm") version "1.8.21"
-    application
-}
-configure<ApplicationPluginConvention> {
-    mainClassName = "com.intellij.ml.llm.template.cli.CLIKt"
-}
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = properties("pluginSinceBuild")
+        }
 
-group = properties("pluginGroup")
-version = properties("pluginVersion")
-
-repositories {
-    mavenCentral()
-    maven {
-        url = uri("https://packages.jetbrains.team/maven/p/grazi/grazie-platform-public")
+        changeNotes = """
+            Initial version
+        """.trimIndent()
     }
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
-intellij {
-    pluginName.set(properties("pluginName"))
-    version.set(properties("platformVersion"))
-    type.set(properties("platformType"))
-
-    plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
-}
-
-changelog {
-    groups.set(emptyList())
-    repositoryUrl.set(properties("pluginRepositoryUrl"))
-}
 
 tasks {
-    wrapper {
-        gradleVersion = properties("gradleVersion")
-    }
-
-    buildPlugin {
-            archiveFileName.set("refactoring-assistant-plugin.zip")
+    // Set the JVM compatibility versions
+    withType<JavaCompile> {
+        sourceCompatibility = "21"
+        targetCompatibility = "21"
     }
 
     patchPluginXml {
-        version.set(properties("pluginVersion"))
-        sinceBuild.set(properties("pluginSinceBuild"))
-        untilBuild.set(properties("pluginUntilBuild"))
+        version = properties("pluginVersion")
+        sinceBuild = properties("pluginSinceBuild")
+        untilBuild = properties("pluginUntilBuild")
 
-        pluginDescription.set(
-            file("README.md").readText().lines().run {
-                val start = "<!-- Plugin description -->"
-                val end = "<!-- Plugin description end -->"
+        pluginDescription = file("README.md").readText().lines().run {
+            val start = "<!-- Plugin description -->"
+            val end = "<!-- Plugin description end -->"
 
-                if (!containsAll(listOf(start, end))) {
-                    throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
-                }
-                subList(indexOf(start) + 1, indexOf(end))
-            }.joinToString("\n").let { markdownToHTML(it) }
-        )
-
-        changeNotes.set(provider {
-            with(changelog) {
-                renderItem(
-                    getOrNull(properties("pluginVersion")) ?: getLatest(),
-                    Changelog.OutputType.HTML,
-                )
+            if (!containsAll(listOf(start, end))) {
+                throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
             }
-        })
-    }
-    test{
+            subList(indexOf(start) + 1, indexOf(end))
+        }.joinToString("\n").let { markdownToHTML(it) }
 
+        changeNotes =  with(changelog) {
+            renderItem(
+                getOrNull(properties("pluginVersion")) ?: getLatest(),
+                Changelog.OutputType.HTML,
+            )
+        }
     }
     runIde{
         systemProperties(Pair("idea.log.warn.categories", "com.intellij,com.android"))
         systemProperties(Pair("idea.log.info.categories", "com.intellij.ml.llm.template"))
+    }
+
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
     }
 }
