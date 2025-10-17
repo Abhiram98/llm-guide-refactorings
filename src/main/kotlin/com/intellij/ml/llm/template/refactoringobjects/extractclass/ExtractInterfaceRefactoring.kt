@@ -34,7 +34,7 @@ class ExtractInterfaceRefactoring(
             tempName,
             classToExtract,
             members,
-            DocCommentPolicy<PsiComment>(DocCommentPolicy.ASIS)
+            DocCommentPolicy(DocCommentPolicy.ASIS)
         )
         processor.run()
 

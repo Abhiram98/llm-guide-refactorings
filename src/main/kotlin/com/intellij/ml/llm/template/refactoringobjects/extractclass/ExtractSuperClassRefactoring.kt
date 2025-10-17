@@ -33,7 +33,7 @@ class ExtractSuperClassRefactoring(
             classToExtract,
             members,
             false,
-            DocCommentPolicy<PsiComment>(DocCommentPolicy.ASIS)
+            DocCommentPolicy(DocCommentPolicy.ASIS)
         )
         processor.run()
 

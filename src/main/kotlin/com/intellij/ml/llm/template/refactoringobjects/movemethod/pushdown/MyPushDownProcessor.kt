@@ -12,7 +12,7 @@ import com.intellij.usageView.UsageInfo
 class MyPushDownProcessor <MemberInfo : MemberInfoBase<Member>, Member : PsiElement, Klass : PsiElement>(
             val kClass: Klass,
             val memberInfo: List<MemberInfo>,
-            val docCommentPolicy: DocCommentPolicy<PsiComment>
+            val docCommentPolicy: DocCommentPolicy
         ) : PushDownProcessor<MemberInfo, Member, Klass>(kClass, memberInfo, docCommentPolicy) {
 
             fun delegatePerformRefactoring(): Boolean{

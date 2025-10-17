@@ -57,7 +57,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
         myGlobalInspectionContext?.cleanup()
     }
 
-    constructor(title: @DialogTitle String?, analysisNoun: @Nls String?) : super(title, analysisNoun)
+    constructor(title: @DialogTitle String?, analysisNoun: String?) : super(title, analysisNoun)
 
     fun doAnalysis(project: Project, scope: AnalysisScope){
         try{
@@ -166,7 +166,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
         return myGlobalInspectionContext!!
     }
 
-    override fun getHelpTopic(): @NonNls String? {
+    override fun getHelpTopic(): String? {
         return "reference.dialogs.inspection.scope"
     }
 

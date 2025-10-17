@@ -21,7 +21,7 @@ class PushDownRefactoring(
         super.performRefactoring(project, editor, file)
 
         val processor = PushDownProcessor(
-            sourceClass, members, DocCommentPolicy<PsiComment>(DocCommentPolicy.ASIS),
+            sourceClass, members, DocCommentPolicy(DocCommentPolicy.ASIS),
             false)
         processor.run()
     }

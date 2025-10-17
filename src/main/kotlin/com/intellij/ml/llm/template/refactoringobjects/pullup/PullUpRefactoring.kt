@@ -21,9 +21,9 @@ class PullUpRefactoring(
     override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
         super.performRefactoring(project, editor, file)
 
-        val processror = PullUpProcessor(sourceClass, targetClass,
-            members.toTypedArray(), DocCommentPolicy<PsiComment>(DocCommentPolicy.ASIS))
-        processror.run()
+        val processor = PullUpProcessor(sourceClass, targetClass,
+            members.toTypedArray(), DocCommentPolicy(DocCommentPolicy.ASIS))
+        processor.run()
 
     }
 

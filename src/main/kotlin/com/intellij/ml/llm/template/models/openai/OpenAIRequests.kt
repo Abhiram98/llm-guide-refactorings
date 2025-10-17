@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder
 import com.intellij.ml.llm.template.models.LLMBaseRequest
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.util.io.HttpRequests
-import org.jetbrains.kotlin.idea.debugger.coroutine.util.logger
 import java.net.HttpURLConnection
 
 open class OpenAIBaseRequest<Body>(path: String, body: Body) : LLMBaseRequest<Body>(body) {
