@@ -40,7 +40,8 @@ dependencies {
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
 
         // Add plugin dependencies for compilation here, example:
-        // bundledPlugin("com.intellij.java")
+        properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty)
+            .forEach { bundledPlugin(it) }
     }
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("junit:junit:4.13.2")
