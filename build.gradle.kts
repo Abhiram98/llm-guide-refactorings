@@ -15,7 +15,7 @@ plugins {
 }
 
 application {
-    mainClass = "com.intellij.ml.llm.template.cli.CLIKt"
+    mainClass = "org.boulderse.ijserver.cli.CLIKt"
 }
 
 
@@ -144,7 +144,10 @@ tasks {
     }
     runIde{
         systemProperties(Pair("idea.log.warn.categories", "com.intellij,com.android"))
-        systemProperties(Pair("idea.log.info.categories", "com.intellij.ml.llm.template"))
+        systemProperties(Pair("idea.log.info.categories", "org.boulderse.ijserver"))
+    }
+    buildPlugin {
+        archiveFileName.set("ij-mcp-server-plugin.zip")
     }
 
 }

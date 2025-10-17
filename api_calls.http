@@ -180,3 +180,15 @@ Content-Type: application/json
   "old_name": "testHasLeadershipWithLeadershipLostAndRevokeEventProcessed",
   "new_name": "testHasLeadershipAsyncWithLeadershipLostAndRevokeEventProcessed"
 }
+
+
+
+### rename formation object
+POST http://localhost:8082/form-rename-object
+Content-Type: application/json
+
+{
+  "old_name": "assertSerializerIsValid",
+  "new_name": "assertSerializerIsValid2",
+  "line_num": 441
+}

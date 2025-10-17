@@ -1,4 +1,4 @@
-package com.intellij.ml.llm.template.testdata;
+package org.boulderse.ijserver.testdata;
 // A simple program to demonstrate
 // Tic-Tac-Toe Game.
 import java.util.*;

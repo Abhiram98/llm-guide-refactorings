@@ -1,4 +1,4 @@
-package com.intellij.ml.llm.template.testdata;
+package org.boulderse.ijserver.testdata;
 
 import java.util.List;
 

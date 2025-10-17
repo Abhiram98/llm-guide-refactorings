@@ -1,0 +1,4 @@
+package org.boulderse.ijserver.refactoringobjects.exceptionhandling
+
+class ExceptionHandalingRefactoring {
+}

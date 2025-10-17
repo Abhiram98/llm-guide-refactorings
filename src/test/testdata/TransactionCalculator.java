@@ -1,4 +1,4 @@
-package com.intellij.ml.llm.template.testdata;
+package org.boulderse.ijserver.testdata;
 
 public class TransactionCalculator {
     public static void main(String[] args) {

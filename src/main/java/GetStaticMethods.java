@@ -1,5 +1,5 @@
 import com.github.javaparser.StaticJavaParser;
-import com.intellij.ml.llm.template.utils.JavaParsingUtils;
+import org.boulderse.ijserver.utils.JavaParsingUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
