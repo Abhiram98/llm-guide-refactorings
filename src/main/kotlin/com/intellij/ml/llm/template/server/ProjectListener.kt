@@ -3,7 +3,7 @@ package com.intellij.ml.llm.template.server
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationsManager
 import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskId
-import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskNotificationListenerAdapter
+import com.intellij.openapi.externalSystem.model.task.ExternalSystemTaskNotificationListener
 import com.intellij.openapi.externalSystem.service.notification.ExternalSystemProgressNotificationManager
 import com.intellij.openapi.externalSystem.service.project.manage.ProjectDataImportListener
 import com.intellij.openapi.project.DumbService
@@ -91,8 +91,8 @@ class ProjectListener {
         val notificationManager =
             ExternalSystemProgressNotificationManager.getInstance()
 
-        notificationManager.addNotificationListener(object : ExternalSystemTaskNotificationListenerAdapter() {
-            override fun onStart(id: ExternalSystemTaskId, workingDir: String?) {
+        notificationManager.addNotificationListener(object : ExternalSystemTaskNotificationListener {
+            override fun onStart(projectPath: String, id: ExternalSystemTaskId) {
                 println("Starting resolve.")
                 resolveCount += 1
 //                if (isResolveProjectTask(id)) {
@@ -112,7 +112,7 @@ class ProjectListener {
 ////                resolveInProgress = false
 //            }
 
-            override fun onEnd(id: ExternalSystemTaskId) {
+            override fun onEnd(projectPath: String, id: ExternalSystemTaskId) {
                 println("Finished resolve.")
                 super.onEnd(id)
                 resolveCount -= 1
