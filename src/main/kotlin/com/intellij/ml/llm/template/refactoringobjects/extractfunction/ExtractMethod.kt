@@ -1,8 +1,6 @@
 package com.intellij.ml.llm.template.refactoringobjects.extractfunction
 
 import com.intellij.lang.java.JavaLanguage
-import com.intellij.ml.llm.template.models.FunctionNameProvider
-import com.intellij.ml.llm.template.models.MyMethodExtractor
 import com.intellij.ml.llm.template.refactoringobjects.AbstractRefactoring
 import com.intellij.ml.llm.template.refactoringobjects.extractfunction.customextractors.MyInplaceExtractionHelper
 import com.intellij.ml.llm.template.utils.PsiUtils
@@ -12,13 +10,13 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.ex.EditorEx
 import com.intellij.openapi.keymap.impl.IdeKeyEventDispatcher
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.refactoring.extractMethod.newImpl.inplace.InplaceMethodExtractor
+import com.intellij.refactoring.extractMethod.newImpl.MethodExtractor
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.idea.refactoring.introduce.extractFunction.ExtractKotlinFunctionHandler
-import org.jetbrains.kotlin.idea.util.executeEnterHandler
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
 import javax.swing.SwingUtilities.invokeAndWait
@@ -113,19 +111,17 @@ class ExtractMethod(
 
 
     private fun invokeExtractFunction(newFunctionName: String, project: Project, editor: Editor?, file: PsiFile?) {
-        val functionNameProvider = FunctionNameProvider(newFunctionName)
         when (file?.language) {
             JavaLanguage.INSTANCE -> {
-                MyMethodExtractor.invokeOnElements(
-                    project, editor, file,
-                    runReadAction{ findSelectedPsiElements(editor, file) }, FunctionNameProvider(newFunctionName)
-                )
+                MethodExtractor().doExtract(
+                    file,
+                    TextRange(getStartOffset(), getEndOffset()))
             }
 
             KotlinLanguage.INSTANCE -> {
                 val dataContext = (editor as EditorEx).dataContext
                 val allContainersEnabled = false
-                val inplaceExtractionHelper = MyInplaceExtractionHelper(allContainersEnabled, functionNameProvider)
+                val inplaceExtractionHelper = MyInplaceExtractionHelper(allContainersEnabled, newFuncName)
                 ExtractKotlinFunctionHandler(allContainersEnabled, inplaceExtractionHelper).invoke(
                     project, editor, file, dataContext
                 )

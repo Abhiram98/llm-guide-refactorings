@@ -2,7 +2,6 @@ package com.intellij.ml.llm.template.refactoringobjects.extractfunction.customex
 
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl
 import com.intellij.java.refactoring.JavaRefactoringBundle
-import com.intellij.ml.llm.template.models.FunctionNameProvider
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.command.impl.FinishMarkAction
 import com.intellij.openapi.command.impl.StartMarkAction
@@ -31,7 +30,22 @@ import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtFile
 
-class MyInplaceExtractionHelper(private val allContainersEnabled: Boolean, private val functionNameProvider: FunctionNameProvider? = null) : ExtractionEngineHelper(EXTRACT_FUNCTION) {
+class MyInplace2(allContainersEnabled: Boolean): ExtractKotlinFunctionHandler.InplaceExtractionHelper(
+    allContainersEnabled
+) {
+    override fun configureAndRun(
+        project: Project,
+        editor: Editor,
+        descriptorWithConflicts: ExtractableCodeDescriptorWithConflicts,
+        onFinish: (ExtractionResult) -> Unit
+    ) {
+        super.configureAndRun(project, editor, descriptorWithConflicts, onFinish)
+    }
+
+}
+
+
+class MyInplaceExtractionHelper(private val myAllContainersEnabled: Boolean, private val functionName: String? = null) : ExtractKotlinFunctionHandler.InplaceExtractionHelper(myAllContainersEnabled) {
     override fun configureAndRun(
         project: Project,
         editor: Editor,
@@ -45,8 +59,8 @@ class MyInplaceExtractionHelper(private val allContainersEnabled: Boolean, priva
                 .invoke(project, editor, descriptorWithConflicts.descriptor.extractionData.originalFile, null)
         }
         var suggestedNames = descriptorWithConflicts.descriptor.suggestedNames.takeIf { it.isNotEmpty() } ?: listOf("extracted")
-        if (functionNameProvider != null) {
-            suggestedNames = listOf(functionNameProvider.getFunctionName().name) + suggestedNames
+        if (functionName != null) {
+            suggestedNames = listOf(functionName) + suggestedNames
         }
         val descriptor = descriptorWithConflicts.descriptor.copy(suggestedNames = suggestedNames)
         val elements = descriptor.extractionData.originalElements
@@ -106,34 +120,6 @@ class MyInplaceExtractionHelper(private val allContainersEnabled: Boolean, priva
     private fun getDialogAdvertisement():  String {
         val shortcut = KeymapUtil.getPrimaryShortcut("ExtractFunction") ?: throw IllegalStateException("Action is not found")
         return RefactoringBundle.message("inplace.refactoring.advertisement.text", KeymapUtil.getShortcutText(shortcut))
-    }
-
-    private fun rangeOf(element: PsiElement): TextRange {
-        return (element as? KtExpression)?.extractableSubstringInfo?.contentRange ?: element.textRange
-    }
-
-    private fun createSmartRangeProvider(container: PsiElement, range: TextRange): () -> TextRange? {
-        val offsetFromStart = range.startOffset - container.textRange.startOffset
-        val offsetFromEnd = container.textRange.endOffset - range.endOffset
-        val pointer = SmartPointerManager.createPointer(container)
-        fun findRange(): TextRange? {
-            val containerRange = pointer.range ?: return null
-            return TextRange(containerRange.startOffset + offsetFromStart, containerRange.endOffset - offsetFromEnd)
-        }
-        return ::findRange
-    }
-
-    @Nls
-    private fun getIdentifierError(file: PsiFile, variableRange: TextRange): String? {
-        val call = PsiTreeUtil.findElementOfClassAtOffset(file, variableRange.startOffset, KtCallExpression::class.java, false)
-        val name = file.viewProvider.document.getText(variableRange)
-        return if (! KotlinNamesValidator().isIdentifier(name, file.project)) {
-            JavaRefactoringBundle.message("template.error.invalid.identifier.name")
-        } else if (call?.resolveToCall() == null) {
-            JavaRefactoringBundle.message("extract.method.error.method.conflict")
-        } else {
-            null
-        }
     }
 
     private fun findSingleCallExpression(file: KtFile, range: TextRange?): KtCallExpression? {

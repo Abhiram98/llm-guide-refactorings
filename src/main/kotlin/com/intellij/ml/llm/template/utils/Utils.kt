@@ -195,14 +195,26 @@ private fun isSelectionExtractableKotlin(
                 reason = LLMBundle.message("extract.function.code.not.extractable.message")
                 applicationResult = EFApplicationResult.FAIL
             } else {
-                ExtractionGeneratorConfiguration(
-                    analysisResult.descriptor!!,
-                    ExtractionGeneratorOptions(
-                        inTempFile = true,
-                        target = ExtractionTarget.FUNCTION,
-                        dummyName = efCandidate.functionName,
-                    )
-                ).generateDeclaration()
+                throw NotImplementedError("Not yet implemented")
+                var iDescriptor = analysisResult.descriptor!!
+//                ExtractionGeneratorConfiguration(
+//                    ExtractableCodeDescriptor(
+//                        extractionData = iDescriptor.extractionData,
+//                        suggestedNames = iDescriptor.suggestedNames,
+//                        visibility = iDescriptor.visibility,
+//                        parameters = iDescriptor.parameters,
+//                        receiverParameter = iDescriptor.receiverParameter,
+//                        typeParameters = iDescriptor.typeParameters,
+//                        replacementMap = iDescriptor.replacementMap,
+//                        controlFlow = iDescriptor.controlFlow,
+//                        returnType = iDescriptor.returnType,
+//                        originalContext = null
+//                        ),
+//                    ExtractionGeneratorOptions(
+//                        inTempFile = true,
+//                        target = ExtractionTarget.FUNCTION,
+//                    )
+//                ).generateDeclaration()
             }
 
         } catch (t: Throwable) {

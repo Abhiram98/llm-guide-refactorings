@@ -135,7 +135,7 @@ class EFCandidateFactory {
 
         var commonParent = PsiTreeUtil.findCommonParent(start, end) ?: return null
 
-        if (commonParent == start || commonParent == end || (commonParent !is PsiBlockStatement && commonParent !is PsiCodeBlock && commonParent !is PsiModifiableCodeBlock)) {
+        if (commonParent == start || commonParent == end || (commonParent !is PsiBlockStatement && commonParent !is PsiCodeBlock)) {
             start = commonParent
             end = commonParent
         }
