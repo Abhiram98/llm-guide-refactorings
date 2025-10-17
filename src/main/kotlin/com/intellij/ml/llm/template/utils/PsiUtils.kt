@@ -494,8 +494,8 @@ class PsiUtils {
             val classWithWeights = mutableListOf<Pair<PsiClass, Double>>()
 
             for (psiClass in classList) {
-                val className = psiClass.name?.toLowerCase() ?: ""
-                val fileName = psiClass.containingFile?.name?.toLowerCase() ?: ""
+                val className = psiClass.name?.lowercase() ?: ""
+                val fileName = psiClass.containingFile?.name?.lowercase() ?: ""
 
                 // Determine if the class is a utility class
                 val isUtilityClass = className.contains("util") || className.contains("utility") ||
@@ -666,7 +666,7 @@ class PsiUtils {
         }
 
         private fun tokenize(text: String): List<String> {
-            return text.split("\\s+".toRegex()).map { it.toLowerCase() }
+            return text.split("\\s+".toRegex()).map { it.lowercase() }
         }
 
         private fun termFrequency(tokens: List<String>): Map<String, Int> {
