@@ -104,7 +104,7 @@ class StringBuilderRefactoringFactory {
                 val sbConcat = ReplaceConcatenationWithStringBufferIntention()
                 WriteCommandAction.runWriteCommandAction(project,
                     Runnable {
-                        sbConcat.processIntention(psiPolyadicExpression)
+                        sbConcat.invoke(psiPolyadicExpression)
                     })
                 reverseRefactoring = getReverseRefactoringObject(project, editor, file)
             }
