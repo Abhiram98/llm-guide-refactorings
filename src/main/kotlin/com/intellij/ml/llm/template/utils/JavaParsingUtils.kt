@@ -9,8 +9,6 @@ import com.github.javaparser.ast.visitor.VoidVisitorWithDefaults
 import com.github.javaparser.resolution.TypeSolver
 import com.github.javaparser.symbolsolver.JavaSymbolSolver
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver
-import com.intellij.ml.llm.template.refactoringobjects.extractfunction.EFCandidate
-import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 import java.nio.file.Path
 
 
@@ -156,27 +154,6 @@ class JavaParsingUtils {
             return parsedResult.findAll(MethodDeclaration::class.java).size
         }
 
-
-    }
-}
-
-
-class MyExtractMethodHelper: LightPlatformCodeInsightTestCase(){
-    private var projectPath = "src/test"
-    override fun getTestDataPath(): String {
-        return projectPath
-    }
-    fun extract(fileName: String, fileText: String, startLine: Int, endLine: Int){
-        val document = configureFromFileText(fileName, fileText)
-
-        val offsetStart = document.getLineEndOffset(startLine)
-        val offsetEnd = document.getLineEndOffset(endLine)
-
-        val isItExtractable = isCandidateExtractable(
-            EFCandidate("test", offsetStart, offsetEnd, startLine, endLine),
-            editor,
-            file)
-        print(isItExtractable)
 
     }
 }

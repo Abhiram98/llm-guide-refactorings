@@ -4,7 +4,6 @@ import com.intellij.ml.llm.template.server.FindReplaceParams
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.PsiFile
-import com.intellij.testFramework.utils.io.createFile
 import java.io.File
 import kotlin.io.path.Path
 
