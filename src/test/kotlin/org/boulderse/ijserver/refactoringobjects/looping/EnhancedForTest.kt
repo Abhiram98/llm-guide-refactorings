@@ -13,7 +13,7 @@ import com.intellij.psi.util.PsiUtilBase
 import com.intellij.refactoring.suggested.startOffset
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 import com.intellij.testFramework.LightProjectDescriptor
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase.JAVA_20
+//import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase.JAVA_20
 import com.siyeh.ig.controlflow.ForLoopReplaceableByWhileInspection
 import com.siyeh.ig.migration.ForCanBeForeachInspection
 import org.jetbrains.kotlin.idea.core.moveCaret
@@ -24,9 +24,9 @@ class EnhancedForTest: LightPlatformCodeInsightTestCase() {
         return projectPath
     }
 
-    override fun getProjectDescriptor(): LightProjectDescriptor {
-        return JAVA_20
-    }
+//    override fun getProjectDescriptor(): LightProjectDescriptor {
+//        return JAVA_20
+//    }
 
     fun testEnhancedForRefactoring() {
         configureByFile("/testdata/HelloWorld.java")

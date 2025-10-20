@@ -77,7 +77,7 @@ class PullUpRefactoringTest: LightPlatformCodeInsightTestCase() {
             psiClassB,
             psiClassA,
             listOf(methodFoo).map { MemberInfo(it) }.toTypedArray(),
-            DocCommentPolicy<PsiComment>(1)
+            DocCommentPolicy(1)
         ).run()
 
 

@@ -80,7 +80,7 @@ class PushDownMethodTest: LightPlatformCodeInsightTestCase() {
 //            )
 //        pushDownProcessor.run()
 
-        val proc2 = MyPushDownProcessor(psiClassA, listOf(psiClassA.methods[0]).map { MemberInfo(it) }, DocCommentPolicy<PsiComment>(1))
+        val proc2 = MyPushDownProcessor(psiClassA, listOf(psiClassA.methods[0]).map { MemberInfo(it) }, DocCommentPolicy(1))
        runWriteAction { proc2.delegatePerformRefactoring() }
 
         val psiClassAcopy = JavaPsiFacade.getInstance(project).findClass(

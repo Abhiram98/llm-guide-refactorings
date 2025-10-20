@@ -79,8 +79,8 @@ class ExtractClassTest: LightPlatformCodeInsightTestCase() {
             file, editor, 52, PsiLocalVariable::class.java
         )
         assert(psiLiterals.isNotEmpty())
-
-        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
+        throw NotImplementedError("call introduce interface handler")
+//        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
 
         println(file.text)
 
@@ -114,9 +114,9 @@ class ExtractClassTest: LightPlatformCodeInsightTestCase() {
             file, editor, 32, PsiLiteralExpression::class.java
         )
         assert(psiLiterals.isNotEmpty())
-
-        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
-        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals2[0])
+        throw NotImplementedError("call introduce interface handler")
+//        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
+//        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals2[0])
 
         println(file.text)
 

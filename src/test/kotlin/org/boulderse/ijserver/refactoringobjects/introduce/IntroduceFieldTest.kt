@@ -6,6 +6,7 @@ import com.intellij.psi.PsiLiteralExpression
 import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiMethod
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
+import kotlin.test.todo
 
 class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
@@ -29,9 +30,9 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
             file, editor, 52, PsiLocalVariable::class.java
         )
         assert(psiLiterals.isNotEmpty())
-
-        MyIntroduceFieldHandler(project, editor, psiLocalVariables[0],
-            containingClass = (file as PsiJavaFile).classes[0]).variableToField()
+        throw NotImplementedError("call introduce interface handler")
+//        MyIntroduceFieldHandler(project, editor, psiLocalVariables[0],
+//            containingClass = (file as PsiJavaFile).classes[0]).variableToField()
 
         println(file.text)
 
@@ -65,8 +66,8 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
             file, editor, 52, PsiLocalVariable::class.java
         )
         assert(psiLiterals.isNotEmpty())
-
-        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
+        throw NotImplementedError("call introduce interface handler")
+//        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
 
         println(file.text)
 
@@ -100,9 +101,9 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
             file, editor, 32, PsiLiteralExpression::class.java
         )
         assert(psiLiterals.isNotEmpty())
-
-        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
-        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals2[0])
+        throw NotImplementedError("call introduce interface handler")
+//        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
+//        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals2[0])
 
         println(file.text)
 
