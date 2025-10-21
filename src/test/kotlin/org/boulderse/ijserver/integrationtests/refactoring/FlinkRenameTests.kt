@@ -29,15 +29,11 @@ class FlinkRenameTests {
 
 
     val flinkProject = GitHubProject.fromGithub(
-        repoRelativeUrl = "apache/flink",
-        branchName = "master")
+        repoRelativeUrl = "apache/flink")
 
     
 
-    fun Driver.renameTest(commitHash: String, oldName: String, newName: String, filePath: String, lineNum: Int? = null) {
-
-        checkout(commitHash)
-
+    fun Driver.renameTest(renameCase: RenameCase) {
         waitForIndicators(5.minutes)
 
 
@@ -46,7 +42,7 @@ class FlinkRenameTests {
         runBlocking{
             val response: HttpResponse = client.post("http://localhost:8082/open-file") {
                 contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(OpenFileParams(filePath = filePath)))
+                setBody(Json.encodeToString(OpenFileParams(filePath = renameCase.filePath)))
             }
             println("File open status status: ${response.status}")
             println("Response body: ${response.bodyAsText()}")
@@ -58,24 +54,16 @@ class FlinkRenameTests {
                 contentType(ContentType.Application.Json)
                 setBody(Json.encodeToString(
                     RenameParams(
-                        oldName = oldName,
-                        newName = newName,
-                        lineNum = lineNum
+                        oldName = renameCase.oldName,
+                        newName = renameCase.newName,
+                        lineNum = renameCase.lineNum,
+                        codeElementType = renameCase.codeElementType
                     )))
             }
             println("Rename status: ${response.status}")
             println("Response body: ${response.bodyAsText()}")
             assert(response.status.value == 200)
         }
-    }
-
-    private fun checkout(commitHash: String) {
-        val process = ProcessBuilder("git", "checkout", commitHash)
-            .directory(flinkProject.projectPath.toFile())
-            .redirectErrorStream(true)
-            .start()
-        process.waitFor()
-        assert(process.exitValue() == 0)
     }
 
 
@@ -93,13 +81,7 @@ class FlinkRenameTests {
         }.runIdeWithDriver().useDriverAndCloseIde {
             waitForIndicators(5.minutes)
             // call the extension on the active driver
-            renameTest(
-                commitHash = case.commitHash,
-                filePath = case.filePath,
-                oldName = case.oldName,
-                newName = case.newName,
-                lineNum = case.lineNum
-            )
+            renameTest(case)
         }
     }
 
@@ -122,10 +104,11 @@ class FlinkRenameTests {
             ),
             RenameCase(
                 commitHash = "32aa7973daaf70e097f247eaf5a3869b47d8e3e0",
-                filePath = "flink-runtime/src/main/java/org/apache/flink/runtime/state/filesystem/FsStateBackend.java",
-                oldName = "FsStateBackend",
-                newName = "FsStateBackend2",
-                lineNum = null
+                filePath = "flink-runtime/src/main/java/org/apache/flink/runtime/checkpoint/metadata/MetadataV3Serializer.java",
+                oldName = "deserializeStreamStateHandle",
+                newName = "deserializeStreamStateHandle2",
+                lineNum = 265,
+                codeElementType = "method"
             )
         )
     }
@@ -135,6 +118,7 @@ class FlinkRenameTests {
         val oldName: String,
         val newName: String,
         val filePath: String,
-        val lineNum: Int? = null
+        val lineNum: Int? = null,
+        val codeElementType: String? = null
     )
 }
