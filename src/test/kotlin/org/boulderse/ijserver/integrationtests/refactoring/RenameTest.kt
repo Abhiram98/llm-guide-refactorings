@@ -23,16 +23,15 @@ import org.boulderse.ijserver.server.RenameParams
 
 class RenameTest {
 
-
+    val ratpackProject = GitHubProject.fromGithub(commitHash = "9f64053dc0bb21a2d8714f4fca5ae58cbaef2a7d",
+        repoRelativeUrl = "ratpack/ratpack",
+        branchName = "master")
     @Test
     fun checkSimpleRename() {
         Starter.newContext(testName = "rename sanity",
             TestCase(
                 IdeProductProvider.IC,
-                projectInfo =
-                    GitHubProject.fromGithub(commitHash = "9f64053dc0bb21a2d8714f4fca5ae58cbaef2a7d",
-                        repoRelativeUrl = "ratpack/ratpack",
-                        branchName = "master")
+                projectInfo = ratpackProject
             )
                 .withVersion("2025.2")).apply {
             val pathToPlugin = System.getProperty("path.to.build.plugin")
