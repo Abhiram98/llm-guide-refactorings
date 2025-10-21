@@ -1,6 +1,5 @@
 package org.boulderse.ijserver.integrationtests.refactoring
 
-import com.intellij.driver.client.Driver
 import com.intellij.driver.sdk.waitForIndicators
 import com.intellij.ide.starter.driver.engine.runIdeWithDriver
 import com.intellij.ide.starter.ide.IdeProductProvider
@@ -8,64 +7,18 @@ import com.intellij.ide.starter.models.TestCase
 import com.intellij.ide.starter.plugins.PluginConfigurator
 import com.intellij.ide.starter.project.GitHubProject
 import com.intellij.ide.starter.runner.Starter
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.bodyAsText
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import org.boulderse.ijserver.server.OpenFileParams
-import org.boulderse.ijserver.server.RenameParams
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import kotlin.io.path.Path
 import kotlin.time.Duration.Companion.minutes
 
-class FlinkRenameTests {
+class FlinkRenameTests: RenameTestsBase() {
 
 
     val flinkProject = GitHubProject.fromGithub(
-        repoRelativeUrl = "apache/flink")
-
-    
-
-    fun Driver.renameTest(renameCase: RenameCase) {
-        waitForIndicators(5.minutes)
-
-
-        val client = HttpClient(CIO)
-
-        runBlocking{
-            val response: HttpResponse = client.post("http://localhost:8082/open-file") {
-                contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(OpenFileParams(filePath = renameCase.filePath)))
-            }
-            println("File open status status: ${response.status}")
-            println("Response body: ${response.bodyAsText()}")
-            assert(response.status.value == 200)
-        }
-
-        runBlocking {
-            val response: HttpResponse = client.post("http://localhost:8082/rename") {
-                contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(
-                    RenameParams(
-                        oldName = renameCase.oldName,
-                        newName = renameCase.newName,
-                        lineNum = renameCase.lineNum,
-                        codeElementType = renameCase.codeElementType
-                    )))
-            }
-            println("Rename status: ${response.status}")
-            println("Response body: ${response.bodyAsText()}")
-            assert(response.status.value == 200)
-        }
-    }
-
+        repoRelativeUrl = "apache/flink",
+        branchName = "master"
+    )
 
     @ParameterizedTest(name = "Flink rename case {index}: {0}")
     @MethodSource("renameCases")
@@ -109,16 +62,23 @@ class FlinkRenameTests {
                 newName = "deserializeStreamStateHandle2",
                 lineNum = 265,
                 codeElementType = "method"
+            ),
+            RenameCase(
+                commitHash = "afe4c79efa15902369d41ef5a6e73d79a2e7d525",
+                filePath = "flink-core/src/test/java/org/apache/flink/api/common/typeutils/TypeSerializerUpgradeTestBase.java",
+                oldName = "testDataMatcher",
+                newName = "testDataMatcherRaihan",
+                lineNum = 102,
+                codeElementType = "method"
+            ),
+            RenameCase(
+                commitHash = "afe4c79efa15902369d41ef5a6e73d79a2e7d525",
+                filePath = "flink-core/src/test/java/org/apache/flink/api/common/typeutils/TypeSerializerUpgradeTestBase.java",
+                oldName = "testDataMatcher",
+                newName = "testDataMatcherRaihan",
+                lineNum = 179,
+                codeElementType = "method"
             )
         )
     }
-
-    data class RenameCase(
-        val commitHash: String,
-        val oldName: String,
-        val newName: String,
-        val filePath: String,
-        val lineNum: Int? = null,
-        val codeElementType: String? = null
-    )
 }

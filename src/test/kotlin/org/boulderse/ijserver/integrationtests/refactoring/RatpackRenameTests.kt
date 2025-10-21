@@ -21,7 +21,7 @@ import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
 
-class RenameTest {
+class RatpackRenameTests {
 
     val ratpackProject = GitHubProject.fromGithub(commitHash = "9f64053dc0bb21a2d8714f4fca5ae58cbaef2a7d",
         repoRelativeUrl = "ratpack/ratpack",
