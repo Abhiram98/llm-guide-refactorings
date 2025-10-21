@@ -1,6 +1,7 @@
 
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 fun properties(key: String) = project.findProperty(key).toString()
 
@@ -37,18 +38,23 @@ repositories {
 dependencies {
     intellijPlatform {
         create(properties("platformType"), properties("platformVersion"))
-        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
+        testFramework(TestFrameworkType.Platform)
+        testFramework(TestFrameworkType.Starter)
 
         // Add plugin dependencies for compilation here, example:
         properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty)
             .forEach { bundledPlugin(it) }
     }
+    
+    // Force Jackson version to match IntelliJ's test framework
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.19.0"))
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.0")
+    
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mongodb:mongodb-driver-sync:4.9.0") // added this line for MongoDB driver
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
-//    2.162
     implementation("ai.grazie.api:api-gateway-client-jvm:0.3.99"){
         exclude("org.slf4j", "slf4j-api")
     }
@@ -60,9 +66,8 @@ dependencies {
     implementation ("com.github.tsantalis:refactoring-miner:3.0.10")
 
     implementation("dev.langchain4j:langchain4j:0.33.0")
-    implementation("dev.langchain4j:langchain4j-ollama:0.33.0")
+    implementation("dev.langchain4j:langchain4j-ollama:0.35.0")
     implementation("dev.langchain4j:langchain4j-open-ai:0.33.0")
-//    implementation("org.testcontainers:testcontainers:1.19.1")
     implementation("dev.langchain4j:langchain4j-voyage-ai:0.35.0")
 
     implementation("org.eclipse.jgit:org.eclipse.jgit:7.2.1.202505142326-r")
@@ -76,28 +81,25 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation-jvm:3.0.3")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:3.0.3")
     implementation("io.ktor:ktor-server-netty-jvm:3.0.3")
-//    implementation("ch.qos.logback:logback-classic")
     implementation("io.ktor:ktor-server-config-yaml:3.0.3")
-//    implementation("ai.grazie.agents:code-agents:0.3.122")
     implementation("ai.jetbrains.code.agents:code-agents-core:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-core-tools:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-tools-registry:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-client:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-daemon:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-executable:1.0.0-beta.25+0.4.12")
-//    implementation("ai.jetbrains.code.files:code-files-jvm:1.0.0-beta.25+0.4.12")
-//    implementation("ai.jetbrains.code.files:code-files-model:1.0.0-beta.25+0.4.12")
-//    implementation("org.jetbrains:ij-parsing-core:0.3.175")
 
 
 
     testImplementation("io.ktor:ktor-client-content-negotiation:3.0.3")
     testImplementation("io.ktor:ktor-server-test-host-jvm")
-//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:3.0.3")
     testImplementation("com.jayway.jsonpath:json-path:2.9.0")
 
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-server-test-host-jvm:3.0.3")
+
+    testImplementation("org.kodein.di:kodein-di-jvm:7.20.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.1")
 }
 
 intellijPlatform {
@@ -150,6 +152,12 @@ tasks {
         archiveFileName.set("ij-mcp-server-plugin.zip")
     }
 
+}
+
+tasks.test {
+    dependsOn("buildPlugin")
+    systemProperty("path.to.build.plugin", tasks.buildPlugin.get().archiveFile.get().asFile.absolutePath)
+    useJUnitPlatform()
 }
 
 kotlin {
