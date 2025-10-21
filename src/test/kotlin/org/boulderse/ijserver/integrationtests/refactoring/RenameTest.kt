@@ -17,6 +17,9 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import org.boulderse.ijserver.server.OpenFileParams
+import org.boulderse.ijserver.server.RenameParams
 
 class RenameTest {
 
@@ -42,7 +45,11 @@ class RenameTest {
             runBlocking{
                 val response: HttpResponse = client.post("http://localhost:8082/open-file") {
                     contentType(ContentType.Application.Json)
-                    setBody("""{"rel_file_path": "ratpack-core/src/main/java/ratpack/override/UserRegistryOverrides.java"}""")
+                    setBody(
+                        Json.encodeToString(
+                            OpenFileParams(filePath = "ratpack-core/src/main/java/ratpack/override/UserRegistryOverrides.java")
+                        )
+                    )
                 }
                 println("Response status: ${response.status}")
                 println("Response body: ${response.bodyAsText()}")
@@ -51,7 +58,7 @@ class RenameTest {
             runBlocking {
                 val response: HttpResponse = client.post("http://localhost:8082/rename") {
                     contentType(ContentType.Application.Json)
-                    setBody("""{"old_name": "UserRegistryOverrides", "new_name": "UserRegistryImpositions"}""")
+                    setBody(Json.encodeToString(RenameParams(oldName = "UserRegistryOverrides", newName = "UserRegistryImpositions")))
                 }
                 println("Response status: ${response.status}")
                 println("Response body: ${response.bodyAsText()}")
