@@ -33,7 +33,6 @@ class FlinkRenameTests: RenameTestsBase() {
             PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
         }.runIdeWithDriver().useDriverAndCloseIde {
             waitForIndicators(5.minutes)
-            // call the extension on the active driver
             renameTest(case)
         }
     }
