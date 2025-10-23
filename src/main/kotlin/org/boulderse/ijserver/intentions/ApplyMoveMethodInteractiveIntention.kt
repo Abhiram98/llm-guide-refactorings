@@ -2,23 +2,16 @@ package org.boulderse.ijserver.intentions
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import com.intellij.codeInsight.unwrap.ScopeHighlighter
-import com.intellij.icons.AllIcons
 import com.intellij.lang.jvm.JvmModifier
 import org.boulderse.ijserver.LLMBundle
 import org.boulderse.ijserver.models.LLMBaseResponse
 import org.boulderse.ijserver.models.sendChatRequest
 import org.boulderse.ijserver.prompts.MethodPromptBase
 import org.boulderse.ijserver.prompts.MoveMethodRefactoringPrompt
-import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.refactoringobjects.movemethod.MoveMethodFactory
 import org.boulderse.ijserver.settings.RefAgentSettingsManager
 import org.boulderse.ijserver.showEFNotification
-import org.boulderse.ijserver.telemetry.EFTelemetryDataElapsedTimeNotificationPayload
-import org.boulderse.ijserver.telemetry.TelemetryDataAction
-import org.boulderse.ijserver.telemetry.TelemetryElapsedTimeObserver
 import org.boulderse.ijserver.toolwindow.logViewer
-import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
 import org.boulderse.ijserver.utils.*
 import org.boulderse.ijserver.utils.PsiUtils.Companion.computeCosineSimilarity
 import com.intellij.notification.NotificationType
@@ -27,19 +20,10 @@ import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.popup.IconButton
-import com.intellij.openapi.ui.popup.JBPopupFactory
-import com.intellij.openapi.ui.popup.JBPopupListener
-import com.intellij.openapi.ui.popup.LightweightWindowEvent
-import com.intellij.openapi.util.NlsSafe
 import com.intellij.psi.*
-import com.intellij.ui.awt.RelativePoint
 import dev.langchain4j.data.message.ChatMessage
-import dev.langchain4j.model.voyageai.VoyageAiEmbeddingModelName
-import dev.langchain4j.store.embedding.CosineSimilarity
-import java.awt.Point
-import java.awt.Rectangle
-import java.util.concurrent.atomic.AtomicReference
+import org.boulderse.ijserver.telemetry.sendTelemetryData
+import org.boulderse.ijserver.ui.showRefactoringOptionsPopup
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
 
@@ -85,7 +69,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
             e.printStackTrace()
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
             telemetryDataManager.setRefactoringObjects(emptyList())
-            sendTelemetryData()
+            sendTelemetryData(this.telemetryDataManager)
         }
     }
     private fun invokeMoveMethodPlugin(project: Project, promptIterator: Iterator<MutableList<ChatMessage>>, editor: Editor, file: PsiFile) {
@@ -131,7 +115,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                     NotificationType.INFORMATION
                 )
             }
-            sendTelemetryData()
+            sendTelemetryData(this.telemetryDataManager)
         } else {
             log2fileAndViewer("Prioritising suggestions...", logger)
 //            val priority = getSuggestionPriority(methodCompatibilitySuggestions, project)
@@ -148,7 +132,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                             NotificationType.INFORMATION
                         )
                     }
-                    sendTelemetryData()
+                    sendTelemetryData(this.telemetryDataManager)
                 } else {
                     createRefactoringObjectsAndShowSuggestions(
                         priority.subList(
@@ -168,7 +152,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                         NotificationType.INFORMATION
                     )
                 }
-                sendTelemetryData()
+                sendTelemetryData(this.telemetryDataManager)
             }
         }
 
@@ -244,7 +228,7 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                         LLMBundle.message("notification.extract.function.with.llm.no.extractable.candidates.message"),
                         NotificationType.INFORMATION
                     )
-                    sendTelemetryData()
+                    sendTelemetryData(this.telemetryDataManager)
                 }
                 return
             }
@@ -256,79 +240,22 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
                 )
             )
             if(showSuggestions) {
-                invokeLater { showRefactoringOptionsPopup(currentProject, currentEditor, currentFile, refObjs, codeTransformer)}
+                invokeLater {
+                    showRefactoringOptionsPopup(
+                        currentProject,
+                        currentEditor,
+                        currentFile,
+                        refObjs,
+                        codeTransformer,
+                        this.telemetryDataManager,
+                        LLMBundle.message("ef.candidates.popup.extract.function.button.title")
+                    )
+                }
             }
             else
-                sendTelemetryData()
+                sendTelemetryData(this.telemetryDataManager)
 
 
-    }
-    fun showRefactoringOptionsPopup(
-        project: Project,
-        editor: Editor,
-        file: PsiFile,
-        candidates: List<AbstractRefactoring>,
-        codeTransformer: CodeTransformer
-    ) {
-        val highlighter = AtomicReference(ScopeHighlighter(editor))
-        val efPanel = RefactoringSuggestionsPanel(
-            project = project,
-            editor = editor,
-            file = file,
-            candidates = candidates,
-            codeTransformer = codeTransformer,
-            highlighter = highlighter,
-            efTelemetryDataManager = telemetryDataManager,
-            button_name = LLMBundle.message("ef.candidates.popup.extract.function.button.title")
-        )
-        efPanel.initTable()
-        val elapsedTimeTelemetryDataObserver = TelemetryElapsedTimeObserver()
-        efPanel.addObserver(elapsedTimeTelemetryDataObserver)
-        val panel = efPanel.createPanel()
-
-        val efPopup =
-            JBPopupFactory.getInstance()
-                .createComponentPopupBuilder(panel, efPanel.myRefactoringCandidateTable)
-                .setRequestFocus(true)
-                .setTitle(LLMBundle.message("ef.candidates.popup.title"))
-                .setResizable(true)
-                .setMovable(true)
-                .setCancelOnClickOutside(false)
-                .setCancelButton(IconButton("Close", AllIcons.Actions.Close))
-                .setCancelOnOtherWindowOpen(false)
-                .setCancelOnWindowDeactivation(false)
-                .createPopup()
-        // Create the popup
-
-        // Add onClosed listener
-        efPopup.addListener(object : JBPopupListener {
-            override fun onClosed(event: LightweightWindowEvent) {
-                elapsedTimeTelemetryDataObserver.update(
-                    EFNotification(
-                        EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.STOP, 0)
-                    )
-                )
-                elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager)
-                highlighter.getAndSet(null).dropHighlight()
-                sendTelemetryData()
-            }
-
-            override fun beforeShown(event: LightweightWindowEvent) {
-                super.beforeShown(event)
-                elapsedTimeTelemetryDataObserver.update(
-                    EFNotification(
-                        EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.START, 0)
-                    )
-                )
-            }
-        })
-
-        // set the popup as delegate to the Extract Function panel
-        efPanel.setDelegatePopup(efPopup)
-
-        // Show the popup at the top right corner of the current editor
-        val contentComponent = editor.contentComponent
-        efPopup.show(RelativePoint.getNorthEastOf(contentComponent))
     }
 
     private fun getSuggestionPriority(

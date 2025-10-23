@@ -196,13 +196,6 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
     override fun startInWriteAction(): Boolean = false
 
 
-    open fun sendTelemetryData() {
-        val efTelemetryData = telemetryDataManager.getData()
-        if (efTelemetryData != null) {
-            TelemetryDataObserver().update(EFNotification(efTelemetryData))
-        }
-    }
-
     fun buildProcessingTimeTelemetryData(llmResponseTime: Long, pluginProcessingTime: Long) {
         val llmResponseTimeMillis = TimeUnit.NANOSECONDS.toMillis(llmResponseTime)
         val pluginProcessingTimeMillis = TimeUnit.NANOSECONDS.toMillis(pluginProcessingTime)

@@ -1,6 +1,5 @@
 package org.boulderse.ijserver.ui
 
-import com.intellij.codeInsight.unwrap.ScopeHighlighter
 import org.boulderse.ijserver.LLMBundle
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.showEFNotification
@@ -13,7 +12,6 @@ import com.intellij.notification.NotificationType
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
-import java.util.concurrent.atomic.AtomicReference
 
 class CompletedRefactoringsPanel(
     project: Project,
@@ -21,13 +19,12 @@ class CompletedRefactoringsPanel(
     file: PsiFile,
     candidates: List<AbstractRefactoring>,
     codeTransformer: CodeTransformer,
-    highlighter: AtomicReference<ScopeHighlighter>,
     efTelemetryDataManager: EFTelemetryDataManager,
     var reverseRefactorings: List<AbstractRefactoring?> = getReverseObjects(candidates, project, editor, file)
 ) : RefactoringSuggestionsPanel(
     project, editor,
     file,
-    candidates, codeTransformer, highlighter, efTelemetryDataManager, LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title")
+    candidates, codeTransformer, efTelemetryDataManager, LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title")
 ) {
 
     companion object{

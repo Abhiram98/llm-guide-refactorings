@@ -66,7 +66,7 @@ open class ApplySuggestRefactoringInteractiveIntention(
             )
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
             buildProcessingTimeTelemetryData(llmResponseTime, System.nanoTime() - now)
-            sendTelemetryData()
+            sendTelemetryData(this.telemetryDataManager)
         } else {
             val rawSuggestions = AbstractRefactoringValidator.getRawSuggestions(llmResponse.text)
             if (rawSuggestions!=null) {
@@ -95,7 +95,7 @@ open class ApplySuggestRefactoringInteractiveIntention(
                         LLMBundle.message("notification.extract.function.with.llm.no.extractable.candidates.message"),
                         NotificationType.INFORMATION
                     )
-                    sendTelemetryData()
+                    sendTelemetryData(this.telemetryDataManager)
                 } else {
 //                refactoringObjectsCache.get(functionSrc)?:refactoringObjectsCache.put(functionSrc, validRefactoringCandidates)
                     showRefactoringOptionsPopup(
@@ -113,14 +113,12 @@ open class ApplySuggestRefactoringInteractiveIntention(
         candidates: List<AbstractRefactoring>,
         codeTransformer: CodeTransformer
     ) {
-        val highlighter = AtomicReference(ScopeHighlighter(editor))
         val efPanel = RefactoringSuggestionsPanel(
             project = project,
             editor = editor,
             file = file,
             candidates = candidates,
             codeTransformer = codeTransformer,
-            highlighter = highlighter,
             efTelemetryDataManager = telemetryDataManager,
             button_name = LLMBundle.message("ef.candidates.popup.extract.function.button.title")
         )
@@ -149,8 +147,8 @@ open class ApplySuggestRefactoringInteractiveIntention(
                     )
                 )
                 elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager)
-                highlighter.getAndSet(null).dropHighlight()
-                sendTelemetryData()
+                AtomicReference(ScopeHighlighter(editor)).getAndSet(null).dropHighlight()
+                sendTelemetryData(telemetryDataManager)
             }
 
             override fun beforeShown(event: LightweightWindowEvent) {

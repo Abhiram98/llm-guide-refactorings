@@ -371,7 +371,6 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
             file = file,
             candidates = candidates,
             codeTransformer = codeTransformer,
-            highlighter = highlighter,
             efTelemetryDataManager = telemetryDataManager
         )
         efPanel.initTable()

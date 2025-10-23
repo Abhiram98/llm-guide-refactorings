@@ -14,6 +14,7 @@ import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.util.elementType
+import org.boulderse.ijserver.utils.EFNotification
 import org.jetbrains.kotlin.psi.psiUtil.elementsInRange
 import java.util.*
 
@@ -583,5 +584,14 @@ class EFTelemetryDataUtils {
             }
             return result
         }
+    }
+}
+
+fun sendTelemetryData(
+    telemetryDataManager: EFTelemetryDataManager
+                      ) {
+    val efTelemetryData = telemetryDataManager.getData()
+    if (efTelemetryData != null) {
+        TelemetryDataObserver().update(EFNotification(efTelemetryData))
     }
 }

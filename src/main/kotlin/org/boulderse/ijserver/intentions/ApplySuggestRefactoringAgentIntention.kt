@@ -244,7 +244,6 @@ open class ApplySuggestRefactoringAgentIntention(
             file = file,
             candidates = candidates,
             codeTransformer = codeTransformer,
-            highlighter = highlighter,
             efTelemetryDataManager = telemetryDataManager
         )
         efPanel.initTable()
@@ -341,7 +340,7 @@ open class ApplySuggestRefactoringAgentIntention(
 
 
 
-    override fun sendTelemetryData() {
+    fun sendTelemetryData() {
         val agenticTelemetry = AgenticTelemetry.createFromSessionIds(
             telemetryIds, telemetryDataManager
         )

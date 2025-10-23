@@ -1,6 +1,7 @@
 package org.boulderse.ijserver.ui
 
 import com.intellij.codeInsight.unwrap.ScopeHighlighter
+import com.intellij.icons.AllIcons
 import org.boulderse.ijserver.LLMBundle
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.telemetry.EFTelemetryDataElapsedTimeNotificationPayload
@@ -18,10 +19,15 @@ import com.intellij.openapi.editor.ScrollType
 import com.intellij.openapi.keymap.KeymapUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.ComboBox
+import com.intellij.openapi.ui.popup.IconButton
 import com.intellij.openapi.ui.popup.JBPopup
+import com.intellij.openapi.ui.popup.JBPopupFactory
+import com.intellij.openapi.ui.popup.JBPopupListener
+import com.intellij.openapi.ui.popup.LightweightWindowEvent
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
+import com.intellij.ui.awt.RelativePoint
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.dsl.builder.AlignX
@@ -29,6 +35,8 @@ import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.JBDimension
 import com.intellij.util.ui.JBUI
+import org.boulderse.ijserver.telemetry.TelemetryElapsedTimeObserver
+import org.boulderse.ijserver.telemetry.sendTelemetryData
 import java.awt.Dimension
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
@@ -45,7 +53,6 @@ open class RefactoringSuggestionsPanel(
     file: PsiFile,
     candidates: List<AbstractRefactoring>,
     codeTransformer: CodeTransformer,
-    highlighter: AtomicReference<ScopeHighlighter>,
     efTelemetryDataManager: EFTelemetryDataManager? = null,
     val button_name: String
 ) : Observable() {
@@ -58,7 +65,7 @@ open class RefactoringSuggestionsPanel(
     var myPopup: JBPopup? = null
     val myCodeTransformer = codeTransformer
     val myFile = file
-    val myHighlighter = highlighter
+    val myHighlighter = AtomicReference(ScopeHighlighter(editor))
     val myEFTelemetryDataManager = efTelemetryDataManager
     private val logger = Logger.getInstance("#com.intellij.ml.llm")
     var prevSelectedCandidateIndex = 0
@@ -343,4 +350,73 @@ open class RefactoringSuggestionsPanel(
     open fun getEndOffset(index: Int): Int{
         return myCandidates[index].getEndOffset()
     }
+}
+
+fun showRefactoringOptionsPopup(
+    project: Project,
+    editor: Editor,
+    file: PsiFile,
+    candidates: List<AbstractRefactoring>,
+    codeTransformer: CodeTransformer,
+    telemetryDataManager: EFTelemetryDataManager,
+    buttonName: String
+) {
+    val efPanel = RefactoringSuggestionsPanel(
+        project = project,
+        editor = editor,
+        file = file,
+        candidates = candidates,
+        codeTransformer = codeTransformer,
+        efTelemetryDataManager = telemetryDataManager,
+        button_name = buttonName
+    )
+    efPanel.initTable()
+    val elapsedTimeTelemetryDataObserver = TelemetryElapsedTimeObserver()
+    efPanel.addObserver(elapsedTimeTelemetryDataObserver)
+    val panel = efPanel.createPanel()
+
+    val efPopup =
+        JBPopupFactory.getInstance()
+            .createComponentPopupBuilder(panel, efPanel.myRefactoringCandidateTable)
+            .setRequestFocus(true)
+            .setTitle(LLMBundle.message("ef.candidates.popup.title"))
+            .setResizable(true)
+            .setMovable(true)
+            .setCancelOnClickOutside(false)
+            .setCancelButton(IconButton("Close", AllIcons.Actions.Close))
+            .setCancelOnOtherWindowOpen(false)
+            .setCancelOnWindowDeactivation(false)
+            .createPopup()
+    // Create the popup
+
+    // Add onClosed listener
+    efPopup.addListener(object : JBPopupListener {
+        override fun onClosed(event: LightweightWindowEvent
+                              ) {
+            elapsedTimeTelemetryDataObserver.update(
+                EFNotification(
+                    EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.STOP, 0)
+                )
+            )
+            elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager)
+            AtomicReference(ScopeHighlighter(editor)).getAndSet(null).dropHighlight()
+            sendTelemetryData(telemetryDataManager)
+        }
+
+        override fun beforeShown(event: LightweightWindowEvent) {
+            super.beforeShown(event)
+            elapsedTimeTelemetryDataObserver.update(
+                EFNotification(
+                    EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.START, 0)
+                )
+            )
+        }
+    })
+
+    // set the popup as delegate to the Extract Function panel
+    efPanel.setDelegatePopup(efPopup)
+
+    // Show the popup at the top right corner of the current editor
+    val contentComponent = editor.contentComponent
+    efPopup.show(RelativePoint.getNorthEastOf(contentComponent))
 }
