@@ -45,7 +45,7 @@ class ReviewRoutes(private val routing: Routing,
              invokeLater {
                  panel.createAndShowPopup()
              }
-             panel.waitForClose()
+             panel.waitAndClose()
 
              val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
              call.respond(HttpStatusCode.OK,

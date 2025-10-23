@@ -16,10 +16,7 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.LogicalPosition
 import com.intellij.openapi.editor.ScrollType
 import com.intellij.openapi.keymap.KeymapUtil
-import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
-import com.intellij.openapi.progress.Task
-import com.intellij.openapi.progress.impl.BackgroundableProcessIndicator
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.popup.IconButton
@@ -38,7 +35,8 @@ import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.JBDimension
 import com.intellij.util.ui.JBUI
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.withTimeoutOrNull
 import org.boulderse.ijserver.telemetry.TelemetryElapsedTimeObserver
 import org.boulderse.ijserver.telemetry.sendTelemetryData
 import java.awt.Dimension
@@ -49,6 +47,7 @@ import javax.swing.JComponent
 import javax.swing.KeyStroke
 import javax.swing.ListSelectionModel
 import javax.swing.table.DefaultTableModel
+import kotlin.time.Duration.Companion.minutes
 
 
 open class RefactoringSuggestionsPanel(
@@ -81,7 +80,7 @@ open class RefactoringSuggestionsPanel(
         "Helpful",
         "Very Helpful"
     )
-    var isClosed = false
+    val closed = CompletableDeferred<Boolean>()
     val ratingsBox = ComboBox(ratingOptions)
     private var resetRating: Boolean = false
     private lateinit var refactoringDescriptionPane: JBScrollPane
@@ -287,13 +286,12 @@ open class RefactoringSuggestionsPanel(
             )
             addSelectionToTelemetryData(index)
             val refObj = myCandidates[index]
-            val thisProject = myProject
-            val task = object : Task.Backgroundable(myProject, "Performing refactoring") {
-                override fun run(indicator: ProgressIndicator) {
-                    refObj.performRefactoring(thisProject, myEditor, myFile)
-                }
-            }
-            ProgressManager.getInstance().runProcessWithProgressAsynchronously(task, BackgroundableProcessIndicator(task))
+            ProgressManager.getInstance().runProcessWithProgressSynchronously(
+                { refObj.performRefactoring(myProject, myEditor, myFile) },
+                "Performing Refactoring",
+                true,
+                myProject
+                )
             myHighlighter.get().dropHighlight()
             refreshCandidates(index, "COMPLETED")
             myPopup?.cancel()
@@ -365,13 +363,10 @@ open class RefactoringSuggestionsPanel(
         return myCandidates[index].getEndOffset()
     }
 
-    suspend fun waitForClose(): Boolean{
-        var count = 100
-        while(!isClosed && count>0){
-            delay(100)
-            count -= 1
-        }
-        return isClosed
+    suspend fun waitAndClose(): Boolean{
+        return withTimeoutOrNull(5.minutes)
+            {closed.await()} ?:
+            throw Exception("User did not review the suggestion within 5 minutes")
     }
 
     fun createAndShowPopup() {
@@ -408,7 +403,7 @@ open class RefactoringSuggestionsPanel(
                 myEFTelemetryDataManager?.let { elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(it) }
                 myHighlighter.get().dropHighlight()
                 myEFTelemetryDataManager?.let {  sendTelemetryData(it) }
-                isClosed = true
+                closed.complete(true)
             }
 
             override fun beforeShown(event: LightweightWindowEvent) {
