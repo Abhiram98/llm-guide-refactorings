@@ -243,7 +243,6 @@ open class ApplySuggestRefactoringAgentIntention(
             editor = editor,
             file = file,
             candidates = candidates,
-            codeTransformer = codeTransformer,
             efTelemetryDataManager = telemetryDataManager
         )
         efPanel.initTable()

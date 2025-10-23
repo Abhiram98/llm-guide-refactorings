@@ -23,19 +23,19 @@ data class RefTelemetryData(
     var id: String,
 ) {
     @SerializedName("hostFunctionTelemetryData")
-    lateinit var hostFunctionTelemetryData: HostFunctionTelemetryData
+    var hostFunctionTelemetryData: HostFunctionTelemetryData? = null
 
     @SerializedName("candidatesTelemetryData")
-    lateinit var candidatesTelemetryData: RefCandidatesTelemetryData
+    var candidatesTelemetryData: RefCandidatesTelemetryData? = null
 
     @SerializedName("userSelectionTelemetryData")
-    lateinit var userSelectionTelemetryData: EFUserSelectionTelemetryData
+    var userSelectionTelemetryData: EFUserSelectionTelemetryData? = null
 
     @SerializedName("elapsedTime")
-    lateinit var elapsedTime: List<CandidateElapsedTimeTelemetryData>
+    var elapsedTime: List<CandidateElapsedTimeTelemetryData>? = null
 
     @SerializedName("processingTime")
-    lateinit var processingTime: EFTelemetryDataProcessingTime
+    var processingTime: EFTelemetryDataProcessingTime? = null
 
     @SerializedName("iterationData")
     var iterationData: MutableList<MoveMethodIterationData> = mutableListOf()
@@ -44,13 +44,13 @@ data class RefTelemetryData(
     var methodCompatibility: MutableMap<String, Pair<ApplyMoveMethodInteractiveIntention.MoveMethodSuggestion, Double>> = mutableMapOf()
 
     @SerializedName("llmMethodPriority")
-    lateinit var llmPriority: LlmMovePriority
+    var llmPriority: LlmMovePriority? = null
 
     @SerializedName("targetClassMap")
     var targetClassMap: MutableMap<String, TargetClass4Method> = mutableMapOf()
 
     @Transient
-    lateinit var refactoringObjects: List<AbstractRefactoring>
+    var refactoringObjects: List<AbstractRefactoring>? = null
 }
 
 data class HostFunctionTelemetryData(
@@ -324,7 +324,7 @@ class EFTelemetryDataManager {
     }
 
     private fun processAbstractRefactorings(refTelemetryData: RefTelemetryData) {
-        val objs = refTelemetryData.refactoringObjects.map { it ->
+        val objs = refTelemetryData.refactoringObjects!!.map { it ->
             RefCandidateTelemetryData(
                 it.startLoc, it.endLoc,
                 it::class.simpleName.toString(),

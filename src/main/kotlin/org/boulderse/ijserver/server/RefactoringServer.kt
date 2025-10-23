@@ -5,7 +5,6 @@ import com.intellij.analysis.AnalysisScope
 import com.intellij.ide.impl.OpenProjectTask
 import com.intellij.ide.impl.ProjectUtil
 import org.boulderse.ijserver.agents.RefactoringTools
-import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.refactoringobjects.inspection.IdeInspection
 import org.boulderse.ijserver.refactoringobjects.change_signature.ChangeSignatureRefactoring
 import org.boulderse.ijserver.refactoringobjects.change_signature.IntroduceParamObject
@@ -72,6 +71,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.*
+import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
 import org.boulderse.ijserver.server.basic.IndexRoutes
 import org.boulderse.ijserver.server.review.ReviewRoutes
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
@@ -167,8 +167,15 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 }
 
                 val match = formRenameObject(
-                    RenameParams(oldName = params.name, newName = params.name+"X", lineNum = params.lineNum, codeElementType = params.codeElementType),
-                    useFile = matchedFile
+                    RenameParams(
+                        oldName = params.name,
+                        newName = params.name + "X",
+                        lineNum = params.lineNum,
+                        codeElementType = params.codeElementType
+                    ),
+                    project,
+                    editor!!,
+                    matchedFile ?: file!!
                 )
                 if (match!=null){
 
@@ -471,7 +478,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     if (sanityChecks(params)) return@post
 
-                    val renameObject = formRenameObject(params)
+                    val renameObject = formRenameObject(params, project, editor!!, file!!)
 
 
                     if (renameObject==null){
@@ -519,7 +526,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
 
                     if (sanityChecks(params)) return@post
                     // Call IJ rename API here.
-                    val renameObject = formRenameObject(params)
+                    val renameObject = formRenameObject(params, project, editor!!, file!!)
                     if (renameObject==null){
                         responseToRenameWithMessage(params)
                         return@post
@@ -1453,7 +1460,7 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
                 print("trying to do data flow")
                 val params = call.receive<RenameParams>()
                 println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
-                val renameObj = formRenameObject(params)
+                val renameObj = formRenameObject(params, project, editor!!, file!!)
                 if (renameObj==null){
                     call.respond(HttpStatusCode.BadRequest)
                     return@post
@@ -1507,45 +1514,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             )
         }
         return true
-    }
-
-    private fun formRenameObject(params: RenameParams, useFile:PsiFile?=null): AbstractRefactoring? {
-        val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
-            project, editor!!, useFile?:file!!, params.oldName, params.newName
-        )
-        if (renameObjectRaw.size==1)
-            return renameObjectRaw[0]
-        if (renameObjectRaw.isEmpty())
-            return null
-
-        // there are multiple elements which match that name in the file, need to find the right one.
-        // filter by element type
-        val elementsToInspect = if (params.codeElementType!=null) {
-            val filtered = renameObjectRaw.filter {
-                PsiUtils.isCodeElementType(
-                    (it as RenameVariable).oldVarPsi, params.codeElementType
-                )
-            }
-            if (filtered.size==1)
-                return filtered[0]
-            filtered.ifEmpty {
-                renameObjectRaw
-            }
-        } else{renameObjectRaw}
-
-        // filter by line number.
-        if(params.lineNum!=null){
-            val filtered = elementsToInspect.filter { it.startLoc == params.lineNum }
-            return if(filtered.size==1) {
-                filtered[0]
-            } else {
-                // return the best match
-                elementsToInspect.sortedBy { abs(it.startLoc-params.lineNum) }[0]
-            }
-        }
-
-        // return the first one because we have no line number
-        return elementsToInspect[0]
     }
 
     private suspend fun RoutingContext.sanityChecks(params: RenameParams): Boolean {

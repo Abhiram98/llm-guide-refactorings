@@ -99,7 +99,7 @@ open class ApplySuggestRefactoringInteractiveIntention(
                 } else {
 //                refactoringObjectsCache.get(functionSrc)?:refactoringObjectsCache.put(functionSrc, validRefactoringCandidates)
                     showRefactoringOptionsPopup(
-                        project, editor, file, validRefactoringCandidates, codeTransformer,
+                        project, editor, file, validRefactoringCandidates,
                     )
                 }
             }
@@ -110,15 +110,13 @@ open class ApplySuggestRefactoringInteractiveIntention(
         project: Project,
         editor: Editor,
         file: PsiFile,
-        candidates: List<AbstractRefactoring>,
-        codeTransformer: CodeTransformer
+        candidates: List<AbstractRefactoring>
     ) {
         val efPanel = RefactoringSuggestionsPanel(
             project = project,
             editor = editor,
             file = file,
             candidates = candidates,
-            codeTransformer = codeTransformer,
             efTelemetryDataManager = telemetryDataManager,
             button_name = LLMBundle.message("ef.candidates.popup.extract.function.button.title")
         )

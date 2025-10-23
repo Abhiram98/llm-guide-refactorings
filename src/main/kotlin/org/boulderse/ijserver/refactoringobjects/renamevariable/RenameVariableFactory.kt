@@ -13,13 +13,10 @@ import com.intellij.psi.PsiCompiledElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
-import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
-import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
+import org.boulderse.ijserver.server.RenameParams
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
-import org.jetbrains.kotlin.idea.hierarchy.overrides.isOverrideHierarchyElement
-import org.jetbrains.kotlin.idea.search.declarationsSearch.forEachOverridingMethod
 import org.jetbrains.kotlin.psi.psiUtil.getChildOfType
-import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
+import kotlin.math.abs
 
 class RenameVariableFactory {
     companion object: MyRefactoringFactory {
@@ -200,4 +197,48 @@ class RenameVariableFactory {
     }
 
 
+}
+
+fun formRenameObject(
+    params: RenameParams,
+    project: Project,
+    editor: Editor,
+    file: PsiFile
+): AbstractRefactoring? {
+    val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
+        project, editor, file, params.oldName, params.newName
+    )
+    if (renameObjectRaw.size==1)
+        return renameObjectRaw[0]
+    if (renameObjectRaw.isEmpty())
+        return null
+
+    // there are multiple elements which match that name in the file, need to find the right one.
+    // filter by element type
+    val elementsToInspect = if (params.codeElementType!=null) {
+        val filtered = renameObjectRaw.filter {
+            PsiUtils.isCodeElementType(
+                (it as RenameVariable).oldVarPsi, params.codeElementType
+            )
+        }
+        if (filtered.size==1)
+            return filtered[0]
+        filtered.ifEmpty {
+            renameObjectRaw
+        }
+    } else{renameObjectRaw}
+
+    // filter by line number.
+    if(params.lineNum!=null){
+        val filtered = elementsToInspect.filter { it.startLoc == params.lineNum }
+        return if(filtered.size==1) {
+            filtered[0]
+        } else {
+            // return the best match
+            elementsToInspect.sortedBy { abs(it.startLoc - params.lineNum) }[0]
+        }
+    }
+
+    // return the first one because we have no line number
+    return elementsToInspect[0]
 }

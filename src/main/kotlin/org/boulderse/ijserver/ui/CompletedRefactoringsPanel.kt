@@ -6,7 +6,6 @@ import org.boulderse.ijserver.showEFNotification
 import org.boulderse.ijserver.telemetry.EFTelemetryDataElapsedTimeNotificationPayload
 import org.boulderse.ijserver.telemetry.EFTelemetryDataManager
 import org.boulderse.ijserver.telemetry.TelemetryDataAction
-import org.boulderse.ijserver.utils.CodeTransformer
 import org.boulderse.ijserver.utils.EFNotification
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.editor.Editor
@@ -18,13 +17,12 @@ class CompletedRefactoringsPanel(
     editor: Editor,
     file: PsiFile,
     candidates: List<AbstractRefactoring>,
-    codeTransformer: CodeTransformer,
     efTelemetryDataManager: EFTelemetryDataManager,
     var reverseRefactorings: List<AbstractRefactoring?> = getReverseObjects(candidates, project, editor, file)
 ) : RefactoringSuggestionsPanel(
     project, editor,
     file,
-    candidates, codeTransformer, efTelemetryDataManager, LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title")
+    candidates, efTelemetryDataManager, LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title")
 ) {
 
     companion object{

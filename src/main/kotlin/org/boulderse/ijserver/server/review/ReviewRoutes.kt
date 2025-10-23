@@ -1,5 +1,6 @@
 package org.boulderse.ijserver.server.review
 
+import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 import com.intellij.openapi.editor.Editor
@@ -10,10 +11,9 @@ import io.ktor.server.routing.Routing
 import io.ktor.server.routing.post
 import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
+import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
 import org.boulderse.ijserver.server.RenameParams
-import org.boulderse.ijserver.telemetry.EFTelemetryDataManager
-import org.boulderse.ijserver.ui.showRefactoringOptionsPopup
-import org.boulderse.ijserver.utils.CodeTransformer
+import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
 
 
 class ReviewRoutes(private val routing: Routing,
@@ -26,23 +26,28 @@ class ReviewRoutes(private val routing: Routing,
              // This API expects the renames to be valid. Invalid renames may cause unexpected behavior
              println("Received review")
              val renamesToReview = call.receive<List<RenameParams>>()
-             // todo: create the refactoring objects.
-             val renameObjs: List<RenameVariable> = renamesToReview.map{ null }.filterNotNull().toList()
              val file = fileCallBack()
              val editor = editorCallBack()
              val project = projectCallBack()
+             val renameObjs: List<RenameVariable> = renamesToReview
+                 .map{ formRenameObject(it, project, editor!!, file!!) as RenameVariable? }
+                 .filterNotNull().toList()
 
-             showRefactoringOptionsPopup(
+             val panel = RefactoringSuggestionsPanel(
                  project,
                  editor!!,
                  file!!,
                  renameObjs,
-                 CodeTransformer(),
-                 EFTelemetryDataManager(),
+                 null,
                  "Rename"
              )
 
-             val reviewStatus = renamesToReview.map { true }
+             invokeLater {
+                 panel.createAndShowPopup()
+             }
+             panel.waitForClose()
+
+             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
              call.respond(HttpStatusCode.OK,
                  message = Json.encodeToString(reviewStatus))
          }

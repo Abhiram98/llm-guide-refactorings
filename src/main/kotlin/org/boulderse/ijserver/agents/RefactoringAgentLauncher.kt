@@ -17,7 +17,6 @@ import org.boulderse.ijserver.refactoringobjects.extractfunction.ExtractMethodFa
 import org.boulderse.ijserver.refactoringobjects.reformat.ReformatFile
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariableFactory
 import org.boulderse.ijserver.server.ExtractMethodParams
-import org.boulderse.ijserver.server.RefactoringServer
 import org.boulderse.ijserver.server.RenameParams
 import org.boulderse.ijserver.telemetry.*
 import org.boulderse.ijserver.testcuration.TestSelector
@@ -370,7 +369,6 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
             editor = editor,
             file = file,
             candidates = candidates,
-            codeTransformer = codeTransformer,
             efTelemetryDataManager = telemetryDataManager
         )
         efPanel.initTable()

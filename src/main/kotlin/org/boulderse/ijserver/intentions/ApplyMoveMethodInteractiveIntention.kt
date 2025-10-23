@@ -23,7 +23,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.*
 import dev.langchain4j.data.message.ChatMessage
 import org.boulderse.ijserver.telemetry.sendTelemetryData
-import org.boulderse.ijserver.ui.showRefactoringOptionsPopup
+import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
 import kotlin.math.min
 import kotlin.system.measureTimeMillis
 
@@ -241,15 +241,12 @@ open class ApplyMoveMethodInteractiveIntention : ApplySuggestRefactoringIntentio
             )
             if(showSuggestions) {
                 invokeLater {
-                    showRefactoringOptionsPopup(
-                        currentProject,
+                    RefactoringSuggestionsPanel(currentProject,
                         currentEditor,
                         currentFile,
                         refObjs,
-                        codeTransformer,
                         this.telemetryDataManager,
-                        LLMBundle.message("ef.candidates.popup.extract.function.button.title")
-                    )
+                        LLMBundle.message("ef.candidates.popup.extract.function.button.title")).createAndShowPopup()
                 }
             }
             else
