@@ -38,7 +38,7 @@ class CompletedRefactoringsPanel(
         // Recalibrate at the start to avoid issue with other ref objects being executed later.
     }
 
-    override fun performAction(index: Int) {
+    override fun performAction(index: Int): Boolean {
         if (index !in completedIndices){
             notifyObservers(
                 EFNotification(
@@ -84,7 +84,9 @@ class CompletedRefactoringsPanel(
                     NotificationType.ERROR
                 )
             }
+            return true
         }
+        return false
     }
 
     override fun getEndOffset(index: Int): Int {

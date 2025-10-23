@@ -39,7 +39,7 @@ class ReviewRoutes(private val routing: Routing,
                  file!!,
                  renameObjs,
                  null,
-                 "Rename"
+                 "Rename Identifier"
              )
 
              invokeLater {

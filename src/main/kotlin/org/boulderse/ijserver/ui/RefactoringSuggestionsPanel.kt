@@ -16,6 +16,10 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.LogicalPosition
 import com.intellij.openapi.editor.ScrollType
 import com.intellij.openapi.keymap.KeymapUtil
+import com.intellij.openapi.progress.ProgressIndicator
+import com.intellij.openapi.progress.ProgressManager
+import com.intellij.openapi.progress.Task
+import com.intellij.openapi.progress.impl.BackgroundableProcessIndicator
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.openapi.ui.popup.IconButton
@@ -92,7 +96,7 @@ open class RefactoringSuggestionsPanel(
             this.preferredSize = Dimension(500, 150)
         }
         myRefactoringCandidateTable = buildRefactoringCandidatesTable(tableModel, refactoringDescriptionMap)
-        myRefactoringScrollPane = builScrollPane()
+        myRefactoringScrollPane = buildScrollPane()
 
     }
 
@@ -153,7 +157,7 @@ open class RefactoringSuggestionsPanel(
         return refFunctionCandidateTable
     }
 
-    private fun builScrollPane(): JBScrollPane {
+    private fun buildScrollPane(): JBScrollPane {
         val refFunctionsScrollPane = JBScrollPane(myRefactoringCandidateTable)
 
         refFunctionsScrollPane.border = JBUI.Borders.empty()
@@ -218,6 +222,7 @@ open class RefactoringSuggestionsPanel(
                         KeymapUtil.getFirstKeyboardShortcutText(ActionManager.getInstance().getAction("ExtractMethod"))
                     )
                 ).align(AlignX.LEFT)
+                button("Reject Suggestion", actionListener = {onReject(myRefactoringCandidateTable.selectedRow)}).align(AlignX.RIGHT)
             }
             row {
                 cell(ratingsBox).comment("Rate the suggestion!")
@@ -238,6 +243,10 @@ open class RefactoringSuggestionsPanel(
 
     fun setDelegatePopup(jbPopup: JBPopup) {
         myPopup = jbPopup
+    }
+
+    fun onReject(index: Int){
+        myPopup?.cancel()
     }
 
     private fun generateFunctionSignature(psiMethod: PsiMethod): String {
@@ -266,7 +275,7 @@ open class RefactoringSuggestionsPanel(
     }
 
 
-    open fun performAction(index: Int) {
+    open fun performAction(index: Int): Boolean {
         if (index !in completedIndices){
             notifyObservers(
                 EFNotification(
@@ -278,14 +287,19 @@ open class RefactoringSuggestionsPanel(
             )
             addSelectionToTelemetryData(index)
             val refObj = myCandidates[index]
-
-            val runnable = Runnable {
-                refObj.performRefactoring(myProject, myEditor, myFile)
+            val thisProject = myProject
+            val task = object : Task.Backgroundable(myProject, "Performing refactoring") {
+                override fun run(indicator: ProgressIndicator) {
+                    refObj.performRefactoring(thisProject, myEditor, myFile)
+                }
             }
-            runnable.run()
+            ProgressManager.getInstance().runProcessWithProgressAsynchronously(task, BackgroundableProcessIndicator(task))
             myHighlighter.get().dropHighlight()
             refreshCandidates(index, "COMPLETED")
+            myPopup?.cancel()
+            return true
         }
+        return false
     }
 
     fun addSelectionToTelemetryData(index: Int) {
