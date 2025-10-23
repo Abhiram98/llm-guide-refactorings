@@ -72,6 +72,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.*
+import org.boulderse.ijserver.server.basic.IndexRoutes
+import org.boulderse.ijserver.server.review.ReviewRoutes
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
@@ -131,7 +133,6 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
             reloadFileIfNeeded()
         }
     }
-
     fun Application.myApplicationModule() {
         install(ContentNegotiation) {
             json()
@@ -139,9 +140,13 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
         routing {
             install(ReloadFilePlugin)
 
-            get("/") {
-                call.respondText("Hello, world!", ContentType.Text.Html)
-            }
+            IndexRoutes(this).install()
+
+            ReviewRoutes(this,
+                { file },
+                { editor },
+                { project }).install()
+
             get("/get_source_code"){
                 call.respond(HttpStatusCode.OK, message = file!!.text)
             }
@@ -2077,3 +2082,4 @@ class RefactoringServer(var project: Project, var editor: Editor? = null, var fi
      
 
 }
+
