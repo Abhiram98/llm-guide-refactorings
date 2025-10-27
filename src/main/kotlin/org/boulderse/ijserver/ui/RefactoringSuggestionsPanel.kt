@@ -421,6 +421,6 @@ open class RefactoringSuggestionsPanel(
 
         // Show the popup at the top right corner of the current editor
         val contentComponent = myEditor.contentComponent
-        efPopup.show(RelativePoint.getNorthEastOf(contentComponent))
+        efPopup.show(RelativePoint.getSouthWestOf(contentComponent))
     }
 }

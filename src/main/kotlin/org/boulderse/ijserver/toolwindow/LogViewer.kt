@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent
 import javax.swing.*
 
 
-class LogViewer(val initalText: String) : JPanel() {
+open class LogViewer(val initalText: String) : JPanel() {
     // Set up the JTextArea
     private val logArea = JTextArea()
 
