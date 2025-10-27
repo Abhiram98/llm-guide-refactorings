@@ -1,17 +1,6 @@
 package org.boulderse.ijserver.intentions
 
 import com.intellij.codeInsight.intention.IntentionAction
-import org.boulderse.ijserver.LLMBundle
-import org.boulderse.ijserver.models.LLMBaseResponse
-import org.boulderse.ijserver.models.sendChatRequest
-import org.boulderse.ijserver.prompts.MethodPromptBase
-import org.boulderse.ijserver.prompts.SuggestRefactoringPrompt
-import org.boulderse.ijserver.settings.RefAgentSettingsManager
-import org.boulderse.ijserver.showEFNotification
-import org.boulderse.ijserver.suggestrefactoring.AtomicSuggestion
-import org.boulderse.ijserver.telemetry.*
-import org.boulderse.ijserver.toolwindow.logViewer
-import org.boulderse.ijserver.utils.*
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.diagnostic.Logger
@@ -27,6 +16,17 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import dev.langchain4j.data.message.ChatMessage
 import dev.langchain4j.model.chat.ChatLanguageModel
+import org.boulderse.ijserver.LLMBundle
+import org.boulderse.ijserver.models.LLMBaseResponse
+import org.boulderse.ijserver.models.sendChatRequest
+import org.boulderse.ijserver.prompts.MethodPromptBase
+import org.boulderse.ijserver.prompts.SuggestRefactoringPrompt
+import org.boulderse.ijserver.settings.RefAgentSettingsManager
+import org.boulderse.ijserver.showEFNotification
+import org.boulderse.ijserver.suggestrefactoring.AtomicSuggestion
+import org.boulderse.ijserver.telemetry.*
+import org.boulderse.ijserver.toolwindow.logViewer
+import org.boulderse.ijserver.utils.*
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.util.concurrent.TimeUnit
 
@@ -46,7 +46,7 @@ abstract class ApplySuggestRefactoringIntention(
     var finishedBackgroundTask: Boolean? = null
     protected val llmContextLimit = 128000
 
-    open var prompter: MethodPromptBase = SuggestRefactoringPrompt();
+    open var prompter: MethodPromptBase = SuggestRefactoringPrompt()
 
     init {
         codeTransformer.addObserver(EFLoggerObserver(logger))
@@ -55,11 +55,17 @@ abstract class ApplySuggestRefactoringIntention(
 
 //    override fun getFamilyName(): String = LLMBundle.message("intentions.apply.suggest.refactoring.family.name")
 
-    override fun isAvailable(project: Project, editor: Editor?, file: PsiFile?): Boolean {
-        return editor != null && file != null
-    }
+    override fun isAvailable(
+        project: Project,
+        editor: Editor?,
+        file: PsiFile?,
+    ): Boolean = editor != null && file != null
 
-    override fun invoke(project: Project, editor: Editor?, file: PsiFile?) {
+    override fun invoke(
+        project: Project,
+        editor: Editor?,
+        file: PsiFile?,
+    ) {
         invokePlugin(project, editor, file, null)
     }
 
@@ -67,7 +73,7 @@ abstract class ApplySuggestRefactoringIntention(
         project: Project,
         editor: Editor?,
         file: PsiFile?,
-        classPsi: PsiClass?
+        classPsi: PsiClass?,
     ) {
         llmChatModel = RefAgentSettingsManager.getInstance().createAndGetAiModel()!!
 
@@ -79,7 +85,6 @@ abstract class ApplySuggestRefactoringIntention(
         val namedElement = classPsi ?: (file as PsiJavaFileImpl).classes[0]
 //        val namedElement = (file as PsiJavaFileImpl).classes[0]
         if (namedElement != null) {
-
             telemetryDataManager.newSession()
             val codeSnippet = namedElement.text
 
@@ -90,10 +95,11 @@ abstract class ApplySuggestRefactoringIntention(
             functionSrc = withLineNumbers
             functionPsiElement = namedElement
 
-            val bodyLineStart = when (namedElement) {
-                is PsiClass -> PsiUtils.getClassBodyStartLine(namedElement)
-                else -> PsiUtils.getFunctionBodyStartLine(namedElement)
-            }
+            val bodyLineStart =
+                when (namedElement) {
+                    is PsiClass -> PsiUtils.getClassBodyStartLine(namedElement)
+                    else -> PsiUtils.getFunctionBodyStartLine(namedElement)
+                }
             telemetryDataManager.addHostFunctionTelemetryData(
                 EFTelemetryDataUtils.buildHostFunctionTelemetryData(
                     codeSnippet = codeSnippet,
@@ -101,8 +107,8 @@ abstract class ApplySuggestRefactoringIntention(
                     bodyLineStart = bodyLineStart,
                     language = file.language.id.toLowerCaseAsciiOnly(),
                     filePath = file.virtualFile.path,
-                    hostClassPsi = functionPsiElement as? PsiClass
-                )
+                    hostClassPsi = functionPsiElement as? PsiClass,
+                ),
             )
 
             getPromptAndRunBackgroundable(withLineNumbers, project, editor, file)
@@ -116,23 +122,30 @@ abstract class ApplySuggestRefactoringIntention(
     }
 
     //    abstract fun invokeLlm(text: String, project: Project, editor: Editor, file: PsiFile)
-fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor, file: PsiFile) {
+    fun getPromptAndRunBackgroundable(
+        text: String,
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ) {
         logger.info("Invoking LLM with text: $text")
         val promptIterator = createPromptIterator(project, text)
 //        val promptText = prompter.getPrompt(text)
-        val task = object : Task.Backgroundable(
-            project, LLMBundle.message("intentions.request.extract.function.background.process.title")
-        ) {
-            override fun run(indicator: ProgressIndicator) {
-                finishedBackgroundTask = false
-                invokeLLM(project, promptIterator, editor, file)
-            }
+        val task =
+            object : Task.Backgroundable(
+                project,
+                LLMBundle.message("intentions.request.extract.function.background.process.title"),
+            ) {
+                override fun run(indicator: ProgressIndicator) {
+                    finishedBackgroundTask = false
+                    invokeLLM(project, promptIterator, editor, file)
+                }
 
-            override fun onFinished() {
-                finishedBackgroundTask = true
-                super.onFinished()
+                override fun onFinished() {
+                    finishedBackgroundTask = true
+                    super.onFinished()
+                }
             }
-        }
         finishedBackgroundTask = false
         ProgressManager.getInstance().runProcessWithProgressAsynchronously(task, BackgroundableProcessIndicator(task))
     }
@@ -145,20 +158,22 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
 
         if (!isInputSizeWithinLimit(text)) {
             // Notify the user that the input exceeds the context limit
-            invokeLater{
+            invokeLater {
                 showEFNotification(
                     project,
                     LLMBundle.message("notification.extract.function.with.llm.exceeds.context.limit.message"),
-                    NotificationType.WARNING
+                    NotificationType.WARNING,
                 )
             }
             logger.warn("Input size exceeds the LLM context limit of $llmContextLimit characters.")
         }
 
-        promptIterator = sequence {
-            while (true)
-                yield(prompter.getPrompt(text))
-        }.iterator()
+        promptIterator =
+            sequence {
+                while (true) {
+                    yield(prompter.getPrompt(text))
+                }
+            }.iterator()
 
         return promptIterator
     }
@@ -167,12 +182,15 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
         project: Project,
         promptIterator: Iterator<MutableList<ChatMessage>>,
         editor: Editor,
-        file: PsiFile
+        file: PsiFile,
     ) {
         val now = System.nanoTime()
-        val response = llmResponseCache.get(functionSrc) ?: sendChatRequest(
-            project, promptIterator.next(), llmChatModel
-        )
+        val response =
+            llmResponseCache.get(functionSrc) ?: sendChatRequest(
+                project,
+                promptIterator.next(),
+                llmChatModel,
+            )
         if (response != null) {
             llmResponseCache.get(functionSrc) ?: llmResponseCache.put(functionSrc, response)
             invokeLater {
@@ -181,7 +199,7 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
                     showEFNotification(
                         project,
                         LLMBundle.message("notification.extract.function.with.llm.no.suggestions.message"),
-                        NotificationType.INFORMATION
+                        NotificationType.INFORMATION,
                     )
                 } else {
                     processLLMResponse(response, project, editor, file)
@@ -190,33 +208,41 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
         }
     }
 
-
-    abstract fun processLLMResponse(response: LLMBaseResponse, project: Project, editor: Editor, file: PsiFile)
+    abstract fun processLLMResponse(
+        response: LLMBaseResponse,
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    )
 
     override fun startInWriteAction(): Boolean = false
 
-
-    fun buildProcessingTimeTelemetryData(llmResponseTime: Long, pluginProcessingTime: Long) {
+    fun buildProcessingTimeTelemetryData(
+        llmResponseTime: Long,
+        pluginProcessingTime: Long,
+    ) {
         val llmResponseTimeMillis = TimeUnit.NANOSECONDS.toMillis(llmResponseTime)
         val pluginProcessingTimeMillis = TimeUnit.NANOSECONDS.toMillis(pluginProcessingTime)
         val efTelemetryData = telemetryDataManager.getData()
         if (efTelemetryData != null) {
-            efTelemetryData.processingTime = EFTelemetryDataProcessingTime(
-
-                llmResponseTime = llmResponseTimeMillis,
-                pluginProcessingTime = pluginProcessingTimeMillis,
-                totalTime = llmResponseTimeMillis + pluginProcessingTimeMillis
-            )
+            efTelemetryData.processingTime =
+                EFTelemetryDataProcessingTime(
+                    llmResponseTime = llmResponseTimeMillis,
+                    pluginProcessingTime = pluginProcessingTimeMillis,
+                    totalTime = llmResponseTimeMillis + pluginProcessingTimeMillis,
+                )
         }
     }
 
-    fun buildCandidatesTelemetryData( //TODO: this function should include telemetry information
-                                        // generic to all refactoring objects
-        numberOfSuggestions: Int, notificationPayloadList: List<EFCandidateApplicationPayload>
+    fun buildCandidatesTelemetryData( // TODO: this function should include telemetry information
+        // generic to all refactoring objects
+        numberOfSuggestions: Int,
+        notificationPayloadList: List<EFCandidateApplicationPayload>,
     ): RefCandidatesTelemetryData {
         val candidateTelemetryDataList = EFTelemetryDataUtils.buildCandidateTelemetryData(notificationPayloadList)
         return RefCandidatesTelemetryData(
-            numberOfSuggestions = numberOfSuggestions, candidates = candidateTelemetryDataList
+            numberOfSuggestions = numberOfSuggestions,
+            candidates = candidateTelemetryDataList,
         )
     }
 
@@ -228,19 +254,26 @@ fun getPromptAndRunBackgroundable(text: String, project: Project, editor: Editor
 //        }
 //    }
 
-    protected fun logLLMResponse(improvementsList: List<AtomicSuggestion>, useDelays: Boolean) {
+    protected fun logLLMResponse(
+        improvementsList: List<AtomicSuggestion>,
+        useDelays: Boolean,
+    ) {
         for (atomicSuggestion in improvementsList.withIndex()) {
             log2fileAndViewer("${atomicSuggestion.index + 1}: ${atomicSuggestion.value.shortDescription}", logger)
             log2fileAndViewer("Suggestion: ${atomicSuggestion.value.longDescription}".prependIndent("    "), logger)
             logger.info("\n")
-            if (useDelays)
+            if (useDelays) {
                 Thread.sleep(3000)
+            }
         }
     }
 
     companion object {
         @JvmStatic
-        fun log2fileAndViewer(logMessage: String, logger: Logger){
+        fun log2fileAndViewer(
+            logMessage: String,
+            logger: Logger,
+        ) {
             logViewer.appendLog(logMessage)
             logger.info(logMessage)
         }

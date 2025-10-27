@@ -1,12 +1,12 @@
 package org.boulderse.ijserver.refactoringobjects.extractfunction
 
 import com.intellij.lang.Language
-import org.boulderse.ijserver.utils.PsiUtils
 import com.intellij.openapi.editor.Editor
 import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
+import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.idea.base.psi.getLineCount
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.lexer.KtTokens
@@ -14,7 +14,11 @@ import org.jetbrains.kotlin.psi.KtBlockExpression
 import org.jetbrains.kotlin.psi.KtExpression
 
 class EFCandidateFactory {
-    fun buildCandidates(efSuggestion: EFSuggestion, editor: Editor, file: PsiFile): HashSet<EFCandidate> {
+    fun buildCandidates(
+        efSuggestion: EFSuggestion,
+        editor: Editor,
+        file: PsiFile,
+    ): HashSet<EFCandidate> {
         val candidates = HashSet<EFCandidate>()
 
         if (!isValid(efSuggestion, file)) {
@@ -28,7 +32,11 @@ class EFCandidateFactory {
         return candidates
     }
 
-    fun buildCandidates(efSuggestions: List<EFSuggestion>, editor: Editor, file: PsiFile): HashSet<EFCandidate> {
+    fun buildCandidates(
+        efSuggestions: List<EFSuggestion>,
+        editor: Editor,
+        file: PsiFile,
+    ): HashSet<EFCandidate> {
         val candidates = HashSet<EFCandidate>()
 
         efSuggestions.forEach {
@@ -38,7 +46,11 @@ class EFCandidateFactory {
         return candidates
     }
 
-    private fun buildCandidateAsIs(efSuggestion: EFSuggestion, editor: Editor, file: PsiFile): EFCandidate? {
+    private fun buildCandidateAsIs(
+        efSuggestion: EFSuggestion,
+        editor: Editor,
+        file: PsiFile,
+    ): EFCandidate? {
         val psiElementStart = PsiUtils.getLeftmostPsiElement(efSuggestion.lineStart - 1, editor, file)
         var psiElementEnd = PsiUtils.getLeftmostPsiElement(efSuggestion.lineEnd - 1, editor, file)
 
@@ -58,7 +70,11 @@ class EFCandidateFactory {
         }
     }
 
-    private fun buildCandidateWithAdjustment(efSuggestion: EFSuggestion, editor: Editor, file: PsiFile): EFCandidate? {
+    private fun buildCandidateWithAdjustment(
+        efSuggestion: EFSuggestion,
+        editor: Editor,
+        file: PsiFile,
+    ): EFCandidate? {
         val psiElementStart = PsiUtils.getLeftmostPsiElement(efSuggestion.lineStart - 1, editor, file)
         val psiElementEnd = PsiUtils.getLeftmostPsiElement(efSuggestion.lineEnd - 1, editor, file)
 
@@ -79,7 +95,6 @@ class EFCandidateFactory {
         }
     }
 
-
     /**
      * Selected region is adjusted by enlarging it to the top-most PsiElement, either start or end
      *
@@ -95,7 +110,7 @@ class EFCandidateFactory {
     private fun adjustRegion(
         psiElementStart: PsiElement,
         psiElementEnd: PsiElement,
-        language: Language
+        language: Language,
     ): Pair<PsiElement, PsiElement>? {
         var start = psiElementStart
         var end = psiElementEnd
@@ -174,8 +189,10 @@ class EFCandidateFactory {
         return start to end
     }
 
-
-    private fun bubbleUp(element: PsiElement, stopElement: PsiElement): PsiElement {
+    private fun bubbleUp(
+        element: PsiElement,
+        stopElement: PsiElement,
+    ): PsiElement {
         var result = element
         while (result.parent != stopElement && result.parent != null) {
             result = result.parent
@@ -184,12 +201,13 @@ class EFCandidateFactory {
         return result
     }
 
-    private fun isValid(efSuggestion: EFSuggestion, file: PsiFile): Boolean {
-        return (efSuggestion.lineStart in (1 until file.getLineCount())) && (efSuggestion.lineEnd in (1 until file.getLineCount()))
-    }
+    private fun isValid(
+        efSuggestion: EFSuggestion,
+        file: PsiFile,
+    ): Boolean = (efSuggestion.lineStart in (1 until file.getLineCount())) && (efSuggestion.lineEnd in (1 until file.getLineCount()))
 
-    private fun buildInvalidCandidate(efSuggestion: EFSuggestion): EFCandidate {
-        return EFCandidate(
+    private fun buildInvalidCandidate(efSuggestion: EFSuggestion): EFCandidate =
+        EFCandidate(
             functionName = efSuggestion.functionName,
             lineStart = 0,
             lineEnd = 0,
@@ -199,5 +217,4 @@ class EFCandidateFactory {
             it.efSuggestion = efSuggestion
             it.type = EfCandidateType.INVALID
         }
-    }
 }

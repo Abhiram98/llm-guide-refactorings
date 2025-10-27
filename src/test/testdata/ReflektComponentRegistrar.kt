@@ -37,7 +37,9 @@ import java.io.File
  * @property isTestConfiguration indicates if the plugin is used in tests
  */
 @Suppress("TOO_LONG_FUNCTION")
-class ReflektComponentRegistrar(private val isTestConfiguration: Boolean = false) : ComponentRegistrar {
+class ReflektComponentRegistrar(
+    private val isTestConfiguration: Boolean = false,
+) : ComponentRegistrar {
     override val supportsK2: Boolean = false
 
     /**
@@ -106,7 +108,8 @@ class ReflektComponentRegistrar(private val isTestConfiguration: Boolean = false
                 messageCollector = config.messageCollector,
             ),
         )
-        val reflektMetaFile = config.reflektMetaFileRelativePath?.let { File(it) } ?: error("reflektMetaFileRelativePath is null for the project")
+        val reflektMetaFile =
+            config.reflektMetaFileRelativePath?.let { File(it) } ?: error("reflektMetaFileRelativePath is null for the project")
         IrGenerationExtension.registerExtension(
             this,
             ReflektMetaFileGenerator(
@@ -143,7 +146,11 @@ class ReflektComponentRegistrar(private val isTestConfiguration: Boolean = false
         )
     }
 
-    private fun MockProject.generateReflektImpl(config: PluginConfig, instancesAnalyzer: IrInstancesAnalyzer, libraryArgumentsWithInstances: LibraryArgumentsWithInstances) {
+    private fun MockProject.generateReflektImpl(
+        config: PluginConfig,
+        instancesAnalyzer: IrInstancesAnalyzer,
+        libraryArgumentsWithInstances: LibraryArgumentsWithInstances,
+    ) {
         this.generateReflektImpl(config, instancesAnalyzer, libraryArgumentsWithInstances.libraryArguments)
         IrGenerationExtension.registerExtension(
             this,

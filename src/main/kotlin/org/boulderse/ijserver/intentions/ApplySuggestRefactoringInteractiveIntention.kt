@@ -1,17 +1,6 @@
 package org.boulderse.ijserver.intentions
 
 import com.intellij.codeInsight.unwrap.ScopeHighlighter
-import org.boulderse.ijserver.LLMBundle
-import org.boulderse.ijserver.models.LLMBaseResponse
-import org.boulderse.ijserver.models.ollama.localOllamaMistral
-import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
-import org.boulderse.ijserver.settings.RefAgentSettingsManager
-import org.boulderse.ijserver.showEFNotification
-import org.boulderse.ijserver.suggestrefactoring.AbstractRefactoringValidator
-import org.boulderse.ijserver.suggestrefactoring.SimpleRefactoringValidator
-import org.boulderse.ijserver.telemetry.*
-import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
-import org.boulderse.ijserver.utils.*
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
@@ -23,10 +12,20 @@ import com.intellij.psi.PsiFile
 import com.intellij.ui.awt.RelativePoint
 import dev.langchain4j.model.chat.ChatLanguageModel
 import kotlinx.coroutines.runBlocking
+import org.boulderse.ijserver.LLMBundle
+import org.boulderse.ijserver.models.LLMBaseResponse
+import org.boulderse.ijserver.models.ollama.localOllamaMistral
+import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
+import org.boulderse.ijserver.settings.RefAgentSettingsManager
+import org.boulderse.ijserver.showEFNotification
+import org.boulderse.ijserver.suggestrefactoring.AbstractRefactoringValidator
+import org.boulderse.ijserver.suggestrefactoring.SimpleRefactoringValidator
+import org.boulderse.ijserver.telemetry.*
+import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
+import org.boulderse.ijserver.utils.*
 import java.awt.Point
 import java.awt.Rectangle
 import java.util.concurrent.atomic.AtomicReference
-
 
 @Suppress("UnstableApiUsage")
 open class ApplySuggestRefactoringInteractiveIntention(
@@ -36,24 +35,33 @@ open class ApplySuggestRefactoringInteractiveIntention(
 
     override fun getFamilyName(): String = LLMBundle.message("intentions.apply.suggest.refactoring.family.name")
 
-    override fun processLLMResponse(response: LLMBaseResponse, project: Project, editor: Editor, file: PsiFile) {
+    override fun processLLMResponse(
+        response: LLMBaseResponse,
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ) {
         efLLMRequestProvider = RefAgentSettingsManager.getInstance().createAndGetAiModel()!!
         val now = System.nanoTime()
 
         val llmResponse = response.getSuggestions()[0]
         println("LLM Response -> ${llmResponse.text}")
         val validatorChatModel =
-            if(RefAgentSettingsManager.getInstance().getUseLocalLLM()) localOllamaMistral
-            else efLLMRequestProvider
+            if (RefAgentSettingsManager.getInstance().getUseLocalLLM()) {
+                localOllamaMistral
+            } else {
+                efLLMRequestProvider
+            }
 
-        val validator = SimpleRefactoringValidator(
-            validatorChatModel,
-            project,
-            editor,
-            file,
-            functionSrc,
-            apiResponseCache
-        )
+        val validator =
+            SimpleRefactoringValidator(
+                validatorChatModel,
+                project,
+                editor,
+                file,
+                functionSrc,
+                apiResponseCache,
+            )
         val refactoringCandidates: List<AbstractRefactoring> =
             runBlocking {
                 validator.getRefactoringSuggestions(llmResponse.text, MAX_REFACTORINGS)
@@ -62,30 +70,31 @@ open class ApplySuggestRefactoringInteractiveIntention(
             showEFNotification(
                 project,
                 LLMBundle.message("notification.extract.function.with.llm.no.suggestions.message"),
-                NotificationType.INFORMATION
+                NotificationType.INFORMATION,
             )
             telemetryDataManager.addCandidatesTelemetryData(buildCandidatesTelemetryData(0, emptyList()))
             buildProcessingTimeTelemetryData(llmResponseTime, System.nanoTime() - now)
             sendTelemetryData(this.telemetryDataManager)
         } else {
             val rawSuggestions = AbstractRefactoringValidator.getRawSuggestions(llmResponse.text)
-            if (rawSuggestions!=null) {
+            if (rawSuggestions != null) {
                 logLLMResponse(
                     rawSuggestions.improvements,
-                    false
+                    false,
                 )
                 telemetryDataManager.setRefactoringObjects(refactoringCandidates)
                 val candidatesApplicationTelemetryObserver = EFCandidatesApplicationTelemetryObserver()
 //            val filteredCandidates = filterCandidates(candidates, candidatesApplicationTelemetryObserver, editor, file)
-                val validRefactoringCandidates = refactoringCandidates.filter {
-                    it.isValid(project, editor, file)
-                }
+                val validRefactoringCandidates =
+                    refactoringCandidates.filter {
+                        it.isValid(project, editor, file)
+                    }
 
                 telemetryDataManager.addCandidatesTelemetryData(
                     buildCandidatesTelemetryData(
                         refactoringCandidates.size,
-                        candidatesApplicationTelemetryObserver.getData()
-                    )
+                        candidatesApplicationTelemetryObserver.getData(),
+                    ),
                 )
                 buildProcessingTimeTelemetryData(llmResponseTime, System.nanoTime() - now)
 
@@ -93,13 +102,16 @@ open class ApplySuggestRefactoringInteractiveIntention(
                     showEFNotification(
                         project,
                         LLMBundle.message("notification.extract.function.with.llm.no.extractable.candidates.message"),
-                        NotificationType.INFORMATION
+                        NotificationType.INFORMATION,
                     )
                     sendTelemetryData(this.telemetryDataManager)
                 } else {
 //                refactoringObjectsCache.get(functionSrc)?:refactoringObjectsCache.put(functionSrc, validRefactoringCandidates)
                     showRefactoringOptionsPopup(
-                        project, editor, file, validRefactoringCandidates,
+                        project,
+                        editor,
+                        file,
+                        validRefactoringCandidates,
                     )
                 }
             }
@@ -110,16 +122,17 @@ open class ApplySuggestRefactoringInteractiveIntention(
         project: Project,
         editor: Editor,
         file: PsiFile,
-        candidates: List<AbstractRefactoring>
+        candidates: List<AbstractRefactoring>,
     ) {
-        val efPanel = RefactoringSuggestionsPanel(
-            project = project,
-            editor = editor,
-            file = file,
-            candidates = candidates,
-            efTelemetryDataManager = telemetryDataManager,
-            button_name = LLMBundle.message("ef.candidates.popup.extract.function.button.title")
-        )
+        val efPanel =
+            RefactoringSuggestionsPanel(
+                project = project,
+                editor = editor,
+                file = file,
+                candidates = candidates,
+                efTelemetryDataManager = telemetryDataManager,
+                button_name = LLMBundle.message("ef.candidates.popup.extract.function.button.title"),
+            )
         efPanel.initTable()
         val elapsedTimeTelemetryDataObserver = TelemetryElapsedTimeObserver()
         efPanel.addObserver(elapsedTimeTelemetryDataObserver)
@@ -127,7 +140,8 @@ open class ApplySuggestRefactoringInteractiveIntention(
 
         // Create the popup
         val efPopup =
-            JBPopupFactory.getInstance()
+            JBPopupFactory
+                .getInstance()
                 .createComponentPopupBuilder(panel, efPanel.myRefactoringCandidateTable)
                 .setRequestFocus(true)
                 .setTitle(LLMBundle.message("ef.candidates.popup.title"))
@@ -137,27 +151,29 @@ open class ApplySuggestRefactoringInteractiveIntention(
                 .createPopup()
 
         // Add onClosed listener
-        efPopup.addListener(object : JBPopupListener {
-            override fun onClosed(event: LightweightWindowEvent) {
-                elapsedTimeTelemetryDataObserver.update(
-                    EFNotification(
-                        EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.STOP, 0)
+        efPopup.addListener(
+            object : JBPopupListener {
+                override fun onClosed(event: LightweightWindowEvent) {
+                    elapsedTimeTelemetryDataObserver.update(
+                        EFNotification(
+                            EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.STOP, 0),
+                        ),
                     )
-                )
-                elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager)
-                AtomicReference(ScopeHighlighter(editor)).getAndSet(null).dropHighlight()
-                sendTelemetryData(telemetryDataManager)
-            }
+                    elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager)
+                    AtomicReference(ScopeHighlighter(editor)).getAndSet(null).dropHighlight()
+                    sendTelemetryData(telemetryDataManager)
+                }
 
-            override fun beforeShown(event: LightweightWindowEvent) {
-                super.beforeShown(event)
-                elapsedTimeTelemetryDataObserver.update(
-                    EFNotification(
-                        EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.START, 0)
+                override fun beforeShown(event: LightweightWindowEvent) {
+                    super.beforeShown(event)
+                    elapsedTimeTelemetryDataObserver.update(
+                        EFNotification(
+                            EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.START, 0),
+                        ),
                     )
-                )
-            }
-        })
+                }
+            },
+        )
 
         // set the popup as delegate to the Extract Function panel
         efPanel.setDelegatePopup(efPopup)
@@ -169,10 +185,7 @@ open class ApplySuggestRefactoringInteractiveIntention(
         efPopup.show(RelativePoint(contentComponent, point))
     }
 
-
     override fun startInWriteAction(): Boolean = false
-    override fun getText(): String {
-        return LLMBundle.message("intentions.apply.suggest.refactoring.family.name")
-    }
 
+    override fun getText(): String = LLMBundle.message("intentions.apply.suggest.refactoring.family.name")
 }

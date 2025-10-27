@@ -1,34 +1,44 @@
 package org.boulderse.ijserver.refactoringobjects.introduce
 
-import org.boulderse.ijserver.utils.PsiUtils
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiLiteralExpression
 import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiMethod
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
+import org.boulderse.ijserver.utils.PsiUtils
 import kotlin.test.todo
 
-class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
+class IntroduceFieldTest : LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
-    override fun getTestDataPath(): String {
-        return projectPath
-    }
 
+    override fun getTestDataPath(): String = projectPath
 
-    fun `test introduce field`(){
+    fun `test introduce field`() {
         configureByFile("/testdata/HelloWorld.java")
         val lineNumber = 51
-        val psiMethods: List<PsiMethod> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, lineNumber, PsiMethod::class.java
-        )
+        val psiMethods: List<PsiMethod> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                lineNumber,
+                PsiMethod::class.java,
+            )
         assert(psiMethods.isNotEmpty())
         val methodToReplace = psiMethods[0]
-        val psiLiterals: List<PsiLiteralExpression> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, 52, PsiLiteralExpression::class.java
-        )
-        val psiLocalVariables: List<PsiLocalVariable> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, 52, PsiLocalVariable::class.java
-        )
+        val psiLiterals: List<PsiLiteralExpression> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                52,
+                PsiLiteralExpression::class.java,
+            )
+        val psiLocalVariables: List<PsiLocalVariable> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                52,
+                PsiLocalVariable::class.java,
+            )
         assert(psiLiterals.isNotEmpty())
         throw NotImplementedError("call introduce interface handler")
 //        MyIntroduceFieldHandler(project, editor, psiLocalVariables[0],
@@ -36,7 +46,9 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
 
         println(file.text)
 
-        assert(file.text.contains("""    public static void prettyPrintArray(List<Integer> array){
+        assert(
+            file.text.contains(
+                """    public static void prettyPrintArray(List<Integer> array){
         result = "Array: ";
 
         for(int i = 0; i < array.size(); i++) {
@@ -45,33 +57,47 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
             result += "\n";
         }
         System.out.println(result);
-    }"""))
+    }""",
+            ),
+        )
         assert(file.text.contains("    private static String result;"))
-
-
     }
 
-    fun `test introduce field 2`(){
+    fun `test introduce field 2`() {
         configureByFile("/testdata/HelloWorld.java")
         val lineNumber = 51
-        val psiMethods: List<PsiMethod> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, lineNumber, PsiMethod::class.java
-        )
+        val psiMethods: List<PsiMethod> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                lineNumber,
+                PsiMethod::class.java,
+            )
         assert(psiMethods.isNotEmpty())
         val methodToReplace = psiMethods[0]
-        val psiLiterals: List<PsiLiteralExpression> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, 52, PsiLiteralExpression::class.java
-        )
-        val psiLocalVariables: List<PsiLocalVariable> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, 52, PsiLocalVariable::class.java
-        )
+        val psiLiterals: List<PsiLiteralExpression> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                52,
+                PsiLiteralExpression::class.java,
+            )
+        val psiLocalVariables: List<PsiLocalVariable> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                52,
+                PsiLocalVariable::class.java,
+            )
         assert(psiLiterals.isNotEmpty())
         throw NotImplementedError("call introduce interface handler")
 //        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
 
         println(file.text)
 
-        assert(file.text.contains("""    public static void prettyPrintArray(List<Integer> array){
+        assert(
+            file.text.contains(
+                """    public static void prettyPrintArray(List<Integer> array){
         HelloWorld.result = "Array: ";
         String result = HelloWorld.result;
 
@@ -81,25 +107,37 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
             result += "\n";
         }
         System.out.println(result);
-    }"""))
-
-
+    }""",
+            ),
+        )
     }
 
-    fun `test introduce field instance`(){
+    fun `test introduce field instance`() {
         configureByFile("/testdata/HelloWorld.java")
         val lineNumber = 28
-        val psiMethods: List<PsiMethod> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, lineNumber, PsiMethod::class.java
-        )
+        val psiMethods: List<PsiMethod> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                lineNumber,
+                PsiMethod::class.java,
+            )
         assert(psiMethods.isNotEmpty())
         val methodToReplace = psiMethods[0]
-        val psiLiterals: List<PsiLiteralExpression> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, 30, PsiLiteralExpression::class.java
-        )
-        val psiLiterals2: List<PsiLiteralExpression> = PsiUtils.getElementsOfTypeOnLine(
-            file, editor, 32, PsiLiteralExpression::class.java
-        )
+        val psiLiterals: List<PsiLiteralExpression> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                30,
+                PsiLiteralExpression::class.java,
+            )
+        val psiLiterals2: List<PsiLiteralExpression> =
+            PsiUtils.getElementsOfTypeOnLine(
+                file,
+                editor,
+                32,
+                PsiLiteralExpression::class.java,
+            )
         assert(psiLiterals.isNotEmpty())
         throw NotImplementedError("call introduce interface handler")
 //        MyIntroduceFieldHandler(project, editor).expressionToField(psiLiterals[0])
@@ -107,17 +145,23 @@ class IntroduceFieldTest: LightPlatformCodeInsightTestCase() {
 
         println(file.text)
 
-        assert(file.text.contains("""    private java.lang.String string;
-    private java.lang.String string1;"""))
-        assert(file.text.contains("""public void prettyPrintIntegerIfImpl(Integer num){
+        assert(
+            file.text.contains(
+                """    private java.lang.String string;
+    private java.lang.String string1;""",
+            ),
+        )
+        assert(
+            file.text.contains(
+                """public void prettyPrintIntegerIfImpl(Integer num){
         if (num==1){
             string = "ONE!!";
             System.out.println(string);
         } else if (num==2) {
             string1 = "TWO!!";
             System.out.println(string1);
-        }"""))
-
-
+        }""",
+            ),
+        )
     }
 }

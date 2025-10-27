@@ -1,16 +1,15 @@
 package org.boulderse.ijserver
 
+import com.intellij.testFramework.LightPlatformCodeInsightTestCase
+import junit.framework.TestCase
 import org.boulderse.ijserver.refactoringobjects.extractfunction.EFCandidate
 import org.boulderse.ijserver.telemetry.*
 import org.boulderse.ijserver.utils.EFCandidatesApplicationTelemetryObserver
-import com.intellij.testFramework.LightPlatformCodeInsightTestCase
-import junit.framework.TestCase
 
 class RefTelemetryDataTest : LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
-    override fun getTestDataPath(): String {
-        return projectPath
-    }
+
+    override fun getTestDataPath(): String = projectPath
 
     fun `test telemetry data collection sessions`() {
         val manager = EFTelemetryDataManager()
@@ -24,20 +23,21 @@ class RefTelemetryDataTest : LightPlatformCodeInsightTestCase() {
     fun `test host function telemetry data added successfully`() {
         val manager = EFTelemetryDataManager()
         val sessionId = manager.newSession()
-        val hostFunctionTelemetryData = HostFunctionTelemetryData(
-            hostFunctionSize = 10,
-            lineStart = 5,
-            lineEnd = 14,
-            bodyLineStart = 6,
-            language = "java",
-            sourceCode = "", // TODO: Add in the source code.
-            filePath = "",
-            methodCount = 0,
-            classLoc = 0,
-            instanceMethodCount = 0,
-            innerClassCount = 0,
-            staticMethodCount = 0
-        )
+        val hostFunctionTelemetryData =
+            HostFunctionTelemetryData(
+                hostFunctionSize = 10,
+                lineStart = 5,
+                lineEnd = 14,
+                bodyLineStart = 6,
+                language = "java",
+                sourceCode = "", // TODO: Add in the source code.
+                filePath = "",
+                methodCount = 0,
+                classLoc = 0,
+                instanceMethodCount = 0,
+                innerClassCount = 0,
+                staticMethodCount = 0,
+            )
         val efAppTelemetryObserver = EFCandidatesApplicationTelemetryObserver()
         TODO("Update line below")
 //        efAppTelemetryObserver.update(
@@ -116,20 +116,21 @@ class RefTelemetryDataTest : LightPlatformCodeInsightTestCase() {
                 TestCase.assertEquals(secondSessionId, manager.currentSession())
             } 
             """.trimIndent()
-        val expectedHostFunctionTelemetryData = HostFunctionTelemetryData(
-            hostFunctionSize = 8,
-            lineStart = 5,
-            lineEnd = 12,
-            bodyLineStart = 6,
-            language = "java",
-            sourceCode = "",
-            filePath = "",
-            methodCount = 0,
-            classLoc = 0,
-            innerClassCount = 0,
-            instanceMethodCount = 0,
-            staticMethodCount = 0
-        )
+        val expectedHostFunctionTelemetryData =
+            HostFunctionTelemetryData(
+                hostFunctionSize = 8,
+                lineStart = 5,
+                lineEnd = 12,
+                bodyLineStart = 6,
+                language = "java",
+                sourceCode = "",
+                filePath = "",
+                methodCount = 0,
+                classLoc = 0,
+                innerClassCount = 0,
+                instanceMethodCount = 0,
+                staticMethodCount = 0,
+            )
         TestCase.assertEquals(
             expectedHostFunctionTelemetryData,
             EFTelemetryDataUtils.buildHostFunctionTelemetryData(
@@ -138,22 +139,21 @@ class RefTelemetryDataTest : LightPlatformCodeInsightTestCase() {
                 bodyLineStart = 6,
                 language = "java",
                 filePath = "",
-                hostClassPsi = null
-            )
+                hostClassPsi = null,
+            ),
         )
     }
 
     fun `test get psi elements names Kotlin`() {
         configureByFile("/testdata/RodCuttingProblem.kt")
-        val efCandidate = EFCandidate(
-            functionName = "foo",
-            offsetStart = 321,
-            offsetEnd = 523,
-            lineStart = 10,
-            lineEnd = 17
-        )
-
-
+        val efCandidate =
+            EFCandidate(
+                functionName = "foo",
+                offsetStart = 321,
+                offsetEnd = 523,
+                lineStart = 10,
+                lineEnd = 17,
+            )
 
 //        val psiElementsTelemetryData = EFTelemetryDataUtils.buildElementsTypeTelemetryData(
 //            ExtractMethodFactory.fromEFCandidate(efCandidate), file)

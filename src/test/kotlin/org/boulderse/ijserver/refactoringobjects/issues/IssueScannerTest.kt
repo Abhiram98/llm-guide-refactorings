@@ -14,14 +14,12 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 
-class IssueScannerTest: LightPlatformCodeInsightTestCase() {
+class IssueScannerTest : LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
-    override fun getTestDataPath(): String {
-        return projectPath
-    }
 
+    override fun getTestDataPath(): String = projectPath
 
-    fun `test extract class`(){
+    fun `test extract class`() {
         configureByFile("/testdata/ProblemClass.java")
         MyCodeInspectionAction(project, AnalysisScope(file as PsiJavaFileImpl)).doInspect()
 
@@ -59,15 +57,14 @@ class IssueScannerTest: LightPlatformCodeInsightTestCase() {
 //            file,
 //            inspectionSession
 //        )
-
     }
 
-    class MyCodeInspectionAction(val project: Project, val scope: AnalysisScope): CodeInspectionAction(){
-        fun doInspect(){
+    class MyCodeInspectionAction(
+        val project: Project,
+        val scope: AnalysisScope,
+    ) : CodeInspectionAction() {
+        fun doInspect() {
             super.runInspections(project, scope)
         }
     }
-
-
-
 }

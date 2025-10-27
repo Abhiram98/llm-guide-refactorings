@@ -1,6 +1,5 @@
 package org.boulderse.ijserver.refactoringobjects.pullup
 
-import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
@@ -9,25 +8,37 @@ import com.intellij.psi.PsiFile
 import com.intellij.refactoring.memberPullUp.PullUpProcessor
 import com.intellij.refactoring.util.DocCommentPolicy
 import com.intellij.refactoring.util.classMembers.MemberInfo
+import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 
 class PullUpRefactoring(
     override val startLoc: Int,
     override val endLoc: Int,
     val sourceClass: PsiClass,
     val targetClass: PsiClass,
-    val members: List<MemberInfo>
+    val members: List<MemberInfo>,
 ) : AbstractRefactoring() {
-
-    override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
+    override fun performRefactoring(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ) {
         super.performRefactoring(project, editor, file)
 
-        val processor = PullUpProcessor(sourceClass, targetClass,
-            members.toTypedArray(), DocCommentPolicy(DocCommentPolicy.ASIS))
+        val processor =
+            PullUpProcessor(
+                sourceClass,
+                targetClass,
+                members.toTypedArray(),
+                DocCommentPolicy(DocCommentPolicy.ASIS),
+            )
         processor.run()
-
     }
 
-    override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
+    override fun isValid(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): Boolean {
         TODO("Not yet implemented")
     }
 
@@ -43,33 +54,51 @@ class PullUpRefactoring(
         TODO("Not yet implemented")
     }
 
-    override fun getReverseRefactoringObject(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+    override fun getReverseRefactoringObject(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): AbstractRefactoring? {
         TODO("Not yet implemented")
     }
 
-    override fun recalibrateRefactoring(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+    override fun recalibrateRefactoring(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): AbstractRefactoring? {
         TODO("Not yet implemented")
     }
 
     companion object {
-        fun fromMembers(sourceClass: PsiClass, targetClass: PsiClass, members:List<String>, keepAbstract: Boolean): PullUpRefactoring{
-            val fields = sourceClass.allFields.filter { it.name in members}
+        fun fromMembers(
+            sourceClass: PsiClass,
+            targetClass: PsiClass,
+            members: List<String>,
+            keepAbstract: Boolean,
+        ): PullUpRefactoring {
+            val fields = sourceClass.allFields.filter { it.name in members }
             val methods = sourceClass.allMethods.filter { it.name in members }
-            val refObj = PullUpRefactoring(
-                1, 1,
-                sourceClass,
-                targetClass,
-                fields.map {
-                    val m = MemberInfo(it)
-                    m.isToAbstract = keepAbstract
-                    m
-                }.union(methods.map {
-                        val m = MemberInfo(it)
-                        m.isToAbstract = keepAbstract
-                        m
-                    }).toList())
+            val refObj =
+                PullUpRefactoring(
+                    1,
+                    1,
+                    sourceClass,
+                    targetClass,
+                    fields
+                        .map {
+                            val m = MemberInfo(it)
+                            m.isToAbstract = keepAbstract
+                            m
+                        }.union(
+                            methods.map {
+                                val m = MemberInfo(it)
+                                m.isToAbstract = keepAbstract
+                                m
+                            },
+                        ).toList(),
+                )
             return refObj
         }
     }
-
 }

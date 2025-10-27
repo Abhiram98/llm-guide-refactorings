@@ -1,10 +1,5 @@
 package org.boulderse.ijserver.refactoringobjects.renamevariable
 
-import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
-import org.boulderse.ijserver.refactoringobjects.MyRefactoringFactory
-import org.boulderse.ijserver.utils.MethodSignature
-import org.boulderse.ijserver.utils.Parameter
-import org.boulderse.ijserver.utils.PsiUtils
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -13,20 +8,24 @@ import com.intellij.psi.PsiCompiledElement
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
+import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
+import org.boulderse.ijserver.refactoringobjects.MyRefactoringFactory
 import org.boulderse.ijserver.server.RenameParams
+import org.boulderse.ijserver.utils.MethodSignature
+import org.boulderse.ijserver.utils.Parameter
+import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 import org.jetbrains.kotlin.psi.psiUtil.getChildOfType
 import kotlin.math.abs
 
 class RenameVariableFactory {
-    companion object: MyRefactoringFactory {
+    companion object : MyRefactoringFactory {
         override fun createObjectsFromFuncCall(
             funcCall: String,
             project: Project,
             editor: Editor,
-            file: PsiFile
+            file: PsiFile,
         ): List<AbstractRefactoring> {
-
             val params = getParamsFromFuncCall(funcCall)
             return fromOldNewName(project, editor, file, getStringFromParam(params[1]), getStringFromParam(params[0]))
         }
@@ -45,8 +44,9 @@ class RenameVariableFactory {
                 }!!
 
             val renameObj = fromOldNewName(project, functionPsi, oldName, newName)
-            if (renameObj != null)
+            if (renameObj != null) {
                 return listOf(renameObj)
+            }
             return listOf()
         }
 
@@ -66,104 +66,139 @@ class RenameVariableFactory {
             get() = "Rename Variable"
         override val apiFunctionName: String
             get() = "rename_variable"
+
         // rename_variable("x", "count")
         override val APIDocumentation: String
-            get() = """def rename_variable(old_variable_name, new_variable_name):
-    ""${'"'}
-    Renames occurrences of a variable within the scope of a function or method.
+            get() =
+                """
+                def rename_variable(old_variable_name, new_variable_name):
+                ""${'"'}
+                Renames occurrences of a variable within the scope of a function or method.
 
-    This function is intended to refactor code by replacing all occurrences of the variable named `old_variable_name`
-    with the new variable name `new_variable_name` within the scope of the function or method where it is called.
+                This function is intended to refactor code by replacing all occurrences of the variable named `old_variable_name`
+                with the new variable name `new_variable_name` within the scope of the function or method where it is called.
 
-    Parameters:
-    - old_variable_name (str): The name of the variable to be renamed.
-    - new_variable_name (str): The new name for the variable.
-    ""${'"'}
-                    """.trimIndent()
+                Parameters:
+                - old_variable_name (str): The name of the variable to be renamed.
+                - new_variable_name (str): The new name for the variable.
+                ""${'"'}
+                """.trimIndent()
 
-        fun fromOldNewName(project: Project,
-                           outerPsiElement: PsiElement,
-                           oldName:String,
-                           newName: String): AbstractRefactoring?{
+        fun fromOldNewName(
+            project: Project,
+            outerPsiElement: PsiElement,
+            oldName: String,
+            newName: String,
+        ): AbstractRefactoring? {
             val varPsi = runReadAction { PsiUtils.getVariableFromPsi(outerPsiElement, oldName) }
-            if (varPsi!=null)
+            if (varPsi != null) {
                 return RenameVariable(
-                    runReadAction{ varPsi.getLineNumber() },
-                    runReadAction{ varPsi.getLineNumber() },
-                    oldName, newName, varPsi,
+                    runReadAction { varPsi.getLineNumber() },
+                    runReadAction { varPsi.getLineNumber() },
+                    oldName,
+                    newName,
+                    varPsi,
                     outerPsiElement,
-                    false
+                    false,
                 )
+            }
             return null
         }
 
-        fun fromOldNewNameAll(project: Project,
-                              editor: Editor,
-                           outerPsiElement: PsiElement,
-                           oldName:String,
-                           newName: String): List<AbstractRefactoring>{
+        fun fromOldNewNameAll(
+            project: Project,
+            editor: Editor,
+            outerPsiElement: PsiElement,
+            oldName: String,
+            newName: String,
+        ): List<AbstractRefactoring> {
             val varPsi = runReadAction { PsiUtils.getAllElementsOfName(outerPsiElement, oldName) }
 
-            val newElements = runReadAction{
-                varPsi
-                    .filter{
-                        it !is PsiCompiledElement
-                    }
-            }
+            val newElements =
+                runReadAction {
+                    varPsi
+                        .filter {
+                            it !is PsiCompiledElement
+                        }
+                }
             return newElements
-                    .map {
-                        RenameVariable(
-                                runReadAction{ PsiUtils.getStartLine(it) },
-                                runReadAction{ PsiUtils.getEndLine(it) },
-                                oldName, newName, it, outerPsiElement, false
-                        )
-                    }
+                .map {
+                    RenameVariable(
+                        runReadAction { PsiUtils.getStartLine(it) },
+                        runReadAction { PsiUtils.getEndLine(it) },
+                        oldName,
+                        newName,
+                        it,
+                        outerPsiElement,
+                        false,
+                    )
+                }
         }
-
 
         fun fromMethodOldNewName(
             project: Project,
             outerClass: PsiClass,
             methodName: String,
             oldName: String,
-            newName: String
-        ): AbstractRefactoring?{
+            newName: String,
+        ): AbstractRefactoring? {
             val outerPsiElement: PsiMethod = PsiUtils.getMethodNameFromClass(outerClass, methodName) ?: return null
             val varPsi = runReadAction { PsiUtils.getVariableFromPsi(outerPsiElement, oldName) }
-            if (varPsi!=null)
+            if (varPsi != null) {
                 return RenameVariable(
-                    runReadAction{ varPsi.getLineNumber() },
-                    runReadAction{ varPsi.getLineNumber() },
-                    oldName, newName, varPsi,
+                    runReadAction { varPsi.getLineNumber() },
+                    runReadAction { varPsi.getLineNumber() },
+                    oldName,
+                    newName,
+                    varPsi,
                     outerPsiElement,
-                    false
-                )
-            return null
-        }
-
-        fun renameMethod(methodName: String, outerClass: PsiClass,
-                         newName: String, oldMethodSignature: MethodSignature): AbstractRefactoring?{
-            val methodPsi = PsiUtils.getMethodWithSignatureFromClass(outerClass, oldMethodSignature)
-            if (methodPsi!=null){
-                return RenameVariable(
-                    runReadAction{ methodPsi.getLineNumber() },
-                    runReadAction{ methodPsi.getLineNumber() },
-                    methodName, newName, methodPsi, outerClass, false
+                    false,
                 )
             }
             return null
         }
 
-        fun renameParameter(methodSignature: MethodSignature, outerClass: PsiClass, oldParameter: Parameter, newParameter: Parameter): AbstractRefactoring?{
+        fun renameMethod(
+            methodName: String,
+            outerClass: PsiClass,
+            newName: String,
+            oldMethodSignature: MethodSignature,
+        ): AbstractRefactoring? {
+            val methodPsi = PsiUtils.getMethodWithSignatureFromClass(outerClass, oldMethodSignature)
+            if (methodPsi != null) {
+                return RenameVariable(
+                    runReadAction { methodPsi.getLineNumber() },
+                    runReadAction { methodPsi.getLineNumber() },
+                    methodName,
+                    newName,
+                    methodPsi,
+                    outerClass,
+                    false,
+                )
+            }
+            return null
+        }
+
+        fun renameParameter(
+            methodSignature: MethodSignature,
+            outerClass: PsiClass,
+            oldParameter: Parameter,
+            newParameter: Parameter,
+        ): AbstractRefactoring? {
             val methodPsi = PsiUtils.getMethodWithSignatureFromClass(outerClass, methodSignature)
-            if (methodPsi!=null){
+            if (methodPsi != null) {
                 val oldParamPsi = PsiUtils.getMethodParameter(methodPsi, oldParameter)
-                if (oldParamPsi!=null)
+                if (oldParamPsi != null) {
                     return RenameVariable(
-                        runReadAction{ methodPsi.getLineNumber() },
-                        runReadAction{ methodPsi.getLineNumber() },
-                        oldParameter.name, newParameter.name, oldParamPsi, outerClass, false
+                        runReadAction { methodPsi.getLineNumber() },
+                        runReadAction { methodPsi.getLineNumber() },
+                        oldParameter.name,
+                        newParameter.name,
+                        oldParamPsi,
+                        outerClass,
+                        false,
                     )
+                }
             }
             return null
         }
@@ -173,65 +208,80 @@ class RenameVariableFactory {
             editor: Editor,
             file: PsiFile,
             oldName: String,
-            newName: String
+            newName: String,
         ): List<RenameVariable> {
             val outerPsiElement: PsiElement = file.getChildOfType<PsiClass>()!!
             val varPsi = runReadAction { PsiUtils.getAllElementsWithNameMatching(outerPsiElement, oldName) }
 
-            val newElements = runReadAction{
-                varPsi
-                    .filter{
-                        it !is PsiCompiledElement
-                    }
-            }
+            val newElements =
+                runReadAction {
+                    varPsi
+                        .filter {
+                            it !is PsiCompiledElement
+                        }
+                }
             return newElements
                 .map {
                     RenameVariable(
-                        runReadAction{ PsiUtils.getStartLine(it) },
-                        runReadAction{ PsiUtils.getEndLine(it) },
-                        oldName, newName, it, outerPsiElement, false
+                        runReadAction { PsiUtils.getStartLine(it) },
+                        runReadAction { PsiUtils.getEndLine(it) },
+                        oldName,
+                        newName,
+                        it,
+                        outerPsiElement,
+                        false,
                     )
                 }
         }
-
     }
-
-
 }
 
 fun formRenameObject(
     params: RenameParams,
     project: Project,
     editor: Editor,
-    file: PsiFile
+    file: PsiFile,
 ): AbstractRefactoring? {
-    val renameObjectRaw = RenameVariableFactory.fromOldNewNameAll(
-        project, editor, file, params.oldName, params.newName
-    )
-    if (renameObjectRaw.size==1)
+    val renameObjectRaw =
+        RenameVariableFactory.fromOldNewNameAll(
+            project,
+            editor,
+            file,
+            params.oldName,
+            params.newName,
+        )
+    if (renameObjectRaw.size == 1) {
         return renameObjectRaw[0]
-    if (renameObjectRaw.isEmpty())
+    }
+    if (renameObjectRaw.isEmpty()) {
         return null
+    }
 
     // there are multiple elements which match that name in the file, need to find the right one.
     // filter by element type
-    val elementsToInspect = if (params.codeElementType!=null) {
-        val filtered = renameObjectRaw.filter {
-            PsiUtils.isCodeElementType(
-                (it as RenameVariable).oldVarPsi, params.codeElementType
-            )
-        }
-        if (filtered.size==1)
-            return filtered[0]
-        filtered.ifEmpty {
+    val elementsToInspect =
+        if (params.codeElementType != null) {
+            val filtered =
+                renameObjectRaw.filter {
+                    PsiUtils.isCodeElementType(
+                        (it as RenameVariable).oldVarPsi,
+                        params.codeElementType,
+                    )
+                }
+            if (filtered.size == 1) {
+                return filtered[0]
+            }
+            filtered.ifEmpty {
+                renameObjectRaw
+            }
+        } else {
             renameObjectRaw
         }
-    } else{renameObjectRaw}
 
     // filter by line number.
-    if(params.lineNum!=null){
+    if (params.lineNum != null) {
         val filtered = elementsToInspect.filter { it.startLoc == params.lineNum }
-        return if(filtered.size==1) {
+        return if (filtered.size == 1) {
             filtered[0]
         } else {
             // return the best match

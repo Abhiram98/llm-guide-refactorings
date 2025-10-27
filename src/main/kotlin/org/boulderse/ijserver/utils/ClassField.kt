@@ -8,6 +8,5 @@ data class ClassField(
     @SerializedName("field_type")
     val fieldType: String,
     @SerializedName("field_declaration")
-    val fieldDeclaration: String
-) {
-}
+    val fieldDeclaration: String,
+)

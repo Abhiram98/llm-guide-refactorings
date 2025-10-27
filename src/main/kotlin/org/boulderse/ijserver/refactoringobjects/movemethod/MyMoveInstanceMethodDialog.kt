@@ -7,9 +7,10 @@ import com.intellij.refactoring.move.MoveCallback
 import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog
 import com.intellij.ui.EditorTextField
 
-class MyMoveInstanceMethodDialog(method: PsiMethod,
-                                 variables: Array<out PsiVariable>,
-                                 val moveCallback: MoveCallback
+class MyMoveInstanceMethodDialog(
+    method: PsiMethod,
+    variables: Array<out PsiVariable>,
+    val moveCallback: MoveCallback,
 ) : MoveInstanceMethodDialog(method, variables) {
     var triggeredRefactoring = false
 
@@ -37,7 +38,7 @@ class MyMoveInstanceMethodDialog(method: PsiMethod,
                         .showErrorDialog(
                             project,
                             JavaRefactoringBundle.message("move.method.enter.a.valid.name.for.parameter"),
-                            myRefactoringName
+                            myRefactoringName,
                         )
                     return
                 }
@@ -46,17 +47,17 @@ class MyMoveInstanceMethodDialog(method: PsiMethod,
         }
 
         val targetVariable = myList.selectedValue as PsiVariable ?: return
-        val processor = MoveInstanceMethodProcessWithCallBack(
-            myMethod.project,
-            myMethod, targetVariable,
-            myVisibilityPanel.visibility!!,
-            isOpenInEditor,
-            parameterNames,
-            moveCallback
-        )
+        val processor =
+            MoveInstanceMethodProcessWithCallBack(
+                myMethod.project,
+                myMethod,
+                targetVariable,
+                myVisibilityPanel.visibility!!,
+                isOpenInEditor,
+                parameterNames,
+                moveCallback,
+            )
         if (!verifyTargetClass(processor.targetClass)) return
         invokeRefactoring(processor)
     }
-
-
 }

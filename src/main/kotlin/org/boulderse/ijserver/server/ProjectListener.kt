@@ -20,18 +20,14 @@ import javax.swing.SwingUtilities
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
-
 class ProjectListener {
-
     var indexingCount = 0
     var importCount = 0
     var resolveCount = 0
 
     val badWindows: MutableMap<Window, Int> = mutableMapOf()
 
-
-    fun registerListeners(project: Project){
-
+    fun registerListeners(project: Project) {
         setupImportListener(project)
         setupResolveListener()
         setupIndexingListener(project)
@@ -43,7 +39,7 @@ class ProjectListener {
     suspend fun waitForCondition(
         timeout: Duration,
         checkInterval: Duration = 5.seconds,
-        condition: () -> Boolean
+        condition: () -> Boolean,
     ): Boolean {
         val startTime = System.currentTimeMillis()
         while (System.currentTimeMillis() - startTime < timeout.inWholeMilliseconds) {
@@ -55,18 +51,20 @@ class ProjectListener {
         return false
     }
 
-    suspend fun waitForFinish(preSleep: Long, maxWaitDuration: Duration): Boolean{
+    suspend fun waitForFinish(
+        preSleep: Long,
+        maxWaitDuration: Duration,
+    ): Boolean {
         Thread.sleep(preSleep) // sleep 10s for auto-reload to kick in.
-        val result = waitForCondition(maxWaitDuration) { indexingCount==0 && importCount==0 && resolveCount==0 }
+        val result = waitForCondition(maxWaitDuration) { indexingCount == 0 && importCount == 0 && resolveCount == 0 }
         return result
     }
 
-    fun reset(){
+    fun reset() {
         indexingCount = 0
-        importCount =0
+        importCount = 0
         resolveCount = 0
     }
-
 
     private fun setupImportListener(project: Project) {
         project.messageBus.connect().subscribe(
@@ -83,7 +81,7 @@ class ProjectListener {
                     importCount -= 1
                     super.onImportFinished(projectPath)
                 }
-            }
+            },
         )
     }
 
@@ -91,42 +89,52 @@ class ProjectListener {
         val notificationManager =
             ExternalSystemProgressNotificationManager.getInstance()
 
-        notificationManager.addNotificationListener(object : ExternalSystemTaskNotificationListener {
-            override fun onStart(projectPath: String, id: ExternalSystemTaskId) {
-                println("Starting resolve.")
-                resolveCount += 1
+        notificationManager.addNotificationListener(
+            object : ExternalSystemTaskNotificationListener {
+                override fun onStart(
+                    projectPath: String,
+                    id: ExternalSystemTaskId,
+                ) {
+                    println("Starting resolve.")
+                    resolveCount += 1
 //                if (isResolveProjectTask(id)) {
 //                    resolveCount += 1
 //                }
-            }
+                }
 
 //            override fun onSuccess(id: ExternalSystemTaskId) {
-////                if (isResolveProjectTask(id)) {
-////                    resolveInProgress = false
-////                }
+// //                if (isResolveProjectTask(id)) {
+// //                    resolveInProgress = false
+// //                }
 //                resolveCount -= 1
 //            }
 
 //            override fun onFailure(id: ExternalSystemTaskId, e: Exception) {
 //                super.onFailure(id, e)
-////                resolveInProgress = false
+// //                resolveInProgress = false
 //            }
 
-            override fun onEnd(projectPath: String, id: ExternalSystemTaskId) {
-                println("Finished resolve.")
-                super.onEnd(id)
-                resolveCount -= 1
+                override fun onEnd(
+                    projectPath: String,
+                    id: ExternalSystemTaskId,
+                ) {
+                    println("Finished resolve.")
+                    super.onEnd(id)
+                    resolveCount -= 1
 //                resolveInProgress = false
-            }
+                }
 
 //            private fun isResolveProjectTask(id: ExternalSystemTaskId): Boolean {
 //                return id.getType() === ExternalSystemTaskType.RESOLVE_PROJECT
 //            }
-        })
+            },
+        )
     }
 
     private fun setupIndexingListener(project: Project) {
-        class IndexingLifecycleListener(private val project: Project) : DumbService.DumbModeListener {
+        class IndexingLifecycleListener(
+            private val project: Project,
+        ) : DumbService.DumbModeListener {
             override fun enteredDumbMode() {
                 println("Indexing started for " + project.name)
 //                indexingInProgress = true
@@ -143,7 +151,7 @@ class ProjectListener {
         project.messageBus.connect().subscribe(DumbService.DUMB_MODE, IndexingLifecycleListener(project))
     }
 
-    fun expireNotifications(project: Project){
+    fun expireNotifications(project: Project) {
         val notificationsManager = NotificationsManager.getNotificationsManager()
         val activeNotifications =
             notificationsManager.getNotificationsOfType(Notification::class.java, project)
@@ -151,17 +159,19 @@ class ProjectListener {
         var windowManager = WindowManagerEx.getInstanceEx()
         val window = windowManager.mostRecentFocusedWindow
 //        windowManager.
-        for (notification in activeNotifications)
+        for (notification in activeNotifications) {
             notification.expire()
+        }
     }
 
-    fun registerAwtListener(){
+    fun registerAwtListener() {
         Toolkit.getDefaultToolkit().addAWTEventListener({ event ->
             if (event.getID() === WindowEvent.WINDOW_OPENED) {
                 val window = (event as WindowEvent).window
                 print("opened window -> ${window.name}")
-                if (window.parent!=null)
+                if (window.parent != null) {
                     badWindows[window] = 0
+                }
             }
         }, AWTEvent.WINDOW_EVENT_MASK)
 
@@ -170,29 +180,30 @@ class ProjectListener {
 
     fun startWindowMonitor() {
         val timer = Timer(true) // Daemon timer
-        timer.scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-                val toRemove = mutableListOf<Window>()
+        timer.scheduleAtFixedRate(
+            object : TimerTask() {
+                override fun run() {
+                    val toRemove = mutableListOf<Window>()
 
-                for (window in badWindows.keys) {
-                    if (badWindows[window]!! < 1){
-                        badWindows[window] = badWindows[window]!! + 1
-                    }else if (window.isShowing) {
-                        println("Closing window -> ${window.name}")
-                        SwingUtilities.invokeLater {
-                            window.dispose()
+                    for (window in badWindows.keys) {
+                        if (badWindows[window]!! < 1) {
+                            badWindows[window] = badWindows[window]!! + 1
+                        } else if (window.isShowing) {
+                            println("Closing window -> ${window.name}")
+                            SwingUtilities.invokeLater {
+                                window.dispose()
+                            }
+                            toRemove.add(window)
+                        } else {
+                            toRemove.add(window) // Already closed
                         }
-                        toRemove.add(window)
-                    } else {
-                        toRemove.add(window) // Already closed
                     }
+
+                    toRemove.forEach { badWindows.remove(it) }
                 }
-
-                toRemove.forEach { badWindows.remove(it) }
-            }
-        }, 0L, 30 * 1000L) // every 30 seconds
+            },
+            0L,
+            30 * 1000L,
+        ) // every 30 seconds
     }
-
-
-
 }

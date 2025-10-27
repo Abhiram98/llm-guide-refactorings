@@ -3,26 +3,33 @@ package org.boulderse.ijserver.models
 import org.boulderse.ijserver.models.openai.OpenAICompletionRequest
 import org.boulderse.ijserver.models.openai.OpenAIEditRequest
 
-data class LLMResponseChoice(val text: String, val finishReason: String?)
+data class LLMResponseChoice(
+    val text: String,
+    val finishReason: String?,
+)
 
 interface LLMBaseResponse {
     fun getSuggestions(): List<LLMResponseChoice>
 }
 
-abstract class LLMBaseRequest<Body>(val body: Body) {
+abstract class LLMBaseRequest<Body>(
+    val body: Body,
+) {
     abstract fun sendSync(): LLMBaseResponse?
 }
 
 enum class LLMRequestType {
-    OPENAI_EDIT, OPENAI_COMPLETION, MOCK;
+    OPENAI_EDIT,
+    OPENAI_COMPLETION,
+    MOCK,
+    ;
 
     companion object {
-        fun byRequest(request: LLMBaseRequest<*>): LLMRequestType {
-            return when (request) {
+        fun byRequest(request: LLMBaseRequest<*>): LLMRequestType =
+            when (request) {
                 is OpenAIEditRequest -> OPENAI_EDIT
                 is OpenAICompletionRequest -> OPENAI_COMPLETION
                 else -> MOCK
             }
-        }
     }
 }

@@ -1,8 +1,6 @@
 package org.boulderse.ijserver.telemetry
 
 import com.google.gson.Gson
-import org.boulderse.ijserver.utils.EFNotification
-import org.boulderse.ijserver.utils.Observer
 import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.io.toNioPath
@@ -11,6 +9,8 @@ import com.intellij.util.io.createDirectories
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import org.boulderse.ijserver.utils.EFNotification
+import org.boulderse.ijserver.utils.Observer
 
 class TelemetryDataObserver : Observer {
     companion object {
@@ -18,9 +18,13 @@ class TelemetryDataObserver : Observer {
         const val LOG_FILE_NAME = "ref_telemetry_data.jsonl"
     }
 
-    private val logFile = PathManager.getLogPath().toNioPathOrNull()!!
-        .resolve(LOG_DIR_NAME)
-        .resolve(LOG_FILE_NAME).toFile()
+    private val logFile =
+        PathManager
+            .getLogPath()
+            .toNioPathOrNull()!!
+            .resolve(LOG_DIR_NAME)
+            .resolve(LOG_FILE_NAME)
+            .toFile()
 
     init {
         runBlocking {
@@ -57,11 +61,12 @@ class TelemetryDataObserver : Observer {
     }
 }
 
-class TelemetryElapsedTimeObserver: Observer {
+class TelemetryElapsedTimeObserver : Observer {
     private val elapsedTime: HashMap<Int, Long> = HashMap()
     private val candidateSelectionElapsedTime: HashMap<Int, Long> = HashMap()
     private var currentSelectedIndex = 0
     private val logger = Logger.getInstance(javaClass)
+
     override fun update(notification: EFNotification) {
         when (notification.payload) {
             is EFTelemetryDataElapsedTimeNotificationPayload -> {
@@ -82,11 +87,10 @@ class TelemetryElapsedTimeObserver: Observer {
         }
     }
 
-    fun getTelemetryData(): List<CandidateElapsedTimeTelemetryData> {
-        return elapsedTime.map {
+    fun getTelemetryData(): List<CandidateElapsedTimeTelemetryData> =
+        elapsedTime.map {
             CandidateElapsedTimeTelemetryData(it.key, it.value)
         }
-    }
 
     fun buildElapsedTimeTelemetryData(telemetryDataManager: EFTelemetryDataManager) {
         val elapsedTimeTelemetryData = this.getTelemetryData()

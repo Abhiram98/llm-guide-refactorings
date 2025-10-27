@@ -11,15 +11,19 @@ fun rodCutting(price: IntArray): Int {
 
     for (i in 1..price.size) {
         var maxVal = Int.MIN_VALUE
-        for (j in 0 until i) maxVal = max(maxVal,
-            price[j] + value[i - j - 1])
+        for (j in 0 until i) {
+            maxVal =
+                max(
+                    maxVal,
+                    price[j] + value[i - j - 1],
+                )
+        }
         value[i] = maxVal
     }
     return value[price.size]
 }
 
-fun someRandomFunction(x: Int)
-{
+fun someRandomFunction(x: Int) {
     val y = x + 1
     val sum = y + x
     return sum
@@ -27,14 +31,15 @@ fun someRandomFunction(x: Int)
 
 fun randomFunction2(): Int {
     val x = 2
-    val prod = x*x
-    return prod }
+    val prod = x * x
+    return prod
+}
 
-fun randomFunction3(): Int
-{   val x = 2
-    val prod = x*x
-    return prod }
-
+fun randomFunction3(): Int {
+    val x = 2
+    val prod = x * x
+    return prod
+}
 
 private fun MockProject.replaceReflektQueries(
     config: PluginConfig,
@@ -65,26 +70,36 @@ private fun checkLocalClass(options: ExtractOptions) {
     val container: PsiElement? = PsiTreeUtil.getParentOfType(options.elements.first(), PsiMember::class.java)
     val analyzer = CodeFragmentAnalyzer(options.elements)
     val localClasses = findLocalClassesIn(container)
-    fun isExtracted(element: PsiElement): Boolean {
-        return element.textRange in TextRange(options.elements.first().textRange.startOffset, options.elements.last().textRange.endOffset)
-    }
+
+    fun isExtracted(element: PsiElement): Boolean =
+        element.textRange in
+            TextRange(
+                options.elements
+                    .first()
+                    .textRange.startOffset,
+                options.elements
+                    .last()
+                    .textRange.endOffset,
+            )
     for (localClass in localClasses) {
         val classExtracted: Boolean = isExtracted(localClass)
         val extractedReferences = Collections.synchronizedList(ArrayList<PsiElement>())
         val remainingReferences = Collections.synchronizedList(ArrayList<PsiElement>())
-        ReferencesSearch.search(localClass).forEach(Processor { psiReference: PsiReference ->
-            val element = psiReference.element
-            val elementExtracted: Boolean = isExtracted(element)
-            if (elementExtracted && !classExtracted) {
-                extractedReferences.add(element)
-                return@Processor false
-            }
-            if (!elementExtracted && classExtracted) {
-                remainingReferences.add(element)
-                return@Processor false
-            }
-            true
-        })
+        ReferencesSearch.search(localClass).forEach(
+            Processor { psiReference: PsiReference ->
+                val element = psiReference.element
+                val elementExtracted: Boolean = isExtracted(element)
+                if (elementExtracted && !classExtracted) {
+                    extractedReferences.add(element)
+                    return@Processor false
+                }
+                if (!elementExtracted && classExtracted) {
+                    remainingReferences.add(element)
+                    return@Processor false
+                }
+                true
+            },
+        )
         if (extractedReferences.isNotEmpty()) {
             throw ExtractException(JavaRefactoringBundle.message("extract.method.error.class.outside.defined"), extractedReferences)
         }
@@ -92,7 +107,8 @@ private fun checkLocalClass(options: ExtractOptions) {
             throw ExtractException(JavaRefactoringBundle.message("extract.method.error.class.outside.used"), remainingReferences)
         }
         if (classExtracted) {
-            analyzer.findUsedVariablesAfter()
+            analyzer
+                .findUsedVariablesAfter()
                 .filter { isExtracted(it) && PsiUtil.resolveClassInType(it.type) === localClass }
                 .forEach { throw ExtractException(JavaRefactoringBundle.message("extract.method.error.class.outside.used"), it) }
         }

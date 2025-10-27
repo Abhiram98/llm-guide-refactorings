@@ -11,20 +11,6 @@ import ai.grazie.code.agents.ideformer.model.agent.IdeFormerAgent
 import ai.grazie.model.llm.profile.LLMProfileID
 import ai.grazie.utils.annotations.ExperimentalAPI
 import com.intellij.codeInsight.unwrap.ScopeHighlighter
-import org.boulderse.ijserver.LLMBundle
-import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
-import org.boulderse.ijserver.refactoringobjects.extractfunction.ExtractMethodFactory
-import org.boulderse.ijserver.refactoringobjects.reformat.ReformatFile
-import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariableFactory
-import org.boulderse.ijserver.server.ExtractMethodParams
-import org.boulderse.ijserver.server.RenameParams
-import org.boulderse.ijserver.telemetry.*
-import org.boulderse.ijserver.testcuration.TestSelector
-import org.boulderse.ijserver.ui.CompletedRefactoringsPanel
-import org.boulderse.ijserver.utils.CodeTransformer
-import org.boulderse.ijserver.utils.EFNotification
-import org.boulderse.ijserver.utils.FileUtils
-import org.boulderse.ijserver.utils.PsiUtils
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
@@ -39,6 +25,20 @@ import com.intellij.refactoring.suggested.startOffset
 import com.intellij.ui.awt.RelativePoint
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
+import org.boulderse.ijserver.LLMBundle
+import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
+import org.boulderse.ijserver.refactoringobjects.extractfunction.ExtractMethodFactory
+import org.boulderse.ijserver.refactoringobjects.reformat.ReformatFile
+import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariableFactory
+import org.boulderse.ijserver.server.ExtractMethodParams
+import org.boulderse.ijserver.server.RenameParams
+import org.boulderse.ijserver.telemetry.*
+import org.boulderse.ijserver.testcuration.TestSelector
+import org.boulderse.ijserver.ui.CompletedRefactoringsPanel
+import org.boulderse.ijserver.utils.CodeTransformer
+import org.boulderse.ijserver.utils.EFNotification
+import org.boulderse.ijserver.utils.FileUtils
+import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.endLine
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
@@ -51,23 +51,23 @@ import kotlin.io.path.Path
 import kotlin.io.path.readText
 import kotlin.math.abs
 
-
-class RefactoringAgentLauncher(val project: Project, val editor: Editor, val file: PsiFile){
-    object RefAgent: IdeFormerAgent.GrazieDefault("refactoring-agent")
+class RefactoringAgentLauncher(
+    val project: Project,
+    val editor: Editor,
+    val file: PsiFile,
+) {
+    object RefAgent : IdeFormerAgent.GrazieDefault("refactoring-agent")
 
     val testSelector = TestSelector.createSelector(1, project)
     val codeTransformer = CodeTransformer()
     val performedRefactorings = mutableListOf<AbstractRefactoring>()
     val telemetryDataManager = EFTelemetryDataManager()
 
-    fun do_extract(){
-
+    fun do_extract() {
     }
 
     @OptIn(ExperimentalAPI::class)
     fun launch() {
-
-
         /** 1. Describe the list of tools for your agent
          *
          * IMPORTANT: Defining tool descriptors in code is good ONLY for fast experiments,
@@ -79,159 +79,170 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
         val toolDescriptorProvider = ToolDescriptorProvider.static(RefactoringTools.toolsList)
 
         // 2. Implement the tools using ToolRegistry
-        val toolRegistry = singleStageStatelessToolRegistry(toolDescriptorProvider) {
-            tool(RefactoringTools.ExtractMethod.NAME) { args ->
-                print("performing extract method.")
-                print("Args: $args")
-                try{
-                    val params = Json.decodeFromString<ExtractMethodParams>(args.toString())
-                    println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
+        val toolRegistry =
+            singleStageStatelessToolRegistry(toolDescriptorProvider) {
+                tool(RefactoringTools.ExtractMethod.NAME) { args ->
+                    print("performing extract method.")
+                    print("Args: $args")
+                    try {
+                        val params = Json.decodeFromString<ExtractMethodParams>(args.toString())
+                        println("extracting lines ${params.startLine} -> ${params.endLine}: ${params.newName}")
 
-                    // Calling IJ extract method API here.
-                    val refObjs = ExtractMethodFactory.fromStartEndLine(
-                        editor,
-                        file,
-                        params.startLine,
-                        params.endLine,
-                        params.newName
-                    )
-                    val response = if (refObjs.isNotEmpty()) {
-                        var failedException: Exception? = null
-                        SwingUtilities.invokeAndWait {
-                            try {
-                                refObjs[0].performRefactoring(project, editor, file)
-                            } catch (ex: Exception) {
-                                failedException = ex
-                            }
-                        }
-                        if (failedException == null) {
-                            performedRefactorings.add(refObjs[0])
-                            "success"
-                        }
-                        else
-                            throw failedException!!
-                    } else
-                        "couldn't create a refactoring object."
-                    return@tool response
-                }catch (exc: Exception) {
-                    return@tool "Error. " + exc.message.toString()
-                }
-            }
-
-            tool(RefactoringTools.Rename.NAME){
-                args ->
-                try{
-                    val params = Json.decodeFromString<RenameParams>(args.toString())
-                    println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
-
-                    // Call IJ rename API here.
-                    val renameObject = RenameVariableFactory.fromOldNewNameAll(
-                        project, editor, file, params.oldName, params.newName
-                    )
-                    val response = if (renameObject.isNotEmpty()) {
-                        val refObj = if (renameObject.size > 1) {
-                            if (params.lineNum == null)
-                                throw Exception(
-                                    "too many matching variables/field. " +
-                                            "Please choose a line number to identify the variable/field to be renamed."
-                                )
-                            val objs = renameObject.filter { it.startLoc + 1 == params.lineNum }
-                            if (objs.size > 1) {
-                                throw Exception(
-                                    "too many matching variables/field. " +
-                                            "Please choose a line number to identify the variable/field to be renamed."
-                                )
-                            } else if (objs.isEmpty()) {
-                                throw Exception("No matching variable/field at the given line number.")
+                        // Calling IJ extract method API here.
+                        val refObjs =
+                            ExtractMethodFactory.fromStartEndLine(
+                                editor,
+                                file,
+                                params.startLine,
+                                params.endLine,
+                                params.newName,
+                            )
+                        val response =
+                            if (refObjs.isNotEmpty()) {
+                                var failedException: Exception? = null
+                                SwingUtilities.invokeAndWait {
+                                    try {
+                                        refObjs[0].performRefactoring(project, editor, file)
+                                    } catch (ex: Exception) {
+                                        failedException = ex
+                                    }
+                                }
+                                if (failedException == null) {
+                                    performedRefactorings.add(refObjs[0])
+                                    "success"
+                                } else {
+                                    throw failedException!!
+                                }
                             } else {
-                                objs[0]
+                                "couldn't create a refactoring object."
                             }
-                        } else {
-                            renameObject[0]
-                        }
-                        SwingUtilities.invokeAndWait { refObj.performRefactoring(project, editor, file) }
-                        performedRefactorings.add(refObj)
-                        "success"
-                    } else
-                        "could not identify a variable to rename"
-                    return@tool response
-                } catch (exc: Exception){
-                    return@tool "Error. " + exc.message.toString()
-                }
-            }
-
-            tool(RefactoringTools.GetSource.NAME){
-                args -> return@tool file.text
-            }
-
-            tool(RefactoringTools.CurateTests.NAME){
-                args ->
-                runReadAction{ testSelector.collectTestSamplesForCurrentFile(file.virtualFile, project) }
-                testSelector.runAndKeepPassingTests()
-                return@tool testSelector.getTestNames().toString()
-            }
-
-            tool(RefactoringTools.RunTestClass.NAME){
-                    args -> testSelector.runTests()
-            }
-
-            tool(RefactoringTools.ReplaceFile.NAME){
-                args ->
-                println("replacing file contents")
-                val params = Json.decodeFromString<RefactoringTools.ReplaceFile.CallParams>(args.toString())
-                val oldContents = Path(file.virtualFile.path).readText()
-                FileUtils.replaceFileContents(
-                    Path(file.virtualFile.path),
-                    params.newContent
-                )
-                VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
-                // Run IJ linter
-                SwingUtilities.invokeAndWait { ReformatFile.doReformat(file, file.startOffset, file.endOffset) }
-                Thread.sleep(5000) // wait for reformat to complete.
-                SwingUtilities.invokeAndWait {
-                    FileDocumentManager.getInstance().saveDocument(editor.document) // save changes to local filesystem
+                        return@tool response
+                    } catch (exc: Exception) {
+                        return@tool "Error. " + exc.message.toString()
+                    }
                 }
 
-                val testReport = testSelector.runTests()
-                if (testReport!="success"){
-                    // roll back changes.
+                tool(RefactoringTools.Rename.NAME) { args ->
+                    try {
+                        val params = Json.decodeFromString<RenameParams>(args.toString())
+                        println("renaming ${params.oldName}@${params.lineNum} -> ${params.newName}")
+
+                        // Call IJ rename API here.
+                        val renameObject =
+                            RenameVariableFactory.fromOldNewNameAll(
+                                project,
+                                editor,
+                                file,
+                                params.oldName,
+                                params.newName,
+                            )
+                        val response =
+                            if (renameObject.isNotEmpty()) {
+                                val refObj =
+                                    if (renameObject.size > 1) {
+                                        if (params.lineNum == null) {
+                                            throw Exception(
+                                                "too many matching variables/field. " +
+                                                    "Please choose a line number to identify the variable/field to be renamed.",
+                                            )
+                                        }
+                                        val objs = renameObject.filter { it.startLoc + 1 == params.lineNum }
+                                        if (objs.size > 1) {
+                                            throw Exception(
+                                                "too many matching variables/field. " +
+                                                    "Please choose a line number to identify the variable/field to be renamed.",
+                                            )
+                                        } else if (objs.isEmpty()) {
+                                            throw Exception("No matching variable/field at the given line number.")
+                                        } else {
+                                            objs[0]
+                                        }
+                                    } else {
+                                        renameObject[0]
+                                    }
+                                SwingUtilities.invokeAndWait { refObj.performRefactoring(project, editor, file) }
+                                performedRefactorings.add(refObj)
+                                "success"
+                            } else {
+                                "could not identify a variable to rename"
+                            }
+                        return@tool response
+                    } catch (exc: Exception) {
+                        return@tool "Error. " + exc.message.toString()
+                    }
+                }
+
+                tool(RefactoringTools.GetSource.NAME) { args ->
+                    return@tool file.text
+                }
+
+                tool(RefactoringTools.CurateTests.NAME) { args ->
+                    runReadAction { testSelector.collectTestSamplesForCurrentFile(file.virtualFile, project) }
+                    testSelector.runAndKeepPassingTests()
+                    return@tool testSelector.getTestNames().toString()
+                }
+
+                tool(RefactoringTools.RunTestClass.NAME) { args ->
+                    testSelector.runTests()
+                }
+
+                tool(RefactoringTools.ReplaceFile.NAME) { args ->
+                    println("replacing file contents")
+                    val params = Json.decodeFromString<RefactoringTools.ReplaceFile.CallParams>(args.toString())
+                    val oldContents = Path(file.virtualFile.path).readText()
                     FileUtils.replaceFileContents(
                         Path(file.virtualFile.path),
-                        oldContents
+                        params.newContent,
                     )
                     VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
-                    "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
-                }else
-                    "success"
-            }
+                    // Run IJ linter
+                    SwingUtilities.invokeAndWait { ReformatFile.doReformat(file, file.startOffset, file.endOffset) }
+                    Thread.sleep(5000) // wait for reformat to complete.
+                    SwingUtilities.invokeAndWait {
+                        FileDocumentManager.getInstance().saveDocument(editor.document) // save changes to local filesystem
+                    }
 
-            tool(RefactoringTools.ReplaceMethod.NAME){
-                    args ->
+                    val testReport = testSelector.runTests()
+                    if (testReport != "success") {
+                        // roll back changes.
+                        FileUtils.replaceFileContents(
+                            Path(file.virtualFile.path),
+                            oldContents,
+                        )
+                        VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
+                        "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
+                    } else {
+                        "success"
+                    }
+                }
+
+                tool(RefactoringTools.ReplaceMethod.NAME) { args ->
                     val params =
                         Json.decodeFromString<RefactoringTools.ReplaceMethod.CallParams>(args.toString())
                     val matches = PsiUtils.getAllMethodNameFromClass(file, params.methodName)!!
 
-
-                    if (matches.size == 0)
+                    if (matches.size == 0) {
                         return@tool "no method with that name was found."
-                    else if (matches.size > 1 && params.lineNum==null)
+                    } else if (matches.size > 1 && params.lineNum == null) {
                         return@tool "Too many methods (${matches.size}) have that name. " +
-                                "Please identify the method from it's line number."
+                            "Please identify the method from it's line number."
+                    }
 
                     val methodPsi = matches.sortedBy { abs(it.startLine(editor.document) - params.lineNum!!) }.first()
 
-                    val oldContents = runReadAction{ editor.document.text }
+                    val oldContents = runReadAction { editor.document.text }
                     FileUtils.replaceFileContentsInRange(
                         Path(file.virtualFile.path),
-                        methodPsi.startOffset, methodPsi.endOffset,
-                        params.newContent
+                        methodPsi.startOffset,
+                        methodPsi.endOffset,
+                        params.newContent,
                     )
                     VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                     SwingUtilities.invokeAndWait {
                         ReformatFile.doReformat(
                             file,
                             methodPsi.startOffset,
-                            methodPsi.startOffset + params.newContent.length
+                            methodPsi.startOffset + params.newContent.length,
                         )
                     }
                     Thread.sleep(5000) // sleep five seconds to allow the reformatting to complete.
@@ -239,26 +250,25 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                         FileDocumentManager.getInstance().saveDocument(editor.document) // save changes to local filesystem
                     }
                     val testReport = testSelector.runTests()
-                    if (testReport != "success"){
+                    if (testReport != "success") {
                         // Tests failed. need to roll back edits.
                         FileUtils.replaceFileContents(
                             Path(file.virtualFile.path),
-                            oldContents
+                            oldContents,
                         )
                         VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                         "Your changes broke the semantics of the code. Tests failed. Please the report and fix your errors: $testReport"
-                    }else
+                    } else {
                         "success"
+                    }
+                }
 
-            }
-
-            tool(RefactoringTools.IntroduceParameterLiteral.NAME){
-                args ->
-                val params = Json.decodeFromString<RefactoringTools.IntroduceParameterLiteral.CallParams>(args.toString())
+                tool(RefactoringTools.IntroduceParameterLiteral.NAME) { args ->
+                    val params = Json.decodeFromString<RefactoringTools.IntroduceParameterLiteral.CallParams>(args.toString())
 //                IntroduceParameter(12, 12, params.parameterName, )
-                "success"
+                    "success"
+                }
             }
-        }
 
         /** 3. Provide agent configuration (including system prompt)
          *
@@ -268,12 +278,14 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
          * https://github.com/JetBrains/code-engine/tree/main/code-agents/code-agents-tools-registry
          * and then feel free to use [AgentSystemPromptProvider.fromRegistry] method.
          */
-        val agentConfig = IdeFormerAgent.GrazieDefault.Config(
-            llmConfig = IdeFormerAgent.GrazieDefault.Config.LLM(
-                profile = LLMProfileID("openai-gpt-4o-mini"),
-                temperature = Temperature(0.5)
-            ),
-        )
+        val agentConfig =
+            IdeFormerAgent.GrazieDefault.Config(
+                llmConfig =
+                    IdeFormerAgent.GrazieDefault.Config.LLM(
+                        profile = LLMProfileID("openai-gpt-4o-mini"),
+                        temperature = Temperature(0.5),
+                    ),
+            )
 
         /**
          * 4. Provide a grazie token (for connecting with LLMs):
@@ -281,28 +293,32 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
          *  - For testing purposes with `staging` tokens please go to https://platform.stgn.jetbrains.ai/, and copy your development token from there
          *  - In real applications, please first authorize user using JBA, and then use Grazie API to exchange JBA token to Grazie user token!
          * */
-        val tokenProvider = object : JwtTokenProvider {
-            override fun getToken(): String = IdeFormerService.token
-            override fun subscribe(onTokenChanged: (token: String?) -> Unit) {}
-            override fun invalidate() {}
-        }
+        val tokenProvider =
+            object : JwtTokenProvider {
+                override fun getToken(): String = IdeFormerService.token
+
+                override fun subscribe(onTokenChanged: (token: String?) -> Unit) {}
+
+                override fun invalidate() {}
+            }
 
         /**
          * 5. Define how you would like to handle events in your agents
          * */
-        val eventHandler = EventHandler {
-            onResultReceived { result ->
-                if (result != null) {
-                    println("result: $result")
+        val eventHandler =
+            EventHandler {
+                onResultReceived { result ->
+                    if (result != null) {
+                        println("result: $result")
+                    }
+                }
+                onToolCalled { toolName, arguments, _ ->
+                    println("tool $toolName was called with arguments $arguments")
+                }
+                onException<Throwable> { exception ->
+                    println("error happened: ${exception.message}")
                 }
             }
-            onToolCalled { toolName, arguments, _ ->
-                println("tool $toolName was called with arguments $arguments")
-            }
-            onException<Throwable> { exception ->
-                println("error happened: ${exception.message}")
-            }
-        }
 
         telemetryDataManager.newSession()
         telemetryDataManager.addHostFunctionTelemetryData(
@@ -312,10 +328,9 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                 bodyLineStart = file.endLine(editor.document),
                 language = file.language.id.toLowerCaseAsciiOnly(),
                 filePath = file.virtualFile.path,
-                hostClassPsi = null
-            )
+                hostClassPsi = null,
+            ),
         )
-
 
         runBlocking {
             /**
@@ -323,30 +338,32 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
              * */
             val client = IdeFormerService.getAgentClient(tokenProvider)
 
-
 //            val sourceCode = addLineNumbersToCodeSnippet(file?.text?:"", 1)
             val sourceCode = file.text
             /**
              * 8. Start your AI agent
              * */
-            try{
+            try {
                 IdeFormerRunner(
                     client = client,
                     toolRegistry = toolRegistry,
                     eventHandler = eventHandler,
                     agent = RefAgent,
-                    agentConfig = agentConfig
+                    agentConfig = agentConfig,
                 ).run(sourceCode)
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
                 print("Something failed.")
             }
-
         }
         // Show completed refactorings to the developer.
         invokeLater {
             showCompletedRefactoringOptionsPopup(
-                project, editor, file, performedRefactorings, codeTransformer,
+                project,
+                editor,
+                file,
+                performedRefactorings,
+                codeTransformer,
             )
         }
     }
@@ -356,21 +373,22 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
         editor: Editor,
         file: PsiFile,
         candidates: List<AbstractRefactoring>,
-        codeTransformer: CodeTransformer
+        codeTransformer: CodeTransformer,
     ) {
-        if (candidates.isEmpty()){
+        if (candidates.isEmpty()) {
             // Show notification
             return
         }
         val highlighter = AtomicReference(ScopeHighlighter(editor))
         telemetryDataManager.setRefactoringObjects(candidates)
-        val efPanel = CompletedRefactoringsPanel(
-            project = project,
-            editor = editor,
-            file = file,
-            candidates = candidates,
-            efTelemetryDataManager = telemetryDataManager
-        )
+        val efPanel =
+            CompletedRefactoringsPanel(
+                project = project,
+                editor = editor,
+                file = file,
+                candidates = candidates,
+                efTelemetryDataManager = telemetryDataManager,
+            )
         efPanel.initTable()
         val elapsedTimeTelemetryDataObserver = TelemetryElapsedTimeObserver()
         efPanel.addObserver(elapsedTimeTelemetryDataObserver)
@@ -378,7 +396,8 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
 
         // Create the popup
         val efPopup =
-            JBPopupFactory.getInstance()
+            JBPopupFactory
+                .getInstance()
                 .createComponentPopupBuilder(panel, efPanel.myRefactoringCandidateTable)
                 .setRequestFocus(true)
                 .setTitle(LLMBundle.message("ef.candidates.completed.popup.title"))
@@ -388,27 +407,29 @@ class RefactoringAgentLauncher(val project: Project, val editor: Editor, val fil
                 .createPopup()
 
         // Add onClosed listener
-        efPopup.addListener(object : JBPopupListener {
-            override fun onClosed(event: LightweightWindowEvent) {
-                elapsedTimeTelemetryDataObserver.update(
-                    EFNotification(
-                        EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.STOP, 0)
+        efPopup.addListener(
+            object : JBPopupListener {
+                override fun onClosed(event: LightweightWindowEvent) {
+                    elapsedTimeTelemetryDataObserver.update(
+                        EFNotification(
+                            EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.STOP, 0),
+                        ),
                     )
-                )
-                elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager = telemetryDataManager)
-                highlighter.getAndSet(null).dropHighlight()
+                    elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(telemetryDataManager = telemetryDataManager)
+                    highlighter.getAndSet(null).dropHighlight()
 //                sendTelemetryData() TODO: implement this!
-            }
+                }
 
-            override fun beforeShown(event: LightweightWindowEvent) {
-                super.beforeShown(event)
-                elapsedTimeTelemetryDataObserver.update(
-                    EFNotification(
-                        EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.START, 0)
+                override fun beforeShown(event: LightweightWindowEvent) {
+                    super.beforeShown(event)
+                    elapsedTimeTelemetryDataObserver.update(
+                        EFNotification(
+                            EFTelemetryDataElapsedTimeNotificationPayload(TelemetryDataAction.START, 0),
+                        ),
                     )
-                )
-            }
-        })
+                }
+            },
+        )
 
         // set the popup as delegate to the Extract Function panel
         efPanel.setDelegatePopup(efPopup)

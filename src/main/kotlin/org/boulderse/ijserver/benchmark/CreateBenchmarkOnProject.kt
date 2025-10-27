@@ -17,10 +17,9 @@ import java.nio.file.Path
 class CreateBenchmarkOnProject(
     val projectPath: String,
     val refMinerOut: String,
-    val project: Project
+    val project: Project,
 ) {
-
-    fun create(){
+    fun create() {
         val jsonContent = Files.readString(Path.of(refMinerOut))
         val json = JsonParser.parseString(jsonContent)
         for (filename in json.asJsonObject.keySet()) {
@@ -30,12 +29,13 @@ class CreateBenchmarkOnProject(
             // Checkout commit
 
             // Open file
-            val editorFilePair = try {
-                openFile(filename)
-            } catch (e: Exception) {
-                print("Skipping. File not found")
-                continue
-            }
+            val editorFilePair =
+                try {
+                    openFile(filename)
+                } catch (e: Exception) {
+                    print("Skipping. File not found")
+                    continue
+                }
             val editor = editorFilePair.first
             val file = editorFilePair.second
 
@@ -48,23 +48,24 @@ class CreateBenchmarkOnProject(
 
     private fun openFile(filePath: String): Pair<Editor, PsiFile> {
 //        runWriteAction {  }
-        var ret : Pair<Editor, PsiFile>? = null
-         invokeAndWaitIfNeeded {
-                val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + filePath)
+        var ret: Pair<Editor, PsiFile>? = null
+        invokeAndWaitIfNeeded {
+            val vfile =
+                LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + filePath)
                     ?: throw Exception("file not found")
-                val newEditor = FileEditorManager.getInstance(project).openTextEditor(
+            val newEditor =
+                FileEditorManager.getInstance(project).openTextEditor(
                     OpenFileDescriptor(
                         project,
-                        vfile
+                        vfile,
                     ),
-                    false // request focus to editor
+                    false, // request focus to editor
                 )!!
-                val psiFile = PsiManager.getInstance(project).findFile(vfile)!!
+            val psiFile = PsiManager.getInstance(project).findFile(vfile)!!
 
-                ret = Pair(newEditor, psiFile)
-         }.wait()
+            ret = Pair(newEditor, psiFile)
+        }.wait()
 
         return ret!!
     }
-
 }

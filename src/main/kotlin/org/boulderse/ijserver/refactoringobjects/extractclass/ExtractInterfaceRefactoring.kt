@@ -1,7 +1,5 @@
 package org.boulderse.ijserver.refactoringobjects.extractclass
 
-import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
-import org.boulderse.ijserver.refactoringobjects.MyRefactoringFactory
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
@@ -11,6 +9,8 @@ import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.extractInterface.ExtractInterfaceProcessor
 import com.intellij.refactoring.util.DocCommentPolicy
 import com.intellij.refactoring.util.classMembers.MemberInfo
+import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
+import org.boulderse.ijserver.refactoringobjects.MyRefactoringFactory
 
 class ExtractInterfaceRefactoring(
     override val startLoc: Int,
@@ -18,28 +18,30 @@ class ExtractInterfaceRefactoring(
     val interfaceName: String,
     val subClassName: String,
     val classToExtract: PsiClass,
-    val members: Array<MemberInfo>
+    val members: Array<MemberInfo>,
 ) : AbstractRefactoring() {
-
-
-    override fun performRefactoring(project: Project, editor: Editor, file: PsiFile) {
+    override fun performRefactoring(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ) {
         val originalName = classToExtract.name!!
 //        val tempName = if (interfaceName == originalName) interfaceName else "${interfaceName}Temp"
         val tempName = "${interfaceName}Temp"
 
-        val processor = ExtractInterfaceProcessor(
-            project,
-            false,
-            file.containingDirectory,
-            tempName,
-            classToExtract,
-            members,
-            DocCommentPolicy(DocCommentPolicy.ASIS)
-        )
+        val processor =
+            ExtractInterfaceProcessor(
+                project,
+                false,
+                file.containingDirectory,
+                tempName,
+                classToExtract,
+                members,
+                DocCommentPolicy(DocCommentPolicy.ASIS),
+            )
         processor.run()
 
-
-        val matchingInterface = classToExtract.interfaces.filter { it.name==originalName }.first()
+        val matchingInterface = classToExtract.interfaces.filter { it.name == originalName }.first()
         val rename1 = RefactoringFactory.getInstance(project).createRename(matchingInterface, interfaceName)
         val usages = rename1?.findUsages()
         rename1?.doRefactoring(usages)
@@ -51,9 +53,11 @@ class ExtractInterfaceRefactoring(
         super.performRefactoring(project, editor, file)
     }
 
-    override fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean {
-        return true
-    }
+    override fun isValid(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): Boolean = true
 
     override fun getRefactoringPreview(): String {
         TODO("Not yet implemented")
@@ -67,64 +71,75 @@ class ExtractInterfaceRefactoring(
         TODO("Not yet implemented")
     }
 
-    override fun getReverseRefactoringObject(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+    override fun getReverseRefactoringObject(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): AbstractRefactoring? {
         TODO("Not yet implemented")
     }
 
-    override fun recalibrateRefactoring(project: Project, editor: Editor, file: PsiFile): AbstractRefactoring? {
+    override fun recalibrateRefactoring(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): AbstractRefactoring? {
         TODO("Not yet implemented")
     }
 
-    companion object: MyRefactoringFactory{
-
+    companion object : MyRefactoringFactory {
         fun createFromMembers(
             psiClass: PsiClass,
             members: List<String>,
             interfaceName: String,
-            subClassName: String
-        ): ExtractInterfaceRefactoring{
-
+            subClassName: String,
+        ): ExtractInterfaceRefactoring {
             if (
-                psiClass.interfaces.filter { it.name == interfaceName }.isNotEmpty()
-                || psiClass.superClass?.name == interfaceName
-                ){
-                throw Exception("${psiClass.name} already implements the $interfaceName interface. " +
-                        "If you would like to move members into the interface, try performing a pull-up refactoring")
+                psiClass.interfaces.filter { it.name == interfaceName }.isNotEmpty() ||
+                psiClass.superClass?.name == interfaceName
+            ) {
+                throw Exception(
+                    "${psiClass.name} already implements the $interfaceName interface. " +
+                        "If you would like to move members into the interface, try performing a pull-up refactoring",
+                )
             }
 
-            val fields = psiClass.allFields.filter { it.name in members}
+            val fields = psiClass.allFields.filter { it.name in members }
             val methods = psiClass.allMethods.filter { it.name in members }
-            if (fields.isEmpty() && methods.isEmpty())
-                throw Exception("No fields/methods of the specified names were found. " +
+            if (fields.isEmpty() && methods.isEmpty()) {
+                throw Exception(
+                    "No fields/methods of the specified names were found. " +
                         "If you are trying to extract a class from a method's parameters, " +
-                        "use the tool `introduce parameter object` instead")
+                        "use the tool `introduce parameter object` instead",
+                )
+            }
 
             return ExtractInterfaceRefactoring(
-                1,1,
+                1,
+                1,
                 interfaceName,
                 subClassName,
                 psiClass,
-                fields.map {
-                    val m = MemberInfo(it)
-                    m.isToAbstract=true
-                    m
-                }
-                    .union(methods.map {
+                fields
+                    .map {
                         val m = MemberInfo(it)
                         m.isToAbstract = true
                         m
-                    })
-                    .toTypedArray()
+                    }.union(
+                        methods.map {
+                            val m = MemberInfo(it)
+                            m.isToAbstract = true
+                            m
+                        },
+                    ).toTypedArray(),
             )
         }
-
-
 
         override fun createObjectsFromFuncCall(
             funcCall: String,
             project: Project,
             editor: Editor,
-            file: PsiFile
+            file: PsiFile,
         ): List<AbstractRefactoring> {
             TODO("Not yet implemented")
         }
@@ -135,6 +150,5 @@ class ExtractInterfaceRefactoring(
             get() = "extract interface"
         override val APIDocumentation: String
             get() = TODO("Not yet implemented")
-
     }
 }

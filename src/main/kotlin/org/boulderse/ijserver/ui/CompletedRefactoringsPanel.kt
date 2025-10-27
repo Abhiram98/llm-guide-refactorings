@@ -1,5 +1,9 @@
 package org.boulderse.ijserver.ui
 
+import com.intellij.notification.NotificationType
+import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiFile
 import org.boulderse.ijserver.LLMBundle
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.showEFNotification
@@ -7,10 +11,6 @@ import org.boulderse.ijserver.telemetry.EFTelemetryDataElapsedTimeNotificationPa
 import org.boulderse.ijserver.telemetry.EFTelemetryDataManager
 import org.boulderse.ijserver.telemetry.TelemetryDataAction
 import org.boulderse.ijserver.utils.EFNotification
-import com.intellij.notification.NotificationType
-import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiFile
 
 class CompletedRefactoringsPanel(
     project: Project,
@@ -18,35 +18,38 @@ class CompletedRefactoringsPanel(
     file: PsiFile,
     candidates: List<AbstractRefactoring>,
     efTelemetryDataManager: EFTelemetryDataManager,
-    var reverseRefactorings: List<AbstractRefactoring?> = getReverseObjects(candidates, project, editor, file)
+    var reverseRefactorings: List<AbstractRefactoring?> = getReverseObjects(candidates, project, editor, file),
 ) : RefactoringSuggestionsPanel(
-    project, editor,
-    file,
-    candidates, efTelemetryDataManager, LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title")
-) {
-
-    companion object{
+        project,
+        editor,
+        file,
+        candidates,
+        efTelemetryDataManager,
+        LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title"),
+    ) {
+    companion object {
         fun getReverseObjects(
             refactoringObjects: List<AbstractRefactoring>,
-            project: Project, editor: Editor, file: PsiFile
-        ): List<AbstractRefactoring?>{
-            return refactoringObjects.map { it.reverseRefactoring }
-        }
+            project: Project,
+            editor: Editor,
+            file: PsiFile,
+        ): List<AbstractRefactoring?> = refactoringObjects.map { it.reverseRefactoring }
     }
+
     init {
         reverseRefactorings = recalibrateRefactorings(reverseRefactorings)
         // Recalibrate at the start to avoid issue with other ref objects being executed later.
     }
 
     override fun performAction(index: Int): Boolean {
-        if (index !in completedIndices){
+        if (index !in completedIndices) {
             notifyObservers(
                 EFNotification(
                     EFTelemetryDataElapsedTimeNotificationPayload(
                         TelemetryDataAction.STOP,
-                        prevSelectedCandidateIndex
-                    )
-                )
+                        prevSelectedCandidateIndex,
+                    ),
+                ),
             )
             addSelectionToTelemetryData(index)
 
@@ -67,21 +70,21 @@ class CompletedRefactoringsPanel(
 
 //            val reverseRefactoring = refCandidate.getReverseRefactoringObject(myProject, myEditor, myFile)
             val reverseRefactoring = reverseRefactorings[index]
-            if (reverseRefactoring!=null && reverseRefactoring.isValid(myProject, myEditor, myFile)) {
-                val runnable = Runnable {
-                    reverseRefactoring.performRefactoring(myProject, myEditor, myFile)
-                }
+            if (reverseRefactoring != null && reverseRefactoring.isValid(myProject, myEditor, myFile)) {
+                val runnable =
+                    Runnable {
+                        reverseRefactoring.performRefactoring(myProject, myEditor, myFile)
+                    }
                 runnable.run()
                 //        myPopup!!.cancel()
                 refCandidate.undone = true
                 refreshCandidates(index, "UNDID")
                 reverseRefactorings = recalibrateRefactorings(reverseRefactorings)
-            }
-            else {
+            } else {
                 showEFNotification(
                     myProject,
                     LLMBundle.message("notification.extract.function.not.reversible"),
-                    NotificationType.ERROR
+                    NotificationType.ERROR,
                 )
             }
             return true
@@ -90,20 +93,23 @@ class CompletedRefactoringsPanel(
     }
 
     override fun getEndOffset(index: Int): Int {
-        if(reverseRefactorings[index]!=null)
+        if (reverseRefactorings[index] != null) {
             return reverseRefactorings[index]!!.getEndOffset()
+        }
         return 0
     }
 
     override fun getStartOffset(index: Int): Int {
-        if(reverseRefactorings[index]!=null)
+        if (reverseRefactorings[index] != null) {
             return reverseRefactorings[index]!!.getStartOffset()
+        }
         return 0
     }
 
     override fun getStartLoc(index: Int): Int {
-        if(reverseRefactorings[index]!=null)
+        if (reverseRefactorings[index] != null) {
             return myEditor.document.getLineNumber(reverseRefactorings[index]!!.getStartOffset())
+        }
         return 0
     }
 
@@ -111,16 +117,14 @@ class CompletedRefactoringsPanel(
         // recalibrate refactorings in case any got invalidated.
         val recalibratedRefactorings = mutableListOf<AbstractRefactoring?>()
         refactoringObjects.forEach { ref ->
-            if (ref==null)
+            if (ref == null) {
                 recalibratedRefactorings.add(ref)
-            else if (ref.isValid(myProject, myEditor, myFile))
+            } else if (ref.isValid(myProject, myEditor, myFile)) {
                 recalibratedRefactorings.add(ref)
-            else
+            } else {
                 recalibratedRefactorings.add(ref.recalibrateRefactoring(myProject, myEditor, myFile))
+            }
         }
         return recalibratedRefactorings
-
     }
-
-
 }

@@ -23,17 +23,19 @@ import java.io.File
 /**
  * A selector for samples for the LLM.
  */
-abstract class TestSelector(val limitTestCount: Int) {
+abstract class TestSelector(
+    val limitTestCount: Int,
+) {
     data class TestMethod(
         val testClass: PsiClass,
-        val testMethod: PsiMethod
-    ){}
+        val testMethod: PsiMethod,
+    )
 
     data class ProcessStatus(
         val returnCode: Int,
         val stdOut: String,
-        val stdErr: String
-    ){}
+        val stdErr: String,
+    )
 
     private val testNames: MutableSet<TestMethod> = mutableSetOf()
 
@@ -61,7 +63,10 @@ abstract class TestSelector(val limitTestCount: Int) {
      */
     fun getInitialTestCodes(): MutableList<String> = initialTestCodes
 
-    fun appendTestSampleCode(index: Int, code: String) {
+    fun appendTestSampleCode(
+        index: Int,
+        code: String,
+    ) {
         testSamplesCode += "Test sample number ${index + 1}\n```\n${code}\n```\n"
     }
 
@@ -111,7 +116,10 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param currentFile The current file.
      * @param project The project.
      */
-    fun collectTestSamplesForCurrentFile(currentFile: VirtualFile, project: Project) {
+    fun collectTestSamplesForCurrentFile(
+        currentFile: VirtualFile,
+        project: Project,
+    ) {
         val projectScope = JavaFilesSearchScope(project)
         if (isJavaFileTypes(currentFile)) {
             val psiJavaFile = findJavaFileFromProject(currentFile, project)
@@ -122,38 +130,41 @@ abstract class TestSelector(val limitTestCount: Int) {
         }
     }
 
-
     /**
      * Run the collected tests and report it's output.
      *
      *
      * @return A report of the test run.
      **/
-    fun runTests(): String{
+    fun runTests(): String {
         var allPassing = true
         var report = ""
-        for (testMethod in testNames){
+        for (testMethod in testNames) {
             val status = runTest(testMethod)
-            allPassing = allPassing && (status.returnCode==0)
+            allPassing = allPassing && (status.returnCode == 0)
             report += "${testMethod.testClass.qualifiedName}.${testMethod.testMethod.name}: ${status.stdErr}\n"
         }
-        if (allPassing)
+        if (allPassing) {
             return "success"
+        }
         return report
     }
 
-    fun runAndKeepPassingTests(){
-        testNames.removeAll(testNames.filter { runTest(it).returnCode!=0 }.toSet()) // Remove all failing tests
+    fun runAndKeepPassingTests() {
+        testNames.removeAll(testNames.filter { runTest(it).returnCode != 0 }.toSet()) // Remove all failing tests
     }
 
     abstract fun runTest(testMethod: TestMethod): ProcessStatus
 
-
-    protected fun executeProcess(command: List<String>, directory: File): ProcessStatus {
-        return try {
-            val process = ProcessBuilder(command)
-                .directory(directory)
-                .start()
+    protected fun executeProcess(
+        command: List<String>,
+        directory: File,
+    ): ProcessStatus =
+        try {
+            val process =
+                ProcessBuilder(command)
+                    .directory(directory)
+                    .start()
             val result = process.waitFor()
             val stdout = process.inputStream.bufferedReader().use { it.readText() }
             val stderr = process.errorStream.bufferedReader().use { it.readText() }
@@ -162,7 +173,6 @@ abstract class TestSelector(val limitTestCount: Int) {
         } catch (e: Exception) {
             ProcessStatus(-1, "failed to run the command", "")
         }
-    }
 
     /**
      * Returns, whether the file type is a Java file type.
@@ -182,7 +192,10 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param project The project instance.
      * @return The PSI Java file for the given file and project.
      */
-    private fun findJavaFileFromProject(file: VirtualFile, project: Project): PsiJavaFile {
+    private fun findJavaFileFromProject(
+        file: VirtualFile,
+        project: Project,
+    ): PsiJavaFile {
         val psiManager = PsiManager.getInstance(project)
         return psiManager.findFile(file) as PsiJavaFile
     }
@@ -194,7 +207,11 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param psiMethod The method from which the search for references starts.
      * @param scope The scope of the search
      */
-    private fun processMethod(psiClass: PsiClass, psiMethod: PsiMethod, scope: SearchScope) {
+    private fun processMethod(
+        psiClass: PsiClass,
+        psiMethod: PsiMethod,
+        scope: SearchScope,
+    ) {
         ReferencesSearch.search(psiMethod, scope).forEach { reference ->
             val enclosingMethod = PsiTreeUtil.getParentOfType(reference.element, PsiMethod::class.java)
             if (enclosingMethod != null) {
@@ -209,7 +226,10 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param enclosingMethod The enclosing method.
      * @param psiClass The class that defines the method.
      */
-    private fun processEnclosingMethod(enclosingMethod: PsiMethod, psiClass: PsiClass) {
+    private fun processEnclosingMethod(
+        enclosingMethod: PsiMethod,
+        psiClass: PsiClass,
+    ) {
         val enclosingClass = enclosingMethod.containingClass
         val enclosingFile = (enclosingMethod.containingFile as PsiJavaFile)
         val imports = retrieveImportStatements(enclosingFile, enclosingClass!!)
@@ -222,12 +242,14 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param psiJavaFile The PSI Java file object
      * @return The PSI class object.
      */
-    fun retrievePsiClass(psiJavaFile: PsiJavaFile): PsiClass {
-        return psiJavaFile.classes[
-            psiJavaFile.classes.stream().map { it.name }.toArray()
+    fun retrievePsiClass(psiJavaFile: PsiJavaFile): PsiClass =
+        psiJavaFile.classes[
+            psiJavaFile.classes
+                .stream()
+                .map { it.name }
+                .toArray()
                 .indexOf(psiJavaFile.name.removeSuffix(".java")),
         ]
-    }
 
     /**
      * Retrieves the import statements for a {@link PsiJavaFile} and {@link PsiClass}.
@@ -236,9 +258,16 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param psiClass The PSI class object.
      * @return A string of import statements.
      */
-    fun retrieveImportStatements(psiJavaFile: PsiJavaFile, psiClass: PsiClass): String {
-        var imports = psiJavaFile.importList?.allImportStatements?.map { it.text }?.toList()
-            ?.joinToString("\n") ?: ""
+    fun retrieveImportStatements(
+        psiJavaFile: PsiJavaFile,
+        psiClass: PsiClass,
+    ): String {
+        var imports =
+            psiJavaFile.importList
+                ?.allImportStatements
+                ?.map { it.text }
+                ?.toList()
+                ?.joinToString("\n") ?: ""
         if (psiClass.qualifiedName != null && psiClass.qualifiedName!!.contains(".")) {
             imports += "\nimport ${psiClass.qualifiedName?.substringBeforeLast(".") + ".*"};"
         }
@@ -255,9 +284,14 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param imports The imports required for the code generation.
      * @param psiClass The PSI class object.
      */
-    private fun processCandidateMethod(psiMethod: PsiMethod, imports: String, psiClass: PsiClass) {
-        if (testNames.size > limitTestCount)
+    private fun processCandidateMethod(
+        psiMethod: PsiMethod,
+        imports: String,
+        psiClass: PsiClass,
+    ) {
+        if (testNames.size > limitTestCount) {
             return
+        }
 
         val annotations = psiMethod.annotations
         annotations.forEach { annotation ->
@@ -280,13 +314,16 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param methodCode The code of the method.
      * @return A class wrapping the given method.
      */
-    fun createTestSampleClass(imports: String, methodCode: String): String {
+    fun createTestSampleClass(
+        imports: String,
+        methodCode: String,
+    ): String {
         var normalizedImports = imports
         if (normalizedImports.isNotBlank()) normalizedImports += "\n\n"
         return normalizedImports +
-                "public class TestSample {\n" +
-                "    $methodCode\n" +
-                "}"
+            "public class TestSample {\n" +
+            "    $methodCode\n" +
+            "}"
     }
 
     /**
@@ -296,15 +333,19 @@ abstract class TestSelector(val limitTestCount: Int) {
      * @param method The method object.
      * @return A fully-qualified method name.
      */
-    fun createMethodName(psiClass: PsiClass, method: PsiMethod): String =
-        "${psiClass.qualifiedName}.${method.name}"
+    fun createMethodName(
+        psiClass: PsiClass,
+        method: PsiMethod,
+    ): String = "${psiClass.qualifiedName}.${method.name}"
 
     companion object {
         const val DEFAULT_TEST_NAME = "<html>provide manually</html>"
         const val DEFAULT_TEST_CODE = "// provide test method code here"
 
-
-        fun createSelector(limitTestCount: Int, project: Project): TestSelector {
+        fun createSelector(
+            limitTestCount: Int,
+            project: Project,
+        ): TestSelector {
             val basePath = project.basePath ?: ""
             return if (File(basePath, "pom.xml").exists()) {
                 MavenTestSelector(limitTestCount)

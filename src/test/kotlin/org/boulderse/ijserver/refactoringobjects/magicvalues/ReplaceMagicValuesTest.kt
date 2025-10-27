@@ -29,38 +29,34 @@ import org.jetbrains.uast.ULiteralExpression
 import org.jetbrains.uast.evaluation.toConstant
 import org.junit.jupiter.api.Assertions.*
 
-class ReplaceMagicValuesTest: LightPlatformCodeInsightTestCase(){
-
+class ReplaceMagicValuesTest : LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
-    override fun getTestDataPath(): String {
-        return projectPath
-    }
 
+    override fun getTestDataPath(): String = projectPath
 
-    fun testReplaceMagicValue(){
+    fun testReplaceMagicValue() {
         configureByFile("/testdata/HelloWorld.java")
         val startLoc = 55
         val element =
-            PsiUtilBase.getElementAtOffset(
-                file, editor.document.getLineStartOffset(startLoc-1))
+            PsiUtilBase.getElementAtOffset(file, editor.document.getLineStartOffset(startLoc - 1))
 
-        val startOffset = editor.document.getLineStartOffset(startLoc-1)
+        val startOffset = editor.document.getLineStartOffset(startLoc - 1)
         val endOffset = editor.document.getLineStartOffset(startLoc)
-        val stringLiteral = PsiTreeUtil
-            .findChildrenOfType(element.parent, PsiAssignmentExpression::class.java)
-            .filter { it.startOffset in startOffset..endOffset }[0]
+        val stringLiteral =
+            PsiTreeUtil
+                .findChildrenOfType(element.parent, PsiAssignmentExpression::class.java)
+                .filter { it.startOffset in startOffset..endOffset }[0]
 
 //        val constantHandler = IntroduceConstantHandler()
 //        constantHandler.invoke(project, arrayOf(stringLiteral))
 //        val magicCharacterInspection = MagicCharacterInspection()
         val magicCharacterInspection = MagicConstantInspection()
 
-
 //        val refactoringFactory = RefactoringFactory.getInstance(project)
 //        refactoringFactory.toConstant()
 //        IntroduceConstantAction()
 //        IntroduceConstantFix()
-//LocalInspectionToolSession(file, TextRange(startOffset, endOffset))
+// LocalInspectionToolSession(file, TextRange(startOffset, endOffset))
         val problemsHolder = ProblemsHolder(InspectionManager.getInstance(project), file, false)
         val visitor = magicCharacterInspection.buildVisitor(problemsHolder, false)
         stringLiteral?.accept(visitor)
@@ -70,30 +66,34 @@ class ReplaceMagicValuesTest: LightPlatformCodeInsightTestCase(){
         val problem = problemsHolder.results[0]!!
         val fix = problem.fixes!![0]
 
-        WriteCommandAction.runWriteCommandAction(project,
-            Runnable { fix.applyFix(project, problem) })
+        WriteCommandAction.runWriteCommandAction(
+            project,
+            Runnable { fix.applyFix(project, problem) },
+        )
         println(file.text)
-
-
     }
+
     fun testIntroduceConstant() {
         configureByFile("/testdata/HelloWorld.java")
         val startLoc = 52
         val element =
             PsiUtilBase.getElementAtOffset(
-                file, editor.document.getLineStartOffset(startLoc - 1)
+                file,
+                editor.document.getLineStartOffset(startLoc - 1),
             )
 
         val startOffset = editor.document.getLineStartOffset(startLoc - 1)
         val endOffset = editor.document.getLineStartOffset(startLoc)
-        val stringLiteral = PsiTreeUtil
-            .findChildrenOfType(element.parent, PsiLiteralExpression::class.java)
-            .filter { it.startOffset in startOffset..endOffset }[0]
+        val stringLiteral =
+            PsiTreeUtil
+                .findChildrenOfType(element.parent, PsiLiteralExpression::class.java)
+                .filter { it.startOffset in startOffset..endOffset }[0]
 
         val introConstant = IntroduceConstantHandler()
         IntroduceConstantAction()
-        WriteCommandAction.runWriteCommandAction(project,
-            Runnable { introConstant.invoke(project, arrayOf(stringLiteral))})
-
+        WriteCommandAction.runWriteCommandAction(
+            project,
+            Runnable { introConstant.invoke(project, arrayOf(stringLiteral)) },
+        )
     }
 }

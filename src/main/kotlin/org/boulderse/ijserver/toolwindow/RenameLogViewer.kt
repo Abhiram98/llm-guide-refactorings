@@ -5,16 +5,15 @@ import kotlinx.coroutines.withTimeoutOrNull
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
+import javax.swing.Box
+import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
-import javax.swing.BoxLayout
-import javax.swing.Box
 import kotlin.time.Duration.Companion.minutes
 
-class RenameLogViewer: LogViewer("Rename agent logs") {
-
+class RenameLogViewer : LogViewer("Rename agent logs") {
     private val patternText = JTextArea()
     private val guardText = JTextArea()
     private val confirmScopeButton = JButton("Confirm Scope")
@@ -26,38 +25,38 @@ class RenameLogViewer: LogViewer("Rename agent logs") {
         guardText.lineWrap = true
         guardText.wrapStyleWord = true
 
-            // Prepare pattern and guard panes
-            val patternPane = JScrollPane(patternText)
-            patternPane.preferredSize = Dimension(500, 100)
+        // Prepare pattern and guard panes
+        val patternPane = JScrollPane(patternText)
+        patternPane.preferredSize = Dimension(500, 100)
 
-            val guardPane = JScrollPane(guardText)
-            guardPane.preferredSize = Dimension(500, 100)
+        val guardPane = JScrollPane(guardText)
+        guardPane.preferredSize = Dimension(500, 100)
 
-            patternText.text = "<Rename pattern>"
-            guardText.text = "<Guard conditions here>"
+        patternText.text = "<Rename pattern>"
+        guardText.text = "<Guard conditions here>"
 
-            // Create titled sub-panels for Pattern and Guard, and wrap them in a "Renaming Scope" panel
-            val patternPanel = JPanel(BorderLayout())
-            patternPanel.border = javax.swing.BorderFactory.createTitledBorder("Pattern")
-            patternPanel.add(patternPane, BorderLayout.CENTER)
+        // Create titled sub-panels for Pattern and Guard, and wrap them in a "Renaming Scope" panel
+        val patternPanel = JPanel(BorderLayout())
+        patternPanel.border = javax.swing.BorderFactory.createTitledBorder("Pattern")
+        patternPanel.add(patternPane, BorderLayout.CENTER)
 
-            val guardPanel = JPanel(BorderLayout())
-            guardPanel.border = javax.swing.BorderFactory.createTitledBorder("Guard")
-            guardPanel.add(guardPane, BorderLayout.CENTER)
+        val guardPanel = JPanel(BorderLayout())
+        guardPanel.border = javax.swing.BorderFactory.createTitledBorder("Guard")
+        guardPanel.add(guardPane, BorderLayout.CENTER)
 
-            val renamingScopePanel = JPanel()
-            renamingScopePanel.layout = BoxLayout(renamingScopePanel, BoxLayout.Y_AXIS)
-            renamingScopePanel.border = javax.swing.BorderFactory.createTitledBorder("Renaming Scope")
-            renamingScopePanel.add(patternPanel)
-            renamingScopePanel.add(Box.createVerticalStrut(8))
-            renamingScopePanel.add(guardPanel)
+        val renamingScopePanel = JPanel()
+        renamingScopePanel.layout = BoxLayout(renamingScopePanel, BoxLayout.Y_AXIS)
+        renamingScopePanel.border = javax.swing.BorderFactory.createTitledBorder("Renaming Scope")
+        renamingScopePanel.add(patternPanel)
+        renamingScopePanel.add(Box.createVerticalStrut(8))
+        renamingScopePanel.add(guardPanel)
 
-            // Create a vertical container for pattern, guard and buttons
-            val southPanel = JPanel()
-            southPanel.layout = BoxLayout(southPanel, BoxLayout.Y_AXIS)
-            // add the combined titled Renaming Scope panel instead of raw panes
-            southPanel.add(renamingScopePanel)
-            southPanel.add(Box.createVerticalStrut(8))
+        // Create a vertical container for pattern, guard and buttons
+        val southPanel = JPanel()
+        southPanel.layout = BoxLayout(southPanel, BoxLayout.Y_AXIS)
+        // add the combined titled Renaming Scope panel instead of raw panes
+        southPanel.add(renamingScopePanel)
+        southPanel.add(Box.createVerticalStrut(8))
 
         // Button row
         val buttonRow = JPanel()
@@ -73,13 +72,9 @@ class RenameLogViewer: LogViewer("Rename agent logs") {
         add(southPanel, BorderLayout.SOUTH)
     }
 
-    fun getPatternText(): String {
-        return patternText.text
-    }
+    fun getPatternText(): String = patternText.text
 
-    fun getGuardText(): String {
-        return guardText.text
-    }
+    fun getGuardText(): String = guardText.text
 
     fun setPattern(pattern: String) {
         patternText.text = pattern
@@ -89,22 +84,21 @@ class RenameLogViewer: LogViewer("Rename agent logs") {
         guardText.text = guard
     }
 
-    suspend fun waitForConfirmation(): Boolean {
-        return withTimeoutOrNull(5.minutes)
-        {scopeConfirmed.await()} ?: throw Exception("User did not review the scope within 5 minutes")
-    }
+    suspend fun waitForConfirmation(): Boolean =
+        withTimeoutOrNull(5.minutes) {
+            scopeConfirmed.await()
+        } ?: throw Exception("User did not review the scope within 5 minutes")
 
-    fun confirmScope(){
+    fun confirmScope() {
         scopeConfirmed.complete(true)
     }
 
-    fun resetConfirmationWait(){
+    fun resetConfirmationWait() {
         scopeConfirmed = CompletableDeferred<Boolean>()
     }
 
-    fun setLogMessage(message: String){
+    fun setLogMessage(message: String) {
         this.clear()
         this.appendLog(message)
     }
-
 }

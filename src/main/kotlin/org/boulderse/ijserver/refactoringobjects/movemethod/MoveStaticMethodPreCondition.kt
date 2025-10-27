@@ -23,7 +23,7 @@ object MoveMembersPreConditions {
         project: Project?,
         elements: Array<PsiElement>,
         targetContainer: PsiElement?,
-        moveCallback: MoveCallback?
+        moveCallback: MoveCallback?,
     ): Boolean {
         if (elements.size == 0) {
             return false
@@ -40,52 +40,63 @@ object MoveMembersPreConditions {
         val preselectMembers: MutableSet<PsiMember> = HashSet()
         for (element in elements) {
             if (element is PsiMember && sourceClass != element.containingClass) {
-                val message = RefactoringBundle.getCannotRefactorMessage(
-                    RefactoringBundle.message("members.to.be.moved.should.belong.to.the.same.class")
-                )
+                val message =
+                    RefactoringBundle.getCannotRefactorMessage(
+                        RefactoringBundle.message("members.to.be.moved.should.belong.to.the.same.class"),
+                    )
                 return false
             }
             if (element is PsiField) {
                 if (!element.hasModifierProperty(PsiModifier.STATIC)) {
-                    val fieldName = PsiFormatUtil.formatVariable(
-                        element,
-                        PsiFormatUtil.SHOW_NAME or PsiFormatUtil.SHOW_TYPE or PsiFormatUtil.TYPE_AFTER,
-                        PsiSubstitutor.EMPTY
-                    )
-                    val message = RefactoringBundle.message(
-                        "field.0.is.not.static", fieldName,
-                        MoveMembersImpl.getRefactoringName()
-                    )
+                    val fieldName =
+                        PsiFormatUtil.formatVariable(
+                            element,
+                            PsiFormatUtil.SHOW_NAME or PsiFormatUtil.SHOW_TYPE or PsiFormatUtil.TYPE_AFTER,
+                            PsiSubstitutor.EMPTY,
+                        )
+                    val message =
+                        RefactoringBundle.message(
+                            "field.0.is.not.static",
+                            fieldName,
+                            MoveMembersImpl.getRefactoringName(),
+                        )
                     return false
                 }
                 preselectMembers.add(element)
             } else if (element is PsiMethod) {
-                val methodName = PsiFormatUtil.formatMethod(
-                    element,
-                    PsiSubstitutor.EMPTY, PsiFormatUtil.SHOW_NAME or PsiFormatUtil.SHOW_PARAMETERS,
-                    PsiFormatUtil.SHOW_TYPE
-                )
-                if (element.isConstructor) {
-                    val message = RefactoringBundle.message(
-                        "0.refactoring.cannot.be.applied.to.constructors",
-                        MoveMembersImpl.getRefactoringName()
+                val methodName =
+                    PsiFormatUtil.formatMethod(
+                        element,
+                        PsiSubstitutor.EMPTY,
+                        PsiFormatUtil.SHOW_NAME or PsiFormatUtil.SHOW_PARAMETERS,
+                        PsiFormatUtil.SHOW_TYPE,
                     )
+                if (element.isConstructor) {
+                    val message =
+                        RefactoringBundle.message(
+                            "0.refactoring.cannot.be.applied.to.constructors",
+                            MoveMembersImpl.getRefactoringName(),
+                        )
                     return false
                 }
                 if (!element.hasModifierProperty(PsiModifier.STATIC)) {
-                    val message = RefactoringBundle.message(
-                        "method.0.is.not.static", methodName,
-                        MoveMembersImpl.getRefactoringName()
-                    )
+                    val message =
+                        RefactoringBundle.message(
+                            "method.0.is.not.static",
+                            methodName,
+                            MoveMembersImpl.getRefactoringName(),
+                        )
                     return false
                 }
                 preselectMembers.add(element)
             } else if (element is PsiClass) {
                 if (!element.hasModifierProperty(PsiModifier.STATIC)) {
-                    val message = JavaRefactoringBundle.message(
-                        "inner.class.0.is.not.static", element.qualifiedName,
-                        MoveMembersImpl.getRefactoringName()
-                    )
+                    val message =
+                        JavaRefactoringBundle.message(
+                            "inner.class.0.is.not.static",
+                            element.qualifiedName,
+                            MoveMembersImpl.getRefactoringName(),
+                        )
                     return false
                 }
                 preselectMembers.add(element)
@@ -98,5 +109,4 @@ object MoveMembersPreConditions {
 
         return true
     }
-
 }

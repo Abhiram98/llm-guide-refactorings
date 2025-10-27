@@ -1,9 +1,9 @@
 package org.boulderse.ijserver.server.review
 
 import com.intellij.openapi.application.invokeLater
+import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
-import com.intellij.openapi.editor.Editor
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
@@ -18,75 +18,84 @@ import org.boulderse.ijserver.server.ReviewScopeParams
 import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
 
-
-class ReviewRoutes(private val routing: Routing,
-                   private val fileCallBack: () -> PsiFile?,
-                   private val editorCallBack: () -> Editor?,
-                   private val projectCallBack: () -> Project
+class ReviewRoutes(
+    private val routing: Routing,
+    private val fileCallBack: () -> PsiFile?,
+    private val editorCallBack: () -> Editor?,
+    private val projectCallBack: () -> Project,
 ) {
     fun install() {
-
-        routing.post("review/noop"){
+        routing.post("review/noop") {
             logViewer.setLogMessage("Agent is thinking. Sit back and relax :)")
             call.respond(HttpStatusCode.OK)
         }
 
+        routing.post("/review/renames") {
+            // This API expects the renames to be valid. Invalid renames may cause unexpected behavior
+            println("Received review")
+            val renamesToReview = call.receive<List<RenameParams>>()
 
-         routing.post("/review/renames") {
-             // This API expects the renames to be valid. Invalid renames may cause unexpected behavior
-             println("Received review")
-             val renamesToReview = call.receive<List<RenameParams>>()
+            logViewer.setLogMessage(
+                "ACTION REQUIRED: \n" +
+                    "Please review the following renames: \n",
+            )
+            renamesToReview.forEach { logViewer.appendLog(it.oldName + " -> " + it.newName) }
+            val file = fileCallBack()
+            val editor = editorCallBack()
+            val project = projectCallBack()
+            val renameObjs: List<RenameVariable> =
+                renamesToReview
+                    .map { formRenameObject(it, project, editor!!, file!!) as RenameVariable? }
+                    .filterNotNull()
+                    .toList()
 
-             logViewer.setLogMessage("ACTION REQUIRED: \n" +
-                     "Please review the following renames: \n")
-             renamesToReview.forEach {logViewer.appendLog(it.oldName + " -> " + it.newName)}
-             val file = fileCallBack()
-             val editor = editorCallBack()
-             val project = projectCallBack()
-             val renameObjs: List<RenameVariable> = renamesToReview
-                 .map{ formRenameObject(it, project, editor!!, file!!) as RenameVariable? }
-                 .filterNotNull().toList()
+            val panel =
+                RefactoringSuggestionsPanel(
+                    project,
+                    editor!!,
+                    file!!,
+                    renameObjs,
+                    null,
+                    "Rename Identifier",
+                )
 
-             val panel = RefactoringSuggestionsPanel(
-                 project,
-                 editor!!,
-                 file!!,
-                 renameObjs,
-                 null,
-                 "Rename Identifier"
-             )
+            invokeLater {
+                panel.createAndShowPopup()
+            }
+            panel.waitAndClose()
 
-             invokeLater {
-                 panel.createAndShowPopup()
-             }
-             panel.waitAndClose()
+            val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
+            call.respond(
+                HttpStatusCode.OK,
+                message = Json.encodeToString(reviewStatus),
+            )
+        }
 
-             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
-             call.respond(HttpStatusCode.OK,
-                 message = Json.encodeToString(reviewStatus))
-         }
-
-        routing.get("/review/pattern"){
+        routing.get("/review/pattern") {
             call.respond(HttpStatusCode.OK, logViewer.getPatternText())
         }
 
-        routing.get("/review/gaurds"){
+        routing.get("/review/gaurds") {
             call.respond(HttpStatusCode.OK, logViewer.getGuardText())
         }
 
-        routing.post("/review/scope"){
+        routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
             logViewer.setPattern(params.pattern)
             logViewer.setGuard(params.guard)
 
-            logViewer.setLogMessage("ACTION REQUIRED: \n" +
+            logViewer.setLogMessage(
+                "ACTION REQUIRED: \n" +
                     "Please confirm the renaming scope below, by clicking the 'Confirm' button. " +
-                    "You are welcome to edit the scope as per your requirements.")
+                    "You are welcome to edit the scope as per your requirements.",
+            )
             logViewer.resetConfirmationWait()
             logViewer.waitForConfirmation()
 
-            call.respond(HttpStatusCode.OK,
-                message = ReviewScopeParams(logViewer.getPatternText(), logViewer.getGuardText()))
+            call.respond(
+                HttpStatusCode.OK,
+                message = ReviewScopeParams(logViewer.getPatternText(), logViewer.getGuardText()),
+            )
         }
     }
 }

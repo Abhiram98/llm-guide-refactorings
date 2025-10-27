@@ -5,7 +5,9 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 
-class IndexRoutes(private val routing: Routing) {
+class IndexRoutes(
+    private val routing: Routing,
+) {
     fun install() {
         routing.get("/") {
             call.respondText("Hello, world!", ContentType.Text.Html)

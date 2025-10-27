@@ -12,14 +12,12 @@ import com.intellij.openapi.project.getOpenedProjects
 import com.intellij.testFramework.StartupActivityTestUtil
 import okhttp3.OkHttpClient
 import org.junit.jupiter.api.Test
-import kotlin.io.path.Path
 import java.net.URL
+import kotlin.io.path.Path
 import kotlin.time.Duration.Companion.minutes
 
-
 class PluginTest {
-
-//    init {
+    //    init {
 //        di = DI {
 //            extend(di)
 //            bindSingleton<CIServer>(overrides = true) {
@@ -34,43 +32,50 @@ class PluginTest {
 
     @Test
     fun sanityLoadPlugin() {
-        Starter.newContext(testName = "sanity",
-            TestCase(
-                IdeProductProvider.IC,
-                projectInfo = NoProject,
+        Starter
+            .newContext(
+                testName = "sanity",
+                TestCase(
+                    IdeProductProvider.IC,
+                    projectInfo = NoProject,
 //                    GitHubProject.fromGithub(branchName = "master", repoRelativeUrl = "JetBrains/ij-perf-report-aggregator")
-            )
-                .withVersion("2025.2")).apply {
-            val pathToPlugin = System.getProperty("path.to.build.plugin")
-            PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
-        }.runIdeWithDriver().useDriverAndCloseIde {
-            print("Hello world!")
-        }
+                ).withVersion("2025.2"),
+            ).apply {
+                val pathToPlugin = System.getProperty("path.to.build.plugin")
+                PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
+            }.runIdeWithDriver()
+            .useDriverAndCloseIde {
+                print("Hello world!")
+            }
     }
 
     @Test
     fun serverUpSanity() {
-        Starter.newContext(testName = "sanity server is running",
-            TestCase(
-                IdeProductProvider.IC,
-                projectInfo =
-                    GitHubProject.fromGithub(branchName = "master", repoRelativeUrl = "apache/flink")
-            )
-                .withVersion("2025.2")).apply {
-            val pathToPlugin = System.getProperty("path.to.build.plugin")
-            PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
-        }.runIdeWithDriver().useDriverAndCloseIde {
-            waitForIndicators(5.minutes)
-            val client = OkHttpClient()
-            val request = okhttp3.Request.Builder()
-                .url("http://localhost:8082/")
-                .build()
+        Starter
+            .newContext(
+                testName = "sanity server is running",
+                TestCase(
+                    IdeProductProvider.IC,
+                    projectInfo =
+                        GitHubProject.fromGithub(branchName = "master", repoRelativeUrl = "apache/flink"),
+                ).withVersion("2025.2"),
+            ).apply {
+                val pathToPlugin = System.getProperty("path.to.build.plugin")
+                PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
+            }.runIdeWithDriver()
+            .useDriverAndCloseIde {
+                waitForIndicators(5.minutes)
+                val client = OkHttpClient()
+                val request =
+                    okhttp3.Request
+                        .Builder()
+                        .url("http://localhost:8082/")
+                        .build()
 
-            client.newCall(request).execute().use { response ->
-                println(response.body!!.string())
-                println("Server is up!")
+                client.newCall(request).execute().use { response ->
+                    println(response.body!!.string())
+                    println("Server is up!")
+                }
             }
-
-        }
     }
 }

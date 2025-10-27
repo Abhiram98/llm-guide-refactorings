@@ -11,26 +11,38 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser
 import org.eclipse.jgit.util.io.DisabledOutputStream
 import java.io.File
 
-
 class GitUtils {
-    companion object{
-        fun getLatestCommit(projectPath: String): String{
-            val f = FileRepositoryBuilder()
-                .setGitDir(File("$projectPath/.git"))
-                .build()
-            val commit = Git(f).log().setMaxCount(1).call().iterator().next()
+    companion object {
+        fun getLatestCommit(projectPath: String): String {
+            val f =
+                FileRepositoryBuilder()
+                    .setGitDir(File("$projectPath/.git"))
+                    .build()
+            val commit =
+                Git(f)
+                    .log()
+                    .setMaxCount(1)
+                    .call()
+                    .iterator()
+                    .next()
 
             return ""
         }
-        fun t(){
 
+        fun t() {
         }
 
-        fun getDiffsInLatestCommit(projectPath: String): List<DiffEntry>{
-            val repo = FileRepositoryBuilder()
-                .setGitDir(File("$projectPath/.git"))
-                .build()
-            val iterator = Git(repo).log().setMaxCount(2).call().iterator()
+        fun getDiffsInLatestCommit(projectPath: String): List<DiffEntry> {
+            val repo =
+                FileRepositoryBuilder()
+                    .setGitDir(File("$projectPath/.git"))
+                    .build()
+            val iterator =
+                Git(repo)
+                    .log()
+                    .setMaxCount(2)
+                    .call()
+                    .iterator()
             val latestCommit: RevCommit =
                 iterator.next()
             val secondLastCommit: RevCommit =
@@ -48,32 +60,35 @@ class GitUtils {
             val commit1: RevCommit = revWalk.parseCommit(latestCommit)
             val commit2: RevCommit = revWalk.parseCommit(secondLastCommit)
 
-            val diffs = repo.newObjectReader().use { reader ->
-                val oldTreeIter =
-                    CanonicalTreeParser()
-                oldTreeIter.reset(reader, oldHead)
-                val newTreeIter =
-                    CanonicalTreeParser()
-                newTreeIter.reset(reader, head)
-                Git(repo).use { git ->
-                    val diffs = git.diff()
-                        .setNewTree(newTreeIter)
-                        .setOldTree(oldTreeIter)
-                        .call()
-                    for (entry in diffs) {
-                        println("Entry: $entry")
+            val diffs =
+                repo.newObjectReader().use { reader ->
+                    val oldTreeIter =
+                        CanonicalTreeParser()
+                    oldTreeIter.reset(reader, oldHead)
+                    val newTreeIter =
+                        CanonicalTreeParser()
+                    newTreeIter.reset(reader, head)
+                    Git(repo).use { git ->
+                        val diffs =
+                            git
+                                .diff()
+                                .setNewTree(newTreeIter)
+                                .setOldTree(oldTreeIter)
+                                .call()
+                        for (entry in diffs) {
+                            println("Entry: $entry")
+                        }
+                        diffs
                     }
-                    diffs
                 }
-            }
             return diffs
         }
 
-        fun sortDiffsBySize(diffs: List<DiffEntry>){
+        fun sortDiffsBySize(diffs: List<DiffEntry>) {
             diffs[0]
             val diffFormatter: DiffFormatter = DiffFormatter(DisabledOutputStream.INSTANCE)
 //            diffFormatter.setRepository(git.getRepository())
-            diffFormatter.toFileHeader(diffs.get(0));
+            diffFormatter.toFileHeader(diffs.get(0))
         }
     }
 }

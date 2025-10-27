@@ -8,11 +8,8 @@ import org.boulderse.ijserver.models.ollama.OllamaMessage
 data class GrazieResponse(
     @SerializedName("llm_response")
     val llmResponse: String,
-
     @SerializedName("status")
-    val status: String
-): LLMBaseResponse {
-    override fun getSuggestions(): List<LLMResponseChoice> {
-        return listOf(LLMResponseChoice(llmResponse, status))
-    }
+    val status: String,
+) : LLMBaseResponse {
+    override fun getSuggestions(): List<LLMResponseChoice> = listOf(LLMResponseChoice(llmResponse, status))
 }

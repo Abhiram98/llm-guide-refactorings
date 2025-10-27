@@ -32,12 +32,12 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
     val problems: MutableList<IdeInspection.MyProblem> = mutableListOf()
     val problemDescriptors: MutableList<ProblemDescriptionNode> = mutableListOf()
 
-
-    class CustomGlobalInspectionContext(project: Project,
-                                                contentManager: NotNullLazyValue<out ContentManager>
+    class CustomGlobalInspectionContext(
+        project: Project,
+        contentManager: NotNullLazyValue<out ContentManager>,
     ) : GlobalInspectionContextImpl(project, contentManager) {
+        var completed = false
 
-        var completed = false;
         override fun cleanup() {
             super.cleanup()
         }
@@ -50,37 +50,41 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
 
     constructor() : super(
         InspectionsBundle.messagePointer("inspection.action.title").get(),
-        InspectionsBundle.messagePointer("inspection.action.noun").get()
+        InspectionsBundle.messagePointer("inspection.action.noun").get(),
     )
 
-    fun cleanup(){
+    fun cleanup() {
         myGlobalInspectionContext?.cleanup()
     }
 
     constructor(title: @DialogTitle String?, analysisNoun: String?) : super(title, analysisNoun)
 
-    fun doAnalysis(project: Project, scope: AnalysisScope){
-        try{
+    fun doAnalysis(
+        project: Project,
+        scope: AnalysisScope,
+    ) {
+        try {
             runInspections(project, scope)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             print("Failed to run inspections! ;/")
             e.printStackTrace()
             myGlobalInspectionContext?.cleanup()
-            myGlobalInspectionContext?.completed=true
+            myGlobalInspectionContext?.completed = true
             throw Exception("Failed to run code inspection - $e")
         }
     }
 
-    fun waitForCompletion(){
+    fun waitForCompletion() {
         var sleepTime = 0
         Thread.sleep(5000)
-        if (myGlobalInspectionContext == null)
+        if (myGlobalInspectionContext == null) {
             return
-        while(!myGlobalInspectionContext!!.completed && sleepTime < 20){
+        }
+        while (!myGlobalInspectionContext!!.completed && sleepTime < 20) {
             Thread.sleep(1000)
             sleepTime += 1
         }
-        if (myGlobalInspectionContext!!.view==null){
+        if (myGlobalInspectionContext!!.view == null) {
             return // inspection found nothing
         }
         if (!myGlobalInspectionContext!!.completed) {
@@ -89,31 +93,38 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
         }
 
         val root = myGlobalInspectionContext!!.view.tree.root
-        val errors = getAllProblemChildren(root).filter {
-            val level = it.javaClass.getDeclaredField("myLevel")
-            level.isAccessible = true
-            (level.get(it) as HighlightDisplayLevel) == HighlightDisplayLevel.ERROR
-        }
+        val errors =
+            getAllProblemChildren(root).filter {
+                val level = it.javaClass.getDeclaredField("myLevel")
+                level.isAccessible = true
+                (level.get(it) as HighlightDisplayLevel) == HighlightDisplayLevel.ERROR
+            }
         problemDescriptors.addAll(errors)
-        val descriptions = errors.map{
-            val desc = (it.descriptor as? ProblemDescriptorBase)
-            IdeInspection.MyProblem(desc?.lineNumber?.plus(1) ?: 0, it.toString())
-        }
+        val descriptions =
+            errors.map {
+                val desc = (it.descriptor as? ProblemDescriptorBase)
+                IdeInspection.MyProblem(desc?.lineNumber?.plus(1) ?: 0, it.toString())
+            }
         problems.addAll(descriptions)
         myGlobalInspectionContext!!.cleanup()
     }
-    private fun getAllProblemChildren(root: InspectionTreeNode): List<ProblemDescriptionNode>{
+
+    private fun getAllProblemChildren(root: InspectionTreeNode): List<ProblemDescriptionNode> {
         val problemNodes = mutableListOf<ProblemDescriptionNode>()
-        for (c in root.children){
+        for (c in root.children) {
             val problemDescriptionNode = c as? ProblemDescriptionNode
-            if (problemDescriptionNode !=null)
+            if (problemDescriptionNode != null) {
                 problemNodes.add(problemDescriptionNode)
+            }
             problemNodes.addAll(getAllProblemChildren(c))
         }
         return problemNodes
     }
 
-    override fun analyze(project: Project, scope: AnalysisScope) {
+    override fun analyze(
+        project: Project,
+        scope: AnalysisScope,
+    ) {
         try {
             runInspections(project, scope)
         } finally {
@@ -124,7 +135,7 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
 
     override fun runInspections(
         project: Project,
-        scope: AnalysisScope
+        scope: AnalysisScope,
     ) {
         val runId = ++myRunId
         scope.setSearchInLibraries(false)
@@ -133,26 +144,27 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
         val externalProfile = myExternalProfile
         val inspectionContext = getGlobalInspectionContext(project)
         inspectionContext.setRerunAction {
-            DumbService.getInstance(project).smartInvokeLater(Runnable {
-                //someone called the runInspections before us, we cannot restore the state
-                if (runId != myRunId) return@Runnable
-                if (project.isDisposed) return@Runnable
-                if (!scope.isValid) return@Runnable
+            DumbService.getInstance(project).smartInvokeLater(
+                Runnable {
+                    // someone called the runInspections before us, we cannot restore the state
+                    if (runId != myRunId) return@Runnable
+                    if (project.isDisposed) return@Runnable
+                    if (!scope.isValid) return@Runnable
 
-                //restore current state
-                myExternalProfile = externalProfile
-                myGlobalInspectionContext = inspectionContext
+                    // restore current state
+                    myExternalProfile = externalProfile
+                    myGlobalInspectionContext = inspectionContext
 
 //                FileDocumentManager.getInstance().saveAllDocuments()
-                analyze(project, scope)
-            })
+                    analyze(project, scope)
+                },
+            )
         }
 
         inspectionContext.setExternalProfile(externalProfile)
         inspectionContext.setCurrentScope(scope)
         inspectionContext.doInspections(scope)
     }
-
 
     private fun getGlobalInspectionContext(project: Project): CustomGlobalInspectionContext {
         if (myGlobalInspectionContext == null) {
@@ -161,21 +173,21 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
 //                inspectionManagerEx.createNewGlobalContext()
             myGlobalInspectionContext = CustomGlobalInspectionContext(project, inspectionManagerEx.contentManager)
             inspectionManagerEx.runningContexts.add(myGlobalInspectionContext)
-
         }
         return myGlobalInspectionContext!!
     }
 
-    override fun getHelpTopic(): String? {
-        return "reference.dialogs.inspection.scope"
-    }
+    override fun getHelpTopic(): String? = "reference.dialogs.inspection.scope"
 
     override fun canceled() {
         super.canceled()
         myGlobalInspectionContext = null
     }
 
-    override fun getAdditionalActionSettings(project: Project, dialog: BaseAnalysisActionDialog): JComponent? {
+    override fun getAdditionalActionSettings(
+        project: Project,
+        dialog: BaseAnalysisActionDialog,
+    ): JComponent? {
         return null
 //        dialog.setShowInspectInjectedCode(true)
 //        val ui = CodeInspectionAdditionalUi()
@@ -236,24 +248,23 @@ open class CustomCodeInspectionAction : CodeInspectionAction {
 
     override fun createConfigurable(
         projectProfileManager: ProjectInspectionProfileManager,
-        profilesCombo: SchemesCombo<InspectionProfileImpl?>
-    ): MyExternalProfilesComboboxAwareInspectionToolsConfigurable {
-        return MyExternalProfilesComboboxAwareInspectionToolsConfigurable(projectProfileManager, profilesCombo)
-    }
+        profilesCombo: SchemesCombo<InspectionProfileImpl?>,
+    ): MyExternalProfilesComboboxAwareInspectionToolsConfigurable =
+        MyExternalProfilesComboboxAwareInspectionToolsConfigurable(projectProfileManager, profilesCombo)
 
     protected class MyExternalProfilesComboboxAwareInspectionToolsConfigurable(
         projectProfileManager: ProjectInspectionProfileManager,
-        private val myProfilesCombo: SchemesCombo<InspectionProfileImpl?>
-    ) :
-        ExternalProfilesComboboxAwareInspectionToolsConfigurable(projectProfileManager, myProfilesCombo) {
+        private val myProfilesCombo: SchemesCombo<InspectionProfileImpl?>,
+    ) : ExternalProfilesComboboxAwareInspectionToolsConfigurable(projectProfileManager, myProfilesCombo) {
         var mySelectedName: String? = null
         var mySelectedIsProjectProfile: Boolean = false
 
-        override fun getCurrentProfile(): InspectionProfileImpl {
-            return myProfilesCombo.selectedScheme!!
-        }
+        override fun getCurrentProfile(): InspectionProfileImpl = myProfilesCombo.selectedScheme!!
 
-        override fun applyRootProfile(name: String, isProjectLevel: Boolean) {
+        override fun applyRootProfile(
+            name: String,
+            isProjectLevel: Boolean,
+        ) {
             mySelectedName = name
             mySelectedIsProjectProfile = isProjectLevel
         }

@@ -9,12 +9,14 @@ import javax.swing.JPanel
 
 val logViewer = RenameLogViewer()
 
-class AgentLogsWindow: ToolWindowFactory {
-    override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
+class AgentLogsWindow : ToolWindowFactory {
+    override fun createToolWindowContent(
+        project: Project,
+        toolWindow: ToolWindow,
+    ) {
 //        val toolWindowContent: CalendarToolWindowContent = CalendarToolWindowContent(toolWindow)
         val content =
             ContentFactory.getInstance().createContent(logViewer, "", false)
         toolWindow.contentManager.addContent(content)
     }
-
 }

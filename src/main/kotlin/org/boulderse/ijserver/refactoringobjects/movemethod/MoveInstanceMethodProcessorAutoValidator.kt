@@ -11,19 +11,24 @@ import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodProces
 import com.intellij.usageView.UsageInfo
 import com.intellij.util.containers.MultiMap
 
-class MoveInstanceMethodProcessorAutoValidator(project: Project,
-                                               method: PsiMethod,
-                                               targetVariable: PsiVariable,
-                                               newVisibility: String,
-                                               isOpenInEditor: Boolean,
-                                               oldClassParameterNames: Map<PsiClass, String>
-):
-    MoveInstanceMethodProcessor(project, method, targetVariable, newVisibility, isOpenInEditor, oldClassParameterNames) {
-    override fun showConflicts(conflicts: MultiMap<PsiElement, String>, usages: Array<out UsageInfo>?): Boolean {
+class MoveInstanceMethodProcessorAutoValidator(
+    project: Project,
+    method: PsiMethod,
+    targetVariable: PsiVariable,
+    newVisibility: String,
+    isOpenInEditor: Boolean,
+    oldClassParameterNames: Map<PsiClass, String>,
+) : MoveInstanceMethodProcessor(project, method, targetVariable, newVisibility, isOpenInEditor, oldClassParameterNames) {
+    override fun showConflicts(
+        conflicts: MultiMap<PsiElement, String>,
+        usages: Array<out UsageInfo>?,
+    ): Boolean {
         if (conflicts.isEmpty) return true
-        return conflicts.toHashMap()
-            .map { it -> it.value.filter { message -> !(message.contains("is already defined in the class") && message.contains("Method")) } }
-            .reduce { acc, strings -> acc + strings }
+        return conflicts
+            .toHashMap()
+            .map { it ->
+                it.value.filter { message -> !(message.contains("is already defined in the class") && message.contains("Method")) }
+            }.reduce { acc, strings -> acc + strings }
             .isEmpty()
 //        return conflicts.isEmpty
     }
@@ -32,17 +37,11 @@ class MoveInstanceMethodProcessorAutoValidator(project: Project,
         return super.findUsages()
     }
 
-    override fun preprocessUsages(refUsages: Ref<Array<UsageInfo>>): Boolean { //to make reflection work.
+    override fun preprocessUsages(refUsages: Ref<Array<UsageInfo>>): Boolean { // to make reflection work.
         return super.preprocessUsages(refUsages)
     }
 
-    fun delegateFindUsages(): Array<UsageInfo>{
-        return findUsages()
-    }
+    fun delegateFindUsages(): Array<UsageInfo> = findUsages()
 
-    fun delegatePreprocessUsages(refUsages: Ref<Array<UsageInfo>>): Boolean{
-        return preprocessUsages(refUsages)
-    }
-
-
+    fun delegatePreprocessUsages(refUsages: Ref<Array<UsageInfo>>): Boolean = preprocessUsages(refUsages)
 }

@@ -22,27 +22,32 @@ open class RenameTestsBase {
 
         val client = HttpClient(CIO)
 
-        runBlocking{
-            val response: HttpResponse = client.post("http://localhost:8082/open-file") {
-                contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(OpenFileParams(filePath = renameCase.filePath)))
-            }
+        runBlocking {
+            val response: HttpResponse =
+                client.post("http://localhost:8082/open-file") {
+                    contentType(ContentType.Application.Json)
+                    setBody(Json.encodeToString(OpenFileParams(filePath = renameCase.filePath)))
+                }
             println("File open status status: ${response.status}")
             println("Response body: ${response.bodyAsText()}")
             assert(response.status.value == 200)
         }
 
         runBlocking {
-            val response: HttpResponse = client.post("http://localhost:8082/rename") {
-                contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(
-                    RenameParams(
-                        oldName = renameCase.oldName,
-                        newName = renameCase.newName,
-                        lineNum = renameCase.lineNum,
-                        codeElementType = renameCase.codeElementType
-                    )))
-            }
+            val response: HttpResponse =
+                client.post("http://localhost:8082/rename") {
+                    contentType(ContentType.Application.Json)
+                    setBody(
+                        Json.encodeToString(
+                            RenameParams(
+                                oldName = renameCase.oldName,
+                                newName = renameCase.newName,
+                                lineNum = renameCase.lineNum,
+                                codeElementType = renameCase.codeElementType,
+                            ),
+                        ),
+                    )
+                }
             println("Rename status: ${response.status}")
             println("Response body: ${response.bodyAsText()}")
             assert(response.status.value == 200)
@@ -55,8 +60,6 @@ open class RenameTestsBase {
         val newName: String,
         val filePath: String,
         val lineNum: Int? = null,
-        val codeElementType: String? = null
+        val codeElementType: String? = null,
     )
-
-
 }

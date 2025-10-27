@@ -2,11 +2,6 @@ package org.boulderse.ijserver.utils
 
 import com.google.gson.Gson
 import com.intellij.lang.java.JavaLanguage
-import org.boulderse.ijserver.LLMBundle
-import org.boulderse.ijserver.refactoringobjects.extractfunction.EFCandidate
-import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestion
-import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestionList
-import org.boulderse.ijserver.suggestrefactoring.RefactoringSuggestion
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.FileEditorManager
@@ -19,6 +14,11 @@ import com.intellij.refactoring.extractMethod.newImpl.ExtractMethodPipeline.find
 import com.intellij.refactoring.extractMethod.newImpl.ExtractSelector
 import com.intellij.refactoring.suggested.endOffset
 import com.intellij.refactoring.suggested.startOffset
+import org.boulderse.ijserver.LLMBundle
+import org.boulderse.ijserver.refactoringobjects.extractfunction.EFCandidate
+import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestion
+import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestionList
+import org.boulderse.ijserver.suggestrefactoring.RefactoringSuggestion
 import org.jetbrains.kotlin.idea.KotlinLanguage
 import org.jetbrains.kotlin.idea.base.psi.unifier.toRange
 import org.jetbrains.kotlin.idea.refactoring.introduce.extractFunction.ExtractKotlinFunctionHandler
@@ -29,19 +29,23 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-
-fun addLineNumbersToCodeSnippet(codeSnippet: String, startIndex: Int): String {
+fun addLineNumbersToCodeSnippet(
+    codeSnippet: String,
+    startIndex: Int,
+): String {
     val lines = codeSnippet.lines()
     val numberedLines = lines.mapIndexed { index, line -> "${startIndex + index}. $line" }
     return numberedLines.joinToString("\n")
 }
 
-
-fun replaceGithubUrlLineRange(githubUrl: String, lineStart: Int, lineEnd: Int): String {
+fun replaceGithubUrlLineRange(
+    githubUrl: String,
+    lineStart: Int,
+    lineEnd: Int,
+): String {
     val newLineRange = String.format("L$lineStart-L$lineEnd")
     return String.format("${githubUrl.substringBefore("#")}#$newLineRange")
 }
-
 
 /**
  * This function will extract the suggestions from a ChatGPT output.
@@ -76,10 +80,10 @@ fun replaceGithubUrlLineRange(githubUrl: String, lineStart: Int, lineEnd: Int): 
  *
  */
 fun identifyExtractFunctionSuggestions(input: String): EFSuggestionList {
-    var refactoringSuggestion: RefactoringSuggestion;
+    var refactoringSuggestion: RefactoringSuggestion
     try {
-        refactoringSuggestion= Gson().fromJson(input, RefactoringSuggestion::class.java)
-    } catch (e: Exception){
+        refactoringSuggestion = Gson().fromJson(input, RefactoringSuggestion::class.java)
+    } catch (e: Exception) {
         refactoringSuggestion = Gson().fromJson("{$input}", RefactoringSuggestion::class.java)
     }
 
@@ -90,20 +94,19 @@ fun identifyExtractFunctionSuggestions(input: String): EFSuggestionList {
                 functionName = "newMethod",
                 lineStart = suggestion.start,
                 lineEnd = suggestion.end,
-            )
+            ),
         )
     }
 
     return EFSuggestionList(efSuggestions)
 }
 
-
 fun isCandidateExtractable(
     efCandidate: EFCandidate,
     editor: Editor,
     file: PsiFile,
     observerList: List<Observer> = emptyList(),
-    allowWholeBody: Boolean=false
+    allowWholeBody: Boolean = false,
 ): Boolean {
     when (file.language) {
         JavaLanguage.INSTANCE -> return isFunctionExtractableJava(efCandidate, editor, file, observerList, allowWholeBody)
@@ -117,7 +120,7 @@ private fun isFunctionExtractableJava(
     editor: Editor,
     file: PsiFile,
     observerList: List<Observer>,
-    allowWholeBody: Boolean
+    allowWholeBody: Boolean,
 ): Boolean {
     var result = true
     var reason = ""
@@ -165,7 +168,7 @@ private fun isSelectionExtractableKotlin(
     efCandidate: EFCandidate,
     editor: Editor,
     file: PsiFile,
-    observerList: List<Observer>
+    observerList: List<Observer>,
 ): Boolean {
     var result = true
     var reason = ""
@@ -216,7 +219,6 @@ private fun isSelectionExtractableKotlin(
 //                    )
 //                ).generateDeclaration()
             }
-
         } catch (t: Throwable) {
             result = false
             reason = LLMBundle.message("extract.function.code.not.extractable.message")
@@ -229,15 +231,18 @@ private fun isSelectionExtractableKotlin(
     return result
 }
 
-fun canSelectElementsForExtractionKotlin(efCandidate: EFCandidate, editor: Editor, file: KtFile): Boolean {
+fun canSelectElementsForExtractionKotlin(
+    efCandidate: EFCandidate,
+    editor: Editor,
+    file: KtFile,
+): Boolean {
     var result = false
     editor.selectionModel.setSelection(efCandidate.offsetStart, efCandidate.offsetEnd)
     try {
         ExtractKotlinFunctionHandler().selectElements(editor, file) { elements, _ ->
             result = elements.isNotEmpty()
         }
-    }
-    catch (t: Throwable) {
+    } catch (t: Throwable) {
         return result
     }
     editor.selectionModel.removeSelection()
@@ -248,7 +253,7 @@ private fun buildEFNotificationAndNotifyObservers(
     efCandidate: EFCandidate,
     result: EFApplicationResult,
     reason: String,
-    observers: List<Observer>
+    observers: List<Observer>,
 ) {
 //    observers.forEach {
 //        it.update(
@@ -270,14 +275,17 @@ private fun logException(e: Exception) {
     logger.info("Utils.kt:$lineNumber", e)
 }
 
-private fun selectionIsEntireBodyFunctionKotlin(efCandidate: EFCandidate, file: PsiFile): Boolean {
+private fun selectionIsEntireBodyFunctionKotlin(
+    efCandidate: EFCandidate,
+    file: PsiFile,
+): Boolean {
     val start = file.findElementAt(efCandidate.offsetStart)
     val end = file.findElementAt(efCandidate.offsetEnd)
 
     val parentBlock =
         PsiUtils.getParentFunctionBlockOrNull(start, KotlinLanguage.INSTANCE) ?: PsiUtils.getParentFunctionBlockOrNull(
             end,
-            KotlinLanguage.INSTANCE
+            KotlinLanguage.INSTANCE,
         )
     val statements = (parentBlock as KtBlockExpression).statements
     if (statements.isEmpty()) return false
@@ -286,12 +294,16 @@ private fun selectionIsEntireBodyFunctionKotlin(efCandidate: EFCandidate, file: 
     return efCandidate.offsetStart <= statementsOffsetRange.first && efCandidate.offsetEnd >= statementsOffsetRange.second
 }
 
-private fun selectionIsEntireBodyFunctionJava(efCandidate: EFCandidate, file: PsiFile): Boolean {
+private fun selectionIsEntireBodyFunctionJava(
+    efCandidate: EFCandidate,
+    file: PsiFile,
+): Boolean {
     val start = file.findElementAt(efCandidate.offsetStart)
     val end = file.findElementAt(efCandidate.offsetEnd)
 
-    val parentBlock = PsiUtils.getParentFunctionBlockOrNull(start, JavaLanguage.INSTANCE)
-        ?: PsiUtils.getParentFunctionBlockOrNull(end, JavaLanguage.INSTANCE)
+    val parentBlock =
+        PsiUtils.getParentFunctionBlockOrNull(start, JavaLanguage.INSTANCE)
+            ?: PsiUtils.getParentFunctionBlockOrNull(end, JavaLanguage.INSTANCE)
     val statements = (parentBlock as PsiCodeBlock).statements
 
     if (statements.isEmpty()) {
@@ -302,17 +314,22 @@ private fun selectionIsEntireBodyFunctionJava(efCandidate: EFCandidate, file: Ps
     return efCandidate.offsetStart <= statementsOffsetRange.first && efCandidate.offsetEnd >= statementsOffsetRange.second
 }
 
-fun openFile(filePath: String, project: Project): Pair<Editor, PsiFile> {
-    var ret : Pair<Editor, PsiFile>? = null
-    val vfile = LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + filePath)
-        ?: throw Exception("file not found - ${project.basePath+"/"+filePath}")
-    val newEditor = FileEditorManager.getInstance(project).openTextEditor(
-        OpenFileDescriptor(
-            project,
-            vfile
-        ),
-        false // request focus to editor
-    )!!
+fun openFile(
+    filePath: String,
+    project: Project,
+): Pair<Editor, PsiFile> {
+    var ret: Pair<Editor, PsiFile>? = null
+    val vfile =
+        LocalFileSystem.getInstance().refreshAndFindFileByPath(project.basePath + "/" + filePath)
+            ?: throw Exception("file not found - ${project.basePath + "/" + filePath}")
+    val newEditor =
+        FileEditorManager.getInstance(project).openTextEditor(
+            OpenFileDescriptor(
+                project,
+                vfile,
+            ),
+            false, // request focus to editor
+        )!!
     val psiFile = PsiManager.getInstance(project).findFile(vfile)!!
 
     ret = Pair(newEditor, psiFile)
@@ -320,33 +337,41 @@ fun openFile(filePath: String, project: Project): Pair<Editor, PsiFile> {
     return ret!!
 }
 
-fun openFileFromQualifiedName(qualifiedName: String, project: Project, focus: Boolean): Pair<Editor, PsiFile> {
-    var ret : Pair<Editor, PsiFile>? = null
+fun openFileFromQualifiedName(
+    qualifiedName: String,
+    project: Project,
+    focus: Boolean,
+): Pair<Editor, PsiFile> {
+    var ret: Pair<Editor, PsiFile>? = null
     val clazz = PsiUtils.findClassFromQualifier(qualifiedName, project)
 
-    if (clazz==null){
+    if (clazz == null) {
         throw Exception("no such class $qualifiedName")
     }
     val vfile = clazz.containingFile.originalFile.virtualFile
-    val newEditor = FileEditorManager.getInstance(project).openTextEditor(
-        OpenFileDescriptor(
-            project,
-            vfile
-        ),
-        focus // request focus to editor
-    )!!
+    val newEditor =
+        FileEditorManager.getInstance(project).openTextEditor(
+            OpenFileDescriptor(
+                project,
+                vfile,
+            ),
+            focus, // request focus to editor
+        )!!
     val psiFile = PsiManager.getInstance(project).findFile(vfile)!!
 
     ret = Pair(newEditor, psiFile)
 
     return ret!!
 }
-fun findAllFilesWithExtension(basePath: String, extension: String): List<Path>{
+
+fun findAllFilesWithExtension(
+    basePath: String,
+    extension: String,
+): List<Path> {
     val projectDirAbsolutePath = Paths.get(basePath).toAbsolutePath()
-    return Files.walk(projectDirAbsolutePath)
+    return Files
+        .walk(projectDirAbsolutePath)
         .filter { item -> Files.isRegularFile(item) }
         .filter { item -> item.toString().endsWith(extension) }
         .toList()
 }
-
-

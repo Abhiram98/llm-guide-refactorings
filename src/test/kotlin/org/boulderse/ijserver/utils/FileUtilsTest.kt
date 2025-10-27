@@ -3,19 +3,18 @@ package org.boulderse.ijserver.utils
 import org.junit.Test
 import kotlin.io.path.Path
 
-class FileUtilsTest{
-
+class FileUtilsTest {
     @Test
-    fun `test overwrite file`(){
+    fun `test overwrite file`() {
         val classLoader = this::class.java.classLoader
         val resource = classLoader.getResource("A1_CSC540.java")
         val fileContent = resource?.readText()
 
-        assert(fileContent!=null)
+        assert(fileContent != null)
 
         FileUtils.replaceFileContents(
             Path(resource.path),
-            fileContent + "another line"
+            fileContent + "another line",
         )
 
         val newContent = resource?.readText()!!
@@ -23,27 +22,26 @@ class FileUtilsTest{
 
         FileUtils.replaceFileContents(
             Path(resource.path),
-            fileContent!!
+            fileContent!!,
         )
         val newContent2 = resource?.readText()!!
         assert(!newContent2.endsWith("another line"))
     }
 
     @Test
-    fun `test overwrite in range`(){
+    fun `test overwrite in range`() {
         val classLoader = this::class.java.classLoader
         val resource = classLoader.getResource("A1_CSC540.java")
         val fileContent = resource?.readText()
 
         FileUtils.replaceFileContentsInRange(
             Path(resource.path),
-            100, 200,
-            "something else"
+            100,
+            200,
+            "something else",
         )
         val newContent = resource?.readText()!!
-        println(newContent.substring(100,200))
-        assert(newContent.substring(100,200).contains("something else"))
-
+        println(newContent.substring(100, 200))
+        assert(newContent.substring(100, 200).contains("something else"))
     }
-
 }

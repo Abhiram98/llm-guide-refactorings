@@ -24,145 +24,166 @@ import kotlin.io.path.Path
 import kotlin.time.Duration.Companion.minutes
 
 class TestRenameFormation {
-    val flinkProject = GitHubProject.fromGithub(
-        repoRelativeUrl = "apache/flink",
-        branchName = "master"
-    )
+    val flinkProject =
+        GitHubProject.fromGithub(
+            repoRelativeUrl = "apache/flink",
+            branchName = "master",
+        )
 
     @Test
     fun testRenameFormation() {
-        Starter.newContext(
-            testName = "Rename formation test",
-            TestCase(
-                IdeProductProvider.IC,
-                projectInfo = flinkProject.onCommit("afe4c79efa15902369d41ef5a6e73d79a2e7d525")
-            )
-                .withVersion("2025.2")
-        ).apply {
-            val pathToPlugin = System.getProperty("path.to.build.plugin")
-            PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
-        }.runIdeWithDriver().useDriverAndCloseIde {
-            waitForIndicators(5.minutes)
-            val client = HttpClient(CIO)
+        Starter
+            .newContext(
+                testName = "Rename formation test",
+                TestCase(
+                    IdeProductProvider.IC,
+                    projectInfo = flinkProject.onCommit("afe4c79efa15902369d41ef5a6e73d79a2e7d525"),
+                ).withVersion("2025.2"),
+            ).apply {
+                val pathToPlugin = System.getProperty("path.to.build.plugin")
+                PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
+            }.runIdeWithDriver()
+            .useDriverAndCloseIde {
+                waitForIndicators(5.minutes)
+                val client = HttpClient(CIO)
 
-            runBlocking {
-                val response: HttpResponse = client.post("http://localhost:8082/open-file") {
-                    contentType(ContentType.Application.Json)
-                    setBody(Json.encodeToString(OpenFileParams(
-                        filePath = "flink-core/src/test/java/org/apache/flink/api/common/typeutils/TypeSerializerUpgradeTestBase.java")))
+                runBlocking {
+                    val response: HttpResponse =
+                        client.post("http://localhost:8082/open-file") {
+                            contentType(ContentType.Application.Json)
+                            setBody(
+                                Json.encodeToString(
+                                    OpenFileParams(
+                                        filePath = "flink-core/src/test/java/org/apache/flink/api/common/typeutils/TypeSerializerUpgradeTestBase.java",
+                                    ),
+                                ),
+                            )
+                        }
+                    println("File open status status: ${response.status}")
+                    println("Response body: ${response.bodyAsText()}")
+                    assert(response.status.value == 200)
                 }
-                println("File open status status: ${response.status}")
-                println("Response body: ${response.bodyAsText()}")
-                assert(response.status.value == 200)
-            }
 
-            runBlocking {
-                val response: HttpResponse = client.post("http://localhost:8082/form-rename-object") {
-                    contentType(ContentType.Application.Json)
-                    setBody(Json.encodeToString(
-                        RenameParams(
-                            oldName = "testDataMatcher",
-                            newName = "testMatcher",
-                            lineNum = 102,
-                            codeElementType = "method",
-                        )
-                    )
-                    )
+                runBlocking {
+                    val response: HttpResponse =
+                        client.post("http://localhost:8082/form-rename-object") {
+                            contentType(ContentType.Application.Json)
+                            setBody(
+                                Json.encodeToString(
+                                    RenameParams(
+                                        oldName = "testDataMatcher",
+                                        newName = "testMatcher",
+                                        lineNum = 102,
+                                        codeElementType = "method",
+                                    ),
+                                ),
+                            )
+                        }
+                    println("Rename formation status: ${response.status}")
+                    println("rename response: ${response.bodyAsText()}")
+                    assert(response.status.value == 200)
                 }
-                println("Rename formation status: ${response.status}")
-                println("rename response: ${response.bodyAsText()}")
-                assert(response.status.value == 200)
-            }
 
-            runBlocking {
-                val response: HttpResponse = client.post("http://localhost:8082/form-rename-object") {
-                    contentType(ContentType.Application.Json)
-                    setBody(Json.encodeToString(
-                        RenameParams(
-                            oldName = "blajblaj",
-                            newName = "bbbb",
-                            lineNum = 102,
-                            codeElementType = "method",
-                        )
-                    )
-                    )
+                runBlocking {
+                    val response: HttpResponse =
+                        client.post("http://localhost:8082/form-rename-object") {
+                            contentType(ContentType.Application.Json)
+                            setBody(
+                                Json.encodeToString(
+                                    RenameParams(
+                                        oldName = "blajblaj",
+                                        newName = "bbbb",
+                                        lineNum = 102,
+                                        codeElementType = "method",
+                                    ),
+                                ),
+                            )
+                        }
+                    println("Rename formation status: ${response.status}")
+                    println("rename response: ${response.bodyAsText()}")
+                    assert(response.status.value != 200) // expected failure. no valid rename possible.
                 }
-                println("Rename formation status: ${response.status}")
-                println("rename response: ${response.bodyAsText()}")
-                assert(response.status.value != 200) // expected failure. no valid rename possible.
 
-            }
+                runBlocking {
+                    val response: HttpResponse =
+                        client.post("http://localhost:8082/form-rename-object") {
+                            contentType(ContentType.Application.Json)
+                            setBody(
+                                Json.encodeToString(
+                                    RenameParams(
+                                        oldName = "TypeSerializer",
+                                        newName = "TypeSerializerANAME",
+                                        lineNum = 406,
+                                        codeElementType = "class",
+                                    ),
+                                ),
+                            )
+                        }
+                    println("Rename formation status: ${response.status}")
+                    println("rename response: ${response.bodyAsText()}")
+                    assert(response.status.value == 200)
 
-            runBlocking {
-                val response: HttpResponse = client.post("http://localhost:8082/form-rename-object") {
-                    contentType(ContentType.Application.Json)
-                    setBody(Json.encodeToString(
-                        RenameParams(
-                            oldName = "TypeSerializer",
-                            newName = "TypeSerializerANAME",
-                            lineNum = 406,
-                            codeElementType = "class",
-                        )
-                    )
-                    )
+                    val responseObj = Json.decodeFromString<RenameParams>(response.bodyAsText())
+                    assert(responseObj.resolvedFilePath != null)
+                    assert(responseObj.resolvedStartLine != null)
                 }
-                println("Rename formation status: ${response.status}")
-                println("rename response: ${response.bodyAsText()}")
-                assert(response.status.value == 200)
-
-                val responseObj = Json.decodeFromString<RenameParams>(response.bodyAsText())
-                assert(responseObj.resolvedFilePath!=null)
-                assert(responseObj.resolvedStartLine!=null)
-
             }
-        }
     }
 
     @Test
     fun testRenameFormationAll() {
-        Starter.newContext(
-            testName = "Rename formation test",
-            TestCase(
-                IdeProductProvider.IC,
-                projectInfo = flinkProject.onCommit("afe4c79efa15902369d41ef5a6e73d79a2e7d525")
-            )
-                .withVersion("2025.2")
-        ).apply {
-            val pathToPlugin = System.getProperty("path.to.build.plugin")
-            PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
-        }.runIdeWithDriver().useDriverAndCloseIde {
-            waitForIndicators(5.minutes)
-            val client = HttpClient(CIO)
+        Starter
+            .newContext(
+                testName = "Rename formation test",
+                TestCase(
+                    IdeProductProvider.IC,
+                    projectInfo = flinkProject.onCommit("afe4c79efa15902369d41ef5a6e73d79a2e7d525"),
+                ).withVersion("2025.2"),
+            ).apply {
+                val pathToPlugin = System.getProperty("path.to.build.plugin")
+                PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
+            }.runIdeWithDriver()
+            .useDriverAndCloseIde {
+                waitForIndicators(5.minutes)
+                val client = HttpClient(CIO)
 
-            runBlocking {
-                val response: HttpResponse = client.post("http://localhost:8082/open-file") {
-                    contentType(ContentType.Application.Json)
-                    setBody(Json.encodeToString(OpenFileParams(
-                        filePath = "flink-core/src/test/java/org/apache/flink/api/common/typeutils/TypeSerializerUpgradeTestBase.java")))
+                runBlocking {
+                    val response: HttpResponse =
+                        client.post("http://localhost:8082/open-file") {
+                            contentType(ContentType.Application.Json)
+                            setBody(
+                                Json.encodeToString(
+                                    OpenFileParams(
+                                        filePath = "flink-core/src/test/java/org/apache/flink/api/common/typeutils/TypeSerializerUpgradeTestBase.java",
+                                    ),
+                                ),
+                            )
+                        }
+                    println("File open status status: ${response.status}")
+                    println("Response body: ${response.bodyAsText()}")
+                    assert(response.status.value == 200)
                 }
-                println("File open status status: ${response.status}")
-                println("Response body: ${response.bodyAsText()}")
-                assert(response.status.value == 200)
-            }
 
-            runBlocking {
-                val response: HttpResponse = client.post("http://localhost:8082/form-rename-object-all") {
-                    contentType(ContentType.Application.Json)
-                    setBody(Json.encodeToString(
-                        RenameParams(
-                            oldName = "testDataMatcher",
-                            newName = "testDataMatcherRaihan",
-                        )
-                    )
-                    )
+                runBlocking {
+                    val response: HttpResponse =
+                        client.post("http://localhost:8082/form-rename-object-all") {
+                            contentType(ContentType.Application.Json)
+                            setBody(
+                                Json.encodeToString(
+                                    RenameParams(
+                                        oldName = "testDataMatcher",
+                                        newName = "testDataMatcherRaihan",
+                                    ),
+                                ),
+                            )
+                        }
+                    println("Rename formation status: ${response.status}")
+                    println("rename response: ${response.bodyAsText()}")
+                    assert(response.status.value == 200)
+
+                    val responseArr = Json.decodeFromString<Array<RenameParams>>(response.bodyAsText())
+                    assert(responseArr.size == 14)
                 }
-                println("Rename formation status: ${response.status}")
-                println("rename response: ${response.bodyAsText()}")
-                assert(response.status.value == 200)
-
-                val responseArr = Json.decodeFromString<Array<RenameParams>>(response.bodyAsText())
-                assert(responseArr.size==14)
             }
-        }
     }
 }

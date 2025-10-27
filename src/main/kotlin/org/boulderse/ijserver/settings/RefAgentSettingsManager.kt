@@ -1,5 +1,11 @@
 package org.boulderse.ijserver.settings
 
+import com.intellij.openapi.components.*
+import com.intellij.util.xmlb.annotations.OptionTag
+import dev.langchain4j.model.chat.ChatLanguageModel
+import dev.langchain4j.model.openai.OpenAiChatModelName
+import dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO
+import dev.langchain4j.model.openai.OpenAiModelName.GPT_4
 import org.boulderse.ijserver.models.grazie.GrazieGPT4
 import org.boulderse.ijserver.models.grazie.GrazieGPT4o
 import org.boulderse.ijserver.models.grazie.GrazieGPT4omini
@@ -8,22 +14,14 @@ import org.boulderse.ijserver.models.ollama.localOllamaMistral
 import org.boulderse.ijserver.models.openai.CredentialsHolder
 import org.boulderse.ijserver.models.openai.OpenAiGpt4
 import org.boulderse.ijserver.models.openai.getOpenAiModel
-import com.intellij.openapi.components.*
-import com.intellij.util.xmlb.annotations.OptionTag
-import dev.langchain4j.model.chat.ChatLanguageModel
-import dev.langchain4j.model.openai.OpenAiChatModelName
-import dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO
-import dev.langchain4j.model.openai.OpenAiModelName.GPT_4
 
 @Service(Service.Level.APP)
 @State(
     name = "RefAgentSettings",
-    storages = [Storage(value = "llm.for.code.xml", roamingType = RoamingType.DISABLED, exportable = true)]
+    storages = [Storage(value = "llm.for.code.xml", roamingType = RoamingType.DISABLED, exportable = true)],
 )
 class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
-
     companion object {
-
         fun getInstance() = service<RefAgentSettingsManager>()
     }
 
@@ -35,9 +33,7 @@ class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
         state = newState
     }
 
-    fun getOpenAiKey(): String {
-        return CredentialsHolder.getInstance().getOpenAiApiKey() ?: ""
-    }
+    fun getOpenAiKey(): String = CredentialsHolder.getInstance().getOpenAiApiKey() ?: ""
 
     fun setOpenAiKey(key: String) {
         CredentialsHolder.getInstance().setOpenAiApiKey(key)
@@ -45,14 +41,13 @@ class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
 
     fun getAiModel() = state.aiModel
 
-    fun setAiModel(aiModel: String?){
-        if (aiModel!=null)
+    fun setAiModel(aiModel: String?) {
+        if (aiModel != null) {
             state.aiModel = aiModel
+        }
     }
 
-    fun getOpenAiOrganization(): String {
-        return CredentialsHolder.getInstance().getOpenAiOrganization() ?: ""
-    }
+    fun getOpenAiOrganization(): String = CredentialsHolder.getInstance().getOpenAiOrganization() ?: ""
 
     fun setOpenAiOrganization(key: String) {
         CredentialsHolder.getInstance().setOpenAiOrganization(key)
@@ -84,21 +79,18 @@ class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
         state.llmSettings.topP = topP.toFloat()
     }
 
-    fun getUseLocalLLM(): Boolean{
-        return state.useOllamaToCreateObj
-    }
+    fun getUseLocalLLM(): Boolean = state.useOllamaToCreateObj
 
-    fun getAnonymizeTelemetry(): Boolean{
-        return state.anonymize_telemetry
-    }
+    fun getAnonymizeTelemetry(): Boolean = state.anonymize_telemetry
 
-    fun setAnonymizeTelemetry(v: Boolean){
+    fun setAnonymizeTelemetry(v: Boolean) {
         state.anonymize_telemetry = v
     }
 
-    fun setUseLocalLLM(b: Boolean){
+    fun setUseLocalLLM(b: Boolean) {
         state.useOllamaToCreateObj = b
     }
+
     fun getNumberOfSamples(): Int = state.llmSettings.numberOfSamples
 
     fun getMaxTokens(): Int = state.llmSettings.maxTokens
@@ -121,16 +113,13 @@ class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
                 return GrazieGPT4omini
             }
             "openai-gpt-4" -> {
-                return getOpenAiModel(
-                    GPT_4, getOpenAiKey(), state.llmSettings.temperature.toDouble())
+                return getOpenAiModel(GPT_4, getOpenAiKey(), state.llmSettings.temperature.toDouble())
             }
             "openai-gpt-3.5-turbo" -> {
-                return getOpenAiModel(
-                    GPT_3_5_TURBO, getOpenAiKey(), state.llmSettings.temperature.toDouble())
+                return getOpenAiModel(GPT_3_5_TURBO, getOpenAiKey(), state.llmSettings.temperature.toDouble())
             }
             "openai-gpt-4o-mini" -> {
-                return getOpenAiModel(
-                    OpenAiChatModelName.GPT_4_O_MINI.toString(), getOpenAiKey(), state.llmSettings.temperature.toDouble())
+                return getOpenAiModel(OpenAiChatModelName.GPT_4_O_MINI.toString(), getOpenAiKey(), state.llmSettings.temperature.toDouble())
             }
             "ollama" -> {
                 return localOllamaMistral
@@ -138,7 +127,6 @@ class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
         }
         return null
     }
-
 }
 
 class RefAgentSettings : BaseState() {

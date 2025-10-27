@@ -1,43 +1,49 @@
 package org.boulderse.ijserver.cli
 
 import com.google.gson.Gson
-import org.boulderse.ijserver.utils.JavaParsingUtils
 import kotlinx.cli.*
+import org.boulderse.ijserver.utils.JavaParsingUtils
 import java.nio.file.Files
 import kotlin.io.path.Path
 
-
 @ExperimentalCli
-fun main(args: Array<String>){
-
+fun main(args: Array<String>) {
     println("Welcome to my JavaParsing Utils CLI.")
     val parser = ArgParser("example")
     val input by parser.option(ArgType.String, shortName = "i", description = "Input file").required()
     val output by parser.option(ArgType.String, shortName = "o", description = "Output file name").required()
-    class CheckIfStatic: Subcommand("checkIfStatic", "Check if method is static?") {
+
+    class CheckIfStatic : Subcommand("checkIfStatic", "Check if method is static?") {
         val methodSignatureString by option(ArgType.String, "methodSignature", "s", "method signature").required()
 
         override fun execute() {
             Files.write(
                 Path(output),
-                JavaParsingUtils.isMethodStatic(
-                    Path(input), methodSignatureString
-                ).toString().toByteArray()
+                JavaParsingUtils
+                    .isMethodStatic(
+                        Path(input),
+                        methodSignatureString,
+                    ).toString()
+                    .toByteArray(),
             )
         }
     }
-    class FindFieldTypes: Subcommand("findFieldTypes", "Find field names and types for a given class") {
+
+    class FindFieldTypes : Subcommand("findFieldTypes", "Find field names and types for a given class") {
         val className by option(ArgType.String, shortName = "c", description = "Class name").required()
+
         override fun execute() {
             Files.write(
                 Path(output),
-                Gson().toJson(
-                        JavaParsingUtils.findFieldTypes(Path(input), className)
-                ).toByteArray()
+                Gson()
+                    .toJson(
+                        JavaParsingUtils.findFieldTypes(Path(input), className),
+                    ).toByteArray(),
             )
         }
     }
-    class CheckIfClassStatic: Subcommand("checkIfClassStatic", "Check if class is static?") {
+
+    class CheckIfClassStatic : Subcommand("checkIfClassStatic", "Check if class is static?") {
         val className by option(ArgType.String, shortName = "c", description = "Class name").required()
 
         override fun execute() {
@@ -48,14 +54,17 @@ fun main(args: Array<String>){
             }
             Files.write(
                 Path(output),
-                JavaParsingUtils.isClassStatic(
-                    Path(input), className
-                ).toString().toByteArray()
+                JavaParsingUtils
+                    .isClassStatic(
+                        Path(input),
+                        className,
+                    ).toString()
+                    .toByteArray(),
             )
         }
     }
 
-    class FindTypesInRange: Subcommand("findTypesInRange", "Find the types of variables used in line ranges.") {
+    class FindTypesInRange : Subcommand("findTypesInRange", "Find the types of variables used in line ranges.") {
         val lineStart by option(ArgType.Int, shortName = "s", description = "start line").required()
         val lineEnd by option(ArgType.Int, shortName = "e", description = "end line").required()
 
@@ -67,14 +76,18 @@ fun main(args: Array<String>){
             }
             Files.write(
                 Path(output),
-                JavaParsingUtils.findTypesInRange(
-                    Path(input), lineStart, lineEnd
-                ).toString().toByteArray()
+                JavaParsingUtils
+                    .findTypesInRange(
+                        Path(input),
+                        lineStart,
+                        lineEnd,
+                    ).toString()
+                    .toByteArray(),
             )
         }
     }
 
-    class CheckIfClassExists: Subcommand("checkIfClassExists", "Check if class is exists") {
+    class CheckIfClassExists : Subcommand("checkIfClassExists", "Check if class is exists") {
         val className by option(ArgType.String, shortName = "c", description = "Class name").required()
 
         override fun execute() {
@@ -85,16 +98,18 @@ fun main(args: Array<String>){
             }
             Files.write(
                 Path(output),
-                Gson().toJson(
-                    JavaParsingUtils.doesClassExist(
-                        Path(input), className
-                    )
-                ).toByteArray()
+                Gson()
+                    .toJson(
+                        JavaParsingUtils.doesClassExist(
+                            Path(input),
+                            className,
+                        ),
+                    ).toByteArray(),
             )
         }
     }
 
-    class MethodCounter: Subcommand("methodCount", "Count the number of method declarations in a file.") {
+    class MethodCounter : Subcommand("methodCount", "Count the number of method declarations in a file.") {
         override fun execute() {
             try {
                 Files.createFile(Path(output))
@@ -103,10 +118,11 @@ fun main(args: Array<String>){
             }
             Files.write(
                 Path(output),
-                JavaParsingUtils.getMethodCount(
-                    Path(input)
-                ).toString().toByteArray()
-
+                JavaParsingUtils
+                    .getMethodCount(
+                        Path(input),
+                    ).toString()
+                    .toByteArray(),
             )
         }
     }
@@ -116,8 +132,7 @@ fun main(args: Array<String>){
         FindFieldTypes(),
         CheckIfClassStatic(),
         CheckIfClassExists(),
-        MethodCounter()
-        )
+        MethodCounter(),
+    )
     parser.parse(args)
-
 }

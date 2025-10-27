@@ -7,13 +7,12 @@ import com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackages
 import com.intellij.refactoring.move.moveClassesOrPackages.SingleSourceRootMoveDestination
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 
-class MoveClassTest: LightPlatformCodeInsightTestCase() {
-
-    fun testMoveClass(){
+class MoveClassTest : LightPlatformCodeInsightTestCase() {
+    fun testMoveClass() {
 //        MoveClassesOrPackagesProcessor(
 //            project,
 //            arrayOf(file as PsiClass),
-////            SingleSourceRootMoveDestination(PackageWrapper(PsiPa))
+// //            SingleSourceRootMoveDestination(PackageWrapper(PsiPa))
 //        )
     }
 }

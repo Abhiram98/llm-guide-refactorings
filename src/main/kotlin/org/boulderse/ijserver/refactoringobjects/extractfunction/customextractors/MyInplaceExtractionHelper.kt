@@ -30,27 +30,30 @@ import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtFile
 
-class MyInplace2(allContainersEnabled: Boolean): ExtractKotlinFunctionHandler.InplaceExtractionHelper(
-    allContainersEnabled
-) {
+class MyInplace2(
+    allContainersEnabled: Boolean,
+) : ExtractKotlinFunctionHandler.InplaceExtractionHelper(
+        allContainersEnabled,
+    ) {
     override fun configureAndRun(
         project: Project,
         editor: Editor,
         descriptorWithConflicts: ExtractableCodeDescriptorWithConflicts,
-        onFinish: (ExtractionResult) -> Unit
+        onFinish: (ExtractionResult) -> Unit,
     ) {
         super.configureAndRun(project, editor, descriptorWithConflicts, onFinish)
     }
-
 }
 
-
-class MyInplaceExtractionHelper(private val myAllContainersEnabled: Boolean, private val functionName: String? = null) : ExtractKotlinFunctionHandler.InplaceExtractionHelper(myAllContainersEnabled) {
+class MyInplaceExtractionHelper(
+    private val myAllContainersEnabled: Boolean,
+    private val functionName: String? = null,
+) : ExtractKotlinFunctionHandler.InplaceExtractionHelper(myAllContainersEnabled) {
     override fun configureAndRun(
         project: Project,
         editor: Editor,
         descriptorWithConflicts: ExtractableCodeDescriptorWithConflicts,
-        onFinish: (ExtractionResult) -> Unit
+        onFinish: (ExtractionResult) -> Unit,
     ) {
         val activeTemplateState = TemplateManagerImpl.getTemplateState(editor)
         if (activeTemplateState != null) {
@@ -76,7 +79,8 @@ class MyInplaceExtractionHelper(private val myAllContainersEnabled: Boolean, pri
             val startMarkAction = StartMarkAction.start(editor, project, EXTRACT_FUNCTION)
             Disposer.register(disposable) { FinishMarkAction.finish(project, editor, startMarkAction) }
         }
-        fun afterFinish(extraction: ExtractionResult){
+
+        fun afterFinish(extraction: ExtractionResult) {
             val callRange: TextRange = callRangeProvider.invoke() ?: throw IllegalStateException()
             val callIdentifier = findSingleCallExpression(file, callRange)?.calleeExpression ?: throw IllegalStateException()
             val methodIdentifier = extraction.declaration.nameIdentifier ?: throw IllegalStateException()
@@ -85,25 +89,24 @@ class MyInplaceExtractionHelper(private val myAllContainersEnabled: Boolean, pri
             val callOffset = callIdentifier.textRange.endOffset
             val preview = InplaceExtractUtils.createPreview(editor, methodRange, methodOffset, callRange, callOffset)
             Disposer.register(disposable, preview)
-            val templateField = TemplateField(callIdentifier.textRange, listOf(methodIdentifier.textRange))
-                .withCompletionNames(descriptor.suggestedNames)
-                .withCompletionHint(getDialogAdvertisement())
-                .withValidation { variableRange ->
-                    val error = getIdentifierError(file, variableRange)
-                    if (error != null) {
-                        InplaceExtractUtils.showErrorHint(editor, variableRange.endOffset, error)
+            val templateField =
+                TemplateField(callIdentifier.textRange, listOf(methodIdentifier.textRange))
+                    .withCompletionNames(descriptor.suggestedNames)
+                    .withCompletionHint(getDialogAdvertisement())
+                    .withValidation { variableRange ->
+                        val error = getIdentifierError(file, variableRange)
+                        if (error != null) {
+                            InplaceExtractUtils.showErrorHint(editor, variableRange.endOffset, error)
+                        }
+                        error == null
                     }
-                    error == null
-                }
             ExtractMethodTemplateBuilder(editor, EXTRACT_FUNCTION)
                 .enableRestartForHandler(ExtractKotlinFunctionHandler::class.java)
                 .onBroken {
                     editorState.revert()
-                }
-                .onSuccess {
+                }.onSuccess {
                     processDuplicates(extraction.duplicateReplacers, file.project, editor)
-                }
-                .disposeWithTemplate(disposable)
+                }.disposeWithTemplate(disposable)
                 .createTemplate(file, listOf(templateField))
             onFinish(extraction)
         }
@@ -117,12 +120,15 @@ class MyInplaceExtractionHelper(private val myAllContainersEnabled: Boolean, pri
     }
 
     @Nls
-    private fun getDialogAdvertisement():  String {
+    private fun getDialogAdvertisement(): String {
         val shortcut = KeymapUtil.getPrimaryShortcut("ExtractFunction") ?: throw IllegalStateException("Action is not found")
         return RefactoringBundle.message("inplace.refactoring.advertisement.text", KeymapUtil.getShortcutText(shortcut))
     }
 
-    private fun findSingleCallExpression(file: KtFile, range: TextRange?): KtCallExpression? {
+    private fun findSingleCallExpression(
+        file: KtFile,
+        range: TextRange?,
+    ): KtCallExpression? {
         if (range == null) return null
         val container = PsiTreeUtil.findCommonParent(file.findElementAt(range.startOffset), file.findElementAt(range.endOffset))
         val callExpressions = PsiTreeUtil.findChildrenOfType(container, KtCallExpression::class.java)

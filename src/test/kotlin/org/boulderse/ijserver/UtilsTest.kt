@@ -1,27 +1,27 @@
 package org.boulderse.ijserver
 
-import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestion
-import org.boulderse.ijserver.models.ExtractFunctionLLMRequestProvider
-import org.boulderse.ijserver.models.LLMRequestProvider
-import org.boulderse.ijserver.models.sendChatRequest
-import org.boulderse.ijserver.refactoringobjects.extractfunction.EFCandidateFactory
-import org.boulderse.ijserver.utils.*
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.util.PsiUtilBase
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 import junit.framework.TestCase
+import org.boulderse.ijserver.models.ExtractFunctionLLMRequestProvider
+import org.boulderse.ijserver.models.LLMRequestProvider
+import org.boulderse.ijserver.models.sendChatRequest
+import org.boulderse.ijserver.refactoringobjects.extractfunction.EFCandidateFactory
+import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestion
+import org.boulderse.ijserver.utils.*
 import org.jetbrains.kotlin.idea.core.moveCaret
 import org.jetbrains.kotlin.psi.KtNamedFunction
 
 class UtilsTest : LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
-    override fun getTestDataPath(): String {
-        return projectPath
-    }
+
+    override fun getTestDataPath(): String = projectPath
 
     fun `test identify extract function suggestions from chatgpt reply`() {
-        val input = """
+        val input =
+            """
             I would suggest the following extract method refactorings:
 
             1. Extract method for creating `GroupRebalanceConfig` object from lines 2650-2656.
@@ -50,45 +50,52 @@ class UtilsTest : LightPlatformCodeInsightTestCase() {
         TestCase.assertEquals("createRebalanceConfig", efSuggestionList.suggestionList.get(0).functionName)
         TestCase.assertEquals(
             2650 to 2656,
-            efSuggestionList.suggestionList.get(0).lineStart to efSuggestionList.suggestionList.get(0).lineEnd
+            efSuggestionList.suggestionList.get(0).lineStart to efSuggestionList.suggestionList.get(0).lineEnd,
         )
         TestCase.assertEquals("createConsumerCoordinator", efSuggestionList.suggestionList.get(1).functionName)
         TestCase.assertEquals(
             2649 to 2670,
-            efSuggestionList.suggestionList.get(1).lineStart to efSuggestionList.suggestionList.get(1).lineEnd
+            efSuggestionList.suggestionList.get(1).lineStart to efSuggestionList.suggestionList.get(1).lineEnd,
         )
         TestCase.assertEquals("createFetchConfig", efSuggestionList.suggestionList.get(2).functionName)
         TestCase.assertEquals(
             2674 to 2684,
-            efSuggestionList.suggestionList.get(2).lineStart to efSuggestionList.suggestionList.get(2).lineEnd
+            efSuggestionList.suggestionList.get(2).lineStart to efSuggestionList.suggestionList.get(2).lineEnd,
         )
         TestCase.assertEquals("createFetcher", efSuggestionList.suggestionList.get(3).functionName)
         TestCase.assertEquals(
             2685 to 2692,
-            efSuggestionList.suggestionList.get(3).lineStart to efSuggestionList.suggestionList.get(3).lineEnd
+            efSuggestionList.suggestionList.get(3).lineStart to efSuggestionList.suggestionList.get(3).lineEnd,
         )
         TestCase.assertEquals("createOffsetFetcher", efSuggestionList.suggestionList.get(4).functionName)
         TestCase.assertEquals(
             2693 to 2701,
-            efSuggestionList.suggestionList.get(4).lineStart to efSuggestionList.suggestionList.get(4).lineEnd
+            efSuggestionList.suggestionList.get(4).lineStart to efSuggestionList.suggestionList.get(4).lineEnd,
         )
         TestCase.assertEquals("createTopicMetadataFetcher", efSuggestionList.suggestionList.get(5).functionName)
         TestCase.assertEquals(
             2702 to 2703,
-            efSuggestionList.suggestionList.get(5).lineStart to efSuggestionList.suggestionList.get(5).lineEnd
+            efSuggestionList.suggestionList.get(5).lineStart to efSuggestionList.suggestionList.get(5).lineEnd,
         )
     }
 
     fun `test identify extract function suggestions from ChatGPT reply in mock mode`() {
-        com.intellij.openapi.util.registry.Registry.get("llm.for.code.enable.mock.requests").setValue(true)
-        val mockReply = """
+        com.intellij.openapi.util.registry.Registry
+            .get("llm.for.code.enable.mock.requests")
+            .setValue(true)
+        val mockReply =
+            """
             {"id":"chatcmpl-7ODaGfLVvacxtdsodruHUvYswiDwH","object":"chat.completion","created":1686006444,"model":"gpt-3.5-turbo-0301","usage":{"prompt_tokens":1830,"completion_tokens":70,"total_tokens":1900},"choices":[{"message":{"role":"assistant","content":"[\n{\"function_name\": \"advanceReadInputCharacter\", \"line_start\": 646, \"line_end\": 691},\n{\"function_name\": \"getNextTransition\", \"line_start\": 692, \"line_end\": 703},\n{\"function_name\": \"handleAction\", \"line_start\": 714, \"line_end\": 788}\n]"},"finish_reason":"stop","index":0}]}
-        """.trimIndent()
+            """.trimIndent()
         val efLLMRequestProvider: LLMRequestProvider =
             ExtractFunctionLLMRequestProvider("text-davinci-003", "text-davinci-edit-001", "gpt-3.5-turbo", mockReply)
-        val llmResponse = sendChatRequest(
-            project, emptyList(), efLLMRequestProvider.chatModel, efLLMRequestProvider
-        )
+        val llmResponse =
+            sendChatRequest(
+                project,
+                emptyList(),
+                efLLMRequestProvider.chatModel,
+                efLLMRequestProvider,
+            )
 
         val llmSuggestions = llmResponse?.getSuggestions()
         val efSuggestions = identifyExtractFunctionSuggestions(llmSuggestions?.get(0)?.text!!).suggestionList
@@ -97,9 +104,10 @@ class UtilsTest : LightPlatformCodeInsightTestCase() {
     }
 
     fun `test no identifiable suggestions in chatgpt reply`() {
-        val input = """
+        val input =
+            """
             "The above function does not have any extract method opportunities."
-        """.trimIndent()
+            """.trimIndent()
 
         val efSuggestionList = identifyExtractFunctionSuggestions(input)
 
@@ -117,11 +125,12 @@ class UtilsTest : LightPlatformCodeInsightTestCase() {
 
     fun `test isCandidateExtractable generates correct notifications Java`() {
         configureByFile("/testdata/KafkaAdminClientTest.java")
-        val efSuggestion = EFSuggestion(
-            functionName = "foo",
-            lineStart = 114,
-            lineEnd = 119
-        )
+        val efSuggestion =
+            EFSuggestion(
+                functionName = "foo",
+                lineStart = 114,
+                lineEnd = 119,
+            )
         val efObserver = EFObserver()
         val candidates = EFCandidateFactory().buildCandidates(efSuggestion, editor, file).toTypedArray()
         TestCase.assertEquals(2, candidates.size)
@@ -174,7 +183,6 @@ class UtilsTest : LightPlatformCodeInsightTestCase() {
 
         TestCase.assertEquals(expectedLine, actualLine)
     }
-
 
     fun `test function block start line in Kotlin code`() {
         configureByFile("/testdata/RodCuttingProblem.kt")

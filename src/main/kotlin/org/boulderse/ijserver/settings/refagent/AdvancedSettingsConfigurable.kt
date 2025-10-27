@@ -1,7 +1,5 @@
 package org.boulderse.ijserver.settings.refagent
 
-import org.boulderse.ijserver.LLMBundle
-import org.boulderse.ijserver.settings.RefAgentSettingsManager
 import com.intellij.openapi.components.service
 import com.intellij.openapi.options.BoundConfigurable
 import com.intellij.openapi.ui.DialogPanel
@@ -9,12 +7,14 @@ import com.intellij.ui.dsl.builder.bindIntText
 import com.intellij.ui.dsl.builder.bindIntValue
 import com.intellij.ui.dsl.builder.bindValue
 import com.intellij.ui.dsl.builder.panel
+import org.boulderse.ijserver.LLMBundle
+import org.boulderse.ijserver.settings.RefAgentSettingsManager
 
 class AdvancedSettingsConfigurable : BoundConfigurable(LLMBundle.message("settings.configurable.openai.advanced.display.name")) {
     private val settings = service<RefAgentSettingsManager>()
 
-    override fun createPanel(): DialogPanel {
-        return panel {
+    override fun createPanel(): DialogPanel =
+        panel {
             row(LLMBundle.message("settings.configurable.option.prompt.length.label")) {
                 intTextField(64..16384)
                     .bindIntText(settings.state.llmSettings::promptLength)
@@ -29,12 +29,14 @@ class AdvancedSettingsConfigurable : BoundConfigurable(LLMBundle.message("settin
             }
             row(LLMBundle.message("settings.configurable.option.top.p.label")) {
                 spinner(0.0..1.0, step = 0.1).bindValue(
-                    settings::getTopP, settings::setTopP
+                    settings::getTopP,
+                    settings::setTopP,
                 )
             }
             row(LLMBundle.message("settings.configurable.option.temperature.label")) {
                 spinner(0.0..1.0, step = 0.1).bindValue(
-                    settings::getTemperature, settings::setTemperature
+                    settings::getTemperature,
+                    settings::setTemperature,
                 )
             }
             row(LLMBundle.message("settings.configurable.option.number.of.suggestions.label")) {
@@ -49,14 +51,15 @@ class AdvancedSettingsConfigurable : BoundConfigurable(LLMBundle.message("settin
 
             row(LLMBundle.message("settings.configurable.option.presence.penalty.label")) {
                 spinner(0.0..1.0, step = 0.1).bindValue(
-                    settings::getPresencePenalty, settings::setPresencePenalty
+                    settings::getPresencePenalty,
+                    settings::setPresencePenalty,
                 )
             }
             row(LLMBundle.message("settings.configurable.option.frequency.penalty.label")) {
                 spinner(0.0..1.0, step = 0.1).bindValue(
-                    settings::getFrequencyPenalty, settings::setFrequencyPenalty
+                    settings::getFrequencyPenalty,
+                    settings::setFrequencyPenalty,
                 )
             }
         }
-    }
 }

@@ -9,7 +9,6 @@ import com.intellij.codeInspection.actions.CodeInspectionAction
 import com.intellij.codeInspection.ex.GlobalInspectionContextImpl
 import com.intellij.codeInspection.ui.InspectionTreeNode
 import com.intellij.codeInspection.ui.ProblemDescriptionNode
-import org.boulderse.ijserver.utils.PsiUtils
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.editor.Editor
@@ -20,27 +19,29 @@ import com.intellij.psi.PsiFile
 import com.intellij.refactoring.suggested.startOffset
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.boulderse.ijserver.utils.PsiUtils
 import javax.swing.SwingUtilities.invokeAndWait
 
-class IdeInspection(val project: Project, val scope: AnalysisScope, val file: PsiFile, val editor: Editor): CodeInspectionAction(){
-
+class IdeInspection(
+    val project: Project,
+    val scope: AnalysisScope,
+    val file: PsiFile,
+    val editor: Editor,
+) : CodeInspectionAction() {
     var myGlobalInspectionContext: GlobalInspectionContextImpl? = null
     val problems: MutableList<MyProblem> = mutableListOf()
     val problemDescriptors: MutableList<ProblemDescriptionNode> = mutableListOf()
 
-
     @Serializable
     data class MyProblem(
-
         @SerialName("line_num")
         @SerializedName("line_num")
         val lineNum: Int,
-
         @SerialName("problem")
-        val problem: String
-    ){}
+        val problem: String,
+    )
 
-    fun doInspect(){
+    fun doInspect() {
         super.runInspections(project, scope)
         // HACK to access private field. Ther should be a better way to do this.
         val f = this.javaClass.superclass.getDeclaredField("myGlobalInspectionContext")
@@ -51,12 +52,14 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
 //                        val view = super.myGlobalInspectionContext.view
 //                        view.tree.root // traverse tree and find problems.
     }
-    fun waitForCompletion(){
+
+    fun waitForCompletion() {
         var sleepTime = 0
         Thread.sleep(5000)
-        if (myGlobalInspectionContext == null)
+        if (myGlobalInspectionContext == null) {
             return
-        while(myGlobalInspectionContext!!.view == null && sleepTime < 20){
+        }
+        while (myGlobalInspectionContext!!.view == null && sleepTime < 20) {
             Thread.sleep(1000)
             sleepTime += 1
         }
@@ -65,61 +68,66 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
             throw Exception("Running code inspection failed.")
         }
         val root = myGlobalInspectionContext!!.view.tree.root
-        val errors = getAllProblemChildren(root).filter {
-            val level = it.javaClass.getDeclaredField("myLevel")
-            level.isAccessible = true
-            (level.get(it) as HighlightDisplayLevel) == HighlightDisplayLevel.ERROR
-        }
+        val errors =
+            getAllProblemChildren(root).filter {
+                val level = it.javaClass.getDeclaredField("myLevel")
+                level.isAccessible = true
+                (level.get(it) as HighlightDisplayLevel) == HighlightDisplayLevel.ERROR
+            }
         problemDescriptors.addAll(errors)
-        val descriptions = errors.map{
-            val desc = (it.descriptor as? ProblemDescriptorBase)
-            MyProblem(desc?.lineNumber?.plus(1)?:0, it.toString())
-        }
+        val descriptions =
+            errors.map {
+                val desc = (it.descriptor as? ProblemDescriptorBase)
+                MyProblem(desc?.lineNumber?.plus(1) ?: 0, it.toString())
+            }
         problems.addAll(descriptions)
 
         println("got the view!")
 //        myGlobalInspectionContext!!.close(true)
     }
 
-    fun fixIssues(){
+    fun fixIssues() {
         problems.removeIf { true } // remove all elements
         problemDescriptors.map {
             val descriptor = it.descriptor
-            if (descriptor!=null && descriptor.fixes?.isNotEmpty() ?: false){
-                invokeAndWait{
+            if (descriptor != null && descriptor.fixes?.isNotEmpty() ?: false) {
+                invokeAndWait {
                     CommandProcessor.getInstance().runUndoTransparentAction {
                         descriptor.fixes!![0].applyFix(project, descriptor) // apply fix.
                     }
                 }
-            }
-            else{
-                if ("Cannot resolve symbol" in it.toString()){
+            } else {
+                if ("Cannot resolve symbol" in it.toString()) {
                     // attempt to resolve import
-                    val typeName = it.toString()
-                        .split("Cannot resolve symbol ")
-                        .last()
-                        .removePrefix("'")
-                        .removeSuffix("'")
+                    val typeName =
+                        it
+                            .toString()
+                            .split("Cannot resolve symbol ")
+                            .last()
+                            .removePrefix("'")
+                            .removeSuffix("'")
                     if (typeName[0].isUpperCase()) { // it's likely a class and we can try to import it.
                         val desc = (descriptor as? ProblemDescriptorBase)
-                        val vars = runReadAction {
-                            PsiUtils.getElementsOfTypeOnLine(
-                                file,
-                                editor,
-                                desc?.lineNumber?.plus(1) ?: 1,
-                                PsiElement::class.java
-                            )
-                                .filter { it.text == typeName }
-                        }
-                        if (vars.isNotEmpty()) {
-                            val importer = runReadAction {
-                                JavaReferenceImporter().computeAutoImportAtOffset(
-                                    editor,
-                                    file,
-                                    vars[0].startOffset,
-                                    false
-                                )
+                        val vars =
+                            runReadAction {
+                                PsiUtils
+                                    .getElementsOfTypeOnLine(
+                                        file,
+                                        editor,
+                                        desc?.lineNumber?.plus(1) ?: 1,
+                                        PsiElement::class.java,
+                                    ).filter { it.text == typeName }
                             }
+                        if (vars.isNotEmpty()) {
+                            val importer =
+                                runReadAction {
+                                    JavaReferenceImporter().computeAutoImportAtOffset(
+                                        editor,
+                                        file,
+                                        vars[0].startOffset,
+                                        false,
+                                    )
+                                }
                             try {
                                 invokeAndWait { println("Import status: " + importer.asBoolean) }
                             } catch (e: Exception) {
@@ -131,32 +139,38 @@ class IdeInspection(val project: Project, val scope: AnalysisScope, val file: Ps
                 }
                 val desc = (it.descriptor as? ProblemDescriptorBase)
 //                problems.add("Error on line ${desc?.lineNumber}: ${it}")
-                problems.add(MyProblem(desc?.lineNumber?:0, it.toString()))
+                problems.add(MyProblem(desc?.lineNumber ?: 0, it.toString()))
             }
         }
     }
 
-    private fun getAllProblemChildren(root: InspectionTreeNode): List<ProblemDescriptionNode>{
+    private fun getAllProblemChildren(root: InspectionTreeNode): List<ProblemDescriptionNode> {
         val problemNodes = mutableListOf<ProblemDescriptionNode>()
-        for (c in root.children){
+        for (c in root.children) {
             val problemDescriptionNode = c as? ProblemDescriptionNode
-            if (problemDescriptionNode !=null)
+            if (problemDescriptionNode != null) {
                 problemNodes.add(problemDescriptionNode)
+            }
             problemNodes.addAll(getAllProblemChildren(c))
         }
         return problemNodes
     }
 
     companion object {
-        fun importFromRange(textRange: TextRange, editor: Editor, file: PsiFile) {
-            val importer = runReadAction {
-                JavaReferenceImporter().computeAutoImportAtOffset(
-                    editor,
-                    file,
-                    textRange.startOffset + 1,
-                    false
-                )
-            }
+        fun importFromRange(
+            textRange: TextRange,
+            editor: Editor,
+            file: PsiFile,
+        ) {
+            val importer =
+                runReadAction {
+                    JavaReferenceImporter().computeAutoImportAtOffset(
+                        editor,
+                        file,
+                        textRange.startOffset + 1,
+                        false,
+                    )
+                }
             try {
                 invokeAndWait { println("Import status: " + importer.asBoolean) }
             } catch (e: Exception) {

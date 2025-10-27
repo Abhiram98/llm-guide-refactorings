@@ -3,8 +3,7 @@ package org.boulderse.ijserver.utils
 import dev.langchain4j.model.voyageai.VoyageAiEmbeddingModelName
 import kotlin.test.Test
 
-class VoyageAiEmbeddingModelITTest{
-
+class VoyageAiEmbeddingModelITTest {
     @Test
     fun testComputeVoyageAiCosineSimilarity() {
         val text1 = "public void method() { System.out.println(\"Hello World\"); }"

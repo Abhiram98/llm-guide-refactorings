@@ -10,8 +10,8 @@ fun floydWarshall(graph: Array<IntArray>): Array<IntArray> {
     for (k in 0 until n) {
         for (i in 0 until n) {
             for (j in 0 until n) {
-                if (dist[i][k] != Int.MAX_VALUE && dist[k][j] != Int.MAX_VALUE
-                    && dist[i][k] + dist[k][j] < dist[i][j]
+                if (dist[i][k] != Int.MAX_VALUE && dist[k][j] != Int.MAX_VALUE &&
+                    dist[i][k] + dist[k][j] < dist[i][j]
                 ) {
                     dist[i][j] = dist[i][k] + dist[k][j]
                 }
@@ -22,7 +22,9 @@ fun floydWarshall(graph: Array<IntArray>): Array<IntArray> {
     return dist
 }
 
-class CentroidDecomposition(val graph: List<List<Int>>) {
+class CentroidDecomposition(
+    val graph: List<List<Int>>,
+) {
     private val size = graph.size
     private val subSize = IntArray(size)
     private val isCentroid = BooleanArray(size)
@@ -32,7 +34,10 @@ class CentroidDecomposition(val graph: List<List<Int>>) {
         decompose(0, -1)
     }
 
-    private fun decompose(node: Int, parent: Int) {
+    private fun decompose(
+        node: Int,
+        parent: Int,
+    ) {
         subSize[node] = 1
         var centroid = -1
         for (child in graph[node]) {

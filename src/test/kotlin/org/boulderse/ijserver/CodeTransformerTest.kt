@@ -1,19 +1,18 @@
 package org.boulderse.ijserver
 
-import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestion
-import org.boulderse.ijserver.utils.CodeTransformer
-import org.boulderse.ijserver.utils.EFApplicationResult
-import org.boulderse.ijserver.refactoringobjects.extractfunction.EFCandidateFactory
-import org.boulderse.ijserver.refactoringobjects.extractfunction.ExtractMethodFactory
-import org.boulderse.ijserver.utils.EFObserver
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 import junit.framework.TestCase
+import org.boulderse.ijserver.refactoringobjects.extractfunction.EFCandidateFactory
+import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestion
+import org.boulderse.ijserver.refactoringobjects.extractfunction.ExtractMethodFactory
+import org.boulderse.ijserver.utils.CodeTransformer
+import org.boulderse.ijserver.utils.EFApplicationResult
+import org.boulderse.ijserver.utils.EFObserver
 
 class CodeTransformerTest : LightPlatformCodeInsightTestCase() {
     private var projectPath = "src/test"
-    override fun getTestDataPath(): String {
-        return projectPath
-    }
+
+    override fun getTestDataPath(): String = projectPath
 
     fun `test failed extract function candidates are reported correctly`() {
         val codeTransformer = CodeTransformer()
@@ -21,19 +20,24 @@ class CodeTransformerTest : LightPlatformCodeInsightTestCase() {
         codeTransformer.addObserver(efObserver)
 
         configureByFile("/testdata/KafkaAdminClientTest.java")
-        val efs = EFSuggestion(
-            functionName = "createPartitionMetadata",
-            lineStart = 113,
-            lineEnd = 119
-        )
+        val efs =
+            EFSuggestion(
+                functionName = "createPartitionMetadata",
+                lineStart = 113,
+                lineEnd = 119,
+            )
         val efCandidates = EFCandidateFactory().buildCandidates(efs, editor, file)
 
         val funcCall = "extract_method(113, 119, \"createPartitionMetadata\")"
-        val emObj = ExtractMethodFactory.createObjectsFromFuncCall(
-            funcCall, project, editor, file
-        )
+        val emObj =
+            ExtractMethodFactory.createObjectsFromFuncCall(
+                funcCall,
+                project,
+                editor,
+                file,
+            )
 
-        for (obj in emObj){
+        for (obj in emObj) {
             if (obj.isValid(project, editor, file)) {
                 obj.performRefactoring(project, editor, file)
             }

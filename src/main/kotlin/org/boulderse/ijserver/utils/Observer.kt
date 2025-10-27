@@ -1,23 +1,25 @@
 package org.boulderse.ijserver.utils
 
+import com.intellij.openapi.diagnostic.Logger
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.refactoringobjects.extractfunction.EFSuggestion
-import com.intellij.openapi.diagnostic.Logger
 import org.jetbrains.kotlin.utils.addIfNotNull
 
-enum class EFApplicationResult(s: String) {
+enum class EFApplicationResult(
+    s: String,
+) {
     OK("OK"),
-    FAIL("FAIL")
+    FAIL("FAIL"),
 }
 
 data class EFNotification(
-    val payload: Any
+    val payload: Any,
 )
 
 data class EFCandidateApplicationPayload(
     var result: EFApplicationResult,
     var candidate: AbstractRefactoring,
-    var reason: String
+    var reason: String,
 )
 
 interface Observer {
@@ -26,6 +28,7 @@ interface Observer {
 
 open class Observable {
     private val observers = mutableListOf<Any>()
+
     open fun addObserver(observer: Observer) {
         if (observers.contains(observer)) return
         observers.addIfNotNull(observer)
@@ -44,6 +47,7 @@ open class Observable {
 
 class EFObserver : Observer {
     private var notifications = hashMapOf<EFSuggestion, ArrayList<EFNotification>>()
+
     override fun update(notification: EFNotification) {
         if (notification.payload is EFCandidateApplicationPayload) {
             val payload = notification.payload
@@ -53,16 +57,17 @@ class EFObserver : Observer {
         }
     }
 
-    fun getNotifications(efApplicationResult: EFApplicationResult): List<EFNotification> {
-        return getNotifications().filter { (it.payload as EFCandidateApplicationPayload).result == efApplicationResult }
-    }
+    fun getNotifications(efApplicationResult: EFApplicationResult): List<EFNotification> =
+        getNotifications().filter {
+            (it.payload as EFCandidateApplicationPayload).result == efApplicationResult
+        }
 
-    fun getNotifications(): List<EFNotification> {
-        return notifications.values.flatten()
-    }
+    fun getNotifications(): List<EFNotification> = notifications.values.flatten()
 }
 
-class EFLoggerObserver(private val logger: Logger) : Observer {
+class EFLoggerObserver(
+    private val logger: Logger,
+) : Observer {
     override fun update(notification: EFNotification) {
         logger.info(notification.payload.toString())
     }
@@ -70,13 +75,12 @@ class EFLoggerObserver(private val logger: Logger) : Observer {
 
 class EFCandidatesApplicationTelemetryObserver : Observer {
     private var notifications: MutableList<EFCandidateApplicationPayload> = mutableListOf()
+
     override fun update(notification: EFNotification) {
         if (notification.payload is EFCandidateApplicationPayload) {
             notifications.add(notification.payload)
         }
     }
 
-    fun getData(): List<EFCandidateApplicationPayload> {
-        return notifications.toList()
-    }
+    fun getData(): List<EFCandidateApplicationPayload> = notifications.toList()
 }

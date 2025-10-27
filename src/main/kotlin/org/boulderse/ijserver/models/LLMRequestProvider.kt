@@ -1,10 +1,9 @@
 package org.boulderse.ijserver.models
 
-import org.boulderse.ijserver.models.openai.*
-import org.boulderse.ijserver.settings.RefAgentSettingsManager
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.registry.Registry
-
+import org.boulderse.ijserver.models.openai.*
+import org.boulderse.ijserver.settings.RefAgentSettingsManager
 
 /**
  * Available options: https://beta.openai.com/docs/models/codex
@@ -30,7 +29,6 @@ val GPTRequestProvider = LLMRequestProvider(GPT_COMPLETION_MODEL, GPT_EDIT_MODEL
 val GPTExtractFunctionRequestProvider =
     ExtractFunctionLLMRequestProvider(GPT_COMPLETION_MODEL, GPT_EDIT_MODEL, CHAT_GPT_3_5_TURBO)
 
-
 open class LLMRequestProvider(
     val completionModel: String,
     val editModel: String,
@@ -41,43 +39,41 @@ open class LLMRequestProvider(
         instruction: String,
         temperature: Double,
         topP: Double,
-        numberOfSuggestions: Int
+        numberOfSuggestions: Int,
     ): LLMBaseRequest<*> {
         if (Registry.`is`("llm.for.code.enable.mock.requests")) {
             logger.info("Emulating request to the API to test response presentation")
             return MockEditRequests(input)
         }
 
-        val body = OpenAiEditRequestBody(
-            model = editModel,
-            input = input,
-            instruction = instruction,
-            numberOfSuggestions = numberOfSuggestions,
-            temperature = temperature,
-            topP = topP
-        )
+        val body =
+            OpenAiEditRequestBody(
+                model = editModel,
+                input = input,
+                instruction = instruction,
+                numberOfSuggestions = numberOfSuggestions,
+                temperature = temperature,
+                topP = topP,
+            )
 
         logger.info(
-            "Sending request to OpenAI API with temperature=$temperature, topP=$topP, suggestions=$numberOfSuggestions"
+            "Sending request to OpenAI API with temperature=$temperature, topP=$topP, suggestions=$numberOfSuggestions",
         )
         return OpenAIEditRequest(body)
     }
 
-    open fun createChatGPTRequest(
-        body: OpenAiChatRequestBody,
-    ): LLMBaseRequest<*> {
+    open fun createChatGPTRequest(body: OpenAiChatRequestBody): LLMBaseRequest<*> {
         if (Registry.`is`("llm.for.code.enable.mock.requests")) {
             logger.info("Emulating request to the API to test response presentation")
             return MockChatGPTRequest()
         }
 
         logger.info(
-            "Sending request to OpenAI API with model=$chatModel and messages=${body.messages}"
+            "Sending request to OpenAI API with model=$chatModel and messages=${body.messages}",
         )
 
         return OpenAIChatRequest(body)
     }
-
 
     fun createCompletionRequest(
         input: String,
@@ -96,8 +92,15 @@ open class LLMRequestProvider(
         }
 
         return createOpenAiCompletionRequest(
-            input, suffix, maxTokens, numberOfSuggestions, temperature, logProbs, topP,
-            presencePenalty, frequencyPenalty
+            input,
+            suffix,
+            maxTokens,
+            numberOfSuggestions,
+            temperature,
+            logProbs,
+            topP,
+            presencePenalty,
+            frequencyPenalty,
         )
     }
 
@@ -113,37 +116,34 @@ open class LLMRequestProvider(
         frequencyPenalty: Double? = null,
     ): OpenAICompletionRequest {
         val settings = RefAgentSettingsManager.getInstance()
-        val body = OpenAiCompletionRequestBody(
-            model = completionModel,
-            prompt = input,
-            suffix = suffix,
-            maxTokens = maxTokens ?: settings.getMaxTokens(),
-            numberOfSuggestions = numberOfSuggestions ?: settings.getNumberOfSamples(),
-            temperature = temperature ?: settings.getTemperature(),
-            topP = settings.getTopP(),
-            logprobs = logProbs,
-            presencePenalty = presencePenalty ?: settings.getPresencePenalty(),
-            frequencyPenalty = frequencyPenalty ?: settings.getFrequencyPenalty()
-        )
+        val body =
+            OpenAiCompletionRequestBody(
+                model = completionModel,
+                prompt = input,
+                suffix = suffix,
+                maxTokens = maxTokens ?: settings.getMaxTokens(),
+                numberOfSuggestions = numberOfSuggestions ?: settings.getNumberOfSamples(),
+                temperature = temperature ?: settings.getTemperature(),
+                topP = settings.getTopP(),
+                logprobs = logProbs,
+                presencePenalty = presencePenalty ?: settings.getPresencePenalty(),
+                frequencyPenalty = frequencyPenalty ?: settings.getFrequencyPenalty(),
+            )
 
         logger.info(
             "Sending completion request to OpenAI API with " +
-                    "maxTokens=$maxTokens, temperature=$temperature, topP=$topP, suggestions=$numberOfSuggestions"
+                "maxTokens=$maxTokens, temperature=$temperature, topP=$topP, suggestions=$numberOfSuggestions",
         )
         return OpenAICompletionRequest(body)
     }
 }
 
-
 class ExtractFunctionLLMRequestProvider(
     completionModel: String,
     editModel: String,
     chatModel: String,
-    private val mockReply: String = ""
-) :
-    LLMRequestProvider(completionModel, editModel, chatModel) {
-
-
+    private val mockReply: String = "",
+) : LLMRequestProvider(completionModel, editModel, chatModel) {
     override fun createChatGPTRequest(body: OpenAiChatRequestBody): LLMBaseRequest<*> {
         if (Registry.`is`("llm.for.code.enable.mock.requests")) {
             logger.info("Emulating request to the API to test response presentation")
@@ -151,7 +151,7 @@ class ExtractFunctionLLMRequestProvider(
         }
 
         logger.info(
-            "Sending request to OpenAI API with model=$chatModel and messages=${body.messages}"
+            "Sending request to OpenAI API with model=$chatModel and messages=${body.messages}",
         )
 
         return OpenAIChatRequest(body)

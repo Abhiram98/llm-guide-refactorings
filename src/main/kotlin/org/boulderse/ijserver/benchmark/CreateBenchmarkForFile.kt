@@ -2,6 +2,11 @@ package org.boulderse.ijserver.benchmark
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
+import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiFile
+import com.intellij.psi.impl.source.PsiJavaFileImpl
+import io.ktor.util.reflect.*
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.refactoringobjects.UncreatableRefactoring
 import org.boulderse.ijserver.refactoringobjects.extractfunction.InlineMethodFactory
@@ -11,23 +16,20 @@ import org.boulderse.ijserver.utils.MethodSignature.Companion.getMethodSignature
 import org.boulderse.ijserver.utils.Parameter
 import org.boulderse.ijserver.utils.PsiUtils
 import org.boulderse.ijserver.utils.getExecutionOrder
-import com.intellij.openapi.editor.Editor
-import com.intellij.openapi.project.Project
-import com.intellij.psi.PsiFile
-import com.intellij.psi.impl.source.PsiJavaFileImpl
-import io.ktor.util.reflect.*
 
 open class CreateBenchmarkForFile(
 //    val projectPath: String,
 //    val refMinerOut: String,
     val filename: String,
-    val project: Project, val editor: Editor, val file: PsiFile,
-    val refactorings: JsonArray
+    val project: Project,
+    val editor: Editor,
+    val file: PsiFile,
+    val refactorings: JsonArray,
 ) {
     val refObjectToRefIDMap = mutableMapOf<AbstractRefactoring, Int>()
     val statusMap = mutableMapOf<Int, Pair<Boolean, String>>()
 
-    open fun create(){
+    open fun create() {
         val allRefactoringObjects = mutableListOf<AbstractRefactoring>()
         for (refactoring in refactorings) {
             val refID = refactoring.asJsonObject.get("refID").asInt
@@ -46,81 +48,110 @@ open class CreateBenchmarkForFile(
         statusMap.putAll(moveMethodBenchmark.statusMap)
     }
 
-
-
     private fun createReverseRefactoringObject(refactoring: JsonElement): List<AbstractRefactoring> {
-        val inverseRefactorings = when(refactoring.asJsonObject.get("type").asString){
-            "Extract Method" -> getExtractMethodInverse(refactoring)
-            "Rename Variable" -> getRenameVariableInverse(refactoring)
-            "Rename Method" -> getRenameMethodInverse(refactoring)
-            "Rename Parameter" -> getRenameParameterInverse(refactoring)
-            else -> {getUnsupportedRefactoring(refactoring)}
-        }
+        val inverseRefactorings =
+            when (refactoring.asJsonObject.get("type").asString) {
+                "Extract Method" -> getExtractMethodInverse(refactoring)
+                "Rename Variable" -> getRenameVariableInverse(refactoring)
+                "Rename Method" -> getRenameMethodInverse(refactoring)
+                "Rename Parameter" -> getRenameParameterInverse(refactoring)
+                else -> {
+                    getUnsupportedRefactoring(refactoring)
+                }
+            }
         return inverseRefactorings
-
     }
 
     private fun getRenameParameterInverse(refactoring: JsonElement): List<AbstractRefactoring> {
         val refJsonObj = refactoring.asJsonObject
-        
-        val oldVariableDeclaration = refactoring.asJsonObject
-            .get("leftSideLocations").asJsonArray
-            .filter { it.asJsonObject.get("description").asString.equals("original variable declaration") }
-            .map{ it.asJsonObject.get("codeElement").asString}
-            .get(0)
+
+        val oldVariableDeclaration =
+            refactoring.asJsonObject
+                .get("leftSideLocations")
+                .asJsonArray
+                .filter {
+                    it.asJsonObject
+                        .get("description")
+                        .asString
+                        .equals("original variable declaration")
+                }.map { it.asJsonObject.get("codeElement").asString }
+                .get(0)
         val splitColonOld = oldVariableDeclaration.split(":")
-        val oldParam = Parameter(name= splitColonOld[0].trim(), type = splitColonOld[1].trim())
+        val oldParam = Parameter(name = splitColonOld[0].trim(), type = splitColonOld[1].trim())
 
-        val newVariableDeclaration = refactoring.asJsonObject
-            .get("rightSideLocations").asJsonArray
-            .filter { it.asJsonObject.get("description").asString.equals("renamed variable declaration") }
-            .map{ it.asJsonObject.get("codeElement").asString}
-            .get(0)
+        val newVariableDeclaration =
+            refactoring.asJsonObject
+                .get("rightSideLocations")
+                .asJsonArray
+                .filter {
+                    it.asJsonObject
+                        .get("description")
+                        .asString
+                        .equals("renamed variable declaration")
+                }.map { it.asJsonObject.get("codeElement").asString }
+                .get(0)
         val newSplitColon = newVariableDeclaration.split(":")
-        val newParam = Parameter(name= newSplitColon[0].trim(), type = newSplitColon[1].trim())
+        val newParam = Parameter(name = newSplitColon[0].trim(), type = newSplitColon[1].trim())
 
-        val methodSignatureString = refactoring.asJsonObject
-            .get("rightSideLocations").asJsonArray
-            .filter { it.asJsonObject.get("description").asString.equals("method declaration with renamed variable") }
-            .map{ it.asJsonObject.get("codeElement").asString}
-            .get(0)
+        val methodSignatureString =
+            refactoring.asJsonObject
+                .get("rightSideLocations")
+                .asJsonArray
+                .filter {
+                    it.asJsonObject
+                        .get("description")
+                        .asString
+                        .equals("method declaration with renamed variable")
+                }.map { it.asJsonObject.get("codeElement").asString }
+                .get(0)
         val methodSignature = MethodSignature.getMethodSignatureParts(methodSignatureString)
 
-
-
         val psiClass = (file as PsiJavaFileImpl).classes
-        if (psiClass.size==0)
+        if (psiClass.size == 0) {
             return emptyList()
+        }
 
-        if (methodSignature!=null) {
-            val refObj = RenameVariableFactory.renameParameter(
-                methodSignature, psiClass[0], newParam, oldParam
-            )
-            if (refObj!=null)
+        if (methodSignature != null) {
+            val refObj =
+                RenameVariableFactory.renameParameter(
+                    methodSignature,
+                    psiClass[0],
+                    newParam,
+                    oldParam,
+                )
+            if (refObj != null) {
                 return listOf(refObj)
+            }
         }
 
         return emptyList()
     }
 
-
     private fun getRenameMethodInverse(refactoring: JsonElement): List<AbstractRefactoring> {
-
         val refJsonObj = refactoring.asJsonObject
-        val oldNewSplit = refJsonObj.get("description").asString
-            .split("renamed to")
+        val oldNewSplit =
+            refJsonObj
+                .get("description")
+                .asString
+                .split("renamed to")
         val oldMethodSignature = getMethodSignatureParts(oldNewSplit[0])
         val newMethodSignature = getMethodSignatureParts(oldNewSplit[1])
         val psiClass = (file as PsiJavaFileImpl).classes
-        if (psiClass.size==0)
+        if (psiClass.size == 0) {
             return emptyList()
+        }
 
-        if (oldMethodSignature!=null && newMethodSignature!=null) {
-            val refObj = RenameVariableFactory.renameMethod(
-                newMethodSignature.methodName, psiClass[0], oldMethodSignature.methodName, newMethodSignature
-            )
-            if (refObj!=null)
+        if (oldMethodSignature != null && newMethodSignature != null) {
+            val refObj =
+                RenameVariableFactory.renameMethod(
+                    newMethodSignature.methodName,
+                    psiClass[0],
+                    oldMethodSignature.methodName,
+                    newMethodSignature,
+                )
+            if (refObj != null) {
                 return listOf(refObj)
+            }
         }
 
         return emptyList()
@@ -128,36 +159,69 @@ open class CreateBenchmarkForFile(
 
     private fun getRenameVariableInverse(refactoring: JsonElement): List<AbstractRefactoring> {
         val refJsonObj = refactoring.asJsonObject
-        val methodSignature = refJsonObj.get("description").asString
-            .split("in method")[1].split("from class")[0]
+        val methodSignature =
+            refJsonObj
+                .get("description")
+                .asString
+                .split("in method")[1]
+                .split("from class")[0]
         val signature = getMethodSignatureParts(methodSignature)
-        if (signature!=null){
-            val oldName = refactoring.asJsonObject
-                .get("leftSideLocations").asJsonArray
-                .filter { it.asJsonObject.get("description").asString.equals("original variable declaration") }
-                .map{ it.asJsonObject.get("codeElement").asString.split(":")[0].trim()}
-                .get(0)
+        if (signature != null) {
+            val oldName =
+                refactoring.asJsonObject
+                    .get("leftSideLocations")
+                    .asJsonArray
+                    .filter {
+                        it.asJsonObject
+                            .get("description")
+                            .asString
+                            .equals("original variable declaration")
+                    }.map {
+                        it.asJsonObject
+                            .get("codeElement")
+                            .asString
+                            .split(":")[0]
+                            .trim()
+                    }.get(0)
 
-            val newName = refactoring.asJsonObject
-                .get("rightSideLocations").asJsonArray
-                .filter { it.asJsonObject.get("description").asString.equals("renamed variable declaration") }
-                .map{ it.asJsonObject.get("codeElement").asString.split(":")[0].trim()}
-                .get(0)
+            val newName =
+                refactoring.asJsonObject
+                    .get("rightSideLocations")
+                    .asJsonArray
+                    .filter {
+                        it.asJsonObject
+                            .get("description")
+                            .asString
+                            .equals("renamed variable declaration")
+                    }.map {
+                        it.asJsonObject
+                            .get("codeElement")
+                            .asString
+                            .split(":")[0]
+                            .trim()
+                    }.get(0)
 
             val psiClass = (file as PsiJavaFileImpl).classes
-            if (psiClass.size==0)
+            if (psiClass.size == 0) {
                 return emptyList()
-            val psiMethod = PsiUtils.getMethodWithSignatureFromClass(
-                psiClass[0], signature
-            )
-            if (psiMethod!=null)
+            }
+            val psiMethod =
+                PsiUtils.getMethodWithSignatureFromClass(
+                    psiClass[0],
+                    signature,
+                )
+            if (psiMethod != null) {
                 return listOf(
                     RenameVariableFactory.fromOldNewName(
-                        project, psiMethod, newName, oldName
-                    )?:UncreatableRefactoring(1, 1, refJsonObj.get("description").asString)
+                        project,
+                        psiMethod,
+                        newName,
+                        oldName,
+                    ) ?: UncreatableRefactoring(1, 1, refJsonObj.get("description").asString),
                 )
+            }
             return emptyList()
-        }else{
+        } else {
             return emptyList()
         }
     }
@@ -165,34 +229,37 @@ open class CreateBenchmarkForFile(
     private fun getUnsupportedRefactoring(refactoring: JsonElement): List<AbstractRefactoring> {
         println("Unsupported refactoring: ${refactoring.asJsonObject.get("description").asString}")
         return listOf(
-            UncreatableRefactoring(1, 1, refactoring.asJsonObject.get("description").asString)
+            UncreatableRefactoring(1, 1, refactoring.asJsonObject.get("description").asString),
         )
     }
 
-    private fun getExtractMethodInverse(refactoring: JsonElement): List<AbstractRefactoring>{
-        val extractedCodeElement = refactoring.asJsonObject
-            .get("rightSideLocations").asJsonArray
-            .filter { it.asJsonObject.get("description").asString.equals("extracted method declaration") }
-            .map{ it.asJsonObject.get("codeElement").asString}
-            .get(0)
+    private fun getExtractMethodInverse(refactoring: JsonElement): List<AbstractRefactoring> {
+        val extractedCodeElement =
+            refactoring.asJsonObject
+                .get("rightSideLocations")
+                .asJsonArray
+                .filter {
+                    it.asJsonObject
+                        .get("description")
+                        .asString
+                        .equals("extracted method declaration")
+                }.map { it.asJsonObject.get("codeElement").asString }
+                .get(0)
         val signature = getMethodSignatureParts(extractedCodeElement)
         val psiClass = (file as PsiJavaFileImpl).classes
-        if (psiClass.size==0 || signature==null) {
+        if (psiClass.size == 0 || signature == null) {
             println("Failed to create Inline: ${refactoring.asJsonObject.get("description").asString}")
             return emptyList()
         }
-        return InlineMethodFactory.fromMethodSignature(
-            file, editor, signature)
-
+        return InlineMethodFactory.fromMethodSignature(file, editor, signature)
     }
 
-    fun executeReverse(refObjects: List<AbstractRefactoring>){
-        for (r in refObjects){
+    fun executeReverse(refObjects: List<AbstractRefactoring>) {
+        for (r in refObjects) {
             try {
-                if (r is UncreatableRefactoring){
+                if (r is UncreatableRefactoring) {
                     statusMap[refObjectToRefIDMap[r]!!] = Pair(false, "Failed to create refactoring object")
-                }
-                else {
+                } else {
                     r.performRefactoring(project, editor, file)
 
                     statusMap[refObjectToRefIDMap[r]!!] = Pair(true, "success")

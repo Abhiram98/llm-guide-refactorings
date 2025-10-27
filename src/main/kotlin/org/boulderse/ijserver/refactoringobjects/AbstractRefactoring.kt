@@ -5,17 +5,16 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 
-//abstract class AbstractRefactoring {
+// abstract class AbstractRefactoring {
 //    companion object{
 //        fun something(){}
 //    }
 //
 //    abstract fun performRefactoring()
 //
-//}
+// }
 
-
-abstract class AbstractRefactoring{
+abstract class AbstractRefactoring {
     var description: String = ""
     var applied: Boolean = false
     var isValid: Boolean? = null
@@ -29,23 +28,28 @@ abstract class AbstractRefactoring{
 //            return 1
 //        }
 //    }
-    open fun performRefactoring(project: Project, editor: Editor, file: PsiFile){
+    open fun performRefactoring(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ) {
         applied = true
         startedRefactoringFlow = true
     }
 
-
     /*
     Return true if the refactoring object can be applied to the code.
      */
-    abstract fun isValid(project: Project, editor: Editor, file: PsiFile): Boolean
+    abstract fun isValid(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): Boolean
 
     /*
     Return the total lines of code covered by the refactoring object
      */
-    fun sizeLoc(): Int{
-        return endLoc-startLoc+1
-    }
+    fun sizeLoc(): Int = endLoc - startLoc + 1
 
     /*
     Line numbers where refactoring is to be applied
@@ -64,24 +68,24 @@ abstract class AbstractRefactoring{
      */
     abstract fun getRefactoringPreview(): String
 
-
     abstract fun getStartOffset(): Int
 
     abstract fun getEndOffset(): Int
 
     abstract fun getReverseRefactoringObject(
-        project: Project, editor: Editor, file: PsiFile): AbstractRefactoring?
-
-    abstract fun recalibrateRefactoring(
-        project: Project, editor: Editor, file: PsiFile
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
     ): AbstractRefactoring?
 
-    fun recalibrateFromPsiElement(psiElement: PsiElement){
+    abstract fun recalibrateRefactoring(
+        project: Project,
+        editor: Editor,
+        file: PsiFile,
+    ): AbstractRefactoring?
 
-
+    fun recalibrateFromPsiElement(psiElement: PsiElement) {
     }
 
-    fun recalibrateFromLineNumber(){}
-
-
+    fun recalibrateFromLineNumber() {}
 }

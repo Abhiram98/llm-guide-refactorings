@@ -3,11 +3,11 @@ package org.boulderse.ijserver.utils
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
 
-class JsonUtilsTest{
-
+class JsonUtilsTest {
     @Test
-    fun testSanitise(){
-        val str = "```json\n" +
+    fun testSanitise() {
+        val str =
+            "```json\n" +
                 "[\n" +
                 "    \"handleShareFetchSuccess\",\n" +
                 "    \"handleShareFetchFailure\",\n" +
@@ -22,7 +22,8 @@ class JsonUtilsTest{
                 "```"
         val sanitised = JsonUtils.sanitizeJson(str)
         print(sanitised)
-        assertTrue(sanitised=="\n" +
+        assertTrue(
+            sanitised == "\n" +
                 "[\n" +
                 "    \"handleShareFetchSuccess\",\n" +
                 "    \"handleShareFetchFailure\",\n" +
@@ -33,12 +34,14 @@ class JsonUtilsTest{
                 "    \"isNodeFree\",\n" +
                 "    \"isRequestStateInProgress\",\n" +
                 "    \"maybeBuildRequest\"\n" +
-                "]\n")
+                "]\n",
+        )
     }
 
     @Test
-    fun testSanitise2(){
-        val str = "```json\n" +
+    fun testSanitise2() {
+        val str =
+            "```json\n" +
                 "[\n" +
                 "    \"handleShareFetchSuccess\",\n" +
                 "    \"handleShareFetchFailure\",\n" +
@@ -67,7 +70,8 @@ class JsonUtilsTest{
                 "No methods are important to move.\n"
         val sanitised = JsonUtils.sanitizeJson(str)
         print(sanitised)
-        assertTrue(sanitised=="\n" +
+        assertTrue(
+            sanitised == "\n" +
                 "[\n" +
                 "    \"handleShareFetchSuccess\",\n" +
                 "    \"handleShareFetchFailure\",\n" +
@@ -78,11 +82,12 @@ class JsonUtilsTest{
                 "    \"isNodeFree\",\n" +
                 "    \"isRequestStateInProgress\",\n" +
                 "    \"maybeBuildRequest\"\n" +
-                "]\n")
+                "]\n",
+        )
     }
 
     @Test
-    fun test3(){
+    fun test3() {
         val json = "```json\n[\n    \"getTrueFunction\",\n    \"createEndingState\"\n]\n```\n\n### Explanation\n1. **getTrueFunction**: This method is a utility function within the `NFAFactoryCompiler` class and does not depend on the state or the primary attributes of `NFACompiler`. It is a small, self-contained utility that is a good candidate for being moved to a utility class or kept as an inner method of `NFAFactoryCompiler`.\n\n2. **createEndingState**: This method is a helper method within `NFAFactoryCompiler` for generating the NFA's ending state. It's tightly focused on the task of setting up states and could benefit from being encapsulated in `NFAFactoryCompiler` to aid in its cohesion and maintainability.\n\n### Not Included\n- **canProduceEmptyMatches**: This method is a static method that uses `NFAFactoryCompiler` to compile patterns and perform a check. Its purpose is well-defined in the context of the `NFACompiler` class, making it less important to move.\n\n- **compileFactory**: This method is a primary method of `NFACompiler` and orchestrates the main functionality of compiling a pattern into an NFA factory. It serves as a core component of the `NFACompiler` class and therefore should not be moved.\n```"
         val s = JsonUtils.sanitizeJson(json)
         print(s)

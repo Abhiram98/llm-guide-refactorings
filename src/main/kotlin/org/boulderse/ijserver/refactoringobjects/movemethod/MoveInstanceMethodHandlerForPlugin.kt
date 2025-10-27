@@ -27,15 +27,19 @@ import com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodHandle
 import com.intellij.refactoring.util.CommonRefactoringUtil
 import com.intellij.util.containers.ContainerUtil
 
-class MoveInstanceMethodHandlerForPlugin: MoveInstanceMethodHandler() {
-    private val LOG = Logger.getInstance(
-        MoveInstanceMethodHandler::class.java
-    )
+class MoveInstanceMethodHandlerForPlugin : MoveInstanceMethodHandler() {
+    private val LOG =
+        Logger.getInstance(
+            MoveInstanceMethodHandler::class.java,
+        )
 
     public val suitableVariablesToMove = mutableListOf<PsiVariable>()
 
-
-    override fun invoke(project: Project, elements: Array<PsiElement>, dataContext: DataContext?) {
+    override fun invoke(
+        project: Project,
+        elements: Array<PsiElement>,
+        dataContext: DataContext?,
+    ) {
         if (elements.size != 1 || elements[0] !is PsiMethod) return
         val method = elements[0] as PsiMethod
         var message: String? = null
@@ -44,10 +48,11 @@ class MoveInstanceMethodHandlerForPlugin: MoveInstanceMethodHandler() {
         } else if (method.isConstructor()) {
             message = JavaRefactoringBundle.message("move.method.is.not.supported.for.constructors")
         } else if (method.getLanguage() !== JavaLanguage.INSTANCE) {
-            message = JavaRefactoringBundle.message(
-                "move.method.is.not.supported.for.0",
-                method.getLanguage().getDisplayName()
-            )
+            message =
+                JavaRefactoringBundle.message(
+                    "move.method.is.not.supported.for.0",
+                    method.getLanguage().getDisplayName(),
+                )
         } else {
             val containingClass: PsiClass? = method.getContainingClass()
             if (containingClass != null && mentionTypeParameters(method)) {
@@ -89,19 +94,26 @@ class MoveInstanceMethodHandlerForPlugin: MoveInstanceMethodHandler() {
         suitableVariablesToMove.addAll(suitableVariables)
     }
 
-    private fun showErrorHint(project: Project, dataContext: DataContext?, message: @DialogMessage String?) {
+    private fun showErrorHint(
+        project: Project,
+        dataContext: DataContext?,
+        message: @DialogMessage String?,
+    ) {
         val editor = if (dataContext == null) null else CommonDataKeys.EDITOR.getData(dataContext)
         CommonRefactoringUtil.showErrorHint(
-            project, editor, RefactoringBundle.getCannotRefactorMessage(message),
-            getRefactoringName()!!, HelpID.MOVE_INSTANCE_METHOD
+            project,
+            editor,
+            RefactoringBundle.getCannotRefactorMessage(message),
+            getRefactoringName()!!,
+            HelpID.MOVE_INSTANCE_METHOD,
         )
     }
 
     private fun collectSuitableVariables(
         method: PsiMethod,
-        suitableVariables: MutableList<in PsiVariable>
+        suitableVariables: MutableList<in PsiVariable>,
     ): @DialogMessage String? {
-        val allVariables= mutableListOf<PsiVariable>()
+        val allVariables = mutableListOf<PsiVariable>()
         allVariables.addAll(method.parameterList.parameters)
         allVariables.addAll(method.containingClass!!.fields)
 //        ContainerUtil.addAll<PsiParameter, List<PsiVariable>>(allVariables, *method.parameterList.parameters)
@@ -139,6 +151,7 @@ class MoveInstanceMethodHandlerForPlugin: MoveInstanceMethodHandler() {
         }
         return null
     }
+
 //
 //    fun suggestParameterNameForThisClass(thisClass: PsiClass): String {
 //        val manager = thisClass.manager
@@ -167,8 +180,7 @@ class MoveInstanceMethodHandlerForPlugin: MoveInstanceMethodHandler() {
         }
         return PsiTypesUtil.mentionsTypeParameters(method.returnType, typeParameters)
     }
+
 //
-    fun getRefactoringName(): @DialogTitle String? {
-        return RefactoringBundle.message("move.instance.method.title")
-    }
+    fun getRefactoringName(): @DialogTitle String? = RefactoringBundle.message("move.instance.method.title")
 }

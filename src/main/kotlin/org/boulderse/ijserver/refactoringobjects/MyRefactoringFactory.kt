@@ -16,8 +16,8 @@ interface MyRefactoringFactory {
         funcCall: String,
         project: Project,
         editor: Editor,
-        file: PsiFile): List<AbstractRefactoring>
-
+        file: PsiFile,
+    ): List<AbstractRefactoring>
 
     // Logical name for the refactoring. Different from apiFunctionName
     // because this variable can contain spaces
@@ -32,15 +32,15 @@ interface MyRefactoringFactory {
     // API Documentation for passed to the LLM, while asking it to create params.
     val APIDocumentation: String
 
-    fun getParamsFromFuncCall(funcCall: String): List<String>{
+    fun getParamsFromFuncCall(funcCall: String): List<String> {
         val removedWhite = funcCall.replace(" ", "")
         val parenthesisRegex = Regex("\\(.*\\)")
         val matchResult = parenthesisRegex.find(removedWhite)?.value
-        if (matchResult!=null){
-            val withoutParen = matchResult.slice(IntRange(1, matchResult.length-2))
+        if (matchResult != null) {
+            val withoutParen = matchResult.slice(IntRange(1, matchResult.length - 2))
             val params = withoutParen.split(",")
             val processedParams: MutableList<String> = mutableListOf()
-            for(p in params){
+            for (p in params) {
                 processedParams.add(processParam(p))
             }
             return processedParams
@@ -48,17 +48,15 @@ interface MyRefactoringFactory {
         return listOf()
     }
 
-     fun processParam(p: String): String {
-         if (p.contains("=")){
-             return p.split("=")[1]
-         }
-         return p
-     }
+    fun processParam(p: String): String {
+        if (p.contains("=")) {
+            return p.split("=")[1]
+        }
+        return p
+    }
 
-    fun getStringFromParam(param: String) = param
-        .replace("\"", "")
-        .replace("\'", "")
-
-
-
+    fun getStringFromParam(param: String) =
+        param
+            .replace("\"", "")
+            .replace("\'", "")
 }

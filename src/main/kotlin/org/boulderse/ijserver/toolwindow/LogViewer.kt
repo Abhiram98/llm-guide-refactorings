@@ -5,8 +5,9 @@ import java.awt.Dimension
 import java.awt.event.ActionEvent
 import javax.swing.*
 
-
-open class LogViewer(val initalText: String) : JPanel() {
+open class LogViewer(
+    val initalText: String,
+) : JPanel() {
     // Set up the JTextArea
     private val logArea = JTextArea()
 
@@ -25,7 +26,7 @@ open class LogViewer(val initalText: String) : JPanel() {
         // Add the JScrollPane to this JPanel
         layout = BorderLayout()
         add(scrollPane, BorderLayout.CENTER)
-        add(clearButton, BorderLayout.SOUTH);
+        add(clearButton, BorderLayout.SOUTH)
     }
 
     // Method to add logs
@@ -36,7 +37,7 @@ open class LogViewer(val initalText: String) : JPanel() {
         logArea.caretPosition = logArea.document.length
     }
 
-    fun clear(){
+    fun clear() {
         logArea.text = initalText + "\n"
     }
 }

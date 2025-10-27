@@ -27,33 +27,38 @@ import kotlin.io.path.Path
 import kotlin.time.Duration.Companion.minutes
 
 class TestSearch {
-
-    val flinkProject = GitHubProject.fromGithub(
-        repoRelativeUrl = "apache/flink",
-        branchName = "master"
-    )
+    val flinkProject =
+        GitHubProject.fromGithub(
+            repoRelativeUrl = "apache/flink",
+            branchName = "master",
+        )
 
     fun searchTest(case: SearchCase) {
         val client = HttpClient(CIO)
 
-        runBlocking{
-            val response: HttpResponse = client.post("http://localhost:8082/open-file") {
-                contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(OpenFileParams(filePath = case.filePath)))
-            }
+        runBlocking {
+            val response: HttpResponse =
+                client.post("http://localhost:8082/open-file") {
+                    contentType(ContentType.Application.Json)
+                    setBody(Json.encodeToString(OpenFileParams(filePath = case.filePath)))
+                }
             println("File open status status: ${response.status}")
             println("Response body: ${response.bodyAsText()}")
             assert(response.status.value == 200)
         }
 
         runBlocking {
-            val response: HttpResponse = client.post("http://localhost:8082/search_symbol") {
-                contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(
-                    SymbolSearchParams(
-                        symbol = case.name,
-                    )))
-            }
+            val response: HttpResponse =
+                client.post("http://localhost:8082/search_symbol") {
+                    contentType(ContentType.Application.Json)
+                    setBody(
+                        Json.encodeToString(
+                            SymbolSearchParams(
+                                symbol = case.name,
+                            ),
+                        ),
+                    )
+                }
             println("Rename status: ${response.status}")
             println("Response body: ${response.bodyAsText()}")
             assert(response.status.value == 200)
@@ -62,35 +67,37 @@ class TestSearch {
             assert(searchResult.containsKey("files"))
             assert(searchResult.containsKey("hit_count"))
 
-            if (case.totalFiles!=null)
+            if (case.totalFiles != null) {
                 assert(searchResult.get("files")!!.jsonArray.size == case.totalFiles)
+            }
         }
-
     }
-
 
     @ParameterizedTest(name = "search test {index}: {0}")
     @MethodSource("searchCases")
     fun searchTestParameterized(case: SearchCase) {
-        Starter.newContext(testName = "Search test for - ${case.commitHash}",
-            TestCase(
-                IdeProductProvider.IC,
-                projectInfo = flinkProject.onCommit(case.commitHash)
-            )
-                .withVersion("2025.2")).apply {
-            val pathToPlugin = System.getProperty("path.to.build.plugin")
-            PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
-        }.runIdeWithDriver().useDriverAndCloseIde {
-            waitForIndicators(5.minutes)
+        Starter
+            .newContext(
+                testName = "Search test for - ${case.commitHash}",
+                TestCase(
+                    IdeProductProvider.IC,
+                    projectInfo = flinkProject.onCommit(case.commitHash),
+                ).withVersion("2025.2"),
+            ).apply {
+                val pathToPlugin = System.getProperty("path.to.build.plugin")
+                PluginConfigurator(this).installPluginFromPath(Path(pathToPlugin))
+            }.runIdeWithDriver()
+            .useDriverAndCloseIde {
+                waitForIndicators(5.minutes)
 
-            searchTest(case)
-        }
+                searchTest(case)
+            }
     }
 
     companion object {
         @JvmStatic
-        fun searchCases(): List<SearchCase> {
-            return listOf(
+        fun searchCases(): List<SearchCase> =
+            listOf(
                 SearchCase(
                     commitHash = "afe4c79efa15902369d41ef5a6e73d79a2e7d525",
                     filePath = "flink-core/src/test/java/org/apache/flink/api/common/typeutils/TypeSerializerUpgradeTestBase.java",
@@ -108,9 +115,8 @@ class TestSearch {
                     filePath = "flink-core/src/main/java/org/apache/flink/api/java/typeutils/runtime/PojoSerializer.java",
                     name = "serializerConfig",
                     totalFiles = 2,
-                )
-                )
-        }
+                ),
+            )
     }
 
     data class SearchCase(
@@ -118,5 +124,5 @@ class TestSearch {
         val filePath: String,
         val name: String,
         val totalFiles: Int? = null,
-        )
+    )
 }

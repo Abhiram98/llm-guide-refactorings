@@ -30,27 +30,35 @@ import java.time.Duration
 import java.util.Arrays.asList
 import java.util.concurrent.TimeUnit
 
-
 @EnabledIfEnvironmentVariable(named = "VOYAGE_API_KEY", matches = ".+")
 class VoyageAiEmbeddingModelIT {
-
-    fun computeVoyageAiCosineSimilarity(psiMethod: PsiMethod, psiClass: PsiClass, modelName: VoyageAiEmbeddingModelName): Double {
+    fun computeVoyageAiCosineSimilarity(
+        psiMethod: PsiMethod,
+        psiClass: PsiClass,
+        modelName: VoyageAiEmbeddingModelName,
+    ): Double {
         val methodBody = psiMethod.text
         val classBody = psiClass.text
         return computeVoyageAiCosineSimilarity(methodBody, classBody, modelName)
     }
 
-    fun computeVoyageAiCosineSimilarity(text1: String, text2: String, modelName: VoyageAiEmbeddingModelName): Double {
+    fun computeVoyageAiCosineSimilarity(
+        text1: String,
+        text2: String,
+        modelName: VoyageAiEmbeddingModelName,
+    ): Double {
         // given
 
-        val model: EmbeddingModel = VoyageAiEmbeddingModel.builder()
-            .apiKey("pa-6GcL1W5Z4KBXn0zXcrHu4Dg9iF8_uHi25rQdpUVcXXk")
-            .modelName(modelName)
-            .timeout(Duration.ofSeconds(60))
-            .inputType("query")
-            .logRequests(true)
-            .logResponses(true)
-            .build()
+        val model: EmbeddingModel =
+            VoyageAiEmbeddingModel
+                .builder()
+                .apiKey("pa-6GcL1W5Z4KBXn0zXcrHu4Dg9iF8_uHi25rQdpUVcXXk")
+                .modelName(modelName)
+                .timeout(Duration.ofSeconds(60))
+                .inputType("query")
+                .logRequests(true)
+                .logResponses(true)
+                .build()
 
         val segment1 = TextSegment.from(text1)
         val segment2 = TextSegment.from(text2)
@@ -65,18 +73,29 @@ class VoyageAiEmbeddingModelIT {
         return CosineSimilarity.between(embedding1, embedding2)
     }
 }
+
 class CodeBertScore {
-    data class CodeBertRequest(val text1: String, val text2: String)
-    data class CodeBertResponse(val score: Double)
+    data class CodeBertRequest(
+        val text1: String,
+        val text2: String,
+    )
+
+    data class CodeBertResponse(
+        val score: Double,
+    )
 
     @OptIn(ExperimentalSerializationApi::class)
     object CodeBertRequestSerializer : KSerializer<CodeBertRequest> {
-        override val descriptor: SerialDescriptor = buildClassSerialDescriptor("CodeBertRequest") {
-            element<String>("text1")
-            element<String>("text2")
-        }
+        override val descriptor: SerialDescriptor =
+            buildClassSerialDescriptor("CodeBertRequest") {
+                element<String>("text1")
+                element<String>("text2")
+            }
 
-        override fun serialize(encoder: Encoder, value: CodeBertRequest) {
+        override fun serialize(
+            encoder: Encoder,
+            value: CodeBertRequest,
+        ) {
             encoder.encodeStructure(descriptor) {
                 encodeStringElement(descriptor, 0, value.text1)
                 encodeStringElement(descriptor, 1, value.text2)
@@ -102,11 +121,15 @@ class CodeBertScore {
 
     @OptIn(ExperimentalSerializationApi::class)
     object CodeBertResponseSerializer : KSerializer<CodeBertResponse> {
-        override val descriptor: SerialDescriptor = buildClassSerialDescriptor("CodeBertResponse") {
-            element<Double>("score")
-        }
+        override val descriptor: SerialDescriptor =
+            buildClassSerialDescriptor("CodeBertResponse") {
+                element<Double>("score")
+            }
 
-        override fun serialize(encoder: Encoder, value: CodeBertResponse) {
+        override fun serialize(
+            encoder: Encoder,
+            value: CodeBertResponse,
+        ) {
             encoder.encodeStructure(descriptor) {
                 encodeDoubleElement(descriptor, 0, value.score)
             }
@@ -130,24 +153,30 @@ class CodeBertScore {
     companion object {
         private val json = Json { ignoreUnknownKeys = true }
 
-        fun computeCodeBertScore(psiMethod: PsiMethod, psiClass: PsiClass): Double {
+        fun computeCodeBertScore(
+            psiMethod: PsiMethod,
+            psiClass: PsiClass,
+        ): Double {
             val methodBody = psiMethod.text
             val classBody = psiClass.text
             return computeCodeBertScore(methodBody, classBody)
         }
 
-        private fun createHttpClient(): OkHttpClient {
-            return OkHttpClient.Builder()
-                .proxy(Proxy.NO_PROXY)  // Disable proxy
+        private fun createHttpClient(): OkHttpClient =
+            OkHttpClient
+                .Builder()
+                .proxy(Proxy.NO_PROXY) // Disable proxy
                 .protocols(listOf(Protocol.HTTP_1_1))
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .connectionPool(ConnectionPool(0, 1, TimeUnit.MILLISECONDS)) // Disable connection pooling
                 .build()
-        }
 
-        fun computeCodeBertScore(text1: String, text2: String): Double {
+        fun computeCodeBertScore(
+            text1: String,
+            text2: String,
+        ): Double {
             // Parse the URL to get host and port
             val urlString = "https://438b-141-142-254-176.ngrok-free.app/compute_codebertscore"
 
@@ -156,12 +185,14 @@ class CodeBertScore {
             val jsonBody = json.encodeToString(CodeBertRequestSerializer, requestData)
 
             val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
-            val request = Request.Builder()
-                .url(urlString)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Connection", "close")
-                .post(requestBody)
-                .build()
+            val request =
+                Request
+                    .Builder()
+                    .url(urlString)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Connection", "close")
+                    .post(requestBody)
+                    .build()
 
             return try {
                 client.newCall(request).execute().use { response ->

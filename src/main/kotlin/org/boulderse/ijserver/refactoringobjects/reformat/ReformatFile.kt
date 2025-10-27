@@ -10,10 +10,13 @@ import com.jetbrains.rd.generator.nova.array
 
 class ReformatFile {
     companion object {
-        fun doReformat(file: PsiFile, startOffset: Int, endOffset: Int) {
+        fun doReformat(
+            file: PsiFile,
+            startOffset: Int,
+            endOffset: Int,
+        ) {
             val processor = ReformatCodeProcessor(file, arrayOf(TextRange(startOffset, endOffset)))
             processor.run()
-
         }
     }
 }
