@@ -32,8 +32,7 @@ class ProjectListener {
         setupResolveListener()
         setupIndexingListener(project)
         // comment line below to stop auto closing popups.
-        registerAwtListener()
-
+        // registerAwtListener()
     }
 
     suspend fun waitForCondition(

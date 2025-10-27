@@ -39,6 +39,7 @@
             <categoryKey>intention.category.suggest.refactoring</categoryKey>
         </intentionAction>
         <backgroundPostStartupActivity implementation="org.boulderse.ijserver.intentions.StartServerActivity"/>
+        <backgroundPostStartupActivity implementation="org.boulderse.ijserver.hooks.RenameHook"/>
 <!--        <intentionAction>-->
 <!--            <className>org.boulderse.ijserver.intentions.ApplyMoveMethodOnProjectIntention</className>-->
 <!--            <bundleName>messages.LLMBundle</bundleName>-->
