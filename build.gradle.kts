@@ -3,8 +3,9 @@ import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
-fun properties(key: String) = project.findProperty(key).toString()
+val ktlint by configurations.creating
 
+fun properties(key: String) = project.findProperty(key).toString()
 
 plugins {
     id("java")
@@ -18,8 +19,6 @@ plugins {
 application {
     mainClass = "org.boulderse.ijserver.cli.CLIKt"
 }
-
-
 
 group = properties("pluginGroup")
 version = properties("pluginVersion")
@@ -42,28 +41,31 @@ dependencies {
         testFramework(TestFrameworkType.Starter)
 
         // Add plugin dependencies for compilation here, example:
-        properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty)
+        properties("platformPlugins")
+            .split(',')
+            .map(String::trim)
+            .filter(String::isNotEmpty)
             .forEach { bundledPlugin(it) }
     }
-    
+
     // Force Jackson version to match IntelliJ's test framework
     implementation(platform("com.fasterxml.jackson:jackson-bom:2.19.0"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.0")
-    
+
     implementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mongodb:mongodb-driver-sync:4.9.0") // added this line for MongoDB driver
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation("ai.grazie.api:api-gateway-client-jvm:0.3.99"){
+    implementation("ai.grazie.api:api-gateway-client-jvm:0.3.99") {
         exclude("org.slf4j", "slf4j-api")
     }
     // https://packages.jetbrains.team/maven/p/grazi/grazie-platform-public/ai/grazie/client/client-ktor-jvm/
-    implementation("ai.grazie.client:client-ktor:0.3.99"){
+    implementation("ai.grazie.client:client-ktor:0.3.99") {
         exclude("org.slf4j", "slf4j-api")
     }
 
-    implementation ("com.github.tsantalis:refactoring-miner:3.0.10")
+    implementation("com.github.tsantalis:refactoring-miner:3.0.10")
 
     implementation("dev.langchain4j:langchain4j:0.33.0")
     implementation("dev.langchain4j:langchain4j-ollama:0.35.0")
@@ -89,8 +91,6 @@ dependencies {
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-daemon:1.0.0-beta.25+0.4.12")
     implementation("ai.jetbrains.code.agents:code-agents-ideformer-executable:1.0.0-beta.25+0.4.12")
 
-
-
     testImplementation("io.ktor:ktor-client-content-negotiation:3.0.3")
     testImplementation("io.ktor:ktor-server-test-host-jvm")
     testImplementation("com.jayway.jsonpath:json-path:2.9.0")
@@ -100,6 +100,12 @@ dependencies {
 
     testImplementation("org.kodein.di:kodein-di-jvm:7.20.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.1")
+
+    ktlint("com.pinterest.ktlint:ktlint-cli:1.7.1") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        }
+    }
 }
 
 intellijPlatform {
@@ -108,12 +114,12 @@ intellijPlatform {
             sinceBuild = properties("pluginSinceBuild")
         }
 
-        changeNotes = """
+        changeNotes =
+            """
             Initial version
-        """.trimIndent()
+            """.trimIndent()
     }
 }
-
 
 tasks {
     // Set the JVM compatibility versions
@@ -127,36 +133,81 @@ tasks {
         sinceBuild = properties("pluginSinceBuild")
         untilBuild = properties("pluginUntilBuild")
 
-        pluginDescription = file("README.md").readText().lines().run {
-            val start = "<!-- Plugin description -->"
-            val end = "<!-- Plugin description end -->"
+        pluginDescription =
+            file("README.md")
+                .readText()
+                .lines()
+                .run {
+                    val start = "<!-- Plugin description -->"
+                    val end = "<!-- Plugin description end -->"
 
-            if (!containsAll(listOf(start, end))) {
-                throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                    if (!containsAll(listOf(start, end))) {
+                        throw GradleException("Plugin description section not found in README.md:\n$start ... $end")
+                    }
+                    subList(indexOf(start) + 1, indexOf(end))
+                }.joinToString("\n")
+                .let { markdownToHTML(it) }
+
+        changeNotes =
+            with(changelog) {
+                renderItem(
+                    getOrNull(properties("pluginVersion")) ?: getLatest(),
+                    Changelog.OutputType.HTML,
+                )
             }
-            subList(indexOf(start) + 1, indexOf(end))
-        }.joinToString("\n").let { markdownToHTML(it) }
-
-        changeNotes =  with(changelog) {
-            renderItem(
-                getOrNull(properties("pluginVersion")) ?: getLatest(),
-                Changelog.OutputType.HTML,
-            )
-        }
     }
-    runIde{
+    runIde {
         systemProperties(Pair("idea.log.warn.categories", "com.intellij,com.android"))
         systemProperties(Pair("idea.log.info.categories", "org.boulderse.ijserver"))
     }
     buildPlugin {
         archiveFileName.set("ij-mcp-server-plugin.zip")
     }
+}
 
+val ktlintCheck by tasks.registering(JavaExec::class) {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    description = "Check Kotlin code style"
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+    args(
+        "**/src/**/*.kt",
+        "**.kts",
+        "!**/build/**",
+    )
+}
+
+tasks.check {
+    dependsOn(ktlintCheck)
+}
+
+tasks.register<JavaExec>("ktlintFormat") {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    description = "Check Kotlin code style and format"
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    // Suppress "sun.misc.Unsafe::objectFieldOffset" on Java24 (warning) (https://github.com/pinterest/ktlint/issues/2973)
+//    jvmArgs("--sun-misc-unsafe-memory-access=allow") // Java 24+
+    // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
+    args(
+        "-F",
+        "**/src/**/*.kt",
+        "**.kts",
+        "!**/build/**",
+    )
 }
 
 tasks.test {
     dependsOn("buildPlugin")
-    systemProperty("path.to.build.plugin", tasks.buildPlugin.get().archiveFile.get().asFile.absolutePath)
+    systemProperty(
+        "path.to.build.plugin",
+        tasks.buildPlugin
+            .get()
+            .archiveFile
+            .get()
+            .asFile.absolutePath,
+    )
     useJUnitPlatform()
 }
 
