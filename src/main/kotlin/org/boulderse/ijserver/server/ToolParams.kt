@@ -242,3 +242,12 @@ data class RenamePairParams(
     @SerialName("new_name")
     val newName: String
 )
+
+
+@Serializable
+data class ReviewScopeParams(
+    @SerialName("pattern")
+    val pattern: String,
+    @SerialName("condition")
+    val guard: String
+)

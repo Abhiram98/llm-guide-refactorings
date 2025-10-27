@@ -8,11 +8,14 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
+import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
 import org.boulderse.ijserver.server.RenameParams
+import org.boulderse.ijserver.server.ReviewScopeParams
+import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
 
 
@@ -22,10 +25,21 @@ class ReviewRoutes(private val routing: Routing,
                    private val projectCallBack: () -> Project
 ) {
     fun install() {
+
+        routing.post("review/noop"){
+            logViewer.setLogMessage("Agent is thinking. Sit back and relax :)")
+            call.respond(HttpStatusCode.OK)
+        }
+
+
          routing.post("/review/renames") {
              // This API expects the renames to be valid. Invalid renames may cause unexpected behavior
              println("Received review")
              val renamesToReview = call.receive<List<RenameParams>>()
+
+             logViewer.setLogMessage("ACTION REQUIRED: \n" +
+                     "Please review the following renames: \n")
+             renamesToReview.forEach {logViewer.appendLog(it.oldName + " -> " + it.newName)}
              val file = fileCallBack()
              val editor = editorCallBack()
              val project = projectCallBack()
@@ -51,5 +65,28 @@ class ReviewRoutes(private val routing: Routing,
              call.respond(HttpStatusCode.OK,
                  message = Json.encodeToString(reviewStatus))
          }
+
+        routing.get("/review/pattern"){
+            call.respond(HttpStatusCode.OK, logViewer.getPatternText())
+        }
+
+        routing.get("/review/gaurds"){
+            call.respond(HttpStatusCode.OK, logViewer.getGuardText())
+        }
+
+        routing.post("/review/scope"){
+            val params = call.receive<ReviewScopeParams>()
+            logViewer.setPattern(params.pattern)
+            logViewer.setGuard(params.guard)
+
+            logViewer.setLogMessage("ACTION REQUIRED: \n" +
+                    "Please confirm the renaming scope below, by clicking the 'Confirm' button. " +
+                    "You are welcome to edit the scope as per your requirements.")
+            logViewer.resetConfirmationWait()
+            logViewer.waitForConfirmation()
+
+            call.respond(HttpStatusCode.OK,
+                message = ReviewScopeParams(logViewer.getPatternText(), logViewer.getGuardText()))
+        }
     }
 }
