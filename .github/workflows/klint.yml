@@ -17,4 +17,4 @@ jobs:
         uses: gradle/wrapper-validation-action@v1.0.4
       - uses: gradle/gradle-build-action@v2.1.5
         with:
-          arguments: ktlintCheck --stacktrace --info
+          arguments: ktlintCheck --info
