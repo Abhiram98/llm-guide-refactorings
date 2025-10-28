@@ -7,7 +7,7 @@ import com.intellij.notification.NotificationType
 import com.intellij.openapi.project.Project
 import org.boulderse.ijserver.settings.openSettingsDialog
 
-private fun createNotificationGroup(): NotificationGroup =
+public fun createNotificationGroup(): NotificationGroup =
     NotificationGroupManager.getInstance().getNotificationGroup("AI notification group")
 
 internal fun showUnauthorizedNotification(project: Project) {
