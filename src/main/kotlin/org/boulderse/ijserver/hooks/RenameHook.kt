@@ -24,7 +24,6 @@ class RenameHook : ProjectActivity {
                 if ("rename" in refactoringId && !coRenameInProgress) {
                     print("Found a rename refactoring")
                     print(afterData)
-                    // todo: send a notification asking the
                     val notification =
                         createNotificationGroup().createNotification(
                             "Trigger coRenameAgent",
@@ -40,7 +39,6 @@ class RenameHook : ProjectActivity {
                         },
                     )
                     notification.notify(project)
-                    //  developer if they want to trigger agent
                 }
             },
         )
@@ -53,5 +51,10 @@ class RenameHook : ProjectActivity {
     fun triggerAgent() {
         coRenameInProgress = true
         // todo: trigger python agent.
+        //  docker run cuboulderse/renameagent --args
+    }
+
+    fun agentComplete() {
+        coRenameInProgress = false
     }
 }

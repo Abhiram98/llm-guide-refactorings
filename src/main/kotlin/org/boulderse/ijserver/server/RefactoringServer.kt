@@ -70,6 +70,7 @@ import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
 import org.boulderse.ijserver.refactoringobjects.snippet.SnippetFinder
 import org.boulderse.ijserver.server.basic.IndexRoutes
 import org.boulderse.ijserver.server.review.ReviewRoutes
+import org.boulderse.ijserver.server.vcs.VcsRoutes
 import org.boulderse.ijserver.testcuration.TestSelector
 import org.boulderse.ijserver.utils.FileUtils
 import org.boulderse.ijserver.utils.PsiUtils
@@ -154,6 +155,8 @@ class RefactoringServer(
                 { editor },
                 { project },
             ).install()
+
+            VcsRoutes(this, { project }).installRoutes()
 
             get("/get_source_code") {
                 call.respond(HttpStatusCode.OK, message = file!!.text)
