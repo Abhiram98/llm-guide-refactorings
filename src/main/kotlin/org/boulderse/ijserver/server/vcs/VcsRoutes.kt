@@ -15,20 +15,37 @@ class VcsRoutes(
 ) {
     fun installRoutes() {
         routing.get("/vcs/changes") {
-            call.respond(HttpStatusCode.OK, getChanges().toString())
+            val changes = getChanges().map {
+                val afterPath = it.afterRevision?.file?.path?.removePrefix("${projectCallBack().basePath}/")
+                if (afterPath==null){
+                    null
+                }else{
+                    val beforeStr = it.beforeRevision?.content
+                    val afterStr = it.afterRevision?.content
+                    afterPath to Pair(beforeStr, afterStr)
+                }
+            }.filterNotNull().toMap()
+            call.respond(HttpStatusCode.OK, Json.encodeToString(changes))
         }
 
         routing.get("/vcs/renamed_files") {
+            val project = projectCallBack()
             val renamedFiles =
                 getChanges()
                     .map { change ->
                         if (change.isRenamed) {
-                            change.beforeRevision?.file?.name to change.afterRevision?.file?.name
+                            val beforePath = change.beforeRevision?.file?.path?.removePrefix("${project.basePath}/")
+                            val afterPath = change.afterRevision?.file?.path?.removePrefix("${project.basePath}/")
+                            if (beforePath!=null && afterPath!=null) {
+                                beforePath to afterPath
+                            }else{
+                                null
+                            }
                         } else {
                             null
                         }
                     }.filterNotNull()
-                    .toList()
+                    .toMap()
 
             call.respond(HttpStatusCode.OK, Json.encodeToString(renamedFiles))
         }
@@ -46,8 +63,6 @@ class VcsRoutes(
 
     fun getChanges(): Collection<Change> {
         val manager: ChangeListManager = ChangeListManager.getInstance(projectCallBack())
-        manager.allChanges.forEach { change -> println(change.description) }
-        manager.changeLists.forEach { changeList -> println(changeList) }
         return manager.allChanges
     }
 }
