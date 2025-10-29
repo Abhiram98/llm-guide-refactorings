@@ -2,17 +2,21 @@ package org.boulderse.ijserver.hooks
 
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationType
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
+import com.intellij.psi.PsiElement
 import com.intellij.refactoring.listeners.RefactoringEventData
 import com.intellij.refactoring.listeners.RefactoringEventListener
 import org.boulderse.ijserver.createNotificationGroup
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
+import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 
 class RenameHook : ProjectActivity {
     var coRenameInProgress = false
     var seedOldName: String? = null
     var seedNewName: String? = null
+    var seedElement: PsiElement? = null
 
     fun registerHook(project: Project) {
         project.messageBus.connect().subscribe(
@@ -25,6 +29,7 @@ class RenameHook : ProjectActivity {
                     if ("rename" in refactoringId && !coRenameInProgress) {
                         print("Found a rename refactoring")
                         val element = beforeData?.getUserData(RefactoringEventData.PSI_ELEMENT_KEY)
+                        seedElement = element
                         seedOldName = element?.namedUnwrappedElement?.name
                     }
                 }
@@ -47,12 +52,34 @@ class RenameHook : ProjectActivity {
         registerHook(project)
     }
 
-    fun triggerAgent() {
+    fun triggerAgent(project: Project) {
         coRenameInProgress = true
-        seedNewName!!
-        seedOldName!!
-        // todo: trigger python agent.
-        //  docker run cuboulderse/renameagent --args
+
+        val pythonPath = System.getenv("PYTHONPATH") ?: "/Users/abhiram/Documents/TBE/RefactoringAgentProject/ref_venv/bin/python"
+        val command = mutableListOf(
+            pythonPath, "-m", "refagent",
+            "--seed_old_name", seedOldName!!,
+            "--seed_new_name", seedNewName!!,
+            "--seed_line_num", (seedElement as PsiElement).getLineNumber().toString() + 1,
+            "--seed_element_type", seedElement?.javaClass?.simpleName!!,
+            "--seed_file", seedElement?.containingFile?.virtualFile?.path?.removePrefix(project.basePath+"/")!!,
+        )
+        println("Running command: ${command.joinToString(" ")}")
+        ApplicationManager.getApplication().executeOnPooledThread {
+            try{
+                val process =
+                    ProcessBuilder(command)
+                        .start()
+                val exitCode = process.waitFor()
+                val output = process.inputStream.bufferedReader().use { it.readText() }
+                val stderr = process.errorStream.bufferedReader().use { it.readText() }
+                println("refagent exit=$exitCode output:\n$output\nstderr:\n$stderr")
+            } catch (e: Exception) {
+                println("Failed to run refagent: ${e.message}")
+            } finally {
+                agentComplete()
+            }
+        }
     }
 
     fun agentComplete() {
@@ -70,7 +97,7 @@ class RenameHook : ProjectActivity {
         val action = "Trigger agent"
         notification.addAction(
             NotificationAction.createSimple(action) {
-                triggerAgent()
+                triggerAgent(project)
                 notification.expire()
             },
         )
