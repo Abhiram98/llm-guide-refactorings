@@ -1,5 +1,6 @@
 package org.boulderse.ijserver.server.sourcecode
 
+import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
@@ -33,7 +34,7 @@ class SourceCodeRoutes(
                 call.respond(HttpStatusCode.BadRequest, message = "file not found.")
                 return@get
             }
-            val file = PsiManager.getInstance(project).findFile(vfile)!!
+            val file = runReadAction{ PsiManager.getInstance(project).findFile(vfile) }!!
             call.respond(HttpStatusCode.OK, message = file.text)
         }
 
