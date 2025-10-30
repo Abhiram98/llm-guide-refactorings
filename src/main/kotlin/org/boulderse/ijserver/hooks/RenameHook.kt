@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.refactoring.listeners.RefactoringEventData
 import com.intellij.refactoring.listeners.RefactoringEventListener
 import org.boulderse.ijserver.createNotificationGroup
+import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 
@@ -60,8 +61,8 @@ class RenameHook : ProjectActivity {
             pythonPath, "-m", "refagent",
             "--seed_old_name", seedOldName!!,
             "--seed_new_name", seedNewName!!,
-            "--seed_line_num", (seedElement as PsiElement).getLineNumber().toString() + 1,
-            "--seed_element_type", seedElement?.javaClass?.simpleName!!,
+            "--seed_line_num", (seedElement as PsiElement).getLineNumber().plus(1).toString(),
+            "--seed_element_type", PsiUtils.getElementTypeStr(seedElement!!),
             "--seed_file", seedElement?.containingFile?.virtualFile?.path?.removePrefix(project.basePath+"/")!!,
         )
         println("Running command: ${command.joinToString(" ")}")
