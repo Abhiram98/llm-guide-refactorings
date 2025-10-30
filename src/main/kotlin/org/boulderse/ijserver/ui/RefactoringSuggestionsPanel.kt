@@ -380,7 +380,7 @@ open class RefactoringSuggestionsPanel(
     open fun getStartLoc(index: Int) = myCandidates[index].startLoc
 
     private fun getSelectedRefactoringObject(extractFuncationCandidateJBTable: JBTable): AbstractRefactoring? {
-        val candidate = myCandidates[extractFuncationCandidateJBTable.selectedRow]
+        val candidate = myCandidates.getOrNull(extractFuncationCandidateJBTable.selectedRow)
         return candidate
     }
 
