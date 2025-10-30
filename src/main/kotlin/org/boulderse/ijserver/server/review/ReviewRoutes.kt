@@ -32,7 +32,7 @@ class ReviewRoutes(
 
         routing.post("/review/renames") {
             // This API expects the renames to be valid. Invalid renames may cause unexpected behavior
-            println("Received review")
+            println("Received review for renames")
             val renamesToReview = call.receive<List<RenameParams>>()
 
             logViewer.setLogMessage(
@@ -65,6 +65,7 @@ class ReviewRoutes(
             panel.waitAndClose()
 
             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
+            println("Review status: $reviewStatus")
             call.respond(
                 HttpStatusCode.OK,
                 message = Json.encodeToString(reviewStatus),
