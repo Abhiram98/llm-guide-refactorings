@@ -9,6 +9,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.refactoring.listeners.RefactoringEventData
 import com.intellij.refactoring.listeners.RefactoringEventListener
 import org.boulderse.ijserver.createNotificationGroup
+import org.boulderse.ijserver.settings.RefAgentSettingsManager
+import org.boulderse.ijserver.showUnauthorizedNotification
 import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
@@ -56,9 +58,17 @@ class RenameHook : ProjectActivity {
     fun triggerAgent(project: Project) {
         coRenameInProgress = true
 
-        val pythonPath = System.getenv("PYTHONPATH") ?: "/Users/abhiram/Documents/TBE/RefactoringAgentProject/ref_venv/bin/python"
+        val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
+        if (llmKey == "") {
+            showUnauthorizedNotification(project)
+            return
+        }
+
         val command = mutableListOf(
-            pythonPath, "-m", "refagent",
+            "docker", "run",
+            "-e", "IJ_SERVER_URL=http://host.docker.internal:8082",
+            "-e", "GRAZIE_JWT_TOKEN",
+            "renameagent",
             "--seed_old_name", seedOldName!!,
             "--seed_new_name", seedNewName!!,
             "--seed_line_num", (seedElement as PsiElement).getLineNumber().plus(1).toString(),
@@ -68,9 +78,10 @@ class RenameHook : ProjectActivity {
         println("Running command: ${command.joinToString(" ")}")
         ApplicationManager.getApplication().executeOnPooledThread {
             try{
-                val process =
+                val cmd =
                     ProcessBuilder(command)
-                        .start()
+                cmd.environment()["GRAZIE_JWT_TOKEN"] = llmKey
+                val process = cmd.start()
                 val exitCode = process.waitFor()
                 val output = process.inputStream.bufferedReader().use { it.readText() }
                 val stderr = process.errorStream.bufferedReader().use { it.readText() }
