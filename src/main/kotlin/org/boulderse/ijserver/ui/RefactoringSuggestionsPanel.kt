@@ -92,17 +92,19 @@ open class RefactoringSuggestionsPanel(
     private var resetRating: Boolean = false
     private lateinit var refactoringDescriptionPane: JBScrollPane
 
-    val refactorButton = JButton(button_name).apply {
-        addActionListener {
-            performAction(myRefactoringCandidateTable.selectedRow)
+    val refactorButton =
+        JButton(button_name).apply {
+            addActionListener {
+                performAction(myRefactoringCandidateTable.selectedRow)
+            }
         }
-    }
 
-    val rejectButton = JButton("Reject").apply {
-        addActionListener {
-            onReject(myRefactoringCandidateTable.selectedRow)
+    val rejectButton =
+        JButton("Reject").apply {
+            addActionListener {
+                onReject(myRefactoringCandidateTable.selectedRow)
+            }
         }
-    }
 
     fun initTable() {
         val tableModel = buildTableModel(myCandidates)
@@ -226,6 +228,7 @@ open class RefactoringSuggestionsPanel(
 
         return refactoringDescription
     }
+
     fun createPanel(): JComponent {
         val refactoringPanel =
             panel {
@@ -280,6 +283,7 @@ open class RefactoringSuggestionsPanel(
         disableButtons()
         myPopup?.cancel()
     }
+
     fun disableButtons() {
         refactorButton.isEnabled = false
         rejectButton.isEnabled = false
@@ -369,9 +373,10 @@ open class RefactoringSuggestionsPanel(
         candidateSignatureMap: Map<AbstractRefactoring, String>,
     ) {
         val candidate = getSelectedRefactoringObject(extractFuncationCandidateJBTable) ?: return
-        val psiElement = candidate.fetchRootPsi()?: return
-        if (psiElement.containingFile.virtualFile.path != myEditor.virtualFile.path){
-                myEditor = FileEditorManager.getInstance(myProject).openTextEditor(
+        val psiElement = candidate.fetchRootPsi() ?: return
+        if (psiElement.containingFile.virtualFile.path != myEditor.virtualFile.path) {
+            myEditor =
+                FileEditorManager.getInstance(myProject).openTextEditor(
                     OpenFileDescriptor(
                         myProject,
                         psiElement.containingFile.virtualFile,
@@ -433,8 +438,7 @@ open class RefactoringSuggestionsPanel(
         myEFTelemetryDataManager?.newSession()
         myEFTelemetryDataManager?.setRefactoringObjects(myCandidates)
 
-        if (anchorPanel!=null){
-
+        if (anchorPanel != null) {
             anchorPanel.removeAll()
             anchorPanel.add(panel)
             anchorPanel.revalidate()
@@ -455,8 +459,6 @@ open class RefactoringSuggestionsPanel(
                 .setCancelOnWindowDeactivation(false)
                 .createPopup()
         // Create the popup
-
-
 
         // Add onClosed listener
         efPopup.addListener(
@@ -489,11 +491,12 @@ open class RefactoringSuggestionsPanel(
 
         // Show the popup at the top right corner of the current editor
 
-        val relPoint = if (anchorPanel!=null){
-            RelativePoint.getNorthWestOf(anchorPanel)
-        }else{
-            RelativePoint.getSouthWestOf(myEditor.contentComponent)
-        }
+        val relPoint =
+            if (anchorPanel != null) {
+                RelativePoint.getNorthWestOf(anchorPanel)
+            } else {
+                RelativePoint.getSouthWestOf(myEditor.contentComponent)
+            }
         efPopup.show(relPoint)
     }
 }

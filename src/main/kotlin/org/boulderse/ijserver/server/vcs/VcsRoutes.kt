@@ -15,16 +15,23 @@ class VcsRoutes(
 ) {
     fun installRoutes() {
         routing.get("/vcs/changes") {
-            val changes = getChanges().map {
-                val afterPath = it.afterRevision?.file?.path?.removePrefix("${projectCallBack().basePath}/")
-                if (afterPath==null){
-                    null
-                }else{
-                    val beforeStr = it.beforeRevision?.content
-                    val afterStr = it.afterRevision?.content
-                    afterPath to Pair(beforeStr, afterStr)
-                }
-            }.filterNotNull().toMap()
+            val changes =
+                getChanges()
+                    .map {
+                        val afterPath =
+                            it.afterRevision
+                                ?.file
+                                ?.path
+                                ?.removePrefix("${projectCallBack().basePath}/")
+                        if (afterPath == null) {
+                            null
+                        } else {
+                            val beforeStr = it.beforeRevision?.content
+                            val afterStr = it.afterRevision?.content
+                            afterPath to Pair(beforeStr, afterStr)
+                        }
+                    }.filterNotNull()
+                    .toMap()
             call.respond(HttpStatusCode.OK, Json.encodeToString(changes))
         }
 
@@ -34,11 +41,19 @@ class VcsRoutes(
                 getChanges()
                     .map { change ->
                         if (change.isRenamed) {
-                            val beforePath = change.beforeRevision?.file?.path?.removePrefix("${project.basePath}/")
-                            val afterPath = change.afterRevision?.file?.path?.removePrefix("${project.basePath}/")
-                            if (beforePath!=null && afterPath!=null) {
+                            val beforePath =
+                                change.beforeRevision
+                                    ?.file
+                                    ?.path
+                                    ?.removePrefix("${project.basePath}/")
+                            val afterPath =
+                                change.afterRevision
+                                    ?.file
+                                    ?.path
+                                    ?.removePrefix("${project.basePath}/")
+                            if (beforePath != null && afterPath != null) {
                                 beforePath to afterPath
-                            }else{
+                            } else {
                                 null
                             }
                         } else {

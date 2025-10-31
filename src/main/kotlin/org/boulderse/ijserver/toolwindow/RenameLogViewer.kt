@@ -53,7 +53,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         guardPanel.border = javax.swing.BorderFactory.createTitledBorder("Guard")
         guardPanel.add(guardPane, BorderLayout.CENTER)
 
-
         renamingScopePanel.layout = BoxLayout(renamingScopePanel, BoxLayout.Y_AXIS)
         renamingScopePanel.border = javax.swing.BorderFactory.createTitledBorder("Renaming Scope")
         renamingScopePanel.add(patternPanel)
@@ -141,13 +140,23 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         guardText.text = "<Guard conditions here>"
     }
 
-    fun setProgress(numerator: Int, denominator: Int) {
+    fun setProgress(
+        numerator: Int,
+        denominator: Int,
+    ) {
         currentNumerator = numerator.coerceAtLeast(0)
         currentDenominator = denominator.coerceAtLeast(0)
 
-        val percent = if (currentDenominator <= 0) 0 else ((currentNumerator.toDouble() / currentDenominator.toDouble()) * 100).toInt().coerceIn(0, 100)
+        val percent =
+            if (currentDenominator <=
+                0
+            ) {
+                0
+            } else {
+                ((currentNumerator.toDouble() / currentDenominator.toDouble()) * 100).toInt().coerceIn(0, 100)
+            }
         progressBar.value = percent
-        progressLabel.text = "${currentNumerator} / ${currentDenominator} (${percent}%)"
+        progressLabel.text = "$currentNumerator / $currentDenominator ($percent%)"
         // ensure UI updates on EDT
         javax.swing.SwingUtilities.invokeLater {
             progressBar.repaint()

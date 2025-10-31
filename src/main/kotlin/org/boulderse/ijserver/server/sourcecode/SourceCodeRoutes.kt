@@ -34,7 +34,7 @@ class SourceCodeRoutes(
                 call.respond(HttpStatusCode.BadRequest, message = "file not found.")
                 return@get
             }
-            val file = runReadAction{ PsiManager.getInstance(project).findFile(vfile) }!!
+            val file = runReadAction { PsiManager.getInstance(project).findFile(vfile) }!!
             call.respond(HttpStatusCode.OK, message = file.text)
         }
 

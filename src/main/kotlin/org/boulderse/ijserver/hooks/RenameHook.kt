@@ -24,9 +24,11 @@ class RenameHook : ProjectActivity {
     fun registerHook(project: Project) {
         project.messageBus.connect().subscribe(
             RefactoringEventListener.REFACTORING_EVENT_TOPIC,
-
             object : RefactoringEventListener {
-                override fun refactoringStarted(refactoringId: String, beforeData: RefactoringEventData?) {
+                override fun refactoringStarted(
+                    refactoringId: String,
+                    beforeData: RefactoringEventData?,
+                ) {
                     print("refactoring started: $refactoringId")
                     super.refactoringStarted(refactoringId, beforeData)
                     if ("rename" in refactoringId && !coRenameInProgress) {
@@ -37,7 +39,10 @@ class RenameHook : ProjectActivity {
                     }
                 }
 
-                override fun refactoringDone(refactoringId: String, afterData: RefactoringEventData?) {
+                override fun refactoringDone(
+                    refactoringId: String,
+                    afterData: RefactoringEventData?,
+                ) {
                     print("refactoring done: $refactoringId")
                     if ("rename" in refactoringId && !coRenameInProgress) {
                         print("Found a rename refactoring")
@@ -45,7 +50,6 @@ class RenameHook : ProjectActivity {
                         seedNewName = element?.namedUnwrappedElement?.name
                         showNotification(project)
                     }
-
                 }
             },
         )
@@ -64,20 +68,33 @@ class RenameHook : ProjectActivity {
             return
         }
 
-        val command = mutableListOf(
-            "docker", "run",
-            "-e", "IJ_SERVER_URL=http://host.docker.internal:8082",
-            "-e", "GRAZIE_JWT_TOKEN",
-            "renameagent",
-            "--seed_old_name", seedOldName!!,
-            "--seed_new_name", seedNewName!!,
-            "--seed_line_num", (seedElement as PsiElement).getLineNumber().plus(1).toString(),
-            "--seed_element_type", PsiUtils.getElementTypeStr(seedElement!!),
-            "--seed_file", seedElement?.containingFile?.virtualFile?.path?.removePrefix(project.basePath+"/")!!,
-        )
+        val command =
+            mutableListOf(
+                "docker",
+                "run",
+                "-e",
+                "IJ_SERVER_URL=http://host.docker.internal:8082",
+                "-e",
+                "GRAZIE_JWT_TOKEN",
+                "renameagent",
+                "--seed_old_name",
+                seedOldName!!,
+                "--seed_new_name",
+                seedNewName!!,
+                "--seed_line_num",
+                (seedElement as PsiElement).getLineNumber().plus(1).toString(),
+                "--seed_element_type",
+                PsiUtils.getElementTypeStr(seedElement!!),
+                "--seed_file",
+                seedElement
+                    ?.containingFile
+                    ?.virtualFile
+                    ?.path
+                    ?.removePrefix(project.basePath + "/")!!,
+            )
         println("Running command: ${command.joinToString(" ")}")
         ApplicationManager.getApplication().executeOnPooledThread {
-            try{
+            try {
                 val cmd =
                     ProcessBuilder(command)
                 cmd.environment()["GRAZIE_JWT_TOKEN"] = llmKey
