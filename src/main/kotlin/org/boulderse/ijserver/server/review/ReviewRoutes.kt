@@ -56,7 +56,7 @@ class ReviewRoutes(
                     file!!,
                     renameObjs,
                     null,
-                    "Rename Identifier",
+                    "Accept",
                 )
 
             invokeLater {

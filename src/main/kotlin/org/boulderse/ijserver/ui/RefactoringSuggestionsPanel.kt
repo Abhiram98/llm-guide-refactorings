@@ -233,7 +233,7 @@ open class RefactoringSuggestionsPanel(
                                 KeymapUtil.getFirstKeyboardShortcutText(ActionManager.getInstance().getAction("ExtractMethod")),
                             ),
                         ).align(AlignX.LEFT)
-                    button("Reject Suggestion", actionListener = { onReject(myRefactoringCandidateTable.selectedRow) }).align(AlignX.RIGHT)
+                    button("Reject", actionListener = { onReject(myRefactoringCandidateTable.selectedRow) }).align(AlignX.RIGHT)
                 }
                 row {
                     cell(ratingsBox)
