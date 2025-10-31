@@ -24,9 +24,13 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     val renameSuggestions = JPanel()
     val progressPanel = JPanel()
     private val progressBar = JProgressBar(0, 100)
+    private val progressBarRenames = JProgressBar(0, 100)
     private val progressLabel = JLabel("0 / 0 (0%)")
+    private val progressLabelRenames = JLabel("0 / 0 (0%)")
     private var currentNumerator: Int = 0
     private var currentDenominator: Int = 0
+    private var inspectingFile: String = "FileName.java"
+    private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
 
     init {
         patternText.lineWrap = true // Wrap lines if they are too long
@@ -88,13 +92,37 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         progressBar.value = 0
 
         // Add components to the progress panel
-        val progressRow = JPanel()
-        progressRow.layout = BoxLayout(progressRow, BoxLayout.X_AXIS)
-        progressRow.add(progressBar)
-        progressRow.add(Box.createHorizontalStrut(8))
-        progressRow.add(progressLabel)
+        val progressPanel = JPanel()
+        progressPanel.layout = BoxLayout(progressPanel, BoxLayout.Y_AXIS)
 
-        progressPanel.add(progressRow)
+        val inspectedRow = JPanel()
+        inspectedRow.layout = BoxLayout(inspectedRow, BoxLayout.Y_AXIS)
+        inspectedRow.add(JLabel("Files Inspected:"))
+
+        val inspectedProgressLine = JPanel()
+        inspectedProgressLine.layout = BoxLayout(inspectedProgressLine, BoxLayout.X_AXIS)
+        inspectedProgressLine.add(progressBar)
+        inspectedProgressLine.add(Box.createHorizontalStrut(8))
+        inspectedProgressLine.add(progressLabel)
+
+        inspectedRow.add(inspectedProgressLine)
+
+        val renameRow = JPanel()
+        renameRow.layout = BoxLayout(renameRow, BoxLayout.Y_AXIS)
+        renameRow.add(renameProgressLabel)
+
+        val renameProgressLine = JPanel()
+        renameProgressLine.layout = BoxLayout(renameProgressLine, BoxLayout.X_AXIS)
+        renameProgressLine.add(progressBarRenames)
+        renameProgressLine.add(Box.createHorizontalStrut(8))
+        renameProgressLine.add(progressLabelRenames)
+
+        renameRow.add(renameProgressLine)
+
+        progressPanel.add(inspectedRow)
+        progressPanel.add(Box.createVerticalStrut(8))
+        progressPanel.add(renameRow)
+
         add(progressPanel, BorderLayout.NORTH)
 
         // Add the southPanel to the existing layout set by LogViewer
@@ -174,5 +202,10 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
             progressBar.repaint()
             progressLabel.repaint()
         }
+    }
+
+    fun setFileInspecting(fileName: String){
+        inspectingFile = fileName
+        renameProgressLabel.text = "Renames Inspected in $inspectingFile: "
     }
 }
