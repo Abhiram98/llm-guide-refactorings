@@ -18,6 +18,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private val guardText = JTextArea()
     private val confirmScopeButton = JButton("Confirm Scope")
     private var scopeConfirmed = CompletableDeferred<Boolean>()
+    val renamingScopePanel = JPanel()
+    val renameSuggestions = JPanel()
 
     init {
         patternText.lineWrap = true // Wrap lines if they are too long
@@ -44,7 +46,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         guardPanel.border = javax.swing.BorderFactory.createTitledBorder("Guard")
         guardPanel.add(guardPane, BorderLayout.CENTER)
 
-        val renamingScopePanel = JPanel()
+
         renamingScopePanel.layout = BoxLayout(renamingScopePanel, BoxLayout.Y_AXIS)
         renamingScopePanel.border = javax.swing.BorderFactory.createTitledBorder("Renaming Scope")
         renamingScopePanel.add(patternPanel)
@@ -70,6 +72,10 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         // Add the southPanel to the existing layout set by LogViewer
         add(southPanel, BorderLayout.SOUTH)
+
+        renameSuggestions.layout = BoxLayout(renameSuggestions, BoxLayout.Y_AXIS)
+        renameSuggestions.border = javax.swing.BorderFactory.createTitledBorder("Rename Suggestions")
+        add(renameSuggestions, BorderLayout.CENTER)
     }
 
     fun getPatternText(): String = patternText.text

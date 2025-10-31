@@ -60,7 +60,7 @@ class ReviewRoutes(
                 )
 
             invokeLater {
-                panel.createAndShowPopup()
+                panel.createAndShowPopup(logViewer.renameSuggestions)
             }
             panel.waitAndClose()
 

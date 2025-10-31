@@ -25,6 +25,8 @@ import com.intellij.ui.awt.RelativePoint
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.dsl.builder.AlignX
+import com.intellij.ui.dsl.builder.Cell
+import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.JBDimension
@@ -47,6 +49,7 @@ import java.awt.Dimension
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
 import java.util.concurrent.atomic.AtomicReference
+import javax.swing.JButton
 import javax.swing.JComponent
 import javax.swing.KeyStroke
 import javax.swing.ListSelectionModel
@@ -88,6 +91,18 @@ open class RefactoringSuggestionsPanel(
     val ratingsBox = ComboBox(ratingOptions)
     private var resetRating: Boolean = false
     private lateinit var refactoringDescriptionPane: JBScrollPane
+
+    val refactorButton = JButton(button_name).apply {
+        addActionListener {
+            performAction(myRefactoringCandidateTable.selectedRow)
+        }
+    }
+
+    val rejectButton = JButton("Reject").apply {
+        addActionListener {
+            onReject(myRefactoringCandidateTable.selectedRow)
+        }
+    }
 
     fun initTable() {
         val tableModel = buildTableModel(myCandidates)
@@ -211,9 +226,8 @@ open class RefactoringSuggestionsPanel(
 
         return refactoringDescription
     }
-
     fun createPanel(): JComponent {
-        val popupPanel =
+        val refactoringPanel =
             panel {
                 row {
                     cell(myRefactoringScrollPane)
@@ -228,16 +242,14 @@ open class RefactoringSuggestionsPanel(
                 }
 
                 row {
-                    button(button_name, actionListener = {
-                        performAction(myRefactoringCandidateTable.selectedRow)
-                    })
+                    cell(refactorButton)
                         .comment(
                             LLMBundle.message(
                                 "ef.candidates.popup.invoke.extract.function",
                                 KeymapUtil.getFirstKeyboardShortcutText(ActionManager.getInstance().getAction("ExtractMethod")),
                             ),
                         ).align(AlignX.LEFT)
-                    button("Reject", actionListener = { onReject(myRefactoringCandidateTable.selectedRow) }).align(AlignX.RIGHT)
+                    cell(rejectButton).align(AlignX.RIGHT)
                 }
                 row {
                     cell(ratingsBox)
@@ -247,8 +259,7 @@ open class RefactoringSuggestionsPanel(
                 }
             }
 
-//        popupPanel.preferredFocusedComponent = myRefactoringCandidateTable
-        return popupPanel
+        return refactoringPanel
     }
 
     private fun registerRating(
@@ -266,7 +277,15 @@ open class RefactoringSuggestionsPanel(
     }
 
     fun onReject(index: Int) {
+        disableButtons()
         myPopup?.cancel()
+    }
+    fun disableButtons() {
+        refactorButton.isEnabled = false
+        rejectButton.isEnabled = false
+        myHighlighter.get().dropHighlight()
+        myEFTelemetryDataManager?.let { sendTelemetryData(it) }
+        closed.complete(true)
     }
 
     private fun generateFunctionSignature(psiMethod: PsiMethod): String {
@@ -315,6 +334,7 @@ open class RefactoringSuggestionsPanel(
             myHighlighter.get().dropHighlight()
             refreshCandidates(index, "COMPLETED")
             myPopup?.cancel()
+            disableButtons()
             return true
         }
         return false
@@ -405,7 +425,7 @@ open class RefactoringSuggestionsPanel(
         withTimeoutOrNull(5.minutes) { closed.await() }
             ?: throw Exception("User did not review the suggestion within 5 minutes")
 
-    fun createAndShowPopup() {
+    fun createAndShowPopup(anchorPanel: JComponent? = null) {
         this.initTable()
         val elapsedTimeTelemetryDataObserver = TelemetryElapsedTimeObserver()
         this.addObserver(elapsedTimeTelemetryDataObserver)
@@ -413,6 +433,14 @@ open class RefactoringSuggestionsPanel(
         myEFTelemetryDataManager?.newSession()
         myEFTelemetryDataManager?.setRefactoringObjects(myCandidates)
 
+        if (anchorPanel!=null){
+
+            anchorPanel.removeAll()
+            anchorPanel.add(panel)
+            anchorPanel.revalidate()
+            anchorPanel.repaint()
+            return@createAndShowPopup
+        }
         val efPopup =
             JBPopupFactory
                 .getInstance()
@@ -427,6 +455,8 @@ open class RefactoringSuggestionsPanel(
                 .setCancelOnWindowDeactivation(false)
                 .createPopup()
         // Create the popup
+
+
 
         // Add onClosed listener
         efPopup.addListener(
@@ -458,7 +488,12 @@ open class RefactoringSuggestionsPanel(
         setDelegatePopup(efPopup)
 
         // Show the popup at the top right corner of the current editor
-        val contentComponent = myEditor.contentComponent
-        efPopup.show(RelativePoint.getSouthWestOf(contentComponent))
+
+        val relPoint = if (anchorPanel!=null){
+            RelativePoint.getNorthWestOf(anchorPanel)
+        }else{
+            RelativePoint.getSouthWestOf(myEditor.contentComponent)
+        }
+        efPopup.show(relPoint)
     }
 }
