@@ -13,16 +13,10 @@ import com.intellij.psi.PsiParameter
 import com.intellij.psi.PsiReferenceExpression
 import com.intellij.psi.impl.source.PsiJavaCodeReferenceElementImpl
 import com.intellij.refactoring.RefactoringFactory
-import com.intellij.refactoring.rename.RenameHandler
-import com.intellij.refactoring.rename.RenameProcessor
-import com.intellij.usageView.UsageInfo
-import com.jetbrains.rd.util.catch
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
-import org.jetbrains.kotlin.idea.codeinsight.utils.findExistingEditor
-import org.jetbrains.kotlin.idea.debugger.getContainingMethod
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
@@ -140,7 +134,7 @@ class RenameVariable(
         return isValid!!
     }
 
-    override fun getRefactoringPreview(): String = "${RenameVariableFactory.logicalName} $oldName -> $newName"
+    override fun getRefactoringPreview(): String = "Rename ${PsiUtils.getElementTypeStr(oldVarPsi)} $oldName -> $newName"
 
     override fun getStartOffset(): Int = oldVarPsi.startOffset
 
