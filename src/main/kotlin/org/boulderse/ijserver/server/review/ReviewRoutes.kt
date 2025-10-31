@@ -80,6 +80,11 @@ class ReviewRoutes(
             call.respond(HttpStatusCode.OK, logViewer.getGuardText())
         }
 
+        routing.post("/review/reset_scope") {
+            logViewer.resetScope()
+            call.respond(HttpStatusCode.OK)
+        }
+
         routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
             logViewer.setPattern(params.pattern)

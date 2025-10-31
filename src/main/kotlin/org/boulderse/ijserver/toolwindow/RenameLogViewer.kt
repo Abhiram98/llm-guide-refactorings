@@ -101,4 +101,9 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         this.clear()
         this.appendLog(message)
     }
+
+    fun resetScope() {
+        patternText.text = "<Rename pattern>"
+        guardText.text = "<Guard conditions here>"
+    }
 }
