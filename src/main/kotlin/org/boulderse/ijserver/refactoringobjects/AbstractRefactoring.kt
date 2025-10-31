@@ -89,7 +89,7 @@ abstract class AbstractRefactoring(open val psiElement: PsiElement?) {
 
     fun recalibrateFromLineNumber() {}
 
-    open fun getPsiElement(): PsiElement?{
+    open fun fetchRootPsi(): PsiElement?{
         return psiElement
     }
 }

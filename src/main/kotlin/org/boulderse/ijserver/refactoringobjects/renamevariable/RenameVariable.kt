@@ -140,6 +140,10 @@ class RenameVariable(
 
     override fun getEndOffset(): Int = oldVarPsi.endOffset
 
+    override fun fetchRootPsi(): PsiElement? {
+        return getResolvedElement()?: oldVarPsi
+    }
+
     override fun getReverseRefactoringObject(
         project: Project,
         editor: Editor,

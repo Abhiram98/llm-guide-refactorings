@@ -7,6 +7,8 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.LogicalPosition
 import com.intellij.openapi.editor.ScrollType
+import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.fileEditor.OpenFileDescriptor
 import com.intellij.openapi.keymap.KeymapUtil
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.project.Project
@@ -39,6 +41,8 @@ import org.boulderse.ijserver.telemetry.TelemetryElapsedTimeObserver
 import org.boulderse.ijserver.telemetry.sendTelemetryData
 import org.boulderse.ijserver.utils.EFNotification
 import org.boulderse.ijserver.utils.Observable
+import org.jetbrains.kotlin.psi.psiUtil.endOffset
+import org.jetbrains.kotlin.psi.psiUtil.startOffset
 import java.awt.Dimension
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
@@ -62,7 +66,7 @@ open class RefactoringSuggestionsPanel(
     val myProject: Project = project
     lateinit var refactoringDescriptionBox: JBTextArea
     val myCandidates = candidates
-    val myEditor = editor
+    var myEditor = editor
     var myPopup: JBPopup? = null
     val myFile = file
     val myHighlighter = AtomicReference(ScopeHighlighter(editor))
@@ -345,14 +349,23 @@ open class RefactoringSuggestionsPanel(
         candidateSignatureMap: Map<AbstractRefactoring, String>,
     ) {
         val candidate = getSelectedRefactoringObject(extractFuncationCandidateJBTable) ?: return
-        val startOffset = getStartOffset(extractFuncationCandidateJBTable.selectedRow)
-        val endOffset = getEndOffset(extractFuncationCandidateJBTable.selectedRow)
-        myEditor.selectionModel.setSelection(startOffset, endOffset)
+        val psiElement = candidate.fetchRootPsi()?: return
+        if (psiElement.containingFile.virtualFile.path != myEditor.virtualFile.path){
+                myEditor = FileEditorManager.getInstance(myProject).openTextEditor(
+                    OpenFileDescriptor(
+                        myProject,
+                        psiElement.containingFile.virtualFile,
+                    ),
+                    true, // request focus to editor
+                )!!
+        }
+
+        myEditor.selectionModel.setSelection(psiElement.startOffset, psiElement.endOffset)
 
         refactoringDescriptionBox.text = candidateSignatureMap[candidate]
         val scopeHighlighter: ScopeHighlighter = myHighlighter.get()
         scopeHighlighter.dropHighlight()
-        val range = TextRange(startOffset, endOffset)
+        val range = TextRange(psiElement.startOffset, psiElement.endOffset)
         scopeHighlighter.highlight(
             com.intellij.openapi.util
                 .Pair(range, listOf(range)),
