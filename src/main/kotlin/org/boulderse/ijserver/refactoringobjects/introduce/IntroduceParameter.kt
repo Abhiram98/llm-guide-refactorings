@@ -20,7 +20,7 @@ class IntroduceParameter(
     val methosPsi: PsiMethod,
     val expression: PsiExpression,
     val localVariable: PsiLocalVariable?,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(expression) {
     override fun isValid(
         project: Project,
         editor: Editor,

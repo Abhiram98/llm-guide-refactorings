@@ -3,15 +3,9 @@ package org.boulderse.ijserver.refactoringobjects.extractclass
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.*
-import com.intellij.refactoring.MoveDestination
 import com.intellij.refactoring.PackageWrapper
-import com.intellij.refactoring.RefactoringFactory
-import com.intellij.refactoring.extractSuperclass.ExtractSuperClassProcessor
 import com.intellij.refactoring.extractclass.ExtractClassProcessor
-import com.intellij.refactoring.extractclass.ExtractEnumProcessor
 import com.intellij.refactoring.move.moveClassesOrPackages.MultipleRootsMoveDestination
-import com.intellij.refactoring.util.DocCommentPolicy
-import com.intellij.refactoring.util.classMembers.MemberInfo
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 
 class ExtractClassRefactoring(
@@ -21,7 +15,7 @@ class ExtractClassRefactoring(
     val classToExtract: PsiClass,
     val fields: List<PsiField>,
     val methods: List<PsiMethod>,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(classToExtract) {
     override fun performRefactoring(
         project: Project,
         editor: Editor,

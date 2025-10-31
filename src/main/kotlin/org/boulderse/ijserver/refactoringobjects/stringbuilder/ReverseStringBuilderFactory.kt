@@ -6,7 +6,6 @@ import com.intellij.psi.PsiFile
 import com.siyeh.ig.style.StringBufferReplaceableByStringInspection
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.refactoringobjects.MyRefactoringFactory
-import org.jetbrains.kotlin.idea.inspections.ReplaceWithStringBuilderAppendRangeInspection
 
 class ReverseStringBuilderFactory {
     companion object : MyRefactoringFactory {
@@ -31,7 +30,7 @@ class ReverseStringBuilderFactory {
     class ReverseStringBuilder(
         override val startLoc: Int,
         override val endLoc: Int,
-    ) : AbstractRefactoring() {
+    ) : AbstractRefactoring(null) {
         override fun isValid(
             project: Project,
             editor: Editor,

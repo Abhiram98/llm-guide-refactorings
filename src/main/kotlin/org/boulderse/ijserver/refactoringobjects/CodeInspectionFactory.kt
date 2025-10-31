@@ -100,13 +100,13 @@ class CodeInspectionFactory<T : PsiElement, T2 : MyRefactoringFactory>(
     private class InspectionBasedRefactoring(
         override val startLoc: Int,
         override val endLoc: Int,
-        val psiElement: PsiElement,
+        override val psiElement: PsiElement,
         var problemsHolder: ProblemsHolder,
         val refactoringPreview: (PsiElement) -> String,
         val reverseRefactoringFactory: MyRefactoringFactory?,
         val isOnTheFly: Boolean,
         val inspection: AbstractBaseJavaLocalInspectionTool,
-    ) : AbstractRefactoring() {
+    ) : AbstractRefactoring(psiElement) {
         //        private var reverseRefactoring:AbstractRefactoring?=null
         override fun performRefactoring(
             project: Project,

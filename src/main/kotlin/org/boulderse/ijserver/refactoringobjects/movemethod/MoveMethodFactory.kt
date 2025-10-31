@@ -543,7 +543,7 @@ class MoveMethodFactory {
             val psiVariable: PsiVariable,
             val classToMoveTo: PsiClass,
             val rationale: String? = null,
-        ) : AbstractRefactoring() {
+        ) : AbstractRefactoring(methodToMove) {
             init {
                 description =
                     runReadAction {
@@ -607,7 +607,7 @@ class MoveMethodFactory {
             val processor: MoveInstanceMethodProcessor,
             val classToMoveTo: PsiClass,
             val rationale: String? = null,
-        ) : AbstractRefactoring() {
+        ) : AbstractRefactoring(methodToMove) {
             init {
                 description =
                     runReadAction {
@@ -749,7 +749,7 @@ class MoveMethodFactory {
         val methodToMove: PsiMethod,
         val classToMoveTo: PsiClass,
         val rationale: String? = null,
-    ) : AbstractRefactoring() {
+    ) : AbstractRefactoring(methodToMove) {
         val sourceClass: PsiClass = methodToMove.containingClass!!
         val methodName = methodToMove.name
 
@@ -822,7 +822,7 @@ class MoveMethodFactory {
         val methodToMove: PsiMethod,
         val classToMoveTo: PsiClass,
         val rationale: String? = null,
-    ) : AbstractRefactoring() {
+    ) : AbstractRefactoring(methodToMove) {
         val sourceClass: PsiClass = methodToMove.containingClass!!
         val methodName = methodToMove.name
 

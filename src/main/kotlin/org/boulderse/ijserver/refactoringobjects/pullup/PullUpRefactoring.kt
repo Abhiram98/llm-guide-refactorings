@@ -3,7 +3,6 @@ package org.boulderse.ijserver.refactoringobjects.pullup
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.memberPullUp.PullUpProcessor
 import com.intellij.refactoring.util.DocCommentPolicy
@@ -16,7 +15,7 @@ class PullUpRefactoring(
     val sourceClass: PsiClass,
     val targetClass: PsiClass,
     val members: List<MemberInfo>,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(null) {
     override fun performRefactoring(
         project: Project,
         editor: Editor,

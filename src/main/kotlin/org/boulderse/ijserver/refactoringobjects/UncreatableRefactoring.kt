@@ -8,7 +8,7 @@ class UncreatableRefactoring(
     override val startLoc: Int,
     override val endLoc: Int,
     val suggestionType: String,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(null) {
     init {
         isValid = false
     }

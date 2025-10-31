@@ -4,7 +4,6 @@ import com.intellij.lang.java.JavaLanguage
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.ex.EditorEx
-import com.intellij.openapi.keymap.impl.IdeKeyEventDispatcher
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
@@ -28,7 +27,7 @@ class ExtractMethod(
     val leftPsi: PsiElement,
     val rightPsi: PsiElement,
     val candidateType: EfCandidateType,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(leftPsi) {
     //    var efCandidate: EFCandidate? =null
 
     companion object {

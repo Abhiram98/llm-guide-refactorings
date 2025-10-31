@@ -4,7 +4,6 @@ import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiForStatement
 import com.intellij.psi.PsiForeachStatement
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiUtilBase
@@ -95,7 +94,7 @@ class TraditionalForFactory {
         override val startLoc: Int,
         override val endLoc: Int,
         var psiForeachStatement: PsiForeachStatement,
-    ) : AbstractRefactoring() {
+    ) : AbstractRefactoring(psiForeachStatement) {
         override fun isValid(
             project: Project,
             editor: Editor,

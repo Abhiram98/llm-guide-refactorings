@@ -1,6 +1,5 @@
 package org.boulderse.ijserver.refactoringobjects.change_signature
 
-import ai.grazie.client.common.logging.qualifiedName
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
@@ -10,12 +9,10 @@ import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.refactoring.changeSignature.ChangeSignatureProcessor
 import com.intellij.refactoring.changeSignature.ParameterInfoImpl
-import com.jetbrains.rd.generator.nova.PredefinedType
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.server.ChangeSignatureParams
 import org.boulderse.ijserver.utils.Parameter
 import org.boulderse.ijserver.utils.PsiUtils
-import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 import kotlin.math.abs
 
@@ -27,7 +24,7 @@ class ChangeSignatureRefactoring(
     val newMethodName: String,
     val newReturnType: PsiType,
     val newParameters: Array<ParameterInfoImpl>,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(methodToChange) {
     override fun performRefactoring(
         project: Project,
         editor: Editor,

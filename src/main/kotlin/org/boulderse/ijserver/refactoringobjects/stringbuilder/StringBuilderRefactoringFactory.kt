@@ -98,7 +98,7 @@ class StringBuilderRefactoringFactory {
             override val startLoc: Int,
             override val endLoc: Int,
             var psiPolyadicExpression: PsiPolyadicExpression,
-        ) : AbstractRefactoring() {
+        ) : AbstractRefactoring(psiPolyadicExpression) {
             override fun performRefactoring(
                 project: Project,
                 editor: Editor,
@@ -159,7 +159,7 @@ class StringBuilderRefactoringFactory {
             override val endLoc: Int,
             var psiAssignmentExpression: PsiAssignmentExpression,
             var problemsHolder: ProblemsHolder,
-        ) : AbstractRefactoring() {
+        ) : AbstractRefactoring(psiAssignmentExpression) {
             override fun performRefactoring(
                 project: Project,
                 editor: Editor,

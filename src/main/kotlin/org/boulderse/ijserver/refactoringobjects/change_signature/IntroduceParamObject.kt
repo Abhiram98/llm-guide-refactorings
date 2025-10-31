@@ -1,6 +1,5 @@
 package org.boulderse.ijserver.refactoringobjects.change_signature
 
-import ai.grazie.client.common.logging.qualifiedName
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.*
@@ -13,8 +12,6 @@ import com.intellij.refactoring.move.moveClassesOrPackages.MultipleRootsMoveDest
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
 import org.boulderse.ijserver.server.IntroduceParamObjectParams
 import org.boulderse.ijserver.utils.PsiUtils
-import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
-import org.jetbrains.kotlin.load.java.descriptors.JavaClassDescriptor
 import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 import kotlin.math.abs
 
@@ -25,7 +22,7 @@ class IntroduceParamObject(
     val newClassName: String,
     val psiPackage: PsiPackage,
     val paramsToAbstract: List<ParameterInfoImpl>,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(methodToChange) {
     override fun performRefactoring(
         project: Project,
         editor: Editor,

@@ -98,7 +98,7 @@ class InlineMethodRefactoring(
     override val startLoc: Int,
     override val endLoc: Int,
     var psiMethod: PsiMethod,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(psiMethod) {
     override fun performRefactoring(
         project: Project,
         editor: Editor,

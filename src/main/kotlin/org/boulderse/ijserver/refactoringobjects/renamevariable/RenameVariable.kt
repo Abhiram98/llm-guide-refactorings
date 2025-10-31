@@ -29,7 +29,7 @@ class RenameVariable(
     var oldVarPsi: PsiElement,
     val outerPsiElement: PsiElement,
     val searchComments: Boolean,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(oldVarPsi) {
     val relatedRenames: MutableList<PsiElement> = mutableListOf()
 
     init {

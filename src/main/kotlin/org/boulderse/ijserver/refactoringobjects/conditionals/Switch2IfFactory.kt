@@ -93,7 +93,7 @@ class Switch2IfFactory {
         override val startLoc: Int,
         override val endLoc: Int,
         var switchStatement: PsiSwitchStatement,
-    ) : AbstractRefactoring() {
+    ) : AbstractRefactoring(switchStatement) {
         override fun performRefactoring(
             project: Project,
             editor: Editor,

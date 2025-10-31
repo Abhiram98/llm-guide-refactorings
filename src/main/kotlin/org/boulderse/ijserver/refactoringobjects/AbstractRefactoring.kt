@@ -14,7 +14,7 @@ import com.intellij.psi.PsiFile
 //
 // }
 
-abstract class AbstractRefactoring {
+abstract class AbstractRefactoring(open val psiElement: PsiElement?) {
     var description: String = ""
     var applied: Boolean = false
     var isValid: Boolean? = null
@@ -88,4 +88,8 @@ abstract class AbstractRefactoring {
     }
 
     fun recalibrateFromLineNumber() {}
+
+    open fun getPsiElement(): PsiElement?{
+        return psiElement
+    }
 }

@@ -3,7 +3,6 @@ package org.boulderse.ijserver.refactoringobjects.extractclass
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
-import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiFile
 import com.intellij.refactoring.RefactoringFactory
 import com.intellij.refactoring.extractSuperclass.ExtractSuperClassProcessor
@@ -18,7 +17,7 @@ class ExtractSuperClassRefactoring(
     val subClassName: String,
     val classToExtract: PsiClass,
     val members: Array<MemberInfo>,
-) : AbstractRefactoring() {
+) : AbstractRefactoring(classToExtract) {
     override fun performRefactoring(
         project: Project,
         editor: Editor,
