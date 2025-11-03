@@ -26,7 +26,7 @@ class ReviewRoutes(
 ) {
     fun install() {
         routing.post("review/noop") {
-            logViewer.setLogMessage("Agent is thinking. Sit back and relax :)")
+            logViewer.setActionItem("Agent is thinking. Sit back and relax :)")
             call.respond(HttpStatusCode.OK)
         }
 
@@ -35,7 +35,7 @@ class ReviewRoutes(
             println("Received review for renames")
             val renamesToReview = call.receive<List<RenameParams>>()
 
-            logViewer.setLogMessage(
+            logViewer.setActionItem(
                 "ACTION REQUIRED: \n" +
                     "Please review the following renames: \n",
             )
@@ -90,7 +90,7 @@ class ReviewRoutes(
             logViewer.setPattern(params.pattern)
             logViewer.setGuard(params.guard)
 
-            logViewer.setLogMessage(
+            logViewer.setActionItem(
                 "ACTION REQUIRED: \n" +
                     "Please confirm the renaming scope below, by clicking the 'Confirm' button. " +
                     "You are welcome to edit the scope as per your requirements.",

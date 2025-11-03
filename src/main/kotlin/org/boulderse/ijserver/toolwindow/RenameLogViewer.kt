@@ -22,6 +22,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private var scopeConfirmed = CompletableDeferred<Boolean>()
     val renamingScopePanel = JPanel()
     val renameSuggestions = JPanel()
+    val actionPanel = JPanel()
     val progressPanel = JPanel()
     private val progressBar = JProgressBar(0, 100)
     private val progressBarRenames = JProgressBar(0, 100)
@@ -128,9 +129,21 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         // Add the southPanel to the existing layout set by LogViewer
         add(southPanel, BorderLayout.SOUTH)
 
+
+        val centerPanel = JPanel(BorderLayout())
+
+        actionPanel.layout = BoxLayout(actionPanel, BoxLayout.Y_AXIS)
+        actionPanel.border = javax.swing.BorderFactory.createTitledBorder("Action Item:")
+        actionPanel.add(Box.createVerticalStrut(8))
+        centerPanel.add(actionPanel, BorderLayout.NORTH)
+
         renameSuggestions.layout = BoxLayout(renameSuggestions, BoxLayout.Y_AXIS)
         renameSuggestions.border = javax.swing.BorderFactory.createTitledBorder("Rename Suggestions")
-        add(renameSuggestions, BorderLayout.CENTER)
+
+        centerPanel.add(renameSuggestions, BorderLayout.CENTER)
+
+        add(centerPanel, BorderLayout.CENTER)
+
     }
 
     fun getPatternText(): String = patternText.text
@@ -207,5 +220,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     fun setFileInspecting(fileName: String){
         inspectingFile = fileName
         renameProgressLabel.text = "Renames Inspected in $inspectingFile: "
+    }
+
+    fun setActionItem(item: String){
+        actionPanel.removeAll()
+        actionPanel.add(JLabel(item))
+        actionPanel.revalidate()
+        actionPanel.repaint()
     }
 }
