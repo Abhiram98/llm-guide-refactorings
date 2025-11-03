@@ -51,11 +51,11 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         // Create titled sub-panels for Pattern and Guard, and wrap them in a "Renaming Scope" panel
         val patternPanel = JPanel(BorderLayout())
-        patternPanel.border = javax.swing.BorderFactory.createTitledBorder("Pattern")
+        patternPanel.border = javax.swing.BorderFactory.createTitledBorder("Pattern: A Find-Replace style rename pattern")
         patternPanel.add(patternPane, BorderLayout.CENTER)
 
         val guardPanel = JPanel(BorderLayout())
-        guardPanel.border = javax.swing.BorderFactory.createTitledBorder("Guard")
+        guardPanel.border = javax.swing.BorderFactory.createTitledBorder("Guard: The conditions where the pattern should apply")
         guardPanel.add(guardPane, BorderLayout.CENTER)
 
         renamingScopePanel.layout = BoxLayout(renamingScopePanel, BoxLayout.Y_AXIS)
@@ -205,7 +205,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
-    // Reset progress to initial empty state
     fun resetProgress() {
         currentNumerator = 0
         currentDenominator = 0
