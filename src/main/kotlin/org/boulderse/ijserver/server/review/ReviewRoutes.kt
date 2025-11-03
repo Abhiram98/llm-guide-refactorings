@@ -13,7 +13,9 @@ import io.ktor.server.routing.post
 import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
+import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
+import org.boulderse.ijserver.server.RenamesToReviewParams
 import org.boulderse.ijserver.server.ReviewScopeParams
 import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
@@ -86,6 +88,13 @@ class ReviewRoutes(
             call.respond(HttpStatusCode.OK)
         }
 
+        routing.post("/review/set_scope") {
+            val params = call.receive<ReviewScopeParams>()
+            logViewer.setPattern(params.pattern)
+            logViewer.setGuard(params.guard)
+            call.respond(HttpStatusCode.OK)
+        }
+
         routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
             logViewer.setPattern(params.pattern)
@@ -103,6 +112,24 @@ class ReviewRoutes(
                 HttpStatusCode.OK,
                 message = ReviewScopeParams(logViewer.getPatternText(), logViewer.getGuardText()),
             )
+        }
+
+
+        routing.post("/review/add_total_renames"){
+            val total = call.receive<RenamesToReviewParams>()
+            logViewer.setTotalRenames(total.count)
+            call.respond(HttpStatusCode.OK)
+        }
+
+        routing.post("/review/add_rename_reviewed"){
+            logViewer.incCompletedRenames()
+            call.respond(HttpStatusCode.OK)
+        }
+
+        routing.post("/review/set_inspecting_file"){
+            val params = call.receive<OpenFileParams>()
+            logViewer.setFileInspect(params.filePath.split("/").last())
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

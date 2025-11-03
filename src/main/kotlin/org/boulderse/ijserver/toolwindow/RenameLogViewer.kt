@@ -28,8 +28,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private val progressBarRenames = JProgressBar(0, 100)
     private val progressLabel = JLabel("0 / 0 (0%)")
     private val progressLabelRenames = JLabel("0 / 0 (0%)")
-    private var currentNumerator: Int = 0
-    private var currentDenominator: Int = 0
+    private var completedRenames: Int = 0
+    private var totalRenames: Int = 0
     private var inspectingFile: String = "FileName.java"
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
 
@@ -194,33 +194,44 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         guardText.text = "<Guard conditions here>"
     }
 
-    fun setProgress(
-        numerator: Int,
-        denominator: Int,
-    ) {
-        currentNumerator = numerator.coerceAtLeast(0)
-        currentDenominator = denominator.coerceAtLeast(0)
 
+    fun setFileInspect(fileName: String){
+        inspectingFile = fileName
+        renameProgressLabel.text = "Renames Inspected in $inspectingFile: "
+        renameProgressLabel.repaint()
+    }
+
+    fun setTotalRenames(num: Int) {
+        totalRenames = completedRenames + num
+        repaintRenameProgress()
+    }
+
+    fun incCompletedRenames() {
+        completedRenames++
+        repaintRenameProgress()
+    }
+
+    private fun repaintRenameProgress() {
         val percent =
-            if (currentDenominator <=
+            if (totalRenames <=
                 0
             ) {
                 0
             } else {
-                ((currentNumerator.toDouble() / currentDenominator.toDouble()) * 100).toInt().coerceIn(0, 100)
+                ((completedRenames.toDouble() / totalRenames.toDouble()) * 100).toInt().coerceIn(0, 100)
             }
-        progressBar.value = percent
-        progressLabel.text = "$currentNumerator / $currentDenominator ($percent%)"
+        progressBarRenames.value = percent
+        progressLabelRenames.text = "$completedRenames / $totalRenames ($percent%)"
         // ensure UI updates on EDT
         javax.swing.SwingUtilities.invokeLater {
-            progressBar.repaint()
-            progressLabel.repaint()
+            progressBarRenames.repaint()
+            progressLabelRenames.repaint()
         }
     }
 
     fun resetProgress() {
-        currentNumerator = 0
-        currentDenominator = 0
+        completedRenames = 0
+        totalRenames = 0
         progressBar.value = 0
         progressLabel.text = "0 / 0 (0%)"
         javax.swing.SwingUtilities.invokeLater {
@@ -229,10 +240,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
-    fun setFileInspecting(fileName: String){
-        inspectingFile = fileName
-        renameProgressLabel.text = "Renames Inspected in $inspectingFile: "
-    }
 
     fun setActionItem(item: String){
         actionPanel.removeAll()

@@ -208,3 +208,10 @@ data class ReviewScopeParams(
     @SerialName("condition")
     val guard: String,
 )
+
+
+@Serializable
+data class RenamesToReviewParams(
+    @SerialName("count")
+    val count: Int,
+)
