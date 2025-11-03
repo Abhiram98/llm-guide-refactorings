@@ -11,6 +11,7 @@ import com.intellij.refactoring.listeners.RefactoringEventListener
 import org.boulderse.ijserver.createNotificationGroup
 import org.boulderse.ijserver.settings.RefAgentSettingsManager
 import org.boulderse.ijserver.showUnauthorizedNotification
+import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
@@ -99,6 +100,7 @@ class RenameHook : ProjectActivity {
                     ProcessBuilder(command)
                 cmd.environment()["GRAZIE_JWT_TOKEN"] = llmKey
                 val process = cmd.start()
+                logViewer.registerAgentProcessId(process.pid())
                 val exitCode = process.waitFor()
                 val output = process.inputStream.bufferedReader().use { it.readText() }
                 val stderr = process.errorStream.bufferedReader().use { it.readText() }

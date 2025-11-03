@@ -33,6 +33,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private var inspectingFile: String = "FileName.java"
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
 
+    var processId: Long? = null
+
     init {
         patternText.lineWrap = true // Wrap lines if they are too long
         patternText.wrapStyleWord = true // Wrap at word boundaries
@@ -73,11 +75,11 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         // Button row
         val buttonRow = JPanel()
-        val clearButton = JButton("Clear Logs")
-        clearButton.addActionListener { _: ActionEvent? -> clear() }
+        val stopButton = JButton("Stop Agent")
+        stopButton.addActionListener { _: ActionEvent? -> stopAgent() }
         buttonRow.add(confirmScopeButton)
         confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
-        buttonRow.add(clearButton)
+        buttonRow.add(stopButton)
 
         southPanel.add(buttonRow)
 
@@ -144,6 +146,17 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         add(centerPanel, BorderLayout.CENTER)
 
+    }
+
+    private fun stopAgent() {
+        if (processId != null) {
+            println("Stopping process $processId")
+            Runtime.getRuntime().exec("kill -SIGINT $processId")
+        }
+    }
+
+    fun registerAgentProcessId(processId: Long) {
+        this.processId = processId
     }
 
     fun getPatternText(): String = patternText.text
