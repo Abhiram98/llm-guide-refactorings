@@ -73,6 +73,7 @@ class RenameHook : ProjectActivity {
             mutableListOf(
                 "docker",
                 "run",
+                "-d",
                 "-e",
                 "IJ_SERVER_URL=http://host.docker.internal:8082",
                 "-e",
@@ -100,10 +101,15 @@ class RenameHook : ProjectActivity {
                     ProcessBuilder(command)
                 cmd.environment()["GRAZIE_JWT_TOKEN"] = llmKey
                 val process = cmd.start()
-                logViewer.registerAgentProcessId(process.pid())
-                val exitCode = process.waitFor()
-                val output = process.inputStream.bufferedReader().use { it.readText() }
-                val stderr = process.errorStream.bufferedReader().use { it.readText() }
+                process.waitFor()
+                val containerId = process.inputStream.bufferedReader().use { it.readText() }.removeSuffix("\n")
+                println("Containerid=$containerId")
+
+                logViewer.registerAgentContainerId(containerId)
+                val waitProcess = ProcessBuilder(listOf("docker", "container", "wait", containerId)).start()
+                val exitCode = waitProcess.waitFor()
+                val output = waitProcess.inputStream.bufferedReader().use { it.readText() }
+                val stderr = waitProcess.errorStream.bufferedReader().use { it.readText() }
                 println("refagent exit=$exitCode output:\n$output\nstderr:\n$stderr")
             } catch (e: Exception) {
                 println("Failed to run refagent: ${e.message}")

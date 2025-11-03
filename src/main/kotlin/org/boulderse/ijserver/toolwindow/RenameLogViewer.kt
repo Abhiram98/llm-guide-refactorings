@@ -33,7 +33,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private var inspectingFile: String = "FileName.java"
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
 
-    var processId: Long? = null
+    var containerId: String? = null
 
     init {
         patternText.lineWrap = true // Wrap lines if they are too long
@@ -149,14 +149,14 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     private fun stopAgent() {
-        if (processId != null) {
-            println("Stopping process $processId")
-            Runtime.getRuntime().exec("kill -SIGINT $processId")
+        if (containerId != null) {
+            println("Stopping process $containerId")
+            Runtime.getRuntime().exec("docker kill $containerId")
         }
     }
 
-    fun registerAgentProcessId(processId: Long) {
-        this.processId = processId
+    fun registerAgentContainerId(containerId: String) {
+        this.containerId = containerId
     }
 
     fun getPatternText(): String = patternText.text
