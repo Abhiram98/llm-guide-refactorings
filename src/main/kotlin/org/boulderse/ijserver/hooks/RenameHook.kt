@@ -102,7 +102,11 @@ class RenameHook : ProjectActivity {
                 cmd.environment()["GRAZIE_JWT_TOKEN"] = llmKey
                 val process = cmd.start()
                 process.waitFor()
-                val containerId = process.inputStream.bufferedReader().use { it.readText() }.removeSuffix("\n")
+                val containerId =
+                    process.inputStream
+                        .bufferedReader()
+                        .use { it.readText() }
+                        .removeSuffix("\n")
                 println("Containerid=$containerId")
 
                 logViewer.registerAgentContainerId(containerId)

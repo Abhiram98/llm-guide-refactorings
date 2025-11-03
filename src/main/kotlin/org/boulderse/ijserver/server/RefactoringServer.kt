@@ -1495,89 +1495,106 @@ class RefactoringServer(
                 val symbolName = params.symbol
                 println("Debug: Searching for symbol: '$symbolName'")
 
-                val (fileHits, totalHits) = runReadAction {
-                    val results = mutableListOf<PsiElement>()
+                val (fileHits, totalHits) =
+                    runReadAction {
+                        val results = mutableListOf<PsiElement>()
 
-                    // Calculate search directory
-                    var searchDir = file!!.containingDirectory.parentDirectory!!
-                    repeat(params.parentCount.coerceAtLeast(1) - 1) {
-                        searchDir = searchDir.parentDirectory ?: searchDir
+                        // Calculate search directory
+                        var searchDir = file!!.containingDirectory.parentDirectory!!
+                        repeat(params.parentCount.coerceAtLeast(1) - 1) {
+                            searchDir = searchDir.parentDirectory ?: searchDir
+                        }
+
+                        // Build list of directories to search
+                        val dirsToSearch =
+                            buildList {
+                                add(searchDir.virtualFile)
+
+                                // Add complementary directory if exists
+                                val path = searchDir.virtualFile.path
+                                val complementaryPath =
+                                    when {
+                                        "test/" in path -> path.replace("test/", "main/")
+                                        "main/" in path -> path.replace("main/", "test/")
+                                        else -> null
+                                    }
+
+                                complementaryPath?.let {
+                                    LocalFileSystem
+                                        .getInstance()
+                                        .refreshAndFindFileByPath(it)
+                                        ?.let { add(it) }
+                                }
+                            }
+
+                        println("Debug: Starting PsiSearchHelper search across ${dirsToSearch.size} directory(ies)...")
+
+                        // Create combined search scope
+                        val combinedScope =
+                            GlobalSearchScopesCore.directoriesScope(
+                                project,
+                                true,
+                                *dirsToSearch.toTypedArray(),
+                            )
+
+                        // Use PsiSearchHelper for semantic search
+                        val psiSearchHelper = PsiSearchHelper.getInstance(project)
+                        psiSearchHelper.processElementsWithWord(
+                            { element, _ ->
+                                if (element.text == symbolName) {
+                                    results.add(element)
+                                }
+                                true
+                            },
+                            combinedScope,
+                            symbolName,
+                            UsageSearchContext.ANY,
+                            true,
+                        )
+
+                        println("Debug: Total results found: ${results.size}")
+
+                        // Group and format results
+                        val docManager = PsiDocumentManager.getInstance(project)
+                        val fileHits =
+                            results
+                                .groupBy {
+                                    it.containingFile
+                                        ?.virtualFile
+                                        ?.path
+                                        ?.removePrefix("${project.basePath}/") ?: "unknown"
+                                }.map { (path, elements) ->
+                                    val lineNumbers =
+                                        elements
+                                            .mapNotNull { element ->
+                                                docManager
+                                                    .getDocument(element.containingFile)
+                                                    ?.getLineNumber(element.textOffset)
+                                                    ?.plus(1)
+                                            }.sorted()
+
+                                    buildJsonObject {
+                                        put("file_path", path)
+                                        put("hit_count", elements.size)
+                                        put(
+                                            "line_nums",
+                                            buildJsonArray {
+                                                lineNumbers.forEach { add(it) }
+                                            },
+                                        )
+                                    }
+                                }
+
+                        fileHits to results.size
                     }
 
-                    // Build list of directories to search
-                    val dirsToSearch = buildList {
-                        add(searchDir.virtualFile)
-
-                        // Add complementary directory if exists
-                        val path = searchDir.virtualFile.path
-                        val complementaryPath = when {
-                            "test/" in path -> path.replace("test/", "main/")
-                            "main/" in path -> path.replace("main/", "test/")
-                            else -> null
-                        }
-
-                        complementaryPath?.let {
-                            LocalFileSystem.getInstance()
-                                .refreshAndFindFileByPath(it)
-                                ?.let { add(it) }
-                        }
-                    }
-
-                    println("Debug: Starting PsiSearchHelper search across ${dirsToSearch.size} directory(ies)...")
-
-                    // Create combined search scope
-                    val combinedScope = GlobalSearchScopesCore.directoriesScope(
-                        project,
-                        true,
-                        *dirsToSearch.toTypedArray()
-                    )
-
-                    // Use PsiSearchHelper for semantic search
-                    val psiSearchHelper = PsiSearchHelper.getInstance(project)
-                    psiSearchHelper.processElementsWithWord(
-                        { element, _ ->
-                            if (element.text == symbolName) {
-                                results.add(element)
-                            }
-                            true
-                        },
-                        combinedScope,
-                        symbolName,
-                        UsageSearchContext.ANY,
-                        true
-                    )
-
-                    println("Debug: Total results found: ${results.size}")
-
-                    // Group and format results
-                    val docManager = PsiDocumentManager.getInstance(project)
-                    val fileHits = results
-                        .groupBy {
-                            it.containingFile?.virtualFile?.path?.removePrefix("${project.basePath}/") ?: "unknown"
-                        }
-                        .map { (path, elements) ->
-                            val lineNumbers = elements.mapNotNull { element ->
-                                docManager.getDocument(element.containingFile)
-                                    ?.getLineNumber(element.textOffset)
-                                    ?.plus(1)
-                            }.sorted()
-
-                            buildJsonObject {
-                                put("file_path", path)
-                                put("hit_count", elements.size)
-                                put("line_nums", buildJsonArray {
-                                    lineNumbers.forEach { add(it) }
-                                })
-                            }
-                        }
-
-                    fileHits to results.size
-                }
-
-                call.respond(HttpStatusCode.OK, buildJsonObject {
-                    put("hit_count", totalHits)
-                    put("files", JsonArray(fileHits))
-                })
+                call.respond(
+                    HttpStatusCode.OK,
+                    buildJsonObject {
+                        put("hit_count", totalHits)
+                        put("files", JsonArray(fileHits))
+                    },
+                )
             }
 
             post("search_symbol_changed") {

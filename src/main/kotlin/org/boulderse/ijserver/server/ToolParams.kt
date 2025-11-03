@@ -209,7 +209,6 @@ data class ReviewScopeParams(
     val guard: String,
 )
 
-
 @Serializable
 data class RenamesToReviewParams(
     @SerialName("count")

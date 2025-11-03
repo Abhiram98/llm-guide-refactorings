@@ -131,7 +131,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         // Add the southPanel to the existing layout set by LogViewer
         add(southPanel, BorderLayout.SOUTH)
 
-
         val centerPanel = JPanel(BorderLayout())
 
         actionPanel.layout = BoxLayout(actionPanel, BoxLayout.Y_AXIS)
@@ -145,7 +144,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         centerPanel.add(renameSuggestions, BorderLayout.CENTER)
 
         add(centerPanel, BorderLayout.CENTER)
-
     }
 
     private fun stopAgent() {
@@ -194,8 +192,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         guardText.text = "<Guard conditions here>"
     }
 
-
-    fun setFileInspect(fileName: String){
+    fun setFileInspect(fileName: String) {
         inspectingFile = fileName
         renameProgressLabel.text = "Renames Inspected in $inspectingFile: "
         renameProgressLabel.repaint()
@@ -240,8 +237,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
-
-    fun setActionItem(item: String){
+    fun setActionItem(item: String) {
         actionPanel.removeAll()
         actionPanel.add(JLabel(item))
         actionPanel.revalidate()

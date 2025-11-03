@@ -50,7 +50,10 @@ class ReviewRoutes(
                     .map { formRenameObject(it, project, editor!!, file!!) as RenameVariable? }
                     .filterNotNull()
                     .toList()
-            renameObjs.forEach { it.description = "The rename ${it.oldName} to ${it.newName} should be implemented. The change fits the provided renaming scope." }
+            renameObjs.forEach {
+                it.description =
+                    "The rename ${it.oldName} to ${it.newName} should be implemented. The change fits the provided renaming scope."
+            }
 
             val panel =
                 RefactoringSuggestionsPanel(
@@ -114,19 +117,18 @@ class ReviewRoutes(
             )
         }
 
-
-        routing.post("/review/add_total_renames"){
+        routing.post("/review/add_total_renames") {
             val total = call.receive<RenamesToReviewParams>()
             logViewer.setTotalRenames(total.count)
             call.respond(HttpStatusCode.OK)
         }
 
-        routing.post("/review/add_rename_reviewed"){
+        routing.post("/review/add_rename_reviewed") {
             logViewer.incCompletedRenames()
             call.respond(HttpStatusCode.OK)
         }
 
-        routing.post("/review/set_inspecting_file"){
+        routing.post("/review/set_inspecting_file") {
             val params = call.receive<OpenFileParams>()
             logViewer.setFileInspect(params.filePath.split("/").last())
             call.respond(HttpStatusCode.OK)
