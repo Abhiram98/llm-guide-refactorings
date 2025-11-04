@@ -43,6 +43,7 @@ import org.boulderse.ijserver.telemetry.TelemetryElapsedTimeObserver
 import org.boulderse.ijserver.telemetry.sendTelemetryData
 import org.boulderse.ijserver.utils.EFNotification
 import org.boulderse.ijserver.utils.Observable
+import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
 import java.awt.Dimension
@@ -72,9 +73,9 @@ open class RefactoringSuggestionsPanel(
     var myEditor = editor
     var myPopup: JBPopup? = null
     val myFile = file
-    val myHighlighter = AtomicReference(ScopeHighlighter(editor))
+    val highlighterMap: MutableMap<String, AtomicReference<ScopeHighlighter>> =
+        mutableMapOf(editor.virtualFile.path to AtomicReference(ScopeHighlighter(editor)))
     val myEFTelemetryDataManager = efTelemetryDataManager
-    private val logger = Logger.getInstance("#com.intellij.ml.llm")
     var prevSelectedCandidateIndex = 0
     var completedIndices = mutableListOf<Int>()
     val ratingOptions =
@@ -281,13 +282,14 @@ open class RefactoringSuggestionsPanel(
 
     fun onReject(index: Int) {
         disableButtons()
+        dropAllHighlights()
         myPopup?.cancel()
     }
 
     fun disableButtons() {
         refactorButton.isEnabled = false
         rejectButton.isEnabled = false
-        myHighlighter.get().dropHighlight()
+        dropAllHighlights()
         myEFTelemetryDataManager?.let { sendTelemetryData(it) }
         closed.complete(true)
     }
@@ -335,7 +337,7 @@ open class RefactoringSuggestionsPanel(
                 true,
                 myProject,
             )
-            myHighlighter.get().dropHighlight()
+            dropAllHighlights()
             refreshCandidates(index, "COMPLETED")
             myPopup?.cancel()
             disableButtons()
@@ -374,22 +376,21 @@ open class RefactoringSuggestionsPanel(
     ) {
         val candidate = getSelectedRefactoringObject(extractFuncationCandidateJBTable) ?: return
         val psiElement = candidate.fetchRootPsi() ?: return
-        if (psiElement.containingFile.virtualFile.path != myEditor.virtualFile.path) {
-            myEditor =
-                FileEditorManager.getInstance(myProject).openTextEditor(
-                    OpenFileDescriptor(
-                        myProject,
-                        psiElement.containingFile.virtualFile,
-                    ),
-                    true, // request focus to editor
-                )!!
-        }
+        myEditor =
+            FileEditorManager.getInstance(myProject).openTextEditor(
+                OpenFileDescriptor(
+                    myProject,
+                    psiElement.containingFile.virtualFile,
+                ),
+                true, // request focus to editor
+            )!!
+        highlighterMap.getOrPut(myEditor.virtualFile.path) { AtomicReference(ScopeHighlighter(myEditor)) }
 
         myEditor.selectionModel.setSelection(psiElement.startOffset, psiElement.endOffset)
 
         refactoringDescriptionBox.text = candidateSignatureMap[candidate]
-        val scopeHighlighter: ScopeHighlighter = myHighlighter.get()
-        scopeHighlighter.dropHighlight()
+        val scopeHighlighter: ScopeHighlighter = highlighterMap.get(myEditor.virtualFile.path)?.get()!!
+        dropAllHighlights()
         val range = TextRange(psiElement.startOffset, psiElement.endOffset)
         scopeHighlighter.highlight(
             com.intellij.openapi.util
@@ -415,7 +416,7 @@ open class RefactoringSuggestionsPanel(
         prevSelectedCandidateIndex = extractFuncationCandidateJBTable.selectedRow
     }
 
-    open fun getStartLoc(index: Int) = myCandidates[index].startLoc
+    open fun getStartLoc(index: Int) = myCandidates[index].fetchRootPsi()?.startLine(myEditor.document)?.plus(1)!!
 
     private fun getSelectedRefactoringObject(extractFuncationCandidateJBTable: JBTable): AbstractRefactoring? {
         val candidate = myCandidates.getOrNull(extractFuncationCandidateJBTable.selectedRow)
@@ -470,7 +471,7 @@ open class RefactoringSuggestionsPanel(
                         ),
                     )
                     myEFTelemetryDataManager?.let { elapsedTimeTelemetryDataObserver.buildElapsedTimeTelemetryData(it) }
-                    myHighlighter.get().dropHighlight()
+                    dropAllHighlights()
                     myEFTelemetryDataManager?.let { sendTelemetryData(it) }
                     closed.complete(true)
                 }
@@ -499,4 +500,8 @@ open class RefactoringSuggestionsPanel(
             }
         efPopup.show(relPoint)
     }
+}
+
+private fun RefactoringSuggestionsPanel.dropAllHighlights() {
+    highlighterMap.forEach { string, reference -> reference.get().dropHighlight() }
 }
