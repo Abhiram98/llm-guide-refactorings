@@ -16,7 +16,7 @@ import javax.swing.JProgressBar
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
 import kotlin.time.Duration.Companion.minutes
-import com.intellij.util.SVGLoader
+import javax.swing.ImageIcon
 
 class RenameLogViewer : LogViewer("Rename agent logs") {
     private val patternText = JTextArea()
@@ -39,13 +39,13 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
     val actionLabel = JLabel("Agent is not yet running.")
 
-    val robotSpinnerLabel = JLabel()
-    val spinnerIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/robot_spinner.gif"))
-    val idleIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/robot_idle.png"))
+    val spinnerLabel = JLabel()
+    val robotSpinnerIcon = loadScaledIcon("/gifs/robot_spinner.gif", 1.0)
+    val robotIdleIcon = loadScaledIcon("/gifs/robot_idle.png", 0.66)
 
     val humanSpinnerLabel = JLabel()
-    val humanIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/human_spinner.gif"))
-    val humanIdleIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/human_idle.png"))
+    val humanIcon = loadScaledIcon("/gifs/human_spinner.gif", 1.0)
+    val humanIdleIcon = loadScaledIcon("/gifs/human_idle.png", 0.66)
 
     var containerId: String? = null
 
@@ -78,20 +78,13 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         actionPanel.border = BorderFactory.createTitledBorder("Action Item:")
         actionPanel.add(Box.createVerticalStrut(16))
         actionPanel.add(actionLabel)
-
-
-        robotSpinnerLabel.icon = idleIcon
-        humanSpinnerLabel.icon = humanIdleIcon
-
+        spinnerLabel.icon = robotIdleIcon
 
         val actionRow = JPanel()
         actionRow.layout = BoxLayout(actionRow, BoxLayout.X_AXIS)
-        actionRow.add(robotSpinnerLabel)
-        actionRow.add(humanSpinnerLabel)
-        actionRow.add(Box.createVerticalStrut(4))
-
-        actionPanel.add(actionRow)
-        northPanel.add(actionPanel)
+        actionRow.add(spinnerLabel)
+        actionRow.add(actionPanel)
+        northPanel.add(actionRow)
         return northPanel
     }
 
@@ -326,7 +319,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun startRobotAnimation() {
         invokeLater {
-            robotSpinnerLabel.icon = spinnerIcon
+            spinnerLabel.icon = robotSpinnerIcon
             actionPanel.revalidate()
             actionPanel.repaint()
         }
@@ -334,7 +327,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun stopRobotAnimation() {
         invokeLater {
-            robotSpinnerLabel.icon = idleIcon
+            spinnerLabel.icon = robotIdleIcon
             actionPanel.revalidate()
             actionPanel.repaint()
         }
@@ -342,13 +335,24 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun startHumanAnimation() {
         invokeLater {
-            humanSpinnerLabel.icon = humanIcon
+            spinnerLabel.icon = humanIcon
             actionPanel.revalidate()
         }
     }
     fun stopHumanAnimation() {
         invokeLater {
-            humanSpinnerLabel.icon = humanIdleIcon
+            spinnerLabel.icon = humanIdleIcon
         }
+    }
+
+    private fun loadScaledIcon(path: String, scale: Double): ImageIcon {
+        val originalIcon = ImageIcon(javaClass.getResource(path))
+        if (scale==1.0){
+            return originalIcon
+        }
+        val width = (originalIcon.iconWidth * scale).toInt()
+        val height = (originalIcon.iconHeight * scale).toInt()
+        val scaledImage = originalIcon.image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH)
+        return ImageIcon(scaledImage)
     }
 }
