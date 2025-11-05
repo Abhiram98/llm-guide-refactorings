@@ -133,5 +133,15 @@ class ReviewRoutes(
             logViewer.setFileInspect(params.filePath.split("/").last())
             call.respond(HttpStatusCode.OK)
         }
+
+        routing.post("/review/inc_replication_files"){
+            logViewer.incTotalFiles()
+            call.respond(HttpStatusCode.OK)
+        }
+
+        routing.post("/review/inc_files_inspected"){
+            logViewer.incCompletedFiles()
+            call.respond(HttpStatusCode.OK)
+        }
     }
 }

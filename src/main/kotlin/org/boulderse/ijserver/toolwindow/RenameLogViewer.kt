@@ -30,6 +30,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private val progressLabelRenames = JLabel("0 / 0 (0%)")
     private var completedRenames: Int = 0
     private var totalRenames: Int = 0
+    private var completedFiles: Int = 0
+    private var totalFiles: Int = 0
     private var inspectingFile: String = "FileName.java"
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
 
@@ -208,6 +210,16 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         repaintRenameProgress()
     }
 
+    fun incCompletedFiles() {
+        completedFiles++
+        repaintFileProgress()
+    }
+
+    fun incTotalFiles() {
+        totalFiles++
+        repaintFileProgress()
+    }
+
     private fun repaintRenameProgress() {
         val percent =
             if (totalRenames <=
@@ -223,6 +235,25 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         javax.swing.SwingUtilities.invokeLater {
             progressBarRenames.repaint()
             progressLabelRenames.repaint()
+        }
+    }
+
+
+    private fun repaintFileProgress() {
+        val percent =
+            if (totalFiles <=
+                0
+            ) {
+                0
+            } else {
+                ((completedFiles.toDouble() / totalFiles.toDouble()) * 100).toInt().coerceIn(0, 100)
+            }
+        progressBar.value = percent
+        progressLabel.text = "$completedFiles / $totalFiles ($percent%)"
+        // ensure UI updates on EDT
+        javax.swing.SwingUtilities.invokeLater {
+            progressBar.repaint()
+            progressLabel.repaint()
         }
     }
 
