@@ -299,9 +299,30 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
+    fun resetViewer(){
+        resetProgress()
+        resetProgressFiles()
+        resetScope()
+        setFileInspect("<Filename.java>")
+        setActionItem("Agent is not running.")
+        stopRobotAnimation()
+        resetRenameSuggestions()
+    }
+
     fun resetProgress() {
         completedRenames = 0
         totalRenames = 0
+        progressBarRenames.value = 0
+        progressLabelRenames.text = "0 / 0 (0%)"
+        javax.swing.SwingUtilities.invokeLater {
+            progressBarRenames.repaint()
+            progressLabelRenames.repaint()
+        }
+    }
+
+    fun resetProgressFiles(){
+        completedFiles = 0
+        totalFiles = 0
         progressBar.value = 0
         progressLabel.text = "0 / 0 (0%)"
         javax.swing.SwingUtilities.invokeLater {
@@ -354,5 +375,11 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         val height = (originalIcon.iconHeight * scale).toInt()
         val scaledImage = originalIcon.image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH)
         return ImageIcon(scaledImage)
+    }
+
+    fun resetRenameSuggestions() {
+        renameSuggestions.removeAll()
+        renameSuggestions.revalidate()
+        renameSuggestions.repaint()
     }
 }

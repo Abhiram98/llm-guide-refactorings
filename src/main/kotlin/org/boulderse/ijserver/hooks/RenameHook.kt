@@ -124,6 +124,7 @@ class RenameHook : ProjectActivity {
     }
 
     fun agentComplete() {
+        logViewer.resetViewer()
         coRenameInProgress = false
     }
 

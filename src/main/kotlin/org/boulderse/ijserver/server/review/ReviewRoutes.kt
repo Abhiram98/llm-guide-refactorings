@@ -30,7 +30,7 @@ class ReviewRoutes(
         routing.post("review/noop") {
             logViewer.setActionItem("Agent is thinking. Sit back and relax :)")
             logViewer.startRobotAnimation()
-//            logViewer.stopHumanAnimation()
+            logViewer.resetRenameSuggestions()
             call.respond(HttpStatusCode.OK)
         }
 
@@ -43,7 +43,6 @@ class ReviewRoutes(
                 "ACTION REQUIRED: \n" +
                     "Please review the following renames: \n",
             )
-//            logViewer.stopRobotAnimation()
             logViewer.startHumanAnimation()
             renamesToReview.forEach { logViewer.appendLog(it.oldName + " -> " + it.newName) }
             val file = fileCallBack()
@@ -112,7 +111,7 @@ class ReviewRoutes(
                     "Please confirm the renaming scope below, by clicking the 'Confirm' button. " +
                     "You are welcome to edit the scope as per your requirements.",
             )
-//            logViewer.stopRobotAnimation()
+            logViewer.resetRenameSuggestions()
             logViewer.startHumanAnimation()
             logViewer.resetConfirmationWait()
             logViewer.waitForConfirmation()
@@ -147,6 +146,11 @@ class ReviewRoutes(
 
         routing.post("/review/inc_files_inspected"){
             logViewer.incCompletedFiles()
+            call.respond(HttpStatusCode.OK)
+        }
+
+        routing.post("/review/reset_view"){
+            logViewer.resetViewer()
             call.respond(HttpStatusCode.OK)
         }
     }
