@@ -5,6 +5,7 @@ import kotlinx.coroutines.withTimeoutOrNull
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
+import javax.swing.BorderFactory
 import javax.swing.Box
 import javax.swing.BoxLayout
 import javax.swing.JButton
@@ -38,6 +39,39 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     var containerId: String? = null
 
     init {
+
+        val northPanel = createNorthPanel()
+        add(northPanel, BorderLayout.NORTH)
+
+        val southPanel = createSouthPanel()
+        add(southPanel, BorderLayout.SOUTH)
+
+        val centerPanel = createCenterPanel()
+        add(centerPanel, BorderLayout.CENTER)
+    }
+
+    private fun createCenterPanel(): JPanel {
+        val centerPanel = JPanel(BorderLayout())
+
+        renameSuggestions.layout = BoxLayout(renameSuggestions, BoxLayout.Y_AXIS)
+        renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
+
+        centerPanel.add(renameSuggestions, BorderLayout.CENTER)
+        return centerPanel
+    }
+
+    private fun createNorthPanel(): JPanel {
+        val northPanel = JPanel()
+        northPanel.layout = BoxLayout(northPanel, BoxLayout.Y_AXIS)
+        actionPanel.layout = BoxLayout(actionPanel, BoxLayout.Y_AXIS)
+        actionPanel.border = BorderFactory.createTitledBorder("Action Item:")
+        actionPanel.add(Box.createVerticalStrut(8))
+        northPanel.add(actionPanel)
+        return northPanel
+    }
+
+    private fun createSouthPanel(): JPanel {
+
         patternText.lineWrap = true // Wrap lines if they are too long
         patternText.wrapStyleWord = true // Wrap at word boundaries
         guardText.lineWrap = true
@@ -68,26 +102,34 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renamingScopePanel.add(Box.createVerticalStrut(8))
         renamingScopePanel.add(guardPanel)
 
-        // Create a vertical container for pattern, guard and buttons
         val southPanel = JPanel()
         southPanel.layout = BoxLayout(southPanel, BoxLayout.Y_AXIS)
         // add the combined titled Renaming Scope panel instead of raw panes
+
+
         southPanel.add(renamingScopePanel)
-        southPanel.add(Box.createVerticalStrut(8))
+        confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
+        val buttonRowScope = JPanel()
+        buttonRowScope.add(confirmScopeButton)
+        southPanel.add(buttonRowScope)
+        val progressPanel = setupProgressPanel()
+        southPanel.add(progressPanel)
+        //        southPanel.add(Box.createVerticalStrut(8))
 
         // Button row
         val buttonRow = JPanel()
         val stopButton = JButton("Stop Agent")
         stopButton.addActionListener { _: ActionEvent? -> stopAgent() }
-        buttonRow.add(confirmScopeButton)
-        confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
         buttonRow.add(stopButton)
 
         southPanel.add(buttonRow)
+        return southPanel
+    }
 
+    private fun setupProgressPanel(): JPanel {
         // Configure progress panel (titled) and add progress bar + label
         progressPanel.layout = BoxLayout(progressPanel, BoxLayout.Y_AXIS)
-        progressPanel.border = javax.swing.BorderFactory.createTitledBorder("Progress")
+        progressPanel.border = BorderFactory.createTitledBorder("Progress")
         progressPanel.add(Box.createVerticalStrut(4))
 
         // Configure determinate progress bar
@@ -112,9 +154,9 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         inspectedRow.add(inspectedProgressLine)
 
-        val renameRow = JPanel()
-        renameRow.layout = BoxLayout(renameRow, BoxLayout.Y_AXIS)
-        renameRow.add(renameProgressLabel)
+        val renameProgressRow = JPanel()
+        renameProgressRow.layout = BoxLayout(renameProgressRow, BoxLayout.Y_AXIS)
+        renameProgressRow.add(renameProgressLabel)
 
         val renameProgressLine = JPanel()
         renameProgressLine.layout = BoxLayout(renameProgressLine, BoxLayout.X_AXIS)
@@ -122,30 +164,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renameProgressLine.add(Box.createHorizontalStrut(8))
         renameProgressLine.add(progressLabelRenames)
 
-        renameRow.add(renameProgressLine)
+        renameProgressRow.add(renameProgressLine)
 
         progressPanel.add(inspectedRow)
         progressPanel.add(Box.createVerticalStrut(8))
-        progressPanel.add(renameRow)
-
-        add(progressPanel, BorderLayout.NORTH)
-
-        // Add the southPanel to the existing layout set by LogViewer
-        add(southPanel, BorderLayout.SOUTH)
-
-        val centerPanel = JPanel(BorderLayout())
-
-        actionPanel.layout = BoxLayout(actionPanel, BoxLayout.Y_AXIS)
-        actionPanel.border = javax.swing.BorderFactory.createTitledBorder("Action Item:")
-        actionPanel.add(Box.createVerticalStrut(8))
-        centerPanel.add(actionPanel, BorderLayout.NORTH)
-
-        renameSuggestions.layout = BoxLayout(renameSuggestions, BoxLayout.Y_AXIS)
-        renameSuggestions.border = javax.swing.BorderFactory.createTitledBorder("Rename Suggestions")
-
-        centerPanel.add(renameSuggestions, BorderLayout.CENTER)
-
-        add(centerPanel, BorderLayout.CENTER)
+        progressPanel.add(renameProgressRow)
+        return progressPanel
     }
 
     private fun stopAgent() {
