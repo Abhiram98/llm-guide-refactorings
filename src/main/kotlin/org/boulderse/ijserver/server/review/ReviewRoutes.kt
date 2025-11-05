@@ -114,7 +114,9 @@ class ReviewRoutes(
             logViewer.resetRenameSuggestions()
             logViewer.startHumanAnimation()
             logViewer.resetConfirmationWait()
+            logViewer.confirmScopeButton.isEnabled = true
             logViewer.waitForConfirmation()
+            logViewer.confirmScopeButton.isEnabled = false
 
             call.respond(
                 HttpStatusCode.OK,

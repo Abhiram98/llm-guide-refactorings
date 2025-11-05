@@ -21,7 +21,7 @@ import javax.swing.ImageIcon
 class RenameLogViewer : LogViewer("Rename agent logs") {
     private val patternText = JTextArea()
     private val guardText = JTextArea()
-    private val confirmScopeButton = JButton("Confirm Scope")
+    val confirmScopeButton = JButton("Confirm Scope")
     private var scopeConfirmed = CompletableDeferred<Boolean>()
     val renamingScopePanel = JPanel()
     val renameSuggestions = JPanel()
@@ -128,6 +128,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         southPanel.add(renamingScopePanel)
         confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
         val buttonRowScope = JPanel()
+        confirmScopeButton.isEnabled = false
         buttonRowScope.add(confirmScopeButton)
         southPanel.add(buttonRowScope)
         val progressPanel = setupProgressPanel()
