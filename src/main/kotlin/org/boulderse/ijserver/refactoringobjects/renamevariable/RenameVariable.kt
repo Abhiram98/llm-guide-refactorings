@@ -134,7 +134,7 @@ class RenameVariable(
         return isValid!!
     }
 
-    override fun getRefactoringPreview(): String = "Rename ${PsiUtils.getElementTypeStr(oldVarPsi)} $oldName -> $newName"
+    override fun getRefactoringPreview(): String = "Rename ${PsiUtils.getElementTypeStr(oldVarPsi)} to $newName"
 
     override fun getStartOffset(): Int = oldVarPsi.startOffset
 

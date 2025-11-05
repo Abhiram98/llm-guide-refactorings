@@ -255,12 +255,12 @@ open class RefactoringSuggestionsPanel(
                         ).align(AlignX.LEFT)
                     cell(rejectButton).align(AlignX.RIGHT)
                 }
-                row {
-                    cell(ratingsBox)
-                        .comment("Rate the suggestion!")
-                        .onChanged { registerRating(myRefactoringCandidateTable.selectedRow, ratingsBox.selectedItem as String) }
-                        .align(AlignX.LEFT)
-                }
+//                row {
+//                    cell(ratingsBox)
+//                        .comment("Rate the suggestion!")
+//                        .onChanged { registerRating(myRefactoringCandidateTable.selectedRow, ratingsBox.selectedItem as String) }
+//                        .align(AlignX.LEFT)
+//                }
             }
 
         return refactoringPanel
