@@ -43,6 +43,8 @@ import org.boulderse.ijserver.telemetry.TelemetryElapsedTimeObserver
 import org.boulderse.ijserver.telemetry.sendTelemetryData
 import org.boulderse.ijserver.utils.EFNotification
 import org.boulderse.ijserver.utils.Observable
+import org.boulderse.ijserver.utils.PsiUtils
+import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
 import org.jetbrains.kotlin.psi.psiUtil.endOffset
 import org.jetbrains.kotlin.psi.psiUtil.startOffset
@@ -386,12 +388,13 @@ open class RefactoringSuggestionsPanel(
             )!!
         highlighterMap.getOrPut(myEditor.virtualFile.path) { AtomicReference(ScopeHighlighter(myEditor)) }
 
-        myEditor.selectionModel.setSelection(psiElement.startOffset, psiElement.endOffset)
+        val offsets = PsiUtils.getElementStartEnd(psiElement)
+        myEditor.selectionModel.setSelection(offsets.first, offsets.second)
 
         refactoringDescriptionBox.text = candidateSignatureMap[candidate]
         val scopeHighlighter: ScopeHighlighter = highlighterMap.get(myEditor.virtualFile.path)?.get()!!
         dropAllHighlights()
-        val range = TextRange(psiElement.startOffset, psiElement.endOffset)
+        val range = TextRange(offsets.first, offsets.second)
         scopeHighlighter.highlight(
             com.intellij.openapi.util
                 .Pair(range, listOf(range)),

@@ -17,6 +17,7 @@ import com.intellij.psi.search.searches.ReferencesSearch
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiUtilBase
 import com.intellij.psi.util.childrenOfType
+import com.intellij.psi.util.endOffset
 import com.intellij.util.Processor
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.KotlinLanguage
@@ -1225,6 +1226,18 @@ class PsiUtils {
                 return "variable"
             }
             return null
+        }
+
+        fun getElementStartEnd(psiElement: PsiElement): Pair<Int, Int> {
+            if (psiElement is PsiMethod) {
+                return Pair(psiElement.nameIdentifier?.startOffset?:psiElement.startOffset, psiElement.nameIdentifier?.endOffset?:psiElement.endOffset)
+            } else if (psiElement is PsiClass) {
+                return Pair(psiElement.nameIdentifier?.startOffset?:psiElement.startOffset, psiElement.nameIdentifier?.endOffset?:psiElement.endOffset)
+            } else if (psiElement is PsiField) {
+                return Pair(psiElement.nameIdentifier.startOffset, psiElement.nameIdentifier.endOffset)
+            } else{
+                return Pair(psiElement.startOffset, psiElement.endOffset)
+            }
         }
     }
 }
