@@ -1,5 +1,6 @@
 package org.boulderse.ijserver.toolwindow
 
+import com.intellij.openapi.application.invokeLater
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
 import java.awt.BorderLayout
@@ -15,6 +16,7 @@ import javax.swing.JProgressBar
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
 import kotlin.time.Duration.Companion.minutes
+import com.intellij.util.SVGLoader
 
 class RenameLogViewer : LogViewer("Rename agent logs") {
     private val patternText = JTextArea()
@@ -35,6 +37,15 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private var totalFiles: Int = 0
     private var inspectingFile: String = "FileName.java"
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
+    val actionLabel = JLabel("Agent is not yet running.")
+
+    val robotSpinnerLabel = JLabel()
+    val spinnerIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/robot_spinner.gif"))
+    val idleIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/robot_idle.png"))
+
+    val humanSpinnerLabel = JLabel()
+    val humanIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/human_spinner.gif"))
+    val humanIdleIcon = javax.swing.ImageIcon(javaClass.getResource("/gifs/human_idle.png"))
 
     var containerId: String? = null
 
@@ -65,7 +76,21 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         northPanel.layout = BoxLayout(northPanel, BoxLayout.Y_AXIS)
         actionPanel.layout = BoxLayout(actionPanel, BoxLayout.Y_AXIS)
         actionPanel.border = BorderFactory.createTitledBorder("Action Item:")
-        actionPanel.add(Box.createVerticalStrut(8))
+        actionPanel.add(Box.createVerticalStrut(16))
+        actionPanel.add(actionLabel)
+
+
+        robotSpinnerLabel.icon = idleIcon
+        humanSpinnerLabel.icon = humanIdleIcon
+
+
+        val actionRow = JPanel()
+        actionRow.layout = BoxLayout(actionRow, BoxLayout.X_AXIS)
+        actionRow.add(robotSpinnerLabel)
+        actionRow.add(humanSpinnerLabel)
+        actionRow.add(Box.createVerticalStrut(4))
+
+        actionPanel.add(actionRow)
         northPanel.add(actionPanel)
         return northPanel
     }
@@ -293,9 +318,37 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun setActionItem(item: String) {
-        actionPanel.removeAll()
-        actionPanel.add(JLabel(item))
+        actionLabel.text = item
         actionPanel.revalidate()
         actionPanel.repaint()
+    }
+
+
+    fun startRobotAnimation() {
+        invokeLater {
+            robotSpinnerLabel.icon = spinnerIcon
+            actionPanel.revalidate()
+            actionPanel.repaint()
+        }
+    }
+
+    fun stopRobotAnimation() {
+        invokeLater {
+            robotSpinnerLabel.icon = idleIcon
+            actionPanel.revalidate()
+            actionPanel.repaint()
+        }
+    }
+
+    fun startHumanAnimation() {
+        invokeLater {
+            humanSpinnerLabel.icon = humanIcon
+            actionPanel.revalidate()
+        }
+    }
+    fun stopHumanAnimation() {
+        invokeLater {
+            humanSpinnerLabel.icon = humanIdleIcon
+        }
     }
 }
