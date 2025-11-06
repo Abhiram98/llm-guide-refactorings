@@ -44,6 +44,8 @@ data class RenameParams(
     val resolvedFilePath: String? = null,
     @SerialName("resolved_start_line")
     val resolvedStartLine: Int? = null,
+    @SerialName("reason")
+    val reason: String? = null,
 )
 
 @Serializable

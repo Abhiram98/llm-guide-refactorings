@@ -53,9 +53,14 @@ class ReviewRoutes(
                     .map { formRenameObject(it, project, editor!!, file!!) as RenameVariable? }
                     .filterNotNull()
                     .toList()
-            renameObjs.forEach {
-                it.description =
-                    "The rename ${it.oldName} to ${it.newName} should be implemented. The change fits the provided renaming scope."
+            if (renameObjs.isEmpty()){
+                call.respond(HttpStatusCode.OK, message = Json.encodeToString(listOf(true)))
+                return@post
+            }
+            renameObjs.forEachIndexed { index, renameObject ->
+                renameObject.description =
+                    renamesToReview.getOrNull(index)?.reason ?:
+                    "The rename ${renameObject.oldName} to ${renameObject.newName} should be implemented. The change fits the provided renaming scope."
             }
 
             val panel =
