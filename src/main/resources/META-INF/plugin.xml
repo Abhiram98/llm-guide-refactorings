@@ -1,6 +1,6 @@
 <idea-plugin package="org.boulderse.ijserver">
     <id>org.boulderse.ijserver</id>
-    <name>LLM Based Refactoring Assistant</name>
+    <name>Coordinated Renaming Agent</name>
     <vendor>JetBrains</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -9,7 +9,7 @@
     <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="org.boulderse.ijserver.toolwindow.AgentLogsWindow" id="Refactoring Assistant Logs" anchor="right">
+        <toolWindow factoryClass="org.boulderse.ijserver.toolwindow.AgentLogsWindow" id="CoRename Agent" anchor="right">
 
         </toolWindow>
         
