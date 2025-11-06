@@ -1,6 +1,7 @@
 package org.boulderse.ijserver.toolwindow
 
 import com.intellij.openapi.application.invokeLater
+import com.intellij.ui.components.JBScrollPane
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
 import java.awt.BorderLayout
@@ -67,7 +68,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renameSuggestions.layout = BoxLayout(renameSuggestions, BoxLayout.Y_AXIS)
         renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
 
-        centerPanel.add(renameSuggestions, BorderLayout.CENTER)
+        val jbScrollPane = JBScrollPane(
+            renameSuggestions,
+            JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+            JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        )
+        centerPanel.add(jbScrollPane, BorderLayout.CENTER)
         return centerPanel
     }
 
@@ -76,8 +82,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         northPanel.layout = BoxLayout(northPanel, BoxLayout.Y_AXIS)
         actionPanel.layout = BoxLayout(actionPanel, BoxLayout.Y_AXIS)
         actionPanel.border = BorderFactory.createTitledBorder("Action Item:")
-        actionPanel.add(Box.createVerticalStrut(16))
-        actionPanel.add(actionLabel)
+        val scrollPane = JBScrollPane(actionLabel)
+        actionPanel.add(scrollPane)
         spinnerLabel.icon = robotIdleIcon
 
         val actionRow = JPanel()
