@@ -145,8 +145,17 @@ class RenameHook : ProjectActivity {
         val action = "Trigger agent"
         notification.addAction(
             NotificationAction.createSimple(action) {
-                triggerAgent(project)
-                notification.expire()
+                try{
+                    triggerAgent(project)
+                }
+                catch (e: Exception){
+                    println("Failed to trigger agent")
+                    coRenameInProgress = false
+                }
+                finally {
+                    notification.expire()
+                }
+
             },
         )
         notification.notify(project)
