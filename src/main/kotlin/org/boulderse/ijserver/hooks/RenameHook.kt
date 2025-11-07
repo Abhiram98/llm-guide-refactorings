@@ -11,6 +11,7 @@ import com.intellij.refactoring.listeners.RefactoringEventListener
 import org.boulderse.ijserver.createNotificationGroup
 import org.boulderse.ijserver.settings.RefAgentSettingsManager
 import org.boulderse.ijserver.showUnauthorizedNotification
+import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
@@ -21,6 +22,8 @@ class RenameHook : ProjectActivity {
     var seedOldName: String? = null
     var seedNewName: String? = null
     var seedElement: PsiElement? = null
+
+    val telemetryManager = RenameAgentTelemetryManager.getInstance()
 
     fun registerHook(project: Project) {
         project.messageBus.connect().subscribe(
@@ -62,6 +65,7 @@ class RenameHook : ProjectActivity {
 
     fun triggerAgent(project: Project) {
         coRenameInProgress = true
+        telemetryManager.startNewSession()
 
         val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
         if (llmKey == "") {
@@ -125,6 +129,7 @@ class RenameHook : ProjectActivity {
 
     fun agentComplete() {
         logViewer.resetViewer()
+        telemetryManager.endSession()
         coRenameInProgress = false
     }
 

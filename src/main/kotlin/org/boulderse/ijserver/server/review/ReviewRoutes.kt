@@ -17,6 +17,7 @@ import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
 import org.boulderse.ijserver.server.RenamesToReviewParams
 import org.boulderse.ijserver.server.ReviewScopeParams
+import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
 
@@ -26,6 +27,9 @@ class ReviewRoutes(
     private val editorCallBack: () -> Editor?,
     private val projectCallBack: () -> Project,
 ) {
+
+    private val telemetryManager = RenameAgentTelemetryManager.getInstance()
+
     fun install() {
         routing.post("review/noop") {
             logViewer.setActionItem("Agent is thinking. Sit back and relax :)")
@@ -127,6 +131,12 @@ class ReviewRoutes(
             logViewer.waitForConfirmation()
             logViewer.confirmScopeButton.isEnabled = false
             logViewer.resetRenameSuggestions()
+
+            if (params.pattern!=logViewer.getPatternText())
+                telemetryManager.patternChanged()
+            if(params.guard!=logViewer.getGuardText())
+                telemetryManager.guardChanged()
+
 
             call.respond(
                 HttpStatusCode.OK,

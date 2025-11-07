@@ -3,7 +3,6 @@ package org.boulderse.ijserver.ui
 import com.intellij.codeInsight.unwrap.ScopeHighlighter
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.ActionManager
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.LogicalPosition
 import com.intellij.openapi.editor.ScrollType
@@ -25,8 +24,6 @@ import com.intellij.ui.awt.RelativePoint
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.dsl.builder.AlignX
-import com.intellij.ui.dsl.builder.Cell
-import com.intellij.ui.dsl.builder.Row
 import com.intellij.ui.dsl.builder.panel
 import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.JBDimension
@@ -35,19 +32,18 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
 import org.boulderse.ijserver.LLMBundle
 import org.boulderse.ijserver.refactoringobjects.AbstractRefactoring
+import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.telemetry.EFTelemetryDataElapsedTimeNotificationPayload
 import org.boulderse.ijserver.telemetry.EFTelemetryDataManager
 import org.boulderse.ijserver.telemetry.EFTelemetryDataUtils
+import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.telemetry.TelemetryDataAction
 import org.boulderse.ijserver.telemetry.TelemetryElapsedTimeObserver
 import org.boulderse.ijserver.telemetry.sendTelemetryData
 import org.boulderse.ijserver.utils.EFNotification
 import org.boulderse.ijserver.utils.Observable
 import org.boulderse.ijserver.utils.PsiUtils
-import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.base.codeInsight.handlers.fixers.startLine
-import org.jetbrains.kotlin.psi.psiUtil.endOffset
-import org.jetbrains.kotlin.psi.psiUtil.startOffset
 import java.awt.Dimension
 import java.awt.event.KeyEvent
 import java.awt.event.MouseEvent
@@ -108,6 +104,8 @@ open class RefactoringSuggestionsPanel(
                 onReject(myRefactoringCandidateTable.selectedRow)
             }
         }
+
+    private val telemetryManager = RenameAgentTelemetryManager.getInstance()
 
     fun initTable() {
         val tableModel = buildTableModel(myCandidates)
@@ -285,6 +283,9 @@ open class RefactoringSuggestionsPanel(
     fun onReject(index: Int) {
         disableButtons()
         dropAllHighlights()
+        telemetryManager.addRejectRating(
+            myCandidates.getOrNull(index)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) }
+        )
         myPopup?.cancel()
     }
 
@@ -342,6 +343,9 @@ open class RefactoringSuggestionsPanel(
             dropAllHighlights()
             refreshCandidates(index, "COMPLETED")
             myPopup?.cancel()
+            telemetryManager.addAcceptRating(
+                (refObj as? RenameVariable)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) }
+            )
             disableButtons()
             return true
         }
