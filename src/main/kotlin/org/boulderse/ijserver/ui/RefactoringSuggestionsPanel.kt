@@ -334,6 +334,9 @@ open class RefactoringSuggestionsPanel(
             )
             addSelectionToTelemetryData(index)
             val refObj = myCandidates[index]
+            telemetryManager.addAcceptRating(
+                (refObj as? RenameVariable)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) },
+            )
             ProgressManager.getInstance().runProcessWithProgressSynchronously(
                 { refObj.performRefactoring(myProject, myEditor, myFile) },
                 "Performing Refactoring",
@@ -343,9 +346,6 @@ open class RefactoringSuggestionsPanel(
             dropAllHighlights()
             refreshCandidates(index, "COMPLETED")
             myPopup?.cancel()
-            telemetryManager.addAcceptRating(
-                (refObj as? RenameVariable)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) },
-            )
             disableButtons()
             return true
         }
