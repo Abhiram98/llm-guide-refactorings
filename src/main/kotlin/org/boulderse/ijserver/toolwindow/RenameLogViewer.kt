@@ -81,6 +81,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         northPanel.layout = BoxLayout(northPanel, BoxLayout.Y_AXIS)
         actionPanel.layout = BoxLayout(actionPanel, BoxLayout.Y_AXIS)
         actionPanel.border = BorderFactory.createTitledBorder("Action Item:")
+        actionLabel.isEditable = false
         val scrollPane = JBScrollPane(actionLabel)
         actionPanel.add(scrollPane)
         robotSpinnerLabel.icon = robotIdleIcon
