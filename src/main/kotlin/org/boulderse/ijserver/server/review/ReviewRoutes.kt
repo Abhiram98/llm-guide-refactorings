@@ -163,11 +163,13 @@ class ReviewRoutes(
 
         routing.post("/review/inc_replication_files"){
             logViewer.incTotalFiles()
+            telemetryManager.addTotalFiles()
             call.respond(HttpStatusCode.OK)
         }
 
         routing.post("/review/inc_files_inspected"){
             logViewer.incCompletedFiles()
+            telemetryManager.addInspectedFile()
             call.respond(HttpStatusCode.OK)
         }
 

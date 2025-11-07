@@ -29,6 +29,12 @@ class RenameAgentTelemetryManager {
         @SerialName("rejected_map")
         val rejectedMap: MutableMap<String, Int> = mutableMapOf(),
 
+        @SerialName("total_files")
+        var totalFiles: Int = 0,
+
+        @SerialName("inspected_files")
+        var inspectedFiles: Int = 0,
+
         )
 
     var currentTelemetryData: TelemetryData? = null
@@ -90,11 +96,11 @@ class RenameAgentTelemetryManager {
     }
 
     fun addTotalFiles(){
-
+        currentTelemetryData?.totalFiles += 1
     }
 
     fun addInspectedFile(){
-
+        currentTelemetryData?.inspectedFiles += 1
     }
 
     companion object{
