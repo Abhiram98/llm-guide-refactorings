@@ -38,7 +38,7 @@ class RenameHook : ProjectActivity {
                     if ("rename" in refactoringId && !coRenameInProgress) {
                         print("Found a rename refactoring")
                         val element = beforeData?.getUserData(RefactoringEventData.PSI_ELEMENT_KEY)
-                        seedElement = element
+
                         seedOldName = element?.namedUnwrappedElement?.name
                     }
                 }
@@ -52,6 +52,7 @@ class RenameHook : ProjectActivity {
                         print("Found a rename refactoring")
                         val element = afterData?.getUserData(RefactoringEventData.PSI_ELEMENT_KEY)
                         seedNewName = element?.namedUnwrappedElement?.name
+                        seedElement = element
                         showNotification(project)
                     }
                 }

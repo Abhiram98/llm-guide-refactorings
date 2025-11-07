@@ -10,6 +10,8 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
@@ -82,7 +84,10 @@ class ReviewRoutes(
             invokeLater {
                 panel.createAndShowPopup(logViewer.renameSuggestions)
             }
+            val startTime = Clock.System.now()
             panel.waitAndClose()
+            val endTime = Clock.System.now()
+            telemetryManager.addHumanTime(endTime-startTime)
 
             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
             println("Review status: $reviewStatus")
@@ -128,7 +133,10 @@ class ReviewRoutes(
             logViewer.stopRobotAnimation()
             logViewer.resetConfirmationWait()
             logViewer.confirmScopeButton.isEnabled = true
+            val startTime = Clock.System.now()
             logViewer.waitForConfirmation()
+            val endTime = Clock.System.now()
+            telemetryManager.addHumanTime(endTime-startTime)
             logViewer.confirmScopeButton.isEnabled = false
             logViewer.resetRenameSuggestions()
 

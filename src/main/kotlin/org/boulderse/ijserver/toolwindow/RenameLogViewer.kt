@@ -4,6 +4,7 @@ import com.intellij.openapi.application.invokeLater
 import com.intellij.ui.components.JBScrollPane
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
+import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
@@ -37,6 +38,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private var totalFiles: Int = 0
     private var inspectingFile: String = "FileName.java"
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
+    private val telemetryManager: RenameAgentTelemetryManager = RenameAgentTelemetryManager.getInstance()
     val actionLabel = JTextArea("Agent is not yet running.")
 
     val robotSpinnerLabel = JLabel()
@@ -220,6 +222,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         if (containerId != null) {
             println("Stopping process $containerId")
             Runtime.getRuntime().exec("docker kill $containerId")
+            telemetryManager.stoppedEarly()
         }
     }
 

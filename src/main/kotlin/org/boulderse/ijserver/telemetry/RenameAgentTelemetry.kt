@@ -9,6 +9,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.time.Duration
 
 class RenameAgentTelemetryManager {
 
@@ -39,7 +40,14 @@ class RenameAgentTelemetryManager {
         val startTime: String = java.time.Instant.now().toString(),
 
         @SerialName("end_time")
-        var endTime: String? = null
+        var endTime: String? = null,
+
+        @SerialName("stopped_early")
+        var stoppedEarly: Boolean = false,
+
+        @SerialName("review_time")
+        var reviewTime: Long = 0
+
         )
 
     var currentTelemetryData: TelemetryData? = null
@@ -107,6 +115,14 @@ class RenameAgentTelemetryManager {
 
     fun addInspectedFile(){
         currentTelemetryData?.inspectedFiles += 1
+    }
+
+    fun stoppedEarly(){
+        currentTelemetryData?.stoppedEarly = true
+    }
+
+    fun addHumanTime(duration: Duration) {
+        currentTelemetryData?.reviewTime += duration.inWholeMilliseconds
     }
 
     companion object{
