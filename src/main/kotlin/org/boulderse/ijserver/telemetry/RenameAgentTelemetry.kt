@@ -35,6 +35,11 @@ class RenameAgentTelemetryManager {
         @SerialName("inspected_files")
         var inspectedFiles: Int = 0,
 
+        @SerialName("start_time")
+        val startTime: String = java.time.Instant.now().toString(),
+
+        @SerialName("end_time")
+        var endTime: String? = null
         )
 
     var currentTelemetryData: TelemetryData? = null
@@ -88,6 +93,7 @@ class RenameAgentTelemetryManager {
     }
 
     fun endSession(){
+        currentTelemetryData?.endTime = java.time.Instant.now().toString()
         runBlocking {
             withContext(Dispatchers.IO) {
                 logFile.appendText("${Gson().toJson(currentTelemetryData)}\n")
