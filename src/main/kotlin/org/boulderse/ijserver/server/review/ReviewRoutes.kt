@@ -29,7 +29,6 @@ class ReviewRoutes(
     private val editorCallBack: () -> Editor?,
     private val projectCallBack: () -> Project,
 ) {
-
     private val telemetryManager = RenameAgentTelemetryManager.getInstance()
 
     fun install() {
@@ -61,14 +60,14 @@ class ReviewRoutes(
                     .map { formRenameObject(it, project, editor!!, file!!) as RenameVariable? }
                     .filterNotNull()
                     .toList()
-            if (renameObjs.isEmpty()){
+            if (renameObjs.isEmpty()) {
                 call.respond(HttpStatusCode.OK, message = Json.encodeToString(listOf(true)))
                 return@post
             }
             renameObjs.forEachIndexed { index, renameObject ->
                 renameObject.description =
-                    renamesToReview.getOrNull(index)?.reason ?:
-                    "The rename ${renameObject.oldName} to ${renameObject.newName} should be implemented. The change fits the provided renaming scope."
+                    renamesToReview.getOrNull(index)?.reason
+                        ?: "The rename ${renameObject.oldName} to ${renameObject.newName} should be implemented. The change fits the provided renaming scope."
             }
 
             val panel =
@@ -87,7 +86,7 @@ class ReviewRoutes(
             val startTime = Clock.System.now()
             panel.waitAndClose()
             val endTime = Clock.System.now()
-            telemetryManager.addHumanTime(endTime-startTime)
+            telemetryManager.addHumanTime(endTime - startTime)
 
             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
             println("Review status: $reviewStatus")
@@ -136,15 +135,16 @@ class ReviewRoutes(
             val startTime = Clock.System.now()
             logViewer.waitForConfirmation()
             val endTime = Clock.System.now()
-            telemetryManager.addHumanTime(endTime-startTime)
+            telemetryManager.addHumanTime(endTime - startTime)
             logViewer.confirmScopeButton.isEnabled = false
             logViewer.resetRenameSuggestions()
 
-            if (params.pattern!=logViewer.getPatternText())
+            if (params.pattern != logViewer.getPatternText()) {
                 telemetryManager.patternChanged()
-            if(params.guard!=logViewer.getGuardText())
+            }
+            if (params.guard != logViewer.getGuardText()) {
                 telemetryManager.guardChanged()
-
+            }
 
             call.respond(
                 HttpStatusCode.OK,
@@ -169,19 +169,19 @@ class ReviewRoutes(
             call.respond(HttpStatusCode.OK)
         }
 
-        routing.post("/review/inc_replication_files"){
+        routing.post("/review/inc_replication_files") {
             logViewer.incTotalFiles()
             telemetryManager.addTotalFiles()
             call.respond(HttpStatusCode.OK)
         }
 
-        routing.post("/review/inc_files_inspected"){
+        routing.post("/review/inc_files_inspected") {
             logViewer.incCompletedFiles()
             telemetryManager.addInspectedFile()
             call.respond(HttpStatusCode.OK)
         }
 
-        routing.post("/review/reset_view"){
+        routing.post("/review/reset_view") {
             logViewer.resetViewer()
             call.respond(HttpStatusCode.OK)
         }

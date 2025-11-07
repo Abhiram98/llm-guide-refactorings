@@ -284,7 +284,7 @@ open class RefactoringSuggestionsPanel(
         disableButtons()
         dropAllHighlights()
         telemetryManager.addRejectRating(
-            myCandidates.getOrNull(index)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) }
+            myCandidates.getOrNull(index)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) },
         )
         myPopup?.cancel()
     }
@@ -344,7 +344,7 @@ open class RefactoringSuggestionsPanel(
             refreshCandidates(index, "COMPLETED")
             myPopup?.cancel()
             telemetryManager.addAcceptRating(
-                (refObj as? RenameVariable)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) }
+                (refObj as? RenameVariable)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) },
             )
             disableButtons()
             return true

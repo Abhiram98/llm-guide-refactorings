@@ -1230,12 +1230,18 @@ class PsiUtils {
 
         fun getElementStartEnd(psiElement: PsiElement): Pair<Int, Int> {
             if (psiElement is PsiMethod) {
-                return Pair(psiElement.nameIdentifier?.startOffset?:psiElement.startOffset, psiElement.nameIdentifier?.endOffset?:psiElement.endOffset)
+                return Pair(
+                    psiElement.nameIdentifier?.startOffset ?: psiElement.startOffset,
+                    psiElement.nameIdentifier?.endOffset ?: psiElement.endOffset,
+                )
             } else if (psiElement is PsiClass) {
-                return Pair(psiElement.nameIdentifier?.startOffset?:psiElement.startOffset, psiElement.nameIdentifier?.endOffset?:psiElement.endOffset)
+                return Pair(
+                    psiElement.nameIdentifier?.startOffset ?: psiElement.startOffset,
+                    psiElement.nameIdentifier?.endOffset ?: psiElement.endOffset,
+                )
             } else if (psiElement is PsiField) {
                 return Pair(psiElement.nameIdentifier.startOffset, psiElement.nameIdentifier.endOffset)
-            } else{
+            } else {
                 return Pair(psiElement.startOffset, psiElement.endOffset)
             }
         }

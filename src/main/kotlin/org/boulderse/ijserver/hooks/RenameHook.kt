@@ -89,7 +89,7 @@ class RenameHook : ProjectActivity {
                 "--seed_new_name",
                 seedNewName!!,
                 "--seed_line_num",
-                seedElement?.getLineNumber()?.plus(1)?.toString()?:"unknown",
+                seedElement?.getLineNumber()?.plus(1)?.toString() ?: "unknown",
                 "--seed_element_type",
                 PsiUtils.getElementTypeStr(seedElement!!),
                 "--seed_file",

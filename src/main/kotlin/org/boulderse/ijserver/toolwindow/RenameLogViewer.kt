@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent
 import javax.swing.BorderFactory
 import javax.swing.Box
 import javax.swing.BoxLayout
+import javax.swing.ImageIcon
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -18,7 +19,6 @@ import javax.swing.JProgressBar
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
 import kotlin.time.Duration.Companion.minutes
-import javax.swing.ImageIcon
 
 class RenameLogViewer : LogViewer("Rename agent logs") {
     private val patternText = JTextArea()
@@ -69,11 +69,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renameSuggestions.layout = BoxLayout(renameSuggestions, BoxLayout.Y_AXIS)
         renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
 
-        val jbScrollPane = JBScrollPane(
-            renameSuggestions,
-            JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER
-        )
+        val jbScrollPane =
+            JBScrollPane(
+                renameSuggestions,
+                JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER,
+            )
         centerPanel.add(jbScrollPane, BorderLayout.CENTER)
         return centerPanel
     }
@@ -113,8 +114,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     private fun createSouthPanel(): JPanel {
-
-
         val progressPanel = setupProgressPanel()
 
         val southPanel = JPanel()
@@ -162,7 +161,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renamingScopePanel.add(patternPanel)
         renamingScopePanel.add(Box.createVerticalStrut(8))
         renamingScopePanel.add(guardPanel)
-
 
         confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
         val buttonRowScope = JPanel()
@@ -309,7 +307,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
-
     private fun repaintFileProgress() {
         val percent =
             if (totalFiles <=
@@ -328,7 +325,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
-    fun resetViewer(){
+    fun resetViewer() {
         resetProgress()
         resetProgressFiles()
         resetScope()
@@ -350,7 +347,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
-    fun resetProgressFiles(){
+    fun resetProgressFiles() {
         completedFiles = 0
         totalFiles = 0
         progressBar.value = 0
@@ -366,7 +363,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         actionPanel.revalidate()
         actionPanel.repaint()
     }
-
 
     fun startRobotAnimation() {
         invokeLater {
@@ -390,15 +386,19 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
             actionPanel.revalidate()
         }
     }
+
     fun stopHumanAnimation() {
         invokeLater {
             humanSpinnerLabel.icon = humanIdleIcon
         }
     }
 
-    private fun loadScaledIcon(path: String, scale: Double): ImageIcon {
+    private fun loadScaledIcon(
+        path: String,
+        scale: Double,
+    ): ImageIcon {
         val originalIcon = ImageIcon(javaClass.getResource(path))
-        if (scale==1.0){
+        if (scale == 1.0) {
             return originalIcon
         }
         val width = (originalIcon.iconWidth * scale).toInt()
@@ -414,7 +414,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renameSuggestions.repaint()
     }
 
-    fun showScopePanel(){
+    fun showScopePanel() {
         renameSuggestions.removeAll()
         renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")
         val scopeConfirmPanel = createScopePanel()
