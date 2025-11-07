@@ -108,6 +108,7 @@ class ReviewRoutes(
 
         routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
+            logViewer.showScopePanel()
             logViewer.setPattern(params.pattern)
             logViewer.setGuard(params.guard)
 
@@ -116,12 +117,13 @@ class ReviewRoutes(
                     "Please confirm the renaming scope below, by clicking the 'Confirm' button. " +
                     "You are welcome to edit the scope as per your requirements.",
             )
-            logViewer.resetRenameSuggestions()
+
             logViewer.startHumanAnimation()
             logViewer.resetConfirmationWait()
             logViewer.confirmScopeButton.isEnabled = true
             logViewer.waitForConfirmation()
             logViewer.confirmScopeButton.isEnabled = false
+            logViewer.resetRenameSuggestions()
 
             call.respond(
                 HttpStatusCode.OK,

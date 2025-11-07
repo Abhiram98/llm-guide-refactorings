@@ -24,7 +24,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private val guardText = JTextArea()
     val confirmScopeButton = JButton("Confirm Scope")
     private var scopeConfirmed = CompletableDeferred<Boolean>()
-    val renamingScopePanel = JPanel()
     val renameSuggestions = JPanel()
     val actionPanel = JPanel()
     val progressPanel = JPanel()
@@ -96,6 +95,25 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     private fun createSouthPanel(): JPanel {
 
+
+        val progressPanel = setupProgressPanel()
+
+        val southPanel = JPanel()
+
+        southPanel.layout = BoxLayout(southPanel, BoxLayout.Y_AXIS)
+        southPanel.add(progressPanel)
+
+        // Button row
+        val buttonRow = JPanel()
+        val stopButton = JButton("Stop Agent")
+        stopButton.addActionListener { _: ActionEvent? -> stopAgent() }
+        buttonRow.add(stopButton)
+
+        southPanel.add(buttonRow)
+        return southPanel
+    }
+
+    private fun createScopePanel(): JPanel {
         patternText.lineWrap = true // Wrap lines if they are too long
         patternText.wrapStyleWord = true // Wrap at word boundaries
         guardText.lineWrap = true
@@ -113,42 +131,26 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         // Create titled sub-panels for Pattern and Guard, and wrap them in a "Renaming Scope" panel
         val patternPanel = JPanel(BorderLayout())
-        patternPanel.border = javax.swing.BorderFactory.createTitledBorder("Pattern: A Find-Replace style rename pattern")
+        patternPanel.border = BorderFactory.createTitledBorder("Pattern: A Find-Replace style rename pattern")
         patternPanel.add(patternPane, BorderLayout.CENTER)
 
         val guardPanel = JPanel(BorderLayout())
-        guardPanel.border = javax.swing.BorderFactory.createTitledBorder("Guard: The conditions where the pattern should apply")
+        guardPanel.border = BorderFactory.createTitledBorder("Guard: The conditions where the pattern should apply")
         guardPanel.add(guardPane, BorderLayout.CENTER)
-
+        val renamingScopePanel = JPanel()
         renamingScopePanel.layout = BoxLayout(renamingScopePanel, BoxLayout.Y_AXIS)
-        renamingScopePanel.border = javax.swing.BorderFactory.createTitledBorder("Renaming Scope")
+//        renamingScopePanel.border = BorderFactory.createTitledBorder("Renaming Scope")
         renamingScopePanel.add(patternPanel)
         renamingScopePanel.add(Box.createVerticalStrut(8))
         renamingScopePanel.add(guardPanel)
 
-        val southPanel = JPanel()
-        southPanel.layout = BoxLayout(southPanel, BoxLayout.Y_AXIS)
-        // add the combined titled Renaming Scope panel instead of raw panes
 
-
-        southPanel.add(renamingScopePanel)
         confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
         val buttonRowScope = JPanel()
-        confirmScopeButton.isEnabled = false
         buttonRowScope.add(confirmScopeButton)
-        southPanel.add(buttonRowScope)
-        val progressPanel = setupProgressPanel()
-        southPanel.add(progressPanel)
-        //        southPanel.add(Box.createVerticalStrut(8))
-
-        // Button row
-        val buttonRow = JPanel()
-        val stopButton = JButton("Stop Agent")
-        stopButton.addActionListener { _: ActionEvent? -> stopAgent() }
-        buttonRow.add(stopButton)
-
-        southPanel.add(buttonRow)
-        return southPanel
+        confirmScopeButton.isEnabled = false
+        renamingScopePanel.add(buttonRowScope)
+        return renamingScopePanel
     }
 
     private fun setupProgressPanel(): JPanel {
@@ -386,6 +388,16 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun resetRenameSuggestions() {
         renameSuggestions.removeAll()
+        renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
+        renameSuggestions.revalidate()
+        renameSuggestions.repaint()
+    }
+
+    fun showScopePanel(){
+        renameSuggestions.removeAll()
+        renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")
+        val scopeConfirmPanel = createScopePanel()
+        renameSuggestions.add(scopeConfirmPanel)
         renameSuggestions.revalidate()
         renameSuggestions.repaint()
     }
