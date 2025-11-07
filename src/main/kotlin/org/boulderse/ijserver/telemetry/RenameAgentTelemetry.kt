@@ -132,6 +132,6 @@ class RenameAgentTelemetryManager {
         }
 
         const val LOG_DIR_NAME = "ref_plugin_logs"
-        const val LOG_FILE_NAME = "ref_telemetry_data.jsonl"
+        const val LOG_FILE_NAME = "rename_agent_telemetry.jsonl"
     }
 }
