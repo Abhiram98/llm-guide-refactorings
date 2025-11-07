@@ -78,7 +78,7 @@ class RenameHook : ProjectActivity {
                 "IJ_SERVER_URL=http://host.docker.internal:8082",
                 "-e",
                 "GRAZIE_JWT_TOKEN",
-                "renameagent",
+                "bellurabhiram/renameagent",
                 "--seed_old_name",
                 seedOldName!!,
                 "--seed_new_name",
