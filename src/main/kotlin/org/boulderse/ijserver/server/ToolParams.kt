@@ -216,3 +216,10 @@ data class RenamesToReviewParams(
     @SerialName("count")
     val count: Int,
 )
+
+
+@Serializable
+data class RenamesNoOpParams(
+    @SerialName("status")
+    val status: String?=null,
+)

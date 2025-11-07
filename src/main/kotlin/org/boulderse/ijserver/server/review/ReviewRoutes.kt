@@ -11,12 +11,12 @@ import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
 import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
+import org.boulderse.ijserver.server.RenamesNoOpParams
 import org.boulderse.ijserver.server.RenamesToReviewParams
 import org.boulderse.ijserver.server.ReviewScopeParams
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
@@ -33,7 +33,9 @@ class ReviewRoutes(
 
     fun install() {
         routing.post("review/noop") {
-            logViewer.setActionItem("Agent is thinking. Sit back and relax :)")
+            val params = call.receive<RenamesNoOpParams>()
+            val agentStatus = params.status ?: "Sit back and relax :)"
+            logViewer.setActionItem("Agent is thinking. $agentStatus")
             logViewer.startRobotAnimation()
             logViewer.stopHumanAnimation()
             logViewer.resetRenameSuggestions()
