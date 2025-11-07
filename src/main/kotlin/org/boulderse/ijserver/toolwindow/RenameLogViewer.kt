@@ -37,9 +37,9 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private var totalFiles: Int = 0
     private var inspectingFile: String = "FileName.java"
     private val renameProgressLabel = JLabel("Renames Inspected in $inspectingFile: ")
-    val actionLabel = JLabel("Agent is not yet running.")
+    val actionLabel = JTextArea("Agent is not yet running.")
 
-    val spinnerLabel = JLabel()
+    val robotSpinnerLabel = JLabel()
     val robotSpinnerIcon = loadScaledIcon("/gifs/robot_spinner.gif", 1.0)
     val robotIdleIcon = loadScaledIcon("/gifs/robot_idle.png", 0.66)
 
@@ -83,11 +83,27 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         actionPanel.border = BorderFactory.createTitledBorder("Action Item:")
         val scrollPane = JBScrollPane(actionLabel)
         actionPanel.add(scrollPane)
-        spinnerLabel.icon = robotIdleIcon
+        robotSpinnerLabel.icon = robotIdleIcon
+        humanSpinnerLabel.icon = humanIdleIcon
 
         val actionRow = JPanel()
-        actionRow.layout = BoxLayout(actionRow, BoxLayout.X_AXIS)
-        actionRow.add(spinnerLabel)
+        actionRow.layout = BoxLayout(actionRow, BoxLayout.Y_AXIS)
+        val spinnerRow = JPanel()
+        spinnerRow.layout = BoxLayout(spinnerRow, BoxLayout.X_AXIS)
+
+        val robotPane = JPanel()
+//        robotPane.layout = BoxLayout(robotPane, BoxLayout.Y_AXIS)
+        robotPane.add(robotSpinnerLabel)
+        robotPane.add(JLabel("Agent"))
+
+        val humanPane = JPanel()
+//        humanPane.layout = BoxLayout(robotPane, BoxLayout.Y_AXIS)
+        humanPane.add(humanSpinnerLabel)
+        humanPane.add(JLabel("Developer"))
+
+        spinnerRow.add(robotPane)
+        spinnerRow.add(humanPane)
+        actionRow.add(spinnerRow)
         actionRow.add(actionPanel)
         northPanel.add(actionRow)
         return northPanel
@@ -315,6 +331,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         setFileInspect("<Filename.java>")
         setActionItem("Agent is not running.")
         stopRobotAnimation()
+        stopHumanAnimation()
         resetRenameSuggestions()
     }
 
@@ -349,7 +366,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun startRobotAnimation() {
         invokeLater {
-            spinnerLabel.icon = robotSpinnerIcon
+            robotSpinnerLabel.icon = robotSpinnerIcon
             actionPanel.revalidate()
             actionPanel.repaint()
         }
@@ -357,7 +374,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun stopRobotAnimation() {
         invokeLater {
-            spinnerLabel.icon = robotIdleIcon
+            robotSpinnerLabel.icon = robotIdleIcon
             actionPanel.revalidate()
             actionPanel.repaint()
         }
@@ -365,13 +382,13 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun startHumanAnimation() {
         invokeLater {
-            spinnerLabel.icon = humanIcon
+            humanSpinnerLabel.icon = humanIcon
             actionPanel.revalidate()
         }
     }
     fun stopHumanAnimation() {
         invokeLater {
-            spinnerLabel.icon = humanIdleIcon
+            humanSpinnerLabel.icon = humanIdleIcon
         }
     }
 

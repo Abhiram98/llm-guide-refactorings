@@ -30,6 +30,7 @@ class ReviewRoutes(
         routing.post("review/noop") {
             logViewer.setActionItem("Agent is thinking. Sit back and relax :)")
             logViewer.startRobotAnimation()
+            logViewer.stopHumanAnimation()
             logViewer.resetRenameSuggestions()
             call.respond(HttpStatusCode.OK)
         }
@@ -44,6 +45,7 @@ class ReviewRoutes(
                     "Please review the following renames: \n",
             )
             logViewer.startHumanAnimation()
+            logViewer.stopRobotAnimation()
             renamesToReview.forEach { logViewer.appendLog(it.oldName + " -> " + it.newName) }
             val file = fileCallBack()
             val editor = editorCallBack()
@@ -119,6 +121,7 @@ class ReviewRoutes(
             )
 
             logViewer.startHumanAnimation()
+            logViewer.stopRobotAnimation()
             logViewer.resetConfirmationWait()
             logViewer.confirmScopeButton.isEnabled = true
             logViewer.waitForConfirmation()
