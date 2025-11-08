@@ -13,6 +13,7 @@ import org.boulderse.ijserver.settings.RefAgentSettingsManager
 import org.boulderse.ijserver.showUnauthorizedNotification
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.toolwindow.logViewer
+import org.boulderse.ijserver.utils.DockerManager
 import org.boulderse.ijserver.utils.PsiUtils
 import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.idea.base.psi.getLineNumber
@@ -22,6 +23,7 @@ class RenameHook : ProjectActivity {
     var seedOldName: String? = null
     var seedNewName: String? = null
     var seedElement: PsiElement? = null
+    val dockerManager = DockerManager.getInstance()
 
     val telemetryManager = RenameAgentTelemetryManager.getInstance()
 
@@ -71,7 +73,22 @@ class RenameHook : ProjectActivity {
 
     fun triggerAgent(project: Project) {
         coRenameInProgress = true
-        checkDockerRunning(project)
+        if (dockerManager.testDockerPath() == false) {
+            showNotification(
+                project,
+                "Docker Error",
+                "Could not find docker installed on machine. Please install docker and retry",
+                "Retry CoRename...",
+            )
+        } else if (dockerManager.checkDockerDaemon() == false) {
+            showNotification(
+                project,
+                "Docker Error",
+                "Could not connect to docker daemon. Please check that docker daemon is running and retry",
+                "Retry CoRename...",
+            )
+        }
+
         telemetryManager.startNewSession()
 
         val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
@@ -82,7 +99,7 @@ class RenameHook : ProjectActivity {
 
         val command =
             mutableListOf(
-                "docker",
+                dockerManager.dockerPath,
                 "run",
                 "-d",
                 "-e",
@@ -121,7 +138,7 @@ class RenameHook : ProjectActivity {
                 println("Containerid=$containerId")
 
                 logViewer.registerAgentContainerId(containerId)
-                val waitProcess = ProcessBuilder(listOf("docker", "container", "wait", containerId)).start()
+                val waitProcess = ProcessBuilder(listOf(dockerManager.dockerPath, "container", "wait", containerId)).start()
                 val exitCode = waitProcess.waitFor()
                 val output = waitProcess.inputStream.bufferedReader().use { it.readText() }
                 val stderr = waitProcess.errorStream.bufferedReader().use { it.readText() }
@@ -131,38 +148,6 @@ class RenameHook : ProjectActivity {
             } finally {
                 agentComplete()
             }
-        }
-    }
-
-    private fun checkDockerRunning(project: Project) {
-        val command = listOf("docker", "--help")
-        val cmd =
-            ProcessBuilder(command)
-        val process = cmd.start()
-        val exitCode = process.waitFor()
-
-        if (exitCode != 0) {
-            showNotification(
-                project,
-                "Docker Error",
-                "docker --help failed. Is docker installed on this machine?",
-                "Retry running CoRenameAgent...",
-            )
-            throw Exception("docker --help failed.")
-        }
-
-        val daemonCommand = listOf("docker", "container", "ps")
-        val processDaemon = ProcessBuilder(daemonCommand).start()
-        val exitCodeDaemon = processDaemon.waitFor()
-
-        if (exitCodeDaemon != 0) {
-            showNotification(
-                project,
-                "Docker Error",
-                "Docker daemon is installed, but doesn't seem to be running. Please start the docker daemon.",
-                "Retry running CoRenameAgent...",
-            )
-            throw Exception("docker daemon not running")
         }
     }
 
@@ -192,6 +177,7 @@ class RenameHook : ProjectActivity {
                 } catch (e: Exception) {
                     println("Failed to trigger agent")
                     coRenameInProgress = false
+                    throw e
                 } finally {
                     notification.expire()
                 }

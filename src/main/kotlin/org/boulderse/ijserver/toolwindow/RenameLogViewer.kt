@@ -5,6 +5,7 @@ import com.intellij.ui.components.JBScrollPane
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
+import org.boulderse.ijserver.utils.DockerManager
 import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.ActionEvent
@@ -219,7 +220,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     private fun stopAgent() {
         if (containerId != null) {
             println("Stopping process $containerId")
-            Runtime.getRuntime().exec("docker kill $containerId")
+            val dockerManager = DockerManager.getInstance()
+            Runtime.getRuntime().exec("${dockerManager.dockerPath} kill $containerId")
             telemetryManager.stoppedEarly()
         }
     }
