@@ -53,7 +53,12 @@ class RenameHook : ProjectActivity {
                         val element = afterData?.getUserData(RefactoringEventData.PSI_ELEMENT_KEY)
                         seedNewName = element?.namedUnwrappedElement?.name
                         seedElement = element
-                        showNotification(project)
+                        showNotification(
+                            project,
+                            "Trigger coRenameAgent",
+                            "You triggered a rename. Do you want to trigger the CoRenameAgent?",
+                            "Trigger agent"
+                        )
                     }
                 }
             },
@@ -66,6 +71,7 @@ class RenameHook : ProjectActivity {
 
     fun triggerAgent(project: Project) {
         coRenameInProgress = true
+        checkDockerRunning(project)
         telemetryManager.startNewSession()
 
         val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
@@ -128,23 +134,44 @@ class RenameHook : ProjectActivity {
         }
     }
 
+    private fun checkDockerRunning(project: Project) {
+        val command = listOf("docker", "--help")
+        val cmd =
+            ProcessBuilder(command)
+        val process = cmd.start()
+        val exitCode = process.waitFor()
+
+        if (exitCode!=0){
+            showNotification(project, "Docker Error", "docker --help failed. Is docker installed on this machine?", "Retry running CoRenameAgent...")
+            throw Exception("docker --help failed.")
+        }
+
+        val daemonCommand = listOf("docker", "container", "ps")
+        val processDaemon = ProcessBuilder(daemonCommand).start()
+        val exitCodeDaemon = processDaemon.waitFor()
+
+        if (exitCodeDaemon!=0){
+            showNotification(project, "Docker Error", "Docker daemon is installed, but doesn't seem to be running. Please start the docker daemon.", "Retry running CoRenameAgent...")
+            throw Exception("docker daemon not running")
+        }
+    }
+
     fun agentComplete() {
         logViewer.resetViewer()
         telemetryManager.endSession()
         coRenameInProgress = false
     }
 
-    fun showNotification(project: Project) {
+    fun showNotification(project: Project, title: String, content: String, actionText: String) {
         val notification =
             createNotificationGroup().createNotification(
-                "Trigger coRenameAgent",
-                "You triggered a rename. Do you want to trigger the CoRenameAgent.",
+                title,
+                content,
                 NotificationType.INFORMATION,
             )
 
-        val action = "Trigger agent"
         notification.addAction(
-            NotificationAction.createSimple(action) {
+            NotificationAction.createSimple(actionText) {
                 try{
                     triggerAgent(project)
                 }
@@ -160,4 +187,5 @@ class RenameHook : ProjectActivity {
         )
         notification.notify(project)
     }
+
 }
