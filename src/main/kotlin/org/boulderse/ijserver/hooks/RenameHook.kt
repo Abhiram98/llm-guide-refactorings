@@ -57,7 +57,7 @@ class RenameHook : ProjectActivity {
                             project,
                             "Trigger coRenameAgent",
                             "You triggered a rename. Do you want to trigger the CoRenameAgent?",
-                            "Trigger agent"
+                            "Trigger agent",
                         )
                     }
                 }
@@ -141,8 +141,13 @@ class RenameHook : ProjectActivity {
         val process = cmd.start()
         val exitCode = process.waitFor()
 
-        if (exitCode!=0){
-            showNotification(project, "Docker Error", "docker --help failed. Is docker installed on this machine?", "Retry running CoRenameAgent...")
+        if (exitCode != 0) {
+            showNotification(
+                project,
+                "Docker Error",
+                "docker --help failed. Is docker installed on this machine?",
+                "Retry running CoRenameAgent...",
+            )
             throw Exception("docker --help failed.")
         }
 
@@ -150,8 +155,13 @@ class RenameHook : ProjectActivity {
         val processDaemon = ProcessBuilder(daemonCommand).start()
         val exitCodeDaemon = processDaemon.waitFor()
 
-        if (exitCodeDaemon!=0){
-            showNotification(project, "Docker Error", "Docker daemon is installed, but doesn't seem to be running. Please start the docker daemon.", "Retry running CoRenameAgent...")
+        if (exitCodeDaemon != 0) {
+            showNotification(
+                project,
+                "Docker Error",
+                "Docker daemon is installed, but doesn't seem to be running. Please start the docker daemon.",
+                "Retry running CoRenameAgent...",
+            )
             throw Exception("docker daemon not running")
         }
     }
@@ -162,7 +172,12 @@ class RenameHook : ProjectActivity {
         coRenameInProgress = false
     }
 
-    fun showNotification(project: Project, title: String, content: String, actionText: String) {
+    fun showNotification(
+        project: Project,
+        title: String,
+        content: String,
+        actionText: String,
+    ) {
         val notification =
             createNotificationGroup().createNotification(
                 title,
@@ -172,20 +187,16 @@ class RenameHook : ProjectActivity {
 
         notification.addAction(
             NotificationAction.createSimple(actionText) {
-                try{
+                try {
                     triggerAgent(project)
-                }
-                catch (e: Exception){
+                } catch (e: Exception) {
                     println("Failed to trigger agent")
                     coRenameInProgress = false
-                }
-                finally {
+                } finally {
                     notification.expire()
                 }
-
             },
         )
         notification.notify(project)
     }
-
 }

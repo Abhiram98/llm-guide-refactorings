@@ -217,9 +217,8 @@ data class RenamesToReviewParams(
     val count: Int,
 )
 
-
 @Serializable
 data class RenamesNoOpParams(
     @SerialName("status")
-    val status: String?=null,
+    val status: String? = null,
 )
