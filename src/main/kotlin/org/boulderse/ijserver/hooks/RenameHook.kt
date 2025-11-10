@@ -123,26 +123,45 @@ class RenameHook : ProjectActivity {
                     ?.removePrefix(project.basePath + "/")!!,
             )
         println("Running command: ${command.joinToString(" ")}")
+        val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
         ApplicationManager.getApplication().executeOnPooledThread {
             try {
                 val cmd =
                     ProcessBuilder(command)
+                dockerManager.applyEnvironmentOverrides(cmd, dockerEnvOverrides)
                 cmd.environment()["GRAZIE_JWT_TOKEN"] = llmKey
                 val process = cmd.start()
-                process.waitFor()
-                val containerId =
+                val exitCode = process.waitFor()
+                val stdout =
                     process.inputStream
                         .bufferedReader()
                         .use { it.readText() }
-                        .removeSuffix("\n")
+                        .trim()
+                val stderr =
+                    process.errorStream
+                        .bufferedReader()
+                        .use { it.readText() }
+
+                if (exitCode != 0 || stdout.isBlank()) {
+                    println(
+                        "Failed to start rename agent container (exit=$exitCode). " +
+                            "stdout:\n$stdout\nstderr:\n$stderr",
+                    )
+                    return@executeOnPooledThread
+                }
+
+                val containerId = stdout
                 println("Containerid=$containerId")
 
                 logViewer.registerAgentContainerId(containerId)
-                val waitProcess = ProcessBuilder(listOf(dockerManager.dockerPath, "container", "wait", containerId)).start()
-                val exitCode = waitProcess.waitFor()
+                val waitCommand = listOf(dockerManager.dockerPath, "container", "wait", containerId)
+                val waitProcessBuilder = ProcessBuilder(waitCommand)
+                dockerManager.applyEnvironmentOverrides(waitProcessBuilder, dockerEnvOverrides)
+                val waitProcess = waitProcessBuilder.start()
+                val waitExitCode = waitProcess.waitFor()
                 val output = waitProcess.inputStream.bufferedReader().use { it.readText() }
-                val stderr = waitProcess.errorStream.bufferedReader().use { it.readText() }
-                println("refagent exit=$exitCode output:\n$output\nstderr:\n$stderr")
+                val waitStderr = waitProcess.errorStream.bufferedReader().use { it.readText() }
+                println("refagent exit=$waitExitCode output:\n$output\nstderr:\n$waitStderr")
             } catch (e: Exception) {
                 println("Failed to run refagent: ${e.message}")
             } finally {
