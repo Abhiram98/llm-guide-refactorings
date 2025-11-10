@@ -2,6 +2,9 @@ package org.boulderse.ijserver.utils
 
 import kotlinx.io.IOException
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.util.UUID
 
 class DockerManager {
     var dockerPath: String? = null
@@ -124,5 +127,82 @@ class DockerManager {
             if (singleton == null) singleton = DockerManager()
             return singleton!!
         }
+    }
+
+    fun prepareCredentialHelperWorkaround(): Map<String, String> {
+        if (!isCredentialHelperMissing()) return emptyMap()
+
+        return try {
+            val tempDir = Files.createTempDirectory("rename-agent-docker-${UUID.randomUUID()}")
+            val configFile = tempDir.resolve("config.json")
+            Files.writeString(configFile, "{}")
+            val configPath = tempDir.toAbsolutePath().toString()
+            println("Applying docker credential helper workaround using config at $configPath")
+            mapOf("DOCKER_CONFIG" to configPath)
+        } catch (e: Exception) {
+            println("Failed to create docker config override: ${e.message}")
+            emptyMap()
+        }
+    }
+
+    fun applyEnvironmentOverrides(
+        builder: ProcessBuilder,
+        overrides: Map<String, String>,
+    ) {
+        overrides.forEach { (key, value) ->
+            builder.environment()[key] = value
+        }
+    }
+
+    private fun isCredentialHelperMissing(): Boolean {
+        val home = System.getenv("HOME") ?: return false
+        val configPath = Paths.get(home, ".docker", "config.json")
+        if (!Files.exists(configPath)) return false
+
+        return try {
+            val config = Files.readString(configPath)
+            val helperNames =
+                mutableSetOf<String>().apply {
+                    Regex("\"credsStore\"\\s*:\\s*\"([^\"]+)\"")
+                        .find(config)
+                        ?.let { add(it.groupValues[1]) }
+                    Regex("\"credHelpers\"\\s*:\\s*\\{([^}]*)}")
+                        .find(config)
+                        ?.groupValues
+                        ?.getOrNull(1)
+                        ?.let { helpersBody ->
+                            Regex("\"[^\"]+\"\\s*:\\s*\"([^\"]+)\"")
+                                .findAll(helpersBody)
+                                .forEach { add(it.groupValues[1]) }
+                        }
+                }
+
+            helperNames.any { helper ->
+                val executable = "docker-credential-$helper"
+                val helperMissing = !isExecutableOnPath(executable)
+                if (helperMissing) {
+                    println("Detected docker credential helper '$executable' configured but not present on PATH.")
+                }
+                helperMissing
+            }
+        } catch (e: Exception) {
+            println("Failed to inspect docker config for credential helpers: ${e.message}")
+            false
+        }
+    }
+
+    private fun isExecutableOnPath(executable: String): Boolean {
+        val path = System.getenv("PATH") ?: return false
+        val isWindows = System.getProperty("os.name").lowercase().contains("win")
+
+        return path
+            .split(File.pathSeparatorChar)
+            .filter { it.isNotBlank() }
+            .any { dir ->
+                val candidate = File(dir, executable)
+                val candidateWithExe = if (isWindows) File(dir, "$executable.exe") else null
+                (candidate.exists() && candidate.canExecute()) ||
+                    (candidateWithExe?.let { it.exists() && it.canExecute() } ?: false)
+            }
     }
 }
