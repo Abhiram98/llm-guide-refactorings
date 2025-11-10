@@ -424,4 +424,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renameSuggestions.revalidate()
         renameSuggestions.repaint()
     }
+
+    fun noOpReview(statusString: String? = null) {
+        val agentStatus = statusString ?: "Sit back and relax :)"
+        this.setActionItem("Agent is thinking. $agentStatus")
+        this.startRobotAnimation()
+        this.stopHumanAnimation()
+        this.resetRenameSuggestions()
+    }
 }

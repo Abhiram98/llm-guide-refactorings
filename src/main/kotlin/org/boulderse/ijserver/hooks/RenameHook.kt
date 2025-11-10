@@ -73,6 +73,7 @@ class RenameHook : ProjectActivity {
 
     fun triggerAgent(project: Project) {
         coRenameInProgress = true
+        logViewer.noOpReview()
         if (dockerManager.testDockerPath() == false) {
             showNotification(
                 project,
@@ -126,6 +127,8 @@ class RenameHook : ProjectActivity {
         val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
         ApplicationManager.getApplication().executeOnPooledThread {
             try {
+                pullDockerImage(project)
+
                 val cmd =
                     ProcessBuilder(command)
                 dockerManager.applyEnvironmentOverrides(cmd, dockerEnvOverrides)
@@ -167,6 +170,22 @@ class RenameHook : ProjectActivity {
             } finally {
                 agentComplete()
             }
+        }
+    }
+
+    private fun pullDockerImage(project: Project) {
+        logViewer.noOpReview("Pulling docker image.")
+        val command = listOf(dockerManager.dockerPath, "pull", "bellurabhiram/renameagent")
+        val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
+        val cmd =
+            ProcessBuilder(command)
+        dockerManager.applyEnvironmentOverrides(cmd, dockerEnvOverrides)
+        try {
+            val exitCode = cmd.start().waitFor()
+        } catch (e: Exception) {
+            println("Failed to pull docker image: ${e.message}")
+            showNotification(project, "Docker Error", "Failed to pull docker image: ${e.message}", "Retry CoRename...")
+            throw e
         }
     }
 

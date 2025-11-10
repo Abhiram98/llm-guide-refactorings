@@ -34,11 +34,7 @@ class ReviewRoutes(
     fun install() {
         routing.post("review/noop") {
             val params = call.receive<RenamesNoOpParams>()
-            val agentStatus = params.status ?: "Sit back and relax :)"
-            logViewer.setActionItem("Agent is thinking. $agentStatus")
-            logViewer.startRobotAnimation()
-            logViewer.stopHumanAnimation()
-            logViewer.resetRenameSuggestions()
+            logViewer.noOpReview(params.status)
             call.respond(HttpStatusCode.OK)
         }
 
