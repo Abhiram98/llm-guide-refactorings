@@ -9,10 +9,8 @@ import dev.langchain4j.model.openai.OpenAiModelName.GPT_4
 import org.boulderse.ijserver.models.grazie.GrazieGPT4
 import org.boulderse.ijserver.models.grazie.GrazieGPT4o
 import org.boulderse.ijserver.models.grazie.GrazieGPT4omini
-import org.boulderse.ijserver.models.grazie.GrazieModel
 import org.boulderse.ijserver.models.ollama.localOllamaMistral
 import org.boulderse.ijserver.models.openai.CredentialsHolder
-import org.boulderse.ijserver.models.openai.OpenAiGpt4
 import org.boulderse.ijserver.models.openai.getOpenAiModel
 
 @Service(Service.Level.APP)
@@ -39,7 +37,7 @@ class RefAgentSettingsManager : PersistentStateComponent<RefAgentSettings> {
         CredentialsHolder.getInstance().setOpenAiApiKey(key)
     }
 
-    fun getAiModel() = state.aiModel
+    fun getAiModelVendor() = state.aiModel
 
     fun setAiModel(aiModel: String?) {
         if (aiModel != null) {
@@ -145,7 +143,7 @@ class RefAgentSettings : BaseState() {
     var useOpenAi by property(true)
 
     @get:OptionTag("ai_model")
-    var aiModel = "grazie-gpt-4o"
+    var aiModel = "openai"
 
     @get:OptionTag("use_local_llm")
     var useOllamaToCreateObj = false

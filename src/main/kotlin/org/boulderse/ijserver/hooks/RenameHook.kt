@@ -106,8 +106,10 @@ class RenameHook : ProjectActivity {
                 "-e",
                 "IJ_SERVER_URL=http://host.docker.internal:8082",
                 "-e",
-                "GRAZIE_JWT_TOKEN",
+                "LLM_TOKEN",
                 "bellurabhiram/renameagent",
+                "--vendor",
+                RefAgentSettingsManager.getInstance().getAiModelVendor(),
                 "--seed_old_name",
                 seedOldName!!,
                 "--seed_new_name",
@@ -132,7 +134,7 @@ class RenameHook : ProjectActivity {
                 val cmd =
                     ProcessBuilder(command)
                 dockerManager.applyEnvironmentOverrides(cmd, dockerEnvOverrides)
-                cmd.environment()["GRAZIE_JWT_TOKEN"] = llmKey
+                cmd.environment()["LLM_TOKEN"] = llmKey
                 val process = cmd.start()
                 val exitCode = process.waitFor()
                 val stdout =

@@ -23,22 +23,18 @@ class RefAgentConfigurable : BoundConfigurable(LLMBundle.message("settings.confi
             row(LLMBundle.message("settings.configurable.openai.model.label")) {
                 comboBox(
                     listOf(
-                        "grazie-gpt-4o",
-                        "grazie-gpt-4o-mini",
-                        "grazie-gpt-4",
-                        "openai-gpt-4",
-                        "openai-gpt-3.5-turbo",
-                        "openai-gpt-4o-mini",
-                        "ollama",
+                        "openai",
+                        "grazie",
+                        "azure"
                     ),
                 ).bindItem(
-                    settings::getAiModel,
+                    settings::getAiModelVendor,
                     settings::setAiModel,
                 )
             }
-            row(LLMBundle.message("settings.configurable.openai.use.ollama.obj.creation")) {
-                checkBox("Yes").bindSelected(settings::getUseLocalLLM, settings::setUseLocalLLM)
-            }
+//            row(LLMBundle.message("settings.configurable.openai.use.ollama.obj.creation")) {
+//                checkBox("Yes").bindSelected(settings::getUseLocalLLM, settings::setUseLocalLLM)
+//            }
             row(LLMBundle.message("settings.configurable.openai.anonymize.telemetry")) {
                 checkBox("Yes").bindSelected(settings::getAnonymizeTelemetry, settings::setAnonymizeTelemetry)
             }
