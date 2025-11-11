@@ -91,6 +91,8 @@ class RenameHook : ProjectActivity {
         }
 
         telemetryManager.startNewSession()
+        if (seedElement!=null)
+            PsiUtils.getElementTypeStr(seedElement!!)?.let {  telemetryManager.setSeedType(it) }
 
         val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
         if (llmKey == "") {

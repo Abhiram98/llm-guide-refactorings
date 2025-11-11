@@ -41,6 +41,9 @@ class RenameAgentTelemetryManager {
         var stoppedEarly: Boolean = false,
         @SerialName("review_time")
         var reviewTime: Long = 0,
+
+        @SerialName("seed_type")
+        var seedType: String? = null,
     )
 
     var currentTelemetryData: TelemetryData? = null
@@ -66,6 +69,10 @@ class RenameAgentTelemetryManager {
 
     fun startNewSession() {
         currentTelemetryData = TelemetryData()
+    }
+
+    fun setSeedType(seedType: String) {
+        currentTelemetryData?.seedType = seedType
     }
 
     fun addAcceptRating(elementType: String? = null) {
