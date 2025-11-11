@@ -169,11 +169,29 @@ class RenameHook : ProjectActivity {
                 val output = waitProcess.inputStream.bufferedReader().use { it.readText() }
                 val waitStderr = waitProcess.errorStream.bufferedReader().use { it.readText() }
                 println("refagent exit=$waitExitCode output:\n$output\nstderr:\n$waitStderr")
+
+                fetchContainerLogs(containerId, dockerEnvOverrides)
+
             } catch (e: Exception) {
                 println("Failed to run refagent: ${e.message}")
             } finally {
                 agentComplete()
             }
+        }
+    }
+
+    private fun fetchContainerLogs(containerId: String, dockerEnvOverrides: Map<String, String>) {
+        try{
+            val logsCommand = listOf(dockerManager.dockerPath, "logs", containerId)
+            val logsProcessBuilder = ProcessBuilder(logsCommand)
+            dockerManager.applyEnvironmentOverrides(logsProcessBuilder, dockerEnvOverrides)
+            val process = logsProcessBuilder.start()
+            val exitCode = process.waitFor()
+            val output = process.inputStream.bufferedReader().use { it.readText() }
+            val stderr = process.errorStream.bufferedReader().use { it.readText() }
+            println("container logs exit=$exitCode output:\n$output\nstderr:\n$stderr")
+        }catch (e:Exception){
+            println("Failed to fetch container logs: ${e.message}")
         }
     }
 
