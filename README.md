@@ -1,9 +1,9 @@
 # Move-Method Assistant
 
 <!-- Plugin description -->
-Researching collaboration between LLMs and IDEs to suggest the move of misplaces method to the right class. 
-This tool leverages the power of LLMs to provide suggestions about what method can be moved, but leverages
-the reliability of IntelliJ IDE to carry out correctly the code transformations.
+CoRename Agent helps you perform Coordinated Renaming throughout your codebase. 
+Coordinated renaming refers to the process of consistently updating the names of various identifiers—such as class names, methods, parameters, and fields—that share a semantic relationship or naming pattern. 
+Unlike a simple text-based rename, coordinated renaming ensures naming consistency across your project.
 <!-- Plugin description end -->
 
 ### Table of contents
