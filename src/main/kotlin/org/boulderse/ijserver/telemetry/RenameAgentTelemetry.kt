@@ -44,6 +44,9 @@ class RenameAgentTelemetryManager {
 
         @SerialName("seed_type")
         var seedType: String? = null,
+
+        @SerialName("plugin_version")
+        val pluginVersion: String
     )
 
     var currentTelemetryData: TelemetryData? = null
@@ -68,7 +71,7 @@ class RenameAgentTelemetryManager {
     }
 
     fun startNewSession() {
-        currentTelemetryData = TelemetryData()
+        currentTelemetryData = TelemetryData(pluginVersion = getPluginVersion())
     }
 
     fun setSeedType(seedType: String) {
@@ -140,5 +143,20 @@ class RenameAgentTelemetryManager {
 
         const val LOG_DIR_NAME = "ref_plugin_logs"
         const val LOG_FILE_NAME = "rename_agent_telemetry.jsonl"
+
+        private fun getPluginVersion(): String {
+            // Try plugin descriptor first (preferred)
+            return try {
+                val pluginId = com.intellij.openapi.extensions.PluginId.getId("org.boulderse.ijserver")
+                val descriptor = com.intellij.ide.plugins.PluginManagerCore.getPlugin(pluginId)
+                descriptor?.version ?: getManifestVersion()
+            } catch (_: Throwable) {
+                getManifestVersion()
+            }
+        }
+
+        private fun getManifestVersion(): String {
+            return object {}.javaClass.`package`.implementationVersion
+        }
     }
 }
