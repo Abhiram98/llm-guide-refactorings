@@ -1,13 +1,19 @@
 package org.boulderse.ijserver.utils
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import kotlinx.io.IOException
 import java.io.File
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 import java.util.UUID
 
 class DockerManager {
     var dockerPath: String? = null
+    private val objectMapper: ObjectMapper by lazy { ObjectMapper().registerKotlinModule() }
 
     fun testDockerPath(): Boolean {
         if (dockerPath == null) findDockerPath()
@@ -133,14 +139,36 @@ class DockerManager {
         if (!isCredentialHelperMissing()) return emptyMap()
 
         return try {
+            val home = resolveHomeDirectory() ?: return emptyMap()
+            val dockerDir = home.resolve(".docker")
+            if (!Files.exists(dockerDir)) {
+                println("Docker config directory not found; skipping credential helper workaround.")
+                return emptyMap()
+            }
+
+            val originalConfig = dockerDir.resolve("config.json")
+            if (!Files.exists(originalConfig)) {
+                println("Docker config.json not found; skipping credential helper workaround.")
+                return emptyMap()
+            }
+
+            // Create temp directory and copy entire .docker directory structure
             val tempDir = Files.createTempDirectory("rename-agent-docker-${UUID.randomUUID()}")
-            val configFile = tempDir.resolve("config.json")
-            Files.writeString(configFile, "{}")
+
+            // Copy the entire .docker directory to preserve contexts and other metadata
+            copyDockerDirectory(dockerDir, tempDir)
+
+            // Now sanitize just the config.json in the temp location
+            val tempConfigPath = tempDir.resolve("config.json")
+            val sanitizedConfig = sanitizeDockerConfig(originalConfig)
+            Files.writeString(tempConfigPath, sanitizedConfig)
+
             val configPath = tempDir.toAbsolutePath().toString()
             println("Applying docker credential helper workaround using config at $configPath")
             mapOf("DOCKER_CONFIG" to configPath)
         } catch (e: Exception) {
             println("Failed to create docker config override: ${e.message}")
+            e.printStackTrace()
             emptyMap()
         }
     }
@@ -155,8 +183,8 @@ class DockerManager {
     }
 
     private fun isCredentialHelperMissing(): Boolean {
-        val home = System.getenv("HOME") ?: return false
-        val configPath = Paths.get(home, ".docker", "config.json")
+        val home = resolveHomeDirectory() ?: return false
+        val configPath = home.resolve(".docker").resolve("config.json")
         if (!Files.exists(configPath)) return false
 
         return try {
@@ -202,7 +230,90 @@ class DockerManager {
                 val candidate = File(dir, executable)
                 val candidateWithExe = if (isWindows) File(dir, "$executable.exe") else null
                 (candidate.exists() && candidate.canExecute()) ||
-                    (candidateWithExe?.let { it.exists() && it.canExecute() } ?: false)
+                        (candidateWithExe?.let { it.exists() && it.canExecute() } ?: false)
             }
+    }
+
+    private fun sanitizeDockerConfig(configPath: Path): String {
+        return try {
+            val content = Files.readString(configPath)
+            val rootNode = objectMapper.readTree(content)
+            if (rootNode is ObjectNode) {
+                // Only remove credential helpers - preserve everything else including context info
+                rootNode.remove(listOf("credsStore", "credHelpers"))
+            }
+            objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode)
+        } catch (e: Exception) {
+            println("Failed to sanitize docker config: ${e.message}")
+            e.printStackTrace()
+            "{}"
+        }
+    }
+
+    private fun copyDockerDirectory(sourceDir: Path, targetDir: Path) {
+        try {
+            Files.walk(sourceDir).use { stream ->
+                stream.forEach { source ->
+                    try {
+                        val destination = targetDir.resolve(sourceDir.relativize(source))
+
+                        if (Files.isDirectory(source)) {
+                            if (!Files.exists(destination)) {
+                                Files.createDirectories(destination)
+                            }
+                        } else {
+                            // Skip the bin directory files - they're executables we don't need
+                            val relativePath = sourceDir.relativize(source).toString()
+                            if (relativePath.startsWith("bin${File.separator}") || relativePath == "bin") {
+                                return@forEach
+                            }
+
+                            // Handle symlinks by copying the target
+                            if (Files.isSymbolicLink(source)) {
+                                try {
+                                    val target = Files.readSymbolicLink(source)
+                                    // Only copy if target exists and is readable
+                                    if (Files.exists(target) && Files.isReadable(target) && Files.isRegularFile(target)) {
+                                        Files.copy(target, destination, StandardCopyOption.REPLACE_EXISTING)
+                                    }
+                                } catch (e: Exception) {
+                                    println("Skipping symlink $source: ${e.message}")
+                                }
+                            } else if (Files.isRegularFile(source) && Files.isReadable(source)) {
+                                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING)
+                            }
+                        }
+                    } catch (e: Exception) {
+                        println("Skipping ${source.fileName}: ${e.message}")
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            println("Warning during docker directory copy: ${e.message}")
+            e.printStackTrace()
+        }
+    }
+
+    private fun resolveHomeDirectory(): Path? {
+        val candidates =
+            listOfNotNull(
+                System.getProperty("user.home"),
+                System.getenv("HOME"),
+                System.getenv("USERPROFILE"),
+                run {
+                    val drive = System.getenv("HOMEDRIVE")
+                    val path = System.getenv("HOMEPATH")
+                    if (!drive.isNullOrBlank() && !path.isNullOrBlank()) drive + path else null
+                },
+            )
+                .map { it.trim() }
+                .filter { it.isNotEmpty() }
+
+        val home = candidates.firstOrNull() ?: return null
+        return try {
+            Paths.get(home)
+        } catch (_: Exception) {
+            null
+        }
     }
 }
