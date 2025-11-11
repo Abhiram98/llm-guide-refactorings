@@ -19,6 +19,7 @@ import org.boulderse.ijserver.server.RenameParams
 import org.boulderse.ijserver.server.RenamesNoOpParams
 import org.boulderse.ijserver.server.RenamesToReviewParams
 import org.boulderse.ijserver.server.ReviewScopeParams
+import org.boulderse.ijserver.showUnauthorizedNotification
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
@@ -181,6 +182,11 @@ class ReviewRoutes(
 
         routing.post("/review/reset_view") {
             logViewer.resetViewer()
+            call.respond(HttpStatusCode.OK)
+        }
+
+        routing.post("/review/llm_auth_failed") {
+            showUnauthorizedNotification(projectCallBack())
             call.respond(HttpStatusCode.OK)
         }
     }
