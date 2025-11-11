@@ -181,16 +181,25 @@ class RenameHook : ProjectActivity {
     }
 
     private fun fetchContainerLogs(containerId: String, dockerEnvOverrides: Map<String, String>) {
-        try{
-            val logsCommand = listOf(dockerManager.dockerPath, "logs", containerId)
+        try {
+            val logsCommand = listOf(dockerManager.dockerPath, "logs", "--tail", "1000", containerId)
             val logsProcessBuilder = ProcessBuilder(logsCommand)
             dockerManager.applyEnvironmentOverrides(logsProcessBuilder, dockerEnvOverrides)
+
+            logsProcessBuilder.redirectErrorStream(true)
+
             val process = logsProcessBuilder.start()
-            val exitCode = process.waitFor()
             val output = process.inputStream.bufferedReader().use { it.readText() }
-            val stderr = process.errorStream.bufferedReader().use { it.readText() }
-            println("container logs exit=$exitCode output:\n$output\nstderr:\n$stderr")
-        }catch (e:Exception){
+
+            val finished = process.waitFor(10, java.util.concurrent.TimeUnit.SECONDS)
+            if (!finished) {
+                process.destroyForcibly()
+                println("fetchContainerLogs: process timed out; logs may be truncated")
+            }
+
+            val exitCode = process.exitValue()
+            println("container logs exit=$exitCode output:\n$output")
+        } catch (e: Exception) {
             println("Failed to fetch container logs: ${e.message}")
         }
     }
