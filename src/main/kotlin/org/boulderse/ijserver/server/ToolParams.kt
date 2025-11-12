@@ -8,6 +8,8 @@ import org.boulderse.ijserver.utils.MethodSignature
 data class OpenFileParams(
     @SerialName("rel_file_path")
     val filePath: String,
+    @SerialName("open_editor")
+    val openEditor: Boolean = false,
 )
 
 @Serializable

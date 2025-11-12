@@ -7,6 +7,7 @@ import com.intellij.ide.impl.ProjectUtil
 import com.intellij.openapi.application.runReadAction
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.fileEditor.OpenFileDescriptor
@@ -246,14 +247,26 @@ class RefactoringServer(
                     return@post
                 }
                 invokeAndWait {
-                    editor =
-                        FileEditorManager.getInstance(project).openTextEditor(
-                            OpenFileDescriptor(
-                                project,
-                                vfile,
-                            ),
-                            true, // request focus to editor
-                        )!!
+                    if (!params.openEditor) {
+                        editor = EditorFactory.getInstance().allEditors.filter { it.virtualFile?.path == vfile.path }
+                            .firstOrNull()
+                        if (editor == null) {
+                            val document = FileDocumentManager.getInstance().getDocument(vfile)
+                            if (document != null) {
+                                editor = EditorFactory.getInstance().createEditor(document)
+                            }
+                        }
+                    }
+                    else{
+                        editor =
+                            FileEditorManager.getInstance(project).openTextEditor(
+                                OpenFileDescriptor(
+                                    project,
+                                    vfile,
+                                ),
+                                true, // request focus to editor
+                            )!!
+                    }
                 }
                 file = PsiManager.getInstance(project).findFile(vfile)!!
                 call.respond(HttpStatusCode.OK, message = "opened file!")
