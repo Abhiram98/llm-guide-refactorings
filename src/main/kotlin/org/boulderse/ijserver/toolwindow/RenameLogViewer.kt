@@ -4,6 +4,7 @@ import com.intellij.openapi.application.invokeLater
 import com.intellij.ui.components.JBScrollPane
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
+import org.boulderse.ijserver.hooks.RenameHook
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.utils.DockerManager
 import java.awt.BorderLayout
@@ -51,6 +52,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     val humanIdleIcon = loadScaledIcon("/gifs/human_idle.png", 0.66)
 
     var containerId: String? = null
+    val stopButton = JButton("Stop Agent")
 
     init {
 
@@ -62,6 +64,9 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         val centerPanel = createCenterPanel()
         add(centerPanel, BorderLayout.CENTER)
+
+        val renameHook = RenameHook.getInstance()
+        updateStopButtonState(renameHook?.coRenameInProgress ?: false)
     }
 
     private fun createCenterPanel(): JPanel {
@@ -124,7 +129,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         // Button row
         val buttonRow = JPanel()
-        val stopButton = JButton("Stop Agent")
         stopButton.addActionListener { _: ActionEvent? -> stopAgent() }
         buttonRow.add(stopButton)
 
@@ -336,6 +340,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         stopRobotAnimation()
         stopHumanAnimation()
         resetRenameSuggestions()
+        updateStopButtonState(false)
     }
 
     fun resetProgress() {
@@ -431,5 +436,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         this.startRobotAnimation()
         this.stopHumanAnimation()
         this.resetRenameSuggestions()
+    }
+
+    fun updateStopButtonState(isEnabled: Boolean) {
+        invokeLater {
+            stopButton.isEnabled = isEnabled
+            stopButton.repaint()
+        }
     }
 }
