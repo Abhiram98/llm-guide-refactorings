@@ -3,6 +3,7 @@ package org.boulderse.ijserver.server.review
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.wm.ToolWindowManager
 import com.intellij.psi.PsiFile
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
@@ -14,6 +15,7 @@ import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
+import org.boulderse.ijserver.server.IdentInspectedParams
 import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
 import org.boulderse.ijserver.server.RenamesNoOpParams
@@ -189,5 +191,15 @@ class ReviewRoutes(
             showUnauthorizedNotification(projectCallBack())
             call.respond(HttpStatusCode.OK)
         }
+
+        routing.post("/review/identifiers_inspected") {
+            val params = call.receive<IdentInspectedParams>()
+            telemetryManager.addIdentifierInspected(params.inspected)
+            call.respond(HttpStatusCode.OK)
+        }
+    }
+
+    fun reviewNotification(){
+        ToolWindowManager.getInstance(projectCallBack()).getToolWindow("CoRename Agent")?.show()
     }
 }

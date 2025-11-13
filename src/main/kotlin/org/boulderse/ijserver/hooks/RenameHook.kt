@@ -95,63 +95,66 @@ class RenameHook : ProjectActivity {
     fun triggerAgent(project: Project) {
         coRenameInProgress = true
         logViewer.noOpReview()
-        if (dockerManager.testDockerPath() == false) {
-            showNotification(
-                project,
-                "Docker Error",
-                "Could not find docker installed on machine. Please install docker and retry",
-                "Retry CoRename...",
-            )
-        } else if (dockerManager.checkDockerDaemon() == false) {
-            showNotification(
-                project,
-                "Docker Error",
-                "Could not connect to docker daemon. Please check that docker daemon is running and retry",
-                "Retry CoRename...",
-            )
-        }
-
-        telemetryManager.startNewSession()
-        if (seedElement!=null)
-            PsiUtils.getElementTypeStr(seedElement!!)?.let {  telemetryManager.setSeedType(it) }
-
-        val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
-        if (llmKey == "") {
-            showUnauthorizedNotification(project)
-            return
-        }
-
-        val command =
-            mutableListOf(
-                dockerManager.dockerPath,
-                "run",
-                "-d",
-                "-e",
-                "IJ_SERVER_URL=http://host.docker.internal:8082",
-                "-e",
-                "LLM_TOKEN",
-                "bellurabhiram/renameagent",
-                "--vendor",
-                RefAgentSettingsManager.getInstance().getAiModelVendor(),
-                "--seed_old_name",
-                seedOldName!!,
-                "--seed_new_name",
-                seedNewName!!,
-                "--seed_line_num",
-                seedElement?.getLineNumber()?.plus(1)?.toString() ?: "unknown",
-                "--seed_element_type",
-                PsiUtils.getElementTypeStr(seedElement!!),
-                "--seed_file",
-                seedElement
-                    ?.containingFile
-                    ?.virtualFile
-                    ?.path
-                    ?.removePrefix(project.basePath + "/")!!,
-            )
-        println("Running command: ${command.joinToString(" ")}")
-        val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
         ApplicationManager.getApplication().executeOnPooledThread {
             try {
+                if (!dockerManager.testDockerPath()) {
+                    showNotification(
+                        project,
+                        "Docker Error",
+                        "Could not find docker installed on machine. Please install docker and retry",
+                        "Retry CoRename...",
+                    )
+                    return@executeOnPooledThread
+                } else if (!dockerManager.checkDockerDaemon()) {
+                    showNotification(
+                        project,
+                        "Docker Error",
+                        "Could not connect to docker daemon. Please check that docker daemon is running and retry",
+                        "Retry CoRename...",
+                    )
+                    return@executeOnPooledThread
+                }
+
+                telemetryManager.startNewSession()
+                if (seedElement!=null)
+                    PsiUtils.getElementTypeStr(seedElement!!)?.let {  telemetryManager.setSeedType(it) }
+
+                val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
+                if (llmKey == "") {
+                    showUnauthorizedNotification(project)
+                    return@executeOnPooledThread
+                }
+
+                val command =
+                    dockerManager.dockerCommand!! +
+                    mutableListOf(
+                        "run",
+                        "-d",
+                        "-e",
+                        "IJ_SERVER_URL=http://host.docker.internal:8082",
+                        "-e",
+                        "LLM_TOKEN",
+                        "bellurabhiram/renameagent",
+                        "--vendor",
+                        RefAgentSettingsManager.getInstance().getAiModelVendor(),
+                        "--seed_old_name",
+                        seedOldName!!,
+                        "--seed_new_name",
+                        seedNewName!!,
+                        "--seed_line_num",
+                        seedElement?.getLineNumber()?.plus(1)?.toString() ?: "unknown",
+                        "--seed_element_type",
+                        PsiUtils.getElementTypeStr(seedElement!!),
+                        "--seed_file",
+                        seedElement
+                            ?.containingFile
+                            ?.virtualFile
+                            ?.path
+                            ?.removePrefix(project.basePath + "/")!!,
+                    )
+                println("Running command: ${command.joinToString(" ")}")
+
+                val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
                 pullDockerImage(project)
 
                 val cmd =
@@ -182,7 +185,7 @@ class RenameHook : ProjectActivity {
                 println("Containerid=$containerId")
 
                 logViewer.registerAgentContainerId(containerId)
-                val waitCommand = listOf(dockerManager.dockerPath, "container", "wait", containerId)
+                val waitCommand = dockerManager.dockerCommand!! + listOf("container", "wait", containerId)
                 val waitProcessBuilder = ProcessBuilder(waitCommand)
                 dockerManager.applyEnvironmentOverrides(waitProcessBuilder, dockerEnvOverrides)
                 val waitProcess = waitProcessBuilder.start()
@@ -203,7 +206,7 @@ class RenameHook : ProjectActivity {
 
     private fun fetchContainerLogs(containerId: String, dockerEnvOverrides: Map<String, String>) {
         try {
-            val logsCommand = listOf(dockerManager.dockerPath, "logs", "--tail", "1000", containerId)
+            val logsCommand = dockerManager.dockerCommand!! + listOf("logs", "--tail", "1000", containerId)
             val logsProcessBuilder = ProcessBuilder(logsCommand)
             dockerManager.applyEnvironmentOverrides(logsProcessBuilder, dockerEnvOverrides)
 
@@ -227,7 +230,7 @@ class RenameHook : ProjectActivity {
 
     private fun pullDockerImage(project: Project) {
         logViewer.noOpReview("Pulling docker image.")
-        val command = listOf(dockerManager.dockerPath, "pull", "bellurabhiram/renameagent")
+        val command = dockerManager.dockerCommand!! + listOf("pull", "bellurabhiram/renameagent")
         val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
         val cmd =
             ProcessBuilder(command)
@@ -243,6 +246,7 @@ class RenameHook : ProjectActivity {
 
     fun agentComplete() {
         logViewer.resetViewer()
+        telemetryManager.currentTelemetryData?.let { logViewer.showStats(it) }
         telemetryManager.endSession()
         coRenameInProgress = false
     }

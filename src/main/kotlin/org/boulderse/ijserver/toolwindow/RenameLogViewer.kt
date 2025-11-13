@@ -1,10 +1,12 @@
 package org.boulderse.ijserver.toolwindow
 
 import com.intellij.openapi.application.invokeLater
+import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBScrollPane
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
 import org.boulderse.ijserver.hooks.RenameHook
+import org.boulderse.ijserver.server.vcs.VcsRoutes
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.utils.DockerManager
 import java.awt.BorderLayout
@@ -53,6 +55,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     var containerId: String? = null
     val stopButton = JButton("Stop Agent")
+
+    var project: Project? = null
 
     init {
 
@@ -225,7 +229,11 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         if (containerId != null) {
             println("Stopping process $containerId")
             val dockerManager = DockerManager.getInstance()
-            Runtime.getRuntime().exec("${dockerManager.dockerPath} kill $containerId")
+            val processBuilder = ProcessBuilder(dockerManager.dockerCommand!! + listOf("kill", containerId))
+            val process = processBuilder.start()
+            val finished = process.waitFor(10, java.util.concurrent.TimeUnit.SECONDS)
+            val exitCode = if (finished) process.exitValue() else -1
+            println("Docker killed with exit code $exitCode")
             telemetryManager.stoppedEarly()
         }
     }
@@ -438,10 +446,85 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         this.resetRenameSuggestions()
     }
 
+
     fun updateStopButtonState(isEnabled: Boolean) {
         invokeLater {
             stopButton.isEnabled = isEnabled
             stopButton.repaint()
         }
     }
+
+    fun showStats(currentTelemetryData: RenameAgentTelemetryManager.TelemetryData) {
+
+        renameSuggestions.removeAll()
+
+        // Create a vertical panel to hold stats rows
+        val statsPanel = JPanel()
+        statsPanel.layout = BoxLayout(statsPanel, BoxLayout.Y_AXIS)
+
+        // Helper to create a labelled row
+        fun statRow(label: String, value: String): JPanel {
+            val row = JPanel()
+            row.layout = BoxLayout(row, BoxLayout.X_AXIS)
+            row.add(JLabel("$label: "))
+            val valueLabel = JLabel(value)
+            row.add(valueLabel)
+            return row
+        }
+        statsPanel.add(statRow("CoRenameAgent Usage Report:", ""))
+        statsPanel.add(statRow("Accepted suggestions count", currentTelemetryData.acceptedCount.toString()))
+        statsPanel.add(statRow("Rejected suggestions count", currentTelemetryData.rejectedCount.toString()))
+        statsPanel.add(statRow("Total Identifiers inspected by CoRenameAgent", currentTelemetryData.identifiersInspected.toString()))
+        statsPanel.add(statRow("Total files searched", currentTelemetryData.totalFiles.toString()))
+        statsPanel.add(statRow("Files inspected by the developer", currentTelemetryData.inspectedFiles.toString()))
+
+        Thread {
+            this.project?.let {
+                val gitChanges = VcsRoutes.getChanges(it)
+                val filesChanged = gitChanges.size.toString()
+                val locChanged = gitChanges.sumOf {
+                    val beforeContent = it.beforeRevision?.content
+                    val afterContent = it.afterRevision?.content
+                    if (beforeContent != null && afterContent != null)
+                        countLineDiff(beforeContent, afterContent)
+                    else
+                        0
+                }
+
+                invokeLater {
+                    statsPanel.add(statRow("Files Changed", filesChanged))
+                    statsPanel.add(
+                        statRow(
+                            "Lines of Code Changed", locChanged.toString()
+                        )
+                    )
+                    renameSuggestions.revalidate()
+                    renameSuggestions.repaint()
+                }
+            }
+
+        }
+
+
+
+        val reviewSeconds = (currentTelemetryData.reviewTime / 1000.0)
+        statsPanel.add(statRow("Human review time (s)", String.format("%.2f", reviewSeconds)))
+
+
+        renameSuggestions.add(statsPanel)
+        renameSuggestions.revalidate()
+        renameSuggestions.repaint()
+    }
+
+    fun attachToProject(project: Project) {
+        this.project = project
+    }
+
+    fun countLineDiff(before: String, after: String): Int {
+        val beforeLines = before.split("\n")
+        val afterLines = after.split("\n")
+        return afterLines.zip(beforeLines).filter { (afterLine, beforeLine) -> afterLine != beforeLine}.size
+    }
+
+
 }

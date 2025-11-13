@@ -12,28 +12,28 @@ import java.nio.file.StandardCopyOption
 import java.util.UUID
 
 class DockerManager {
-    var dockerPath: String? = null
+    var dockerCommand: List<String>? = null
     private val objectMapper: ObjectMapper by lazy { ObjectMapper().registerKotlinModule() }
 
     fun testDockerPath(): Boolean {
-        if (dockerPath == null) findDockerPath()
+        if (dockerCommand == null) findDockerPath()
 
         val dockerCmd =
-            dockerPath ?: return false.also {
+            dockerCommand ?: return false.also {
                 println("Docker path not set; run findDockerPath() first.")
             }
 
         return try {
-            val processBuilder = ProcessBuilder(dockerCmd, "--help")
+            val processBuilder = ProcessBuilder(dockerCmd + listOf("version", "--format", "{{.Client.Version}}"))
             val process = processBuilder.start()
-            val exitCode = process.waitFor()
-
+            val finished = process.waitFor(10, java.util.concurrent.TimeUnit.SECONDS)
+            val exitCode = if (finished) process.exitValue() else -1
             if (exitCode == 0) {
                 println("Docker is accessible and responding to --help.")
                 true
             } else {
-                val err = process.errorStream.bufferedReader().readText()
-                println("Docker --help failed with exit $exitCode: $err")
+//                val err = process.errorStream.bufferedReader().readText()
+                println("Docker --help failed with exit $exitCode")
                 false
             }
         } catch (e: Exception) {
@@ -64,8 +64,8 @@ class DockerManager {
                     .trim()
 
             if (exitCode == 0 && output.isNotBlank()) {
-                dockerPath = output
-                println("Found docker via system command: $dockerPath")
+                dockerCommand = if (isWindows) listOf("cmd", "/c", output) else listOf(output)
+                println("Found docker via system command: $dockerCommand")
                 return
             } else {
                 println("'which/where docker' failed (exit=$exitCode): $output")
@@ -86,8 +86,8 @@ class DockerManager {
 
         for (path in possiblePaths) {
             if (File(path).exists()) {
-                dockerPath = path
-                println("Found docker at known location: $dockerPath")
+                dockerCommand = if (isWindows) listOf("cmd", "/c", path) else listOf(path)
+                println("Found docker at known location: $dockerCommand")
                 return
             }
         }
@@ -97,24 +97,25 @@ class DockerManager {
 
     fun checkDockerDaemon(): Boolean {
         val dockerCmd =
-            dockerPath ?: return false.also {
+            dockerCommand ?: return false.also {
                 println("Docker path not set; run findDockerPath() first.")
             }
 
         return try {
-            val processBuilder = ProcessBuilder(dockerCmd, "info")
+            val processBuilder = ProcessBuilder(dockerCmd + listOf("info"))
 
             val process = processBuilder.start()
-            val exitCode = process.waitFor()
+            val finished = process.waitFor(10, java.util.concurrent.TimeUnit.SECONDS)
+            val exitCode = if (finished) process.exitValue() else -1
 
-            val stdout = process.inputStream.bufferedReader().readText()
-            val stderr = process.errorStream.bufferedReader().readText()
+//            val stdout = process.inputStream.bufferedReader().readText()
+//            val stderr = process.errorStream.bufferedReader().readText()
 
-            if (exitCode == 0 && stdout.contains("Server Version")) {
+            if (exitCode == 0) {
                 println("Docker daemon is running and reachable.")
                 true
             } else {
-                println("Docker daemon check failed (exit=$exitCode). Output:\n$stdout\nErrors:\n$stderr")
+                println("Docker daemon check failed (exit=$exitCode).")
                 false
             }
         } catch (e: IOException) {
