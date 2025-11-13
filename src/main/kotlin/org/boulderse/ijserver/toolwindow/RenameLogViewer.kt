@@ -455,8 +455,9 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
             return row
         }
         statsPanel.add(statRow("CoRenameAgent Usage Report:", ""))
-        statsPanel.add(statRow("Accepted suggestions", currentTelemetryData.acceptedCount.toString()))
-        statsPanel.add(statRow("Rejected suggestions", currentTelemetryData.rejectedCount.toString()))
+        statsPanel.add(statRow("Accepted suggestions count", currentTelemetryData.acceptedCount.toString()))
+        statsPanel.add(statRow("Rejected suggestions count", currentTelemetryData.rejectedCount.toString()))
+        statsPanel.add(statRow("Total Identifiers inspected by CoRenameAgent", currentTelemetryData.identifiersInspected.toString()))
         statsPanel.add(statRow("Total files searched", currentTelemetryData.totalFiles.toString()))
         statsPanel.add(statRow("Files inspected by the developer", currentTelemetryData.inspectedFiles.toString()))
 

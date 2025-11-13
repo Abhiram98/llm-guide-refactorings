@@ -18,6 +18,9 @@ class RenameAgentTelemetryManager {
         var acceptedCount: Int = 0,
         @SerialName("rejected_count")
         var rejectedCount: Int = 0,
+        @SerialName("identifiers_inspected_count") // total number of identifiers inspected by the tool, before presenting them to the developer.
+        var identifiersInspected: Int = 0,
+
         @SerialName("scope_change_count")
         var patternChangedCount: Int = 0,
         @SerialName("guard_change_count")
@@ -84,6 +87,10 @@ class RenameAgentTelemetryManager {
             val count = currentTelemetryData?.acceptedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.acceptedMap[elementType] = count?.plus(1) ?: 0
         }
+    }
+
+    fun addIdentifierInspected(count: Int = 1) {
+        currentTelemetryData?.identifiersInspected += count
     }
 
     fun addRejectRating(elementType: String? = null) {
