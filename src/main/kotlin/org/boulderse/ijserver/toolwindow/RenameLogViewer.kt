@@ -1,5 +1,6 @@
 package org.boulderse.ijserver.toolwindow
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBScrollPane
@@ -478,7 +479,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         statsPanel.add(statRow("Total files searched", currentTelemetryData.totalFiles.toString()))
         statsPanel.add(statRow("Files inspected by the developer", currentTelemetryData.inspectedFiles.toString()))
 
-        Thread {
+        ApplicationManager.getApplication().executeOnPooledThread {
             this.project?.let {
                 val gitChanges = VcsRoutes.getChanges(it)
                 val filesChanged = gitChanges.size.toString()
