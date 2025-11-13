@@ -105,8 +105,8 @@ class RenameHook : ProjectActivity {
                 }
 
                 val command =
+                    dockerManager.dockerCommand!! +
                     mutableListOf(
-                        dockerManager.dockerPath,
                         "run",
                         "-d",
                         "-e",
@@ -164,7 +164,7 @@ class RenameHook : ProjectActivity {
                 println("Containerid=$containerId")
 
                 logViewer.registerAgentContainerId(containerId)
-                val waitCommand = listOf(dockerManager.dockerPath, "container", "wait", containerId)
+                val waitCommand = dockerManager.dockerCommand!! + listOf("container", "wait", containerId)
                 val waitProcessBuilder = ProcessBuilder(waitCommand)
                 dockerManager.applyEnvironmentOverrides(waitProcessBuilder, dockerEnvOverrides)
                 val waitProcess = waitProcessBuilder.start()
@@ -185,7 +185,7 @@ class RenameHook : ProjectActivity {
 
     private fun fetchContainerLogs(containerId: String, dockerEnvOverrides: Map<String, String>) {
         try {
-            val logsCommand = listOf(dockerManager.dockerPath, "logs", "--tail", "1000", containerId)
+            val logsCommand = dockerManager.dockerCommand!! + listOf("logs", "--tail", "1000", containerId)
             val logsProcessBuilder = ProcessBuilder(logsCommand)
             dockerManager.applyEnvironmentOverrides(logsProcessBuilder, dockerEnvOverrides)
 
@@ -209,7 +209,7 @@ class RenameHook : ProjectActivity {
 
     private fun pullDockerImage(project: Project) {
         logViewer.noOpReview("Pulling docker image.")
-        val command = listOf(dockerManager.dockerPath, "pull", "bellurabhiram/renameagent")
+        val command = dockerManager.dockerCommand!! + listOf("pull", "bellurabhiram/renameagent")
         val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
         val cmd =
             ProcessBuilder(command)

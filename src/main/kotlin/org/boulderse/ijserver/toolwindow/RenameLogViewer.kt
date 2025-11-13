@@ -225,7 +225,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         if (containerId != null) {
             println("Stopping process $containerId")
             val dockerManager = DockerManager.getInstance()
-            Runtime.getRuntime().exec("${dockerManager.dockerPath} kill $containerId")
+            Runtime.getRuntime().exec("${dockerManager.dockerCommand!!.joinToString(" ")} kill $containerId")
             telemetryManager.stoppedEarly()
         }
     }
