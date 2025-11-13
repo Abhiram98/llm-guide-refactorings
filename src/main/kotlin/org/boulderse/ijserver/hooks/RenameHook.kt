@@ -20,12 +20,33 @@ import org.jetbrains.kotlin.idea.base.psi.getLineNumber
 
 class RenameHook : ProjectActivity {
     var coRenameInProgress = false
+        set(value) {
+            field = value
+            updateStopButtonState()
+        }
     var seedOldName: String? = null
     var seedNewName: String? = null
     var seedElement: PsiElement? = null
     val dockerManager = DockerManager.getInstance()
 
     val telemetryManager = RenameAgentTelemetryManager.getInstance()
+
+    companion object {
+        @Volatile
+        private var instance: RenameHook? = null
+
+        fun getInstance(): RenameHook? {
+            return instance
+        }
+    }
+
+    init {
+        instance = this
+    }
+
+    private fun updateStopButtonState() {
+        logViewer.updateStopButtonState(coRenameInProgress)
+    }
 
     fun registerHook(project: Project) {
         project.messageBus.connect().subscribe(
