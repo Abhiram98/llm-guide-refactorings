@@ -9,7 +9,7 @@ data class OpenFileParams(
     @SerialName("rel_file_path")
     val filePath: String,
     @SerialName("open_editor")
-    val openEditor: Boolean = false,
+    val openEditor: Boolean = true,
 )
 
 @Serializable
@@ -223,4 +223,11 @@ data class RenamesToReviewParams(
 data class RenamesNoOpParams(
     @SerialName("status")
     val status: String? = null,
+)
+
+
+@Serializable
+data class IdentInspectedParams(
+    @SerialName("inspected")
+    val inspected: Int,
 )
