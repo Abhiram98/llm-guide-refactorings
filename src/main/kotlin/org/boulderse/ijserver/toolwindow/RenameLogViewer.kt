@@ -1,9 +1,11 @@
 package org.boulderse.ijserver.toolwindow
 
 import com.intellij.openapi.application.invokeLater
+import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBScrollPane
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
+import org.boulderse.ijserver.server.vcs.VcsRoutes
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.utils.DockerManager
 import java.awt.BorderLayout
@@ -51,6 +53,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     val humanIdleIcon = loadScaledIcon("/gifs/human_idle.png", 0.66)
 
     var containerId: String? = null
+
+    var project: Project? = null
 
     init {
 
@@ -453,48 +457,42 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         statsPanel.add(statRow("CoRenameAgent Usage Report:", ""))
         statsPanel.add(statRow("Accepted suggestions", currentTelemetryData.acceptedCount.toString()))
         statsPanel.add(statRow("Rejected suggestions", currentTelemetryData.rejectedCount.toString()))
-        statsPanel.add(statRow("Pattern (scope) changes", currentTelemetryData.patternChangedCount.toString()))
-        statsPanel.add(statRow("Guard changes", currentTelemetryData.guardChangedCount.toString()))
-        statsPanel.add(statRow("Total files discovered", currentTelemetryData.totalFiles.toString()))
-        statsPanel.add(statRow("Files inspected", currentTelemetryData.inspectedFiles.toString()))
-//        statsPanel.add(statRow("Stopped early", currentTelemetryData.stoppedEarly.toString()))
+        statsPanel.add(statRow("Total files searched", currentTelemetryData.totalFiles.toString()))
+        statsPanel.add(statRow("Files inspected by the developer", currentTelemetryData.inspectedFiles.toString()))
+
+        this.project?.let {
+            val gitChanges = VcsRoutes.getChanges(it)
+            statsPanel.add(statRow("Files Changed", gitChanges.size.toString()))
+            statsPanel.add(statRow("Lines of Code Changed", gitChanges.map {
+                val beforeContent = it.beforeRevision?.content
+                val afterContent = it.afterRevision?.content
+                if (beforeContent!=null && afterContent!=null)
+                    countLineDiff(beforeContent, afterContent)
+                else
+                    0
+            }.sum().toString()
+            ))
+        }
+
+
+
         val reviewSeconds = (currentTelemetryData.reviewTime / 1000.0)
         statsPanel.add(statRow("Human review time (s)", String.format("%.2f", reviewSeconds)))
-//        statsPanel.add(statRow("Seed type", currentTelemetryData.seedType ?: "<none>"))
-//        statsPanel.add(statRow("Plugin version", currentTelemetryData.pluginVersion ?: "<unknown>"))
 
-//        if (currentTelemetryData.acceptedMap.isNotEmpty()) {
-//            val acceptedText = JTextArea()
-//            acceptedText.isEditable = false
-//            acceptedText.lineWrap = true
-//            acceptedText.wrapStyleWord = true
-//            val acceptedSb = StringBuilder()
-//            acceptedSb.append("Accepted by element type:\n")
-//            currentTelemetryData.acceptedMap.forEach { (k, v) -> acceptedSb.append("  $k: $v\n") }
-//            acceptedText.text = acceptedSb.toString()
-//            acceptedText.preferredSize = Dimension(400, 80)
-//            statsPanel.add(Box.createVerticalStrut(6))
-//            statsPanel.add(JLabel("Accepted breakdown:"))
-//            statsPanel.add(JBScrollPane(acceptedText, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER))
-//        }
-//
-//        if (currentTelemetryData.rejectedMap.isNotEmpty()) {
-//            val rejectedText = JTextArea()
-//            rejectedText.isEditable = false
-//            rejectedText.lineWrap = true
-//            rejectedText.wrapStyleWord = true
-//            val rejectedSb = StringBuilder()
-//            rejectedSb.append("Rejected by element type:\n")
-//            currentTelemetryData.rejectedMap.forEach { (k, v) -> rejectedSb.append("  $k: $v\n") }
-//            rejectedText.text = rejectedSb.toString()
-//            rejectedText.preferredSize = Dimension(400, 80)
-//            statsPanel.add(Box.createVerticalStrut(6))
-//            statsPanel.add(JLabel("Rejected breakdown:"))
-//            statsPanel.add(JBScrollPane(rejectedText, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER))
-//        }
 
         renameSuggestions.add(statsPanel)
         renameSuggestions.revalidate()
         renameSuggestions.repaint()
     }
+
+    fun attachToProject(project: Project) {
+        this.project = project
+    }
+
+    fun countLineDiff(before: String, after: String): Int {
+        val beforeLines = before.split("\n")
+        val afterLines = after.split("\n")
+        return afterLines.zip(beforeLines).filter { (afterLine, beforeLine) -> afterLine != beforeLine}.size
+    }
+
 }

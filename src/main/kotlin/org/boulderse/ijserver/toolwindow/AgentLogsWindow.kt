@@ -4,8 +4,6 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.content.ContentFactory
-import javax.swing.JComponent
-import javax.swing.JPanel
 
 val logViewer = RenameLogViewer()
 
@@ -17,6 +15,7 @@ class AgentLogsWindow : ToolWindowFactory {
 //        val toolWindowContent: CalendarToolWindowContent = CalendarToolWindowContent(toolWindow)
         val content =
             ContentFactory.getInstance().createContent(logViewer, "", false)
+        logViewer.attachToProject(project)
         toolWindow.contentManager.addContent(content)
     }
 }
