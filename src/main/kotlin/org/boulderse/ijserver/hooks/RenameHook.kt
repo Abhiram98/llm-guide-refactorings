@@ -225,6 +225,7 @@ class RenameHook : ProjectActivity {
 
     fun agentComplete() {
         logViewer.resetViewer()
+        telemetryManager.currentTelemetryData?.let { logViewer.showStats(it) }
         telemetryManager.endSession()
         coRenameInProgress = false
     }

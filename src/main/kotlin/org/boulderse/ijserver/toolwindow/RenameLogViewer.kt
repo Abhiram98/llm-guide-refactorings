@@ -432,4 +432,69 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         this.stopHumanAnimation()
         this.resetRenameSuggestions()
     }
+
+    fun showStats(currentTelemetryData: RenameAgentTelemetryManager.TelemetryData) {
+
+        renameSuggestions.removeAll()
+
+        // Create a vertical panel to hold stats rows
+        val statsPanel = JPanel()
+        statsPanel.layout = BoxLayout(statsPanel, BoxLayout.Y_AXIS)
+
+        // Helper to create a labelled row
+        fun statRow(label: String, value: String): JPanel {
+            val row = JPanel()
+            row.layout = BoxLayout(row, BoxLayout.X_AXIS)
+            row.add(JLabel("$label: "))
+            val valueLabel = JLabel(value)
+            row.add(valueLabel)
+            return row
+        }
+        statsPanel.add(statRow("CoRenameAgent Usage Report:", ""))
+        statsPanel.add(statRow("Accepted suggestions", currentTelemetryData.acceptedCount.toString()))
+        statsPanel.add(statRow("Rejected suggestions", currentTelemetryData.rejectedCount.toString()))
+        statsPanel.add(statRow("Pattern (scope) changes", currentTelemetryData.patternChangedCount.toString()))
+        statsPanel.add(statRow("Guard changes", currentTelemetryData.guardChangedCount.toString()))
+        statsPanel.add(statRow("Total files discovered", currentTelemetryData.totalFiles.toString()))
+        statsPanel.add(statRow("Files inspected", currentTelemetryData.inspectedFiles.toString()))
+//        statsPanel.add(statRow("Stopped early", currentTelemetryData.stoppedEarly.toString()))
+        val reviewSeconds = (currentTelemetryData.reviewTime / 1000.0)
+        statsPanel.add(statRow("Human review time (s)", String.format("%.2f", reviewSeconds)))
+//        statsPanel.add(statRow("Seed type", currentTelemetryData.seedType ?: "<none>"))
+//        statsPanel.add(statRow("Plugin version", currentTelemetryData.pluginVersion ?: "<unknown>"))
+
+//        if (currentTelemetryData.acceptedMap.isNotEmpty()) {
+//            val acceptedText = JTextArea()
+//            acceptedText.isEditable = false
+//            acceptedText.lineWrap = true
+//            acceptedText.wrapStyleWord = true
+//            val acceptedSb = StringBuilder()
+//            acceptedSb.append("Accepted by element type:\n")
+//            currentTelemetryData.acceptedMap.forEach { (k, v) -> acceptedSb.append("  $k: $v\n") }
+//            acceptedText.text = acceptedSb.toString()
+//            acceptedText.preferredSize = Dimension(400, 80)
+//            statsPanel.add(Box.createVerticalStrut(6))
+//            statsPanel.add(JLabel("Accepted breakdown:"))
+//            statsPanel.add(JBScrollPane(acceptedText, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER))
+//        }
+//
+//        if (currentTelemetryData.rejectedMap.isNotEmpty()) {
+//            val rejectedText = JTextArea()
+//            rejectedText.isEditable = false
+//            rejectedText.lineWrap = true
+//            rejectedText.wrapStyleWord = true
+//            val rejectedSb = StringBuilder()
+//            rejectedSb.append("Rejected by element type:\n")
+//            currentTelemetryData.rejectedMap.forEach { (k, v) -> rejectedSb.append("  $k: $v\n") }
+//            rejectedText.text = rejectedSb.toString()
+//            rejectedText.preferredSize = Dimension(400, 80)
+//            statsPanel.add(Box.createVerticalStrut(6))
+//            statsPanel.add(JLabel("Rejected breakdown:"))
+//            statsPanel.add(JBScrollPane(rejectedText, JBScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JBScrollPane.HORIZONTAL_SCROLLBAR_NEVER))
+//        }
+
+        renameSuggestions.add(statsPanel)
+        renameSuggestions.revalidate()
+        renameSuggestions.repaint()
+    }
 }
