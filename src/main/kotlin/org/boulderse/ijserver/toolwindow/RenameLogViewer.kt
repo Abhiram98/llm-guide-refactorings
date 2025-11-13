@@ -465,18 +465,31 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         statsPanel.add(statRow("Total files searched", currentTelemetryData.totalFiles.toString()))
         statsPanel.add(statRow("Files inspected by the developer", currentTelemetryData.inspectedFiles.toString()))
 
-        this.project?.let {
-            val gitChanges = VcsRoutes.getChanges(it)
-            statsPanel.add(statRow("Files Changed", gitChanges.size.toString()))
-            statsPanel.add(statRow("Lines of Code Changed", gitChanges.map {
-                val beforeContent = it.beforeRevision?.content
-                val afterContent = it.afterRevision?.content
-                if (beforeContent!=null && afterContent!=null)
-                    countLineDiff(beforeContent, afterContent)
-                else
-                    0
-            }.sum().toString()
-            ))
+        Thread {
+            this.project?.let {
+                val gitChanges = VcsRoutes.getChanges(it)
+                val filesChanged = gitChanges.size.toString()
+                val locChanged = gitChanges.sumOf {
+                    val beforeContent = it.beforeRevision?.content
+                    val afterContent = it.afterRevision?.content
+                    if (beforeContent != null && afterContent != null)
+                        countLineDiff(beforeContent, afterContent)
+                    else
+                        0
+                }
+
+                invokeLater {
+                    statsPanel.add(statRow("Files Changed", filesChanged))
+                    statsPanel.add(
+                        statRow(
+                            "Lines of Code Changed", locChanged.toString()
+                        )
+                    )
+                    renameSuggestions.revalidate()
+                    renameSuggestions.repaint()
+                }
+            }
+
         }
 
 
