@@ -24,7 +24,7 @@ class DockerManager {
             }
 
         return try {
-            val processBuilder = ProcessBuilder(dockerCmd + listOf("--help"))
+            val processBuilder = ProcessBuilder(dockerCmd + listOf("version", "--format", "{{.Client.Version}}"))
             val process = processBuilder.start()
             val finished = process.waitFor(10, java.util.concurrent.TimeUnit.SECONDS)
             val exitCode = if (finished) process.exitValue() else -1
