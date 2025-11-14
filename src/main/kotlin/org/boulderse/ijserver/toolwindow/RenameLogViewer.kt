@@ -484,7 +484,10 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         }
     }
 
-    fun showStats(currentTelemetryData: RenameAgentTelemetryManager.TelemetryData) {
+    fun showStats(
+        currentTelemetryData: RenameAgentTelemetryManager.TelemetryData,
+        actualChanges: RenameAgentTelemetryManager.SensitiveData?
+    ) {
         renameSuggestions.removeAll()
 
         // Create a vertical panel to hold stats rows
@@ -541,10 +544,50 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         val reviewSeconds = (currentTelemetryData.reviewTime / 1000.0)
         statsPanel.add(statRow("Human review time (s)", String.format("%.2f", reviewSeconds)))
-
+        
+        actualChanges?.let { statsPanel.add(createRefactoringReport(it)) }
+        
+        
         renameSuggestions.add(statsPanel)
         renameSuggestions.revalidate()
         renameSuggestions.repaint()
+    }
+
+    private fun createRefactoringReport(refactorings: RenameAgentTelemetryManager.SensitiveData) : JPanel {
+        val reportPanel = JPanel(BorderLayout())
+        reportPanel.border = BorderFactory.createTitledBorder("Refactorings Applied")
+
+        // Left: list of filenames
+        val fileNames = refactorings.filesRefactored.keys.toTypedArray()
+        val fileList = javax.swing.JList(fileNames)
+        fileList.selectionMode = javax.swing.ListSelectionModel.SINGLE_SELECTION
+        val fileScroll = JScrollPane(fileList)
+//        fileScroll.preferredSize = Dimension(250, 200)
+
+        // Right: area showing patterns for selected file
+        val patternsArea = JTextArea()
+        patternsArea.isEditable = false
+        patternsArea.lineWrap = true
+        patternsArea.wrapStyleWord = true
+        val patternsScroll = JScrollPane(patternsArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER)
+
+        fileList.addListSelectionListener { evt ->
+            if (!evt.valueIsAdjusting) {
+                val sel = fileList.selectedValue
+                if (sel != null) {
+                    val patterns = refactorings.filesRefactored[sel] ?: emptyList()
+                    patternsArea.text = patterns.joinToString(separator = "\n") { it }
+                } else {
+                    patternsArea.text = ""
+                }
+            }
+        }
+
+        val split = javax.swing.JSplitPane(javax.swing.JSplitPane.VERTICAL_SPLIT, fileScroll, patternsScroll)
+        split.resizeWeight = 0.3
+        reportPanel.add(split, BorderLayout.CENTER)
+
+        return reportPanel
     }
 
     fun attachToProject(project: Project) {

@@ -250,7 +250,10 @@ class RenameHook : ProjectActivity {
 
     fun agentComplete() {
         logViewer.resetViewer()
-        telemetryManager.currentTelemetryData?.let { logViewer.showStats(it) }
+        val telemetry = telemetryManager.currentTelemetryData
+        val refactorings = telemetryManager.currentSensitiveData
+        if (telemetry != null)
+            logViewer.showStats(telemetry, refactorings)
         telemetryManager.endSession()
         coRenameInProgress = false
     }

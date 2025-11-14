@@ -61,11 +61,11 @@ class RenameAgentTelemetryManager {
 
 
     data class SensitiveData(
-        val elementsRenamed: MutableList<String> = mutableListOf(),
-        val filesRefactored: MutableList<String> = mutableListOf(),
+        val filesRefactored: MutableMap<String, MutableList<String>> = mutableMapOf(),
     )
 
     var currentTelemetryData: TelemetryData? = null
+    var currentSensitiveData: SensitiveData? = null
 
     private val logFile =
         PathManager
@@ -88,6 +88,7 @@ class RenameAgentTelemetryManager {
 
     fun startNewSession() {
         currentTelemetryData = TelemetryData(pluginVersion = getPluginVersion())
+        currentSensitiveData = SensitiveData()
     }
 
     fun setSeedInfo(seedType: String, modifier: String? = null) {
@@ -160,6 +161,11 @@ class RenameAgentTelemetryManager {
 
     fun addHumanTime(duration: Duration) {
         currentTelemetryData?.reviewTime += duration.inWholeMilliseconds
+    }
+
+    fun logRefactoring(filename: String, pattern: String){
+        val renames = currentSensitiveData?.filesRefactored?.getOrPut(filename) {mutableListOf<String>()}
+        renames?.add(pattern)
     }
 
     companion object {

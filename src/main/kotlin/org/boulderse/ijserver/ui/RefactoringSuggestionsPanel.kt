@@ -20,6 +20,7 @@ import com.intellij.openapi.ui.popup.LightweightWindowEvent
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
+import com.intellij.psi.util.firstLeaf
 import com.intellij.ui.awt.RelativePoint
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
@@ -337,11 +338,20 @@ open class RefactoringSuggestionsPanel(
             )
             addSelectionToTelemetryData(index)
             val refObj = myCandidates[index]
-            val rootPsi = (refObj as? RenameVariable)?.fetchRootPsi()
+            val renameObj = refObj as? RenameVariable
+            val rootPsi = renameObj?.fetchRootPsi()
             telemetryManager.addAcceptRating(
                 elementType = rootPsi?.let { PsiUtils.getElementTypeStr(it) },
                 modifier = rootPsi?.let { PsiUtils.getElementModifiers(it) }
             )
+
+            if (rootPsi != null && renameObj!=null) {
+                telemetryManager.logRefactoring(
+                    rootPsi.containingFile.virtualFile.path,
+                    "${renameObj.oldName} -> ${renameObj.newName}"
+                )
+            }
+
             ProgressManager.getInstance().runProcessWithProgressSynchronously(
                 { refObj.performRefactoring(myProject, myEditor, myFile) },
                 "Performing Refactoring",
