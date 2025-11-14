@@ -253,7 +253,7 @@ class RefactoringServer(
                         if (editor == null) {
                             val document = FileDocumentManager.getInstance().getDocument(vfile)
                             if (document != null) {
-                                editor = EditorFactory.getInstance().createEditor(document)
+                                editor = EditorFactory.getInstance().createEditor(document, project, vfile, false)
                             }
                         }
                     }

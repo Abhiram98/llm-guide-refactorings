@@ -72,7 +72,7 @@ open class RefactoringSuggestionsPanel(
     var myPopup: JBPopup? = null
     val myFile = file
     val highlighterMap: MutableMap<String, AtomicReference<ScopeHighlighter>> =
-        mutableMapOf(editor.virtualFile.path to AtomicReference(ScopeHighlighter(editor)))
+        mutableMapOf()
     val myEFTelemetryDataManager = efTelemetryDataManager
     var prevSelectedCandidateIndex = 0
     var completedIndices = mutableListOf<Int>()
@@ -162,7 +162,7 @@ open class RefactoringSuggestionsPanel(
 
                 override fun processMouseEvent(e: MouseEvent?) {
                     if (e != null && e.clickCount == 2) {
-                        performAction(selectedRow)
+                        highlightElement(this, candidateSignatureMap)
                     }
                     super.processMouseEvent(e)
                 }
@@ -174,7 +174,7 @@ open class RefactoringSuggestionsPanel(
         refFunctionCandidateTable.selectionModel.addListSelectionListener {
             highlightElement(refFunctionCandidateTable, candidateSignatureMap)
         }
-        refFunctionCandidateTable.selectionModel.setSelectionInterval(0, 0)
+        refactoringDescriptionBox.text = candidateSignatureMap.values.firstOrNull() ?: ""
         refFunctionCandidateTable.cellEditor = null
 
         refFunctionCandidateTable.columnModel.getColumn(0).maxWidth = 50
