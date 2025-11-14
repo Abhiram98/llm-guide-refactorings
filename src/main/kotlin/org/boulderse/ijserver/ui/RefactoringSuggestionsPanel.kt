@@ -62,6 +62,7 @@ open class RefactoringSuggestionsPanel(
     candidates: List<AbstractRefactoring>,
     efTelemetryDataManager: EFTelemetryDataManager? = null,
     val button_name: String,
+    val selectFirst: Boolean = false,
 ) : Observable() {
     lateinit var myRefactoringCandidateTable: JBTable
     lateinit var myRefactoringScrollPane: JBScrollPane
@@ -175,6 +176,8 @@ open class RefactoringSuggestionsPanel(
             highlightElement(refFunctionCandidateTable, candidateSignatureMap)
         }
         refactoringDescriptionBox.text = candidateSignatureMap.values.firstOrNull() ?: ""
+        if (selectFirst)
+            refFunctionCandidateTable.selectionModel.setSelectionInterval(0, 0)
         refFunctionCandidateTable.cellEditor = null
 
         refFunctionCandidateTable.columnModel.getColumn(0).maxWidth = 50

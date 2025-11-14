@@ -25,6 +25,7 @@ import org.boulderse.ijserver.showUnauthorizedNotification
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.toolwindow.logViewer
 import org.boulderse.ijserver.ui.RefactoringSuggestionsPanel
+import kotlin.time.Duration.Companion.seconds
 
 class ReviewRoutes(
     private val routing: Routing,
@@ -33,6 +34,7 @@ class ReviewRoutes(
     private val projectCallBack: () -> Project,
 ) {
     private val telemetryManager = RenameAgentTelemetryManager.getInstance()
+    private var lastReviewTime = Clock.System.now()
 
     fun install() {
         routing.post("review/noop") {
@@ -44,6 +46,7 @@ class ReviewRoutes(
         routing.post("/review/renames") {
             // This API expects the renames to be valid. Invalid renames may cause unexpected behavior
             println("Received review for renames")
+            val recievedTime = Clock.System.now()
             val renamesToReview = call.receive<List<RenameParams>>()
 
             logViewer.setActionItem(
@@ -81,6 +84,9 @@ class ReviewRoutes(
                     renameObjs,
                     null,
                     "Accept",
+
+                    // select the first element when the last item reviewed was less than 10 seconds ago
+                    selectFirst = recievedTime - lastReviewTime < 10.seconds
                 )
 
             invokeLater {
@@ -89,6 +95,7 @@ class ReviewRoutes(
             val startTime = Clock.System.now()
             panel.waitAndClose()
             val endTime = Clock.System.now()
+            lastReviewTime = endTime
             telemetryManager.addHumanTime(endTime - startTime)
             logViewer.showScopeButton.isEnabled = true
 
