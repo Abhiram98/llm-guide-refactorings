@@ -450,6 +450,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         scopeDisplayed = !scopeDisplayed
     }
 
+    fun hideScope(){
+        if (!scopeDisplayed)
+            return
+        toggleScope()
+    }
+
     fun showScopePanel(forReview: Boolean = true) {
         renameSuggestions.removeAll()
         renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")

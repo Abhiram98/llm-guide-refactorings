@@ -53,6 +53,7 @@ class ReviewRoutes(
             logViewer.startHumanAnimation()
             logViewer.stopRobotAnimation()
             logViewer.showScopeButton.isEnabled = false
+            logViewer.hideScope()
             renamesToReview.forEach { logViewer.appendLog(it.oldName + " -> " + it.newName) }
             val file = fileCallBack()
             val editor = editorCallBack()
@@ -122,6 +123,7 @@ class ReviewRoutes(
         routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
             logViewer.showScopeButton.isEnabled = false
+            logViewer.hideScope()
             logViewer.showScopePanel()
             logViewer.setPattern(params.pattern)
             logViewer.setGuard(params.guard)
