@@ -1247,11 +1247,11 @@ class PsiUtils {
         }
 
         fun getElementModifiers(element: PsiElement): String? {
-            if (element is PsiMethod){
+            if (element is PsiMethod) {
                 return element.modifierList.text
-            } else if (element is PsiField){
+            } else if (element is PsiField) {
                 return element.modifierList?.text
-            } else if (element is PsiClass){
+            } else if (element is PsiClass) {
                 return element.modifierList?.text
             }
             return null

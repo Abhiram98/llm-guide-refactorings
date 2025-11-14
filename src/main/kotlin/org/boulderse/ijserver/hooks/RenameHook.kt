@@ -116,8 +116,10 @@ class RenameHook : ProjectActivity {
                 telemetryManager.startNewSession()
                 if (seedElement != null) {
                     PsiUtils.getElementTypeStr(seedElement!!)?.let {
-                        telemetryManager.setSeedInfo(it,
-                        PsiUtils.getElementModifiers(seedElement!!))
+                        telemetryManager.setSeedInfo(
+                            it,
+                            PsiUtils.getElementModifiers(seedElement!!),
+                        )
                     }
                 }
 
@@ -252,8 +254,9 @@ class RenameHook : ProjectActivity {
         logViewer.resetViewer()
         val telemetry = telemetryManager.currentTelemetryData
         val refactorings = telemetryManager.currentSensitiveData
-        if (telemetry != null)
+        if (telemetry != null) {
             logViewer.showStats(telemetry, refactorings)
+        }
         telemetryManager.endSession()
         coRenameInProgress = false
     }

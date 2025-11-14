@@ -3,12 +3,14 @@ package org.boulderse.ijserver.telemetry
 import com.google.gson.Gson
 import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.util.io.toNioPathOrNull
+import com.intellij.psi.PsiFile
 import com.intellij.util.io.createDirectories
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import kotlin.time.Duration
 
 class RenameAgentTelemetryManager {
@@ -24,17 +26,14 @@ class RenameAgentTelemetryManager {
         var patternChangedCount: Int = 0,
         @SerialName("guard_change_count")
         var guardChangedCount: Int = 0,
-
         @SerialName("accepted_map")
         val acceptedMap: MutableMap<String, Int> = mutableMapOf(),
         @SerialName("rejected_map")
         val rejectedMap: MutableMap<String, Int> = mutableMapOf(),
-
         @SerialName("accepted_modifiers")
         val acceptedModifiers: MutableList<String> = mutableListOf(),
         @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
-
         @SerialName("total_files")
         var totalFiles: Int = 0,
         @SerialName("inspected_files")
@@ -54,14 +53,12 @@ class RenameAgentTelemetryManager {
         var seedType: String? = null,
         @SerialName("seed_modifiers")
         var seedModifiers: String? = null,
-
         @SerialName("plugin_version")
         val pluginVersion: String,
     )
 
-
     data class SensitiveData(
-        val filesRefactored: MutableMap<String, MutableList<String>> = mutableMapOf(),
+        val filesRefactored: MutableMap<PsiFile, MutableList<RenameVariable>> = mutableMapOf(),
     )
 
     var currentTelemetryData: TelemetryData? = null
@@ -91,21 +88,27 @@ class RenameAgentTelemetryManager {
         currentSensitiveData = SensitiveData()
     }
 
-    fun setSeedInfo(seedType: String, modifier: String? = null) {
+    fun setSeedInfo(
+        seedType: String,
+        modifier: String? = null,
+    ) {
         currentTelemetryData?.seedType = seedType
-        if (modifier!=null){
+        if (modifier != null) {
             currentTelemetryData?.seedModifiers = modifier
         }
     }
 
-    fun addAcceptRating(elementType: String? = null, modifier: String? = null) {
+    fun addAcceptRating(
+        elementType: String? = null,
+        modifier: String? = null,
+    ) {
         currentTelemetryData?.acceptedCount += 1
         if (elementType != null) {
             val count = currentTelemetryData?.acceptedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.acceptedMap[elementType] = count?.plus(1) ?: 0
         }
 
-        if (modifier!=null){
+        if (modifier != null) {
             currentTelemetryData?.acceptedModifiers?.add("$elementType: $modifier")
         }
     }
@@ -114,7 +117,10 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.identifiersInspected += count
     }
 
-    fun addRejectRating(elementType: String? = null, modifier: String? = null) {
+    fun addRejectRating(
+        elementType: String? = null,
+        modifier: String? = null,
+    ) {
         currentTelemetryData?.rejectedCount += 1
 
         if (elementType != null) {
@@ -122,7 +128,7 @@ class RenameAgentTelemetryManager {
             currentTelemetryData?.rejectedMap[elementType] = count?.plus(1) ?: 0
         }
 
-        if (modifier!=null){
+        if (modifier != null) {
             currentTelemetryData?.rejectedModifiers?.add(modifier)
         }
     }
@@ -163,8 +169,11 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.reviewTime += duration.inWholeMilliseconds
     }
 
-    fun logRefactoring(filename: String, pattern: String){
-        val renames = currentSensitiveData?.filesRefactored?.getOrPut(filename) {mutableListOf<String>()}
+    fun logRefactoring(
+        file: PsiFile,
+        pattern: RenameVariable,
+    ) {
+        val renames = currentSensitiveData?.filesRefactored?.getOrPut(file) { mutableListOf() }
         renames?.add(pattern)
     }
 

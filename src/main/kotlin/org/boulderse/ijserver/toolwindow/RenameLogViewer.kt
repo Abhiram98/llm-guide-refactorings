@@ -2,6 +2,8 @@ package org.boulderse.ijserver.toolwindow
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.invokeLater
+import com.intellij.openapi.editor.EditorFactory
+import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
@@ -10,7 +12,9 @@ import kotlinx.coroutines.withTimeoutOrNull
 import org.boulderse.ijserver.hooks.RenameHook
 import org.boulderse.ijserver.server.vcs.VcsRoutes
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
+import org.boulderse.ijserver.ui.CompletedRefactoringsPanel
 import org.boulderse.ijserver.utils.DockerManager
+import org.jetbrains.kotlin.idea.codeinsight.utils.findExistingEditor
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Dimension
@@ -486,7 +490,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     fun showStats(
         currentTelemetryData: RenameAgentTelemetryManager.TelemetryData,
-        actualChanges: RenameAgentTelemetryManager.SensitiveData?
+        actualChanges: RenameAgentTelemetryManager.SensitiveData?,
     ) {
         renameSuggestions.removeAll()
 
@@ -544,41 +548,60 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         val reviewSeconds = (currentTelemetryData.reviewTime / 1000.0)
         statsPanel.add(statRow("Human review time (s)", String.format("%.2f", reviewSeconds)))
-        
+
         actualChanges?.let { statsPanel.add(createRefactoringReport(it)) }
-        
-        
+
         renameSuggestions.add(statsPanel)
         renameSuggestions.revalidate()
         renameSuggestions.repaint()
     }
 
-    private fun createRefactoringReport(refactorings: RenameAgentTelemetryManager.SensitiveData) : JPanel {
+    private fun createRefactoringReport(refactorings: RenameAgentTelemetryManager.SensitiveData): JPanel {
         val reportPanel = JPanel(BorderLayout())
         reportPanel.border = BorderFactory.createTitledBorder("Refactorings Applied")
 
         // Left: list of filenames
-        val fileNames = refactorings.filesRefactored.keys.toTypedArray()
+        val fileNames =
+            refactorings.filesRefactored.keys
+                .map { it.containingFile.name }
+                .toTypedArray()
         val fileList = javax.swing.JList(fileNames)
         fileList.selectionMode = javax.swing.ListSelectionModel.SINGLE_SELECTION
         val fileScroll = JScrollPane(fileList)
 //        fileScroll.preferredSize = Dimension(250, 200)
 
         // Right: area showing patterns for selected file
-        val patternsArea = JTextArea()
-        patternsArea.isEditable = false
-        patternsArea.lineWrap = true
-        patternsArea.wrapStyleWord = true
+        val patternsArea = JPanel()
         val patternsScroll = JScrollPane(patternsArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER)
 
         fileList.addListSelectionListener { evt ->
             if (!evt.valueIsAdjusting) {
                 val sel = fileList.selectedValue
-                if (sel != null) {
-                    val patterns = refactorings.filesRefactored[sel] ?: emptyList()
-                    patternsArea.text = patterns.joinToString(separator = "\n") { it }
-                } else {
-                    patternsArea.text = ""
+                val file = refactorings.filesRefactored.keys.find { it.containingFile.name == sel }
+                if (file != null) {
+                    val refactorings = refactorings.filesRefactored[file] ?: emptyList()
+                    val existingEditor = file.findExistingEditor()
+
+                    val editor =
+                        if (existingEditor != null) {
+                            existingEditor
+                        } else {
+                            val document = FileDocumentManager.getInstance().getDocument(file.virtualFile)
+                            if (document != null) {
+                                EditorFactory.getInstance().createEditor(document, project, file.virtualFile, false)
+                            } else {
+                                null
+                            }
+                        }
+                    val panel =
+                        CompletedRefactoringsPanel(
+                            project!!,
+                            editor = editor!!,
+                            file = file,
+                            refactorings,
+                            null,
+                        )
+                    panel.createAndShowPopup(patternsArea)
                 }
             }
         }

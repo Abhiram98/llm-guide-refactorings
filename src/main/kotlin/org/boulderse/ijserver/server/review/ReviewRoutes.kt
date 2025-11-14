@@ -84,9 +84,8 @@ class ReviewRoutes(
                     renameObjs,
                     null,
                     "Accept",
-
                     // select the first element when the last item reviewed was less than 10 seconds ago
-                    selectFirst = recievedTime - lastReviewTime < 10.seconds
+                    selectFirst = recievedTime - lastReviewTime < 10.seconds,
                 )
 
             invokeLater {

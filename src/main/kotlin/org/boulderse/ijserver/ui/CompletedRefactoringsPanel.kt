@@ -17,7 +17,7 @@ class CompletedRefactoringsPanel(
     editor: Editor,
     file: PsiFile,
     candidates: List<AbstractRefactoring>,
-    efTelemetryDataManager: EFTelemetryDataManager,
+    efTelemetryDataManager: EFTelemetryDataManager?,
     var reverseRefactorings: List<AbstractRefactoring?> = getReverseObjects(candidates, project, editor, file),
 ) : RefactoringSuggestionsPanel(
         project,
@@ -26,6 +26,7 @@ class CompletedRefactoringsPanel(
         candidates,
         efTelemetryDataManager,
         LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title"),
+        showRejectButton = false,
     ) {
     companion object {
         fun getReverseObjects(

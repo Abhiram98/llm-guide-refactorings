@@ -64,6 +64,7 @@ open class RefactoringSuggestionsPanel(
     efTelemetryDataManager: EFTelemetryDataManager? = null,
     val button_name: String,
     val selectFirst: Boolean = false,
+    val showRejectButton: Boolean = true,
 ) : Observable() {
     lateinit var myRefactoringCandidateTable: JBTable
     lateinit var myRefactoringScrollPane: JBScrollPane
@@ -177,8 +178,9 @@ open class RefactoringSuggestionsPanel(
             highlightElement(refFunctionCandidateTable, candidateSignatureMap)
         }
         refactoringDescriptionBox.text = candidateSignatureMap.values.firstOrNull() ?: ""
-        if (selectFirst)
+        if (selectFirst) {
             refFunctionCandidateTable.selectionModel.setSelectionInterval(0, 0)
+        }
         refFunctionCandidateTable.cellEditor = null
 
         refFunctionCandidateTable.columnModel.getColumn(0).maxWidth = 50
@@ -257,7 +259,9 @@ open class RefactoringSuggestionsPanel(
                                 KeymapUtil.getFirstKeyboardShortcutText(ActionManager.getInstance().getAction("ExtractMethod")),
                             ),
                         ).align(AlignX.LEFT)
-                    cell(rejectButton).align(AlignX.RIGHT)
+                    if (showRejectButton) {
+                        cell(rejectButton).align(AlignX.RIGHT)
+                    }
                 }
 //                row {
 //                    cell(ratingsBox)
@@ -342,13 +346,13 @@ open class RefactoringSuggestionsPanel(
             val rootPsi = renameObj?.fetchRootPsi()
             telemetryManager.addAcceptRating(
                 elementType = rootPsi?.let { PsiUtils.getElementTypeStr(it) },
-                modifier = rootPsi?.let { PsiUtils.getElementModifiers(it) }
+                modifier = rootPsi?.let { PsiUtils.getElementModifiers(it) },
             )
 
-            if (rootPsi != null && renameObj!=null) {
+            if (rootPsi != null && renameObj != null) {
                 telemetryManager.logRefactoring(
-                    rootPsi.containingFile.virtualFile.path,
-                    "${renameObj.oldName} -> ${renameObj.newName}"
+                    rootPsi.containingFile,
+                    renameObj,
                 )
             }
 
