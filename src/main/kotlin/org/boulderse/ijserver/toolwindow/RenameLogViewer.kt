@@ -56,6 +56,9 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
     var containerId: String? = null
     val stopButton = JButton("Stop Agent")
+    var scopeDisplayed = false
+
+    val showScopeButton = JButton("Show Agent's Scope")
 
     var project: Project? = null
 
@@ -135,7 +138,10 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         // Button row
         val buttonRow = JPanel()
         stopButton.addActionListener { _: ActionEvent? -> stopAgent() }
+        showScopeButton.addActionListener { _: ActionEvent? -> toggleScope() }
         buttonRow.add(stopButton)
+        buttonRow.add(showScopeButton)
+
 
         southPanel.add(buttonRow)
         return southPanel
@@ -430,7 +436,21 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renameSuggestions.repaint()
     }
 
-    fun showScopePanel() {
+    fun toggleScope(){
+        if(scopeDisplayed){
+            showScopePanel(false)
+            showScopeButton.text = "Hide Agent's Scope"
+        } else {
+            renameSuggestions.removeAll()
+            renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
+            renameSuggestions.revalidate()
+            renameSuggestions.repaint()
+            showScopeButton.text = "Show Agent's Scope"
+        }
+        scopeDisplayed = !scopeDisplayed
+    }
+
+    fun showScopePanel(forReview: Boolean = true) {
         renameSuggestions.removeAll()
         renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")
         val scopeConfirmPanel = createScopePanel()

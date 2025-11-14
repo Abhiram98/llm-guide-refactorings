@@ -52,6 +52,7 @@ class ReviewRoutes(
             )
             logViewer.startHumanAnimation()
             logViewer.stopRobotAnimation()
+            logViewer.showScopeButton.isEnabled = false
             renamesToReview.forEach { logViewer.appendLog(it.oldName + " -> " + it.newName) }
             val file = fileCallBack()
             val editor = editorCallBack()
@@ -88,6 +89,7 @@ class ReviewRoutes(
             panel.waitAndClose()
             val endTime = Clock.System.now()
             telemetryManager.addHumanTime(endTime - startTime)
+            logViewer.showScopeButton.isEnabled = true
 
             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
             println("Review status: $reviewStatus")
@@ -119,6 +121,7 @@ class ReviewRoutes(
 
         routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
+            logViewer.showScopeButton.isEnabled = false
             logViewer.showScopePanel()
             logViewer.setPattern(params.pattern)
             logViewer.setGuard(params.guard)
@@ -138,6 +141,7 @@ class ReviewRoutes(
             val endTime = Clock.System.now()
             telemetryManager.addHumanTime(endTime - startTime)
             logViewer.confirmScopeButton.isEnabled = false
+            logViewer.showScopeButton.isEnabled = true
             logViewer.resetRenameSuggestions()
 
             if (params.pattern != logViewer.getPatternText()) {
