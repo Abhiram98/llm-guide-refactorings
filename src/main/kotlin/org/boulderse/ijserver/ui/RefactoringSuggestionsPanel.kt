@@ -337,8 +337,10 @@ open class RefactoringSuggestionsPanel(
             )
             addSelectionToTelemetryData(index)
             val refObj = myCandidates[index]
+            val rootPsi = (refObj as? RenameVariable)?.fetchRootPsi()
             telemetryManager.addAcceptRating(
-                (refObj as? RenameVariable)?.fetchRootPsi()?.let { PsiUtils.getElementTypeStr(it) },
+                elementType = rootPsi?.let { PsiUtils.getElementTypeStr(it) },
+                modifier = rootPsi?.let { PsiUtils.getElementModifiers(it) }
             )
             ProgressManager.getInstance().runProcessWithProgressSynchronously(
                 { refObj.performRefactoring(myProject, myEditor, myFile) },

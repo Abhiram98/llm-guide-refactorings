@@ -24,10 +24,17 @@ class RenameAgentTelemetryManager {
         var patternChangedCount: Int = 0,
         @SerialName("guard_change_count")
         var guardChangedCount: Int = 0,
+
         @SerialName("accepted_map")
         val acceptedMap: MutableMap<String, Int> = mutableMapOf(),
         @SerialName("rejected_map")
         val rejectedMap: MutableMap<String, Int> = mutableMapOf(),
+
+        @SerialName("accepted_modifiers")
+        val acceptedModifiers: MutableList<String> = mutableListOf(),
+        @SerialName("rejected_modifiers")
+        val rejectedModifiers: MutableList<String> = mutableListOf(),
+
         @SerialName("total_files")
         var totalFiles: Int = 0,
         @SerialName("inspected_files")
@@ -45,8 +52,17 @@ class RenameAgentTelemetryManager {
         var reviewTime: Long = 0,
         @SerialName("seed_type")
         var seedType: String? = null,
+        @SerialName("seed_modifiers")
+        var seedModifiers: String? = null,
+
         @SerialName("plugin_version")
         val pluginVersion: String,
+    )
+
+
+    data class SensitiveData(
+        val elementsRenamed: MutableList<String> = mutableListOf(),
+        val filesRefactored: MutableList<String> = mutableListOf(),
     )
 
     var currentTelemetryData: TelemetryData? = null
@@ -74,15 +90,22 @@ class RenameAgentTelemetryManager {
         currentTelemetryData = TelemetryData(pluginVersion = getPluginVersion())
     }
 
-    fun setSeedType(seedType: String) {
+    fun setSeedInfo(seedType: String, modifier: String? = null) {
         currentTelemetryData?.seedType = seedType
+        if (modifier!=null){
+            currentTelemetryData?.seedModifiers = modifier
+        }
     }
 
-    fun addAcceptRating(elementType: String? = null) {
+    fun addAcceptRating(elementType: String? = null, modifier: String? = null) {
         currentTelemetryData?.acceptedCount += 1
         if (elementType != null) {
             val count = currentTelemetryData?.acceptedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.acceptedMap[elementType] = count?.plus(1) ?: 0
+        }
+
+        if (modifier!=null){
+            currentTelemetryData?.acceptedModifiers?.add("$elementType: $modifier")
         }
     }
 
@@ -90,12 +113,16 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.identifiersInspected += count
     }
 
-    fun addRejectRating(elementType: String? = null) {
+    fun addRejectRating(elementType: String? = null, modifier: String? = null) {
         currentTelemetryData?.rejectedCount += 1
 
         if (elementType != null) {
             val count = currentTelemetryData?.rejectedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.rejectedMap[elementType] = count?.plus(1) ?: 0
+        }
+
+        if (modifier!=null){
+            currentTelemetryData?.rejectedModifiers?.add(modifier)
         }
     }
 
