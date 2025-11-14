@@ -20,7 +20,6 @@ class RenameAgentTelemetryManager {
         var rejectedCount: Int = 0,
         @SerialName("identifiers_inspected_count") // total number of identifiers inspected by the tool, before presenting them to the developer.
         var identifiersInspected: Int = 0,
-
         @SerialName("scope_change_count")
         var patternChangedCount: Int = 0,
         @SerialName("guard_change_count")
@@ -44,12 +43,10 @@ class RenameAgentTelemetryManager {
         var stoppedEarly: Boolean = false,
         @SerialName("review_time")
         var reviewTime: Long = 0,
-
         @SerialName("seed_type")
         var seedType: String? = null,
-
         @SerialName("plugin_version")
-        val pluginVersion: String
+        val pluginVersion: String,
     )
 
     var currentTelemetryData: TelemetryData? = null
@@ -154,16 +151,18 @@ class RenameAgentTelemetryManager {
         private fun getPluginVersion(): String {
             // Try plugin descriptor first (preferred)
             return try {
-                val pluginId = com.intellij.openapi.extensions.PluginId.getId("org.boulderse.ijserver")
-                val descriptor = com.intellij.ide.plugins.PluginManagerCore.getPlugin(pluginId)
+                val pluginId =
+                    com.intellij.openapi.extensions.PluginId
+                        .getId("org.boulderse.ijserver")
+                val descriptor =
+                    com.intellij.ide.plugins.PluginManagerCore
+                        .getPlugin(pluginId)
                 descriptor?.version ?: getManifestVersion()
             } catch (_: Throwable) {
                 getManifestVersion()
             }
         }
 
-        private fun getManifestVersion(): String {
-            return object {}.javaClass.`package`.implementationVersion
-        }
+        private fun getManifestVersion(): String = object {}.javaClass.`package`.implementationVersion
     }
 }

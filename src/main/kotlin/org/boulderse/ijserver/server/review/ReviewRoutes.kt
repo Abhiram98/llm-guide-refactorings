@@ -205,7 +205,7 @@ class ReviewRoutes(
         }
     }
 
-    fun reviewNotification(){
+    fun reviewNotification() {
         ToolWindowManager.getInstance(projectCallBack()).getToolWindow("CoRename Agent")?.show()
     }
 }

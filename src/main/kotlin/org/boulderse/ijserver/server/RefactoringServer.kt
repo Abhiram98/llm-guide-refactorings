@@ -248,16 +248,19 @@ class RefactoringServer(
                 }
                 invokeAndWait {
                     if (!params.openEditor) {
-                        editor = EditorFactory.getInstance().allEditors.filter { it.virtualFile?.path == vfile.path }
-                            .firstOrNull()
+                        editor =
+                            EditorFactory
+                                .getInstance()
+                                .allEditors
+                                .filter { it.virtualFile?.path == vfile.path }
+                                .firstOrNull()
                         if (editor == null) {
                             val document = FileDocumentManager.getInstance().getDocument(vfile)
                             if (document != null) {
                                 editor = EditorFactory.getInstance().createEditor(document, project, vfile, false)
                             }
                         }
-                    }
-                    else{
+                    } else {
                         editor =
                             FileEditorManager.getInstance(project).openTextEditor(
                                 OpenFileDescriptor(

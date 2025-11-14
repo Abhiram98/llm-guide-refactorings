@@ -76,9 +76,8 @@ class VcsRoutes(
         }
     }
 
-    fun getChanges(): Collection<Change> {
-        return getChanges(projectCallBack())
-    }
+    fun getChanges(): Collection<Change> = getChanges(projectCallBack())
+
     companion object {
         fun getChanges(project: Project): Collection<Change> {
             val manager: ChangeListManager = ChangeListManager.getInstance(project)

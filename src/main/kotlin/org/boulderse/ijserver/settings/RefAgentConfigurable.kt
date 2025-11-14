@@ -25,7 +25,7 @@ class RefAgentConfigurable : BoundConfigurable(LLMBundle.message("settings.confi
                     listOf(
                         "openai",
                         "grazie",
-                        "azure"
+                        "azure",
                     ),
                 ).bindItem(
                     settings::getAiModelVendor,

@@ -35,9 +35,7 @@ class RenameHook : ProjectActivity {
         @Volatile
         private var instance: RenameHook? = null
 
-        fun getInstance(): RenameHook? {
-            return instance
-        }
+        fun getInstance(): RenameHook? = instance
     }
 
     init {
@@ -116,8 +114,9 @@ class RenameHook : ProjectActivity {
                 }
 
                 telemetryManager.startNewSession()
-                if (seedElement!=null)
-                    PsiUtils.getElementTypeStr(seedElement!!)?.let {  telemetryManager.setSeedType(it) }
+                if (seedElement != null) {
+                    PsiUtils.getElementTypeStr(seedElement!!)?.let { telemetryManager.setSeedType(it) }
+                }
 
                 val llmKey = RefAgentSettingsManager.getInstance().getOpenAiKey()
                 if (llmKey == "") {
@@ -127,31 +126,31 @@ class RenameHook : ProjectActivity {
 
                 val command =
                     dockerManager.dockerCommand!! +
-                    mutableListOf(
-                        "run",
-                        "-d",
-                        "-e",
-                        "IJ_SERVER_URL=http://host.docker.internal:8082",
-                        "-e",
-                        "LLM_TOKEN",
-                        "bellurabhiram/renameagent",
-                        "--vendor",
-                        RefAgentSettingsManager.getInstance().getAiModelVendor(),
-                        "--seed_old_name",
-                        seedOldName!!,
-                        "--seed_new_name",
-                        seedNewName!!,
-                        "--seed_line_num",
-                        seedElement?.getLineNumber()?.plus(1)?.toString() ?: "unknown",
-                        "--seed_element_type",
-                        PsiUtils.getElementTypeStr(seedElement!!),
-                        "--seed_file",
-                        seedElement
-                            ?.containingFile
-                            ?.virtualFile
-                            ?.path
-                            ?.removePrefix(project.basePath + "/")!!,
-                    )
+                        mutableListOf(
+                            "run",
+                            "-d",
+                            "-e",
+                            "IJ_SERVER_URL=http://host.docker.internal:8082",
+                            "-e",
+                            "LLM_TOKEN",
+                            "bellurabhiram/renameagent",
+                            "--vendor",
+                            RefAgentSettingsManager.getInstance().getAiModelVendor(),
+                            "--seed_old_name",
+                            seedOldName!!,
+                            "--seed_new_name",
+                            seedNewName!!,
+                            "--seed_line_num",
+                            seedElement?.getLineNumber()?.plus(1)?.toString() ?: "unknown",
+                            "--seed_element_type",
+                            PsiUtils.getElementTypeStr(seedElement!!),
+                            "--seed_file",
+                            seedElement
+                                ?.containingFile
+                                ?.virtualFile
+                                ?.path
+                                ?.removePrefix(project.basePath + "/")!!,
+                        )
                 println("Running command: ${command.joinToString(" ")}")
 
                 val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
@@ -195,7 +194,6 @@ class RenameHook : ProjectActivity {
                 println("refagent exit=$waitExitCode output:\n$output\nstderr:\n$waitStderr")
 
                 fetchContainerLogs(containerId, dockerEnvOverrides)
-
             } catch (e: Exception) {
                 println("Failed to run refagent: ${e.message}")
             } finally {
@@ -204,7 +202,10 @@ class RenameHook : ProjectActivity {
         }
     }
 
-    private fun fetchContainerLogs(containerId: String, dockerEnvOverrides: Map<String, String>) {
+    private fun fetchContainerLogs(
+        containerId: String,
+        dockerEnvOverrides: Map<String, String>,
+    ) {
         try {
             val logsCommand = dockerManager.dockerCommand!! + listOf("logs", "--tail", "1000", containerId)
             val logsProcessBuilder = ProcessBuilder(logsCommand)

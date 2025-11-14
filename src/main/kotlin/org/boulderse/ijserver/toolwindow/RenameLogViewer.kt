@@ -144,7 +144,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         buttonRow.add(stopButton)
         buttonRow.add(showScopeButton)
 
-
         southPanel.add(buttonRow)
         return southPanel
     }
@@ -440,8 +439,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renameSuggestions.repaint()
     }
 
-    fun toggleScope(){
-        if(scopeDisplayed){
+    fun toggleScope() {
+        if (scopeDisplayed) {
             showScopePanel(false)
             showScopeButton.text = "Hide Agent's Scope"
         } else {
@@ -454,9 +453,10 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         scopeDisplayed = !scopeDisplayed
     }
 
-    fun hideScope(){
-        if (!scopeDisplayed)
+    fun hideScope() {
+        if (!scopeDisplayed) {
             return
+        }
         toggleScope()
     }
 
@@ -477,7 +477,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         this.resetRenameSuggestions()
     }
 
-
     fun updateStopButtonState(isEnabled: Boolean) {
         invokeLater {
             stopButton.isEnabled = isEnabled
@@ -486,7 +485,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun showStats(currentTelemetryData: RenameAgentTelemetryManager.TelemetryData) {
-
         renameSuggestions.removeAll()
 
         // Create a vertical panel to hold stats rows
@@ -494,7 +492,10 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         statsPanel.layout = BoxLayout(statsPanel, BoxLayout.Y_AXIS)
 
         // Helper to create a labelled row
-        fun statRow(label: String, value: String): JPanel {
+        fun statRow(
+            label: String,
+            value: String,
+        ): JPanel {
             val row = JPanel()
             row.layout = BoxLayout(row, BoxLayout.X_AXIS)
             row.add(JLabel("$label: "))
@@ -513,34 +514,33 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
             this.project?.let {
                 val gitChanges = VcsRoutes.getChanges(it)
                 val filesChanged = gitChanges.size.toString()
-                val locChanged = gitChanges.sumOf {
-                    val beforeContent = it.beforeRevision?.content
-                    val afterContent = it.afterRevision?.content
-                    if (beforeContent != null && afterContent != null)
-                        countLineDiff(beforeContent, afterContent)
-                    else
-                        0
-                }
+                val locChanged =
+                    gitChanges.sumOf {
+                        val beforeContent = it.beforeRevision?.content
+                        val afterContent = it.afterRevision?.content
+                        if (beforeContent != null && afterContent != null) {
+                            countLineDiff(beforeContent, afterContent)
+                        } else {
+                            0
+                        }
+                    }
 
                 invokeLater {
                     statsPanel.add(statRow("Files Changed", filesChanged))
                     statsPanel.add(
                         statRow(
-                            "Lines of Code Changed", locChanged.toString()
-                        )
+                            "Lines of Code Changed",
+                            locChanged.toString(),
+                        ),
                     )
                     renameSuggestions.revalidate()
                     renameSuggestions.repaint()
                 }
             }
-
         }
-
-
 
         val reviewSeconds = (currentTelemetryData.reviewTime / 1000.0)
         statsPanel.add(statRow("Human review time (s)", String.format("%.2f", reviewSeconds)))
-
 
         renameSuggestions.add(statsPanel)
         renameSuggestions.revalidate()
@@ -551,11 +551,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         this.project = project
     }
 
-    fun countLineDiff(before: String, after: String): Int {
+    fun countLineDiff(
+        before: String,
+        after: String,
+    ): Int {
         val beforeLines = before.split("\n")
         val afterLines = after.split("\n")
-        return afterLines.zip(beforeLines).filter { (afterLine, beforeLine) -> afterLine != beforeLine}.size
+        return afterLines.zip(beforeLines).filter { (afterLine, beforeLine) -> afterLine != beforeLine }.size
     }
-
-
 }

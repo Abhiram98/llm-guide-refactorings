@@ -231,12 +231,12 @@ class DockerManager {
                 val candidate = File(dir, executable)
                 val candidateWithExe = if (isWindows) File(dir, "$executable.exe") else null
                 (candidate.exists() && candidate.canExecute()) ||
-                        (candidateWithExe?.let { it.exists() && it.canExecute() } ?: false)
+                    (candidateWithExe?.let { it.exists() && it.canExecute() } ?: false)
             }
     }
 
-    private fun sanitizeDockerConfig(configPath: Path): String {
-        return try {
+    private fun sanitizeDockerConfig(configPath: Path): String =
+        try {
             val content = Files.readString(configPath)
             val rootNode = objectMapper.readTree(content)
             if (rootNode is ObjectNode) {
@@ -249,9 +249,11 @@ class DockerManager {
             e.printStackTrace()
             "{}"
         }
-    }
 
-    private fun copyDockerDirectory(sourceDir: Path, targetDir: Path) {
+    private fun copyDockerDirectory(
+        sourceDir: Path,
+        targetDir: Path,
+    ) {
         try {
             Files.walk(sourceDir).use { stream ->
                 stream.forEach { source ->
@@ -306,8 +308,7 @@ class DockerManager {
                     val path = System.getenv("HOMEPATH")
                     if (!drive.isNullOrBlank() && !path.isNullOrBlank()) drive + path else null
                 },
-            )
-                .map { it.trim() }
+            ).map { it.trim() }
                 .filter { it.isNotEmpty() }
 
         val home = candidates.firstOrNull() ?: return null
