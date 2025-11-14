@@ -4,6 +4,7 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.project.Project
 import com.intellij.ui.components.JBScrollPane
+import com.intellij.ui.components.JBTextArea
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.withTimeoutOrNull
 import org.boulderse.ijserver.hooks.RenameHook
@@ -11,6 +12,7 @@ import org.boulderse.ijserver.server.vcs.VcsRoutes
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.utils.DockerManager
 import java.awt.BorderLayout
+import java.awt.Color
 import java.awt.Dimension
 import java.awt.event.ActionEvent
 import javax.swing.BorderFactory
@@ -26,8 +28,8 @@ import javax.swing.JTextArea
 import kotlin.time.Duration.Companion.minutes
 
 class RenameLogViewer : LogViewer("Rename agent logs") {
-    private val patternText = JTextArea()
-    private val guardText = JTextArea()
+    private val patternText = JBTextArea()
+    private val guardText = JBTextArea()
     val confirmScopeButton = JButton("Confirm Scope")
     private var scopeConfirmed = CompletableDeferred<Boolean>()
     val renameSuggestions = JPanel()
@@ -160,8 +162,10 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         val guardPane = JScrollPane(guardText)
         guardPane.preferredSize = Dimension(500, 100)
 
-        patternText.text = "<Rename pattern>"
-        guardText.text = "<Guard conditions here>"
+        patternText.background = Color(0x1e1f22)
+        guardText.background = Color(0x1e1f22)
+        patternText.emptyText.text = "Rename Pattern"
+        guardText.emptyText.text = "Guard conditions"
 
         // Create titled sub-panels for Pattern and Guard, and wrap them in a "Renaming Scope" panel
         val patternPanel = JPanel(BorderLayout())
