@@ -528,6 +528,6 @@ open class RefactoringSuggestionsPanel(
     }
 }
 
-private fun RefactoringSuggestionsPanel.dropAllHighlights() {
+fun RefactoringSuggestionsPanel.dropAllHighlights() {
     highlighterMap.forEach { string, reference -> reference.get().dropHighlight() }
 }

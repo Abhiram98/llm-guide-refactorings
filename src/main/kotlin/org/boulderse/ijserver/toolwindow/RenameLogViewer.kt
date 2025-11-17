@@ -13,6 +13,7 @@ import org.boulderse.ijserver.hooks.RenameHook
 import org.boulderse.ijserver.server.vcs.VcsRoutes
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.ui.CompletedRefactoringsPanel
+import org.boulderse.ijserver.ui.dropAllHighlights
 import org.boulderse.ijserver.utils.DockerManager
 import org.jetbrains.kotlin.idea.codeinsight.utils.findExistingEditor
 import java.awt.BorderLayout
@@ -573,6 +574,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         // Right: area showing patterns for selected file
         val patternsArea = JPanel()
         val patternsScroll = JScrollPane(patternsArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER)
+        var openPanel: CompletedRefactoringsPanel? = null
 
         fileList.addListSelectionListener { evt ->
             if (!evt.valueIsAdjusting) {
@@ -593,15 +595,16 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
                                 null
                             }
                         }
-                    val panel =
+                    openPanel?.dropAllHighlights()
+                    openPanel =
                         CompletedRefactoringsPanel(
                             project!!,
                             editor = editor!!,
                             file = file,
-                            refactorings,
-                            null,
+                            candidates = refactorings,
+                            efTelemetryDataManager = null,
                         )
-                    panel.createAndShowPopup(patternsArea)
+                    openPanel.createAndShowPopup(patternsArea)
                 }
             }
         }
