@@ -235,7 +235,7 @@ class RenameHook : ProjectActivity {
     }
 
     private fun pullDockerImage(project: Project) {
-        logViewer.noOpReview("Pulling docker image.")
+        logViewer.noOpReview("Starting the agent...")
         val command = dockerManager.dockerCommand!! + listOf("pull", "bellurabhiram/renameagent")
         val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
         val cmd =
