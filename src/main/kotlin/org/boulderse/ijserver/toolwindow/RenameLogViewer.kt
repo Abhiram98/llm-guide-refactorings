@@ -445,7 +445,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun toggleScope() {
-        if (scopeDisplayed) {
+        if (!scopeDisplayed) {
             showScopePanel(false)
             showScopeButton.text = "Hide Agent's Scope"
         } else {
