@@ -18,6 +18,7 @@ import org.boulderse.ijserver.refactoringobjects.snippet.SnippetFinder
 import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
 import org.boulderse.ijserver.server.SnippetFinderParams
+import org.boulderse.ijserver.utils.PsiUtils
 
 class SourceCodeRoutes(
     private val routing: Routing,
@@ -87,6 +88,10 @@ class SourceCodeRoutes(
                 return@post
             }
             call.respond(HttpStatusCode.BadRequest)
+        }
+
+        routing.post("/count_identifiers") {
+            call.respond(HttpStatusCode.OK, message = runReadAction{ PsiUtils.countIdentifiers(fileCallBack()!!) }.toString())
         }
     }
 }

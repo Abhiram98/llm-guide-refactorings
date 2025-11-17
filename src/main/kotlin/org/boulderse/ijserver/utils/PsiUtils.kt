@@ -1256,5 +1256,20 @@ class PsiUtils {
             }
             return null
         }
+
+        fun countIdentifiers(file: PsiFile): Int {
+            var count = 0
+
+            class NameFinder : JavaRecursiveElementVisitor() {
+                override fun visitElement(element: PsiElement) {
+                    super.visitElement(element)
+                    if ((element as? PsiNameIdentifierOwner)!=null) {
+                        count += 1
+                    }
+                }
+            }
+            file.accept(NameFinder())
+            return count
+        }
     }
 }
