@@ -1,50 +1,55 @@
 package org.boulderse.ijserver.refactoringobjects.snippet
 
+import com.intellij.openapi.application.runReadAction
 import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
-import org.jetbrains.kotlin.idea.base.util.module
 
 class SnippetFinder(
     val file: PsiFile,
     val psiElement: PsiElement,
 ) {
     fun getSnippet(): String {
-        val packageStatement = PsiTreeUtil.getChildOfType(file, PsiPackageStatement::class.java)?.text?.plus("\n") ?: ""
+        val packageStatement =
+            runReadAction { PsiTreeUtil.getChildOfType(file, PsiPackageStatement::class.java)?.text?.plus("\n") ?: "" }
         return packageStatement +
-            when (psiElement) {
-                is PsiClass -> {
-                    snippetizeClass(psiElement, ignoreMethodsAndFields = false)
-                }
-                is PsiField -> {
-                    val outerClass = PsiTreeUtil.getParentOfType(psiElement, PsiClass::class.java)
-                    var snippet = snippetizeField(psiElement)
-                    snippet += "\n"
-                    if (outerClass != null) {
-                        snippetizeClass(outerClass).replace("// class body here", snippet)
-                    } else {
-                        snippet
+            runReadAction {
+                when (psiElement) {
+                    is PsiClass -> {
+                        snippetizeClass(psiElement, ignoreMethodsAndFields = false)
                     }
-                }
 
-                is PsiParameter, is PsiVariable -> {
-                    val outerClass = PsiTreeUtil.getParentOfType(psiElement, PsiClass::class.java)
-                    var snippet = PsiTreeUtil.getParentOfType(psiElement, PsiMethod::class.java)?.text ?: psiElement.text
-                    snippet += "\n"
-                    if (outerClass != null) {
-                        snippetizeClass(outerClass).replace("// class body here", snippet)
-                    } else {
-                        snippet
+                    is PsiField -> {
+                        val outerClass = PsiTreeUtil.getParentOfType(psiElement, PsiClass::class.java)
+                        var snippet = snippetizeField(psiElement)
+                        snippet += "\n"
+                        if (outerClass != null) {
+                            snippetizeClass(outerClass).replace("// class body here", snippet)
+                        } else {
+                            snippet
+                        }
                     }
-                }
 
-                else -> {
-                    val outerClass = PsiTreeUtil.getParentOfType(psiElement, PsiClass::class.java)
-                    var snippet = psiElement.text
-                    snippet += "\n"
-                    if (outerClass != null) {
-                        snippetizeClass(outerClass).replace("// class body here", snippet)
-                    } else {
-                        snippet
+                    is PsiParameter, is PsiVariable -> {
+                        val outerClass = PsiTreeUtil.getParentOfType(psiElement, PsiClass::class.java)
+                        var snippet =
+                            PsiTreeUtil.getParentOfType(psiElement, PsiMethod::class.java)?.text ?: psiElement.text
+                        snippet += "\n"
+                        if (outerClass != null) {
+                            snippetizeClass(outerClass).replace("// class body here", snippet)
+                        } else {
+                            snippet
+                        }
+                    }
+
+                    else -> {
+                        val outerClass = PsiTreeUtil.getParentOfType(psiElement, PsiClass::class.java)
+                        var snippet = psiElement.text
+                        snippet += "\n"
+                        if (outerClass != null) {
+                            snippetizeClass(outerClass).replace("// class body here", snippet)
+                        } else {
+                            snippet
+                        }
                     }
                 }
             }

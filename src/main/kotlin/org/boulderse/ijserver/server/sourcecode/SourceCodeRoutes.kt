@@ -91,7 +91,7 @@ class SourceCodeRoutes(
         }
 
         routing.post("/count_identifiers") {
-            call.respond(HttpStatusCode.OK, message = runReadAction{ PsiUtils.countIdentifiers(fileCallBack()!!) }.toString())
+            call.respond(HttpStatusCode.OK, message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!) }.toString())
         }
     }
 }

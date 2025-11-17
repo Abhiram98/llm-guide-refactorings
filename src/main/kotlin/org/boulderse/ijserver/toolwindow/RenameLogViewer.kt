@@ -493,6 +493,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         currentTelemetryData: RenameAgentTelemetryManager.TelemetryData,
         actualChanges: RenameAgentTelemetryManager.SensitiveData?,
     ) {
+        telemetryManager.calculateIdentifierInspected()
         renameSuggestions.removeAll()
 
         // Create a vertical panel to hold stats rows
@@ -563,7 +564,9 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         // Left: list of filenames
         val fileNames =
-            refactorings.filesRefactored.keys
+            refactorings.filesRefactored
+                .filterValues { it.isNotEmpty() }
+                .keys
                 .map { it.containingFile.name }
                 .toTypedArray()
         val fileList = javax.swing.JList(fileNames)

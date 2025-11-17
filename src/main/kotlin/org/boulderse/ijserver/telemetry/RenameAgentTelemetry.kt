@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
+import org.boulderse.ijserver.utils.PsiUtils
 import kotlin.time.Duration
 
 class RenameAgentTelemetryManager {
@@ -117,6 +118,16 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.identifiersInspected += count
     }
 
+    fun calculateIdentifierInspected() {
+        currentTelemetryData?.identifiersInspected =
+            currentSensitiveData
+                ?.filesRefactored
+                ?.keys
+                ?.map { PsiUtils.countIdentifiers(it) }
+                ?.sum()
+                ?: currentTelemetryData?.identifiersInspected ?: 0
+    }
+
     fun addRejectRating(
         elementType: String? = null,
         modifier: String? = null,
@@ -175,6 +186,10 @@ class RenameAgentTelemetryManager {
     ) {
         val renames = currentSensitiveData?.filesRefactored?.getOrPut(file) { mutableListOf() }
         renames?.add(pattern)
+    }
+
+    fun logFileInspected(file: PsiFile) {
+        currentSensitiveData?.filesRefactored?.getOrPut(file) { mutableListOf() }
     }
 
     companion object {

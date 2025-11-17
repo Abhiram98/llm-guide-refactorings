@@ -1263,7 +1263,7 @@ class PsiUtils {
             class NameFinder : JavaRecursiveElementVisitor() {
                 override fun visitElement(element: PsiElement) {
                     super.visitElement(element)
-                    if ((element as? PsiNameIdentifierOwner)!=null) {
+                    if ((element as? PsiNameIdentifierOwner) != null) {
                         count += 1
                     }
                 }

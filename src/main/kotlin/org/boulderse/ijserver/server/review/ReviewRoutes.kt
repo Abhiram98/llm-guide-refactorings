@@ -179,6 +179,7 @@ class ReviewRoutes(
         routing.post("/review/set_inspecting_file") {
             val params = call.receive<OpenFileParams>()
             logViewer.setFileInspect(params.filePath.split("/").last())
+            telemetryManager.logFileInspected(fileCallBack()!!)
             call.respond(HttpStatusCode.OK)
         }
 
