@@ -535,14 +535,18 @@ class RefactoringServer(
                             renameObject.startLoc,
                             params.codeElementType, // todo: fetch the code element type from the rename object.
                             startLineComments =
-                                editor?.let {
-                                    (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1)
+                                runReadAction{
+                                    editor?.let {
+                                        (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1)
+                                    }
                                 },
                             resolvedFilePath =
-                                (renameObject as? RenameVariable)?.getResolvedFilePath()?.removePrefix(
-                                    "${project.basePath}/",
-                                ),
-                            resolvedStartLine = (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1),
+                                runReadAction{
+                                    (renameObject as? RenameVariable)?.getResolvedFilePath()?.removePrefix(
+                                        "${project.basePath}/",
+                                    )
+                                },
+                            resolvedStartLine = runReadAction { (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1) },
                         ),
                     )
                 } catch (ex: IllegalStateException) {
@@ -591,18 +595,26 @@ class RefactoringServer(
                                     params.oldName,
                                     params.newName,
                                     renameObject.startLoc,
-                                    PsiUtils.getElementTypeStr(rv.oldVarPsi) ?: rv
-                                        .getResolvedElement()
-                                        ?.let { PsiUtils.getElementTypeStr(it) },
+                                    runReadAction{
+                                        PsiUtils.getElementTypeStr(rv.oldVarPsi) ?: rv
+                                            .getResolvedElement()
+                                            ?.let { PsiUtils.getElementTypeStr(it) }
+                                    },
                                     startLineComments =
-                                        editor?.let {
-                                            (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1)
+                                        runReadAction{
+                                            editor?.let {
+                                                (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1)
+                                            }
                                         },
                                     resolvedFilePath =
-                                        (renameObject as? RenameVariable)
-                                            ?.getResolvedFilePath()
-                                            ?.removePrefix("${project.basePath}/"),
-                                    resolvedStartLine = (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1),
+                                        runReadAction{
+                                            (renameObject as? RenameVariable)
+                                                ?.getResolvedFilePath()
+                                                ?.removePrefix("${project.basePath}/")
+                                        },
+                                    resolvedStartLine = runReadAction {
+                                        (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1)
+                                    },
                                 )
                             }.toList(),
                     )
@@ -652,18 +664,26 @@ class RefactoringServer(
                                     params.oldName,
                                     params.newName,
                                     renameObject.startLoc,
-                                    PsiUtils.getElementTypeStr(rv.oldVarPsi) ?: rv
-                                        .getResolvedElement()
-                                        ?.let { PsiUtils.getElementTypeStr(it) },
+                                    runReadAction{
+                                        PsiUtils.getElementTypeStr(rv.oldVarPsi) ?: rv
+                                            .getResolvedElement()
+                                            ?.let { PsiUtils.getElementTypeStr(it) }
+                                    },
                                     startLineComments =
-                                        editor?.let {
-                                            (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1)
+                                        runReadAction{
+                                            editor?.let {
+                                                (renameObject as? RenameVariable)?.startLineWithComments(it)?.plus(1)
+                                            }
                                         },
                                     resolvedFilePath =
-                                        (renameObject as? RenameVariable)
-                                            ?.getResolvedFilePath()
-                                            ?.removePrefix("${project.basePath}/"),
-                                    resolvedStartLine = (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1),
+                                        runReadAction{
+                                            (renameObject as? RenameVariable)
+                                                ?.getResolvedFilePath()
+                                                ?.removePrefix("${project.basePath}/")
+                                        },
+                                    resolvedStartLine = runReadAction{
+                                        (renameObject as? RenameVariable)?.getResolvedStartLine()?.plus(1)
+                                    },
                                 )
                             }.toList(),
                     )
