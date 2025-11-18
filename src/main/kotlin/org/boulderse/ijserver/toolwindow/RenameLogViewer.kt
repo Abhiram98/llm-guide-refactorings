@@ -606,6 +606,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
                             file = file,
                             candidates = refactorings,
                             efTelemetryDataManager = null,
+                            showAcceptButton = false
                         )
                     openPanel.createAndShowPopup(patternsArea)
                 }

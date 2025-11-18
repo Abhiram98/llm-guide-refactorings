@@ -20,7 +20,6 @@ import com.intellij.openapi.ui.popup.LightweightWindowEvent
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiMethod
-import com.intellij.psi.util.firstLeaf
 import com.intellij.ui.awt.RelativePoint
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.components.JBTextArea
@@ -65,6 +64,7 @@ open class RefactoringSuggestionsPanel(
     val button_name: String,
     val selectFirst: Boolean = false,
     val showRejectButton: Boolean = true,
+    val showAcceptButton: Boolean = true,
 ) : Observable() {
     lateinit var myRefactoringCandidateTable: JBTable
     lateinit var myRefactoringScrollPane: JBScrollPane
@@ -252,13 +252,17 @@ open class RefactoringSuggestionsPanel(
                 }
 
                 row {
-                    cell(refactorButton)
-                        .comment(
-                            LLMBundle.message(
-                                "ef.candidates.popup.invoke.extract.function",
-                                KeymapUtil.getFirstKeyboardShortcutText(ActionManager.getInstance().getAction("ExtractMethod")),
-                            ),
-                        ).align(AlignX.LEFT)
+                    if (showAcceptButton) {
+                        cell(refactorButton)
+                            .comment(
+                                LLMBundle.message(
+                                    "ef.candidates.popup.invoke.extract.function",
+                                    KeymapUtil.getFirstKeyboardShortcutText(
+                                        ActionManager.getInstance().getAction("ExtractMethod")
+                                    ),
+                                ),
+                            ).align(AlignX.LEFT)
+                    }
                     if (showRejectButton) {
                         cell(rejectButton).align(AlignX.RIGHT)
                     }
