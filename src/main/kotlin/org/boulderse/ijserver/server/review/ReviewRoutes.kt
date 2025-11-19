@@ -212,6 +212,11 @@ class ReviewRoutes(
             telemetryManager.addIdentifierInspected(params.inspected)
             call.respond(HttpStatusCode.OK)
         }
+
+        routing.post("/review/reset_rename_suggestions"){
+            logViewer.resetRenameSuggestions()
+            call.respond(HttpStatusCode.OK)
+        }
     }
 
     fun reviewNotification() {

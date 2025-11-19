@@ -491,7 +491,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         this.setActionItem(agentStatus)
         this.startRobotAnimation()
         this.stopHumanAnimation()
-        this.resetRenameSuggestions()
     }
 
     fun updateStopButtonState(isEnabled: Boolean) {
