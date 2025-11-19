@@ -3,6 +3,7 @@ package org.boulderse.ijserver.ui
 import com.intellij.codeInsight.unwrap.ScopeHighlighter
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.ActionManager
+import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.LogicalPosition
 import com.intellij.openapi.editor.ScrollType
@@ -470,10 +471,12 @@ open class RefactoringSuggestionsPanel(
         myEFTelemetryDataManager?.setRefactoringObjects(myCandidates)
 
         if (anchorPanel != null) {
-            anchorPanel.removeAll()
-            anchorPanel.add(panel)
-            anchorPanel.revalidate()
-            anchorPanel.repaint()
+            invokeLater {
+                anchorPanel.removeAll()
+                anchorPanel.add(panel)
+                anchorPanel.revalidate()
+                anchorPanel.repaint()
+            }
             return@createAndShowPopup
         }
         val efPopup =
