@@ -82,7 +82,7 @@ class SourceCodeRoutes(
                     message =
                         SnippetFinder(
                             file = matchedFile,
-                            psiElement = (match as RenameVariable).getResolvedElement() ?: match.oldVarPsi,
+                            psiElement = runReadAction{ (match as RenameVariable).getResolvedElement() ?: match.oldVarPsi },
                         ).getSnippet(),
                 )
                 return@post
