@@ -136,7 +136,7 @@ class ReviewRoutes(
 
             logViewer.setActionItem(
                 "ACTION REQUIRED: \n" +
-                    "Please confirm the renaming scope below, by clicking the 'Confirm' button. " +
+                    "Please confirm the renaming scope below, by clicking the 'Confirm' button. \n" +
                     "You are welcome to edit the scope as per your requirements.",
             )
 
