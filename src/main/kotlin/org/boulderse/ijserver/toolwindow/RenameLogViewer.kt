@@ -82,6 +82,8 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         val renameHook = RenameHook.getInstance()
         updateStopButtonState(renameHook?.coRenameInProgress ?: false)
+
+        confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
     }
 
     private fun createCenterPanel(): JPanel {
@@ -186,7 +188,6 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
         renamingScopePanel.add(Box.createVerticalStrut(8))
         renamingScopePanel.add(guardPanel)
 
-        confirmScopeButton.addActionListener { _: ActionEvent? -> confirmScope() }
         val buttonRowScope = JPanel()
         buttonRowScope.add(confirmScopeButton)
         confirmScopeButton.isEnabled = false
@@ -466,12 +467,14 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun showScopePanel(forReview: Boolean = true) {
-        renameSuggestions.removeAll()
-        renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")
-        val scopeConfirmPanel = createScopePanel()
-        renameSuggestions.add(scopeConfirmPanel)
-        renameSuggestions.revalidate()
-        renameSuggestions.repaint()
+        invokeLater {
+            renameSuggestions.removeAll()
+            renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")
+            val scopeConfirmPanel = createScopePanel()
+            renameSuggestions.add(scopeConfirmPanel)
+            renameSuggestions.revalidate()
+            renameSuggestions.repaint()
+        }
     }
 
     fun noOpReview(statusString: String? = null) {

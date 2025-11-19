@@ -54,7 +54,7 @@ class SourceCodeRoutes(
                         LocalFileSystem
                             .getInstance()
                             .refreshAndFindFileByPath(project.basePath + "/" + params.filePath)!!
-                    PsiManager.getInstance(project).findFile(foundVfile)!!
+                    runReadAction{ PsiManager.getInstance(project).findFile(foundVfile)!! }
                 } else {
                     file!!
                 }
