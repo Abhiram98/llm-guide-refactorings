@@ -30,6 +30,7 @@ import javax.swing.JPanel
 import javax.swing.JProgressBar
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
+import javax.swing.SwingUtilities.invokeAndWait
 import kotlin.time.Duration.Companion.minutes
 
 class RenameLogViewer : LogViewer("Rename agent logs") {
@@ -467,7 +468,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun showScopePanel(forReview: Boolean = true) {
-        invokeLater {
+        invokeAndWait {
             renameSuggestions.removeAll()
             renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")
             val scopeConfirmPanel = createScopePanel()
