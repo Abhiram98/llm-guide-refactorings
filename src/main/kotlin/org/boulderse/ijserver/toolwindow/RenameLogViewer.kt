@@ -295,9 +295,11 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun setFileInspect(fileName: String) {
-        inspectingFile = fileName
-        renameProgressLabel.text = "Renames Inspected in $inspectingFile: "
-        renameProgressLabel.repaint()
+        invokeLater {
+            inspectingFile = fileName
+            renameProgressLabel.text = "Renames Inspected in $inspectingFile: "
+            renameProgressLabel.repaint()
+        }
     }
 
     fun setTotalRenames(num: Int) {
@@ -391,9 +393,11 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun setActionItem(item: String) {
-        actionLabel.text = item
-        actionPanel.revalidate()
-        actionPanel.repaint()
+        invokeLater{
+            actionLabel.text = item
+            actionPanel.revalidate()
+            actionPanel.repaint()
+        }
     }
 
     fun startRobotAnimation() {
@@ -440,10 +444,12 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun resetRenameSuggestions() {
-        renameSuggestions.removeAll()
-        renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
-        renameSuggestions.revalidate()
-        renameSuggestions.repaint()
+        invokeLater {
+            renameSuggestions.removeAll()
+            renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
+            renameSuggestions.revalidate()
+            renameSuggestions.repaint()
+        }
     }
 
     fun toggleScope() {
@@ -451,11 +457,13 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
             showScopePanel(false)
             showScopeButton.text = "Hide Agent's Scope"
         } else {
-            renameSuggestions.removeAll()
-            renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
-            renameSuggestions.revalidate()
-            renameSuggestions.repaint()
-            showScopeButton.text = "Show Agent's Scope"
+            invokeLater {
+                renameSuggestions.removeAll()
+                renameSuggestions.border = BorderFactory.createTitledBorder("Rename Suggestions")
+                renameSuggestions.revalidate()
+                renameSuggestions.repaint()
+                showScopeButton.text = "Show Agent's Scope"
+            }
         }
         scopeDisplayed = !scopeDisplayed
     }
@@ -468,7 +476,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun showScopePanel(forReview: Boolean = true) {
-        invokeAndWait {
+        invokeLater {
             renameSuggestions.removeAll()
             renameSuggestions.border = BorderFactory.createTitledBorder("Rename Scope")
             val scopeConfirmPanel = createScopePanel()
@@ -557,9 +565,11 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
 
         actualChanges?.let { statsPanel.add(createRefactoringReport(it)) }
 
-        renameSuggestions.add(statsPanel)
-        renameSuggestions.revalidate()
-        renameSuggestions.repaint()
+        invokeLater {
+            renameSuggestions.add(statsPanel)
+            renameSuggestions.revalidate()
+            renameSuggestions.repaint()
+        }
     }
 
     private fun createRefactoringReport(refactorings: RenameAgentTelemetryManager.SensitiveData): JPanel {

@@ -55,7 +55,7 @@ class ReviewRoutes(
             )
             logViewer.startHumanAnimation()
             logViewer.stopRobotAnimation()
-            logViewer.showScopeButton.isEnabled = false
+            invokeLater { logViewer.showScopeButton.isEnabled = false }
             logViewer.hideScope()
             renamesToReview.forEach { logViewer.appendLog(it.oldName + " -> " + it.newName) }
             val file = fileCallBack()
@@ -96,7 +96,7 @@ class ReviewRoutes(
             val endTime = Clock.System.now()
             lastReviewTime = endTime
             telemetryManager.addHumanTime(endTime - startTime)
-            logViewer.showScopeButton.isEnabled = true
+            invokeLater{ logViewer.showScopeButton.isEnabled = true }
 
             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
             println("Review status: $reviewStatus")
@@ -128,7 +128,7 @@ class ReviewRoutes(
 
         routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
-            logViewer.showScopeButton.isEnabled = false
+            invokeLater{ logViewer.showScopeButton.isEnabled = false }
             logViewer.hideScope()
             logViewer.showScopePanel()
             logViewer.setPattern(params.pattern)
@@ -143,13 +143,15 @@ class ReviewRoutes(
             logViewer.startHumanAnimation()
             logViewer.stopRobotAnimation()
             logViewer.resetConfirmationWait()
-            logViewer.confirmScopeButton.isEnabled = true
+            invokeLater{ logViewer.confirmScopeButton.isEnabled = true }
             val startTime = Clock.System.now()
             logViewer.waitForConfirmation()
             val endTime = Clock.System.now()
             telemetryManager.addHumanTime(endTime - startTime)
-            logViewer.confirmScopeButton.isEnabled = false
-            logViewer.showScopeButton.isEnabled = true
+            invokeLater{
+                logViewer.confirmScopeButton.isEnabled = false
+                logViewer.showScopeButton.isEnabled = true
+            }
             logViewer.resetRenameSuggestions()
 
             if (params.pattern != logViewer.getPatternText()) {
