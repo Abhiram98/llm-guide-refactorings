@@ -93,6 +93,7 @@ class RenameHook : ProjectActivity {
     fun triggerAgent(project: Project) {
         coRenameInProgress = true
         logViewer.noOpReview()
+        logViewer.resetViewer()
         ApplicationManager.getApplication().executeOnPooledThread {
             try {
                 if (!dockerManager.testDockerPath()) {
