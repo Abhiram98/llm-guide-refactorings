@@ -10,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.utils.PsiUtils
 import kotlin.time.Duration
@@ -39,13 +40,17 @@ class RenameAgentTelemetryManager {
         var totalFiles: Int = 0,
         @SerialName("inspected_files")
         var inspectedFiles: Int = 0,
-        @SerialName("start_time")
-        val startTime: String =
+
+        @Transient
+        val startTime: java.time.Instant =
             java.time.Instant
-                .now()
-                .toString(),
-        @SerialName("end_time")
-        var endTime: String? = null,
+                .now(),
+        @Transient
+        var endTime: java.time.Instant? = null,
+
+        @SerialName("elapsed_time")
+        var elapsedTime: Long? = null,
+
         @SerialName("stopped_early")
         var stoppedEarly: Boolean = false,
         @SerialName("review_time")
@@ -156,7 +161,7 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.endTime =
             java.time.Instant
                 .now()
-                .toString()
+        currentTelemetryData?.elapsedTime = currentTelemetryData?.endTime?.toEpochMilli()?.minus(currentTelemetryData?.startTime?.toEpochMilli() ?: 0)
         runBlocking {
             withContext(Dispatchers.IO) {
                 logFile.appendText("${Gson().toJson(currentTelemetryData)}\n")

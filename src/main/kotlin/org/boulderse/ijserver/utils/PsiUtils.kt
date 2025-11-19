@@ -371,7 +371,6 @@ class PsiUtils {
                         match.add(element)
                     }
                     if ((element as? PsiReferenceExpression) != null) {
-                        print("found reference.")
 //                        if (element.namedUnwrappedElement?.name == nameToSearch){
 // //                            match.add((element as? PsiReferenceExpression)!!.namedUnwrappedElement!!)
 //                            match.add(element)

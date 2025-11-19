@@ -52,7 +52,6 @@ class RenameVariable(
 
     fun getResolvedStartLine(): Int? {
         if ((oldVarPsi as? PsiReferenceExpression) != null) {
-            print("found reference.")
             val refElement = (oldVarPsi as PsiReferenceExpression).resolve()?.namedUnwrappedElement
             return refElement?.containingFile?.fileDocument?.let { refElement.startLine(it) }
         }
@@ -65,7 +64,6 @@ class RenameVariable(
 
     fun getResolvedFilePath(): String? {
         if ((oldVarPsi as? PsiReferenceExpression) != null) {
-            print("found reference.")
             val refElement = (oldVarPsi as PsiReferenceExpression).resolve()?.namedUnwrappedElement
             refElement?.containingFile?.fileDocument?.let { refElement.startLine(it) }
             return refElement?.containingFile?.virtualFile?.path
@@ -192,7 +190,6 @@ class RenameVariable(
                     return PsiUtils.findAllOverridingMethods(psiElement)
                 }
             } else if ((psiElement as? PsiReferenceExpression) != null) {
-                print("found reference.")
                 val elements = mutableListOf<PsiElement>()
 //                val nameUnwrapped = psiElement.namedUnwrappedElement
 //                if (nameUnwrapped!=null && nameUnwrapped !is PsiCompiledElement)
