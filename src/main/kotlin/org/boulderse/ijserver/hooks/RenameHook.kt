@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.refactoring.listeners.RefactoringEventData
 import com.intellij.refactoring.listeners.RefactoringEventListener
 import org.boulderse.ijserver.createNotificationGroup
+import org.boulderse.ijserver.server.RefactoringServer
 import org.boulderse.ijserver.settings.RefAgentSettingsManager
 import org.boulderse.ijserver.showUnauthorizedNotification
 import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
@@ -96,6 +97,7 @@ class RenameHook : ProjectActivity {
         logViewer.resetRenameSuggestions()
         ApplicationManager.getApplication().executeOnPooledThread {
             try {
+                seedElement?.let { RefactoringServer.getInstance(it.project) } // open project if needed
                 if (!dockerManager.testDockerPath()) {
                     showNotification(
                         project,
