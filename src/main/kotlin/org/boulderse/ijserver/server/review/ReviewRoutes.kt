@@ -1,5 +1,6 @@
 package org.boulderse.ijserver.server.review
 
+import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -13,6 +14,7 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json
+import org.boulderse.ijserver.createNotificationGroup
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
 import org.boulderse.ijserver.server.IdentInspectedParams
@@ -96,7 +98,7 @@ class ReviewRoutes(
             val endTime = Clock.System.now()
             lastReviewTime = endTime
             telemetryManager.addHumanTime(endTime - startTime)
-            invokeLater{ logViewer.showScopeButton.isEnabled = true }
+            invokeLater { logViewer.showScopeButton.isEnabled = true }
 
             val reviewStatus = renamesToReview.mapIndexed { index, params -> index in panel.completedIndices }
             println("Review status: $reviewStatus")
@@ -128,7 +130,7 @@ class ReviewRoutes(
 
         routing.post("/review/scope") {
             val params = call.receive<ReviewScopeParams>()
-            invokeLater{ logViewer.showScopeButton.isEnabled = false }
+            invokeLater { logViewer.showScopeButton.isEnabled = false }
             logViewer.hideScope()
             logViewer.showScopePanel()
             logViewer.setPattern(params.pattern)
@@ -143,12 +145,12 @@ class ReviewRoutes(
             logViewer.startHumanAnimation()
             logViewer.stopRobotAnimation()
             logViewer.resetConfirmationWait()
-            invokeLater{ logViewer.confirmScopeButton.isEnabled = true }
+            invokeLater { logViewer.confirmScopeButton.isEnabled = true }
             val startTime = Clock.System.now()
             logViewer.waitForConfirmation()
             val endTime = Clock.System.now()
             telemetryManager.addHumanTime(endTime - startTime)
-            invokeLater{
+            invokeLater {
                 logViewer.confirmScopeButton.isEnabled = false
                 logViewer.showScopeButton.isEnabled = true
             }
@@ -207,13 +209,18 @@ class ReviewRoutes(
             call.respond(HttpStatusCode.OK)
         }
 
+        routing.post("/review/multiple_projects_open") {
+            showMultiProjectsNotification(projectCallBack())
+            call.respond(HttpStatusCode.OK)
+        }
+
         routing.post("/review/identifiers_inspected") {
             val params = call.receive<IdentInspectedParams>()
             telemetryManager.addIdentifierInspected(params.inspected)
             call.respond(HttpStatusCode.OK)
         }
 
-        routing.post("/review/reset_rename_suggestions"){
+        routing.post("/review/reset_rename_suggestions") {
             logViewer.resetRenameSuggestions()
             call.respond(HttpStatusCode.OK)
         }
@@ -221,5 +228,18 @@ class ReviewRoutes(
 
     fun reviewNotification() {
         ToolWindowManager.getInstance(projectCallBack()).getToolWindow("CoRename Agent")?.show()
+    }
+
+    fun showMultiProjectsNotification(project: Project) {
+        val notification =
+            createNotificationGroup().createNotification(
+                "CoRename Agent setup error",
+                "It looks like you have multiple projects open when running CoRename Agent. " +
+                    "Please close all other projects and restart your IDE." +
+                    "See https://renameagent.netlify.app/installation#troubleshooting for details.",
+                NotificationType.ERROR,
+            )
+
+        notification.notify(project)
     }
 }
