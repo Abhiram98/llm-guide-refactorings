@@ -393,7 +393,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
     }
 
     fun setActionItem(item: String) {
-        invokeLater{
+        invokeLater {
             actionLabel.text = item
             actionPanel.revalidate()
             actionPanel.repaint()
@@ -619,7 +619,7 @@ class RenameLogViewer : LogViewer("Rename agent logs") {
                             file = file,
                             candidates = refactorings,
                             efTelemetryDataManager = null,
-                            showAcceptButton = false
+                            showAcceptButton = false,
                         )
                     openPanel.createAndShowPopup(patternsArea)
                 }

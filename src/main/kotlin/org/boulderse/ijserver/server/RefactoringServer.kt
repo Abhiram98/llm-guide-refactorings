@@ -271,7 +271,7 @@ class RefactoringServer(
                             )!!
                     }
                 }
-                file = runReadAction{ PsiManager.getInstance(project).findFile(vfile)!! }
+                file = runReadAction { PsiManager.getInstance(project).findFile(vfile)!! }
                 call.respond(HttpStatusCode.OK, message = "opened file!")
             }
 

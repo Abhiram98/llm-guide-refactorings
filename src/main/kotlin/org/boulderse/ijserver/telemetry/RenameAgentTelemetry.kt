@@ -40,17 +40,14 @@ class RenameAgentTelemetryManager {
         var totalFiles: Int = 0,
         @SerialName("inspected_files")
         var inspectedFiles: Int = 0,
-
         @Transient
         val startTime: java.time.Instant =
             java.time.Instant
                 .now(),
         @Transient
         var endTime: java.time.Instant? = null,
-
         @SerialName("elapsed_time")
         var elapsedTime: Long? = null,
-
         @SerialName("stopped_early")
         var stoppedEarly: Boolean = false,
         @SerialName("review_time")
@@ -161,7 +158,8 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.endTime =
             java.time.Instant
                 .now()
-        currentTelemetryData?.elapsedTime = currentTelemetryData?.endTime?.toEpochMilli()?.minus(currentTelemetryData?.startTime?.toEpochMilli() ?: 0)
+        currentTelemetryData?.elapsedTime =
+            currentTelemetryData?.endTime?.toEpochMilli()?.minus(currentTelemetryData?.startTime?.toEpochMilli() ?: 0)
         runBlocking {
             withContext(Dispatchers.IO) {
                 logFile.appendText("${Gson().toJson(currentTelemetryData)}\n")

@@ -54,7 +54,7 @@ class SourceCodeRoutes(
                         LocalFileSystem
                             .getInstance()
                             .refreshAndFindFileByPath(project.basePath + "/" + params.filePath)!!
-                    runReadAction{ PsiManager.getInstance(project).findFile(foundVfile)!! }
+                    runReadAction { PsiManager.getInstance(project).findFile(foundVfile)!! }
                 } else {
                     file!!
                 }
@@ -82,7 +82,7 @@ class SourceCodeRoutes(
                     message =
                         SnippetFinder(
                             file = matchedFile,
-                            psiElement = runReadAction{ (match as RenameVariable).getResolvedElement() ?: match.oldVarPsi },
+                            psiElement = runReadAction { (match as RenameVariable).getResolvedElement() ?: match.oldVarPsi },
                         ).getSnippet(),
                 )
                 return@post

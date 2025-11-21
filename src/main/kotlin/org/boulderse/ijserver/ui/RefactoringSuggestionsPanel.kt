@@ -259,7 +259,7 @@ open class RefactoringSuggestionsPanel(
                                 LLMBundle.message(
                                     "ef.candidates.popup.invoke.extract.function",
                                     KeymapUtil.getFirstKeyboardShortcutText(
-                                        ActionManager.getInstance().getAction("ExtractMethod")
+                                        ActionManager.getInstance().getAction("ExtractMethod"),
                                     ),
                                 ),
                             ).align(AlignX.LEFT)

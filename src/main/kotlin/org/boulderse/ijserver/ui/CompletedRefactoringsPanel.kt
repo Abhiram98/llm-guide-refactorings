@@ -28,7 +28,7 @@ class CompletedRefactoringsPanel(
         efTelemetryDataManager,
         LLMBundle.message("ef.candidates.completed.popup.extract.function.button.title"),
         showRejectButton = false,
-        showAcceptButton = showAcceptButton
+        showAcceptButton = showAcceptButton,
     ) {
     companion object {
         fun getReverseObjects(
