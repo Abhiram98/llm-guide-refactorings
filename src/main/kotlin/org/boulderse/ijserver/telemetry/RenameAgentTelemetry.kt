@@ -16,6 +16,30 @@ import org.boulderse.ijserver.utils.PsiUtils
 import kotlin.time.Duration
 
 class RenameAgentTelemetryManager {
+
+    @Serializable
+    data class EpochData(
+        // One epoch is before scope refinement takes place. Here we're computing how the performance changes,
+        // as scope refinement takes into account human feedback.
+        @SerialName("accepted_count")
+        var acceptedCount: Int = 0,
+        @SerialName("rejected_count")
+        var rejectedCount: Int = 0,
+        @SerialName("identifiers_inspected_count") // total number of identifiers inspected by the tool, before presenting them to the developer.
+        var identifiersInspected: Int = 0,
+        @SerialName("interesting_identifiers_count") // total number of identifiers inspected by the tool, which match the pattern, before presenting them to the developer.
+        var interestingIdentifiersCount: Int = 0,
+        @SerialName("accepted_map")
+        val acceptedMap: MutableMap<String, Int> = mutableMapOf(),
+        @SerialName("rejected_map")
+        val rejectedMap: MutableMap<String, Int> = mutableMapOf(),
+        @SerialName("accepted_modifiers")
+        val acceptedModifiers: MutableList<String> = mutableListOf(),
+        @SerialName("rejected_modifiers")
+        val rejectedModifiers: MutableList<String> = mutableListOf(),
+
+    )
+
     @Serializable
     data class TelemetryData(
         @SerialName("accepted_count")
@@ -42,6 +66,9 @@ class RenameAgentTelemetryManager {
         val acceptedModifiers: MutableList<String> = mutableListOf(),
         @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
+
+        @SerialName("epoch_data")
+        val epochData: MutableList<EpochData> = mutableListOf(EpochData()),
 
         @SerialName("total_files")
         var totalFiles: Int = 0,
@@ -98,6 +125,12 @@ class RenameAgentTelemetryManager {
         currentSensitiveData = SensitiveData()
     }
 
+    fun startNewEpoch() {
+        currentTelemetryData?.epochData?.add(
+            EpochData()
+        )
+    }
+
     fun setSeedInfo(
         seedType: String,
         modifier: String? = null,
@@ -113,23 +146,29 @@ class RenameAgentTelemetryManager {
         modifier: String? = null,
     ) {
         currentTelemetryData?.acceptedCount += 1
+        currentTelemetryData?.epochData?.last()?.acceptedCount += 1
         currentTelemetryData?.reviewSeries?.add("accepted")
         if (elementType != null) {
             val count = currentTelemetryData?.acceptedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.acceptedMap[elementType] = count?.plus(1) ?: 0
+            val countEpoch = currentTelemetryData?.epochData?.last()?.acceptedMap?.getOrPut(elementType, { 0 })
+            currentTelemetryData?.epochData?.last()?.acceptedMap[elementType] = countEpoch?.plus(1) ?: 0
         }
 
         if (modifier != null) {
             currentTelemetryData?.acceptedModifiers?.add("$elementType: $modifier")
+            currentTelemetryData?.epochData?.last()?.acceptedModifiers?.add("$elementType: $modifier")
         }
     }
 
     fun addIdentifierInspected(count: Int = 1) {
         currentTelemetryData?.identifiersInspected += count
+        currentTelemetryData?.epochData?.last()?.identifiersInspected += count
     }
 
     fun addInterestingIdentifiers(count: Int = 1) {
         currentTelemetryData?.interestingIdentifiersCount += count
+        currentTelemetryData?.epochData?.last()?.interestingIdentifiersCount += count
     }
 
     fun calculateIdentifierInspected() {
@@ -147,15 +186,19 @@ class RenameAgentTelemetryManager {
         modifier: String? = null,
     ) {
         currentTelemetryData?.rejectedCount += 1
+        currentTelemetryData?.epochData?.last()?.rejectedCount += 1
         currentTelemetryData?.reviewSeries?.add("rejected")
 
         if (elementType != null) {
             val count = currentTelemetryData?.rejectedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.rejectedMap[elementType] = count?.plus(1) ?: 0
+            val countEpoch = currentTelemetryData?.epochData?.last()?.rejectedMap?.getOrPut(elementType, { 0 })
+            currentTelemetryData?.epochData?.last()?.rejectedMap[elementType] = countEpoch?.plus(1) ?: 0
         }
 
         if (modifier != null) {
             currentTelemetryData?.rejectedModifiers?.add(modifier)
+            currentTelemetryData?.epochData?.last()?.rejectedModifiers?.add(modifier)
         }
     }
 

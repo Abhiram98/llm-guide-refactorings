@@ -150,6 +150,8 @@ class ReviewRoutes(
             logViewer.waitForConfirmation()
             val endTime = Clock.System.now()
             telemetryManager.addHumanTime(endTime - startTime)
+            telemetryManager.startNewEpoch() // this marks the start of a new epoch,
+            // where scope has been refined based on human feedback
             invokeLater {
                 logViewer.confirmScopeButton.isEnabled = false
                 logViewer.showScopeButton.isEnabled = true
