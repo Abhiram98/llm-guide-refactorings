@@ -15,6 +15,7 @@ import io.ktor.server.routing.post
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.refactoringobjects.renamevariable.formRenameObject
 import org.boulderse.ijserver.refactoringobjects.snippet.SnippetFinder
+import org.boulderse.ijserver.server.CountIdentsParams
 import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
 import org.boulderse.ijserver.server.SnippetFinderParams
@@ -91,7 +92,14 @@ class SourceCodeRoutes(
         }
 
         routing.post("/count_identifiers") {
-            call.respond(HttpStatusCode.OK, message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!) }.toString())
+            call.respond(HttpStatusCode.OK,
+                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, null) }.toString())
+        }
+
+        routing.post("/count_identifiers_keyword") {
+            val params = call.receive<CountIdentsParams>()
+            call.respond(HttpStatusCode.OK,
+                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, params.keyword) }.toString())
         }
     }
 }

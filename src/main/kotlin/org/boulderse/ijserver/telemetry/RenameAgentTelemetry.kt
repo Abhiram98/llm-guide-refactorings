@@ -24,6 +24,9 @@ class RenameAgentTelemetryManager {
         var rejectedCount: Int = 0,
         @SerialName("identifiers_inspected_count") // total number of identifiers inspected by the tool, before presenting them to the developer.
         var identifiersInspected: Int = 0,
+        @SerialName("interesting_identifiers_count") // total number of identifiers inspected by the tool, which match the pattern, before presenting them to the developer.
+        var interestingIdentifiersCount: Int = 0,
+
         @SerialName("scope_change_count")
         var patternChangedCount: Int = 0,
         @SerialName("guard_change_count")
@@ -39,6 +42,7 @@ class RenameAgentTelemetryManager {
         val acceptedModifiers: MutableList<String> = mutableListOf(),
         @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
+
         @SerialName("total_files")
         var totalFiles: Int = 0,
         @SerialName("inspected_files")
@@ -124,12 +128,16 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.identifiersInspected += count
     }
 
+    fun addInterestingIdentifiers(count: Int = 1) {
+        currentTelemetryData?.interestingIdentifiersCount += count
+    }
+
     fun calculateIdentifierInspected() {
         currentTelemetryData?.identifiersInspected =
             currentSensitiveData
                 ?.filesRefactored
                 ?.keys
-                ?.map { PsiUtils.countIdentifiers(it) }
+                ?.map { PsiUtils.countIdentifiers(it, null) }
                 ?.sum()
                 ?: currentTelemetryData?.identifiersInspected ?: 0
     }

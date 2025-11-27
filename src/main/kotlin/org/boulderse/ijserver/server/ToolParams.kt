@@ -230,3 +230,9 @@ data class IdentInspectedParams(
     @SerialName("inspected")
     val inspected: Int,
 )
+
+@Serializable
+data class CountIdentsParams(
+    @SerialName("keyword")
+    val keyword: String? = null,
+)

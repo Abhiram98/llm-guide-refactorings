@@ -1256,14 +1256,15 @@ class PsiUtils {
             return null
         }
 
-        fun countIdentifiers(file: PsiFile): Int {
+        fun countIdentifiers(file: PsiFile, keyword: String?): Int {
             var count = 0
 
             class NameFinder : JavaRecursiveElementVisitor() {
                 override fun visitElement(element: PsiElement) {
                     super.visitElement(element)
                     if ((element as? PsiNameIdentifierOwner) != null) {
-                        count += 1
+                        if (keyword == null || element.name?.contains(keyword) == true)
+                            count += 1
                     }
                 }
             }

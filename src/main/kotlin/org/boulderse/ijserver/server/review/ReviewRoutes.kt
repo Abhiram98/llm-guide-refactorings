@@ -220,6 +220,12 @@ class ReviewRoutes(
             call.respond(HttpStatusCode.OK)
         }
 
+        routing.post("/review/interesting_identifiers_inspected") {
+            val params = call.receive<IdentInspectedParams>()
+            telemetryManager.addInterestingIdentifiers(params.inspected)
+            call.respond(HttpStatusCode.OK)
+        }
+
         routing.post("/review/reset_rename_suggestions") {
             logViewer.resetRenameSuggestions()
             call.respond(HttpStatusCode.OK)
