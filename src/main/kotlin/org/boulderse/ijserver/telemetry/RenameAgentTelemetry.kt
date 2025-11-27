@@ -28,6 +28,9 @@ class RenameAgentTelemetryManager {
         var patternChangedCount: Int = 0,
         @SerialName("guard_change_count")
         var guardChangedCount: Int = 0,
+
+        @SerialName("review_series")
+        var reviewSeries: MutableList<String> = mutableListOf(),
         @SerialName("accepted_map")
         val acceptedMap: MutableMap<String, Int> = mutableMapOf(),
         @SerialName("rejected_map")
@@ -106,6 +109,7 @@ class RenameAgentTelemetryManager {
         modifier: String? = null,
     ) {
         currentTelemetryData?.acceptedCount += 1
+        currentTelemetryData?.reviewSeries?.add("accepted")
         if (elementType != null) {
             val count = currentTelemetryData?.acceptedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.acceptedMap[elementType] = count?.plus(1) ?: 0
@@ -135,6 +139,7 @@ class RenameAgentTelemetryManager {
         modifier: String? = null,
     ) {
         currentTelemetryData?.rejectedCount += 1
+        currentTelemetryData?.reviewSeries?.add("rejected")
 
         if (elementType != null) {
             val count = currentTelemetryData?.rejectedMap?.getOrPut(elementType, { 0 })
