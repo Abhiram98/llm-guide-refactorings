@@ -92,14 +92,18 @@ class SourceCodeRoutes(
         }
 
         routing.post("/count_identifiers") {
-            call.respond(HttpStatusCode.OK,
-                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, null) }.toString())
+            call.respond(
+                HttpStatusCode.OK,
+                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, null) }.toString(),
+            )
         }
 
         routing.post("/count_identifiers_keyword") {
             val params = call.receive<CountIdentsParams>()
-            call.respond(HttpStatusCode.OK,
-                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, params.keyword) }.toString())
+            call.respond(
+                HttpStatusCode.OK,
+                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, params.keyword) }.toString(),
+            )
         }
     }
 }

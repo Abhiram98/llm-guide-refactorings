@@ -16,7 +16,6 @@ import org.boulderse.ijserver.utils.PsiUtils
 import kotlin.time.Duration
 
 class RenameAgentTelemetryManager {
-
     @Serializable
     data class EpochData(
         // One epoch is before scope refinement takes place. Here we're computing how the performance changes,
@@ -37,7 +36,6 @@ class RenameAgentTelemetryManager {
         val acceptedModifiers: MutableList<String> = mutableListOf(),
         @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
-
     )
 
     @Serializable
@@ -50,12 +48,10 @@ class RenameAgentTelemetryManager {
         var identifiersInspected: Int = 0,
         @SerialName("interesting_identifiers_count") // total number of identifiers inspected by the tool, which match the pattern, before presenting them to the developer.
         var interestingIdentifiersCount: Int = 0,
-
         @SerialName("scope_change_count")
         var patternChangedCount: Int = 0,
         @SerialName("guard_change_count")
         var guardChangedCount: Int = 0,
-
         @SerialName("review_series")
         var reviewSeries: MutableList<String> = mutableListOf(),
         @SerialName("accepted_map")
@@ -66,10 +62,8 @@ class RenameAgentTelemetryManager {
         val acceptedModifiers: MutableList<String> = mutableListOf(),
         @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
-
         @SerialName("epoch_data")
         val epochData: MutableList<EpochData> = mutableListOf(EpochData()),
-
         @SerialName("total_files")
         var totalFiles: Int = 0,
         @SerialName("inspected_files")
@@ -127,7 +121,7 @@ class RenameAgentTelemetryManager {
 
     fun startNewEpoch() {
         currentTelemetryData?.epochData?.add(
-            EpochData()
+            EpochData(),
         )
     }
 
@@ -151,13 +145,22 @@ class RenameAgentTelemetryManager {
         if (elementType != null) {
             val count = currentTelemetryData?.acceptedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.acceptedMap[elementType] = count?.plus(1) ?: 0
-            val countEpoch = currentTelemetryData?.epochData?.last()?.acceptedMap?.getOrPut(elementType, { 0 })
+            val countEpoch =
+                currentTelemetryData
+                    ?.epochData
+                    ?.last()
+                    ?.acceptedMap
+                    ?.getOrPut(elementType, { 0 })
             currentTelemetryData?.epochData?.last()?.acceptedMap[elementType] = countEpoch?.plus(1) ?: 0
         }
 
         if (modifier != null) {
             currentTelemetryData?.acceptedModifiers?.add("$elementType: $modifier")
-            currentTelemetryData?.epochData?.last()?.acceptedModifiers?.add("$elementType: $modifier")
+            currentTelemetryData
+                ?.epochData
+                ?.last()
+                ?.acceptedModifiers
+                ?.add("$elementType: $modifier")
         }
     }
 
@@ -192,13 +195,22 @@ class RenameAgentTelemetryManager {
         if (elementType != null) {
             val count = currentTelemetryData?.rejectedMap?.getOrPut(elementType, { 0 })
             currentTelemetryData?.rejectedMap[elementType] = count?.plus(1) ?: 0
-            val countEpoch = currentTelemetryData?.epochData?.last()?.rejectedMap?.getOrPut(elementType, { 0 })
+            val countEpoch =
+                currentTelemetryData
+                    ?.epochData
+                    ?.last()
+                    ?.rejectedMap
+                    ?.getOrPut(elementType, { 0 })
             currentTelemetryData?.epochData?.last()?.rejectedMap[elementType] = countEpoch?.plus(1) ?: 0
         }
 
         if (modifier != null) {
             currentTelemetryData?.rejectedModifiers?.add(modifier)
-            currentTelemetryData?.epochData?.last()?.rejectedModifiers?.add(modifier)
+            currentTelemetryData
+                ?.epochData
+                ?.last()
+                ?.rejectedModifiers
+                ?.add(modifier)
         }
     }
 
