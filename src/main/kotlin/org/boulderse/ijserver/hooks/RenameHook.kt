@@ -29,6 +29,7 @@ class RenameHook : ProjectActivity {
     var seedNewName: String? = null
     var seedElement: PsiElement? = null
     val dockerManager = DockerManager.getInstance()
+    val useLocalImage = System.getenv("USE_LOCAL_AGENT_IMAGE")?.toBoolean() ?: false
 
     val telemetryManager = RenameAgentTelemetryManager.getInstance()
 
@@ -141,7 +142,7 @@ class RenameHook : ProjectActivity {
                             "IJ_SERVER_URL=http://host.docker.internal:8082",
                             "-e",
                             "LLM_TOKEN",
-                            "bellurabhiram/renameagent",
+                            getImageName(),
                             "--vendor",
                             RefAgentSettingsManager.getInstance().getAiModelVendor(),
                             "--seed_old_name",
@@ -238,9 +239,11 @@ class RenameHook : ProjectActivity {
     }
 
     private fun pullDockerImage(project: Project) {
+        if (useLocalImage) return
+
         logViewer.noOpReview("Starting the agent...")
         logViewer.noOpReview("Downloading latest version of docker container (this may take a while)...")
-        val command = dockerManager.dockerCommand!! + listOf("pull", "bellurabhiram/renameagent")
+        val command = dockerManager.dockerCommand!! + listOf("pull", getImageName())
         val dockerEnvOverrides = dockerManager.prepareCredentialHelperWorkaround()
         val cmd =
             ProcessBuilder(command)
@@ -253,6 +256,8 @@ class RenameHook : ProjectActivity {
             throw e
         }
     }
+
+    private fun getImageName(): String = if (useLocalImage) "renameagent" else "bellurabhiram/renameagent"
 
     fun agentComplete() {
         logViewer.resetViewer()

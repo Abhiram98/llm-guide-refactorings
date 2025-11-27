@@ -224,7 +224,7 @@ class ReviewRoutes(
 
         routing.post("/review/interesting_identifiers_inspected") {
             val params = call.receive<IdentInspectedParams>()
-            telemetryManager.addInterestingIdentifiers(params.inspected)
+            telemetryManager.addInterestingIdentifiers(params.inspected, fileCallBack()?.name)
             call.respond(HttpStatusCode.OK)
         }
 

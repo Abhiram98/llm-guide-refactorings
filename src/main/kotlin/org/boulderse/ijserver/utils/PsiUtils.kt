@@ -1259,21 +1259,21 @@ class PsiUtils {
         fun countIdentifiers(
             file: PsiFile,
             keyword: String?,
-        ): Int {
-            var count = 0
+        ): List<PsiElement> {
+            val identifiers: MutableList<PsiElement> = mutableListOf()
 
             class NameFinder : JavaRecursiveElementVisitor() {
                 override fun visitElement(element: PsiElement) {
                     super.visitElement(element)
                     if ((element as? PsiNameIdentifierOwner) != null) {
-                        if (keyword == null || element.name?.contains(keyword) == true) {
-                            count += 1
+                        if (keyword == null || element.name?.lowercase()?.contains(keyword) == true) {
+                            identifiers.add(element)
                         }
                     }
                 }
             }
             file.accept(NameFinder())
-            return count
+            return identifiers
         }
     }
 }

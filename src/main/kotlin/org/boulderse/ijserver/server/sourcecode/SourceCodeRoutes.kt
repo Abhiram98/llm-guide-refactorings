@@ -19,6 +19,7 @@ import org.boulderse.ijserver.server.CountIdentsParams
 import org.boulderse.ijserver.server.OpenFileParams
 import org.boulderse.ijserver.server.RenameParams
 import org.boulderse.ijserver.server.SnippetFinderParams
+import org.boulderse.ijserver.telemetry.RenameAgentTelemetryManager
 import org.boulderse.ijserver.utils.PsiUtils
 
 class SourceCodeRoutes(
@@ -27,6 +28,7 @@ class SourceCodeRoutes(
     private val editorCallBack: () -> Editor?,
     private val projectCallBack: () -> Project,
 ) {
+    val telemetryManager = RenameAgentTelemetryManager.getInstance()
     fun install() {
         routing.get("/src/get_code") {
             val params = call.receive<OpenFileParams>()
@@ -94,15 +96,19 @@ class SourceCodeRoutes(
         routing.post("/count_identifiers") {
             call.respond(
                 HttpStatusCode.OK,
-                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, null) }.toString(),
+                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, null).size }.toString(),
             )
         }
 
         routing.post("/count_identifiers_keyword") {
             val params = call.receive<CountIdentsParams>()
+            val interestingIdentifiers = runReadAction{ PsiUtils.countIdentifiers(fileCallBack()!!, params.keyword) }
+            val identifiers = runReadAction{ PsiUtils.countIdentifiers(fileCallBack()!!, null) }
+            telemetryManager.addInterestingIdentifiers(interestingIdentifiers)
+            telemetryManager.addInspectedIdentifiers(identifiers)
             call.respond(
                 HttpStatusCode.OK,
-                message = runReadAction { PsiUtils.countIdentifiers(fileCallBack()!!, params.keyword) }.toString(),
+                message = interestingIdentifiers.size.toString(),
             )
         }
     }

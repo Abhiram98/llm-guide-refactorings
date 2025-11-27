@@ -1,8 +1,8 @@
 package org.boulderse.ijserver.telemetry
 
-import com.google.gson.Gson
 import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.util.io.toNioPathOrNull
+import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.util.io.createDirectories
 import kotlinx.coroutines.Dispatchers
@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlinx.serialization.json.Json
 import org.boulderse.ijserver.refactoringobjects.renamevariable.RenameVariable
 import org.boulderse.ijserver.utils.PsiUtils
 import kotlin.time.Duration
@@ -36,7 +37,13 @@ class RenameAgentTelemetryManager {
         val acceptedModifiers: MutableList<String> = mutableListOf(),
         @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
-    )
+
+        @Transient
+        val interestingIdentMap: MutableMap<String, MutableSet<PsiElement>> = mutableMapOf(),
+        @Transient
+        val inspectedIdentMap: MutableMap<String, MutableSet<PsiElement>> = mutableMapOf(),
+
+        )
 
     @Serializable
     data class TelemetryData(
@@ -169,9 +176,32 @@ class RenameAgentTelemetryManager {
         currentTelemetryData?.epochData?.last()?.identifiersInspected += count
     }
 
-    fun addInterestingIdentifiers(count: Int = 1) {
+    fun addInterestingIdentifiers(count: Int = 1, fileName: String? = null) {
         currentTelemetryData?.interestingIdentifiersCount += count
         currentTelemetryData?.epochData?.last()?.interestingIdentifiersCount += count
+    }
+
+    fun addInterestingIdentifiers(psiElements: List<PsiElement>) {
+//        addInterestingIdentifiers(count = psiElements.size, fileName = file.name)
+        val identMap = currentTelemetryData?.epochData?.last()?.interestingIdentMap
+        psiElements.forEach {
+            val elementSet = identMap?.getOrPut(it.containingFile.name, { mutableSetOf<PsiElement>() })
+            elementSet?.add(it)
+        }
+        val count = identMap?.values?.sumOf { it.size }
+        if (count!=null)
+            currentTelemetryData?.epochData?.last()?.interestingIdentifiersCount = count
+    }
+
+    fun addInspectedIdentifiers(psiElements: List<PsiElement>) {
+        val identMap = currentTelemetryData?.epochData?.last()?.inspectedIdentMap
+        psiElements.forEach {
+            val elementSet = identMap?.getOrPut(it.containingFile.name, { mutableSetOf<PsiElement>() })
+            elementSet?.add(it)
+        }
+        val count = identMap?.values?.sumOf { it.size }
+        if (count!=null)
+            currentTelemetryData?.epochData?.last()?.identifiersInspected = count
     }
 
     fun calculateIdentifierInspected() {
@@ -179,7 +209,7 @@ class RenameAgentTelemetryManager {
             currentSensitiveData
                 ?.filesRefactored
                 ?.keys
-                ?.map { PsiUtils.countIdentifiers(it, null) }
+                ?.map { PsiUtils.countIdentifiers(it, null).size }
                 ?.sum()
                 ?: currentTelemetryData?.identifiersInspected ?: 0
     }
@@ -230,7 +260,7 @@ class RenameAgentTelemetryManager {
             currentTelemetryData?.endTime?.toEpochMilli()?.minus(currentTelemetryData?.startTime?.toEpochMilli() ?: 0)
         runBlocking {
             withContext(Dispatchers.IO) {
-                logFile.appendText("${Gson().toJson(currentTelemetryData)}\n")
+                logFile.appendText("${Json { ignoreUnknownKeys = true; encodeDefaults = true }.encodeToString(currentTelemetryData)}\n")
             }
         }
     }
