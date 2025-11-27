@@ -67,6 +67,9 @@ class RenameAgentTelemetryManager {
         var seedType: String? = null,
         var seedModifiers: String? = null,
         val pluginVersion: String,
+
+        @Transient
+        val interestingIdentMap: MutableMap<String, MutableSet<PsiElement>> = mutableMapOf(),
     )
 
     data class SensitiveData(
@@ -157,14 +160,23 @@ class RenameAgentTelemetryManager {
 
     fun addInterestingIdentifiers(psiElements: List<PsiElement>) {
 //        addInterestingIdentifiers(count = psiElements.size, fileName = file.name)
-        val identMap = currentTelemetryData?.epochData?.last()?.interestingIdentMap
+        val identMapEpoch = currentTelemetryData?.epochData?.last()?.interestingIdentMap
+        val identMapTelemetry = currentTelemetryData?.interestingIdentMap
         psiElements.forEach {
-            val elementSet = identMap?.getOrPut(it.containingFile.name, { mutableSetOf<PsiElement>() })
+            val elementSet = identMapEpoch?.getOrPut(it.containingFile.name, { mutableSetOf<PsiElement>() })
             elementSet?.add(it)
         }
-        val count = identMap?.values?.sumOf { it.size }
+        psiElements.forEach {
+            val elementSet = identMapTelemetry?.getOrPut(it.containingFile.name, { mutableSetOf<PsiElement>() })
+            elementSet?.add(it)
+        }
+
+        val count = identMapEpoch?.values?.sumOf { it.size }
         if (count!=null)
             currentTelemetryData?.epochData?.last()?.interestingIdentifiersCount = count
+        val countTelemetry = identMapTelemetry?.values?.sumOf { it.size }
+        if (countTelemetry!=null)
+            currentTelemetryData?.interestingIdentifiersCount = countTelemetry
     }
 
     fun addInspectedIdentifiers(psiElements: List<PsiElement>) {
