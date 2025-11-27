@@ -102,7 +102,7 @@ class SourceCodeRoutes(
 
         routing.post("/count_identifiers_keyword") {
             val params = call.receive<CountIdentsParams>()
-            val interestingIdentifiers = runReadAction{ PsiUtils.countIdentifiers(fileCallBack()!!, params.keyword) }
+            val interestingIdentifiers = runReadAction{ PsiUtils.countIdentifiers(fileCallBack()!!, params.keyword?.lowercase()) }
             val identifiers = runReadAction{ PsiUtils.countIdentifiers(fileCallBack()!!, null) }
             telemetryManager.addInterestingIdentifiers(interestingIdentifiers)
             telemetryManager.addInspectedIdentifiers(identifiers)
