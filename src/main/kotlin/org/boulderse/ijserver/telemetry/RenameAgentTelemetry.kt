@@ -8,7 +8,6 @@ import com.intellij.util.io.createDirectories
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlinx.serialization.json.Json
@@ -21,21 +20,13 @@ class RenameAgentTelemetryManager {
     data class EpochData(
         // One epoch is before scope refinement takes place. Here we're computing how the performance changes,
         // as scope refinement takes into account human feedback.
-        @SerialName("accepted_count")
         var acceptedCount: Int = 0,
-        @SerialName("rejected_count")
         var rejectedCount: Int = 0,
-        @SerialName("identifiers_inspected_count") // total number of identifiers inspected by the tool, before presenting them to the developer.
-        var identifiersInspected: Int = 0,
-        @SerialName("interesting_identifiers_count") // total number of identifiers inspected by the tool, which match the pattern, before presenting them to the developer.
-        var interestingIdentifiersCount: Int = 0,
-        @SerialName("accepted_map")
+        var identifiersInspected: Int = 0, // total number of identifiers inspected by the tool, before presenting them to the developer.
+        var interestingIdentifiersCount: Int = 0, // total number of identifiers inspected by the tool, which match the pattern, before presenting them to the developer.
         val acceptedMap: MutableMap<String, Int> = mutableMapOf(),
-        @SerialName("rejected_map")
         val rejectedMap: MutableMap<String, Int> = mutableMapOf(),
-        @SerialName("accepted_modifiers")
         val acceptedModifiers: MutableList<String> = mutableListOf(),
-        @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
 
         @Transient
@@ -47,51 +38,34 @@ class RenameAgentTelemetryManager {
 
     @Serializable
     data class TelemetryData(
-        @SerialName("accepted_count")
         var acceptedCount: Int = 0,
-        @SerialName("rejected_count")
         var rejectedCount: Int = 0,
-        @SerialName("identifiers_inspected_count") // total number of identifiers inspected by the tool, before presenting them to the developer.
+        // total number of identifiers inspected by the tool, before presenting them to the developer.
         var identifiersInspected: Int = 0,
-        @SerialName("interesting_identifiers_count") // total number of identifiers inspected by the tool, which match the pattern, before presenting them to the developer.
+        // total number of identifiers inspected by the tool, which match the pattern, before presenting them to the developer.
         var interestingIdentifiersCount: Int = 0,
-        @SerialName("scope_change_count")
         var patternChangedCount: Int = 0,
-        @SerialName("guard_change_count")
         var guardChangedCount: Int = 0,
-        @SerialName("review_series")
         var reviewSeries: MutableList<String> = mutableListOf(),
-        @SerialName("accepted_map")
         val acceptedMap: MutableMap<String, Int> = mutableMapOf(),
-        @SerialName("rejected_map")
         val rejectedMap: MutableMap<String, Int> = mutableMapOf(),
-        @SerialName("accepted_modifiers")
         val acceptedModifiers: MutableList<String> = mutableListOf(),
-        @SerialName("rejected_modifiers")
         val rejectedModifiers: MutableList<String> = mutableListOf(),
-        @SerialName("epoch_data")
         val epochData: MutableList<EpochData> = mutableListOf(EpochData()),
-        @SerialName("total_files")
         var totalFiles: Int = 0,
-        @SerialName("inspected_files")
         var inspectedFiles: Int = 0,
+
         @Transient
         val startTime: java.time.Instant =
             java.time.Instant
                 .now(),
         @Transient
         var endTime: java.time.Instant? = null,
-        @SerialName("elapsed_time")
         var elapsedTime: Long? = null,
-        @SerialName("stopped_early")
         var stoppedEarly: Boolean = false,
-        @SerialName("review_time")
         var reviewTime: Long = 0,
-        @SerialName("seed_type")
         var seedType: String? = null,
-        @SerialName("seed_modifiers")
         var seedModifiers: String? = null,
-        @SerialName("plugin_version")
         val pluginVersion: String,
     )
 
