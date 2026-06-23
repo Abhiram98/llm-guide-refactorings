@@ -438,7 +438,9 @@ class RefactoringServer(
                     }
                     try {
                         invokeAndWait {
-                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            WriteCommandAction.runWriteCommandAction(project) {
+                                FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            }
                         }
                     } catch (ex: Exception) {
                         println("Failed to save all documents :/")
@@ -458,7 +460,9 @@ class RefactoringServer(
                 } finally {
                     try {
                         invokeAndWait {
-                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            WriteCommandAction.runWriteCommandAction(project) {
+                                FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            }
                         }
                     } catch (ex: Exception) {
                         println("Failed to save all documents :/")
@@ -484,7 +488,9 @@ class RefactoringServer(
                     renameObject.performRefactoring(project, editor!!, file!!)
                     try {
                         invokeAndWait {
-                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            WriteCommandAction.runWriteCommandAction(project) {
+                                FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            }
                         }
                     } catch (ex: Exception) {
                         println("Failed to save all documents :/")
@@ -504,7 +510,9 @@ class RefactoringServer(
                 } finally {
                     try {
                         invokeAndWait {
-                            FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            WriteCommandAction.runWriteCommandAction(project) {
+                                FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                            }
                         }
                     } catch (ex: Exception) {
                         println("Failed to save all documents :/")
@@ -896,18 +904,29 @@ class RefactoringServer(
                     val params = call.receive<RefactoringTools.ReplaceFile.CallParams>()
                     println("attempting to replace file contents of ${params.filePath}")
 
-                    val oldContents = Path(file!!.virtualFile.path).readText()
+                    val filePath = runReadAction { file!!.virtualFile.path }
+                    val oldContents = Path(filePath).readText()
                     FileUtils.replaceFileContents(
-                        Path(file!!.virtualFile.path),
+                        Path(filePath),
                         params.newContent,
                     )
                     VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
-                    // Run IJ linter
+                    // PSI may have been invalidated by the on-disk replace; re-resolve under a read action.
                     reloadFileIfNeeded()
-                    SwingUtilities.invokeAndWait { ReformatFile.doReformat(file!!, file!!.startOffset, file!!.endOffset) }
+                    // Reformat mutates the document; in IDEA 2024.2+ the EDT no longer
+                    // implicitly holds the write-intent lock, so we must establish one
+                    // explicitly via WriteCommandAction.
+                    SwingUtilities.invokeAndWait {
+                        WriteCommandAction.runWriteCommandAction(project) {
+                            val f = file!!
+                            ReformatFile.doReformat(f, f.startOffset, f.endOffset)
+                        }
+                    }
                     Thread.sleep(5000) // wait for reformat to complete.
                     SwingUtilities.invokeAndWait {
-                        FileDocumentManager.getInstance().saveDocument(editor!!.document) // save changes to local filesystem
+                        WriteCommandAction.runWriteCommandAction(project) {
+                            FileDocumentManager.getInstance().saveDocument(editor!!.document) // save changes to local filesystem
+                        }
                     }
 
                     val testReport = testSelector.runTests()
@@ -921,6 +940,12 @@ class RefactoringServer(
                     call.respond(HttpStatusCode.BadRequest)
                 } catch (ex: JsonConvertException) {
                     call.respond(HttpStatusCode.BadRequest)
+                } catch (ex: Throwable) {
+                    ex.printStackTrace()
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        message = "replace_file_contents failed: ${ex.javaClass.simpleName}: ${ex.message}",
+                    )
                 }
             }
 
@@ -971,15 +996,19 @@ class RefactoringServer(
                     )
                     VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)
                     SwingUtilities.invokeAndWait {
-                        ReformatFile.doReformat(
-                            file!!,
-                            startOffset,
-                            startOffset + params.newContent.length,
-                        )
+                        WriteCommandAction.runWriteCommandAction(project) {
+                            ReformatFile.doReformat(
+                                file!!,
+                                startOffset,
+                                startOffset + params.newContent.length,
+                            )
+                        }
                     }
                     Thread.sleep(5000) // sleep five seconds to allow the reformatting to complete.
                     SwingUtilities.invokeAndWait {
-                        FileDocumentManager.getInstance().saveDocument(editor!!.document) // save changes to local filesystem
+                        WriteCommandAction.runWriteCommandAction(project) {
+                            FileDocumentManager.getInstance().saveDocument(editor!!.document) // save changes to local filesystem
+                        }
                     }
                     val testReport = testSelector.runTests()
                     val message = revertIfTestsFailed(testReport, oldContents)
@@ -1034,7 +1063,9 @@ class RefactoringServer(
 
             post("save_all_changes") {
                 invokeAndWait {
-                    FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                    WriteCommandAction.runWriteCommandAction(project) {
+                        FileDocumentManager.getInstance().saveAllDocuments() // save changes to local filesystem
+                    }
                 }
                 Thread.sleep(2000)
                 call.respond(HttpStatusCode.OK, message = "success")
@@ -1793,11 +1824,12 @@ class RefactoringServer(
 
     private fun reloadFileIfNeeded() {
         try {
-            if (file == null) {
-                return
-            } else if (!file!!.isValid) {
-                // if the psi file got invalidated because of a rewrite, reload it's contents.
-                file = PsiManager.getInstance(project).findFile(file!!.virtualFile)!!
+            runReadAction {
+                val current = file ?: return@runReadAction
+                if (!current.isValid) {
+                    // if the psi file got invalidated because of a rewrite, reload its contents.
+                    file = PsiManager.getInstance(project).findFile(current.virtualFile)!!
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -1812,8 +1844,9 @@ class RefactoringServer(
         val message =
             if (testReport != SUCCESS_MSG) {
                 // Tests failed. need to roll back edits.
+                val filePath = runReadAction { file!!.virtualFile.path }
                 FileUtils.replaceFileContents(
-                    Path(file!!.virtualFile.path),
+                    Path(filePath),
                     oldContents,
                 )
                 VfsUtil.markDirtyAndRefresh(false, true, true, project.baseDir)

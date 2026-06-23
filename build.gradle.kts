@@ -28,6 +28,8 @@ repositories {
     maven {
         url = uri("https://packages.jetbrains.team/maven/p/grazi/grazie-platform-public")
     }
+    maven("https://www.jetbrains.com/intellij-repository/snapshots")
+    maven("https://www.jetbrains.com/intellij-repository/releases")
     intellijPlatform {
         defaultRepositories()
     }
@@ -100,6 +102,7 @@ dependencies {
 
     testImplementation("org.kodein.di:kodein-di-jvm:7.20.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.1")
+    // driver-client and driver-sdk are provided transitively by TestFrameworkType.Starter
 
     ktlint("com.pinterest.ktlint:ktlint-cli:1.7.1") {
         attributes {
